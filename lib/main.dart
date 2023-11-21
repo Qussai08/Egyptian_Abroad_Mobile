@@ -1,3 +1,4 @@
+import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -40,6 +41,7 @@ class MyApp extends StatelessWidget {
       translations: LocalizationHelper(),
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
+      theme: Styles.myTheme,
       initialBinding: InitialBinding(),
       builder: (buildContext, widget) {
         handleFixSize(buildContext);

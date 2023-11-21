@@ -10,7 +10,7 @@ class SplashController extends GetxController {
   void onInit() {
     super.onInit();
     LocalizationHelper().changeLocale(
-        Language.english); // TODO: Change this to the user's preferred language
+        Language.arabic); // TODO: Change this to the user's preferred language
     _startDelay();
   }
 
