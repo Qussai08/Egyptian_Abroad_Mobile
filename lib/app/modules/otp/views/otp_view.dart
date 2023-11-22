@@ -70,6 +70,8 @@ class OtpView extends GetView<OtpController> {
                   ),
                 ),
 
+                ///
+
                 // TODO : add resend in widget
               ],
             ),
