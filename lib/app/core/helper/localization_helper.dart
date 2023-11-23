@@ -29,7 +29,7 @@ class LocalizationHelper extends Translations {
         languages[Language.english]!.languageCode: en
       };
 
-  bool isArabic() {
+  static bool isArabic() {
     return Get.locale!.languageCode == languages[Language.arabic]!.languageCode;
   }
 
