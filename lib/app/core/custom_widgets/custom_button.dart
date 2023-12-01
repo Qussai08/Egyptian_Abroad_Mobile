@@ -17,7 +17,7 @@ extension ButtonTypeExtension on ButtonType {
       case ButtonType.primary:
         return Styles.white;
       case ButtonType.secondary:
-        return Styles.white;
+        return Styles.black;
       case ButtonType.ghost:
         return Styles.primaryColor;
       case ButtonType.danger:
@@ -38,7 +38,7 @@ extension ButtonTypeExtension on ButtonType {
       case ButtonType.primary:
         return Styles.primaryColor;
       case ButtonType.secondary:
-        return Styles.black;
+        return Styles.secondaryButtonColor;
       case ButtonType.ghost:
         return Styles.white;
       case ButtonType.danger:
@@ -57,7 +57,7 @@ extension ButtonTypeExtension on ButtonType {
 
 class CustomButton extends StatelessWidget {
   const CustomButton(
-      {Key? key,
+      {super.key,
       this.text,
       this.widget,
       this.width = double.infinity,
@@ -69,13 +69,13 @@ class CustomButton extends StatelessWidget {
       this.fontSize = 16,
       this.icon,
       this.isLoading = false,
+      this.iconSize = 20,
       this.fontWeight = FontWeight.w700})
       : assert(
             (text == null && widget != null) ||
                 (text != null && widget == null),
             "text and widget cannot be defined simultaneously"),
-        assert(text != null || widget != null, "Must define text or widget"),
-        super(key: key);
+        assert(text != null || widget != null, "Must define text or widget");
   final String? text;
   final Widget? widget;
   final double width;
@@ -88,21 +88,22 @@ class CustomButton extends StatelessWidget {
   final IconData? icon;
   final bool isLoading;
   final FontWeight fontWeight;
+  final double iconSize;
 
   @override
   Widget build(BuildContext context) {
-    return Ink(
+    return Container(
       decoration: BoxDecoration(
         color: isLoading ? Colors.transparent : type.backgroundColor,
         borderRadius: BorderRadius.circular(100),
         gradient: type == ButtonType.primary
             ? const LinearGradient(
-                colors: [Color(0xff2665F7), Color(0xff5E57FD)])
+                colors: [Color(0xff2665F7), Color(0xff4D91C6)])
             : null,
       ),
       width: width,
       height: height,
-      padding: EdgeInsets.symmetric(horizontal: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 8),
       child: TextButton(
           style: TextButton.styleFrom(
             // backgroundColor:
@@ -138,7 +139,8 @@ class CustomButton extends StatelessWidget {
                         style: TextStyle(
                             fontSize: fontSize,
                             color: type.textColor,
-                            fontWeight: fontWeight),
+                            fontWeight: fontWeight,
+                            fontFamily: 'baloo'),
                       ),
                       if (icon != null)
                         const SizedBox(
@@ -148,7 +150,7 @@ class CustomButton extends StatelessWidget {
                         Icon(
                           icon,
                           color: type.textColor,
-                          size: 20,
+                          size: iconSize,
                         ),
                     ],
                   )),

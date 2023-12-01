@@ -24,4 +24,12 @@ Map<String, String> en = {
   AppStrings.otpDiscription: 'Enter the 4-digit code sent to your email',
   AppStrings.resendOtp: ' Resend code in ',
   AppStrings.resend: 'Resend',
+  AppStrings.home: 'Home',
+  AppStrings.notifications: 'Notifications',
+  AppStrings.aboutApp: 'About App',
+  AppStrings.hello: 'Hello,',
+  AppStrings.exploreServices: 'Explore Services',
+  AppStrings.allServices: 'All the services you will need and more',
+  AppStrings.showMore: 'Show more',
+  AppStrings.servicesNeeded: 'Services that interest you'
 };

@@ -1,3 +1,4 @@
+import 'package:egyptians_abroad/app/core/services/base_api.dart';
 import 'package:get/get.dart';
 
 import '../../../core/helper/localization_helper.dart';
@@ -9,6 +10,8 @@ class SplashController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    BaseApi.initializeDio();
+
     LocalizationHelper().changeLocale(
         Language.arabic); // TODO: Change this to the user's preferred language
     _startDelay();

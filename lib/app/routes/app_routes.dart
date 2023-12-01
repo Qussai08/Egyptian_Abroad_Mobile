@@ -9,6 +9,7 @@ abstract class Routes {
   static const OTP = _Paths.OTP;
   static const REGISTRATION = _Paths.REGISTRATION;
   static const CATEGORY = _Paths.CATEGORY;
+  static const BOTTOMNAVIGATION = _Paths.BOTTOMNAVIGATION;
 }
 
 abstract class _Paths {
@@ -19,4 +20,5 @@ abstract class _Paths {
   static const OTP = '/otp';
   static const REGISTRATION = '/registration';
   static const CATEGORY = '/category';
+  static const BOTTOMNAVIGATION = '/bottomNavigation';
 }

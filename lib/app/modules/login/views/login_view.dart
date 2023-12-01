@@ -13,7 +13,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 
-
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
@@ -23,7 +22,6 @@ class LoginView extends GetView<LoginController> {
     return NetworkIndicator(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        // backgroundColor: Colors.white,
         body: SafeArea(
           child: Container(
             padding: EdgeInsets.only(top: 48.h, right: 16.w, left: 16.w),
@@ -43,17 +41,15 @@ class LoginView extends GetView<LoginController> {
                 SizedBox(
                   height: 40.h,
                 ),
-                TextFieldTitle(title: AppStrings.nationalID.tr),
+                TextFieldTitle(title: AppStrings.email.tr),
                 TextFieldContainer(
                   width: double.infinity,
                   height: 50,
+                  borderColor: const Color(0xffEBEBEB),
                   child: TextFormField(
-                    // controller: _mobileController,
                     textDirection: TextDirection.ltr,
                     scrollPadding: const EdgeInsets.only(bottom: 120),
-                    // validator: (val) =>
-                    //     Validators.validateMobilePhone(val, context),
-                    keyboardType: TextInputType.phone,
+                    keyboardType: TextInputType.emailAddress,
                     onChanged: (val) {},
                     maxLength: 14,
                     onFieldSubmitted: (val) {},
@@ -61,7 +57,9 @@ class LoginView extends GetView<LoginController> {
                         ? TextAlign.right
                         : TextAlign.left,
                     style: const TextStyle(
-                        fontSize: 16, fontWeight: FontWeight.w400),
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                        fontFamily: 'baloo'),
                     decoration: Styles().inputDecoration.copyWith(
                           contentPadding:
                               const EdgeInsets.symmetric(horizontal: 10),
@@ -75,24 +73,22 @@ class LoginView extends GetView<LoginController> {
                 TextFieldTitle(title: AppStrings.password.tr),
                 TextFieldContainer(
                   width: double.infinity,
+                  borderColor: const Color(0xffEBEBEB),
                   height: 50,
                   child: TextFormField(
-                    // controller: _mobileController,
                     textDirection: TextDirection.ltr,
                     scrollPadding: const EdgeInsets.only(bottom: 120),
-                    // validator: (val) =>
-                    //     Validators.validateMobilePhone(val, context),
                     keyboardType: TextInputType.text,
                     obscureText: true,
-
                     onChanged: (val) {},
-
                     onFieldSubmitted: (val) {},
                     textAlign: LocalizationHelper.isArabic()
                         ? TextAlign.right
                         : TextAlign.left,
                     style: const TextStyle(
-                        fontSize: 16, fontWeight: FontWeight.w400),
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                        fontFamily: 'baloo'),
                     decoration: Styles().inputDecoration.copyWith(
                           contentPadding:
                               const EdgeInsets.symmetric(horizontal: 10),
@@ -127,6 +123,9 @@ class LoginView extends GetView<LoginController> {
                   type: ButtonType.primary,
                   width: 300.w,
                   height: 50,
+                  onPressed: () {
+                    Get.offAllNamed(Routes.BOTTOMNAVIGATION);
+                  },
                 ),
                 SizedBox(
                   height: 16.h,
@@ -139,7 +138,8 @@ class LoginView extends GetView<LoginController> {
                       style: const TextStyle(
                           fontSize: 11,
                           fontWeight: FontWeight.w400,
-                          color: Styles.lightBlack),
+                          color: Styles.lightBlack,
+                          fontFamily: 'baloo'),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -150,11 +150,11 @@ class LoginView extends GetView<LoginController> {
                       child: Text(
                         AppStrings.newAccount.tr,
                         style: const TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600,
-                          color: Styles.primaryColor,
-                          decoration: TextDecoration.underline,
-                        ),
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600,
+                            color: Styles.primaryColor,
+                            decoration: TextDecoration.underline,
+                            fontFamily: 'baloo'),
                       ),
                     )
                   ],

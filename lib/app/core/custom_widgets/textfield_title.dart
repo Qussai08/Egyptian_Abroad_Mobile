@@ -36,7 +36,8 @@ class TextFieldTitle extends StatelessWidget {
                 TextStyle(
                     color: const Color.fromRGBO(0, 0, 0, 0.5),
                     fontSize: fontSize,
-                    fontWeight: FontWeight.w400),
+                    fontWeight: FontWeight.w400,
+                    fontFamily: 'baloo'),
           ),
           hasSubTitle
               ? Text(subTitle,

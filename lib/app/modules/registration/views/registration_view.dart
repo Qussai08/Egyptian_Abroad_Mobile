@@ -49,12 +49,10 @@ class RegistrationView extends GetView<RegistrationController> {
                   TextFieldContainer(
                     width: double.infinity,
                     height: 50,
+                    borderColor: const Color(0xffEBEBEB),
                     child: TextFormField(
-                      // controller: _mobileController,
                       textDirection: TextDirection.ltr,
                       scrollPadding: const EdgeInsets.only(bottom: 120),
-                      // validator: (val) =>
-                      //     Validators.validateMobilePhone(val, context),
                       keyboardType: TextInputType.text,
                       onChanged: (val) {},
                       maxLength: 14,
@@ -63,7 +61,9 @@ class RegistrationView extends GetView<RegistrationController> {
                           ? TextAlign.right
                           : TextAlign.left,
                       style: const TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.w400),
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                          fontFamily: 'baloo'),
                       decoration: Styles().inputDecoration.copyWith(
                             contentPadding:
                                 const EdgeInsets.symmetric(horizontal: 10),
@@ -76,14 +76,12 @@ class RegistrationView extends GetView<RegistrationController> {
                   ),
                   TextFieldTitle(title: AppStrings.nationalID.tr),
                   TextFieldContainer(
+                    borderColor: const Color(0xffEBEBEB),
                     width: double.infinity,
                     height: 50,
                     child: TextFormField(
-                      // controller: _mobileController,
                       textDirection: TextDirection.ltr,
                       scrollPadding: const EdgeInsets.only(bottom: 120),
-                      // validator: (val) =>
-                      //     Validators.validateMobilePhone(val, context),
                       keyboardType: TextInputType.phone,
                       onChanged: (val) {},
                       maxLength: 14,
@@ -92,7 +90,9 @@ class RegistrationView extends GetView<RegistrationController> {
                           ? TextAlign.right
                           : TextAlign.left,
                       style: const TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.w400),
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                          fontFamily: 'baloo'),
                       decoration: Styles().inputDecoration.copyWith(
                             contentPadding:
                                 const EdgeInsets.symmetric(horizontal: 10),
@@ -105,14 +105,12 @@ class RegistrationView extends GetView<RegistrationController> {
                   ),
                   TextFieldTitle(title: AppStrings.email.tr),
                   TextFieldContainer(
+                    borderColor: const Color(0xffEBEBEB),
                     width: double.infinity,
                     height: 50,
                     child: TextFormField(
-                      // controller: _mobileController,
                       textDirection: TextDirection.ltr,
                       scrollPadding: const EdgeInsets.only(bottom: 120),
-                      // validator: (val) =>
-                      //     Validators.validateMobilePhone(val, context),
                       keyboardType: TextInputType.emailAddress,
                       onChanged: (val) {},
                       maxLength: 14,
@@ -121,7 +119,9 @@ class RegistrationView extends GetView<RegistrationController> {
                           ? TextAlign.right
                           : TextAlign.left,
                       style: const TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.w400),
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                          fontFamily: 'baloo'),
                       decoration: Styles().inputDecoration.copyWith(
                             contentPadding:
                                 const EdgeInsets.symmetric(horizontal: 10),
@@ -134,14 +134,12 @@ class RegistrationView extends GetView<RegistrationController> {
                   ),
                   TextFieldTitle(title: AppStrings.residence.tr),
                   TextFieldContainer(
+                    borderColor: const Color(0xffEBEBEB),
                     width: double.infinity,
                     height: 50,
                     child: TextFormField(
-                      // controller: _mobileController,
                       textDirection: TextDirection.ltr,
                       scrollPadding: const EdgeInsets.only(bottom: 120),
-                      // validator: (val) =>
-                      //     Validators.validateMobilePhone(val, context),
                       keyboardType: TextInputType.phone,
                       onChanged: (val) {},
                       maxLength: 14,
@@ -150,7 +148,9 @@ class RegistrationView extends GetView<RegistrationController> {
                           ? TextAlign.right
                           : TextAlign.left,
                       style: const TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.w400),
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                          fontFamily: 'baloo'),
                       decoration: Styles().inputDecoration,
                       textInputAction: TextInputAction.go,
                     ),
@@ -181,7 +181,8 @@ class RegistrationView extends GetView<RegistrationController> {
                         style: const TextStyle(
                             fontSize: 11,
                             fontWeight: FontWeight.w400,
-                            color: Styles.lightBlack),
+                            color: Styles.lightBlack,
+                            fontFamily: 'baloo'),
                       ),
                       GestureDetector(
                         onTap: () {
@@ -192,11 +193,11 @@ class RegistrationView extends GetView<RegistrationController> {
                         child: Text(
                           AppStrings.logIn.tr,
                           style: const TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w600,
-                            color: Styles.primaryColor,
-                            decoration: TextDecoration.underline,
-                          ),
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600,
+                              color: Styles.primaryColor,
+                              decoration: TextDecoration.underline,
+                              fontFamily: 'baloo'),
                         ),
                       )
                     ],

@@ -46,7 +46,8 @@ class OtpView extends GetView<OtpController> {
                   titleTextStyle: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
-                      color: Styles.lightBlack),
+                      color: Styles.lightBlack,
+                      fontFamily: 'baloo'),
                 ),
                 SizedBox(
                   height: 25.h,

@@ -31,4 +31,18 @@ abstract class AppStrings {
   static const otpDiscription = 'otpDiscription';
   static const resendOtp = 'resendOtp';
   static const resend = 'resend';
+
+  // bottomNavigation tabs
+  static const home = 'home';
+  static const notifications = 'notifications';
+  static const aboutApp = 'aboutApp';
+
+  // home screen
+  static const hello = 'hello';
+  static const exploreServices = 'exploreServices';
+  static const allServices = 'allServices';
+  static const showMore = 'showMore';
+
+  // category screen
+  static const servicesNeeded = 'servicesNeeded';
 }

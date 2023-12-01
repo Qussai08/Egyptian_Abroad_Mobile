@@ -3,13 +3,18 @@ import 'package:flutter/material.dart';
 
 class TitleText extends StatelessWidget {
   const TitleText(
-      {Key? key, required this.title, this.titleTextStyle, this.fontSize = 24})
+      {Key? key,
+      required this.title,
+      this.titleTextStyle,
+      this.fontSize = 24,
+      this.color = Styles.black})
       : super(key: key);
 
   final String title;
 
   final TextStyle? titleTextStyle;
   final double fontSize;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +22,10 @@ class TitleText extends StatelessWidget {
       title,
       style: titleTextStyle ??
           TextStyle(
-              color: Styles.black,
+              color: color,
               fontSize: fontSize,
-              fontWeight: FontWeight.w700),
+              fontWeight: FontWeight.w700,
+              fontFamily: 'baloo'),
     );
   }
 }

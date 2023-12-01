@@ -25,4 +25,12 @@ Map<String, String> ar = {
       'أدخل الرمز المكون من 4 أرقام المرسل على البريد الالكتونى الخاص بك ',
   AppStrings.resendOtp: ' إعادة إرسال خلال ',
   AppStrings.resend: 'أرسل',
+  AppStrings.home: 'الرئيسية',
+  AppStrings.notifications: 'الاشعارات',
+  AppStrings.aboutApp: 'عن التطبيق',
+  AppStrings.hello: 'اهلا،',
+  AppStrings.exploreServices: 'استكشف الخدمات',
+  AppStrings.allServices: 'كل الخدمات اللي هتحتاجها واكتر، اى خدمة!',
+  AppStrings.showMore: 'عرض المزيد',
+  AppStrings.servicesNeeded: 'خدمات تهمك'
 };

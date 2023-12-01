@@ -1,3 +1,6 @@
+import 'package:egyptians_abroad/app/modules/bottom_navigation.dart/bindings/bottom_navigation_binding.dart';
+import 'package:egyptians_abroad/app/modules/bottom_navigation.dart/controllers/bottom_navigation_controller.dart';
+import 'package:egyptians_abroad/app/modules/bottom_navigation.dart/views/bottom_navigation_view.dart';
 import 'package:get/get.dart';
 
 import '../modules/category/bindings/category_binding.dart';
@@ -22,11 +25,6 @@ class AppPages {
 
   static final routes = [
     GetPage(
-      name: _Paths.HOME,
-      page: () => const HomeView(),
-      binding: HomeBinding(),
-    ),
-    GetPage(
       name: _Paths.SPLASH,
       page: () => const SplashView(),
       binding: SplashBinding(),
@@ -48,8 +46,19 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.CATEGORY,
-      page: () => const CategoryView(),
+      page: () => CategoryView(),
       binding: CategoryBinding(),
     ),
+    GetPage(
+        name: _Paths.BOTTOMNAVIGATION,
+        page: () => const BottomNavigationView(),
+        binding: BottomNavigationBinding(),
+        children: [
+          GetPage(
+            name: _Paths.HOME,
+            page: () => HomeView(),
+            binding: HomeBinding(),
+          ),
+        ]),
   ];
 }

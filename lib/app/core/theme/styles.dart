@@ -6,6 +6,7 @@ class Styles {
       colorScheme: ColorScheme.fromSwatch().copyWith(
         primary: const Color(0xff438AE7),
       ),
+      //   fontFamily: 'baloo',
       scaffoldBackgroundColor: Colors.white);
 
   final inputDecoration = InputDecoration(
@@ -14,7 +15,8 @@ class Styles {
       border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(37), borderSide: BorderSide.none),
       focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(37), borderSide: BorderSide.none),
+          borderRadius: BorderRadius.circular(37),
+          borderSide: BorderSide(color: Styles.primaryColor)),
       counterText: "",
       hintText: "");
 
@@ -76,6 +78,7 @@ class Styles {
   static const ghostGrey = Color(0xff717171);
   static const matchBackGroundGrey = Color(0xffFFFEF8);
   static const matchBorderGrey = Color(0xffEAEAEA);
+  static const secondaryButtonColor = Color(0xffF8F8F8);
 
   static const red = Color(0xffD71A21);
   static const heavyRed = Color(0xffBA1212);

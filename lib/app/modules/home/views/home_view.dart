@@ -1,23 +1,280 @@
+import 'package:egyptians_abroad/app/core/custom_widgets/custom_button.dart';
+import 'package:egyptians_abroad/app/core/custom_widgets/grid_widget.dart';
+import 'package:egyptians_abroad/app/core/custom_widgets/no_data_widget.dart';
+import 'package:egyptians_abroad/app/core/custom_widgets/textfield_container.dart';
+import 'package:egyptians_abroad/app/core/custom_widgets/title_text.dart';
+import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
+import 'package:egyptians_abroad/app/core/helper/localization_helper.dart';
+import 'package:egyptians_abroad/app/core/language/app_string.dart';
+import 'package:egyptians_abroad/app/core/theme/styles.dart';
+import 'package:egyptians_abroad/app/modules/home/views/widgets/home_appbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 
 import '../controllers/home_controller.dart';
 
-class HomeView extends GetView<HomeController> {
-  const HomeView({Key? key}) : super(key: key);
+class HomeView extends StatefulWidget {
+  const HomeView({super.key});
+
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
+  String _keySearch = '';
+  final TextEditingController _searchController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('HomeView'),
-        centerTitle: true,
-      ),
-      body: const Center(
-        child: Text(
-          'HomeView is working',
-          style: TextStyle(fontSize: 20),
+    final controller = Get.put(HomeController());
+    return GetBuilder<HomeController>(
+      builder: (homeContoller) => Scaffold(
+        resizeToAvoidBottomInset: false,
+        appBar: const HomeAppBar(),
+        body: SingleChildScrollView(
+          physics: NeverScrollableScrollPhysics(),
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 16.w),
+            child: Column(
+              children: [
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 15.h),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          Image.asset(
+                            'assets/icons/male.png',
+                            width: 36.w,
+                            fit: BoxFit.fitWidth,
+                          ),
+                          Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 5),
+                            child: Image.asset(
+                              'assets/icons/arrow-down.png',
+                              width: 16.w,
+                              fit: BoxFit.fitWidth,
+                            ),
+                          ),
+                          TitleText(
+                            title: "${AppStrings.hello.tr} احمد" + "!",
+                            fontSize: fixDpiFont(18),
+                            color: const Color(0xff263238),
+                          )
+                        ],
+                      ),
+                      // Container(
+                      //   width: 133.w,
+                      //   height: 37.h,
+                      //   padding: const EdgeInsets.symmetric(horizontal: 10),
+                      //   decoration: BoxDecoration(
+                      //       borderRadius: BorderRadius.circular(28),
+                      //       border: Border.all(color: const Color(0xffEBEBEB))),
+                      //   child: Row(
+                      //     mainAxisAlignment: MainAxisAlignment.center,
+                      //     children: [
+                      //       Image.asset(
+                      //         'assets/icons/location-icon.png',
+                      //         height: 24.w,
+                      //         width: 24.w,
+                      //         fit: BoxFit.fitWidth,
+                      //       ),
+                      //       const SizedBox(
+                      //         width: 5,
+                      //       ),
+                      //       Text(
+                      //         'ميونيخ 🇩🇪',
+                      //         style: TextStyle(
+                      //             fontSize: fixDpiFont(14),
+                      //             fontWeight: FontWeight.w400,
+                      //             color: const Color(0xff263238),
+                      //             fontFamily: 'baloo'),
+                      //       ),
+                      //     ],
+                      //   ),
+                      // )
+                    ],
+                  ),
+                ),
+                TextFieldContainer(
+                  width: double.infinity,
+                  height: 50,
+                  borderColor: const Color(0xffEBEBEB),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(right: 12.w),
+                        child: const Icon(
+                          Icons.search,
+                          color: Styles.primaryColor,
+                        ),
+                      ),
+                      Expanded(
+                        child: TextFormField(
+                          controller: _searchController,
+                          textDirection: LocalizationHelper.isArabic()
+                              ? TextDirection.rtl
+                              : TextDirection.ltr,
+                          scrollPadding: const EdgeInsets.only(bottom: 120),
+                          keyboardType: TextInputType.text,
+                          onChanged: (val) {
+                            if (val.isEmpty) {
+                              _keySearch = val;
+                              controller.setKeySearch(_keySearch,
+                                  notifiy: true);
+                              FocusScope.of(context).unfocus();
+                            }
+                          },
+                          onFieldSubmitted: (val) {
+                            _keySearch = val;
+                            controller.setKeySearch(_keySearch, notifiy: true);
+                          },
+                          textAlign: LocalizationHelper.isArabic()
+                              ? TextAlign.right
+                              : TextAlign.left,
+                          style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                              fontFamily: 'baloo'),
+                          decoration: Styles().inputDecoration.copyWith(
+                                fillColor: const Color(0xffEBEBEB),
+                                contentPadding:
+                                    const EdgeInsets.symmetric(horizontal: 10),
+                                hintText: "ابحث عن خدمة",
+                                hintStyle: TextStyle(
+                                    fontSize: fixDpiFont(14),
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: 'baloo'),
+                              ),
+                          textInputAction: TextInputAction.search,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(top: 20.h),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 16.w, vertical: 19.h),
+                  height: 524.h,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Color.fromRGBO(28, 76, 159, 0.15),
+                        spreadRadius: 5,
+                        blurRadius: 7,
+                        offset: Offset(0, 3), // changes position of shadow
+                      ),
+                    ],
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      TitleText(
+                        title: 'استكشف الخدمات',
+                        fontSize: fixDpiFont(18),
+                      ),
+                      TitleText(
+                        title: 'كل الخدمات اللي هتحتاجها واكتر، اى خدمة!',
+                        fontSize: fixDpiFont(14),
+                        titleTextStyle: TextStyle(
+                            fontSize: fixDpiFont(14),
+                            fontWeight: FontWeight.w400,
+                            color: const Color.fromRGBO(62, 60, 60, 0.71),
+                            fontFamily: 'baloo'),
+                      ),
+                      homeContoller.categoriesLoading ||
+                              homeContoller.displayedCategoriesList.isEmpty
+                          ? const Spacer()
+                          : Container(),
+                      homeContoller.categoriesLoading
+                          ? const Center(
+                              child: CircularProgressIndicator(
+                                color: Styles.primaryColor,
+                              ),
+                            )
+                          : homeContoller.displayedCategoriesList.isEmpty
+                              ? const NoDataWidget(
+                                  message: 'لا توجد خدمات',
+                                )
+                              : Column(
+                                  children: [
+                                    SizedBox(
+                                      height:
+                                          !controller.showMore ? 425.h : 385.h,
+                                      child: GridView.builder(
+                                        shrinkWrap: true,
+                                        padding: EdgeInsets.only(top: 15.h),
+                                        gridDelegate:
+                                            const SliverGridDelegateWithMaxCrossAxisExtent(
+                                          maxCrossAxisExtent: 125,
+                                          childAspectRatio: 0.96,
+                                        ),
+                                        scrollDirection: Axis.vertical,
+                                        itemCount: controller
+                                            .displayedCategoriesList.length,
+                                        itemBuilder: (ctx, i) => GridWidget(
+                                          i,
+                                          category: controller
+                                              .displayedCategoriesList[i],
+                                        ),
+                                      ),
+                                    ),
+                                    controller.showMore
+                                        ? Container(
+                                            alignment: Alignment.bottomCenter,
+                                            padding: EdgeInsets.only(
+                                                bottom: 5.h, top: 5.h),
+                                            child: CustomButton(
+                                              type: ButtonType.secondary,
+                                              text: 'عرض المزيد',
+                                              width: 96,
+                                              height: 36.h,
+                                              fontSize: 10,
+                                              icon: Icons.arrow_forward,
+                                              iconSize: 13,
+                                              onPressed: () {
+                                                controller.getMoreCategories();
+                                              },
+                                            ),
+                                          )
+                                        : Container()
+                                  ],
+                                ),
+                      const Spacer(),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
         ),
+        // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        // floatingActionButton: controller.showMore
+        //     ? Container(
+        //         alignment: Alignment.bottomCenter,
+        //         padding: EdgeInsets.only(bottom: 35.h),
+        //         child: CustomButton(
+        //           type: ButtonType.secondary,
+        //           text: 'عرض المزيد',
+        //           width: 95.w,
+        //           height: 36.h,
+        //           fontSize: 10,
+        //           icon: Icons.arrow_forward,
+        //           iconSize: 13,
+        //           onPressed: () {
+        //             controller.getMoreCategories();
+        //           },
+        //         ),
+        //       )
+        //     : Container(),
       ),
     );
   }
