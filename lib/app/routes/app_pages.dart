@@ -1,6 +1,7 @@
 import 'package:egyptians_abroad/app/modules/bottom_navigation.dart/bindings/bottom_navigation_binding.dart';
-import 'package:egyptians_abroad/app/modules/bottom_navigation.dart/controllers/bottom_navigation_controller.dart';
 import 'package:egyptians_abroad/app/modules/bottom_navigation.dart/views/bottom_navigation_view.dart';
+import 'package:egyptians_abroad/app/modules/registration/views/complete_account.dart';
+import 'package:egyptians_abroad/app/modules/registration/views/set_password_view.dart';
 import 'package:get/get.dart';
 
 import '../modules/category/bindings/category_binding.dart';
@@ -42,6 +43,16 @@ class AppPages {
     GetPage(
       name: _Paths.REGISTRATION,
       page: () => const RegistrationView(),
+      binding: RegistrationBinding(),
+    ),
+    GetPage(
+      name: _Paths.SETPASSWORD,
+      page: () => const SetPasswordView(),
+      binding: RegistrationBinding(),
+    ),
+    GetPage(
+      name: _Paths.COMPLETEACCOUNT,
+      page: () => const CompleteAccountView(),
       binding: RegistrationBinding(),
     ),
     GetPage(

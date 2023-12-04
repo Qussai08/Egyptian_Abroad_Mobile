@@ -56,6 +56,7 @@ class Styles {
 
   // green disclamer
   static const lightGreen = Color.fromARGB(255, 229, 248, 234);
+  static const green = Color(0xff469F7A);
 
   // black
   static const black = Color.fromRGBO(0, 0, 0, 1);
@@ -82,4 +83,5 @@ class Styles {
 
   static const red = Color(0xffD71A21);
   static const heavyRed = Color(0xffBA1212);
+  static const disabledGreyColor = Color(0xffC7C7C7);
 }

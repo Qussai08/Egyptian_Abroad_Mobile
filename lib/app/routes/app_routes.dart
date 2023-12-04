@@ -10,6 +10,8 @@ abstract class Routes {
   static const REGISTRATION = _Paths.REGISTRATION;
   static const CATEGORY = _Paths.CATEGORY;
   static const BOTTOMNAVIGATION = _Paths.BOTTOMNAVIGATION;
+  static const SETPASSWORD = _Paths.SETPASSWORD;
+  static const COMPLETEACCOUNT = _Paths.COMPLETEACCOUNT;
 }
 
 abstract class _Paths {
@@ -21,4 +23,6 @@ abstract class _Paths {
   static const REGISTRATION = '/registration';
   static const CATEGORY = '/category';
   static const BOTTOMNAVIGATION = '/bottomNavigation';
+  static const SETPASSWORD = '/setPassword';
+  static const COMPLETEACCOUNT = '/completeAccount';
 }

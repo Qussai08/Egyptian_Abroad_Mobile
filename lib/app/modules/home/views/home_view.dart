@@ -1,4 +1,5 @@
 import 'package:egyptians_abroad/app/core/custom_widgets/custom_button.dart';
+import 'package:egyptians_abroad/app/core/custom_widgets/custom_textfield.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/grid_widget.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/no_data_widget.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/textfield_container.dart';
@@ -99,62 +100,30 @@ class _HomeViewState extends State<HomeView> {
                     ],
                   ),
                 ),
-                TextFieldContainer(
-                  width: double.infinity,
-                  height: 50,
-                  borderColor: const Color(0xffEBEBEB),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(right: 12.w),
-                        child: const Icon(
-                          Icons.search,
-                          color: Styles.primaryColor,
-                        ),
-                      ),
-                      Expanded(
-                        child: TextFormField(
-                          controller: _searchController,
-                          textDirection: LocalizationHelper.isArabic()
-                              ? TextDirection.rtl
-                              : TextDirection.ltr,
-                          scrollPadding: const EdgeInsets.only(bottom: 120),
-                          keyboardType: TextInputType.text,
-                          onChanged: (val) {
-                            if (val.isEmpty) {
-                              _keySearch = val;
-                              controller.setKeySearch(_keySearch,
-                                  notifiy: true);
-                              FocusScope.of(context).unfocus();
-                            }
-                          },
-                          onFieldSubmitted: (val) {
-                            _keySearch = val;
-                            controller.setKeySearch(_keySearch, notifiy: true);
-                          },
-                          textAlign: LocalizationHelper.isArabic()
-                              ? TextAlign.right
-                              : TextAlign.left,
-                          style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                              fontFamily: 'baloo'),
-                          decoration: Styles().inputDecoration.copyWith(
-                                fillColor: const Color(0xffEBEBEB),
-                                contentPadding:
-                                    const EdgeInsets.symmetric(horizontal: 10),
-                                hintText: "ابحث عن خدمة",
-                                hintStyle: TextStyle(
-                                    fontSize: fixDpiFont(14),
-                                    fontWeight: FontWeight.w400,
-                                    fontFamily: 'baloo'),
-                              ),
-                          textInputAction: TextInputAction.search,
-                        ),
-                      ),
-                    ],
+                CustomTextFormField(
+                  controller: _searchController,
+                  prefixIcon: const Icon(
+                    Icons.search,
+                    color: Styles.primaryColor,
                   ),
+                  inputData: TextInputType.text,
+                  textInputAction: TextInputAction.search,
+                  onChangedFunc: (val) {
+                    if (val.isEmpty) {
+                      _keySearch = val;
+                      controller.setKeySearch(_keySearch, notifiy: true);
+                      FocusScope.of(context).unfocus();
+                    }
+                  },
+                  onFieldSubmitted: (val) {
+                    _keySearch = val;
+                    controller.setKeySearch(_keySearch, notifiy: true);
+                  },
+                  hintTxt: "ابحث عن خدمة",
+                  hintStyle: TextStyle(
+                      fontSize: fixDpiFont(14),
+                      fontWeight: FontWeight.w400,
+                      fontFamily: 'baloo'),
                 ),
                 Container(
                   margin: EdgeInsets.only(top: 20.h),
@@ -256,25 +225,6 @@ class _HomeViewState extends State<HomeView> {
             ),
           ),
         ),
-        // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        // floatingActionButton: controller.showMore
-        //     ? Container(
-        //         alignment: Alignment.bottomCenter,
-        //         padding: EdgeInsets.only(bottom: 35.h),
-        //         child: CustomButton(
-        //           type: ButtonType.secondary,
-        //           text: 'عرض المزيد',
-        //           width: 95.w,
-        //           height: 36.h,
-        //           fontSize: 10,
-        //           icon: Icons.arrow_forward,
-        //           iconSize: 13,
-        //           onPressed: () {
-        //             controller.getMoreCategories();
-        //           },
-        //         ),
-        //       )
-        //     : Container(),
       ),
     );
   }
