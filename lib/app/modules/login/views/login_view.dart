@@ -1,13 +1,10 @@
 import 'package:egyptians_abroad/app/core/custom_widgets/custom_button.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/custom_textfield.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/network_indecator.dart';
-import 'package:egyptians_abroad/app/core/custom_widgets/textfield_container.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/textfield_title.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/title_text.dart';
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
-import 'package:egyptians_abroad/app/core/helper/localization_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
-import 'package:egyptians_abroad/app/core/services/app_response.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:egyptians_abroad/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
@@ -15,8 +12,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:egyptians_abroad/app/core/helper/validators.dart';
 
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 
+import '../../../core/theme/app_images.dart';
 import '../controllers/login_controller.dart';
 
 class LoginView extends StatefulWidget {
@@ -48,7 +45,8 @@ class _LoginViewState extends State<LoginView> with ValidationMixin {
               child: Column(
                 children: [
                   Image.asset(
-                    'assets/images/travel.png',
+                    // TODO: use reference from AppImages
+                    AppImages.travel,
                     width: 56.w,
                     fit: BoxFit.fitWidth,
                   ),
@@ -131,12 +129,22 @@ class _LoginViewState extends State<LoginView> with ValidationMixin {
                         },
                         child: Text(
                           AppStrings.newAccount.tr,
-                          style: const TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600,
-                              color: Styles.primaryColor,
-                              decoration: TextDecoration.underline,
-                              fontFamily: 'baloo'),
+
+                          // TODO:replace this with the new style
+                          // style: const TextStyle(
+                          //     fontSize: 12,
+                          //     fontWeight: FontWeight.w600,
+                          //     color: Styles.primaryColor,
+                          //     decoration: TextDecoration.underline,
+                          //     fontFamily: 'baloo'),
+
+                          // New style
+                          style: Styles.getSemiBoldStyle(
+                                  color: Styles.primaryColor,
+                                  fontSize: FontSize.s12)
+                              .copyWith(
+                            decoration: TextDecoration.underline,
+                          ),
                         ),
                       ),
                     ],

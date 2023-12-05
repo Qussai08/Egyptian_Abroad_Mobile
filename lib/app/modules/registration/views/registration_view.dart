@@ -15,7 +15,7 @@ import 'package:egyptians_abroad/app/core/helper/validators.dart';
 import 'package:get/get.dart';
 
 class RegistrationView extends StatefulWidget {
-  const RegistrationView({Key? key}) : super(key: key);
+  const RegistrationView({super.key});
 
   @override
   State<RegistrationView> createState() => _RegistrationViewState();
@@ -150,9 +150,7 @@ class _RegistrationViewState extends State<RegistrationView>
                         ),
                         GestureDetector(
                           onTap: () {
-                            Get.toNamed(
-                              Routes.LOGIN,
-                            );
+                            Get.back();
                           },
                           child: Text(
                             AppStrings.logIn.tr,
