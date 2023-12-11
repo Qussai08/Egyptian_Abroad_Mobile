@@ -1,7 +1,13 @@
 import 'package:egyptians_abroad/app/modules/bottom_navigation.dart/bindings/bottom_navigation_binding.dart';
 import 'package:egyptians_abroad/app/modules/bottom_navigation.dart/views/bottom_navigation_view.dart';
+import 'package:egyptians_abroad/app/modules/edit_account/bindings/edit_account_binding.dart';
+import 'package:egyptians_abroad/app/modules/edit_account/views/edit_account.dart';
+import 'package:egyptians_abroad/app/modules/forget_password/bindings/forget_password_bindings.dart';
+import 'package:egyptians_abroad/app/modules/forget_password/views/forget_password_view.dart';
 import 'package:egyptians_abroad/app/modules/registration/views/complete_account.dart';
 import 'package:egyptians_abroad/app/modules/registration/views/set_password_view.dart';
+import 'package:egyptians_abroad/app/modules/start_service/bindings/start_service_binding.dart';
+import 'package:egyptians_abroad/app/modules/start_service/views/start_service_view.dart';
 import 'package:get/get.dart';
 
 import '../modules/category/bindings/category_binding.dart';
@@ -56,9 +62,24 @@ class AppPages {
       binding: RegistrationBinding(),
     ),
     GetPage(
+      name: _Paths.EditACCOUNT,
+      page: () => const EditAccountView(),
+      binding: EditAccountBinding(),
+    ),
+    GetPage(
+      name: _Paths.FORGETPASSWORD,
+      page: () => const ForgetPasswordView(),
+      binding: ForgetPasswordBinding(),
+    ),
+    GetPage(
       name: _Paths.CATEGORY,
       page: () => CategoryView(),
       binding: CategoryBinding(),
+    ),
+    GetPage(
+      name: _Paths.URLSERVICE,
+      page: () => URLServiceView(),
+      binding: StartServiceBinding(),
     ),
     GetPage(
         name: _Paths.BOTTOMNAVIGATION,

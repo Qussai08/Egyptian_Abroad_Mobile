@@ -4,9 +4,7 @@ import 'package:egyptians_abroad/app/core/custom_widgets/dropdown_list_selector.
 import 'package:egyptians_abroad/app/core/custom_widgets/network_indecator.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/textfield_title.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/title_text.dart';
-import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
-import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:egyptians_abroad/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -181,7 +179,7 @@ class _CompleteAccountViewState extends State<CompleteAccountView>
                       // validationFunc: (val) =>
                       //     validateUserEmail(_emailTxtController.text),
                       inputData: TextInputType.text,
-                      maxLength: 200,
+                      maxLength: null,
                     ),
                     SizedBox(
                       height: 16.h,
@@ -263,7 +261,7 @@ class _CompleteAccountViewState extends State<CompleteAccountView>
                       // validationFunc: (val) =>
                       //     validateUserEmail(_emailTxtController.text),
                       inputData: TextInputType.phone,
-                      maxLength: 15,
+                      maxLength: null,
                     ),
                     SizedBox(
                       height: 16.h,
@@ -275,7 +273,7 @@ class _CompleteAccountViewState extends State<CompleteAccountView>
                       // validationFunc: (val) =>
                       //     validateUserEmail(_emailTxtController.text),
                       inputData: TextInputType.text,
-                      maxLength: 200,
+                      maxLength: null,
                     ),
                     SizedBox(
                       height: 50.h,

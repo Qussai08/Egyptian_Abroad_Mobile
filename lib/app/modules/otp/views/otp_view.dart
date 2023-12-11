@@ -1,16 +1,21 @@
+import 'package:egyptians_abroad/app/core/custom_widgets/custom_button.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/network_indecator.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/title_text.dart';
+import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/helper/validators.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
+import 'package:egyptians_abroad/app/core/services/app_response.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
+import 'package:egyptians_abroad/app/modules/registration/controllers/registration_controller.dart';
 import 'package:egyptians_abroad/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
+import 'package:intl/intl.dart' as intl;
 import 'package:otp_text_field/otp_text_field.dart';
 import 'package:otp_text_field/style.dart';
-
 
 class OtpView extends StatefulWidget {
   const OtpView({Key? key}) : super(key: key);
@@ -21,16 +26,20 @@ class OtpView extends StatefulWidget {
 
 class _OtpViewState extends State<OtpView> with ValidationMixin {
   final _formKey = GlobalKey<FormState>();
-  // final OtpFieldController _otpTxtController = OtpFieldController();
   final ValueNotifier<bool> _otpHasError = ValueNotifier(false);
+
+  int endTime = DateTime.now().millisecondsSinceEpoch + 1000 * 120;
+  intl.NumberFormat formatter = intl.NumberFormat("00");
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(RegistrationController());
+
     return NetworkIndicator(
       child: Scaffold(
           body: SafeArea(
         child: Container(
-          padding: EdgeInsets.only(top: 20.h, right: 16.w, left: 16.w),
+          padding: EdgeInsets.only(top: 30.h, right: 16.w, left: 16.w),
           child: SingleChildScrollView(
             child: Form(
               key: _formKey,
@@ -67,44 +76,150 @@ class _OtpViewState extends State<OtpView> with ValidationMixin {
                     child: ValueListenableBuilder<bool>(
                         valueListenable: _otpHasError,
                         builder: (_, hasError, __) {
-                          return Directionality(
-                            textDirection: TextDirection.ltr,
-                            child: OTPTextField(
-                              length: 4,
-                              width: MediaQuery.of(context).size.width,
-                              outlineBorderRadius: 24,
-                              otpFieldStyle: OtpFieldStyle(
-                                focusBorderColor: Styles.primaryColor,
-                              ),
-                              fieldWidth: 50,
-                              style: const TextStyle(
-                                fontSize: 17,
-                              ),
-                              keyboardType: TextInputType.number,
-                              textFieldAlignment: MainAxisAlignment.spaceAround,
-                              fieldStyle: FieldStyle.box,
-                              // controller: _otpTxtController,
-                              hasError: hasError,
-                              onChanged: (pin) {},
-                              onCompleted: (pin) async {
-                                _otpHasError.value =
-                                    validateOtpCode(pin) != null ? true : false;
-                                print(validateOtpCode(pin));
+                          return Column(
+                            children: [
+                              Directionality(
+                                textDirection: TextDirection.ltr,
+                                child: OTPTextField(
+                                  length: 4,
+                                  width: MediaQuery.of(context).size.width,
+                                  outlineBorderRadius: 24,
+                                  otpFieldStyle: OtpFieldStyle(
+                                    focusBorderColor: Styles.primaryColor,
+                                  ),
+                                  fieldWidth: 50,
+                                  style: const TextStyle(
+                                    fontSize: 17,
+                                  ),
+                                  keyboardType: TextInputType.number,
+                                  textFieldAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  fieldStyle: FieldStyle.box,
+                                  controller: controller.otpTxtController,
+                                  hasError: hasError,
+                                  contentPadding: EdgeInsets.only(left: 5),
+                                  onChanged: (pin) {
+                                    controller.otp = pin;
+                                  },
+                                  onCompleted: (pin) async {
+                                    _otpHasError.value =
+                                        validateOtpCode(pin) != null
+                                            ? true
+                                            : false;
 
-                                if (!hasError) {
-                                  Get.toNamed(
-                                    Routes.SETPASSWORD,
-                                  );
-                                }
-                              },
-                            ),
+                                    AppResponse res =
+                                        await controller.verifyCode(pin);
+                                    if (res.status &&
+                                        res.data['data'] == true) {
+                                      controller.otp = pin;
+                                      Get.toNamed(Routes.SETPASSWORD);
+                                    } else {
+                                      _otpHasError.value = true;
+                                    }
+                                  },
+                                ),
+                              ),
+                              if (hasError)
+                                Container(
+                                  margin: const EdgeInsets.only(top: 10),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.error,
+                                        color: Colors.red,
+                                        size: fixDpiHeight(24),
+                                      ),
+                                      const SizedBox(
+                                        width: 2,
+                                      ),
+                                      Text(
+                                        AppStrings.sorry.tr,
+                                        style: TextStyle(
+                                            color: Colors.red,
+                                            fontSize: fixDpiFont(18),
+                                            fontWeight: FontWeight.w700,
+                                            fontFamily: "baloo"),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              if (hasError)
+                                Text(
+                                  'كود التحقق غير صحيح',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      color: Colors.red,
+                                      fontSize: fixDpiFont(14),
+                                      fontWeight: FontWeight.w400,
+                                      fontFamily: "baloo"),
+                                ),
+                            ],
                           );
                         }),
                   ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  CountdownTimer(
+                    endTime: endTime,
+                    widgetBuilder: (context, time) {
+                      if (time == null) {
+                        return Container(
+                          margin: EdgeInsets.symmetric(horizontal: 110.w),
+                          child: CustomButton(
+                            text: "إعادة إرسال",
+                            type: ButtonType.secondary,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w700,
+                            height: 40,
+                            onPressed: () async {
+                              await controller.createVerificationCode();
+                              endTime = DateTime.now().millisecondsSinceEpoch +
+                                  1000 * 120;
+                              _otpHasError.value = false;
+                              controller.otpTxtController.clear();
+                              setState(() {});
+                            },
+                          ),
+                        );
+                      }
 
-                  ///
-
-                  // TODO : add resend in widget
+                      return Container(
+                        height: 40,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 10),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: Styles.secondaryButtonColor,
+                        ),
+                        child: Text(
+                          " إعادة إرسال خلال " +
+                              '${formatter.format(time.min ?? 00)}:${formatter.format(time.sec ?? 00)}',
+                          style: TextStyle(
+                              fontFamily: 'baloo',
+                              fontWeight: FontWeight.w400,
+                              fontSize: fixDpiFont(12)),
+                        ),
+                      );
+                    },
+                  ),
+                  SizedBox(
+                    height: 50.h,
+                  ),
+                  CustomButton(
+                    text: "تأكيد",
+                    icon: Icons.arrow_forward,
+                    type: ButtonType.primary,
+                    width: 300.w,
+                    height: 50,
+                    onPressed: () async {
+                      _otpHasError.value =
+                          validateOtpCode(controller.otp) != null
+                              ? true
+                              : false;
+                    },
+                  ),
                 ],
               ),
             ),

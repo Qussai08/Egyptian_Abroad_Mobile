@@ -22,7 +22,7 @@ class BottomNavigationView extends GetView<BottomNavigationController> {
                   label: AppStrings.home.tr,
                 ),
                 _buildNavigationBarItem(
-                  label: AppStrings.home.tr,
+                  label: 'start service',
                 ),
               ],
               currentIndex: bottomNavigationController.tabIndex,

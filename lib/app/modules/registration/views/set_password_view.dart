@@ -9,6 +9,7 @@ import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/helper/localization_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
+import 'package:egyptians_abroad/app/modules/registration/controllers/registration_controller.dart';
 import 'package:egyptians_abroad/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,7 +27,6 @@ class SetPasswordView extends StatefulWidget {
 
 class _SetPasswordViewState extends State<SetPasswordView>
     with ValidationMixin {
-  final TextEditingController _passwordTxtController = TextEditingController();
   final TextEditingController _confirmPassTxtController =
       TextEditingController();
 
@@ -36,6 +36,8 @@ class _SetPasswordViewState extends State<SetPasswordView>
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(RegistrationController());
+
     return NetworkIndicator(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -62,9 +64,9 @@ class _SetPasswordViewState extends State<SetPasswordView>
                   ),
                   TextFieldTitle(title: AppStrings.password.tr),
                   CustomTextFormField(
-                    controller: _passwordTxtController,
+                    controller: controller.passwordTxtController,
                     validationFunc: (val) =>
-                        validatePassword(_passwordTxtController.text),
+                        validatePassword(controller.passwordTxtController.text),
                     onChangedFunc: (val) {
                       _validationsValues.value = [
                         passMinimumLenght(val),
@@ -130,14 +132,12 @@ class _SetPasswordViewState extends State<SetPasswordView>
                     type: ButtonType.primary,
                     width: 300.w,
                     height: 50,
-                    onPressed: () {
+                    onPressed: () async {
                       if (_formKey.currentState!.validate() &&
                           _validationsValues.value.firstWhereOrNull(
                                   (element) => element == false) ==
                               null) {
-                        Get.toNamed(
-                          Routes.COMPLETEACCOUNT,
-                        );
+                        await controller.register();
                       }
                     },
                   ),

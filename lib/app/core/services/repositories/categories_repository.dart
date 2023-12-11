@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:convert';
 
 import 'package:egyptians_abroad/app/core/services/app_response.dart';
@@ -17,5 +16,12 @@ class CategoriesRepository {
       endPoint: "GetServicesByCategoryId",
       body: jsonEncode(body),
     );
+  }
+
+  Future<AppResponse> getServicesContentByServiceId(
+      {required Map<String, dynamic> queryParameters}) async {
+    return await BaseApi.getRequest(
+        endPoint: "GetServicesContentByServiceId",
+        queryParameters: queryParameters);
   }
 }

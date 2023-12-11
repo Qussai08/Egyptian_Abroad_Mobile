@@ -30,6 +30,7 @@ class CustomTextFormField extends StatefulWidget {
   final FocusNode? focusNode;
   final OutlineInputBorder? disabledBorder;
   final TextInputAction? textInputAction;
+  final Color? fillColor;
 
   final TextEditingController? controller;
   CustomTextFormField(
@@ -60,7 +61,8 @@ class CustomTextFormField extends StatefulWidget {
       this.hintStyle,
       this.textStyle,
       this.focusNode,
-      this.textInputAction});
+      this.textInputAction,
+      this.fillColor = Colors.white});
 
   @override
   _CustomTextFormFieldState createState() => _CustomTextFormFieldState();
@@ -120,11 +122,12 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                 TextStyle(
                     color: Colors.black,
                     fontSize: widget.isPassword! ? 16 : 14,
-                    fontWeight: FontWeight.w400),
+                    fontWeight: FontWeight.w400,
+                    fontFamily: 'baloo'),
             decoration: InputDecoration(
               filled: true,
               labelText: widget.labelText,
-              fillColor: Colors.white,
+              fillColor: widget.fillColor,
               contentPadding: EdgeInsets.only(
                   right: 10,
                   left: 10,
@@ -149,21 +152,26 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
               focusColor: Styles.primaryColor,
               suffixIcon: !widget.suffixIconIsImage!
                   ? widget.isPassword!
-                      ? GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              _obsecureText = !_obsecureText;
-                            });
-                          },
-                          child: Icon(
-                            _obsecureText
-                                ? Icons.remove_red_eye
-                                : Icons.visibility_off,
-                            color: _focusNode.hasFocus
-                                ? Styles.primaryColor
-                                : Styles.grey_300,
-                            size: 20,
-                          ),
+                      ? SizedBox(
+                          width: 30,
+                          height: 30,
+                          child: IconButton(
+                              splashColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onPressed: () {
+                                setState(() {
+                                  _obsecureText = !_obsecureText;
+                                });
+                              },
+                              icon: Icon(
+                                _obsecureText
+                                    ? Icons.remove_red_eye
+                                    : Icons.visibility_off,
+                                color: _focusNode.hasFocus
+                                    ? Styles.primaryColor
+                                    : Styles.grey_300,
+                                size: 20,
+                              )),
                         )
                       : widget.suffixIcon
                   : _focusNode.hasFocus
@@ -197,10 +205,10 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                         ),
               hintText: widget.hintTxt,
               errorStyle: const TextStyle(
-                fontSize: 11.0,
-                color: Colors.red,
-                fontWeight: FontWeight.w400,
-              ),
+                  fontSize: 11.0,
+                  color: Colors.red,
+                  fontWeight: FontWeight.w400,
+                  fontFamily: 'baloo'),
               counterStyle: TextStyle(
                 height: 0,
                 fontSize: 9,
@@ -208,7 +216,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
 
               disabledBorder: widget.disabledBorder ??
                   OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
+                    borderRadius: BorderRadius.circular(37.0),
                     borderSide: BorderSide(
                         color: _focusNode.hasFocus
                             ? Styles.primaryColor
@@ -220,7 +228,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                           ? Styles.primaryColor
                           : Styles.grey_300,
                       fontSize: 14,
-                      fontWeight: FontWeight.w400),
+                      fontWeight: FontWeight.w400,
+                      fontFamily: 'baloo'),
             ),
             onTapOutside: (event) {
               FocusManager.instance.primaryFocus?.unfocus();

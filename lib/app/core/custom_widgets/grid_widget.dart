@@ -2,6 +2,7 @@ import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/services/models/category.dart';
 import 'package:egyptians_abroad/app/core/services/models/service.dart';
 import 'package:egyptians_abroad/app/modules/category/views/category_view.dart';
+import 'package:egyptians_abroad/app/modules/start_service/controllers/start_service_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -20,9 +21,26 @@ class _GridWidgetState extends State<GridWidget> {
   @override
   Widget build(BuildContext context) {
     bool isService = widget.serviceItem != null ? true : false;
+    final controller = Get.put(StartServiceController());
+
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
         if (isService) {
+          var serviceContent = await controller
+              .getServicesContent(widget.serviceItem!.serviceId);
+
+          // Get.to(() => serviceContent.servicesType != ServiceType.content
+          //     ? StartServiceRedir(
+          //         serviceContent: serviceContent,
+          //       )
+          //     : ServiceContentView(
+          //         category: widget.category,
+          //         serviceContent: serviceContent,
+          //       ));
+          // Get.to(() => StartServiceRedir(
+          //       category: widget.category,
+          //       serviceContent: serviceContent,
+          //     ));
         } else {
           Get.to(() => CategoryView(
                 category: widget.category,

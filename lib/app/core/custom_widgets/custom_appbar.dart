@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class CategoryAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const CategoryAppBar({super.key, required this.title});
-  final String title;
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const CustomAppBar({super.key, this.title});
+  final String? title;
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
@@ -17,7 +17,7 @@ class CategoryAppBar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: Colors.transparent,
       shadowColor: Colors.transparent,
       title: Text(
-        title,
+        title ?? "",
         textAlign: TextAlign.center,
         style: TextStyle(
             fontSize: fixDpiFont(26),

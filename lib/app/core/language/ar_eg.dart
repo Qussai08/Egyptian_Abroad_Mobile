@@ -66,5 +66,10 @@ Map<String, String> ar = {
   AppStrings.save: 'حفظ',
   AppStrings.skip: 'تخطي',
   AppStrings.sorry: 'عفوا',
-  AppStrings.invalidMailOrPass: 'خطأ في البريد الإلكترونى أو كلمة المرور.'
+  AppStrings.invalidMailOrPass: 'خطأ في البريد الإلكترونى أو كلمة المرور.',
+  AppStrings.accountInfos: 'بيانات الحساب',
+  AppStrings.editAccountInfos: 'تعديل بيانات الحساب',
+  AppStrings.viewAccountInfos: 'عرض بيانات الحساب',
+  AppStrings.forgetPasswordTitle: 'اعادة تعيين كلمة المرور',
+  AppStrings.sendVerificationCode: 'ارسال كود التحقق'
 };

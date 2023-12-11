@@ -14,19 +14,19 @@ class SplashController extends GetxController {
 
     LocalizationHelper().changeLocale(
         Language.arabic); // TODO: Change this to the user's preferred language
-    _startDelay();
+    // _startDelay();
   }
 
-  _startDelay() {
-    Future.delayed(const Duration(seconds: 2), _goNext);
-  }
+  // _startDelay() {
+  //   Future.delayed(const Duration(seconds: 2), _goNext);
+  // }
 
-  _goNext() async {
-    Get.offAllNamed(Routes.LOGIN); // For now ;)
-    // if (await _appPref.isUserLogged()) {
-    //   Get.offAllNamed(Routes.Home);
-    // } else {
-    //   Get.offAllNamed(Routes.LOGIN);
-    // }
-  }
+  // _goNext() async {
+  //   Get.offAllNamed(Routes.LOGIN); // For now ;)
+  //   // if (await _appPref.isUserLogged()) {
+  //   //   Get.offAllNamed(Routes.Home);
+  //   // } else {
+  //   //   Get.offAllNamed(Routes.LOGIN);
+  //   // }
+  // }
 }

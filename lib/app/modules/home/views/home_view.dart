@@ -1,5 +1,6 @@
 import 'package:egyptians_abroad/app/core/custom_widgets/custom_button.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/custom_textfield.dart';
+import 'package:egyptians_abroad/app/core/custom_widgets/dropdown_list_selector.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/grid_widget.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/no_data_widget.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/textfield_container.dart';
@@ -9,6 +10,7 @@ import 'package:egyptians_abroad/app/core/helper/localization_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:egyptians_abroad/app/modules/home/views/widgets/home_appbar.dart';
+import 'package:egyptians_abroad/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -52,19 +54,41 @@ class _HomeViewState extends State<HomeView> {
                             width: 36.w,
                             fit: BoxFit.fitWidth,
                           ),
-                          Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 5),
-                            child: Image.asset(
-                              'assets/icons/arrow-down.png',
-                              width: 16.w,
-                              fit: BoxFit.fitWidth,
-                            ),
-                          ),
-                          TitleText(
-                            title: "${AppStrings.hello.tr} احمد" + "!",
-                            fontSize: fixDpiFont(18),
-                            color: const Color(0xff263238),
+
+                          DropDownListSelector(
+                            decoration: const BoxDecoration(),
+                            blackHint: true,
+                            reverseArrowPosition: true,
+                            dropDownList: <DropdownMenuItem>[
+                              DropdownMenuItem(
+                                value: Routes.EditACCOUNT,
+                                child: Text(AppStrings.viewAccountInfos.tr),
+                              ),
+                              DropdownMenuItem(
+                                value: Routes.EditACCOUNT,
+                                child: Text(AppStrings.editAccountInfos.tr),
+                              ),
+                            ],
+                            // value: residence,
+                            hint: "!" + "${AppStrings.hello.tr} احمد" + " ",
+                            onChangeFunc: (val) {
+                              Get.toNamed(val);
+                              // _residenceCountry.value = val;
+                            },
                           )
+                          // Container(
+                          //   margin: const EdgeInsets.symmetric(horizontal: 5),
+                          //   child: Image.asset(
+                          //     'assets/icons/arrow-down.png',
+                          //     width: 16.w,
+                          //     fit: BoxFit.fitWidth,
+                          //   ),
+                          // ),
+                          // TitleText(
+                          //   title: "${AppStrings.hello.tr} احمد" + "!",
+                          //   fontSize: fixDpiFont(18),
+                          //   color: const Color(0xff263238),
+                          // )
                         ],
                       ),
                       // Container(

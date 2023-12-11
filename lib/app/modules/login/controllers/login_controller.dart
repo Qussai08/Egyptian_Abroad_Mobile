@@ -1,3 +1,4 @@
+import 'package:egyptians_abroad/app/core/helper/app_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/core/services/app_response.dart';
 import 'package:egyptians_abroad/app/core/services/repositories/user_repository.dart';
@@ -12,7 +13,10 @@ class LoginController extends GetxController {
         await UserRepository().loginReq({"email": email, "password": pass});
     if (response.status) {
       Get.offAllNamed(Routes.BOTTOMNAVIGATION);
+      AppHelper.setToken(response.data['accessToken']);
     } else {
+      // Get.offAllNamed(Routes.BOTTOMNAVIGATION);
+
       Get.showSnackbar(
         buildCustomToast(
           Get.context!,

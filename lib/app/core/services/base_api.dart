@@ -27,37 +27,53 @@ class BaseApi {
   static Future<AppResponse> getRequest(
       {required String endPoint,
       Map<String, dynamic>? extraHeaders,
-      String? shopToken}) async {
+      Map<String, dynamic>? queryParameters,
+      String? token,
+      bool? jsonResponse = true}) async {
     Map<String, dynamic> headers = {"languageId": AppHelper.languageId};
+    var token = AppHelper.token;
+    if (token != null) {
+      token = "Bearer $token";
+      headers["Authorization"] = token;
+    }
 
     if (extraHeaders != null) {
       headers.addAll(extraHeaders);
     }
 
-    try {
-      _response = await _dio.get(endPoint, options: Options(headers: headers));
+    // try {
+    _response = await _dio.get(endPoint,
+        options: Options(headers: headers), queryParameters: queryParameters);
 
-      return AppResponse(
-          statusCode: _response.statusCode,
-          status: _response.data['isSuccess'],
-          data: _response.data);
-    } on DioException catch (e) {
-      return AppResponse(status: false, error: e, errorMessage: e.message);
-    }
+    return AppResponse(
+        statusCode: _response.statusCode,
+        status: jsonResponse! ? _response.data['isSuccess'] ?? true : true,
+        data: _response.data);
+    // } on DioException catch (e) {
+    //   return AppResponse(status: false, error: e, errorMessage: e.message);
+    // }
   }
 
   // Perform POST request
   static Future<AppResponse> postRequest({
     body,
+    Map<String, dynamic>? options,
     required String endPoint,
   }) async {
+    var headers = {};
+    if (options != null) {
+      headers = options['headers'];
+    }
+    var token = AppHelper.token;
+    if (token != null) token = "Bearer $token";
+    var _options = Options(headers: {
+      "Authorization": token,
+    });
     try {
       var _queryParms = {"languageId": AppHelper.languageId};
 
       _response = await _dio.post(Constants.baseUrl + endPoint,
-          data: body,
-          //  options: body,
-          queryParameters: _queryParms);
+          data: body, options: _options, queryParameters: _queryParms);
 
       return AppResponse(
           statusCode: _response.statusCode,
@@ -67,4 +83,41 @@ class BaseApi {
       return AppResponse(status: false, error: e, errorMessage: e.message);
     }
   }
+
+  // static Future<AppResponse> postRequest({
+  //   body,
+  //   Map<String, dynamic>? options,
+  //   required String endPoint,
+  // }) async {
+  //   // var headers = {};
+  //   // if (options != null) {
+  //   //   headers = options['headers'];
+  //   // }
+  //   var token = AppHelper.token;
+  //   if (token != null) token = "Bearer $token";
+  //   var _options = Options(headers: {
+  //     "Authorization": token,
+  //   });
+
+  //   try {
+  //     Map<String, dynamic> queryParms = {"languageId": AppHelper.languageId};
+
+  //     if (options != null) {
+  //       queryParms.addAll(options);
+  //     }
+  //     _response = await _dio.post(Constants.baseUrl + endPoint,
+  //         data: body, options: _options, queryParameters: queryParms);
+  //     print('_response $_response');
+
+  //     return AppResponse(
+  //         statusCode: _response.statusCode,
+  //         status: _response.data['isSuccess'],
+  //         data: _response.data['data']);
+  //   } on DioException catch (e) {
+  //     print("error response : ${e.response}");
+  //     print("error : ${e.error}");
+
+  //     return AppResponse(status: false, error: e, errorMessage: e.message);
+  //   }
+  // }
 }

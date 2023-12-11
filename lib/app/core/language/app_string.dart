@@ -54,7 +54,7 @@ abstract class AppStrings {
   static const passwordContainsChar = 'passwordContainsChar';
   static const passwordContainsSpecialChar = 'passwordContainsSpecialChar';
 
-  // set password screen
+  // complete account infos screen
   static const completeAccountTitle = 'completeAccountTitle';
   static const egPassportNum = 'egPassportNum';
   static const residenceCountry = 'residenceCountry';
@@ -84,4 +84,13 @@ abstract class AppStrings {
 
   // category screen
   static const servicesNeeded = 'servicesNeeded';
+
+  // view & edit account screens
+  static const accountInfos = 'accountInfos';
+  static const editAccountInfos = 'editAccountInfos';
+  static const viewAccountInfos = 'viewAccountInfos';
+
+  // forget password screen
+  static const forgetPasswordTitle = 'forgetPasswordTitle';
+  static const sendVerificationCode = 'sendVerificationCode';
 }

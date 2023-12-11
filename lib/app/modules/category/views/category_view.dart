@@ -3,15 +3,13 @@ import 'package:egyptians_abroad/app/core/custom_widgets/custom_textfield.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/grid_widget.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/network_indecator.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/no_data_widget.dart';
-import 'package:egyptians_abroad/app/core/custom_widgets/textfield_container.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/title_text.dart';
 import 'package:egyptians_abroad/app/core/helper/app_helper.dart';
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
-import 'package:egyptians_abroad/app/core/helper/localization_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/core/services/models/category.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
-import 'package:egyptians_abroad/app/modules/category/views/widgets/category_appbar.dart';
+import 'package:egyptians_abroad/app/core/custom_widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -50,7 +48,7 @@ class _CategoryViewState extends State<CategoryView> {
               )),
               child: Scaffold(
                 backgroundColor: Colors.transparent,
-                appBar: CategoryAppBar(
+                appBar: CustomAppBar(
                   title: widget.category!.categoryName,
                 ),
                 body: SingleChildScrollView(
@@ -164,6 +162,7 @@ class _CategoryViewState extends State<CategoryView> {
                                                   itemBuilder: (ctx, i) =>
                                                       GridWidget(
                                                     i,
+                                                    category: widget.category,
                                                     serviceItem: categoryController
                                                         .displayedServicesList[i],
                                                   ),

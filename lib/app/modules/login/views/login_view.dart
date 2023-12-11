@@ -78,20 +78,25 @@ class _LoginViewState extends State<LoginView> with ValidationMixin {
                   SizedBox(
                     height: 16.h,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 6),
-                        child: Text(
-                          AppStrings.forgetPassword.tr,
-                          style: const TextStyle(
-                            color: Styles.red,
-                            decoration: TextDecoration.underline,
+                  GestureDetector(
+                    onTap: () {
+                      Get.toNamed(Routes.FORGETPASSWORD);
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 6),
+                          child: Text(
+                            AppStrings.forgetPassword.tr,
+                            style: const TextStyle(
+                              color: Styles.red,
+                              decoration: TextDecoration.underline,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                   const Spacer(),
                   CustomButton(

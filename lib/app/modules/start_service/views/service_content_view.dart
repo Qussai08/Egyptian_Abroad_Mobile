@@ -1,0 +1,167 @@
+import 'package:egyptians_abroad/app/core/custom_widgets/custom_button.dart';
+import 'package:egyptians_abroad/app/core/custom_widgets/custom_textfield.dart';
+import 'package:egyptians_abroad/app/core/custom_widgets/grid_widget.dart';
+import 'package:egyptians_abroad/app/core/custom_widgets/network_indecator.dart';
+import 'package:egyptians_abroad/app/core/custom_widgets/no_data_widget.dart';
+import 'package:egyptians_abroad/app/core/custom_widgets/textfield_container.dart';
+import 'package:egyptians_abroad/app/core/custom_widgets/title_text.dart';
+import 'package:egyptians_abroad/app/core/helper/app_helper.dart';
+import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
+import 'package:egyptians_abroad/app/core/helper/localization_helper.dart';
+import 'package:egyptians_abroad/app/core/language/app_string.dart';
+import 'package:egyptians_abroad/app/core/services/models/category.dart';
+import 'package:egyptians_abroad/app/core/services/models/service_content.dart';
+import 'package:egyptians_abroad/app/core/theme/styles.dart';
+import 'package:egyptians_abroad/app/core/custom_widgets/custom_appbar.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+class ServiceContentView extends StatefulWidget {
+  final Category? category;
+  final ServiceContent? serviceContent;
+  const ServiceContentView({super.key, this.category, this.serviceContent});
+
+  @override
+  State<ServiceContentView> createState() => _ServiceContentViewState();
+}
+
+class _ServiceContentViewState extends State<ServiceContentView> {
+  @override
+  Widget build(BuildContext context) {
+    return NetworkIndicator(
+        child: Scaffold(
+      //   resizeToAvoidBottomInset: false,
+      body: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.center,
+            colors: [widget.category!.categoryColor!.toColor(), Colors.white],
+          )),
+          child: Scaffold(
+            backgroundColor: Colors.transparent,
+            appBar: CustomAppBar(
+              title: widget.category!.categoryName,
+            ),
+            body: SingleChildScrollView(
+              physics: const NeverScrollableScrollPhysics(),
+              child: Container(
+                height: fixDpiScreenHeight() * 0.9,
+                width: fixDpiScreenWidth(),
+                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                child: Column(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.symmetric(vertical: 15.h),
+                      child: Row(
+                        children: [
+                          Image.asset(
+                            'assets/icons/male.png',
+                            width: 36.w,
+                            fit: BoxFit.fitWidth,
+                          ),
+                          const SizedBox(
+                            width: 8,
+                          ),
+                          TitleText(
+                            title: "${AppStrings.hello.tr} احمد" + "!",
+                            fontSize: fixDpiFont(18),
+                            color: const Color(0xff263238),
+                          )
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20.h,
+                    ),
+                    Image.network(
+                      widget.category!.categoryIcon!,
+                      width: 180.w,
+                      height: 180.w,
+                    ),
+                    SizedBox(
+                      height: 48.h,
+                    ),
+                    Align(
+                      alignment: LocalizationHelper.isArabic()
+                          ? Alignment.centerRight
+                          : Alignment.centerLeft,
+                      child: Text(
+                        "يمكنك من خلال هذه الخدمة تسجيل عقار سواء كان تجاريا او سكنيا دون الحاجة الى التوجه للجهات الحكومية. اذا كنت ترغب فى الحصول على هذد الخدمة برجاء الضغط على الرابط التالى:",
+                        textDirection: LocalizationHelper.isArabic()
+                            ? TextDirection.rtl
+                            : TextDirection.ltr,
+                        style: TextStyle(
+                            fontSize: fixDpiFont(16),
+                            fontFamily: 'baloo',
+                            fontWeight: FontWeight.w400,
+                            color: Color.fromRGBO(62, 60, 60, 0.71)),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    // TODO : add on press to open the url
+                    Align(
+                      alignment: LocalizationHelper.isArabic()
+                          ? Alignment.centerRight
+                          : Alignment.centerLeft,
+                      child: Text(
+                        widget.serviceContent!.serviceContentLink!,
+                        textDirection: TextDirection.ltr,
+                        style: TextStyle(
+                          fontSize: fixDpiFont(16),
+                          fontFamily: 'baloo',
+                          fontWeight: FontWeight.w400,
+                          color: Color(0xff1B57E3),
+                          decoration: TextDecoration.underline,
+                        ),
+                      ),
+                    ),
+                    Spacer(),
+                    CustomButton(
+                      text: "متابعة",
+                      icon: Icons.arrow_forward,
+                      type: ButtonType.primary,
+                      width: 300.w,
+                      height: 50,
+                      onPressed: () async {
+                        await launchUrl(
+                            mode: LaunchMode.platformDefault,
+                            Uri.parse(
+                                "https://www.google.com/maps/search/?api=1&query=-3.823216,-38.481700"));
+                        // Uri(
+                        //     scheme: 'https',
+                        //     host: 'www.google.com/maps/search/',
+                        //     query: "?api=1&query=-3.823216,-38.481700"));
+                        // Get.toNamed(
+                        //   Routes.STARTSERVICE,
+                        // );
+                      },
+                    ),
+                    SizedBox(
+                      height: 16.h,
+                    ),
+                    CustomButton(
+                      text: "الرجوع إلي التطبيق",
+                      type: ButtonType.secondary,
+                      width: 300.w,
+                      height: 50,
+                      onPressed: () {
+                        Get.back();
+                      },
+                    ),
+                    SizedBox(
+                      height: 60.h,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          )),
+    ));
+  }
+}

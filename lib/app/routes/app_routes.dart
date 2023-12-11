@@ -12,6 +12,9 @@ abstract class Routes {
   static const BOTTOMNAVIGATION = _Paths.BOTTOMNAVIGATION;
   static const SETPASSWORD = _Paths.SETPASSWORD;
   static const COMPLETEACCOUNT = _Paths.COMPLETEACCOUNT;
+  static const EditACCOUNT = _Paths.EditACCOUNT;
+  static const FORGETPASSWORD = _Paths.FORGETPASSWORD;
+  static const URLSERVICE = _Paths.URLSERVICE;
 }
 
 abstract class _Paths {
@@ -25,4 +28,7 @@ abstract class _Paths {
   static const BOTTOMNAVIGATION = '/bottomNavigation';
   static const SETPASSWORD = '/setPassword';
   static const COMPLETEACCOUNT = '/completeAccount';
+  static const EditACCOUNT = '/editAccount';
+  static const FORGETPASSWORD = '/forgetPassword';
+  static const URLSERVICE = '/urlService';
 }

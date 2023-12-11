@@ -1,4 +1,7 @@
 class Constants {
   static const bool isProduction = false;
-  static const String baseUrl = "http://10.3.20.37:7200/App/";
+
+  static const String devUrl = "http://10.3.21.22:7200/App/";
+  static const String testingUrl = "http://10.3.20.230:7200/App/";
+  static const String baseUrl = testingUrl;
 }

@@ -50,7 +50,7 @@ Map<String, String> en = {
   AppStrings.passwordContainsSpecialChar:
       'Contains at least 1 special character',
   AppStrings.confirmPasswordValidation: 'Unidentical Confirm Password',
-  AppStrings.completeAccountTitle: 'Complete account information',
+  AppStrings.completeAccountTitle: 'Complete account informations',
   AppStrings.egPassportNum: 'EG Passport Number',
   AppStrings.residenceCountry: 'Residency Country',
   AppStrings.residenceType: 'Residency Type',
@@ -67,4 +67,9 @@ Map<String, String> en = {
   AppStrings.skip: 'Skip',
   AppStrings.sorry: 'Error',
   AppStrings.invalidMailOrPass: 'Invalid email or password.',
+  AppStrings.accountInfos: 'Account Informations',
+  AppStrings.editAccountInfos: 'Edit Account Informations',
+  AppStrings.viewAccountInfos: 'View Account Informations',
+  AppStrings.forgetPasswordTitle: 'Forget Password',
+  AppStrings.sendVerificationCode: 'Send OTP'
 };

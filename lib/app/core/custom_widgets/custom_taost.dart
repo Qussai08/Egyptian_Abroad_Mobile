@@ -74,7 +74,7 @@ GetSnackBar buildCustomToast(
     backgroundColor: toastType.backgroundColor,
     borderRadius: 16,
     margin: const EdgeInsets.only(bottom: 0),
-    padding: const EdgeInsets.only(top: 12),
+    padding: const EdgeInsets.only(top: 12, bottom: 10),
     snackStyle: SnackStyle.GROUNDED,
   );
 }
