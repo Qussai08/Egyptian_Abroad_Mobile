@@ -71,5 +71,7 @@ Map<String, String> ar = {
   AppStrings.editAccountInfos: 'تعديل بيانات الحساب',
   AppStrings.viewAccountInfos: 'عرض بيانات الحساب',
   AppStrings.forgetPasswordTitle: 'اعادة تعيين كلمة المرور',
-  AppStrings.sendVerificationCode: 'ارسال كود التحقق'
+  AppStrings.sendVerificationCode: 'ارسال كود التحقق',
+  AppStrings.select: 'اختيار',
+  AppStrings.selectLanguage: "اختيار اللغة"
 };

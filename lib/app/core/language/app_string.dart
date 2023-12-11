@@ -1,5 +1,8 @@
 abstract class AppStrings {
+  // general
   static const success = 'success';
+  static const select = "select";
+  static const selectLanguage = "selectLanguage";
 
   // no internet screen
   static const noInternet = 'noInternet';

@@ -71,5 +71,7 @@ Map<String, String> en = {
   AppStrings.editAccountInfos: 'Edit Account Informations',
   AppStrings.viewAccountInfos: 'View Account Informations',
   AppStrings.forgetPasswordTitle: 'Forget Password',
-  AppStrings.sendVerificationCode: 'Send OTP'
+  AppStrings.sendVerificationCode: 'Send OTP',
+  AppStrings.select: 'Select',
+  AppStrings.selectLanguage: 'Select Language',
 };

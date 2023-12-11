@@ -62,6 +62,7 @@ class Styles {
   static const black = Color.fromRGBO(0, 0, 0, 1);
   static const lightBlack = Color.fromRGBO(0, 0, 0, 0.5);
   static const mediumBlack = Color(0xff121212);
+  // static const blueBlack = Color(0xFF201D61);
 
   static const blueBlack = Color(0xff1C304C);
 
@@ -84,6 +85,9 @@ class Styles {
   static const red = Color(0xffD71A21);
   static const heavyRed = Color(0xffBA1212);
   static const disabledGreyColor = Color(0xffC7C7C7);
+
+  // Radio styles
+  static const radioBorder = Color.fromRGBO(145, 168, 221, 1);
 
   // Text Styles
   static TextStyle _getTextStyle(
@@ -138,5 +142,6 @@ class FontSize {
   static const double s18 = 18.0;
   static const double s20 = 20.0;
   static const double s22 = 22.0;
+  static const double s24 = 24.0;
   static const double s30 = 30.0;
 }
