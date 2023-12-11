@@ -18,7 +18,7 @@ import 'package:otp_text_field/otp_text_field.dart';
 import 'package:otp_text_field/style.dart';
 
 class OtpView extends StatefulWidget {
-  const OtpView({Key? key}) : super(key: key);
+  const OtpView({super.key});
 
   @override
   State<OtpView> createState() => _OtpViewState();
@@ -97,7 +97,8 @@ class _OtpViewState extends State<OtpView> with ValidationMixin {
                                   fieldStyle: FieldStyle.box,
                                   controller: controller.otpTxtController,
                                   hasError: hasError,
-                                  contentPadding: EdgeInsets.only(left: 5),
+                                  contentPadding:
+                                      const EdgeInsets.only(left: 5),
                                   onChanged: (pin) {
                                     controller.otp = pin;
                                   },
@@ -168,7 +169,7 @@ class _OtpViewState extends State<OtpView> with ValidationMixin {
                         return Container(
                           margin: EdgeInsets.symmetric(horizontal: 110.w),
                           child: CustomButton(
-                            text: "إعادة إرسال",
+                            text: AppStrings.resendCode.tr,
                             type: ButtonType.secondary,
                             fontSize: 12,
                             fontWeight: FontWeight.w700,
@@ -194,8 +195,8 @@ class _OtpViewState extends State<OtpView> with ValidationMixin {
                           color: Styles.secondaryButtonColor,
                         ),
                         child: Text(
-                          " إعادة إرسال خلال " +
-                              '${formatter.format(time.min ?? 00)}:${formatter.format(time.sec ?? 00)}',
+                          " إعادة إرسال خلال "
+                          '${formatter.format(time.min ?? 00)}:${formatter.format(time.sec ?? 00)}',
                           style: TextStyle(
                               fontFamily: 'baloo',
                               fontWeight: FontWeight.w400,
@@ -208,7 +209,7 @@ class _OtpViewState extends State<OtpView> with ValidationMixin {
                     height: 50.h,
                   ),
                   CustomButton(
-                    text: "تأكيد",
+                    text: AppStrings.confirm.tr,
                     icon: Icons.arrow_forward,
                     type: ButtonType.primary,
                     width: 300.w,

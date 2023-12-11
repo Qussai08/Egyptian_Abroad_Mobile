@@ -17,6 +17,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../core/language/app_string.dart';
+
 class StartServiceRedir extends StatelessWidget {
   final ServiceContent serviceContent;
   final Category? category;
@@ -38,14 +40,14 @@ class StartServiceRedir extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Spacer(),
+                  const Spacer(),
                   Container(
                     width: fixDpiScreenWidth() * 0.4,
                     height: fixDpiScreenWidth() * 0.4,
                     padding: EdgeInsets.all(35.w),
-                    child: Image.asset("assets/icons/service-redir.png"),
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                         shape: BoxShape.circle, color: Color(0xFFF9FBFF)),
+                    child: Image.asset("assets/icons/service-redir.png"),
                   ),
                   SizedBox(
                     height: 22.h,
@@ -56,14 +58,14 @@ class StartServiceRedir extends StatelessWidget {
                         : "برجاء العلم أنه سيتم تحويلك لتطبيق ${serviceContent.serviceName}. هل تريد المتابعة؟",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                        color: Color(0xff3F3D56),
+                        color: const Color(0xff3F3D56),
                         fontFamily: "baloo",
                         fontSize: fixDpiFont(15),
                         fontWeight: FontWeight.w600),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   CustomButton(
-                    text: "متابعة",
+                    text: AppStrings.continueStr.tr,
                     icon: Icons.arrow_forward,
                     type: ButtonType.primary,
                     width: 300.w,
@@ -93,7 +95,7 @@ class StartServiceRedir extends StatelessWidget {
                     height: 16.h,
                   ),
                   CustomButton(
-                    text: "الرجوع إلي التطبيق",
+                    text: AppStrings.backToApp.tr,
                     type: ButtonType.secondary,
                     width: 300.w,
                     height: 50,
@@ -123,7 +125,7 @@ class StartServiceRedir extends StatelessWidget {
                   : "https://apps.apple.com/app/id$appId",
             );
 
-      print("url : ${url}");
+      print("url : $url");
 
       launchUrl(
         url,

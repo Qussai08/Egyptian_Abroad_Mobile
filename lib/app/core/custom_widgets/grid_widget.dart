@@ -2,6 +2,7 @@ import 'package:egyptians_abroad/app/core/helper/app_helper.dart';
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/services/models/category.dart';
 import 'package:egyptians_abroad/app/core/services/models/service.dart';
+import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:egyptians_abroad/app/modules/category/views/category_view.dart';
 import 'package:egyptians_abroad/app/modules/start_service/controllers/start_service_controller.dart';
 import 'package:egyptians_abroad/app/modules/start_service/views/service_content_view.dart';
@@ -76,20 +77,22 @@ class _GridWidgetState extends State<GridWidget> {
                 const SizedBox(
                   height: 5,
                 ),
-                Align(
-                  alignment: Alignment.center,
-                  child: FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: Text(
+                Expanded(
+                  // fix overflow on english text
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(
                         isService
                             ? widget.serviceItem!.serviceName
                             : widget.category!.categoryName,
                         maxLines: 2,
-                        style: const TextStyle(
-                            color: Colors.black,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w300,
-                            fontFamily: 'baloo')),
+                        overflow: TextOverflow.ellipsis,
+                        style: Styles.getLightStyle(
+                            color: Colors.black, fontSize: 12),
+                      ),
+                    ),
                   ),
                 ),
               ],

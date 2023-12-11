@@ -71,7 +71,7 @@ class _CategoryViewState extends State<CategoryView> {
                                 width: 8,
                               ),
                               TitleText(
-                                title: "${AppStrings.hello.tr} احمد" + "!",
+                                title: "${AppStrings.hello.tr} احمد" "!",
                                 fontSize: fixDpiFont(18),
                                 color: const Color(0xff263238),
                               )
@@ -134,7 +134,7 @@ class _CategoryViewState extends State<CategoryView> {
                                     : categoryController
                                             .displayedServicesList.isEmpty
                                         ? NoDataWidget(
-                                            message: 'لا توجد خدمات',
+                                            message: AppStrings.noServices.tr,
                                             color: widget
                                                 .category!.categoryColor!
                                                 .toColor(),
@@ -183,7 +183,8 @@ class _CategoryViewState extends State<CategoryView> {
                                                       child: CustomButton(
                                                         type: ButtonType
                                                             .secondary,
-                                                        text: 'عرض المزيد',
+                                                        text: AppStrings
+                                                            .showMore.tr,
                                                         width: 96,
                                                         height: 36.h,
                                                         fontSize: 10,

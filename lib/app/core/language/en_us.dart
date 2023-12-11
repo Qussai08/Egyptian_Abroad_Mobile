@@ -74,4 +74,10 @@ Map<String, String> en = {
   AppStrings.sendVerificationCode: 'Send OTP',
   AppStrings.select: 'Select',
   AppStrings.selectLanguage: 'Select Language',
+  AppStrings.searchForService: 'Search for a service',
+  AppStrings.noServices: 'No services found',
+  AppStrings.continueStr: 'Continue',
+  AppStrings.resendCode: 'Resend Code',
+  AppStrings.confirm: 'Confirm',
+  AppStrings.backToApp: 'Back to App',
 };

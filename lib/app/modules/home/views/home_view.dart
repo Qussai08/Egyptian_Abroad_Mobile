@@ -37,7 +37,7 @@ class _HomeViewState extends State<HomeView> {
         resizeToAvoidBottomInset: false,
         appBar: const HomeAppBar(),
         body: SingleChildScrollView(
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 16.w),
             child: Column(
@@ -45,9 +45,10 @@ class _HomeViewState extends State<HomeView> {
                 Container(
                   margin: EdgeInsets.symmetric(vertical: 15.h),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Image.asset(
                             'assets/icons/male.png',
@@ -70,12 +71,13 @@ class _HomeViewState extends State<HomeView> {
                               ),
                             ],
                             // value: residence,
-                            hint: "!" + "${AppStrings.hello.tr} احمد" + " ",
+                            hint: "!${AppStrings.hello.tr} احمد ",
                             onChangeFunc: (val) {
                               Get.toNamed(val);
                               // _residenceCountry.value = val;
                             },
-                          )
+                          ),
+
                           // Container(
                           //   margin: const EdgeInsets.symmetric(horizontal: 5),
                           //   child: Image.asset(
@@ -143,7 +145,7 @@ class _HomeViewState extends State<HomeView> {
                     _keySearch = val;
                     controller.setKeySearch(_keySearch, notifiy: true);
                   },
-                  hintTxt: "ابحث عن خدمة",
+                  hintTxt: AppStrings.searchForService.tr,
                   hintStyle: TextStyle(
                       fontSize: fixDpiFont(14),
                       fontWeight: FontWeight.w400,
@@ -171,11 +173,11 @@ class _HomeViewState extends State<HomeView> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       TitleText(
-                        title: 'استكشف الخدمات',
+                        title: AppStrings.exploreServices.tr,
                         fontSize: fixDpiFont(18),
                       ),
                       TitleText(
-                        title: 'كل الخدمات اللي هتحتاجها واكتر، اى خدمة!',
+                        title: AppStrings.allServices.tr,
                         fontSize: fixDpiFont(14),
                         titleTextStyle: TextStyle(
                             fontSize: fixDpiFont(14),
@@ -194,8 +196,8 @@ class _HomeViewState extends State<HomeView> {
                               ),
                             )
                           : homeContoller.displayedCategoriesList.isEmpty
-                              ? const NoDataWidget(
-                                  message: 'لا توجد خدمات',
+                              ? NoDataWidget(
+                                  message: AppStrings.noServices.tr,
                                 )
                               : Column(
                                   children: [
@@ -227,8 +229,8 @@ class _HomeViewState extends State<HomeView> {
                                                 bottom: 5.h, top: 5.h),
                                             child: CustomButton(
                                               type: ButtonType.secondary,
-                                              text: 'عرض المزيد',
-                                              width: 96,
+                                              text: AppStrings.showMore.tr,
+                                              width: 110.w,
                                               height: 36.h,
                                               fontSize: 10,
                                               icon: Icons.arrow_forward,

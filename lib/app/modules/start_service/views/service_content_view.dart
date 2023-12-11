@@ -70,7 +70,7 @@ class _ServiceContentViewState extends State<ServiceContentView> {
                             width: 8,
                           ),
                           TitleText(
-                            title: "${AppStrings.hello.tr} احمد" + "!",
+                            title: "${AppStrings.hello.tr} احمد" "!",
                             fontSize: fixDpiFont(18),
                             color: const Color(0xff263238),
                           )
@@ -172,7 +172,7 @@ class _ServiceContentViewState extends State<ServiceContentView> {
                     // ),
                     const Spacer(),
                     CustomButton(
-                      text: "متابعة",
+                      text: AppStrings.continueStr.tr,
                       icon: Icons.arrow_forward,
                       type: ButtonType.primary,
                       width: 300.w,
@@ -198,7 +198,7 @@ class _ServiceContentViewState extends State<ServiceContentView> {
                       height: 16.h,
                     ),
                     CustomButton(
-                      text: "الرجوع إلي التطبيق",
+                      text: AppStrings.backToApp.tr,
                       type: ButtonType.secondary,
                       width: 300.w,
                       height: 50,

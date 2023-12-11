@@ -73,5 +73,11 @@ Map<String, String> ar = {
   AppStrings.forgetPasswordTitle: 'اعادة تعيين كلمة المرور',
   AppStrings.sendVerificationCode: 'ارسال كود التحقق',
   AppStrings.select: 'اختيار',
-  AppStrings.selectLanguage: "اختيار اللغة"
+  AppStrings.selectLanguage: "اختيار اللغة",
+  AppStrings.searchForService: "ابحث عن خدمة",
+  AppStrings.noServices: 'لا توجد خدمات',
+  AppStrings.continueStr: 'متابعة',
+  AppStrings.resendCode: 'إعادة إرسال',
+  AppStrings.confirm: 'تأكيد',
+  AppStrings.backToApp: 'الرجوع إلي التطبيق',
 };

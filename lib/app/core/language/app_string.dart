@@ -3,6 +3,8 @@ abstract class AppStrings {
   static const success = 'success';
   static const select = "select";
   static const selectLanguage = "selectLanguage";
+  static const confirm = 'confirm';
+  static const backToApp = 'backToApp';
 
   // no internet screen
   static const noInternet = 'noInternet';
@@ -47,6 +49,7 @@ abstract class AppStrings {
   static const resend = 'resend';
   static const otpEmptyValidation = 'otpEmptyValidation';
   static const otpShortValidation = 'otpShortValidation';
+  static const resendCode = 'resendCode';
 
   // set password screen
   static const setPasswordTitle = 'setPasswordTitle';
@@ -84,6 +87,8 @@ abstract class AppStrings {
   static const exploreServices = 'exploreServices';
   static const allServices = 'allServices';
   static const showMore = 'showMore';
+  static const searchForService = 'searchForService';
+  static const noServices = 'noServices';
 
   // category screen
   static const servicesNeeded = 'servicesNeeded';
@@ -96,4 +101,7 @@ abstract class AppStrings {
   // forget password screen
   static const forgetPasswordTitle = 'forgetPasswordTitle';
   static const sendVerificationCode = 'sendVerificationCode';
+
+  // Service content screen
+  static const continueStr = 'continueStr';
 }
