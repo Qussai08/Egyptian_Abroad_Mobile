@@ -1,6 +1,7 @@
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
+import 'package:egyptians_abroad/app/modules/home/views/widgets/home_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_offline/flutter_offline.dart';
 import 'package:get/get.dart';
@@ -71,14 +72,14 @@ class NetworkIndicatorState extends State<NetworkIndicator> {
         ConnectivityResult connectivity,
         Widget child,
       ) {
-        // if (connectivity == ConnectivityResult.none) {
-        //   return Scaffold(
-        //     appBar: HomeAppBar(),
-        //     body: _buildBodyItem(),
-        //   );
-        // } else {
-        return child;
-        // }
+        if (connectivity == ConnectivityResult.none) {
+          return Scaffold(
+            appBar: HomeAppBar(),
+            body: _buildBodyItem(),
+          );
+        } else {
+          return child;
+        }
       },
       builder: (BuildContext context) {
         return widget.child;

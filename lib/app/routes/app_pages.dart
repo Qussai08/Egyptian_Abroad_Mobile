@@ -7,7 +7,7 @@ import 'package:egyptians_abroad/app/modules/forget_password/views/forget_passwo
 import 'package:egyptians_abroad/app/modules/registration/views/complete_account.dart';
 import 'package:egyptians_abroad/app/modules/registration/views/set_password_view.dart';
 import 'package:egyptians_abroad/app/modules/start_service/bindings/start_service_binding.dart';
-import 'package:egyptians_abroad/app/modules/start_service/views/start_service_view.dart';
+import 'package:egyptians_abroad/app/modules/start_service/views/url_service_view.dart';
 import 'package:get/get.dart';
 
 import '../modules/category/bindings/category_binding.dart';

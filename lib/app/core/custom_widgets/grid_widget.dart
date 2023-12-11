@@ -1,8 +1,11 @@
+import 'package:egyptians_abroad/app/core/helper/app_helper.dart';
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/services/models/category.dart';
 import 'package:egyptians_abroad/app/core/services/models/service.dart';
 import 'package:egyptians_abroad/app/modules/category/views/category_view.dart';
 import 'package:egyptians_abroad/app/modules/start_service/controllers/start_service_controller.dart';
+import 'package:egyptians_abroad/app/modules/start_service/views/service_content_view.dart';
+import 'package:egyptians_abroad/app/modules/start_service/views/start_service_redirect.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -29,10 +32,15 @@ class _GridWidgetState extends State<GridWidget> {
           var serviceContent = await controller
               .getServicesContent(widget.serviceItem!.serviceId);
 
-          // Get.to(() => serviceContent.servicesType != ServiceType.content
-          //     ? StartServiceRedir(
-          //         serviceContent: serviceContent,
-          //       )
+          Get.to(() => serviceContent!.servicesType! == ServiceType.content
+              ? ServiceContentView(
+                  serviceContent: serviceContent,
+                  category: widget.category,
+                )
+              : StartServiceRedir(
+                  serviceContent: serviceContent,
+                  category: widget.category,
+                ));
           //     : ServiceContentView(
           //         category: widget.category,
           //         serviceContent: serviceContent,

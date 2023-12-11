@@ -18,7 +18,8 @@ import 'package:get/get.dart';
 import '../../../core/theme/app_images.dart';
 
 class URLServiceView extends StatefulWidget {
-  const URLServiceView({super.key});
+  final String? url;
+  const URLServiceView({super.key, this.url});
 
   @override
   State<URLServiceView> createState() => _URLServiceViewState();
@@ -41,10 +42,7 @@ class _URLServiceViewState extends State<URLServiceView> {
               width: fixDpiScreenWidth(),
               child: InAppWebView(
                 initialUrlRequest: URLRequest(
-                    url: Uri(
-                  scheme: 'https',
-                  host: 'flutter.dev',
-                )),
+                    url: Uri.parse(widget.url ?? "https://flutter.dev/")),
                 // URLRequest(url: WebUri("https://www.facebook.com/")),
                 initialOptions: InAppWebViewGroupOptions(
                     crossPlatform: InAppWebViewOptions(

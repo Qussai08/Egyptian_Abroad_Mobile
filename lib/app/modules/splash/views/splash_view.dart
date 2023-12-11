@@ -20,19 +20,20 @@ class _SplashViewState extends State<SplashView> {
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    _delay();
+    // _delay();
   }
 
-  Future<Null> _delay() async {
-    await Future.delayed(const Duration(
-      milliseconds: 3000,
-    )).then((value) {
-      Get.offAllNamed(Routes.LOGIN); // For now ;)
-    });
-  }
+  // Future<Null> _delay() async {
+  //   await Future.delayed(const Duration(
+  //     milliseconds: 3000,
+  //   )).then((value) {
+  //     Get.offAllNamed(Routes.LOGIN); // For now ;)
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
+    Get.put(SplashController());
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(

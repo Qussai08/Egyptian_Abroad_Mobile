@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:egyptians_abroad/app/core/custom_widgets/custom_button.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/network_indecator.dart';
@@ -8,6 +9,7 @@ import 'package:egyptians_abroad/app/core/services/models/category.dart';
 import 'package:egyptians_abroad/app/core/services/models/service.dart';
 import 'package:egyptians_abroad/app/core/services/models/service_content.dart';
 import 'package:egyptians_abroad/app/modules/start_service/views/service_content_view.dart';
+import 'package:egyptians_abroad/app/modules/start_service/views/url_service_view.dart';
 import 'package:egyptians_abroad/app/routes/app_pages.dart';
 
 import 'package:flutter/material.dart';
@@ -25,7 +27,7 @@ class StartServiceRedir extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // serviceContent.servicesType != ServiceType.content
-    print("serviceContent.serviceName ${serviceContent.serviceName}");
+    // print("serviceContent.serviceName ${serviceContent.serviceName}");
     return NetworkIndicator(
       child: SafeArea(
         child: Scaffold(
@@ -49,7 +51,9 @@ class StartServiceRedir extends StatelessWidget {
                     height: 22.h,
                   ),
                   Text(
-                    "أنت على وشك فتح شاشة خدمة ${serviceContent.serviceName}، هل أنت متأكد من المتابعة؟",
+                    serviceContent.servicesType == ServiceType.web
+                        ? "أنت على وشك فتح شاشة خدمة ${serviceContent.serviceName}، هل أنت متأكد من المتابعة؟"
+                        : "برجاء العلم أنه سيتم تحويلك لتطبيق ${serviceContent.serviceName}. هل تريد المتابعة؟",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         color: Color(0xff3F3D56),
@@ -65,10 +69,17 @@ class StartServiceRedir extends StatelessWidget {
                     width: 300.w,
                     height: 50,
                     onPressed: () async {
-                      await launchUrl(
-                          mode: LaunchMode.platformDefault,
-                          Uri.parse(
-                              "https://www.google.com/maps/search/?api=1&query=-3.823216,-38.481700"));
+                      serviceContent.servicesType == ServiceType.web
+                          ? Get.to(() => URLServiceView(
+                                url: serviceContent.servicesLink,
+                              ))
+                          : await launchApp(
+                              serviceContent.androidLink ??
+                                  'com.facebook.katana',
+                              serviceContent.iosLink ?? '284882215');
+                      // launchUrl(
+                      //     mode: LaunchMode.externalApplication,
+                      //     Uri.parse("https://www.facebook.com"));
                       // Uri(
                       //     scheme: 'https',
                       //     host: 'www.google.com/maps/search/',
@@ -76,16 +87,6 @@ class StartServiceRedir extends StatelessWidget {
                       // Get.toNamed(
                       //   Routes.STARTSERVICE,
                       // );
-
-                      Get.to(() =>
-                          serviceContent.servicesType != ServiceType.content
-                              ? StartServiceRedir(
-                                  serviceContent: serviceContent,
-                                )
-                              : ServiceContentView(
-                                  category: category,
-                                  serviceContent: serviceContent,
-                                ));
                     },
                   ),
                   SizedBox(
@@ -108,5 +109,26 @@ class StartServiceRedir extends StatelessWidget {
             )),
       ),
     );
+  }
+
+  launchApp(String androidID, String iosID) {
+    if (Platform.isAndroid || Platform.isIOS) {
+      final appId = Platform.isAndroid ? androidID : iosID;
+      // 'com.mcit.eca' : '6444364022';
+      final url = androidID == iosID
+          ? Uri.parse(iosID)
+          : Uri.parse(
+              Platform.isAndroid
+                  ? "market://details?id=$appId"
+                  : "https://apps.apple.com/app/id$appId",
+            );
+
+      print("url : ${url}");
+
+      launchUrl(
+        url,
+        mode: LaunchMode.externalApplication,
+      );
+    }
   }
 }

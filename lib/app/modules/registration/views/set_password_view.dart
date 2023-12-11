@@ -9,6 +9,7 @@ import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/helper/localization_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
+import 'package:egyptians_abroad/app/modules/login/controllers/login_controller.dart';
 import 'package:egyptians_abroad/app/modules/registration/controllers/registration_controller.dart';
 import 'package:egyptians_abroad/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
@@ -37,6 +38,7 @@ class _SetPasswordViewState extends State<SetPasswordView>
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(RegistrationController());
+    final loginController = Get.put(LoginController());
 
     return NetworkIndicator(
       child: Scaffold(
@@ -137,7 +139,7 @@ class _SetPasswordViewState extends State<SetPasswordView>
                           _validationsValues.value.firstWhereOrNull(
                                   (element) => element == false) ==
                               null) {
-                        await controller.register();
+                        await controller.register(loginController);
                       }
                     },
                   ),

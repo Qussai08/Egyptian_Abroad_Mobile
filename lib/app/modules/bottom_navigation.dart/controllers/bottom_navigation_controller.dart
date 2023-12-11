@@ -1,5 +1,5 @@
 import 'package:egyptians_abroad/app/modules/home/views/home_view.dart';
-import 'package:egyptians_abroad/app/modules/start_service/views/start_service_view.dart';
+import 'package:egyptians_abroad/app/modules/start_service/views/url_service_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
