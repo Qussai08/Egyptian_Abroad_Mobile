@@ -4,6 +4,8 @@ import 'package:egyptians_abroad/app/core/helper/app_helper.dart';
 import 'package:egyptians_abroad/app/core/services/app_response.dart';
 import 'package:egyptians_abroad/app/core/services/base_api.dart';
 
+import '../../helper/localization_helper.dart';
+
 class UserRepository {
   Future<AppResponse> loginReq(Map<String, dynamic> body) async {
     return await BaseApi.postRequest(
@@ -31,7 +33,7 @@ class UserRepository {
   Future<AppResponse> getCountriesReq() async {
     return await BaseApi.getRequest(
         endPoint: "GetCountryList",
-        queryParameters: {"langId": AppHelper.languageId},
+        queryParameters: {"langId": LocalizationHelper.isArabic() ? 1 : 2},
         jsonResponse: false);
   }
 }

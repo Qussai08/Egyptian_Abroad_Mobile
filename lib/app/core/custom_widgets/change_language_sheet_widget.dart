@@ -9,11 +9,11 @@ import 'custom_button.dart';
 
 class ChangeLanguageWidget extends StatefulWidget {
   final Function(Language?)? onChanged;
-  Language languageId;
+  Language language;
   ChangeLanguageWidget({
     super.key,
     required this.onChanged,
-    required this.languageId,
+    required this.language,
   });
 
   @override
@@ -69,7 +69,7 @@ class _ChangeLanguageWidgetState extends State<ChangeLanguageWidget> {
           InkWell(
             onTap: () {
               setState(() {
-                widget.languageId = Language.arabic;
+                widget.language = Language.arabic;
               });
             },
             child: _buildLangRow(
@@ -82,7 +82,7 @@ class _ChangeLanguageWidgetState extends State<ChangeLanguageWidget> {
           InkWell(
             onTap: () {
               setState(() {
-                widget.languageId = Language.english;
+                widget.language = Language.english;
               });
             },
             child: _buildLangRow(langID: Language.english, langName: 'English'),
@@ -93,7 +93,7 @@ class _ChangeLanguageWidgetState extends State<ChangeLanguageWidget> {
             text: AppStrings.select.tr,
             type: ButtonType.primary,
             height: 50,
-            onPressed: () => widget.onChanged!(widget.languageId),
+            onPressed: () => widget.onChanged!(widget.language),
           ),
           SizedBox(height: 29.h),
         ],
@@ -109,7 +109,7 @@ class _ChangeLanguageWidgetState extends State<ChangeLanguageWidget> {
       height: 50.h,
       clipBehavior: Clip.antiAlias,
       decoration: ShapeDecoration(
-        color: widget.languageId == langID
+        color: widget.language == langID
             ? Styles.secondaryButtonColor
             : Colors.white,
         shape: RoundedRectangleBorder(
@@ -122,10 +122,10 @@ class _ChangeLanguageWidgetState extends State<ChangeLanguageWidget> {
           const SizedBox(width: 11),
           Radio(
             value: langID,
-            groupValue: widget.languageId,
+            groupValue: widget.language,
             onChanged: (Language? value) {
               setState(() {
-                widget.languageId = value!;
+                widget.language = value!;
               });
             },
             fillColor: MaterialStateProperty.resolveWith<Color>(

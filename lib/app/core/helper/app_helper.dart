@@ -7,9 +7,6 @@ enum ServiceType {
 }
 
 class AppHelper {
-  static int languageId = 1;
-  static changeLanguage() => languageId == 1 ? languageId = 2 : languageId = 1;
-
   static String? _token;
   static String? get token => _token;
   static setToken(String? token) => _token = token;

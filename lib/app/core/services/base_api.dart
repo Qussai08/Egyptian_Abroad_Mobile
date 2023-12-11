@@ -2,12 +2,16 @@
 /// It will create an instance of Dio to do the network calls
 /// Also define the main structre for all http requests
 /// Each descendant class will have a single responsibility
+library;
+
 import 'dart:async';
 
 import 'package:dio/dio.dart';
 import 'package:egyptians_abroad/app/core/constants/globals.dart';
 import 'package:egyptians_abroad/app/core/helper/app_helper.dart';
 import 'package:egyptians_abroad/app/core/services/app_response.dart';
+
+import '../helper/localization_helper.dart';
 
 // The class must be Abtract
 class BaseApi {
@@ -30,7 +34,9 @@ class BaseApi {
       Map<String, dynamic>? queryParameters,
       String? token,
       bool? jsonResponse = true}) async {
-    Map<String, dynamic> headers = {"languageId": AppHelper.languageId};
+    Map<String, dynamic> headers = {
+      "languageId": LocalizationHelper.isArabic() ? 1 : 2
+    };
     var token = AppHelper.token;
     if (token != null) {
       token = "Bearer $token";
@@ -66,14 +72,14 @@ class BaseApi {
     }
     var token = AppHelper.token;
     if (token != null) token = "Bearer $token";
-    var _options = Options(headers: {
+    var options0 = Options(headers: {
       "Authorization": token,
     });
     try {
-      var _queryParms = {"languageId": AppHelper.languageId};
+      var queryParms = {"languageId": LocalizationHelper.isArabic() ? 1 : 2};
 
       _response = await _dio.post(Constants.baseUrl + endPoint,
-          data: body, options: _options, queryParameters: _queryParms);
+          data: body, options: options0, queryParameters: queryParms);
 
       return AppResponse(
           statusCode: _response.statusCode,
@@ -100,7 +106,7 @@ class BaseApi {
   //   });
 
   //   try {
-  //     Map<String, dynamic> queryParms = {"languageId": AppHelper.languageId};
+  //     Map<String, dynamic> queryParms = {"languageId": LocalizationHelper.isArabic() ? 1 : 2};
 
   //     if (options != null) {
   //       queryParms.addAll(options);

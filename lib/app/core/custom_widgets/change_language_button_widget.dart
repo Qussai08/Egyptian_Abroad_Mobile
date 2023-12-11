@@ -63,7 +63,7 @@ class ChangeLangButtonWidget extends StatelessWidget {
       backgroundColor: Colors.transparent,
       context: Get.context!,
       builder: (context) => ChangeLanguageWidget(
-        languageId:
+        language:
             LocalizationHelper.isArabic() ? Language.arabic : Language.english,
         onChanged: (val) {
           if (val != null) LocalizationHelper().changeLocale(val);

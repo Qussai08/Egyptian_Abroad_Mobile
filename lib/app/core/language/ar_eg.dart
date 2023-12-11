@@ -12,7 +12,7 @@ Map<String, String> ar = {
   AppStrings.nationalID: 'الرقم القومي',
   AppStrings.password: 'كلمة المرور',
   AppStrings.forgetPassword: 'هل نسيت كلمة المرور ؟',
-  AppStrings.donotHaveAccount: ' ليس لديك حساب انشأ ',
+  AppStrings.donotHaveAccount: ' ليس لديك حساب أنشئ ',
   AppStrings.newAccount: 'حساب جديد',
   AppStrings.registerNew: 'أنشئ حساب جديد',
   AppStrings.register: 'أنشئ حساب',
