@@ -13,7 +13,10 @@ import 'package:egyptians_abroad/app/core/services/models/category.dart';
 import 'package:egyptians_abroad/app/core/services/models/service_content.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/custom_appbar.dart';
+import 'package:egyptians_abroad/app/modules/start_service/views/url_service_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart' as html;
+// import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
@@ -44,7 +47,7 @@ class _ServiceContentViewState extends State<ServiceContentView> {
           child: Scaffold(
             backgroundColor: Colors.transparent,
             appBar: CustomAppBar(
-              title: widget.category!.categoryName,
+              title: widget.serviceContent!.servicesContentTitle,
             ),
             body: SingleChildScrollView(
               physics: const NeverScrollableScrollPhysics(),
@@ -89,39 +92,85 @@ class _ServiceContentViewState extends State<ServiceContentView> {
                       alignment: LocalizationHelper.isArabic()
                           ? Alignment.centerRight
                           : Alignment.centerLeft,
-                      child: Text(
-                        "يمكنك من خلال هذه الخدمة تسجيل عقار سواء كان تجاريا او سكنيا دون الحاجة الى التوجه للجهات الحكومية. اذا كنت ترغب فى الحصول على هذد الخدمة برجاء الضغط على الرابط التالى:",
-                        textDirection: LocalizationHelper.isArabic()
-                            ? TextDirection.rtl
-                            : TextDirection.ltr,
-                        style: TextStyle(
-                            fontSize: fixDpiFont(16),
-                            fontFamily: 'baloo',
-                            fontWeight: FontWeight.w400,
-                            color: Color.fromRGBO(62, 60, 60, 0.71)),
+                      child: html.Html(
+                        data: widget.serviceContent!.servicesContentSummary!,
+                        style: {
+                          "*": html.Style(
+                              color: const Color.fromRGBO(62, 60, 60, 0.71),
+                              fontFamily: 'baloo',
+                              fontSize: html.FontSize.large,
+                              fontWeight: FontWeight.w400),
+                          "div": html.Style(
+                              color: const Color.fromRGBO(62, 60, 60, 0.71),
+                              fontFamily: 'baloo',
+                              fontSize: html.FontSize.large,
+                              fontWeight: FontWeight.w400),
+                          "span": html.Style(
+                              color: const Color.fromRGBO(62, 60, 60, 0.71),
+                              fontFamily: 'baloo',
+                              fontSize: html.FontSize.large,
+                              fontWeight: FontWeight.w400),
+                          "p": html.Style(
+                              color: const Color.fromRGBO(62, 60, 60, 0.71),
+                              fontFamily: 'baloo',
+                              fontSize: html.FontSize.large,
+                              fontWeight: FontWeight.w400),
+                          "a": html.Style(
+                              color: Styles.primaryColor,
+                              fontFamily: 'baloo',
+                              fontSize: html.FontSize.large,
+                              fontWeight: FontWeight.w400),
+                        },
+                        onLinkTap: (url, attributes, element) {
+                          Get.to(() => URLServiceView(
+                                url: url,
+                              ));
+                        },
                       ),
+                      //     Text(
+                      //   widget.serviceContent!.servicesContentSummary!,
+                      //   textDirection: LocalizationHelper.isArabic()
+                      //       ? TextDirection.rtl
+                      //       : TextDirection.ltr,
+                      //   style: TextStyle(
+                      //       fontSize: fixDpiFont(16),
+                      //       fontFamily: 'baloo',
+                      //       fontWeight: FontWeight.w400,
+                      //       color: const Color.fromRGBO(62, 60, 60, 0.71)),
+                      // ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 8,
                     ),
                     // TODO : add on press to open the url
-                    Align(
-                      alignment: LocalizationHelper.isArabic()
-                          ? Alignment.centerRight
-                          : Alignment.centerLeft,
-                      child: Text(
-                        widget.serviceContent!.serviceContentLink!,
-                        textDirection: TextDirection.ltr,
-                        style: TextStyle(
-                          fontSize: fixDpiFont(16),
-                          fontFamily: 'baloo',
-                          fontWeight: FontWeight.w400,
-                          color: Color(0xff1B57E3),
-                          decoration: TextDecoration.underline,
-                        ),
-                      ),
-                    ),
-                    Spacer(),
+                    // GestureDetector(
+                    //   onTap: () {
+                    //     Get.to(() => URLServiceView(
+                    //           url: widget.serviceContent!.serviceContentLink,
+                    //         ));
+                    //     // launchUrl(
+                    //     //     mode: LaunchMode.platformDefault,
+                    //     //     Uri.parse(
+                    //     //         widget.serviceContent!.serviceContentLink!));
+                    //   },
+                    //   child: Align(
+                    //     alignment: LocalizationHelper.isArabic()
+                    //         ? Alignment.centerRight
+                    //         : Alignment.centerLeft,
+                    //     child: Text(
+                    //       widget.serviceContent!.serviceContentLink!,
+                    //       textDirection: TextDirection.ltr,
+                    //       style: TextStyle(
+                    //         fontSize: fixDpiFont(16),
+                    //         fontFamily: 'baloo',
+                    //         fontWeight: FontWeight.w400,
+                    //         color: const Color(0xff1B57E3),
+                    //         decoration: TextDecoration.underline,
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
+                    const Spacer(),
                     CustomButton(
                       text: "متابعة",
                       icon: Icons.arrow_forward,
@@ -129,10 +178,13 @@ class _ServiceContentViewState extends State<ServiceContentView> {
                       width: 300.w,
                       height: 50,
                       onPressed: () async {
-                        await launchUrl(
-                            mode: LaunchMode.platformDefault,
-                            Uri.parse(
-                                "https://www.google.com/maps/search/?api=1&query=-3.823216,-38.481700"));
+                        Get.to(() => URLServiceView(
+                              url: widget.serviceContent!.serviceContentLink,
+                            ));
+                        // await launchUrl(
+                        //     mode: LaunchMode.platformDefault,
+                        //     Uri.parse(
+                        //         "https://www.google.com/maps/search/?api=1&query=-3.823216,-38.481700"));
                         // Uri(
                         //     scheme: 'https',
                         //     host: 'www.google.com/maps/search/',

@@ -2,6 +2,7 @@ import 'package:egyptians_abroad/app/core/custom_widgets/custom_taost.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/core/services/app_response.dart';
 import 'package:egyptians_abroad/app/core/services/repositories/user_repository.dart';
+import 'package:egyptians_abroad/app/modules/login/controllers/login_controller.dart';
 import 'package:egyptians_abroad/app/modules/registration/data/models/country.dart';
 import 'package:egyptians_abroad/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
@@ -47,7 +48,7 @@ class RegistrationController extends GetxController {
     return response;
   }
 
-  Future<void> register() async {
+  Future<void> register(LoginController loginController) async {
     AppResponse response = await UserRepository().registerReq({
       "name": nameTxtController.text,
       "nationalId": nationalIDTxtController.text,
@@ -57,10 +58,12 @@ class RegistrationController extends GetxController {
       "verificationCode": otp
     });
     if (response.status) {
-      Future.delayed(const Duration(seconds: 3), () {
-        Get.offAllNamed(Routes.LOGIN);
+      Future.delayed(const Duration(seconds: 3), () async {
+        await loginController.login(
+            email: emailTxtController.text, pass: passwordTxtController.text);
+        passwordTxtController.clear();
       });
-      passwordTxtController.clear();
+
       Get.showSnackbar(
         buildCustomToast(
           Get.context!,
