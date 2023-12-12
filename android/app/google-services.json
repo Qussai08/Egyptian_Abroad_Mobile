@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "27725809439",
-    "project_id": "azure-notification-hub-p-66d47",
-    "storage_bucket": "azure-notification-hub-p-66d47.appspot.com"
+    "project_number": "887509960997",
+    "project_id": "egyptians-abroad",
+    "storage_bucket": "egyptians-abroad.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:27725809439:android:44fab60785cbda0686122a",
+        "mobilesdk_app_id": "1:887509960997:android:2bedd9b30bff70e47b32cc",
         "android_client_info": {
           "package_name": "com.getgroup.egyptians_abroad"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBmFOXa7GX6zbEFXNxA-q4SIY5kkvt04bM"
+          "current_key": "AIzaSyCBYPI0pi3mqXxFrqODhY6DOt3TzN-0TiA"
         }
       ],
       "services": {

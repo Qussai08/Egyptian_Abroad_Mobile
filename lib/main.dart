@@ -1,4 +1,6 @@
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
+import 'package:egyptians_abroad/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -7,6 +9,7 @@ import 'package:get/get.dart';
 import 'app/core/binding/initial_binding.dart';
 import 'app/core/helper/dpi_helper.dart';
 import 'app/core/helper/localization_helper.dart';
+import 'app/core/helper/notification_helper.dart';
 import 'app/routes/app_pages.dart';
 import 'package:flutter_localizations/flutter_localizations.dart'
     show
@@ -14,7 +17,16 @@ import 'package:flutter_localizations/flutter_localizations.dart'
         GlobalMaterialLocalizations,
         GlobalWidgetsLocalizations;
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  var notificationHelper = NotificationHelper();
+  await notificationHelper.initialize();
+  await notificationHelper.subscribeToTopic('broadcast');
+
   runApp(const MyApp());
 }
 
