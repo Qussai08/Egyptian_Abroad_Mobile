@@ -46,12 +46,12 @@ class _LoginViewState extends State<LoginView> with ValidationMixin {
               child: Column(
                 children: [
                   // change language widget
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      ChangeLangButtonWidget(),
-                    ],
-                  ),
+                  // const Row(
+                  //   mainAxisAlignment: MainAxisAlignment.end,
+                  //   children: [
+                  //     ChangeLangButtonWidget(),
+                  //   ],
+                  // ),
 
                   // End
 
