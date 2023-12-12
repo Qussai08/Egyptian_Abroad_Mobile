@@ -1,6 +1,7 @@
 import 'package:egyptians_abroad/app/core/custom_widgets/network_indecator.dart';
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
+import 'package:egyptians_abroad/app/core/theme/app_images.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:egyptians_abroad/app/modules/bottom_navigation.dart/controllers/bottom_navigation_controller.dart';
 import 'package:flutter/material.dart';
@@ -20,9 +21,15 @@ class BottomNavigationView extends GetView<BottomNavigationController> {
               items: <BottomNavigationBarItem>[
                 _buildNavigationBarItem(
                   label: AppStrings.home.tr,
+                  tabIcon: AppImages.homeIcon,
+                ),
+                _buildNavigationBarItem(
+                  label: AppStrings.notifications.tr,
+                  tabIcon: AppImages.notificationIcon,
                 ),
                 _buildNavigationBarItem(
                   label: 'start service',
+                  tabIcon: AppImages.homeIcon,
                 ),
               ],
               currentIndex: bottomNavigationController.tabIndex,
@@ -49,10 +56,11 @@ class BottomNavigationView extends GetView<BottomNavigationController> {
     );
   }
 
-  BottomNavigationBarItem _buildNavigationBarItem({required String label}) {
+  BottomNavigationBarItem _buildNavigationBarItem(
+      {required String label, required String tabIcon}) {
     return BottomNavigationBarItem(
       icon: Image.asset(
-        'assets/icons/home-icon.png',
+        tabIcon,
         color: const Color(0xFF404554),
         width: 24,
         height: 24,
@@ -65,7 +73,7 @@ class BottomNavigationView extends GetView<BottomNavigationController> {
               width: 3, style: BorderStyle.solid, color: Styles.primaryColor),
         )),
         child: Image.asset(
-          'assets/icons/home-icon.png',
+          tabIcon,
           color: Styles.primaryColor,
           width: 24,
           height: 24,

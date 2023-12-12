@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:get/get.dart';
 
 import '../modules/bottom_navigation.dart/bindings/bottom_navigation_binding.dart';
@@ -30,7 +32,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.SPLASH;
+  static const INITIAL = Routes.BOTTOMNAVIGATION;
 
   static final routes = [
     GetPage(
@@ -75,12 +77,12 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.CATEGORY,
-      page: () => CategoryView(),
+      page: () => const CategoryView(),
       binding: CategoryBinding(),
     ),
     GetPage(
       name: _Paths.URLSERVICE,
-      page: () => URLServiceView(),
+      page: () => const URLServiceView(),
       binding: StartServiceBinding(),
     ),
     GetPage(
@@ -90,7 +92,7 @@ class AppPages {
         children: [
           GetPage(
             name: _Paths.HOME,
-            page: () => HomeView(),
+            page: () => const HomeView(),
             binding: HomeBinding(),
           ),
         ]),

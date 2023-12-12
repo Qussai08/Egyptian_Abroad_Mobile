@@ -27,7 +27,7 @@ Map<String, String> ar = {
   AppStrings.resendOtp: ' إعادة إرسال خلال ',
   AppStrings.resend: 'أرسل',
   AppStrings.home: 'الرئيسية',
-  AppStrings.notifications: 'الاشعارات',
+  AppStrings.notifications: 'الإشعارات',
   AppStrings.aboutApp: 'عن التطبيق',
   AppStrings.hello: 'اهلا،',
   AppStrings.exploreServices: 'استكشف الخدمات',
