@@ -79,5 +79,10 @@ Map<String, String> en = {
   AppStrings.continueStr: 'Continue',
   AppStrings.resendCode: 'Resend Code',
   AppStrings.confirm: 'Confirm',
+  AppStrings.cancel: 'Cancel',
   AppStrings.backToApp: 'Back to App',
+  AppStrings.changePassword: 'Change Password',
+  AppStrings.oldPassword: 'Old Password',
+  AppStrings.newPassword: 'New Password',
+  AppStrings.confirmNewPassword: 'Confirm New Password',
 };

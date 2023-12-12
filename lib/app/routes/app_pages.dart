@@ -1,5 +1,7 @@
 import 'package:egyptians_abroad/app/modules/bottom_navigation.dart/bindings/bottom_navigation_binding.dart';
 import 'package:egyptians_abroad/app/modules/bottom_navigation.dart/views/bottom_navigation_view.dart';
+import 'package:egyptians_abroad/app/modules/change_password/bindings/change_password_bindings.dart';
+import 'package:egyptians_abroad/app/modules/change_password/views/change_password_view.dart';
 import 'package:egyptians_abroad/app/modules/edit_account/bindings/edit_account_binding.dart';
 import 'package:egyptians_abroad/app/modules/edit_account/views/edit_account.dart';
 import 'package:egyptians_abroad/app/modules/forget_password/bindings/forget_password_bindings.dart';
@@ -80,6 +82,11 @@ class AppPages {
       name: _Paths.URLSERVICE,
       page: () => URLServiceView(),
       binding: StartServiceBinding(),
+    ),
+    GetPage(
+      name: _Paths.CHANGEPASSWORD,
+      page: () => const ChangePasswordView(),
+      binding: ChangePasswordBinding(),
     ),
     GetPage(
         name: _Paths.BOTTOMNAVIGATION,

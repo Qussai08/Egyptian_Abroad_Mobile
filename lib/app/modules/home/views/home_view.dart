@@ -69,6 +69,10 @@ class _HomeViewState extends State<HomeView> {
                                 value: Routes.EditACCOUNT,
                                 child: Text(AppStrings.editAccountInfos.tr),
                               ),
+                              DropdownMenuItem(
+                                value: Routes.CHANGEPASSWORD,
+                                child: Text(AppStrings.changePassword.tr),
+                              ),
                             ],
                             // value: residence,
                             hint: "!${AppStrings.hello.tr} احمد ",

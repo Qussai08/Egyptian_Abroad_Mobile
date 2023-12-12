@@ -79,5 +79,10 @@ Map<String, String> ar = {
   AppStrings.continueStr: 'متابعة',
   AppStrings.resendCode: 'إعادة إرسال',
   AppStrings.confirm: 'تأكيد',
+  AppStrings.cancel: 'إلغاء',
   AppStrings.backToApp: 'الرجوع إلي التطبيق',
+  AppStrings.changePassword: 'تغيير كلمة المرور',
+  AppStrings.oldPassword: 'كلمة المرور الحالية',
+  AppStrings.newPassword: 'كلمة المرور الجديدة',
+  AppStrings.confirmNewPassword: 'تأكيد كلمة المرور الجديدة',
 };

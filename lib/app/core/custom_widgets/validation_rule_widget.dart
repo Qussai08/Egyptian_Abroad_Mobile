@@ -29,7 +29,7 @@ class ValidationRowWidget extends StatelessWidget {
             style: TextStyle(
                 fontSize: fixDpiFont(15),
                 fontWeight: FontWeight.w400,
-                color: checked ? Styles.primaryColor : Styles.disabledGreyColor,
+                color: checked ? Styles.green : Styles.disabledGreyColor,
                 fontFamily: "baloo"),
           ),
         ],

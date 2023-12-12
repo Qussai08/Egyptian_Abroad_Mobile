@@ -4,6 +4,7 @@ abstract class AppStrings {
   static const select = "select";
   static const selectLanguage = "selectLanguage";
   static const confirm = 'confirm';
+  static const cancel = 'cancel';
   static const backToApp = 'backToApp';
 
   // no internet screen
@@ -97,6 +98,12 @@ abstract class AppStrings {
   static const accountInfos = 'accountInfos';
   static const editAccountInfos = 'editAccountInfos';
   static const viewAccountInfos = 'viewAccountInfos';
+
+  // change password screen
+  static const changePassword = 'changePassword';
+  static const oldPassword = 'oldPassword';
+  static const newPassword = 'newPassword';
+  static const confirmNewPassword = 'confirmNewPassword';
 
   // forget password screen
   static const forgetPasswordTitle = 'forgetPasswordTitle';
