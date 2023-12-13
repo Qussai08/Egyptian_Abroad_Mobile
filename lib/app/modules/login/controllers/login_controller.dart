@@ -1,4 +1,3 @@
-import 'package:egyptians_abroad/app/core/helper/app_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/core/services/app_response.dart';
 import 'package:egyptians_abroad/app/core/services/repositories/user_repository.dart';
@@ -17,6 +16,7 @@ class LoginController extends GetxController {
     if (response.status) {
       authService.setAccessToken(response.data['accessToken'] ?? '');
       authService.setRefreshToken(response.data['refreshToken'] ?? '');
+      String? userID = authService.userID ?? '';
       Get.offAllNamed(Routes.BOTTOMNAVIGATION);
     } else {
       // Get.offAllNamed(Routes.BOTTOMNAVIGATION);
