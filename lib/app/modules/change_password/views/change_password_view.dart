@@ -24,7 +24,10 @@ class ChangePasswordView extends StatefulWidget {
 
 class _ChangePasswordViewState extends State<ChangePasswordView>
     with ValidationMixin {
+  
+  
   final _formKey = GlobalKey<FormState>();
+ 
   ValueNotifier<List<bool>> _validationsValues =
       ValueNotifier([false, false, false, false]);
 

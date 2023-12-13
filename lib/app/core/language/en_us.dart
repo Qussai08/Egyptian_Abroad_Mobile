@@ -9,7 +9,7 @@ Map<String, String> en = {
   AppStrings.checkRouter: 'Check your router',
   AppStrings.tryAgain: 'And try again',
   AppStrings.logIn: 'Log In',
-  AppStrings.logOut: 'Log Out',
+  AppStrings.logOut: 'Sign Out',
   AppStrings.nationalID: 'National ID',
   AppStrings.password: 'Password',
   AppStrings.forgetPassword: 'Forget password ?',
