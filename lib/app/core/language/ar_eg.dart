@@ -9,6 +9,7 @@ Map<String, String> ar = {
   AppStrings.checkRouter: 'تفقد الراوتر الخاص بك',
   AppStrings.tryAgain: 'وحاول مرة آخري',
   AppStrings.logIn: 'تسجيل الدخول',
+  AppStrings.logOut: 'تسجيل الخروج',
   AppStrings.nationalID: 'الرقم القومي',
   AppStrings.password: 'كلمة المرور',
   AppStrings.forgetPassword: 'هل نسيت كلمة المرور ؟',
@@ -85,4 +86,6 @@ Map<String, String> ar = {
   AppStrings.oldPassword: 'كلمة المرور الحالية',
   AppStrings.newPassword: 'كلمة المرور الجديدة',
   AppStrings.confirmNewPassword: 'تأكيد كلمة المرور الجديدة',
+  AppStrings.invalidOldPassword: 'كلمة المرور الحالية غير صحيحة',
+  AppStrings.successPasswordChange: 'تم تعديل كلمة المرور بنجاح',
 };

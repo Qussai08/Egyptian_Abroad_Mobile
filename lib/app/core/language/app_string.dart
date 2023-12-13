@@ -7,6 +7,8 @@ abstract class AppStrings {
   static const cancel = 'cancel';
   static const backToApp = 'backToApp';
 
+  static const logOut = 'logOut';
+
   // no internet screen
   static const noInternet = 'noInternet';
   static const checkRouter = 'checkRouter';
@@ -104,7 +106,9 @@ abstract class AppStrings {
   static const oldPassword = 'oldPassword';
   static const newPassword = 'newPassword';
   static const confirmNewPassword = 'confirmNewPassword';
-
+  static const invalidOldPassword = 'invalidOldPassword';
+  static const successPasswordChange = 'successPasswordChange';
+  
   // forget password screen
   static const forgetPasswordTitle = 'forgetPasswordTitle';
   static const sendVerificationCode = 'sendVerificationCode';

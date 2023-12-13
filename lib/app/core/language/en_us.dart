@@ -9,6 +9,7 @@ Map<String, String> en = {
   AppStrings.checkRouter: 'Check your router',
   AppStrings.tryAgain: 'And try again',
   AppStrings.logIn: 'Log In',
+  AppStrings.logOut: 'Log Out',
   AppStrings.nationalID: 'National ID',
   AppStrings.password: 'Password',
   AppStrings.forgetPassword: 'Forget password ?',
@@ -85,4 +86,6 @@ Map<String, String> en = {
   AppStrings.oldPassword: 'Old Password',
   AppStrings.newPassword: 'New Password',
   AppStrings.confirmNewPassword: 'Confirm New Password',
+  AppStrings.invalidOldPassword: 'Invalid Old Password',
+  AppStrings.successPasswordChange: 'Password has been changed successfully',
 };
