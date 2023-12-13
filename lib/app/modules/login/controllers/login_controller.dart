@@ -6,14 +6,18 @@ import 'package:egyptians_abroad/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
 import '../../../core/custom_widgets/custom_taost.dart';
+import '../../../core/services/auth_service.dart';
 
 class LoginController extends GetxController {
+  final AuthService authService = Get.find();
+
   Future<void> login({required String email, required String pass}) async {
     AppResponse response =
         await UserRepository().loginReq({"email": email, "password": pass});
     if (response.status) {
+      authService.setAccessToken(response.data['accessToken'] ?? '');
+      authService.setRefreshToken(response.data['refreshToken'] ?? '');
       Get.offAllNamed(Routes.BOTTOMNAVIGATION);
-      AppHelper.setToken(response.data['accessToken']);
     } else {
       // Get.offAllNamed(Routes.BOTTOMNAVIGATION);
 
