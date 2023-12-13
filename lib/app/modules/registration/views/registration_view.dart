@@ -1,4 +1,5 @@
 import 'package:egyptians_abroad/app/core/custom_widgets/custom_button.dart';
+import 'package:egyptians_abroad/app/core/custom_widgets/custom_taost.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/custom_textfield.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/dropdown_list_selector.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/network_indecator.dart';
@@ -6,6 +7,7 @@ import 'package:egyptians_abroad/app/core/custom_widgets/textfield_title.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/title_text.dart';
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
+import 'package:egyptians_abroad/app/core/services/app_response.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:egyptians_abroad/app/modules/registration/controllers/registration_controller.dart';
 import 'package:egyptians_abroad/app/routes/app_pages.dart';
@@ -14,6 +16,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:egyptians_abroad/app/core/helper/validators.dart';
 
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 
 class RegistrationView extends StatefulWidget {
   const RegistrationView({super.key});
@@ -25,6 +28,7 @@ class RegistrationView extends StatefulWidget {
 class _RegistrationViewState extends State<RegistrationView>
     with ValidationMixin {
   final _formKey = GlobalKey<FormState>();
+  bool showCountryError = false;
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(RegistrationController());
@@ -97,26 +101,71 @@ class _RegistrationViewState extends State<RegistrationView>
                               height: 16.h,
                             ),
                             TextFieldTitle(title: AppStrings.residence.tr),
-                            ValueListenableBuilder<int>(
-                                valueListenable: controller.residenceCountry,
-                                builder: (_, residence, __) {
-                                  return DropDownListSelector(
-                                    dropDownList:
-                                        (controller.countriesList.length == 0)
-                                            ? <DropdownMenuItem>[]
-                                            : controller.countriesList
-                                                .map((e) => DropdownMenuItem(
-                                                      child: Text(e.country),
-                                                      value: e.id,
-                                                    ))
-                                                .toList(),
-                                    value: residence,
-                                    hint: "",
-                                    onChangeFunc: (val) {
-                                      controller.residenceCountry.value = val;
-                                    },
-                                  );
-                                }),
+                            GetBuilder<RegistrationController>(
+                              builder: (registrationController) =>
+                                  ValueListenableBuilder<int?>(
+                                      valueListenable:
+                                          controller.residenceCountry,
+                                      builder: (_, residence, __) {
+                                        return Stack(
+                                          children: [
+                                            CustomTextFormField(
+                                              // controller:
+                                              //     controller.residenceTxtController,
+                                              validationFunc: (val) =>
+                                                  validateCountry(
+                                                      residence.toString()),
+                                              enabled: false,
+                                            ),
+                                            DropDownListSelector(
+                                              dropDownList: (controller
+                                                          .countriesList
+                                                          .length ==
+                                                      0)
+                                                  ? <DropdownMenuItem>[]
+                                                  : controller.countriesList
+                                                      .map((e) =>
+                                                          DropdownMenuItem(
+                                                            child:
+                                                                Text(e.country),
+                                                            value: e.id,
+                                                          ))
+                                                      .toList(),
+                                              borderColor: showCountryError ==
+                                                          false &&
+                                                      (registrationController
+                                                                  .residenceCountry
+                                                                  .value ==
+                                                              null ||
+                                                          (registrationController
+                                                                      .residenceCountry
+                                                                      .value !=
+                                                                  null &&
+                                                              validateCountry(registrationController
+                                                                      .residenceCountry
+                                                                      .value
+                                                                      .toString()) ==
+                                                                  null))
+                                                  ? Color.fromARGB(
+                                                      255, 237, 239, 240)
+                                                  : Colors.red,
+                                              value: residence,
+                                              hint: "",
+                                              onChangeFunc: (val) {
+                                                controller
+                                                    .residenceTxtController
+                                                    .text = val.toString();
+
+                                                controller.residenceCountry
+                                                    .value = val;
+                                                // showCountryError = true;
+                                                // setState(() {});
+                                              },
+                                            ),
+                                          ],
+                                        );
+                                      }),
+                            ),
                             SizedBox(
                               height: 50.h,
                             ),
@@ -128,10 +177,43 @@ class _RegistrationViewState extends State<RegistrationView>
                               height: 50,
                               onPressed: () async {
                                 if (_formKey.currentState!.validate()) {
-                                  await controller.createVerificationCode();
-                                  Get.toNamed(
-                                    Routes.OTP,
-                                  );
+                                  setState(() {
+                                    showCountryError = false;
+                                  });
+                                  AppResponse res =
+                                      await controller.verifyMailAndNID();
+                                  if (res.status && res.data['data'] == true) {
+                                    await controller.createVerificationCode();
+                                    Get.toNamed(
+                                      Routes.OTP,
+                                    );
+                                  } else {
+                                    Get.showSnackbar(
+                                      buildCustomToast(
+                                        Get.context!,
+                                        toastMsg:
+                                            "الرقم القومي أو البريد الإلكتروني مُسجل بالفعل.",
+                                        toastTitle: AppStrings.sorry.tr,
+                                        toastType: ToastType.error,
+                                      ),
+                                    );
+                                  }
+                                } else {
+                                  print(
+                                      " ddd  ${validateCountry(registrationController.residenceCountry.value.toString())}");
+
+                                  if (validateCountry(registrationController
+                                          .residenceCountry.value
+                                          .toString()) !=
+                                      null) {
+                                    setState(() {
+                                      showCountryError = true;
+                                    });
+                                  } else {
+                                    setState(() {
+                                      showCountryError = false;
+                                    });
+                                  }
                                 }
                               },
                             ),

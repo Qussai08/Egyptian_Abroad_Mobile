@@ -27,8 +27,9 @@ class OtpView extends StatefulWidget {
 class _OtpViewState extends State<OtpView> with ValidationMixin {
   final _formKey = GlobalKey<FormState>();
   final ValueNotifier<bool> _otpHasError = ValueNotifier(false);
+  String? errormsg;
 
-  int endTime = DateTime.now().millisecondsSinceEpoch + 1000 * 120;
+  int endTime = DateTime.now().millisecondsSinceEpoch + 1000 * 600;
   intl.NumberFormat formatter = intl.NumberFormat("00");
 
   @override
@@ -120,22 +121,29 @@ class _OtpViewState extends State<OtpView> with ValidationMixin {
                                   },
                                 ),
                               ),
-                              if (hasError)
+                              if (hasError &&
+                                  validateOtpCode(controller.otp) !=
+                                      AppStrings.otpEmptyValidation.tr)
                                 Container(
                                   margin: const EdgeInsets.only(top: 10),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Icon(
-                                        Icons.error,
-                                        color: Colors.red,
-                                        size: fixDpiHeight(24),
-                                      ),
+                                      if (validateOtpCode(controller.otp) !=
+                                          AppStrings.otpEmptyValidation.tr)
+                                        Icon(
+                                          Icons.error,
+                                          color: Colors.red,
+                                          size: fixDpiHeight(24),
+                                        ),
                                       const SizedBox(
                                         width: 2,
                                       ),
                                       Text(
-                                        AppStrings.sorry.tr,
+                                        validateOtpCode(controller.otp) ==
+                                                AppStrings.otpEmptyValidation.tr
+                                            ? ""
+                                            : AppStrings.sorry.tr,
                                         style: TextStyle(
                                             color: Colors.red,
                                             fontSize: fixDpiFont(18),
@@ -147,7 +155,10 @@ class _OtpViewState extends State<OtpView> with ValidationMixin {
                                 ),
                               if (hasError)
                                 Text(
-                                  'كود التحقق غير صحيح',
+                                  validateOtpCode(controller.otp) ==
+                                          AppStrings.otpEmptyValidation.tr
+                                      ? ""
+                                      : "كود التحقق غير صحيح",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       color: Colors.red,
@@ -165,60 +176,75 @@ class _OtpViewState extends State<OtpView> with ValidationMixin {
                   CountdownTimer(
                     endTime: endTime,
                     widgetBuilder: (context, time) {
-                      if (time == null) {
-                        return Container(
-                          margin: EdgeInsets.symmetric(horizontal: 110.w),
-                          child: CustomButton(
-                            text: AppStrings.resendCode.tr,
-                            type: ButtonType.secondary,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w700,
-                            height: 40,
+                      return Column(
+                        children: [
+                          time == null
+                              ? Container(
+                                  margin:
+                                      EdgeInsets.symmetric(horizontal: 110.w),
+                                  child: CustomButton(
+                                      text: AppStrings.resendCode.tr,
+                                      type: ButtonType.secondary,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w700,
+                                      height: 40,
+                                      onPressed: () async {
+                                        await controller
+                                            .createVerificationCode();
+                                        endTime = DateTime.now()
+                                                .millisecondsSinceEpoch +
+                                            1000 * 600;
+                                        _otpHasError.value = false;
+                                        controller.otpTxtController.clear();
+                                        setState(() {});
+                                      }),
+                                )
+                              : Container(
+                                  height: 40,
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 10),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(100),
+                                    color: Styles.secondaryButtonColor,
+                                  ),
+                                  child: Text(
+                                    " إعادة إرسال خلال "
+                                    '${formatter.format(time.min ?? 00)}:${formatter.format(time.sec ?? 00)}',
+                                    style: TextStyle(
+                                        fontFamily: 'baloo',
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: fixDpiFont(12)),
+                                  ),
+                                ),
+                          SizedBox(
+                            height: 50.h,
+                          ),
+                          CustomButton(
+                            text: AppStrings.confirm.tr,
+                            icon: Icons.arrow_forward,
+                            type: ButtonType.primary,
+                            width: 300.w,
+                            height: 50,
                             onPressed: () async {
-                              await controller.createVerificationCode();
-                              endTime = DateTime.now().millisecondsSinceEpoch +
-                                  1000 * 120;
-                              _otpHasError.value = false;
-                              controller.otpTxtController.clear();
-                              setState(() {});
+                              if (time == null) {
+                                _otpHasError.value = true;
+                              } else {
+                                _otpHasError.value =
+                                    validateOtpCode(controller.otp) != null
+                                        ? true
+                                        : false;
+                              }
+
+                              if (_otpHasError.value == false) {
+                                errormsg = validateOtpCode(controller.otp);
+                                if (errormsg ==
+                                    AppStrings.otpEmptyValidation.tr)
+                                  setState(() {});
+                              }
                             },
                           ),
-                        );
-                      }
-
-                      return Container(
-                        height: 40,
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 10),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(100),
-                          color: Styles.secondaryButtonColor,
-                        ),
-                        child: Text(
-                          " إعادة إرسال خلال "
-                          '${formatter.format(time.min ?? 00)}:${formatter.format(time.sec ?? 00)}',
-                          style: TextStyle(
-                              fontFamily: 'baloo',
-                              fontWeight: FontWeight.w400,
-                              fontSize: fixDpiFont(12)),
-                        ),
+                        ],
                       );
-                    },
-                  ),
-                  SizedBox(
-                    height: 50.h,
-                  ),
-                  CustomButton(
-                    text: AppStrings.confirm.tr,
-                    icon: Icons.arrow_forward,
-                    type: ButtonType.primary,
-                    width: 300.w,
-                    height: 50,
-                    onPressed: () async {
-                      _otpHasError.value =
-                          validateOtpCode(controller.otp) != null
-                              ? true
-                              : false;
                     },
                   ),
                 ],

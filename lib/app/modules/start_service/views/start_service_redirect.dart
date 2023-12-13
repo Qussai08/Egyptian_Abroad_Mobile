@@ -118,7 +118,7 @@ class StartServiceRedir extends StatelessWidget {
       final appId = Platform.isAndroid ? androidID : iosID;
       // 'com.mcit.eca' : '6444364022';
       final url = androidID == iosID
-          ? Uri.parse(iosID)
+          ? Uri.parse("iosID")
           : Uri.parse(
               Platform.isAndroid
                   ? "market://details?id=$appId"

@@ -6,7 +6,7 @@ class SecureStorageHelper {
   static Future<String?> localRead(String key) async {
     FlutterSecureStorage secureStorage = const FlutterSecureStorage();
     if (await secureStorage.containsKey(key: key)) {
-      return json.decode(secureStorage.read(key: key) as String);
+      return secureStorage.read(key: key);
     } else {
       return null;
     }

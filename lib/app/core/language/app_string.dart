@@ -25,6 +25,7 @@ abstract class AppStrings {
   static const emailFormatValidation = "emailFormatValidation";
   static const emailEmptyValidation = "emailEmptyValidation";
   static const passwordEmptyValidation = "passwordEmptyValidation";
+  static const passwordWeekValidation = "passwordWeekValidation";
   static const sorry = "sorry";
   static const invalidMailOrPass = "invalidMailOrPass";
 
@@ -41,6 +42,8 @@ abstract class AppStrings {
   static const nationalIDEmptyValidation = "nationalIDEmptyValidation";
   static const onlyNumericValidation = "onlyNumericValidation";
   static const nationalIDShortValidation = "onlyNumericValidation";
+  static const emptyValidation = "emptyValidation";
+  static const nationalIDWrongValidation = "nationalIDWrongValidation";
 
   // otp screen
   static const otpTitle = 'otpTitle';
@@ -76,6 +79,10 @@ abstract class AppStrings {
   static const msgsAddress = 'msgsAddress';
   static const save = 'save';
   static const skip = 'skip';
+  static const passportShortValidation = "passportShortValidation";
+  static const passportWrongValidation = "passportWrongValidation";
+  static const egPhoneNumShortValidation = "egPhoneNumShortValidation";
+  static const egPhoneNumWrongValidation = "egPhoneNumWrongValidation";
 
   // bottomNavigation tabs
   static const home = 'home';
@@ -104,4 +111,12 @@ abstract class AppStrings {
 
   // Service content screen
   static const continueStr = 'continueStr';
+
+  // logout
+  static const logout = 'logout';
+
+  // validation
+  static const maxlength = 'maxlength';
+  static const char = 'char';
+  static const num = 'num';
 }

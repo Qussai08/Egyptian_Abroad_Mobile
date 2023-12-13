@@ -16,7 +16,7 @@ Map<String, String> en = {
   AppStrings.newAccount: 'New Account',
   AppStrings.registerNew: 'Create New Account',
   AppStrings.register: 'Create Account',
-  AppStrings.name: 'Name',
+  AppStrings.name: 'Name as in National ID',
   AppStrings.email: 'Email',
   AppStrings.residence: 'Country of Residence',
   AppStrings.next: 'Next',
@@ -39,7 +39,7 @@ Map<String, String> en = {
   AppStrings.nameEmptyValidation: 'Please enter your name',
   AppStrings.nationalIDEmptyValidation: 'Please enter your National ID',
   AppStrings.onlyNumericValidation: 'Enter numeric values only',
-  AppStrings.nationalIDShortValidation: 'You must enter 9 digits',
+  AppStrings.nationalIDShortValidation: 'You must enter National ID 14 digits',
   AppStrings.otpEmptyValidation: 'Please enter the verification code',
   AppStrings.otpShortValidation: 'The verification code should be 4 digit',
   AppStrings.setPasswordTitle: 'Set Password',
@@ -63,7 +63,7 @@ Map<String, String> en = {
   AppStrings.forignPhoneNum: 'Foreign Mobile Number',
   AppStrings.forignPhoneNumHint: ' (must have WhatsApp application) ',
   AppStrings.msgsAddress: 'Messaging Address in Egypt',
-  AppStrings.save: 'Save',
+  AppStrings.save: 'Continue',
   AppStrings.skip: 'Skip',
   AppStrings.sorry: 'Error',
   AppStrings.invalidMailOrPass: 'Invalid email or password.',
@@ -80,4 +80,19 @@ Map<String, String> en = {
   AppStrings.resendCode: 'Resend Code',
   AppStrings.confirm: 'Confirm',
   AppStrings.backToApp: 'Back to App',
+  AppStrings.emptyValidation: "This field is requested",
+  AppStrings.nationalIDWrongValidation:
+      "The submitted National ID is incorrect",
+  AppStrings.passwordWeekValidation: "Weak password",
+  AppStrings.logout: "Log out",
+  AppStrings.maxlength: 'Maximum length allowed is ',
+  AppStrings.char: 'char',
+  AppStrings.num: 'number',
+  AppStrings.passportShortValidation: 'Passport number should be 9 digits',
+  AppStrings.passportWrongValidation:
+      "The submitted Passport number is incorrect",
+  AppStrings.egPhoneNumShortValidation:
+      'Egyptian phone number should be 11 digits',
+  AppStrings.egPhoneNumWrongValidation:
+      "The submitted Phone number is incorrect",
 };

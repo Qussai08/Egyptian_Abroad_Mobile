@@ -67,8 +67,14 @@ class _SetPasswordViewState extends State<SetPasswordView>
                   TextFieldTitle(title: AppStrings.password.tr),
                   CustomTextFormField(
                     controller: controller.passwordTxtController,
-                    validationFunc: (val) =>
-                        validatePassword(controller.passwordTxtController.text),
+                    validationFunc: (val) {
+                      return _validationsValues.value.firstWhereOrNull(
+                                  (element) => element == false) !=
+                              null
+                          ? AppStrings.passwordWeekValidation.tr
+                          : validatePassword(
+                              controller.passwordTxtController.text);
+                    },
                     onChangedFunc: (val) {
                       _validationsValues.value = [
                         passMinimumLenght(val),
@@ -135,6 +141,7 @@ class _SetPasswordViewState extends State<SetPasswordView>
                     width: 300.w,
                     height: 50,
                     onPressed: () async {
+                      print(_validationsValues.value);
                       if (_formKey.currentState!.validate() &&
                           _validationsValues.value.firstWhereOrNull(
                                   (element) => element == false) ==

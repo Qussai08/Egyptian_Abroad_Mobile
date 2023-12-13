@@ -1,4 +1,5 @@
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
+import 'package:egyptians_abroad/app/modules/splash/views/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -39,7 +40,8 @@ class MyApp extends StatelessWidget {
       ],
       locale: LocalizationHelper.local,
       translations: LocalizationHelper(),
-      initialRoute: AppPages.INITIAL,
+      //initialRoute: AppPages.INITIAL,
+      home: SplashView(),
       getPages: AppPages.routes,
       theme: Styles.myTheme,
       initialBinding: InitialBinding(),

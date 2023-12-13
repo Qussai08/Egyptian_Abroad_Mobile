@@ -61,69 +61,39 @@ class BaseApi {
   }
 
   // Perform POST request
-  static Future<AppResponse> postRequest({
-    body,
-    Map<String, dynamic>? options,
-    required String endPoint,
-  }) async {
-    var headers = {};
-    if (options != null) {
-      headers = options['headers'];
-    }
+  static Future<AppResponse> postRequest(
+      {body,
+      Map<String, dynamic>? options,
+      required String endPoint,
+      bool? jsonResponse = true}) async {
     var token = AppHelper.token;
     if (token != null) token = "Bearer $token";
     var options0 = Options(headers: {
       "Authorization": token,
     });
+
     try {
-      var queryParms = {"languageId": LocalizationHelper.isArabic() ? 1 : 2};
+      Map<String, dynamic> queryParms = {
+        "languageId": LocalizationHelper.isArabic() ? 1 : 2
+      };
+
+      if (options != null) {
+        queryParms.addAll(options);
+      }
 
       _response = await _dio.post(Constants.baseUrl + endPoint,
           data: body, options: options0, queryParameters: queryParms);
 
       return AppResponse(
           statusCode: _response.statusCode,
-          status: _response.data['isSuccess'],
-          data: _response.data['data']);
+          status: jsonResponse!
+              ? _response.data['isSuccess']
+              : _response.statusCode == 200
+                  ? true
+                  : false,
+          data: jsonResponse ? _response.data['data'] : {});
     } on DioException catch (e) {
       return AppResponse(status: false, error: e, errorMessage: e.message);
     }
   }
-
-  // static Future<AppResponse> postRequest({
-  //   body,
-  //   Map<String, dynamic>? options,
-  //   required String endPoint,
-  // }) async {
-  //   // var headers = {};
-  //   // if (options != null) {
-  //   //   headers = options['headers'];
-  //   // }
-  //   var token = AppHelper.token;
-  //   if (token != null) token = "Bearer $token";
-  //   var _options = Options(headers: {
-  //     "Authorization": token,
-  //   });
-
-  //   try {
-  //     Map<String, dynamic> queryParms = {"languageId": LocalizationHelper.isArabic() ? 1 : 2};
-
-  //     if (options != null) {
-  //       queryParms.addAll(options);
-  //     }
-  //     _response = await _dio.post(Constants.baseUrl + endPoint,
-  //         data: body, options: _options, queryParameters: queryParms);
-  //     print('_response $_response');
-
-  //     return AppResponse(
-  //         statusCode: _response.statusCode,
-  //         status: _response.data['isSuccess'],
-  //         data: _response.data['data']);
-  //   } on DioException catch (e) {
-  //     print("error response : ${e.response}");
-  //     print("error : ${e.error}");
-
-  //     return AppResponse(status: false, error: e, errorMessage: e.message);
-  //   }
-  // }
 }

@@ -14,6 +14,7 @@ class DropDownListSelector extends StatefulWidget {
   final bool reverseArrowPosition;
   final double hintFontSize;
   final FontWeight hintFontWeight;
+  final Color? borderColor;
 
   const DropDownListSelector(
       {super.key,
@@ -26,7 +27,8 @@ class DropDownListSelector extends StatefulWidget {
       this.blackHint = false,
       this.reverseArrowPosition = false,
       this.hintFontSize = 18,
-      this.hintFontWeight = FontWeight.w700});
+      this.hintFontWeight = FontWeight.w700,
+      this.borderColor = const Color.fromARGB(255, 237, 239, 240)});
   @override
   _DropDownListSelectorState createState() => _DropDownListSelectorState();
 }
@@ -50,8 +52,7 @@ class _DropDownListSelectorState extends State<DropDownListSelector> {
           decoration: widget.decoration ??
               BoxDecoration(
                 borderRadius: BorderRadius.circular(37.0),
-                border:
-                    Border.all(color: const Color.fromARGB(255, 237, 239, 240)),
+                border: Border.all(color: widget.borderColor!),
               ),
           child: DropdownButtonHideUnderline(
             child: DropdownButton<dynamic>(

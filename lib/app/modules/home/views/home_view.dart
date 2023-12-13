@@ -7,6 +7,7 @@ import 'package:egyptians_abroad/app/core/custom_widgets/textfield_container.dar
 import 'package:egyptians_abroad/app/core/custom_widgets/title_text.dart';
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/helper/localization_helper.dart';
+import 'package:egyptians_abroad/app/core/helper/secure_storage_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:egyptians_abroad/app/modules/home/views/widgets/home_appbar.dart';
@@ -69,10 +70,17 @@ class _HomeViewState extends State<HomeView> {
                                 value: Routes.EditACCOUNT,
                                 child: Text(AppStrings.editAccountInfos.tr),
                               ),
+                              DropdownMenuItem(
+                                value: Routes.LOGIN,
+                                child: Text(AppStrings.logout.tr),
+                              ),
                             ],
                             // value: residence,
                             hint: "!${AppStrings.hello.tr} احمد ",
-                            onChangeFunc: (val) {
+                            onChangeFunc: (val) async {
+                              if (val == Routes.LOGIN) {
+                                await SecureStorageHelper.localRemove('user');
+                              }
                               Get.toNamed(val);
                               // _residenceCountry.value = val;
                             },

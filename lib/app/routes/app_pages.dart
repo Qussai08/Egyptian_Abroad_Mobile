@@ -4,7 +4,8 @@ import 'package:egyptians_abroad/app/modules/edit_account/bindings/edit_account_
 import 'package:egyptians_abroad/app/modules/edit_account/views/edit_account.dart';
 import 'package:egyptians_abroad/app/modules/forget_password/bindings/forget_password_bindings.dart';
 import 'package:egyptians_abroad/app/modules/forget_password/views/forget_password_view.dart';
-import 'package:egyptians_abroad/app/modules/registration/views/complete_account.dart';
+import 'package:egyptians_abroad/app/modules/registration/views/complete_account_residence.dart';
+import 'package:egyptians_abroad/app/modules/registration/views/complete_account_work.dart';
 import 'package:egyptians_abroad/app/modules/registration/views/set_password_view.dart';
 import 'package:egyptians_abroad/app/modules/start_service/bindings/start_service_binding.dart';
 import 'package:egyptians_abroad/app/modules/start_service/views/url_service_view.dart';
@@ -59,6 +60,11 @@ class AppPages {
     GetPage(
       name: _Paths.COMPLETEACCOUNT,
       page: () => const CompleteAccountView(),
+      binding: RegistrationBinding(),
+    ),
+    GetPage(
+      name: _Paths.COMPLETEACCOUNTWORK,
+      page: () => const CompleteAccountWorkView(),
       binding: RegistrationBinding(),
     ),
     GetPage(
