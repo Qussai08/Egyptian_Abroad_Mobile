@@ -4,4 +4,5 @@ class AppImages {
   static const calendarIcon = 'assets/icons/icCalendar.svg';
   static const notificationIcon = 'assets/icons/notifications-icon.png';
   static const homeIcon = 'assets/icons/home-icon.png';
+  static const lock = 'assets/images/lock.png';
 }

@@ -17,6 +17,8 @@ abstract class Routes {
   static const EditACCOUNT = _Paths.EditACCOUNT;
   static const FORGETPASSWORD = _Paths.FORGETPASSWORD;
   static const URLSERVICE = _Paths.URLSERVICE;
+  static const CHANGEPASSWORD = _Paths.CHANGEPASSWORD;
+
   static const NOTIFICATIONS = _Paths.NOTIFICATIONS;
 }
 
@@ -35,4 +37,5 @@ abstract class _Paths {
   static const FORGETPASSWORD = '/forgetPassword';
   static const URLSERVICE = '/urlService';
   static const NOTIFICATIONS = '/notifications';
+  static const CHANGEPASSWORD = '/changePassword';
 }
