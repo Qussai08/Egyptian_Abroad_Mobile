@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 
 import '../../../../core/theme/app_images.dart';
 import '../../../../core/theme/styles.dart';
-import '../../data/notification_model.dart';
+import '../../data/models/notifications_model/notifications_model.dart';
 
 class NotificationCardWidget extends StatelessWidget {
   NotificationCardWidget({
@@ -13,7 +13,7 @@ class NotificationCardWidget extends StatelessWidget {
     required this.notification,
   });
 
-  final NotificationModel notification;
+  final NotificationsModel notification;
   final RxBool isExpanded = false.obs;
 
   @override
@@ -83,7 +83,7 @@ class NotificationCardWidget extends StatelessWidget {
 
                   // Title
                   Text(
-                    notification.title,
+                    notification.title ?? '',
                     maxLines: isExpanded() ? null : 1,
                     overflow: isExpanded() ? null : TextOverflow.ellipsis,
                     style: Styles.getBoldStyle(
@@ -93,7 +93,7 @@ class NotificationCardWidget extends StatelessWidget {
                   ),
                   SizedBox(height: fixDpiHeight(8)),
                   Text(
-                    notification.message,
+                    notification.message ?? '',
                     maxLines: isExpanded() ? null : 2,
                     overflow: isExpanded() ? null : TextOverflow.ellipsis,
                     style: Styles.getMediumStyle(

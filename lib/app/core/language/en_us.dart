@@ -80,4 +80,5 @@ Map<String, String> en = {
   AppStrings.resendCode: 'Resend Code',
   AppStrings.confirm: 'Confirm',
   AppStrings.backToApp: 'Back to App',
+  AppStrings.noResult: 'No Result',
 };

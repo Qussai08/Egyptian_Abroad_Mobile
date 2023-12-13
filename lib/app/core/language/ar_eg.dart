@@ -80,4 +80,5 @@ Map<String, String> ar = {
   AppStrings.resendCode: 'إعادة إرسال',
   AppStrings.confirm: 'تأكيد',
   AppStrings.backToApp: 'الرجوع إلي التطبيق',
+  AppStrings.noResult: 'لا يوجد نتائج',
 };

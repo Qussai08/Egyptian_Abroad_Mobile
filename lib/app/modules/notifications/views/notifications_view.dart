@@ -4,17 +4,18 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
+import '../../../core/custom_widgets/app_error_widget.dart';
+import '../../../core/custom_widgets/loading_dialog.dart';
 import '../../../core/custom_widgets/title_text.dart';
 import '../../../core/theme/styles.dart';
 import '../controllers/notifications_controller.dart';
 import 'widgets/notification_card_widget.dart';
 
-class NotificationsView extends StatelessWidget {
+class NotificationsView extends GetView<NotificationsController> {
   const NotificationsView({super.key});
+
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(NotificationsController());
-
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size(double.maxFinite, fixDpiHeight(110)),
@@ -42,33 +43,83 @@ class NotificationsView extends StatelessWidget {
           ),
         ),
       ),
-      body: ListView(
-        children: [
-          // space
-          SizedBox(height: fixDpiHeight(15)),
-          Obx(() {
-            if (controller.notificationsList.isEmpty) {
-              return const Center(child: Text('No notifications'));
-            }
-            return ListView.builder(
-              physics: const ClampingScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: controller.notificationsList.length,
-              itemBuilder: (context, index) {
-                final notification = controller.notificationsList[index];
+      body: controller.obx(
+          (state) => ListView(
+                children: [
+                  // space
+                  SizedBox(height: fixDpiHeight(15)),
+                  Obx(() {
+                    if (controller.notificationsList.isEmpty) {
+                      return const Center(child: Text('No notifications'));
+                    }
+                    return ListView.builder(
+                      physics: const ClampingScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: controller.notificationsList.length,
+                      itemBuilder: (context, index) {
+                        final notification =
+                            controller.notificationsList[index];
 
-                return Padding(
-                  padding: EdgeInsets.symmetric(horizontal: fixDpiWidth(16)),
-                  child: NotificationCardWidget(notification: notification),
-                );
-              },
-            );
-          }),
+                        return Padding(
+                          padding:
+                              EdgeInsets.symmetric(horizontal: fixDpiWidth(16)),
+                          child: NotificationCardWidget(
+                              notification: notification),
+                        );
+                      },
+                    );
+                  }),
 
-          // space
-          SizedBox(height: fixDpiHeight(28)),
-        ],
-      ),
+                  // space
+                  SizedBox(height: fixDpiHeight(28)),
+                ],
+              ),
+          onLoading: const LoadingDialog(),
+          onError: (error) => AppErrorWidget(
+                text: error ?? '',
+                // text: ErrorHelper.getErrorMessage(int.parse(error ?? '')),
+                onPress: () {
+                  controller.retry();
+                },
+              ),
+          onEmpty: Center(
+            child: Text(
+              AppStrings.noResult.tr,
+              style: Styles.getBoldStyle(
+                color: Styles.black,
+                fontSize: 18,
+              ),
+              overflow: TextOverflow.ellipsis,
+            ),
+          )),
+
+      // ListView(
+      //   children: [
+      //     // space
+      //     SizedBox(height: fixDpiHeight(15)),
+      //     Obx(() {
+      //       if (controller.notificationsList.isEmpty) {
+      //         return const Center(child: Text('No notifications'));
+      //       }
+      //       return ListView.builder(
+      //         physics: const ClampingScrollPhysics(),
+      //         shrinkWrap: true,
+      //         itemCount: controller.notificationsList.length,
+      //         itemBuilder: (context, index) {
+      //           final notification = controller.notificationsList[index];
+
+      //           return Padding(
+      //             padding: EdgeInsets.symmetric(horizontal: fixDpiWidth(16)),
+      //             child: NotificationCardWidget(notification: notification),
+      //           );
+      //         },
+      //       );
+      //     }),
+
+      //     // space
+      //     SizedBox(height: fixDpiHeight(28)),
+      //   ],
+      // ),
     );
   }
 }

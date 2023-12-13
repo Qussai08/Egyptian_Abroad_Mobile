@@ -5,6 +5,7 @@ abstract class AppStrings {
   static const selectLanguage = "selectLanguage";
   static const confirm = 'confirm';
   static const backToApp = 'backToApp';
+  static const noResult = 'noResult';
 
   // no internet screen
   static const noInternet = 'noInternet';

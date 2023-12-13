@@ -13,14 +13,21 @@ class ApiResponse<T> extends Response<T> {
     if (response.hasError) {
       throw response.statusCode ?? -1;
     } else {
-      if (response.body!['isSuccess'] ?? false) {
-        return ApiResponse(
-          isSuccess: true,
-          body: fromJson(response.body!['data']),
-        );
-      } else {
-        throw int.parse(response.body!['error']['errorCode'] ?? '-1');
-      }
+      // TODO: fix this
+      return ApiResponse(
+        isSuccess: true,
+        body: fromJson(response.body),
+      );
+
+      // Uncomment this when the API is ready
+      // if (response.body!['isSuccess'] ?? false) {
+      //   return ApiResponse(
+      //     isSuccess: true,
+      //     body: fromJson(response.body!['data']),
+      //   );
+      // } else {
+      //   throw int.parse(response.body!['error']['errorCode'] ?? '-1');
+      // }
     }
   }
 
