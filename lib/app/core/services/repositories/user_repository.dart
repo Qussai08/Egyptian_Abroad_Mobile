@@ -14,7 +14,7 @@ class UserRepository {
   }
 
   Future<AppResponse> changePasswordReq(Map<String, dynamic> body) async {
-    return await BaseApi.postRequest(
+    return await BaseApi().postRequest(
       endPoint: "ChangePassword",
       body: jsonEncode(body),
     );

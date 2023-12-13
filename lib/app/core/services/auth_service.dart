@@ -1,11 +1,7 @@
-import 'package:egyptians_abroad/app/core/helper/app_helper.dart';
 import 'package:get/get.dart';
 import '../constants/storage_constants.dart';
 import 'storage_service.dart';
-import 'package:get/get.dart';
 import 'package:jwt_decode/jwt_decode.dart';
-import '../constants/storage_constants.dart';
-import 'storage_service.dart';
 
 class AuthService extends GetxService {
   final storageService = Get.find<StorageService>();
@@ -23,20 +19,8 @@ class AuthService extends GetxService {
     storageService.setData(StorageConstants.kToken, token);
   }
 
-  void setAccessToken(String token) {
-    storageService.setData(StorageConstants.kToken, token);
-  }
-
   void setRefreshToken(String refreshToken) {
     storageService.setData(StorageConstants.kRefreshToken, refreshToken);
-  }
-
-  void setRefreshToken(String refreshToken) {
-    storageService.setData(StorageConstants.kRefreshToken, refreshToken);
-  }
-
-  void setFCMToken(String fcmToken) {
-    storageService.setData(StorageConstants.fcmToken, fcmToken);
   }
 
   void setFCMToken(String fcmToken) {
@@ -48,29 +32,12 @@ class AuthService extends GetxService {
     storageService.setData(StorageConstants.kExpireAt, willExpireAt.toString());
   }
 
-  void setExpireAt(int expireAt) {
-    DateTime willExpireAt = DateTime.now().add(Duration(seconds: expireAt));
-    storageService.setData(StorageConstants.kExpireAt, willExpireAt.toString());
-  }
-
-  void removeAccessToken() {
-    storageService.removeData(StorageConstants.kToken);
-  }
-
   void removeAccessToken() {
     storageService.removeData(StorageConstants.kToken);
   }
 
   void setUserEmail(String email) {
     storageService.setData(StorageConstants.kUserEmail, email);
-  }
-
-  void setUserEmail(String email) {
-    storageService.setData(StorageConstants.kUserEmail, email);
-  }
-
-  void setUserPhone(String phone) {
-    storageService.setData(StorageConstants.kUserPhone, phone);
   }
 
   void setUserPhone(String phone) {
