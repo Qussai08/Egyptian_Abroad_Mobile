@@ -43,5 +43,16 @@
 	</array>
 	<key>io.flutter.embedded_views_preview</key>
 	<string>YES</string>
+	<key>UIBackgroundModes</key>
+<array>
+  <string>fetch</string>
+  <string>remote-notification</string>
+
+  <key>NSLocationWhenInUseUsageDescription</key>
+<string>This app needs access to location when open.</string>
+<key>NSLocationAlwaysUsageDescription</key>
+<string>This app needs access to location when in the background.</string>
+
+</array>
 </dict>
 </plist>

@@ -59,10 +59,10 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyDe6y2Zol3QkVLQlDdwL8YI4S6q1hGZ_N4',
-    appId: '1:887509960997:ios:34b7d57b5c3883cd7b32cc',
+    appId: '1:887509960997:ios:6910ee6a3dfd33167b32cc',
     messagingSenderId: '887509960997',
     projectId: 'egyptians-abroad',
     storageBucket: 'egyptians-abroad.appspot.com',
-    iosBundleId: 'com.get.egyptiansabroad',
+    iosBundleId: 'com.getgroup.egyptiansabroadtest',
   );
 }

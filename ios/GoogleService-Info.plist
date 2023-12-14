@@ -9,7 +9,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.get.egyptiansabroad</string>
+	<string>com.getgroup.egyptiansabroadtest</string>
 	<key>PROJECT_ID</key>
 	<string>egyptians-abroad</string>
 	<key>STORAGE_BUCKET</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:887509960997:ios:34b7d57b5c3883cd7b32cc</string>
+	<string>1:887509960997:ios:6910ee6a3dfd33167b32cc</string>
 </dict>
 </plist>
