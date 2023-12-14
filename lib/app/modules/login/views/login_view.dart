@@ -129,11 +129,8 @@ class _LoginViewState extends State<LoginView> with ValidationMixin {
                     children: [
                       Text(
                         AppStrings.donotHaveAccount.tr,
-                        style: const TextStyle(
-                            fontSize: 11,
-                            fontWeight: FontWeight.w400,
-                            color: Styles.lightBlack,
-                            fontFamily: 'baloo'),
+                        style: Styles.getRegularStyle(
+                            color: Styles.black, fontSize: fixDpiFont(11)),
                       ),
                       GestureDetector(
                         onTap: () {

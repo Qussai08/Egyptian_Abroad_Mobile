@@ -5,6 +5,7 @@ import 'package:egyptians_abroad/app/core/custom_widgets/network_indecator.dart'
 import 'package:egyptians_abroad/app/core/custom_widgets/textfield_title.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/title_text.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
+import 'package:egyptians_abroad/app/core/theme/app_images.dart';
 import 'package:egyptians_abroad/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -58,7 +59,7 @@ class _CompleteAccountViewState extends State<CompleteAccountView>
                       height: 48.h,
                     ),
                     Image.asset(
-                      'assets/images/user.png',
+                      AppImages.user,
                       width: 56.w,
                       fit: BoxFit.fitWidth,
                     ),

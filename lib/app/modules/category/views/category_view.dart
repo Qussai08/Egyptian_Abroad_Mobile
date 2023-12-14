@@ -8,6 +8,7 @@ import 'package:egyptians_abroad/app/core/helper/app_helper.dart';
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/core/services/models/category.dart';
+import 'package:egyptians_abroad/app/core/theme/app_images.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
@@ -63,7 +64,7 @@ class _CategoryViewState extends State<CategoryView> {
                           child: Row(
                             children: [
                               Image.asset(
-                                'assets/icons/male.png',
+                                AppImages.maleIcon,
                                 width: 36.w,
                                 fit: BoxFit.fitWidth,
                               ),

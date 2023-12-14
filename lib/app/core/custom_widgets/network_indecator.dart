@@ -4,6 +4,7 @@ import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:egyptians_abroad/app/modules/home/views/widgets/home_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_offline/flutter_offline.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class NetworkIndicator extends StatefulWidget {
@@ -30,7 +31,7 @@ class NetworkIndicatorState extends State<NetworkIndicator> {
               color: Styles.primaryColor,
             ),
             Container(
-                margin: const EdgeInsets.only(top: 10),
+                margin: EdgeInsets.only(top: 10.h),
                 child: Text(
                   AppStrings.noInternet.tr,
                   style: const TextStyle(
@@ -39,25 +40,25 @@ class NetworkIndicatorState extends State<NetworkIndicator> {
                       fontFamily: 'baloo'),
                 )),
             Container(
-                margin: EdgeInsets.only(top: fixDpiScreenHeight() * 0.04),
-                child: Text(
-                  AppStrings.checkRouter.tr,
-                  style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.grey[600],
-                      fontWeight: FontWeight.w400,
-                      fontFamily: 'baloo'),
-                )),
+              margin: EdgeInsets.only(top: fixDpiScreenHeight() * 0.04),
+              child: Text(
+                AppStrings.checkRouter.tr,
+                style: Styles.getRegularStyle(
+                  color: Styles.grey_600,
+                  fontSize: fixDpiFont(18),
+                ),
+              ),
+            ),
             Container(
-                margin: EdgeInsets.only(top: fixDpiScreenHeight() * 0.04),
-                child: Text(
-                  AppStrings.tryAgain.tr,
-                  style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.grey[600],
-                      fontWeight: FontWeight.w400,
-                      fontFamily: 'baloo'),
-                )),
+              margin: EdgeInsets.only(top: fixDpiScreenHeight() * 0.04),
+              child: Text(
+                AppStrings.tryAgain.tr,
+                style: Styles.getRegularStyle(
+                  color: Styles.grey_600,
+                  fontSize: fixDpiFont(18),
+                ),
+              ),
+            ),
           ],
         ),
       ),

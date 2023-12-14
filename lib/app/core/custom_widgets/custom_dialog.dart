@@ -22,7 +22,7 @@ class CustomDialog extends StatelessWidget {
             icon,
             Text(
               text,
-              style: const TextStyle(color: Styles.grey_400),
+              style: Styles.getRegularStyle(color: Styles.grey_400),
             ),
           ],
         ),

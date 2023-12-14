@@ -1,3 +1,4 @@
+import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:flutter/material.dart';
 
@@ -30,11 +31,8 @@ class NoDataWidget extends StatelessWidget {
           margin: const EdgeInsets.only(top: 15),
           child: Text(
             message,
-            style: const TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.w600,
-                fontSize: 18,
-                fontFamily: 'baloo'),
+            style: Styles.getSemiBoldStyle(
+                color: Styles.black, fontSize: fixDpiFont(18)),
           ),
         ),
       ],

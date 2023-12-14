@@ -1,4 +1,6 @@
+import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
+import 'package:egyptians_abroad/app/core/theme/app_images.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:egyptians_abroad/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
@@ -52,18 +54,15 @@ class _SplashViewState extends State<SplashView> {
               child: Column(
                 children: [
                   Image.asset(
-                    'assets/images/logo.png',
+                    AppImages.logo,
                     width: 90.w,
                     fit: BoxFit.fitWidth,
                   ),
                   Text(
                     AppStrings.appName.tr,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: 21.sp,
-                        fontWeight: FontWeight.w700,
-                        color: Styles.black,
-                        fontFamily: 'baloo'),
+                    style: Styles.getBoldStyle(
+                        color: Styles.black, fontSize: fixDpiFont(21)),
                   ),
                   Container(
                     width: 150.w,
@@ -71,11 +70,8 @@ class _SplashViewState extends State<SplashView> {
                     child: Text(
                       AppStrings.splashDiscription.tr,
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontSize: 11.sp,
-                          fontWeight: FontWeight.w400,
-                          color: Styles.blueBlack,
-                          fontFamily: 'baloo'),
+                      style: Styles.getRegularStyle(
+                          color: Styles.blueBlack, fontSize: fixDpiFont(11)),
                     ),
                   )
                 ],

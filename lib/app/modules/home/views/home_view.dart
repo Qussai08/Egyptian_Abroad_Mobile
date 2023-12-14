@@ -6,6 +6,7 @@ import 'package:egyptians_abroad/app/core/custom_widgets/no_data_widget.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/title_text.dart';
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
+import 'package:egyptians_abroad/app/core/theme/app_images.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:egyptians_abroad/app/modules/home/views/widgets/home_appbar.dart';
 import 'package:egyptians_abroad/app/routes/app_pages.dart';
@@ -49,7 +50,7 @@ class _HomeViewState extends State<HomeView> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Image.asset(
-                            'assets/icons/male.png',
+                            AppImages.maleIcon,
                             width: 36.w,
                             fit: BoxFit.fitWidth,
                           ),
@@ -188,11 +189,8 @@ class _HomeViewState extends State<HomeView> {
                       TitleText(
                         title: AppStrings.allServices.tr,
                         fontSize: fixDpiFont(14),
-                        titleTextStyle: TextStyle(
-                            fontSize: fixDpiFont(14),
-                            fontWeight: FontWeight.w400,
-                            color: const Color.fromRGBO(62, 60, 60, 0.71),
-                            fontFamily: 'baloo'),
+                        titleTextStyle:
+                            Styles.getRegularStyle(color: Styles.transGrey),
                       ),
                       homeContoller.categoriesLoading ||
                               homeContoller.displayedCategoriesList.isEmpty

@@ -74,8 +74,8 @@ class Styles {
   static const white = Color.fromRGBO(255, 255, 255, 1);
 
   // grey
-  static const grey_500 = Color.fromRGBO(77, 77, 77, 1);
-  static const grey_400 = Color.fromRGBO(144, 144, 144, 1);
+  static const grey_600 = Color.fromRGBO(117, 117, 117, 1);
+  static const grey_400 = Color(0xFF909090);
   static const grey_300 = Color.fromRGBO(163, 163, 163, 1);
   static const grey_200 = Color.fromRGBO(221, 221, 221, 1);
   static const grey_100 = Color.fromRGBO(245, 245, 245, 1);
@@ -85,6 +85,8 @@ class Styles {
   static const matchBackGroundGrey = Color(0xffFFFEF8);
   static const matchBorderGrey = Color(0xffEAEAEA);
   static const secondaryButtonColor = Color(0xffF8F8F8);
+  static const transGrey = Color.fromRGBO(62, 60, 60, 0.71);
+  static const blueGrey = Color(0xff3F3D56);
 
   static const red = Color(0xffD71A21);
   static const heavyRed = Color(0xffBA1212);
