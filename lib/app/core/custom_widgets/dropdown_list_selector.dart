@@ -60,6 +60,9 @@ class _DropDownListSelectorState extends State<DropDownListSelector> {
               isExpanded: widget.reverseArrowPosition ? false : true,
               hint: Text(
                 widget.hint ?? "",
+                textDirection: LocalizationHelper.isArabic()
+                    ? TextDirection.rtl
+                    : TextDirection.ltr,
                 style: TextStyle(
                     color: widget.blackHint ? Colors.black : Color(0xffC8C8C8),
                     fontSize: fixDpiFont(widget.hintFontSize),

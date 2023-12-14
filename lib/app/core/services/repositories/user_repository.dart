@@ -67,4 +67,12 @@ class UserRepository {
         options: queryParameters,
         jsonResponse: false);
   }
+
+  Future<AppResponse> viewAccountReq(
+      {Map<String, dynamic>? queryParameters}) async {
+    return await BaseApi.getRequest(
+        endPoint: "ViewAccount",
+        queryParameters: queryParameters,
+        jsonResponse: false);
+  }
 }

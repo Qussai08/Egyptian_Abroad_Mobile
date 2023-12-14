@@ -1,4 +1,5 @@
 import 'package:egyptians_abroad/app/core/custom_widgets/custom_taost.dart';
+import 'package:egyptians_abroad/app/core/helper/app_helper.dart';
 import 'package:egyptians_abroad/app/core/helper/secure_storage_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/core/services/app_response.dart';
@@ -16,7 +17,7 @@ class RegistrationController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    loadResidenceData();
+    getCountriesList();
   }
 
   @override
@@ -68,9 +69,10 @@ class RegistrationController extends GetxController {
           email: emailTxtController.text,
           pass: passwordTxtController.text,
           navigateToHome: false);
+
       Future.delayed(const Duration(seconds: 3), () async {
         // if (await SecureStorageHelper.checkIsFirstTime()) {
-        //   await loadResidenceData();
+
         Get.offAllNamed(Routes.COMPLETEACCOUNT);
         // } else {
         //   Get.offAllNamed(Routes.BOTTOMNAVIGATION);
@@ -114,7 +116,7 @@ class RegistrationController extends GetxController {
   }
 
   Future<void> getCountriesList() async {
-    // setCountriesLoading(true);
+    setCountriesLoading(true);
     AppResponse response = await UserRepository().getCountriesReq();
     if (response.status) {
       Iterable iterable = response.data;
@@ -123,7 +125,7 @@ class RegistrationController extends GetxController {
       setCountriesList(countriesData);
     }
 
-    // setCountriesLoading(false);
+    setCountriesLoading(false);
   }
 
   Future<AppResponse> verifyMailAndNID() async {
@@ -171,12 +173,18 @@ class RegistrationController extends GetxController {
 
   final ValueNotifier<int?> completeResidenceCountry = ValueNotifier(null);
 
+  bool residenceLoading = true;
+  setResidenceLoading(bool val) {
+    residenceLoading = val;
+    print("residenceLoading $residenceLoading");
+    update();
+  }
+
   Future<void> loadResidenceData() async {
-    setCountriesLoading(true);
-    await getCountriesList();
+    // setResidenceLoading(true);
     await getResidenceTypeList();
     await getGobCategoryList();
-    setCountriesLoading(false);
+    setResidenceLoading(false);
   }
 
   List<ResidenceType> residenceTypeList = [];
@@ -210,6 +218,8 @@ class RegistrationController extends GetxController {
       Iterable iterable = response.data;
       List<JobCategory> joCatData =
           iterable.map((e) => JobCategory.fromJson(e)).toList();
+      print("joCatData $joCatData");
+
       setJobCategoryList(joCatData);
     }
   }
@@ -233,10 +243,9 @@ class RegistrationController extends GetxController {
     }
     AppResponse response = await UserRepository().editAccount(reqBody,
         // TODO : make it dynamic
-        queryParameters: {"guid": "af338e03-d5ea-4065-b199-5ed79ec25342"});
+        queryParameters: {"guid": AppHelper.userId});
     if (response.status) {
       print("edit account res -> ${response.data}");
-      await SecureStorageHelper.setIsFirstTime(false);
       Future.delayed(const Duration(seconds: 3), () async {
         Get.offAllNamed(Routes.BOTTOMNAVIGATION);
       });

@@ -93,7 +93,14 @@ class _SetPasswordViewState extends State<SetPasswordView>
                   CustomTextFormField(
                     controller: _confirmPassTxtController,
                     validationFunc: (val) =>
-                        validateConfirmPassword(_confirmPassTxtController.text),
+                        _confirmPassTxtController.text.trim().isEmpty
+                            ? AppStrings.emptyValidation.tr
+                            : _validationsValues.value.firstWhereOrNull(
+                                        (element) => element == false) !=
+                                    null
+                                ? AppStrings.passwordWeekValidation.tr
+                                : validateConfirmPassword(
+                                    _confirmPassTxtController.text),
                     inputData: TextInputType.text,
                     isPassword: true,
                   ),

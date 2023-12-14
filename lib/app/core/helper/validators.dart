@@ -23,7 +23,8 @@ mixin ValidationMixin<T extends StatefulWidget> on State<T> {
       return AppStrings.onlyNumericValidation.tr;
     } else if (nationalID.length != 14) {
       return AppStrings.nationalIDShortValidation.tr;
-    } else if (!RegExp(r'(2|3)[0-9][0-9][0-1][1-9][0-3][0-9][00-88]\d\d\d\d\d')
+    } else if (!RegExp(
+            r'(2[0-9][0-9]|3[0-2][0-3])[0-1][1-9][0-3][0-9][00-88]\d\d\d\d\d')
         .hasMatch(nationalID)) {
       return AppStrings.nationalIDWrongValidation.tr;
     }
@@ -80,9 +81,7 @@ mixin ValidationMixin<T extends StatefulWidget> on State<T> {
   }
 
   String? validateConfirmPassword(String confirmPassword) {
-    if (confirmPassword.trim().isEmpty) {
-      return AppStrings.emptyValidation.tr;
-    } else if (_password != confirmPassword) {
+    if (_password != confirmPassword) {
       return AppStrings.confirmPasswordValidation.tr;
     }
     return null;

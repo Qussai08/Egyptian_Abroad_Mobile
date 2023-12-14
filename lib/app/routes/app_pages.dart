@@ -69,7 +69,14 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.EditACCOUNT,
-      page: () => const EditAccountView(),
+      page: () => const EditAccountView(isEdit: true),
+      binding: EditAccountBinding(),
+    ),
+    GetPage(
+      name: _Paths.ViewACCOUNT,
+      page: () => const EditAccountView(
+        isEdit: false,
+      ),
       binding: EditAccountBinding(),
     ),
     GetPage(

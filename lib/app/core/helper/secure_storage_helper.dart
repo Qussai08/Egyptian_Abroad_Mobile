@@ -24,16 +24,6 @@ class SecureStorageHelper {
     }
   }
 
-// save value "first_time" to show complete account or not
-
-  static Future<void> setIsFirstTime(bool value) async {
-    return await localWrite("first_time", value);
-  }
-
-  static Future<bool> checkIsFirstTime() async {
-    return bool.parse(await localRead("first_time") ?? "true");
-  }
-
   ///-----------------
   /// user language
   ///------------------

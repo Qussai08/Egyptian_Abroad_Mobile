@@ -16,6 +16,7 @@ abstract class Routes {
   static const FORGETPASSWORD = _Paths.FORGETPASSWORD;
   static const URLSERVICE = _Paths.URLSERVICE;
   static const COMPLETEACCOUNTWORK = _Paths.COMPLETEACCOUNTWORK;
+  static const ViewACCOUNT = _Paths.ViewACCOUNT;
 }
 
 abstract class _Paths {
@@ -33,4 +34,5 @@ abstract class _Paths {
   static const FORGETPASSWORD = '/forgetPassword';
   static const URLSERVICE = '/urlService';
   static const COMPLETEACCOUNTWORK = '/completeAccountWork';
+  static const ViewACCOUNT = '/viewAccount';
 }

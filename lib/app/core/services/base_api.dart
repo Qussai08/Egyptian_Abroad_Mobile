@@ -47,9 +47,20 @@ class BaseApi {
       headers.addAll(extraHeaders);
     }
 
+    print("queryParameters ${queryParameters.toString()}");
+    print("headers ${headers.toString()}");
+
     // try {
     _response = await _dio.get(endPoint,
         options: Options(headers: headers), queryParameters: queryParameters);
+
+    print("get res data ${_response.data.toString()}");
+    print("get res _response ${_response.toString()}");
+    print("get res _response statusCode ${_response.statusCode}");
+    print("get res _response headers ${_response.headers.toString()}");
+    print("get res _response extra ${_response.extra.toString()}");
+    print(
+        "get res _response requestOptions ${_response.requestOptions.toString()}");
 
     return AppResponse(
         statusCode: _response.statusCode,
