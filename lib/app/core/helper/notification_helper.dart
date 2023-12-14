@@ -4,6 +4,9 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 
+import '../data/providers/auth_provider.dart';
+import '../services/auth_service.dart';
+
 class NotificationHelper {
   final FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
 
@@ -88,9 +91,37 @@ class NotificationHelper {
     }
   }
 
+  Future<void> registerFCMToken() async {
+    AuthService authService = Get.find();
+    AuthProvider authProvider = Get.find();
+    final fcmToken = await FirebaseMessaging.instance.getToken();
+    if ((authService.fcmToken?.isEmpty ?? true) ||
+        authService.fcmToken != fcmToken) {
+      await authProvider.registerFCMToken(fcmToken!).then((value) {
+        if (value.body ?? false) {
+          authService.setFCMToken(fcmToken);
+        }
+      }, onError: (err) {});
+    }
+    FirebaseMessaging.instance.onTokenRefresh.listen((fcmToken) async {
+      await authProvider.registerFCMToken(fcmToken).then((value) {
+        if (value.body ?? false) {
+          authService.setFCMToken(fcmToken);
+        }
+      }, onError: (err) {});
+    }).onError((err) {
+      // print(err);
+    });
+  }
+
 // Subscribe to topic
   Future<void> subscribeToTopic(String topic) async {
     await firebaseMessaging.subscribeToTopic(topic);
+  }
+
+  // Unsubscribe from topic
+  Future<void> unSubscribeFromTopic(String topic) async {
+    await firebaseMessaging.unsubscribeFromTopic(topic);
   }
 
 // Delete token

@@ -1,10 +1,12 @@
 import 'package:get/get.dart';
 import '../constants/storage_constants.dart';
+import '../helper/notification_helper.dart';
 import 'storage_service.dart';
 import 'package:jwt_decode/jwt_decode.dart';
 
 class AuthService extends GetxService {
   final storageService = Get.find<StorageService>();
+  var notificationHelper = NotificationHelper();
 
   RxBool isAuthUser = false.obs;
 
@@ -79,7 +81,10 @@ class AuthService extends GetxService {
     }
   }
 
-  void logout() {
+  Future<void> logout() async {
+    await notificationHelper.unSubscribeFromTopic('broadcast');
+    await notificationHelper.deleteFCMToken();
+
     storageService.removeAll();
     isAuthUser(false);
   }

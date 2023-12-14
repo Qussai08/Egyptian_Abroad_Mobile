@@ -25,7 +25,7 @@ Future<void> main() async {
 
   var notificationHelper = NotificationHelper();
   await notificationHelper.initialize();
-  await notificationHelper.subscribeToTopic('broadcast');
+  // await notificationHelper.subscribeToTopic('broadcast');
 
   runApp(const MyApp());
 }

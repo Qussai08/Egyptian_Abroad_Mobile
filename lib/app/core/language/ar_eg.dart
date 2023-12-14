@@ -90,4 +90,6 @@ Map<String, String> ar = {
   AppStrings.invalidOldPassword: 'كلمة المرور الحالية غير صحيحة',
   AppStrings.successPasswordChange: 'تم تعديل كلمة المرور بنجاح',
   AppStrings.more: 'المزيد',
+  AppStrings.evening: 'مساء',
+  AppStrings.morning: 'صباحا',
 };

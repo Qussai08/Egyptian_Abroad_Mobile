@@ -59,8 +59,9 @@ class NotificationCardWidget extends StatelessWidget {
                           ),
 
                           const SizedBox(width: 8),
+
                           Text(
-                            '21 ديسمبر 2023 7:00 صباحا',
+                            notification.sentDate ?? '',
                             textAlign: TextAlign.right,
                             style: Styles.getMediumStyle(
                               color: Colors.black.withOpacity(0.5),

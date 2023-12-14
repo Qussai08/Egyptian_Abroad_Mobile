@@ -7,6 +7,8 @@ abstract class AppStrings {
   static const cancel = 'cancel';
   static const backToApp = 'backToApp';
   static const noResult = 'noResult';
+  static const evening = 'evening';
+  static const morning = 'morning';
 
   static const logOut = 'logOut';
 

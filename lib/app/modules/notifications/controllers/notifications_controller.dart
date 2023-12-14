@@ -16,12 +16,6 @@ class NotificationsController extends GetxController
     loadNotifications(); // Call the method to load notifications when the controller is initialized
   }
 
-  @override
-  void onReady() {
-    super.onReady();
-    print('NotificationsController is ready');
-  }
-
   // Method to simulate loading notifications
   Future<void> loadNotifications() async {
     notificationsList.clear();
@@ -40,41 +34,6 @@ class NotificationsController extends GetxController
     }, onError: (error) {
       change(null, status: RxStatus.error('$error'));
     });
-
-    // notificationsList.addAll([
-    //   NotificationModel(
-    //     title: 'عنوان الإشعار الأول' * 10,
-    //     message: 'هذا هو وصف إشعار لإعلان النظام' * 10,
-    //     time: '7:00 صباحاً',
-    //   ),
-    //   NotificationModel(
-    //     title: 'عنوان الإشعار الثاني',
-    //     message: 'محتوى الإشعار يمكن أن يكون هنا',
-    //     time: '8:15 صباحاً',
-    //   ),
-    //   NotificationModel(
-    //     title: 'عنوان الإشعار الثالث',
-    //     message: 'محتوى الإشعار يمكن أن يكون هنا',
-    //     time: '9:00 صباحاً',
-    //   ),
-    //   NotificationModel(
-    //     title: 'عنوان الإشعار الرابع',
-    //     message: 'محتوى الإشعار يمكن أن يكون هنا',
-    //     time: '10:00 صباحاً',
-    //   ),
-    //   NotificationModel(
-    //     title: 'عنوان الإشعار الخامس',
-    //     message: 'محتوى الإشعار يمكن أن يكون هنا',
-    //     time: '11:00 صباحاً',
-    //   ),
-    //   NotificationModel(
-    //     title: 'عنوان الإشعار السادس',
-    //     message: 'محتوى الإشعار يمكن أن يكون هنا',
-    //     time: '12:00 مساءً',
-    //   ),
-
-    //   // Add as many notifications as you want
-    // ]);
   }
 
   Future<void> retry() async {
