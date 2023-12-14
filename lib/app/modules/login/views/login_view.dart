@@ -13,7 +13,6 @@ import 'package:egyptians_abroad/app/core/helper/validators.dart';
 
 import 'package:get/get.dart';
 
-import '../../../core/custom_widgets/change_language_button_widget.dart';
 import '../../../core/theme/app_images.dart';
 import '../controllers/login_controller.dart';
 
@@ -46,12 +45,12 @@ class _LoginViewState extends State<LoginView> with ValidationMixin {
               child: Column(
                 children: [
                   // change language widget
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      ChangeLangButtonWidget(),
-                    ],
-                  ),
+                  // const Row(
+                  //   mainAxisAlignment: MainAxisAlignment.end,
+                  //   children: [
+                  //     ChangeLangButtonWidget(),
+                  //   ],
+                  // ),
 
                   // End
 

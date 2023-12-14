@@ -1,23 +1,19 @@
 import 'package:egyptians_abroad/app/core/custom_widgets/custom_button.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/custom_textfield.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/network_indecator.dart';
-import 'package:egyptians_abroad/app/core/custom_widgets/textfield_container.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/textfield_title.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/title_text.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/validation_rule_widget.dart';
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
-import 'package:egyptians_abroad/app/core/helper/localization_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
-import 'package:egyptians_abroad/app/core/theme/styles.dart';
+import 'package:egyptians_abroad/app/core/theme/app_images.dart';
 import 'package:egyptians_abroad/app/modules/login/controllers/login_controller.dart';
 import 'package:egyptians_abroad/app/modules/registration/controllers/registration_controller.dart';
-import 'package:egyptians_abroad/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:egyptians_abroad/app/core/helper/validators.dart';
 
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 
 class SetPasswordView extends StatefulWidget {
   const SetPasswordView({super.key});
@@ -32,14 +28,14 @@ class _SetPasswordViewState extends State<SetPasswordView>
       TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
+  final controller = Get.put(RegistrationController());
+  final loginController = Get.put(LoginController());
+
   ValueNotifier<List<bool>> _validationsValues =
       ValueNotifier([false, false, false, false]);
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(RegistrationController());
-    final loginController = Get.put(LoginController());
-
     return NetworkIndicator(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -53,7 +49,7 @@ class _SetPasswordViewState extends State<SetPasswordView>
               child: Column(
                 children: [
                   Image.asset(
-                    'assets/images/lock.png',
+                    AppImages.lock,
                     width: 56.w,
                     fit: BoxFit.fitWidth,
                   ),

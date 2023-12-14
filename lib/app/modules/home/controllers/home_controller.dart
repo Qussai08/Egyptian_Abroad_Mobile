@@ -1,4 +1,5 @@
 import 'package:egyptians_abroad/app/core/services/app_response.dart';
+import 'package:egyptians_abroad/app/core/services/auth_service.dart';
 import 'package:egyptians_abroad/app/core/services/models/category.dart';
 import 'package:egyptians_abroad/app/core/services/repositories/categories_repository.dart';
 import 'package:get/get.dart';
@@ -160,5 +161,9 @@ class HomeController extends GetxController {
       _showMore = true;
     }
     update();
+  }
+
+  onLogout() {
+    AuthService().logout();
   }
 }

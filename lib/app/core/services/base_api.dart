@@ -8,13 +8,16 @@ import 'dart:async';
 
 import 'package:dio/dio.dart';
 import 'package:egyptians_abroad/app/core/constants/globals.dart';
-import 'package:egyptians_abroad/app/core/helper/app_helper.dart';
 import 'package:egyptians_abroad/app/core/services/app_response.dart';
+import 'package:get/instance_manager.dart';
 
 import '../helper/localization_helper.dart';
+import 'auth_service.dart';
 
 // The class must be Abtract
 class BaseApi {
+  final authService = Get.find<AuthService>();
+
   // Instance of the package to perform network calls
   static late Dio _dio;
 
@@ -28,7 +31,7 @@ class BaseApi {
   }
 
   // Perform GET request
-  static Future<AppResponse> getRequest(
+  Future<AppResponse> getRequest(
       {required String endPoint,
       Map<String, dynamic>? extraHeaders,
       Map<String, dynamic>? queryParameters,
@@ -37,11 +40,9 @@ class BaseApi {
     Map<String, dynamic> headers = {
       "languageId": LocalizationHelper.isArabic() ? 1 : 2
     };
-    var token = AppHelper.token;
-    if (token != null) {
-      token = "Bearer $token";
-      headers["Authorization"] = token;
-    }
+    String token = authService.accessToken ?? '';
+    token = "Bearer $token";
+    headers["Authorization"] = token;
 
     if (extraHeaders != null) {
       headers.addAll(extraHeaders);
@@ -61,7 +62,7 @@ class BaseApi {
   }
 
   // Perform POST request
-  static Future<AppResponse> postRequest({
+  Future<AppResponse> postRequest({
     body,
     Map<String, dynamic>? options,
     required String endPoint,
@@ -70,8 +71,8 @@ class BaseApi {
     if (options != null) {
       headers = options['headers'];
     }
-    var token = AppHelper.token;
-    if (token != null) token = "Bearer $token";
+    String token = authService.accessToken ?? '';
+    token = "Bearer $token";
     var options0 = Options(headers: {
       "Authorization": token,
     });

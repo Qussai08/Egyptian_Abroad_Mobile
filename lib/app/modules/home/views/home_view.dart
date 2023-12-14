@@ -3,10 +3,8 @@ import 'package:egyptians_abroad/app/core/custom_widgets/custom_textfield.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/dropdown_list_selector.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/grid_widget.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/no_data_widget.dart';
-import 'package:egyptians_abroad/app/core/custom_widgets/textfield_container.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/title_text.dart';
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
-import 'package:egyptians_abroad/app/core/helper/localization_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:egyptians_abroad/app/modules/home/views/widgets/home_appbar.dart';
@@ -68,6 +66,17 @@ class _HomeViewState extends State<HomeView> {
                               DropdownMenuItem(
                                 value: Routes.EditACCOUNT,
                                 child: Text(AppStrings.editAccountInfos.tr),
+                              ),
+                              DropdownMenuItem(
+                                value: Routes.CHANGEPASSWORD,
+                                child: Text(AppStrings.changePassword.tr),
+                              ),
+                              DropdownMenuItem(
+                                onTap: () {
+                                  controller.onLogout();
+                                },
+                                value: Routes.LOGIN,
+                                child: Text(AppStrings.logOut.tr),
                               ),
                             ],
                             // value: residence,

@@ -62,6 +62,10 @@ class Styles {
   static const black = Color.fromRGBO(0, 0, 0, 1);
   static const lightBlack = Color.fromRGBO(0, 0, 0, 0.5);
   static const mediumBlack = Color(0xff121212);
+  static const blackShadow = Color(0x261C4C9F);
+  static const black2 = Color(0xFF3E3C3C);
+  static const black3 = Color(0xFF4F4F4F);
+
   // static const blueBlack = Color(0xFF201D61);
 
   static const blueBlack = Color(0xff1C304C);

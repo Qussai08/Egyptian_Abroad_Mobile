@@ -4,7 +4,6 @@ import 'package:egyptians_abroad/app/core/services/app_response.dart';
 import 'package:egyptians_abroad/app/core/services/repositories/user_repository.dart';
 import 'package:egyptians_abroad/app/modules/login/controllers/login_controller.dart';
 import 'package:egyptians_abroad/app/modules/registration/data/models/country.dart';
-import 'package:egyptians_abroad/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:otp_text_field/otp_text_field.dart';
@@ -14,16 +13,6 @@ class RegistrationController extends GetxController {
   void onInit() {
     super.onInit();
     getCountriesList();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
   }
 
   final TextEditingController nameTxtController = TextEditingController();

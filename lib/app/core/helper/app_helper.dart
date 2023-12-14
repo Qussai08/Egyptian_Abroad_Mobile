@@ -7,9 +7,9 @@ enum ServiceType {
 }
 
 class AppHelper {
-  static String? _token;
-  static String? get token => _token;
-  static setToken(String? token) => _token = token;
+  // static String? _token;
+  // static String? get token => _token;
+  // static setToken(String? token) => _token = token;
 
   static ServiceType getServiceType(String serviceId) {
     if (serviceId == "1") {
