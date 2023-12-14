@@ -85,6 +85,7 @@ abstract class AppStrings {
   static const home = 'home';
   static const notifications = 'notifications';
   static const aboutApp = 'aboutApp';
+  static const more = 'more';
 
   // home screen
   static const hello = 'hello';
@@ -109,7 +110,7 @@ abstract class AppStrings {
   static const confirmNewPassword = 'confirmNewPassword';
   static const invalidOldPassword = 'invalidOldPassword';
   static const successPasswordChange = 'successPasswordChange';
-  
+
   // forget password screen
   static const forgetPasswordTitle = 'forgetPasswordTitle';
   static const sendVerificationCode = 'sendVerificationCode';

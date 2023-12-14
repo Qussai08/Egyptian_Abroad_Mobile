@@ -89,4 +89,5 @@ Map<String, String> ar = {
   AppStrings.confirmNewPassword: 'تأكيد كلمة المرور الجديدة',
   AppStrings.invalidOldPassword: 'كلمة المرور الحالية غير صحيحة',
   AppStrings.successPasswordChange: 'تم تعديل كلمة المرور بنجاح',
+  AppStrings.more: 'المزيد',
 };

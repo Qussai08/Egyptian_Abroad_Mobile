@@ -20,6 +20,7 @@ abstract class Routes {
   static const CHANGEPASSWORD = _Paths.CHANGEPASSWORD;
 
   static const NOTIFICATIONS = _Paths.NOTIFICATIONS;
+  static const MORE = _Paths.MORE;
 }
 
 abstract class _Paths {
@@ -38,4 +39,5 @@ abstract class _Paths {
   static const URLSERVICE = '/urlService';
   static const NOTIFICATIONS = '/notifications';
   static const CHANGEPASSWORD = '/changePassword';
+  static const MORE = '/more';
 }

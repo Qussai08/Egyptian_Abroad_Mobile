@@ -1,6 +1,6 @@
 import 'package:egyptians_abroad/app/modules/home/views/home_view.dart';
+import 'package:egyptians_abroad/app/modules/more/views/more_view.dart';
 import 'package:egyptians_abroad/app/modules/notifications/views/notifications_view.dart';
-import 'package:egyptians_abroad/app/modules/start_service/views/url_service_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,7 +14,8 @@ class BottomNavigationController extends GetxController {
   final List<Widget> _navigationScreens = [
     const HomeView(),
     const NotificationsView(),
-    const URLServiceView()
+    const MoreView(),
+    // const URLServiceView()
   ];
 
   void changeTabIndex(int index) {

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/request/request.dart';
 
 import '../constants/globals.dart';
+import '../helper/localization_helper.dart';
 import 'auth_service.dart';
 
 class ApiService extends GetConnect {
@@ -17,6 +18,9 @@ class ApiService extends GetConnect {
     httpClient.maxAuthRetries = 3;
     httpClient.addRequestModifier((Request request) async {
       if (await isNetworkAvailable()) {
+        // add lang id in header
+        request.headers['languageId'] = request.headers['languageId'] =
+            '${LocalizationHelper.isArabic() ? 1 : 2}';
         if (!request.url.path.contains('AccessToken')) {
           if (authService.isAuth) {
             if (isTokenExpired()) {

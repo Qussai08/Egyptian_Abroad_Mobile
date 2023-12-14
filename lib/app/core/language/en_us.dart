@@ -89,4 +89,5 @@ Map<String, String> en = {
   AppStrings.confirmNewPassword: 'Confirm New Password',
   AppStrings.invalidOldPassword: 'Invalid Old Password',
   AppStrings.successPasswordChange: 'Password has been changed successfully',
+  AppStrings.more: 'More',
 };

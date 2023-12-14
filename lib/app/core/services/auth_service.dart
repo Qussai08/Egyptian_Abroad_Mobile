@@ -7,7 +7,6 @@ class AuthService extends GetxService {
   final storageService = Get.find<StorageService>();
 
   RxBool isAuthUser = false.obs;
-  // Rxn<UserModel> user = Rxn();
 
   bool get isAuth {
     String? accessToken = storageService.getData(StorageConstants.kToken);
@@ -24,7 +23,7 @@ class AuthService extends GetxService {
   }
 
   void setFCMToken(String fcmToken) {
-    storageService.setData(StorageConstants.fcmToken, fcmToken);
+    storageService.setData(StorageConstants.kFcmToken, fcmToken);
   }
 
   void setExpireAt(int expireAt) {
@@ -61,7 +60,7 @@ class AuthService extends GetxService {
   }
 
   String? get fcmToken {
-    return storageService.getData(StorageConstants.fcmToken);
+    return storageService.getData(StorageConstants.kFcmToken);
   }
 
   DateTime? get expireAt {

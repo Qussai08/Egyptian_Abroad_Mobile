@@ -5,4 +5,5 @@ class Constants {
   static const String testingUrl = "http://10.3.20.230:7200/App/";
   static const String baseUrl = devUrl;
   static const String getNotificationHistory = "GetNotificationHistory";
+  static const String registerFCMTokenPath = 'AssignFCMToken';
 }
