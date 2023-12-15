@@ -18,8 +18,8 @@ class NotificationHelper {
     await firebaseMessaging.requestPermission();
 
     // print token
-    String? token = await firebaseMessaging.getToken();
-    print('Token: $token');
+    String? fcmToken = await getFcmToken();
+    print('FCMToken: $fcmToken');
 
     const AndroidInitializationSettings initializationSettingsAndroid =
         AndroidInitializationSettings('@mipmap/ic_launcher');
@@ -94,10 +94,10 @@ class NotificationHelper {
   Future<void> registerFCMToken() async {
     AuthService authService = Get.find();
     AuthProvider authProvider = Get.find();
-    final fcmToken = await FirebaseMessaging.instance.getToken();
+    final fcmToken = await getFcmToken() ?? '';
     if ((authService.fcmToken?.isEmpty ?? true) ||
         authService.fcmToken != fcmToken) {
-      await authProvider.registerFCMToken(fcmToken!).then((value) {
+      await authProvider.registerFCMToken(fcmToken).then((value) {
         if (value.body ?? false) {
           authService.setFCMToken(fcmToken);
         }
@@ -112,6 +112,16 @@ class NotificationHelper {
     }).onError((err) {
       // print(err);
     });
+  }
+
+  // Get token form firebase for android and ios
+  Future<String?> getFcmToken() async {
+    if (GetPlatform.isAndroid) {
+      return await firebaseMessaging.getToken();
+    } else if (GetPlatform.isIOS) {
+      return await firebaseMessaging.getAPNSToken();
+    }
+    return null;
   }
 
 // Subscribe to topic
