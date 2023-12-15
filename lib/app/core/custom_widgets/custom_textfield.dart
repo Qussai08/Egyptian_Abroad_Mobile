@@ -1,3 +1,4 @@
+import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/helper/localization_helper.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:flutter/material.dart';
@@ -119,11 +120,10 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                 ? TextAlign.right
                 : TextAlign.left,
             style: widget.textStyle ??
-                TextStyle(
-                    color: Colors.black,
-                    fontSize: widget.isPassword! ? 16 : 14,
-                    fontWeight: FontWeight.w400,
-                    fontFamily: 'baloo'),
+                Styles.getRegularStyle(
+                    color: Styles.black,
+                    fontSize:
+                        widget.isPassword! ? fixDpiFont(16) : fixDpiFont(14)),
             decoration: InputDecoration(
               filled: true,
               labelText: widget.labelText,
@@ -204,12 +204,10 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                           width: 25,
                         ),
               hintText: widget.hintTxt,
-              errorStyle: const TextStyle(
-                  fontSize: 11.0,
-                  color: Colors.red,
-                  fontWeight: FontWeight.w400,
-                  fontFamily: 'baloo'),
-              counterStyle: TextStyle(
+              errorStyle: Styles.getRegularStyle(
+                  color: Styles.red, fontSize: fixDpiFont(11)),
+
+              counterStyle: const TextStyle(
                 height: 0,
                 fontSize: 9,
               ),
@@ -223,13 +221,10 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                             : Color(0xffEBEBEB)),
                   ),
               hintStyle: widget.hintStyle ??
-                  TextStyle(
+                  Styles.getRegularStyle(
                       color: _focusNode.hasFocus
                           ? Styles.primaryColor
-                          : Styles.grey_300,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                      fontFamily: 'baloo'),
+                          : Styles.grey_300),
             ),
             onTapOutside: (event) {
               FocusManager.instance.primaryFocus?.unfocus();

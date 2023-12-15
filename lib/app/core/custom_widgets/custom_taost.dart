@@ -53,23 +53,14 @@ GetSnackBar buildCustomToast(
         ),
         Text(
           toastTitle,
-          style: TextStyle(
-              color: Colors.white,
-              fontSize: fixDpiFont(18),
-              fontWeight: FontWeight.w700,
-              fontFamily: "baloo"),
+          style: Styles.getBoldStyle(
+              color: Styles.white, fontSize: fixDpiFont(18)),
         ),
       ],
     ),
-    messageText: Text(
-      toastMsg,
-      textAlign: TextAlign.center,
-      style: TextStyle(
-          color: Colors.white,
-          fontSize: fixDpiFont(14),
-          fontWeight: FontWeight.w400,
-          fontFamily: "baloo"),
-    ),
+    messageText: Text(toastMsg,
+        textAlign: TextAlign.center,
+        style: Styles.getRegularStyle(color: Styles.white)),
     duration: const Duration(seconds: 2),
     backgroundColor: toastType.backgroundColor,
     borderRadius: 16,

@@ -71,11 +71,7 @@ class _DropDownListSelectorState extends State<DropDownListSelector> {
                 size: 20,
                 color: Styles.dropdownArrowGrey,
               ),
-              style: const TextStyle(
-                fontSize: 14,
-                color: Colors.black,
-                fontWeight: FontWeight.w400,
-              ),
+              style: Styles.getRegularStyle(color: Styles.black),
               items: widget.dropDownList,
               onChanged: widget.onChangeFunc,
               value: widget.value,

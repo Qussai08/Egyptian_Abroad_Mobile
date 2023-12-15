@@ -6,6 +6,7 @@ import 'package:egyptians_abroad/app/core/custom_widgets/textfield_title.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/title_text.dart';
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
+import 'package:egyptians_abroad/app/core/theme/app_images.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:egyptians_abroad/app/modules/registration/controllers/registration_controller.dart';
 import 'package:egyptians_abroad/app/routes/app_pages.dart';
@@ -54,7 +55,7 @@ class _RegistrationViewState extends State<RegistrationView>
                               height: 48.h,
                             ),
                             Image.asset(
-                              'assets/images/user.png',
+                              AppImages.user,
                               width: 56.w,
                               fit: BoxFit.fitWidth,
                             ),
@@ -143,11 +144,9 @@ class _RegistrationViewState extends State<RegistrationView>
                               children: [
                                 Text(
                                   AppStrings.alreadyHaveAccount.tr,
-                                  style: const TextStyle(
-                                      fontSize: 11,
-                                      fontWeight: FontWeight.w400,
+                                  style: Styles.getRegularStyle(
                                       color: Styles.lightBlack,
-                                      fontFamily: 'baloo'),
+                                      fontSize: fixDpiFont(11)),
                                 ),
                                 GestureDetector(
                                   onTap: () {
@@ -155,12 +154,9 @@ class _RegistrationViewState extends State<RegistrationView>
                                   },
                                   child: Text(
                                     AppStrings.logIn.tr,
-                                    style: const TextStyle(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w600,
+                                    style: Styles.getSemiBoldStyle(
                                         color: Styles.primaryColor,
-                                        decoration: TextDecoration.underline,
-                                        fontFamily: 'baloo'),
+                                        fontSize: fixDpiFont(12)),
                                   ),
                                 )
                               ],

@@ -21,11 +21,7 @@ class TitleText extends StatelessWidget {
     return Text(
       title,
       style: titleTextStyle ??
-          TextStyle(
-              color: color,
-              fontSize: fontSize,
-              fontWeight: FontWeight.w700,
-              fontFamily: 'baloo'),
+          Styles.getBoldStyle(color: color, fontSize: fontSize),
     );
   }
 }

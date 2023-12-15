@@ -5,7 +5,9 @@ import 'package:egyptians_abroad/app/core/custom_widgets/dropdown_list_selector.
 import 'package:egyptians_abroad/app/core/custom_widgets/network_indecator.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/textfield_title.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/title_text.dart';
+import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
+import 'package:egyptians_abroad/app/core/theme/app_images.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:egyptians_abroad/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
@@ -69,7 +71,7 @@ class _EditAccountViewState extends State<EditAccountView>
                       height: 26.h,
                     ),
                     Image.asset(
-                      'assets/images/user.png',
+                      AppImages.user,
                       width: 56.w,
                       fit: BoxFit.fitWidth,
                     ),
@@ -421,11 +423,9 @@ class _EditAccountViewState extends State<EditAccountView>
                       children: [
                         Text(
                           AppStrings.alreadyHaveAccount.tr,
-                          style: const TextStyle(
-                              fontSize: 11,
-                              fontWeight: FontWeight.w400,
+                          style: Styles.getRegularStyle(
                               color: Styles.lightBlack,
-                              fontFamily: 'baloo'),
+                              fontSize: fixDpiFont(11)),
                         ),
                         GestureDetector(
                           onTap: () {
@@ -433,12 +433,10 @@ class _EditAccountViewState extends State<EditAccountView>
                           },
                           child: Text(
                             AppStrings.logIn.tr,
-                            style: const TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w600,
-                                color: Styles.primaryColor,
-                                decoration: TextDecoration.underline,
-                                fontFamily: 'baloo'),
+                            style: Styles.getSemiBoldStyle(
+                                    color: Styles.primaryColor,
+                                    fontSize: fixDpiFont(12))
+                                .copyWith(decoration: TextDecoration.underline),
                           ),
                         )
                       ],

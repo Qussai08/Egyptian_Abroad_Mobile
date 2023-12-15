@@ -1,3 +1,4 @@
+import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -39,15 +40,10 @@ class TextFieldTitle extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Text(
-            title,
-            style: titleTextStyle ??
-                TextStyle(
-                    color: const Color.fromRGBO(0, 0, 0, 0.5),
-                    fontSize: fontSize,
-                    fontWeight: FontWeight.w400,
-                    fontFamily: 'baloo'),
-          ),
+          Text(title,
+              style: titleTextStyle ??
+                  Styles.getRegularStyle(
+                      color: Styles.lightBlack, fontSize: fontSize)),
           hasSubTitle
               ? Text(subTitle,
                   style: TextStyle(

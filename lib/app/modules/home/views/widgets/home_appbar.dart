@@ -1,5 +1,6 @@
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
+import 'package:egyptians_abroad/app/core/theme/app_images.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -30,7 +31,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 5.0),
             child: Image.asset(
-              'assets/images/travel.png',
+              AppImages.travel,
               width: 40.h,
               height: 40.h,
               fit: BoxFit.fitHeight,
@@ -39,11 +40,8 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
           Text(
             " ${AppStrings.appName.tr}",
             textAlign: TextAlign.center,
-            style: TextStyle(
-                fontSize: fixDpiFont(16),
-                fontWeight: FontWeight.w700,
-                color: Styles.black,
-                fontFamily: 'baloo'),
+            style: Styles.getBoldStyle(
+                color: Styles.black, fontSize: fixDpiFont(16)),
           ),
         ],
       ),

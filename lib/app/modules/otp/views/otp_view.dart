@@ -5,6 +5,7 @@ import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/helper/validators.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/core/services/app_response.dart';
+import 'package:egyptians_abroad/app/core/theme/app_images.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:egyptians_abroad/app/modules/registration/controllers/registration_controller.dart';
 import 'package:egyptians_abroad/app/routes/app_pages.dart';
@@ -46,7 +47,7 @@ class _OtpViewState extends State<OtpView> with ValidationMixin {
               child: Column(
                 children: [
                   Image.asset(
-                    'assets/images/Fingerprint2.png',
+                    AppImages.fingerPrint,
                     width: 333.w,
                     fit: BoxFit.fitWidth,
                   ),
@@ -62,11 +63,8 @@ class _OtpViewState extends State<OtpView> with ValidationMixin {
                   ),
                   TitleText(
                     title: AppStrings.otpDiscription.tr,
-                    titleTextStyle: const TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                        color: Styles.lightBlack,
-                        fontFamily: 'baloo'),
+                    titleTextStyle:
+                        Styles.getRegularStyle(color: Styles.lightBlack),
                   ),
                   SizedBox(
                     height: 25.h,
@@ -136,11 +134,9 @@ class _OtpViewState extends State<OtpView> with ValidationMixin {
                                       ),
                                       Text(
                                         AppStrings.sorry.tr,
-                                        style: TextStyle(
-                                            color: Colors.red,
-                                            fontSize: fixDpiFont(18),
-                                            fontWeight: FontWeight.w700,
-                                            fontFamily: "baloo"),
+                                        style: Styles.getBoldStyle(
+                                            color: Styles.red,
+                                            fontSize: fixDpiFont(18)),
                                       ),
                                     ],
                                   ),
@@ -149,11 +145,8 @@ class _OtpViewState extends State<OtpView> with ValidationMixin {
                                 Text(
                                   'كود التحقق غير صحيح',
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      color: Colors.red,
-                                      fontSize: fixDpiFont(14),
-                                      fontWeight: FontWeight.w400,
-                                      fontFamily: "baloo"),
+                                  style:
+                                      Styles.getRegularStyle(color: Styles.red),
                                 ),
                             ],
                           );
