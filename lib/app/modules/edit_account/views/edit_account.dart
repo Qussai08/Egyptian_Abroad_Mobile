@@ -8,6 +8,7 @@ import 'package:egyptians_abroad/app/core/custom_widgets/title_text.dart';
 import 'package:egyptians_abroad/app/core/helper/app_helper.dart';
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
+import 'package:egyptians_abroad/app/core/services/models/user_profile.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:egyptians_abroad/app/modules/registration/controllers/registration_controller.dart';
 import 'package:egyptians_abroad/app/routes/app_pages.dart';
@@ -99,7 +100,7 @@ class _EditAccountViewState extends State<EditAccountView>
                       : Column(
                           children: [
                             SizedBox(
-                              height: 26.h,
+                              height: 12.h,
                             ),
                             Image.asset(
                               'assets/images/user.png',
@@ -134,8 +135,6 @@ class _EditAccountViewState extends State<EditAccountView>
                                 title: AppStrings.nationalID.tr,
                                 hasSubTitle: false),
                             CustomTextFormField(
-                              validationFunc: (val) => validateNationalID(
-                                  _nationalIDTxtController.text),
                               inputData: TextInputType.number,
                               maxLength: null,
                               fillColor: Color(0xffF8F8F8),
@@ -150,8 +149,6 @@ class _EditAccountViewState extends State<EditAccountView>
                               hasSubTitle: false,
                             ),
                             CustomTextFormField(
-                              validationFunc: (val) =>
-                                  validateUserEmail(_emailTxtController.text),
                               inputData: TextInputType.emailAddress,
                               fillColor: Color(0xffF8F8F8),
                               enabled: false,
@@ -164,9 +161,8 @@ class _EditAccountViewState extends State<EditAccountView>
                                 title: AppStrings.egPassportNum.tr,
                                 hasSubTitle: false),
                             CustomTextFormField(
-                              validationFunc: (val) {
-                                // validateName(_nameTxtController.text)
-                              },
+                              validationFunc: (val) => validateEgyptionPassport(
+                                  _egPassportNumTxtController.text),
                               inputData: TextInputType.text,
                               enabled: false,
                               controller: _egPassportNumTxtController,
@@ -214,75 +210,93 @@ class _EditAccountViewState extends State<EditAccountView>
                             ValueListenableBuilder<int?>(
                                 valueListenable: _residenceType,
                                 builder: (_, residenceTP, __) {
-                                  return DropDownListSelector(
-                                    hintFontSize: 14,
-                                    hintFontWeight: FontWeight.w400,
-                                    dropDownList: widget.isEdit!
-                                        ? controller.residenceTypeList
-                                            .map((e) => DropdownMenuItem(
-                                                  child: Text(e.name),
-                                                  value: e.id,
-                                                ))
-                                            .toList()
-                                        : [],
-                                    value: residenceTP,
-                                    hint: !widget.isEdit!
-                                        ? controller.residenceTypeList
+                                  return Column(
+                                    children: [
+                                      DropDownListSelector(
+                                        hintFontSize: 14,
+                                        hintFontWeight: FontWeight.w400,
+                                        dropDownList: widget.isEdit!
+                                            ? controller.residenceTypeList
+                                                .map((e) => DropdownMenuItem(
+                                                      child: Text(e.name),
+                                                      value: e.id,
+                                                    ))
+                                                .toList()
+                                            : [],
+                                        value: residenceTP,
+                                        hint: !widget.isEdit!
+                                            ? controller.residenceTypeList
+                                                        .firstWhereOrNull(
+                                                            (element) =>
+                                                                element.id ==
+                                                                residenceTP) !=
+                                                    null
+                                                ? controller.residenceTypeList
                                                     .firstWhereOrNull(
                                                         (element) =>
                                                             element.id ==
-                                                            residenceTP) !=
-                                                null
-                                            ? controller.residenceTypeList
-                                                .firstWhereOrNull((element) =>
-                                                    element.id == residenceTP)!
-                                                .name
-                                            : ""
-                                        : "",
-                                    blackHint: true,
-                                    onChangeFunc: (val) {
-                                      _residenceType.value = val;
-                                    },
+                                                            residenceTP)!
+                                                    .name
+                                                : ""
+                                            : "",
+                                        blackHint: true,
+                                        onChangeFunc: (val) {
+                                          _residenceType.value = val;
+                                        },
+                                      ),
+                                      SizedBox(
+                                        height: 16.h,
+                                      ),
+                                      if (residenceTP == 1)
+                                        TextFieldTitle(
+                                            title:
+                                                AppStrings.residenceNumber.tr,
+                                            hasSubTitle: false),
+                                      if (residenceTP == 1)
+                                        CustomTextFormField(
+                                          enabled: widget.isEdit,
+                                          controller:
+                                              _residenceNumTxtController,
+                                          inputData: TextInputType.text,
+                                          validationFunc: (val) =>
+                                              maxLenghtValidation(
+                                                  _residenceNumTxtController
+                                                      .text,
+                                                  20),
+                                        ),
+                                      if (residenceTP == 1)
+                                        SizedBox(
+                                          height: 16.h,
+                                        ),
+                                      if (residenceTP == 2)
+                                        TextFieldTitle(
+                                            title:
+                                                AppStrings.forignPassportNum.tr,
+                                            hasSubTitle: false),
+                                      if (residenceTP == 2)
+                                        CustomTextFormField(
+                                          enabled: widget.isEdit,
+                                          controller:
+                                              _forignPassportNumTxtController,
+                                          inputData: TextInputType.text,
+                                          validationFunc: (val) =>
+                                              maxLenghtValidation(
+                                                  _forignPassportNumTxtController
+                                                      .text,
+                                                  20),
+                                        ),
+                                      if (residenceTP == 2)
+                                        SizedBox(
+                                          height: 16.h,
+                                        ),
+                                    ],
                                   );
                                 }),
-                            SizedBox(
-                              height: 16.h,
-                            ),
-                            TextFieldTitle(
-                                title: AppStrings.residenceNumber.tr,
-                                hasSubTitle: false),
-                            CustomTextFormField(
-                              // validationFunc: (val) =>
-                              //     validateUserEmail(_emailTxtController.text),
-                              inputData: TextInputType.text,
-                              enabled: widget.isEdit,
-                              controller: _residenceNumTxtController,
-                            ),
-                            SizedBox(
-                              height: 16.h,
-                            ),
-                            TextFieldTitle(
-                                title: AppStrings.forignPassportNum.tr,
-                                hasSubTitle: false),
-                            CustomTextFormField(
-                                // validationFunc: (val) =>
-                                //     validateUserEmail(_emailTxtController.text),
-                                inputData: TextInputType.text,
-                                enabled: widget.isEdit,
-                                controller: _forignPassportNumTxtController),
-                            SizedBox(
-                              height: 16.h,
-                            ),
-                            //-------------------
-                            SizedBox(
-                              height: 16.h,
-                            ),
+
                             TextFieldTitle(
                                 title: AppStrings.residenceAddress.tr,
                                 hasSubTitle: false),
                             CustomTextFormField(
-                                // validationFunc: (val) =>
-                                //     validateUserEmail(_emailTxtController.text),
                                 inputData: TextInputType.text,
                                 maxLength: null,
                                 enabled: widget.isEdit,
@@ -334,12 +348,12 @@ class _EditAccountViewState extends State<EditAccountView>
                                 title: AppStrings.jobTitle.tr,
                                 hasSubTitle: false),
                             CustomTextFormField(
-                              // validationFunc: (val) =>
-                              //     validateUserEmail(_emailTxtController.text),
                               inputData: TextInputType.text,
                               maxLength: null,
                               enabled: widget.isEdit,
                               controller: _jobTitleTxtController,
+                              validationFunc: (val) => maxLenghtValidation(
+                                  _jobTitleTxtController.text, 100),
                             ),
                             SizedBox(
                               height: 16.h,
@@ -349,12 +363,12 @@ class _EditAccountViewState extends State<EditAccountView>
                               hasSubTitle: false,
                             ),
                             CustomTextFormField(
-                              // validationFunc: (val) =>
-                              //     validateUserEmail(_emailTxtController.text),
                               inputData: TextInputType.phone,
                               maxLength: null,
                               enabled: widget.isEdit,
                               controller: _egptionPhoneNumTxtController,
+                              validationFunc: (val) => validateEgyptionPhoneNum(
+                                  _egptionPhoneNumTxtController.text),
                             ),
                             SizedBox(
                               height: 16.h,
@@ -374,8 +388,8 @@ class _EditAccountViewState extends State<EditAccountView>
                               ],
                             ),
                             CustomTextFormField(
-                              // validationFunc: (val) =>
-                              //     validateUserEmail(_emailTxtController.text),
+                              validationFunc: (val) => maxLenghtValidation(
+                                  _forignPhoneNumTxtController.text, 15),
                               inputData: TextInputType.phone,
                               maxLength: null,
                               enabled: widget.isEdit,
@@ -388,8 +402,6 @@ class _EditAccountViewState extends State<EditAccountView>
                                 title: AppStrings.msgsAddress.tr,
                                 hasSubTitle: false),
                             CustomTextFormField(
-                              // validationFunc: (val) =>
-                              //     validateUserEmail(_emailTxtController.text),
                               inputData: TextInputType.text,
                               maxLength: null,
                               enabled: widget.isEdit,
@@ -400,14 +412,37 @@ class _EditAccountViewState extends State<EditAccountView>
                               height: 32.h,
                             ),
                             CustomButton(
-                              text: AppStrings.save.tr,
-                              type: ButtonType.primary,
+                              // TODO : translate
+                              text: "حفظ",
+                              type: widget.isEdit!
+                                  ? ButtonType.primary
+                                  : ButtonType.disabled,
                               width: 300.w,
                               height: 50,
-                              onPressed: () {
-                                // if (_formKey.currentState!.validate()) {
-
-                                // }
+                              onPressed: () async {
+                                if (widget.isEdit! &&
+                                    _formKey.currentState!.validate()) {
+                                  await controller.editAccount(UserProfile(
+                                      name: _nameTxtController.text,
+                                      residencyCountryId:
+                                          _residenceCountry.value,
+                                      residencyTypeId: _residenceType.value,
+                                      residencyNo:
+                                          _residenceNumTxtController.text,
+                                      foreignPassportNo:
+                                          _forignPassportNumTxtController.text,
+                                      residencyAddress:
+                                          _residenceAddressTxtController.text,
+                                      jobTitle: _jobTitleTxtController.text,
+                                      egyptionMobile:
+                                          _egptionPhoneNumTxtController.text,
+                                      foreignMobile:
+                                          _forignPhoneNumTxtController.text,
+                                      messagingAddress:
+                                          _msgsAddressTxtController.text,
+                                      passportNo:
+                                          _egPassportNumTxtController.text));
+                                }
                               },
                             ),
                             SizedBox(

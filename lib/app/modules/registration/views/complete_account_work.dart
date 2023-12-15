@@ -205,7 +205,7 @@ class _CompleteAccountWorkViewState extends State<CompleteAccountWorkView>
 
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
-                            await registrationController.editAccount(
+                            await registrationController.completeAccount(
                                 isEdit: false);
                           }
                         },

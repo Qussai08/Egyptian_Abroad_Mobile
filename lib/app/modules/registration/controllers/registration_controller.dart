@@ -1,9 +1,12 @@
 import 'package:egyptians_abroad/app/core/custom_widgets/custom_taost.dart';
 import 'package:egyptians_abroad/app/core/helper/app_helper.dart';
+import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/helper/secure_storage_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/core/services/app_response.dart';
+import 'package:egyptians_abroad/app/core/services/models/user_profile.dart';
 import 'package:egyptians_abroad/app/core/services/repositories/user_repository.dart';
+import 'package:egyptians_abroad/app/modules/home/controllers/home_controller.dart';
 import 'package:egyptians_abroad/app/modules/login/controllers/login_controller.dart';
 import 'package:egyptians_abroad/app/modules/registration/data/models/country.dart';
 import 'package:egyptians_abroad/app/modules/registration/data/models/job_category.dart';
@@ -224,7 +227,7 @@ class RegistrationController extends GetxController {
     }
   }
 
-  Future<void> editAccount({bool? isEdit = true}) async {
+  Future<void> completeAccount({bool? isEdit = true}) async {
     Map<String, dynamic> reqBody = {
       "jobCategoryID": jobCategory.value,
       "residencyCountryId": residenceCountry.value,
@@ -245,7 +248,7 @@ class RegistrationController extends GetxController {
         // TODO : make it dynamic
         queryParameters: {"guid": AppHelper.userId});
     if (response.status) {
-      print("edit account res -> ${response.data}");
+      print("complete account res -> ${response.data}");
       Future.delayed(const Duration(seconds: 3), () async {
         Get.offAllNamed(Routes.BOTTOMNAVIGATION);
       });
@@ -258,6 +261,61 @@ class RegistrationController extends GetxController {
           toastType: ToastType.success,
         ),
       );
+    }
+  }
+
+  Future<void> editAccount(UserProfile profile) async {
+    Map<String, dynamic> reqBody = {
+      "name": profile.name,
+      "jobCategoryID": profile.jobCategoryID,
+      "residencyCountryId": profile.residencyCountryId,
+      "residencyTypeId": profile.residencyTypeId,
+      "residencyNo": profile.residencyNo,
+      "foreignPassportNo": profile.foreignPassportNo,
+      "residencyAddress": profile.residencyAddress,
+      "jobTitle": profile.jobTitle,
+      "egyptionMobile": profile.egyptionMobile,
+      "foreignMobile": profile.foreignMobile,
+      "messagingAddress": profile.messagingAddress,
+      "passportNo": profile.passportNo
+    };
+
+    AppResponse response = await UserRepository().editAccount(reqBody,
+        // TODO : make it dynamic
+        queryParameters: {"guid": AppHelper.userId});
+    if (response.status) {
+      print("edit account res -> ${response.data}");
+
+      Get.defaultDialog(
+          title: "",
+          contentPadding: EdgeInsets.all(0),
+          content: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.check_circle,
+                color: const Color(0xff00B25D),
+                size: fixDpiHeight(21),
+              ),
+              SizedBox(
+                height: fixDpiHeight(20),
+              ),
+              Text(
+                // TODO : translate
+                "تم تعديل بيانات الحساب بنجاح",
+                style: TextStyle(
+                    fontFamily: "baloo",
+                    fontSize: fixDpiFont(14),
+                    fontWeight: FontWeight.w400),
+              ),
+              SizedBox(
+                height: fixDpiHeight(20),
+              ),
+            ],
+          ));
+
+      var controller = Get.put(HomeController());
+      controller.getUserProfile();
     }
   }
 }

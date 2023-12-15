@@ -125,7 +125,7 @@ mixin ValidationMixin<T extends StatefulWidget> on State<T> {
   }
 
   String? maxLenghtValidation(String text, int max) {
-    if (text.length > max) {
+    if (text.isNotEmpty && text.length > max) {
       return "${AppStrings.maxlength.tr}$max ${AppStrings.char.tr}";
     } else {
       return null;
