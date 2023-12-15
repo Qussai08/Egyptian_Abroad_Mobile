@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 
+import '../../../core/custom_widgets/change_language_button_widget.dart';
 import '../../../core/custom_widgets/title_text.dart';
 import '../../../core/helper/dpi_helper.dart';
 import '../../../core/language/app_string.dart';
@@ -99,16 +100,21 @@ class MoreListView extends GetView<MoreController> {
                   fontSize: fixDpiFont(16)),
             ),
           ),
-          const Divider(color: Styles.grey_200),
-          InkWell(
-            onTap: () {},
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 26.0),
-              height: 71.h,
-              child: ContactElementWidget(
-                  imageAsset: AppImages.languageIcon,
-                  text: AppStrings.language.tr,
-                  fontSize: fixDpiFont(16)),
+          // const Divider(color: Styles.grey_200),
+          Visibility(
+            visible: false, // hide change language button
+            child: InkWell(
+              onTap: () {
+                // const ChangeLangButtonWidget();
+              },
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 26.0),
+                height: 71.h,
+                child: ContactElementWidget(
+                    imageAsset: AppImages.languageIcon,
+                    text: AppStrings.language.tr,
+                    fontSize: fixDpiFont(16)),
+              ),
             ),
           ),
           const Divider(color: Styles.grey_200),
