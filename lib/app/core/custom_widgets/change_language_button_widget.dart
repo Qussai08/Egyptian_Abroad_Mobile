@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 // import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import '../helper/localization_helper.dart';
 import '../theme/styles.dart';
-import 'change_language_sheet_widget.dart';
 
 class ChangeLangButtonWidget extends StatelessWidget {
   const ChangeLangButtonWidget({
@@ -26,7 +24,7 @@ class ChangeLangButtonWidget extends StatelessWidget {
           gradient: const LinearGradient(
             begin: Alignment(0.00, -1.00),
             end: Alignment(0, 1),
-            colors: [Color(0xFF438AE7), Color(0xFF5E57FD)],
+            colors: [Styles.primaryColor, Color(0xFF5E57FD)],
           ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(28),

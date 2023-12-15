@@ -23,6 +23,10 @@ class NotificationsController extends GetxController
     await notificationsProvider.getNotificationHistory().then((value) {
       if (value.isSuccess) {
         if (value.body != null) {
+          if (value.body!.isEmpty) {
+            change(null, status: RxStatus.empty());
+            return;
+          }
           notificationsList.addAll(value.body ?? []);
           change(value.body, status: RxStatus.success());
         } else {

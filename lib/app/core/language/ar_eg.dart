@@ -7,7 +7,7 @@ Map<String, String> ar = {
       'تقدر توصل لكل الخدمات اللى انت محتاجها من اى مكان بكل سهولة',
   AppStrings.noInternet: 'لا يوجد اتصال',
   AppStrings.checkRouter: 'تفقد الراوتر الخاص بك',
-  AppStrings.tryAgain: 'وحاول مرة آخري',
+  AppStrings.tryAgain: 'حاول مرة آخري',
   AppStrings.logIn: 'تسجيل الدخول',
   AppStrings.logOut: 'تسجيل الخروج',
   AppStrings.nationalID: 'الرقم القومي',

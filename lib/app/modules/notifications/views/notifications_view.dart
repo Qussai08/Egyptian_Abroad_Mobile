@@ -49,9 +49,9 @@ class NotificationsView extends GetView<NotificationsController> {
                   // space
                   SizedBox(height: fixDpiHeight(15)),
                   Obx(() {
-                    if (controller.notificationsList.isEmpty) {
-                      return const Center(child: Text('No notifications'));
-                    }
+                    // if (controller.notificationsList.isEmpty) {
+                    //   return const Center(child: Text('No notifications'));
+                    // }
                     return ListView.builder(
                       physics: const ClampingScrollPhysics(),
                       shrinkWrap: true,
