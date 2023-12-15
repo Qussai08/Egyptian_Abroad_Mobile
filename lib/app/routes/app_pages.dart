@@ -3,6 +3,8 @@ import 'package:egyptians_abroad/app/modules/bottom_navigation.dart/views/bottom
 import 'package:egyptians_abroad/app/modules/edit_account/bindings/edit_account_binding.dart';
 import 'package:egyptians_abroad/app/modules/edit_account/views/edit_account.dart';
 import 'package:egyptians_abroad/app/modules/forget_password/bindings/forget_password_bindings.dart';
+import 'package:egyptians_abroad/app/modules/forget_password/views/forget_pass_otp.dart';
+import 'package:egyptians_abroad/app/modules/forget_password/views/forget_pass_set_pass.dart';
 import 'package:egyptians_abroad/app/modules/forget_password/views/forget_password_view.dart';
 import 'package:egyptians_abroad/app/modules/registration/views/complete_account_residence.dart';
 import 'package:egyptians_abroad/app/modules/registration/views/complete_account_work.dart';
@@ -93,6 +95,16 @@ class AppPages {
       name: _Paths.URLSERVICE,
       page: () => URLServiceView(),
       binding: StartServiceBinding(),
+    ),
+    GetPage(
+      name: _Paths.FORGETPASSOTP,
+      page: () => ForgetPassOtpView(),
+      binding: ForgetPasswordBinding(),
+    ),
+    GetPage(
+      name: _Paths.FORGETPASSSETPASS,
+      page: () => ForgetPassSetPasswordView(),
+      binding: ForgetPasswordBinding(),
     ),
     GetPage(
         name: _Paths.BOTTOMNAVIGATION,

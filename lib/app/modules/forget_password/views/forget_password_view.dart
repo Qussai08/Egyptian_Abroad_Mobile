@@ -7,6 +7,7 @@ import 'package:egyptians_abroad/app/core/custom_widgets/title_text.dart';
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
+import 'package:egyptians_abroad/app/modules/forget_password/controllers/forget_password_controller.dart';
 import 'package:egyptians_abroad/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -25,12 +26,11 @@ class ForgetPasswordView extends StatefulWidget {
 
 class _ForgetPasswordViewState extends State<ForgetPasswordView>
     with ValidationMixin {
-  final TextEditingController _emailTxtController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    // final controller = Get.put(LoginController());
+    final controller = Get.put(ForgetPasswordController());
 
     return NetworkIndicator(
       child: SafeArea(
@@ -60,9 +60,9 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView>
                   ),
                   TextFieldTitle(title: AppStrings.email.tr),
                   CustomTextFormField(
-                    controller: _emailTxtController,
+                    controller: controller.emailTxtController,
                     validationFunc: (val) =>
-                        validateUserEmail(_emailTxtController.text),
+                        validateUserEmail(controller.emailTxtController.text),
                     inputData: TextInputType.emailAddress,
                   ),
                   const Spacer(),
@@ -73,11 +73,28 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView>
                     width: 300.w,
                     height: 50,
                     onPressed: () async {
-                      if (!_formKey.currentState!.validate()) return;
+                      if (_formKey.currentState!.validate()) {
+                        await controller.verifyMail();
+                      }
                     },
                   ),
                   SizedBox(
-                    height: 35.h,
+                    height: 16.h,
+                  ),
+                  CustomButton(
+                    // TODO : translate
+                    text: "الغاء",
+                    icon: Icons.arrow_forward,
+
+                    type: ButtonType.secondary,
+                    width: 300.w,
+                    height: 50,
+                    onPressed: () {
+                      Get.back();
+                    },
+                  ),
+                  SizedBox(
+                    height: 20.h,
                   ),
                 ],
               ),

@@ -75,4 +75,13 @@ class UserRepository {
         queryParameters: queryParameters,
         jsonResponse: false);
   }
+
+  Future<AppResponse> forgetPasswordReq(Map<String, dynamic> body,
+      {Map<String, dynamic>? queryParameters}) async {
+    return await BaseApi.postRequest(
+        endPoint: "ForgetUserPassword",
+        body: jsonEncode(body),
+        options: queryParameters,
+        jsonResponse: true);
+  }
 }

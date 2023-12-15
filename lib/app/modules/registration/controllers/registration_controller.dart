@@ -1,3 +1,4 @@
+import 'package:egyptians_abroad/app/core/custom_widgets/custom_dialog.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/custom_taost.dart';
 import 'package:egyptians_abroad/app/core/helper/app_helper.dart';
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
@@ -286,33 +287,10 @@ class RegistrationController extends GetxController {
     if (response.status) {
       print("edit account res -> ${response.data}");
 
-      Get.defaultDialog(
-          title: "",
-          contentPadding: EdgeInsets.all(0),
-          content: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Icon(
-                Icons.check_circle,
-                color: const Color(0xff00B25D),
-                size: fixDpiHeight(21),
-              ),
-              SizedBox(
-                height: fixDpiHeight(20),
-              ),
-              Text(
-                // TODO : translate
-                "تم تعديل بيانات الحساب بنجاح",
-                style: TextStyle(
-                    fontFamily: "baloo",
-                    fontSize: fixDpiFont(14),
-                    fontWeight: FontWeight.w400),
-              ),
-              SizedBox(
-                height: fixDpiHeight(20),
-              ),
-            ],
-          ));
+      buildCustomDialog(
+          // TODO : translate
+          dialogMsg: "تم تعديل بيانات الحساب بنجاح",
+          dialogType: DialogType.success);
 
       var controller = Get.put(HomeController());
       controller.getUserProfile();
