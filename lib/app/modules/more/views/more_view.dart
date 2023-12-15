@@ -1,4 +1,9 @@
+import 'package:egyptians_abroad/app/core/theme/app_images.dart';
+import 'package:egyptians_abroad/app/modules/more/views/about_us_view.dart';
+import 'package:egyptians_abroad/app/modules/more/views/contact_us_view.dart';
+import 'package:egyptians_abroad/app/modules/more/views/widgets/column_element_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 
@@ -10,6 +15,17 @@ import '../controllers/more_controller.dart';
 
 class MoreView extends GetView<MoreController> {
   const MoreView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Obx(() => Container(child: controller.content()));
+  }
+}
+
+class MoreListView extends GetView<MoreController> {
+  const MoreListView({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -40,31 +56,62 @@ class MoreView extends GetView<MoreController> {
           ),
         ),
       ),
-      body: ListView(
+      body: Column(
         children: [
-          // space
-          SizedBox(height: fixDpiHeight(15)),
-          // Obx(() {
-          //   if (controller.notificationsList.isEmpty) {
-          //     return const Center(child: Text('No notifications'));
-          //   }
-          //   return ListView.builder(
-          //     physics: const ClampingScrollPhysics(),
-          //     shrinkWrap: true,
-          //     itemCount: controller.notificationsList.length,
-          //     itemBuilder: (context, index) {
-          //       final notification = controller.notificationsList[index];
-
-          //       return Padding(
-          //         padding: EdgeInsets.symmetric(horizontal: fixDpiWidth(16)),
-          //         child: NotificationCardWidget(notification: notification),
-          //       );
-          //     },
-          //   );
-          // }),
-
-          // space
-          SizedBox(height: fixDpiHeight(28)),
+          InkWell(
+            onTap: () {},
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 26.0),
+              height: 73.h,
+              child: ContactElementWidget(
+                  imageAsset: AppImages.profileIcon,
+                  text: AppStrings.profile.tr,
+                  fontSize: fixDpiFont(16)),
+            ),
+          ),
+          const Divider(color: Styles.grey_200),
+          InkWell(
+            onTap: () {
+              controller.changeView(const AboutUsView());
+            },
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 26.0),
+              height: 71.h,
+              child: ContactElementWidget(
+                  imageAsset: AppImages.logo,
+                  imageScale: 12,
+                  text: AppStrings.aboutUs.tr,
+                  fontSize: fixDpiFont(16)),
+            ),
+          ),
+          const Divider(color: Styles.grey_200),
+          InkWell(
+            onTap: () {
+              controller.changeView(const ContactUsView());
+            },
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 26.0),
+              height: 71.h,
+              child: ContactElementWidget(
+                  imageAsset: AppImages.callIcon,
+                  imageScale: 2,
+                  text: AppStrings.contactUs.tr,
+                  fontSize: fixDpiFont(16)),
+            ),
+          ),
+          const Divider(color: Styles.grey_200),
+          InkWell(
+            onTap: () {},
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 26.0),
+              height: 71.h,
+              child: ContactElementWidget(
+                  imageAsset: AppImages.languageIcon,
+                  text: AppStrings.language.tr,
+                  fontSize: fixDpiFont(16)),
+            ),
+          ),
+          const Divider(color: Styles.grey_200),
         ],
       ),
     );

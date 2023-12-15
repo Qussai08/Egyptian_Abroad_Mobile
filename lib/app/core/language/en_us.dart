@@ -92,4 +92,9 @@ Map<String, String> en = {
   AppStrings.more: 'More',
   AppStrings.evening: 'PM',
   AppStrings.morning: 'AM',
+  AppStrings.profile: 'Profile',
+  AppStrings.aboutUs: 'About Us',
+  AppStrings.contactUs: 'Contact Us',
+  AppStrings.language: 'Language (English)',
+  AppStrings.callUsVia: 'Contact us via:'
 };

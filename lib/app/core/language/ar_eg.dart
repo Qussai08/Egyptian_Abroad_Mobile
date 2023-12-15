@@ -92,4 +92,9 @@ Map<String, String> ar = {
   AppStrings.more: 'المزيد',
   AppStrings.evening: 'مساء',
   AppStrings.morning: 'صباحا',
+  AppStrings.profile: 'الملف التعريفي',
+  AppStrings.aboutUs: 'من نحن؟',
+  AppStrings.contactUs: 'اتصل بنا',
+  AppStrings.language: 'اللغة (العربية)',
+  AppStrings.callUsVia: 'تواصل معنا عبر الوسائل التالية:',
 };
