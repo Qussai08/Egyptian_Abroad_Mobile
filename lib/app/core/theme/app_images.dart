@@ -12,11 +12,17 @@ class AppImages {
 
   static const lock = 'assets/images/lock.png';
 
+  static const profileIcon = 'assets/icons/profile_icon.png';
+  static const logo = 'assets/images/logo.png';
+  static const mediumLogo = 'assets/images/medium_logo.png';
+  static const callIcon = 'assets/icons/call_icon.png';
+  static const languageIcon = 'assets/icons/language_icon.png';
+  static const facebookIcon = 'assets/icons/facebook_icon.png';
+  static const gmailIcon = 'assets/icons/gmail_icon.png';
+
   static const checkIcon = 'assets/icons/icon-check.png';
   static const backIcon = 'assets/icons/back-icon.png';
   static const maleIcon = 'assets/icons/male.png';
   static const user = 'assets/images/user.png';
   static const fingerPrint = 'assets/images/Fingerprint2.png';
-
-  static const logo = 'assets/images/logo.png';
 }

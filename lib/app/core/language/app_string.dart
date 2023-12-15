@@ -9,7 +9,7 @@ abstract class AppStrings {
   static const noResult = 'noResult';
   static const evening = 'evening';
   static const morning = 'morning';
-
+  static const profile = 'profile';
   static const logOut = 'logOut';
 
   // no internet screen
@@ -119,4 +119,10 @@ abstract class AppStrings {
 
   // Service content screen
   static const continueStr = 'continueStr';
+
+  //more screen
+  static const aboutUs = 'aboutUs';
+  static const contactUs = 'contactUs';
+  static const language = 'language';
+  static const callUsVia = 'callUsVia';
 }
