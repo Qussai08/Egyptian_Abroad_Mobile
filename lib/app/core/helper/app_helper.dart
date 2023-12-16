@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:egyptians_abroad/app/core/services/models/user_profile.dart';
 import 'package:flutter/material.dart';
 
 enum ServiceType {
@@ -7,9 +10,15 @@ enum ServiceType {
 }
 
 class AppHelper {
-  // static String? _token;
-  // static String? get token => _token;
-  // static setToken(String? token) => _token = token;
+  static String? _token;
+  static String? get token => _token;
+  static setToken(String? token) {
+    _token = token;
+    getUserIdFromToken(_token!);
+  }
+
+  static UserProfile? userProfile;
+  static setUserProfile(UserProfile? profile) => userProfile = profile;
 
   static ServiceType getServiceType(String serviceId) {
     if (serviceId == "1") {
@@ -23,6 +32,16 @@ class AppHelper {
 
   static Future<void> launchUrl(String url) async {
     await launchUrl(url);
+  }
+
+  static String? userId;
+
+  static String getUserIdFromToken(String code) {
+    String normalizedSource = base64Url.normalize(code.split(".")[1]);
+    String id =
+        json.decode(utf8.decode(base64Url.decode(normalizedSource)))['sub'];
+    userId = id;
+    return id;
   }
 }
 

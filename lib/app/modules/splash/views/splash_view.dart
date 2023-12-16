@@ -1,5 +1,11 @@
+import 'dart:async';
+import 'dart:convert';
+
+import 'package:egyptians_abroad/app/core/helper/secure_storage_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
+import 'package:egyptians_abroad/app/modules/login/controllers/login_controller.dart';
+import 'package:egyptians_abroad/app/modules/login/views/login_view.dart';
 import 'package:egyptians_abroad/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -20,6 +26,7 @@ class _SplashViewState extends State<SplashView> {
   void didChangeDependencies() {
     super.didChangeDependencies();
 
+    WidgetsBinding.instance.addPostFrameCallback((_) {});
     // _delay();
   }
 
@@ -34,6 +41,22 @@ class _SplashViewState extends State<SplashView> {
   @override
   Widget build(BuildContext context) {
     Get.put(SplashController());
+    Timer(const Duration(seconds: 3), () async {
+      var userData = await SecureStorageHelper.localRead('user');
+      print("userData ${userData}");
+      if (userData != null) {
+        var json = jsonDecode(userData);
+        final controller = Get.put(LoginController());
+
+        controller.login(email: json['email'], pass: json['password']);
+      } else {
+        Get.offAllNamed(Routes.LOGIN);
+        // Navigator.pushAndRemoveUntil(
+        //     context,
+        //     MaterialPageRoute(builder: (context) => LoginView()),
+        //     (route) => false);
+      }
+    });
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -48,7 +71,7 @@ class _SplashViewState extends State<SplashView> {
             width: ScreenUtil().screenWidth,
             child: Container(
               alignment: Alignment.topLeft,
-              margin: EdgeInsets.only(left: 25.w),
+              margin: EdgeInsets.only(left: 25.w, top: 10),
               child: Column(
                 children: [
                   Image.asset(

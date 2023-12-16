@@ -1,41 +1,43 @@
 import 'package:egyptians_abroad/app/core/custom_widgets/custom_button.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/custom_textfield.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/network_indecator.dart';
+import 'package:egyptians_abroad/app/core/custom_widgets/textfield_container.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/textfield_title.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/title_text.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/validation_rule_widget.dart';
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
+import 'package:egyptians_abroad/app/core/helper/localization_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
-import 'package:egyptians_abroad/app/core/theme/app_images.dart';
+import 'package:egyptians_abroad/app/core/theme/styles.dart';
+import 'package:egyptians_abroad/app/modules/forget_password/controllers/forget_password_controller.dart';
 import 'package:egyptians_abroad/app/modules/login/controllers/login_controller.dart';
 import 'package:egyptians_abroad/app/modules/registration/controllers/registration_controller.dart';
+import 'package:egyptians_abroad/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:egyptians_abroad/app/core/helper/validators.dart';
 
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
-class SetPasswordView extends StatefulWidget {
-  const SetPasswordView({super.key});
+class ForgetPassSetPasswordView extends StatefulWidget {
+  const ForgetPassSetPasswordView({super.key});
 
   @override
-  State<SetPasswordView> createState() => _SetPasswordViewState();
+  State<ForgetPassSetPasswordView> createState() =>
+      _ForgetPassSetPasswordViewState();
 }
 
-class _SetPasswordViewState extends State<SetPasswordView>
+class _ForgetPassSetPasswordViewState extends State<ForgetPassSetPasswordView>
     with ValidationMixin {
-  final TextEditingController _confirmPassTxtController =
-      TextEditingController();
-
   final _formKey = GlobalKey<FormState>();
-  final controller = Get.put(RegistrationController());
-  final loginController = Get.put(LoginController());
-
   ValueNotifier<List<bool>> _validationsValues =
       ValueNotifier([false, false, false, false]);
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(ForgetPasswordController());
+
     return NetworkIndicator(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -49,27 +51,29 @@ class _SetPasswordViewState extends State<SetPasswordView>
               child: Column(
                 children: [
                   Image.asset(
-                    AppImages.lock,
+                    'assets/images/lock.png',
                     width: 56.w,
                     fit: BoxFit.fitWidth,
                   ),
                   SizedBox(
                     height: 16.h,
                   ),
-                  TitleText(title: AppStrings.setPasswordTitle.tr),
+                  // TODO : translate
+                  TitleText(title: "تعيين كلمة مرور جديدة"),
                   SizedBox(
                     height: 40.h,
                   ),
-                  TextFieldTitle(title: AppStrings.password.tr),
+                  // TODO : translate
+                  TextFieldTitle(title: "كلمة المرور الجديدة"),
                   CustomTextFormField(
-                    controller: controller.passwordTxtController,
+                    controller: controller.newPasswordTxtController,
                     validationFunc: (val) {
                       return _validationsValues.value.firstWhereOrNull(
                                   (element) => element == false) !=
                               null
                           ? AppStrings.passwordWeekValidation.tr
                           : validatePassword(
-                              controller.passwordTxtController.text);
+                              controller.newPasswordTxtController.text);
                     },
                     onChangedFunc: (val) {
                       _validationsValues.value = [
@@ -85,18 +89,21 @@ class _SetPasswordViewState extends State<SetPasswordView>
                   SizedBox(
                     height: 16.h,
                   ),
-                  TextFieldTitle(title: AppStrings.confirmPassword.tr),
+                  // TODO : translate
+                  TextFieldTitle(title: "تأكيد كلمة المرور الجديدة"),
                   CustomTextFormField(
-                    controller: _confirmPassTxtController,
-                    validationFunc: (val) =>
-                        _confirmPassTxtController.text.trim().isEmpty
-                            ? AppStrings.emptyValidation.tr
-                            : _validationsValues.value.firstWhereOrNull(
-                                        (element) => element == false) !=
-                                    null
-                                ? AppStrings.passwordWeekValidation.tr
-                                : validateConfirmPassword(
-                                    _confirmPassTxtController.text),
+                    controller: controller.confirmNewPassTxtController,
+                    validationFunc: (val) => controller
+                            .confirmNewPassTxtController.text
+                            .trim()
+                            .isEmpty
+                        ? AppStrings.emptyValidation.tr
+                        : _validationsValues.value.firstWhereOrNull(
+                                    (element) => element == false) !=
+                                null
+                            ? AppStrings.passwordWeekValidation.tr
+                            : validateConfirmPassword(
+                                controller.confirmNewPassTxtController.text),
                     inputData: TextInputType.text,
                     isPassword: true,
                   ),
@@ -135,10 +142,10 @@ class _SetPasswordViewState extends State<SetPasswordView>
                         );
                       }),
                   SizedBox(
-                    height: 90.h,
+                    height: 40.h,
                   ),
                   CustomButton(
-                    text: AppStrings.register.tr,
+                    text: AppStrings.confirm.tr,
                     icon: Icons.arrow_forward,
                     type: ButtonType.primary,
                     width: 300.w,
@@ -149,8 +156,23 @@ class _SetPasswordViewState extends State<SetPasswordView>
                           _validationsValues.value.firstWhereOrNull(
                                   (element) => element == false) ==
                               null) {
-                        await controller.register(loginController);
+                        await controller.forgetPass();
                       }
+                    },
+                  ),
+                  SizedBox(
+                    height: 16.h,
+                  ),
+                  CustomButton(
+                    // TODO : translate
+                    text: "الغاء",
+                    icon: Icons.arrow_forward,
+
+                    type: ButtonType.secondary,
+                    width: 300.w,
+                    height: 50,
+                    onPressed: () {
+                      Get.offAll(Routes.LOGIN);
                     },
                   ),
                 ],

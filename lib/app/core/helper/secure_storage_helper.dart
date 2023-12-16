@@ -6,7 +6,7 @@ class SecureStorageHelper {
   static Future<String?> localRead(String key) async {
     FlutterSecureStorage secureStorage = const FlutterSecureStorage();
     if (await secureStorage.containsKey(key: key)) {
-      return json.decode(secureStorage.read(key: key) as String);
+      return secureStorage.read(key: key);
     } else {
       return null;
     }
@@ -22,16 +22,6 @@ class SecureStorageHelper {
     if (await secureStorage.containsKey(key: key)) {
       await secureStorage.delete(key: key);
     }
-  }
-
-// save value "first_time" to show complete account or not
-
-  static Future<void> setIsFirstTime(bool value) async {
-    return await localWrite("first_time", value);
-  }
-
-  static Future<bool> checkIsFirstTime() async {
-    return bool.parse(await localRead("first_time") ?? "true");
   }
 
   ///-----------------

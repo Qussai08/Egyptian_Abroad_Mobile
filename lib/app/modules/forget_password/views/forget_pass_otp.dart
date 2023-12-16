@@ -6,6 +6,7 @@ import 'package:egyptians_abroad/app/core/helper/validators.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/core/services/app_response.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
+import 'package:egyptians_abroad/app/modules/forget_password/controllers/forget_password_controller.dart';
 import 'package:egyptians_abroad/app/modules/registration/controllers/registration_controller.dart';
 import 'package:egyptians_abroad/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
@@ -17,14 +18,15 @@ import 'package:intl/intl.dart' as intl;
 import 'package:otp_text_field/otp_text_field.dart';
 import 'package:otp_text_field/style.dart';
 
-class OtpView extends StatefulWidget {
-  const OtpView({super.key});
+class ForgetPassOtpView extends StatefulWidget {
+  const ForgetPassOtpView({super.key});
 
   @override
-  State<OtpView> createState() => _OtpViewState();
+  State<ForgetPassOtpView> createState() => _ForgetPassOtpViewState();
 }
 
-class _OtpViewState extends State<OtpView> with ValidationMixin {
+class _ForgetPassOtpViewState extends State<ForgetPassOtpView>
+    with ValidationMixin {
   final _formKey = GlobalKey<FormState>();
   final ValueNotifier<bool> _otpHasError = ValueNotifier(false);
   String? errormsg;
@@ -34,7 +36,7 @@ class _OtpViewState extends State<OtpView> with ValidationMixin {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(RegistrationController());
+    final controller = Get.put(ForgetPasswordController());
 
     return NetworkIndicator(
       child: Scaffold(
@@ -114,7 +116,7 @@ class _OtpViewState extends State<OtpView> with ValidationMixin {
                                     if (res.status &&
                                         res.data['data'] == true) {
                                       controller.otp = pin;
-                                      Get.toNamed(Routes.SETPASSWORD);
+                                      Get.toNamed(Routes.FORGETPASSSETPASS);
                                     } else {
                                       _otpHasError.value = true;
                                     }
@@ -242,6 +244,24 @@ class _OtpViewState extends State<OtpView> with ValidationMixin {
                                   setState(() {});
                               }
                             },
+                          ),
+                          SizedBox(
+                            height: 16.h,
+                          ),
+                          CustomButton(
+                            // TODO : translate
+                            text: "الغاء",
+                            icon: Icons.arrow_forward,
+
+                            type: ButtonType.secondary,
+                            width: 300.w,
+                            height: 50,
+                            onPressed: () {
+                              Get.offAll(Routes.LOGIN);
+                            },
+                          ),
+                          SizedBox(
+                            height: 20.h,
                           ),
                         ],
                       );
