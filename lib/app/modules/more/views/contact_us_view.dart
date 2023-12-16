@@ -4,7 +4,6 @@ import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/core/theme/app_images.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:egyptians_abroad/app/modules/more/controllers/more_controller.dart';
-import 'package:egyptians_abroad/app/modules/more/views/more_view.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -20,11 +19,7 @@ class ContactUsView extends GetView<MoreController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
-        onBack: () {
-          controller.changeView(const MoreListView());
-        },
-      ),
+      appBar: CustomAppBar(),
       body: Padding(
         padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 16.w),
         child: Column(
