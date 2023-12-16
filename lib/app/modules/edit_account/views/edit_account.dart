@@ -44,36 +44,38 @@ class _EditAccountViewState extends State<EditAccountView>
   }
 
   final TextEditingController _nameTxtController =
-      TextEditingController(text: AppHelper.userProfile!.name);
+      TextEditingController(text: AppHelper.userProfile?.name ?? "");
   final TextEditingController _nationalIDTxtController =
-      TextEditingController(text: AppHelper.userProfile!.nationalId);
+      TextEditingController(text: AppHelper.userProfile?.nationalId ?? "");
   final TextEditingController _emailTxtController =
-      TextEditingController(text: AppHelper.userProfile!.email);
+      TextEditingController(text: AppHelper.userProfile?.email ?? "");
   final TextEditingController _egPassportNumTxtController =
-      TextEditingController(text: AppHelper.userProfile!.passportNo);
+      TextEditingController(text: AppHelper.userProfile?.passportNo ?? "");
 
   final ValueNotifier<int?> _residenceCountry =
-      ValueNotifier(AppHelper.userProfile!.residencyCountryId);
+      ValueNotifier(AppHelper.userProfile?.residencyCountryId ?? 0);
   final ValueNotifier<int?> _residenceType =
-      ValueNotifier(AppHelper.userProfile!.residencyTypeId);
+      ValueNotifier(AppHelper.userProfile?.residencyTypeId ?? 0);
   final TextEditingController _residenceNumTxtController =
-      TextEditingController(text: AppHelper.userProfile!.residencyNo);
+      TextEditingController(text: AppHelper.userProfile?.residencyNo ?? "");
   final TextEditingController _forignPassportNumTxtController =
-      TextEditingController(text: AppHelper.userProfile!.foreignPassportNo);
+      TextEditingController(
+          text: AppHelper.userProfile?.foreignPassportNo ?? "");
 
   final TextEditingController _residenceAddressTxtController =
-      TextEditingController(text: AppHelper.userProfile!.residencyAddress);
+      TextEditingController(
+          text: AppHelper.userProfile?.residencyAddress ?? "");
   final ValueNotifier<int?> _jobCategory =
-      ValueNotifier(AppHelper.userProfile!.jobCategoryID);
+      ValueNotifier(AppHelper.userProfile?.jobCategoryID ?? 0);
 
   final TextEditingController _jobTitleTxtController =
-      TextEditingController(text: AppHelper.userProfile!.jobTitle);
+      TextEditingController(text: AppHelper.userProfile?.jobTitle ?? "");
   final TextEditingController _egptionPhoneNumTxtController =
-      TextEditingController(text: AppHelper.userProfile!.egyptionMobile);
+      TextEditingController(text: AppHelper.userProfile?.egyptionMobile ?? "");
   final TextEditingController _forignPhoneNumTxtController =
-      TextEditingController(text: AppHelper.userProfile!.foreignMobile);
-  final TextEditingController _msgsAddressTxtController =
-      TextEditingController(text: AppHelper.userProfile!.messagingAddress);
+      TextEditingController(text: AppHelper.userProfile?.foreignMobile ?? "");
+  final TextEditingController _msgsAddressTxtController = TextEditingController(
+      text: AppHelper.userProfile?.messagingAddress ?? "");
 
   final _formKey = GlobalKey<FormState>();
 

@@ -4,7 +4,9 @@ import 'package:egyptians_abroad/app/core/custom_widgets/dropdown_list_selector.
 import 'package:egyptians_abroad/app/core/custom_widgets/grid_widget.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/no_data_widget.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/title_text.dart';
+import 'package:egyptians_abroad/app/core/helper/app_helper.dart';
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
+import 'package:egyptians_abroad/app/core/helper/secure_storage_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:egyptians_abroad/app/modules/home/views/widgets/home_appbar.dart';
@@ -14,7 +16,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 
-import '../../../core/helper/app_helper.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -30,12 +31,17 @@ class HomeView extends GetView<HomeController> {
           physics: const NeverScrollableScrollPhysics(),
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 16.w),
-            child: Column(
-              children: [
-                Container(
-                  margin: EdgeInsets.symmetric(vertical: 15.h),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
+            child: homeContoller.userProfileLoading
+                ? SizedBox(
+                    height: fixDpiScreenHeight() * 0.8,
+                    width: fixDpiScreenWidth(),
+                    child: const Center(
+                      child: CircularProgressIndicator(
+                        color: Styles.primaryColor,
+                      ),
+                    ),
+                  )
+                : Column(
                     children: [
                       Container(
                         margin: EdgeInsets.symmetric(vertical: 15.h),
@@ -254,7 +260,7 @@ class HomeView extends GetView<HomeController> {
                                     : Column(
                                         children: [
                                           SizedBox(
-                                            height: controller.showMore
+                                            height: !controller.showMore
                                                 ? 425.h
                                                 : 385.h,
                                             child: GridView.builder(
@@ -308,9 +314,6 @@ class HomeView extends GetView<HomeController> {
                       )
                     ],
                   ),
-                ),
-              ],
-            ),
           ),
         ),
       ),
