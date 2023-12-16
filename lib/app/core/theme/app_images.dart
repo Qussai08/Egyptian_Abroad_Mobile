@@ -18,6 +18,7 @@ class AppImages {
   static const user = 'assets/images/user.png';
   static const fingerPrint = 'assets/images/Fingerprint2.png';
 
+  static const splash = 'assets/images/Splash.png';
   static const logo = 'assets/images/logo.png';
 
   static const profileIcon = 'assets/icons/profile_icon.png';

@@ -14,12 +14,12 @@ class SplashController extends GetxController {
     BaseApi.initializeDio();
     LocalizationHelper().changeLocale(
         Language.arabic); // TODO: Change this to the user's preferred language
-    // _startDelay();
+    _startDelay();
   }
 
-  // _startDelay() {
-  //   Future.delayed(const Duration(seconds: 3), _goNext);
-  // }
+  _startDelay() {
+    Future.delayed(const Duration(seconds: 3), _goNext);
+  }
 
   _goNext() async {
     if (!authService.isAuth) {

@@ -17,7 +17,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:otp_text_field/otp_text_field.dart';
 
+import '../../../core/services/auth_service.dart';
+
 class RegistrationController extends GetxController {
+  // Auth service
+  final AuthService authService = Get.find();
   @override
   void onInit() {
     super.onInit();
@@ -48,7 +52,9 @@ class RegistrationController extends GetxController {
     return response;
   }
 
-  Future<void> register(LoginController loginController) async {
+  Future<void> register() async {
+    // Login Controller
+    final LoginController loginController = Get.find();
     AppResponse response = await UserRepository().registerReq({
       "name": nameTxtController.text,
       "nationalId": nationalIDTxtController.text,
@@ -237,7 +243,7 @@ class RegistrationController extends GetxController {
     }
     AppResponse response = await UserRepository().editAccount(reqBody,
         // TODO : make it dynamic
-        queryParameters: {"guid": AppHelper.userId});
+        queryParameters: {"guid": authService.userID});
     if (response.status) {
       print("complete account res -> ${response.data}");
       Future.delayed(const Duration(seconds: 3), () async {
@@ -255,7 +261,7 @@ class RegistrationController extends GetxController {
     }
   }
 
-  Future<void> editAccount(UserProfile profile) async {
+  Future<void> editAccount(UserProfileModel profile) async {
     Map<String, dynamic> reqBody = {
       "name": profile.name,
       "jobCategoryID": profile.jobCategoryID,
@@ -273,7 +279,7 @@ class RegistrationController extends GetxController {
 
     AppResponse response = await UserRepository().editAccount(reqBody,
         // TODO : make it dynamic
-        queryParameters: {"guid": AppHelper.userId});
+        queryParameters: {"guid": authService.userID});
     if (response.status) {
       print("edit account res -> ${response.data}");
 

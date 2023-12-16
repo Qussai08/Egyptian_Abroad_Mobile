@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import '../constants/storage_constants.dart';
 import '../helper/notification_helper.dart';
+import '../helper/secure_storage_helper.dart';
 import 'storage_service.dart';
 import 'package:jwt_decode/jwt_decode.dart';
 
@@ -84,6 +85,9 @@ class AuthService extends GetxService {
   Future<void> logout() async {
     await notificationHelper.unSubscribeFromTopic('broadcast');
     await notificationHelper.deleteFCMToken();
+
+    // Remove user from secure storage
+    await SecureStorageHelper.localRemove('user');
 
     storageService.removeAll();
     isAuthUser(false);

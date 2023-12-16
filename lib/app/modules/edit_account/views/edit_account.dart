@@ -424,7 +424,7 @@ class _EditAccountViewState extends State<EditAccountView>
                               onPressed: () async {
                                 if (widget.isEdit! &&
                                     _formKey.currentState!.validate()) {
-                                  await controller.editAccount(UserProfile(
+                                  await controller.editAccount(UserProfileModel(
                                       name: _nameTxtController.text,
                                       residencyCountryId:
                                           _residenceCountry.value,

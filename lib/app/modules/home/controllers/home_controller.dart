@@ -1,32 +1,26 @@
-import 'dart:convert';
-
-import 'package:dio/dio.dart';
 import 'package:egyptians_abroad/app/core/helper/app_helper.dart';
-import 'package:egyptians_abroad/app/core/helper/localization_helper.dart';
 import 'package:egyptians_abroad/app/core/services/app_response.dart';
 import 'package:egyptians_abroad/app/core/services/auth_service.dart';
 import 'package:egyptians_abroad/app/core/services/models/category.dart';
 import 'package:egyptians_abroad/app/core/services/models/user_profile.dart';
 import 'package:egyptians_abroad/app/core/services/repositories/categories_repository.dart';
-import 'package:egyptians_abroad/app/core/services/repositories/user_repository.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../core/helper/localization_helper.dart';
+import '../../../core/services/repositories/user_repository.dart';
+
 class HomeController extends GetxController {
+  String keySearch = '';
+  final TextEditingController searchController = TextEditingController();
+
+  // Auth service
+  final AuthService authService = Get.find();
   @override
   void onInit() {
     super.onInit();
     getUserProfile();
     getCategoriesList();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
   }
 
   bool userProfileLoading = false;
@@ -37,17 +31,15 @@ class HomeController extends GetxController {
 
   Future<void> getUserProfile() async {
     setUserProfileLoading(true);
-    print("AppHelper.userId ${AppHelper.userId}");
-    print("AppHelper.token ${AppHelper.token}");
 
     AppResponse response = await UserRepository().viewAccountReq(
         // make it dynamic
         queryParameters: {
-          "Userid": AppHelper.userId,
+          "Userid": authService.userID,
           "languageId": LocalizationHelper.isArabic() ? 1 : 2
         });
     if (response.status) {
-      UserProfile userProfile = UserProfile.fromJson(response.data);
+      UserProfileModel userProfile = UserProfileModel.fromJson(response.data);
       print("user profile => ${response.data}");
       AppHelper.setUserProfile(userProfile);
     }
@@ -74,8 +66,6 @@ class HomeController extends GetxController {
     getCategoriesList();
     // if (notifiy) update();
   }
-
-  String get keySearch => _keySearch;
 
   Future<void> getCategoriesList({int? pageNo = 1, applyLoading = true}) async {
     if (applyLoading) _updateCategoriesLoading(true);

@@ -6,10 +6,8 @@ import 'package:egyptians_abroad/app/core/custom_widgets/no_data_widget.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/title_text.dart';
 import 'package:egyptians_abroad/app/core/helper/app_helper.dart';
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
-import 'package:egyptians_abroad/app/core/helper/localization_helper.dart';
 import 'package:egyptians_abroad/app/core/helper/secure_storage_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
-import 'package:egyptians_abroad/app/core/theme/app_images.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:egyptians_abroad/app/modules/home/views/widgets/home_appbar.dart';
 import 'package:egyptians_abroad/app/routes/app_pages.dart';
@@ -20,20 +18,11 @@ import 'package:get/get.dart';
 
 import '../controllers/home_controller.dart';
 
-class HomeView extends StatefulWidget {
+class HomeView extends GetView<HomeController> {
   const HomeView({super.key});
 
   @override
-  State<HomeView> createState() => _HomeViewState();
-}
-
-class _HomeViewState extends State<HomeView> {
-  String _keySearch = '';
-  final TextEditingController _searchController = TextEditingController();
-
-  @override
   Widget build(BuildContext context) {
-    final controller = Get.put(HomeController());
     return GetBuilder<HomeController>(
       builder: (homeContoller) => Scaffold(
         resizeToAvoidBottomInset: false,
@@ -84,39 +73,6 @@ class _HomeViewState extends State<HomeView> {
                                           Text(AppStrings.editAccountInfos.tr),
                                     ),
                                     DropdownMenuItem(
-                                      value: Routes.LOGIN,
-                                      child: Text(AppStrings.logout.tr),
-                                    ),
-                                  ],
-                                  // value: residence,
-                                  hint:
-                                      "${AppStrings.hello.tr} ${AppHelper.userProfile!.name ?? ''}!",
-
-                                  onChangeFunc: (val) async {
-                                    if (val == Routes.LOGIN) {
-                                      await SecureStorageHelper.localRemove(
-                                          'user');
-                                    }
-                                    Get.toNamed(val);
-                                    // _residenceCountry.value = val;
-                                  },
-                                ),
-                                DropDownListSelector(
-                                  decoration: const BoxDecoration(),
-                                  blackHint: true,
-                                  reverseArrowPosition: true,
-                                  dropDownList: <DropdownMenuItem>[
-                                    DropdownMenuItem(
-                                      value: Routes.EditACCOUNT,
-                                      child:
-                                          Text(AppStrings.viewAccountInfos.tr),
-                                    ),
-                                    DropdownMenuItem(
-                                      value: Routes.EditACCOUNT,
-                                      child:
-                                          Text(AppStrings.editAccountInfos.tr),
-                                    ),
-                                    DropdownMenuItem(
                                       value: Routes.CHANGEPASSWORD,
                                       child: Text(AppStrings.changePassword.tr),
                                     ),
@@ -129,12 +85,52 @@ class _HomeViewState extends State<HomeView> {
                                     ),
                                   ],
                                   // value: residence,
-                                  hint: "!${AppStrings.hello.tr} احمد ",
-                                  onChangeFunc: (val) {
+                                  hint:
+                                      "${AppStrings.hello.tr} ${AppHelper.userProfile!.name ?? ''}!",
+
+                                  onChangeFunc: (val) async {
+                                    // if (val == Routes.LOGIN) {
+                                    //   await SecureStorageHelper.localRemove(
+                                    //       'user');
+                                    // }
                                     Get.toNamed(val);
                                     // _residenceCountry.value = val;
                                   },
                                 ),
+                                // DropDownListSelector(
+                                //   decoration: const BoxDecoration(),
+                                //   blackHint: true,
+                                //   reverseArrowPosition: true,
+                                //   dropDownList: <DropdownMenuItem>[
+                                //     DropdownMenuItem(
+                                //       value: Routes.EditACCOUNT,
+                                //       child:
+                                //           Text(AppStrings.viewAccountInfos.tr),
+                                //     ),
+                                //     DropdownMenuItem(
+                                //       value: Routes.EditACCOUNT,
+                                //       child:
+                                //           Text(AppStrings.editAccountInfos.tr),
+                                //     ),
+                                //     DropdownMenuItem(
+                                //       value: Routes.CHANGEPASSWORD,
+                                //       child: Text(AppStrings.changePassword.tr),
+                                //     ),
+                                //     DropdownMenuItem(
+                                //       onTap: () {
+                                //         controller.onLogout();
+                                //       },
+                                //       value: Routes.LOGIN,
+                                //       child: Text(AppStrings.logOut.tr),
+                                //     ),
+                                //   ],
+                                //   // value: residence,
+                                //   hint: "!${AppStrings.hello.tr} احمد ",
+                                //   onChangeFunc: (val) {
+                                //     Get.toNamed(val);
+                                //     // _residenceCountry.value = val;
+                                //   },
+                                // ),
 
                                 // Container(
                                 //   margin: const EdgeInsets.symmetric(horizontal: 5),
@@ -185,7 +181,7 @@ class _HomeViewState extends State<HomeView> {
                         ),
                       ),
                       CustomTextFormField(
-                        controller: _searchController,
+                        controller: controller.searchController,
                         prefixIcon: const Icon(
                           Icons.search,
                           color: Styles.primaryColor,
@@ -194,14 +190,16 @@ class _HomeViewState extends State<HomeView> {
                         textInputAction: TextInputAction.search,
                         onChangedFunc: (val) {
                           if (val.isEmpty) {
-                            _keySearch = val;
-                            controller.setKeySearch(_keySearch, notifiy: true);
+                            controller.keySearch = val;
+                            controller.setKeySearch(controller.keySearch,
+                                notifiy: true);
                             FocusScope.of(context).unfocus();
                           }
                         },
                         onFieldSubmitted: (val) {
-                          _keySearch = val;
-                          controller.setKeySearch(_keySearch, notifiy: true);
+                          controller.keySearch = val;
+                          controller.setKeySearch(controller.keySearch,
+                              notifiy: true);
                         },
                         hintTxt: AppStrings.searchForService.tr,
                         hintStyle: TextStyle(

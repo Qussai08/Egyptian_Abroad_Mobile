@@ -1,5 +1,5 @@
-class UserProfile {
-  UserProfile({
+class UserProfileModel {
+  UserProfileModel({
     this.userId,
     this.name,
     this.email,
@@ -38,7 +38,7 @@ class UserProfile {
   late final String? foreignPassportNo;
   late final String? residencyAddress;
 
-  UserProfile.fromJson(Map<String, dynamic> json) {
+  UserProfileModel.fromJson(Map<String, dynamic> json) {
     userId = json['userId'];
     name = json['name'];
     email = json['email'];
@@ -60,26 +60,26 @@ class UserProfile {
   }
 
   Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['userId'] = userId;
-    _data['name'] = name;
-    _data['email'] = email;
-    _data['nationalId'] = nationalId;
-    _data['jobCategoryID'] = jobCategoryID;
-    _data['jobCategoryName'] = jobCategoryName;
-    _data['jobTitle'] = jobTitle;
-    _data['egyptionMobile'] = egyptionMobile;
-    _data['foreignMobile'] = foreignMobile;
-    _data['messagingAddress'] = messagingAddress;
-    _data['passportNo'] = passportNo;
-    _data['residencyCountryId'] = residencyCountryId;
-    _data['residencyCountryName'] = residencyCountryName;
-    _data['residencyTypeId'] = residencyTypeId;
-    _data['residencyTypeName'] = residencyTypeName;
-    _data['residencyNo'] = residencyNo;
-    _data['foreignPassportNo'] = foreignPassportNo;
-    _data['residencyAddress'] = residencyAddress;
+    final data = <String, dynamic>{};
+    data['userId'] = userId;
+    data['name'] = name;
+    data['email'] = email;
+    data['nationalId'] = nationalId;
+    data['jobCategoryID'] = jobCategoryID;
+    data['jobCategoryName'] = jobCategoryName;
+    data['jobTitle'] = jobTitle;
+    data['egyptionMobile'] = egyptionMobile;
+    data['foreignMobile'] = foreignMobile;
+    data['messagingAddress'] = messagingAddress;
+    data['passportNo'] = passportNo;
+    data['residencyCountryId'] = residencyCountryId;
+    data['residencyCountryName'] = residencyCountryName;
+    data['residencyTypeId'] = residencyTypeId;
+    data['residencyTypeName'] = residencyTypeName;
+    data['residencyNo'] = residencyNo;
+    data['foreignPassportNo'] = foreignPassportNo;
+    data['residencyAddress'] = residencyAddress;
 
-    return _data;
+    return data;
   }
 }

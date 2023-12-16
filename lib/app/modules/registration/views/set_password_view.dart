@@ -29,9 +29,8 @@ class _SetPasswordViewState extends State<SetPasswordView>
 
   final _formKey = GlobalKey<FormState>();
   final controller = Get.put(RegistrationController());
-  final loginController = Get.put(LoginController());
 
-  ValueNotifier<List<bool>> _validationsValues =
+  final ValueNotifier<List<bool>> _validationsValues =
       ValueNotifier([false, false, false, false]);
 
   @override
@@ -149,7 +148,7 @@ class _SetPasswordViewState extends State<SetPasswordView>
                           _validationsValues.value.firstWhereOrNull(
                                   (element) => element == false) ==
                               null) {
-                        await controller.register(loginController);
+                        await controller.register();
                       }
                     },
                   ),

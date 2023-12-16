@@ -6,4 +6,5 @@ class Constants {
   static const String baseUrl = devUrl;
   static const String getNotificationHistory = "GetNotificationHistory";
   static const String registerFCMTokenPath = 'AssignFCMToken';
+  static const String viewAccount = 'ViewAccount';
 }

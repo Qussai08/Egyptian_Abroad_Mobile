@@ -79,8 +79,8 @@ class BaseApi {
       Map<String, dynamic>? options,
       required String endPoint,
       bool? jsonResponse = true}) async {
-    var token = AppHelper.token;
-    if (token != null) token = "Bearer $token";
+    String token = authService.accessToken ?? '';
+    token = "Bearer $token";
     var options0 = Options(headers: {
       "Authorization": token,
     });
