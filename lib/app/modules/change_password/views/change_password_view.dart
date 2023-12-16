@@ -24,11 +24,9 @@ class ChangePasswordView extends StatefulWidget {
 
 class _ChangePasswordViewState extends State<ChangePasswordView>
     with ValidationMixin {
-  
-  
   final _formKey = GlobalKey<FormState>();
- 
-  ValueNotifier<List<bool>> _validationsValues =
+
+  final ValueNotifier<List<bool>> _validationsValues =
       ValueNotifier([false, false, false, false]);
 
   @override
@@ -38,7 +36,7 @@ class _ChangePasswordViewState extends State<ChangePasswordView>
     return NetworkIndicator(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        appBar: CustomAppBar(),
+        appBar: const CustomAppBar(),
         body: SingleChildScrollView(
           child: Column(
             children: [
