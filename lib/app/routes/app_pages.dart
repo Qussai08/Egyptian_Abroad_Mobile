@@ -1,3 +1,5 @@
+import 'package:egyptians_abroad/app/modules/more/views/about_us_view.dart';
+import 'package:egyptians_abroad/app/modules/more/views/contact_us_view.dart';
 import 'package:get/get.dart';
 
 import '../modules/bottom_navigation.dart/bindings/bottom_navigation_binding.dart';
@@ -114,6 +116,14 @@ class AppPages {
       name: _Paths.MORE,
       page: () => const MoreView(),
       binding: MoreBinding(),
+    ),
+    GetPage(
+      name: _Paths.ABOUTUS,
+      page: () => const AboutUsView(),
+    ),
+    GetPage(
+      name: _Paths.CONTACTUS,
+      page: () => const ContactUsView(),
     ),
   ];
 }

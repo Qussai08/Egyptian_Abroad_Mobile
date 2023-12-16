@@ -21,6 +21,8 @@ abstract class Routes {
 
   static const NOTIFICATIONS = _Paths.NOTIFICATIONS;
   static const MORE = _Paths.MORE;
+  static const CONTACTUS = _Paths.CONTACTUS;
+  static const ABOUTUS = _Paths.ABOUTUS;
 }
 
 abstract class _Paths {
@@ -40,4 +42,6 @@ abstract class _Paths {
   static const NOTIFICATIONS = '/notifications';
   static const CHANGEPASSWORD = '/changePassword';
   static const MORE = '/more';
+  static const CONTACTUS = '/contactus';
+  static const ABOUTUS = '/aboutus';
 }

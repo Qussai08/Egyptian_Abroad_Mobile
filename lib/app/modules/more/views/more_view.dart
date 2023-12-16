@@ -1,7 +1,6 @@
 import 'package:egyptians_abroad/app/core/theme/app_images.dart';
-import 'package:egyptians_abroad/app/modules/more/views/about_us_view.dart';
-import 'package:egyptians_abroad/app/modules/more/views/contact_us_view.dart';
 import 'package:egyptians_abroad/app/modules/more/views/widgets/column_element_widget.dart';
+import 'package:egyptians_abroad/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -15,17 +14,6 @@ import '../controllers/more_controller.dart';
 
 class MoreView extends GetView<MoreController> {
   const MoreView({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Obx(() => controller.content());
-  }
-}
-
-class MoreListView extends GetView<MoreController> {
-  const MoreListView({
-    super.key,
-  });
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +62,7 @@ class MoreListView extends GetView<MoreController> {
             padding: const EdgeInsets.symmetric(horizontal: 26.0),
             height: 71.h,
             child: ContactElementWidget(
-                onTap: () => controller.changeView(const AboutUsView()),
+                onTap: () => controller.changeView(Routes.ABOUTUS),
                 imageAsset: AppImages.logo,
                 imageScale: 12,
                 text: AppStrings.aboutUs.tr,
@@ -85,7 +73,7 @@ class MoreListView extends GetView<MoreController> {
             padding: const EdgeInsets.symmetric(horizontal: 26.0),
             height: 71.h,
             child: ContactElementWidget(
-                onTap: () => controller.changeView(const ContactUsView()),
+                onTap: () => controller.changeView(Routes.CONTACTUS),
                 imageAsset: AppImages.callIcon,
                 imageScale: 2,
                 text: AppStrings.contactUs.tr,
