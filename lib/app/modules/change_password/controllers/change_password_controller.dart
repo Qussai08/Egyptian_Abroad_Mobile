@@ -24,12 +24,19 @@ class ChangePasswordController extends GetxController {
     changePasswordProvider.postChangePassword(oldPassword, newPassword).then(
         (value) {
       if (value.isSuccess) {
-        Get.dialog(CustomDialog(
-            icon: const Icon(
-              Icons.check_circle,
-              color: Styles.green,
-            ),
-            text: AppStrings.successPasswordChange.tr));
+        buildCustomDialog(
+          dialogMsg: AppStrings.successPasswordChange.tr,
+          dialogType: DialogType.success,
+        );
+        // OLD Code
+        // Get.dialog(
+        // CustomDialog(
+        //   icon: const Icon(
+        //     Icons.check_circle,
+        //     color: Styles.green,
+        //   ),
+        //   text: AppStrings.successPasswordChange.tr)
+        // );
         Future.delayed(const Duration(seconds: 3), () {
           AuthService().logout();
           Get.offAllNamed(Routes.LOGIN);

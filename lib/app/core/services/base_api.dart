@@ -74,7 +74,7 @@ class BaseApi {
   }
 
   // Perform POST request
-  static Future<AppResponse> postRequest(
+  Future<AppResponse> postRequest(
       {body,
       Map<String, dynamic>? options,
       required String endPoint,
