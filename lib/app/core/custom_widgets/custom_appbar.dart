@@ -6,9 +6,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppBar({super.key, this.title});
+  const CustomAppBar({super.key, this.title, this.onBack});
   final String? title;
-
+  final void Function()? onBack;
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
@@ -25,7 +25,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       leading: GestureDetector(
         onTap: () {
-          Get.back();
+          if (onBack == null) {
+            Get.back();
+          } else {
+            onBack!();
+          }
         },
         child: Container(
           margin: const EdgeInsets.symmetric(horizontal: 10),

@@ -19,4 +19,11 @@ class AppImages {
   static const fingerPrint = 'assets/images/Fingerprint2.png';
 
   static const logo = 'assets/images/logo.png';
+
+  static const profileIcon = 'assets/icons/profile_icon.png';
+  static const mediumLogo = 'assets/images/medium_logo.png';
+  static const callIcon = 'assets/icons/call_icon.png';
+  static const languageIcon = 'assets/icons/language_icon.png';
+  static const facebookIcon = 'assets/icons/facebook_icon.png';
+  static const gmailIcon = 'assets/icons/gmail_icon.png';
 }
