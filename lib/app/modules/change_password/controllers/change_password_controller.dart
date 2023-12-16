@@ -22,16 +22,17 @@ class ChangePasswordController extends GetxController {
 
   Future<void> changePassword(
       {required String oldPassword, required String newPassword}) async {
-    // if (oldPassword == newPassword) {
-    //   Get.showSnackbar(
-    //     buildCustomToast(
-    //       Get.context!,
-    //       toastMsg: AppStrings.oldEqualNew.tr,
-    //       toastTitle: AppStrings.sorry.tr,
-    //       toastType: ToastType.error,
-    //     ),
-    //   );
-    // }
+    if (oldPassword == newPassword) {
+      Get.showSnackbar(
+        buildCustomToast(
+          Get.context!,
+          toastMsg: AppStrings.oldEqualNew.tr,
+          toastTitle: AppStrings.sorry.tr,
+          toastType: ToastType.error,
+        ),
+      );
+      return;
+    }
     changePasswordProvider.postChangePassword(oldPassword, newPassword).then(
         (value) {
       if (value.isSuccess) {
