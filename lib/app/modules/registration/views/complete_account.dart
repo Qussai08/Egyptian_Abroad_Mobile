@@ -14,7 +14,7 @@ import 'package:egyptians_abroad/app/core/helper/validators.dart';
 import 'package:get/get.dart';
 
 class CompleteAccountView extends StatefulWidget {
-  const CompleteAccountView({Key? key}) : super(key: key);
+  const CompleteAccountView({super.key});
 
   @override
   State<CompleteAccountView> createState() => _CompleteAccountViewState();
@@ -75,6 +75,8 @@ class _CompleteAccountViewState extends State<CompleteAccountView>
                     CustomTextFormField(
                       controller: _egPassportNumTxtController,
                       validationFunc: (val) {
+                        return null;
+
                         // validateName(_nameTxtController.text)
                       },
                       inputData: TextInputType.text,

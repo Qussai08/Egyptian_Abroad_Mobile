@@ -60,7 +60,9 @@ class _DropDownListSelectorState extends State<DropDownListSelector> {
               hint: Text(
                 widget.hint ?? "",
                 style: TextStyle(
-                    color: widget.blackHint ? Colors.black : Color(0xffC8C8C8),
+                    color: widget.blackHint
+                        ? Colors.black
+                        : const Color(0xffC8C8C8),
                     fontSize: fixDpiFont(widget.hintFontSize),
                     fontWeight: widget.hintFontWeight,
                     fontFamily: "baloo"),

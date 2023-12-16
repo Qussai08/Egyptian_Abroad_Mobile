@@ -1,20 +1,14 @@
 import 'package:get/get.dart';
 
 import '../modules/bottom_navigation.dart/bindings/bottom_navigation_binding.dart';
-import '../modules/bottom_navigation.dart/bindings/bottom_navigation_binding.dart';
-import '../modules/bottom_navigation.dart/views/bottom_navigation_view.dart';
 import '../modules/bottom_navigation.dart/views/bottom_navigation_view.dart';
 import '../modules/category/bindings/category_binding.dart';
 import '../modules/category/views/category_view.dart';
 import '../modules/change_password/bindings/change_password_bindings.dart';
 import '../modules/change_password/views/change_password_view.dart';
 import '../modules/edit_account/bindings/edit_account_binding.dart';
-import '../modules/edit_account/bindings/edit_account_binding.dart';
-import '../modules/edit_account/views/edit_account.dart';
 import '../modules/edit_account/views/edit_account.dart';
 import '../modules/forget_password/bindings/forget_password_bindings.dart';
-import '../modules/forget_password/bindings/forget_password_bindings.dart';
-import '../modules/forget_password/views/forget_password_view.dart';
 import '../modules/forget_password/views/forget_password_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
@@ -28,15 +22,11 @@ import '../modules/otp/bindings/otp_binding.dart';
 import '../modules/otp/views/otp_view.dart';
 import '../modules/registration/bindings/registration_binding.dart';
 import '../modules/registration/views/complete_account.dart';
-import '../modules/registration/views/complete_account.dart';
 import '../modules/registration/views/registration_view.dart';
-import '../modules/registration/views/set_password_view.dart';
 import '../modules/registration/views/set_password_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
 import '../modules/start_service/bindings/start_service_binding.dart';
-import '../modules/start_service/bindings/start_service_binding.dart';
-import '../modules/start_service/views/url_service_view.dart';
 import '../modules/start_service/views/url_service_view.dart';
 
 // ignore_for_file: constant_identifier_names

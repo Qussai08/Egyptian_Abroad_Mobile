@@ -59,7 +59,7 @@ class _EditAccountViewState extends State<EditAccountView>
     return NetworkIndicator(
       child: SafeArea(
         child: Scaffold(
-          appBar: CustomAppBar(),
+          appBar: const CustomAppBar(),
           body: Container(
             padding: EdgeInsets.only(right: 16.w, left: 16.w),
             child: SingleChildScrollView(
@@ -107,7 +107,7 @@ class _EditAccountViewState extends State<EditAccountView>
                           validateNationalID(_nationalIDTxtController.text),
                       inputData: TextInputType.number,
                       maxLength: null,
-                      fillColor: Color(0xffF8F8F8),
+                      fillColor: const Color(0xffF8F8F8),
                       enabled: false,
                       controller:
                           widget.isEdit! ? _nationalIDTxtController : null,
@@ -125,7 +125,7 @@ class _EditAccountViewState extends State<EditAccountView>
                       validationFunc: (val) =>
                           validateUserEmail(_emailTxtController.text),
                       inputData: TextInputType.emailAddress,
-                      fillColor: Color(0xffF8F8F8),
+                      fillColor: const Color(0xffF8F8F8),
                       enabled: false,
                       controller: widget.isEdit! ? _emailTxtController : null,
                       initialValue: widget.isEdit! ? null : AppStrings.email.tr,
@@ -137,6 +137,8 @@ class _EditAccountViewState extends State<EditAccountView>
                         title: AppStrings.egPassportNum.tr, hasSubTitle: false),
                     CustomTextFormField(
                       validationFunc: (val) {
+                        return null;
+
                         // validateName(_nameTxtController.text)
                       },
                       inputData: TextInputType.text,

@@ -140,16 +140,6 @@ class _LoginViewState extends State<LoginView> with ValidationMixin {
                         },
                         child: Text(
                           AppStrings.newAccount.tr,
-
-                          // TODO:replace this with the new style
-                          // style: const TextStyle(
-                          //     fontSize: 12,
-                          //     fontWeight: FontWeight.w600,
-                          //     color: Styles.primaryColor,
-                          //     decoration: TextDecoration.underline,
-                          //     fontFamily: 'baloo'),
-
-                          // New style
                           style: Styles.getSemiBoldStyle(
                                   color: Styles.primaryColor,
                                   fontSize: FontSize.s12)

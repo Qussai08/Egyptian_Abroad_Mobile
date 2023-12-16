@@ -46,7 +46,7 @@ abstract class AppStrings {
   static const nameEmptyValidation = "nameEmptyValidation";
   static const nationalIDEmptyValidation = "nationalIDEmptyValidation";
   static const onlyNumericValidation = "onlyNumericValidation";
-  static const nationalIDShortValidation = "onlyNumericValidation";
+  static const nationalIDShortValidation = "nationalIDShortValidation";
 
   // otp screen
   static const otpTitle = 'otpTitle';

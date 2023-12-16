@@ -31,7 +31,7 @@ class _SetPasswordViewState extends State<SetPasswordView>
   final controller = Get.put(RegistrationController());
   final loginController = Get.put(LoginController());
 
-  ValueNotifier<List<bool>> _validationsValues =
+  final ValueNotifier<List<bool>> _validationsValues =
       ValueNotifier([false, false, false, false]);
 
   @override

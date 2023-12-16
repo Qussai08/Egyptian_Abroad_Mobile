@@ -11,16 +11,6 @@ class HomeController extends GetxController {
     getCategoriesList();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
   List<Category> allCategories = [];
   List<Category> searchCategoriesList = [];
   List<Category> displayedCategoriesList = [];

@@ -8,11 +8,10 @@ class NoDataWidget extends StatelessWidget {
   final Color? color;
 
   const NoDataWidget(
-      {Key? key,
+      {super.key,
       required this.message,
       this.iconSize = 100,
-      this.color = Styles.primaryColor})
-      : super(key: key);
+      this.color = Styles.primaryColor});
 
   @override
   Widget build(BuildContext context) {

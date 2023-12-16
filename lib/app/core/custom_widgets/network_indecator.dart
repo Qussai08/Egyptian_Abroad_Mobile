@@ -18,7 +18,7 @@ class NetworkIndicator extends StatefulWidget {
 class NetworkIndicatorState extends State<NetworkIndicator> {
   Widget _buildBodyItem() {
     return SafeArea(
-      child: Container(
+      child: SizedBox(
         height: fixDpiScreenHeight(),
         width: fixDpiScreenWidth(),
         child: Column(
@@ -75,7 +75,7 @@ class NetworkIndicatorState extends State<NetworkIndicator> {
       ) {
         if (connectivity == ConnectivityResult.none) {
           return Scaffold(
-            appBar: HomeAppBar(),
+            appBar: const HomeAppBar(),
             body: _buildBodyItem(),
           );
         } else {

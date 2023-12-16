@@ -40,10 +40,10 @@ class _RegistrationViewState extends State<RegistrationView>
                 child: GetBuilder<RegistrationController>(
                   builder: (registrationController) => registrationController
                           .countriesLoading
-                      ? Container(
+                      ? SizedBox(
                           height: fixDpiScreenHeight(),
                           width: fixDpiScreenWidth(),
-                          child: Center(
+                          child: const Center(
                             child: CircularProgressIndicator(
                               color: Styles.primaryColor,
                             ),
@@ -103,12 +103,12 @@ class _RegistrationViewState extends State<RegistrationView>
                                 builder: (_, residence, __) {
                                   return DropDownListSelector(
                                     dropDownList:
-                                        (controller.countriesList.length == 0)
+                                        (controller.countriesList.isEmpty)
                                             ? <DropdownMenuItem>[]
                                             : controller.countriesList
                                                 .map((e) => DropdownMenuItem(
-                                                      child: Text(e.country),
                                                       value: e.id,
+                                                      child: Text(e.country),
                                                     ))
                                                 .toList(),
                                     value: residence,

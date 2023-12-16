@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TextFieldTitle extends StatelessWidget {
   const TextFieldTitle(
-      {Key? key,
+      {super.key,
       required this.title,
       this.subTitle = "*",
       this.hasSubTitle = true,
@@ -12,8 +12,7 @@ class TextFieldTitle extends StatelessWidget {
       this.hasBottomMargin = true,
       this.hasHorizontalMargin = true,
       this.subTitlecolor = Colors.red,
-      this.fontSize = 14})
-      : super(key: key);
+      this.fontSize = 14});
 
   final String title;
   final String subTitle;

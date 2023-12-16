@@ -21,16 +21,6 @@ class CategoryController extends GetxController {
     getServicesList(_categoryId!);
   }
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
   List<ServiceItem> allServices = [];
   List<ServiceItem> searchServicesList = [];
   List<ServiceItem> displayedServicesList = [];

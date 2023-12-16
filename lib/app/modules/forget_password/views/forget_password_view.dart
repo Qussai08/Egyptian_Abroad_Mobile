@@ -6,8 +6,6 @@ import 'package:egyptians_abroad/app/core/custom_widgets/textfield_title.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/title_text.dart';
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
-import 'package:egyptians_abroad/app/core/theme/styles.dart';
-import 'package:egyptians_abroad/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:egyptians_abroad/app/core/helper/validators.dart';
@@ -36,7 +34,7 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView>
       child: SafeArea(
         child: Scaffold(
           resizeToAvoidBottomInset: false,
-          appBar: CustomAppBar(),
+          appBar: const CustomAppBar(),
           body: Container(
             padding: EdgeInsets.only(top: 30.h, right: 16.w, left: 16.w),
             height: fixDpiScreenHeight(),
