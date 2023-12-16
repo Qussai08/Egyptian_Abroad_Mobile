@@ -54,7 +54,7 @@ class ContactUsView extends GetView<MoreController> {
                 ContactElementWidget(
                     onTap: () => launchUrl(Uri(
                         scheme: 'https',
-                        host: 'www.facebook.com/eme',
+                        host: 'www.facebook.com',
                         path: 'eme/')),
                     imageAsset: AppImages.facebookIcon,
                     text: 'facebook/eme',
