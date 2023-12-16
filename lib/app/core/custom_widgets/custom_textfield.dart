@@ -126,6 +126,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                     fontSize:
                         widget.isPassword! ? fixDpiFont(16) : fixDpiFont(14)),
             decoration: InputDecoration(
+              counterText: '',
               filled: true,
               labelText: widget.labelText,
               fillColor: widget.fillColor,

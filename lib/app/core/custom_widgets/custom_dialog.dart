@@ -28,6 +28,7 @@ Future<dynamic> buildCustomDialog({
   required DialogType dialogType,
 }) {
   return Get.defaultDialog(
+      backgroundColor: Styles.white,
       title: "",
       contentPadding: const EdgeInsets.all(0),
       content: Column(
