@@ -7,13 +7,10 @@ import 'package:egyptians_abroad/app/core/custom_widgets/textfield_title.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/title_text.dart';
 import 'package:egyptians_abroad/app/core/helper/app_helper.dart';
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
-import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
-import 'package:egyptians_abroad/app/core/theme/app_images.dart';
 import 'package:egyptians_abroad/app/core/services/models/user_profile.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:egyptians_abroad/app/modules/registration/controllers/registration_controller.dart';
-import 'package:egyptians_abroad/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:egyptians_abroad/app/core/helper/validators.dart';
@@ -37,7 +34,7 @@ class _EditAccountViewState extends State<EditAccountView>
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
     if (intialRun) {
-      var controller = Get.put(RegistrationController());
+      var controller = Get.find<RegistrationController>();
       controller.loadResidenceData();
       intialRun = false;
     }
