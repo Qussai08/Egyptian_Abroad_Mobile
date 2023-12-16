@@ -1,9 +1,5 @@
 import 'package:egyptians_abroad/app/core/custom_widgets/custom_button.dart';
-import 'package:egyptians_abroad/app/core/custom_widgets/custom_textfield.dart';
-import 'package:egyptians_abroad/app/core/custom_widgets/grid_widget.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/network_indecator.dart';
-import 'package:egyptians_abroad/app/core/custom_widgets/no_data_widget.dart';
-import 'package:egyptians_abroad/app/core/custom_widgets/textfield_container.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/title_text.dart';
 import 'package:egyptians_abroad/app/core/helper/app_helper.dart';
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
@@ -21,7 +17,6 @@ import 'package:flutter_html/flutter_html.dart' as html;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class ServiceContentView extends StatefulWidget {
   final Category? category;

@@ -31,7 +31,6 @@ abstract class AppStrings {
   static const emailFormatValidation = "emailFormatValidation";
   static const emailEmptyValidation = "emailEmptyValidation";
   static const passwordEmptyValidation = "passwordEmptyValidation";
-  static const passwordWeekValidation = "passwordWeekValidation";
   static const sorry = "sorry";
   static const invalidMailOrPass = "invalidMailOrPass";
 
@@ -50,6 +49,7 @@ abstract class AppStrings {
   static const nationalIDShortValidation = "nationalIDShortValidation";
   static const emptyValidation = "emptyValidation";
   static const nationalIDWrongValidation = "nationalIDWrongValidation";
+  static const passwordWeekValidation = "passwordWeekValidation";
 
   // otp screen
   static const otpTitle = 'otpTitle';
@@ -119,6 +119,7 @@ abstract class AppStrings {
   static const confirmNewPassword = 'confirmNewPassword';
   static const invalidOldPassword = 'invalidOldPassword';
   static const successPasswordChange = 'successPasswordChange';
+  static const oldEqualNew = 'oldEqualNew';
 
   // forget password screen
   static const forgetPasswordTitle = 'forgetPasswordTitle';

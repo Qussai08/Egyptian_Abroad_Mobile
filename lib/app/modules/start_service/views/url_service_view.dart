@@ -1,21 +1,8 @@
 import 'package:egyptians_abroad/app/core/custom_widgets/custom_appbar.dart';
-import 'package:egyptians_abroad/app/core/custom_widgets/custom_button.dart';
-import 'package:egyptians_abroad/app/core/custom_widgets/custom_textfield.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/network_indecator.dart';
-import 'package:egyptians_abroad/app/core/custom_widgets/textfield_title.dart';
-import 'package:egyptians_abroad/app/core/custom_widgets/title_text.dart';
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
-import 'package:egyptians_abroad/app/core/language/app_string.dart';
-import 'package:egyptians_abroad/app/core/theme/styles.dart';
-import 'package:egyptians_abroad/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:egyptians_abroad/app/core/helper/validators.dart';
-
-import 'package:get/get.dart';
-
-import '../../../core/theme/app_images.dart';
 
 class URLServiceView extends StatefulWidget {
   final String? url;

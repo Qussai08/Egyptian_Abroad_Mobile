@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:egyptians_abroad/app/core/custom_widgets/custom_button.dart';
@@ -6,12 +5,9 @@ import 'package:egyptians_abroad/app/core/custom_widgets/network_indecator.dart'
 import 'package:egyptians_abroad/app/core/helper/app_helper.dart';
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/services/models/category.dart';
-import 'package:egyptians_abroad/app/core/services/models/service.dart';
 import 'package:egyptians_abroad/app/core/services/models/service_content.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
-import 'package:egyptians_abroad/app/modules/start_service/views/service_content_view.dart';
 import 'package:egyptians_abroad/app/modules/start_service/views/url_service_view.dart';
-import 'package:egyptians_abroad/app/routes/app_pages.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

@@ -17,14 +17,14 @@ abstract class Routes {
   static const EditACCOUNT = _Paths.EditACCOUNT;
   static const FORGETPASSWORD = _Paths.FORGETPASSWORD;
   static const URLSERVICE = _Paths.URLSERVICE;
-  static const COMPLETEACCOUNTWORK = _Paths.COMPLETEACCOUNTWORK;
-  static const ViewACCOUNT = _Paths.ViewACCOUNT;
-  static const FORGETPASSOTP = _Paths.FORGETPASSOTP;
-  static const FORGETPASSSETPASS = _Paths.FORGETPASSSETPASS;
   static const CHANGEPASSWORD = _Paths.CHANGEPASSWORD;
 
   static const NOTIFICATIONS = _Paths.NOTIFICATIONS;
   static const MORE = _Paths.MORE;
+  static const COMPLETEACCOUNTWORK = _Paths.COMPLETEACCOUNTWORK;
+  static const ViewACCOUNT = _Paths.ViewACCOUNT;
+  static const FORGETPASSOTP = _Paths.FORGETPASSOTP;
+  static const FORGETPASSSETPASS = _Paths.FORGETPASSSETPASS;
 }
 
 abstract class _Paths {

@@ -34,8 +34,9 @@ class CustomTextFormField extends StatefulWidget {
   final Color? fillColor;
 
   final TextEditingController? controller;
-  CustomTextFormField(
-      {this.hintTxt,
+  const CustomTextFormField(
+      {super.key,
+      this.hintTxt,
       this.inputData,
       this.disabledBorder,
       this.hasHorizontalMargin = false,
@@ -218,7 +219,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                     borderSide: BorderSide(
                         color: _focusNode.hasFocus
                             ? Styles.primaryColor
-                            : Color(0xffEBEBEB)),
+                            : const Color(0xffEBEBEB)),
                   ),
               hintStyle: widget.hintStyle ??
                   Styles.getRegularStyle(

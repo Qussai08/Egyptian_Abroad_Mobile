@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 // import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import '../helper/localization_helper.dart';
@@ -26,7 +27,7 @@ class ChangeLangButtonWidget extends StatelessWidget {
           gradient: const LinearGradient(
             begin: Alignment(0.00, -1.00),
             end: Alignment(0, 1),
-            colors: [Color(0xFF438AE7), Color(0xFF5E57FD)],
+            colors: [Styles.primaryColor, Color(0xFF5E57FD)],
           ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(28),
@@ -58,18 +59,18 @@ class ChangeLangButtonWidget extends StatelessWidget {
   }
 
   Future<void> openChangeLanguageSheet() async {
-    // await showBarModalBottomSheet(
-    //   useRootNavigator: true,
-    //   backgroundColor: Colors.transparent,
-    //   context: Get.context!,
-    //   builder: (context) => ChangeLanguageWidget(
-    //     language:
-    //         LocalizationHelper.isArabic() ? Language.arabic : Language.english,
-    //     onChanged: (val) {
-    //       if (val != null) LocalizationHelper().changeLocale(val);
-    //       Get.back();
-    //     },
-    //   ),
-    // );
+    await showBarModalBottomSheet(
+      useRootNavigator: true,
+      backgroundColor: Colors.transparent,
+      context: Get.context!,
+      builder: (context) => ChangeLanguageWidget(
+        language:
+            LocalizationHelper.isArabic() ? Language.arabic : Language.english,
+        onChanged: (val) {
+          if (val != null) LocalizationHelper().changeLocale(val);
+          Get.back();
+        },
+      ),
+    );
   }
 }

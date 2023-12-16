@@ -19,7 +19,6 @@ class LoginController extends GetxController {
       bool navigateToHome = true}) async {
     AppResponse response =
         await UserRepository().loginReq({"email": email, "password": pass});
-    print("login res ${response.data}");
     if (response.status) {
       authService.setAccessToken(response.data['accessToken'] ?? '');
       authService.setRefreshToken(response.data['refreshToken'] ?? '');

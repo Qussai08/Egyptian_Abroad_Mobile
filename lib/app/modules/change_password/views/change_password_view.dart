@@ -24,11 +24,9 @@ class ChangePasswordView extends StatefulWidget {
 
 class _ChangePasswordViewState extends State<ChangePasswordView>
     with ValidationMixin {
-  
-  
   final _formKey = GlobalKey<FormState>();
- 
-  ValueNotifier<List<bool>> _validationsValues =
+
+  final ValueNotifier<List<bool>> _validationsValues =
       ValueNotifier([false, false, false, false]);
 
   @override
@@ -38,7 +36,7 @@ class _ChangePasswordViewState extends State<ChangePasswordView>
     return NetworkIndicator(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        appBar: CustomAppBar(),
+        appBar: const CustomAppBar(),
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -65,17 +63,10 @@ class _ChangePasswordViewState extends State<ChangePasswordView>
                         ),
                         TextFieldTitle(title: AppStrings.oldPassword.tr),
                         CustomTextFormField(
+                          maxLength: 100,
                           controller: controller.oldPasswordTxtController,
-                          // validationFunc: (val) => validatePassword(
-                          //     controller.oldPasswordTxtController.text),
-                          // onChangedFunc: (val) {
-                          // _validationsValues.value = [
-                          //   passMinimumLenght(val),
-                          //   atLeastOneCharString(val),
-                          //   atLeastOneNumberString(val),
-                          //   atLeastOneSpecialCharString(val)
-                          // ];
-                          // },
+                          validationFunc: (val) => validatePassword(
+                              controller.oldPasswordTxtController.text),
                           inputData: TextInputType.text,
                           isPassword: true,
                         ),
@@ -84,6 +75,7 @@ class _ChangePasswordViewState extends State<ChangePasswordView>
                         ),
                         TextFieldTitle(title: AppStrings.newPassword.tr),
                         CustomTextFormField(
+                          maxLength: 100,
                           controller: controller.newPasswordTxtController,
                           validationFunc: (val) => validatePassword(
                               controller.newPasswordTxtController.text),
@@ -103,6 +95,7 @@ class _ChangePasswordViewState extends State<ChangePasswordView>
                         ),
                         TextFieldTitle(title: AppStrings.confirmNewPassword.tr),
                         CustomTextFormField(
+                          maxLength: 100,
                           controller:
                               controller.confirmNewPasswordTxtController,
                           validationFunc: (val) => validateConfirmPassword(

@@ -2,12 +2,12 @@ import 'package:egyptians_abroad/app/core/helper/app_helper.dart';
 import 'package:egyptians_abroad/app/core/services/app_response.dart';
 import 'package:egyptians_abroad/app/core/services/auth_service.dart';
 import 'package:egyptians_abroad/app/core/services/models/category.dart';
-import 'package:egyptians_abroad/app/core/services/models/user_profile.dart';
 import 'package:egyptians_abroad/app/core/services/repositories/categories_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../core/helper/localization_helper.dart';
+import '../../../core/services/models/user_profile.dart';
 import '../../../core/services/repositories/user_repository.dart';
 
 class HomeController extends GetxController {
@@ -19,7 +19,6 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    getUserProfile();
     getCategoriesList();
   }
 

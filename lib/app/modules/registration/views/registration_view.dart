@@ -132,19 +132,12 @@ class _RegistrationViewState extends State<RegistrationView>
                                                       .toList(),
                                               borderColor: showCountryError ==
                                                           false &&
-                                                      (registrationController
+                                                      ((validateCountry(
+                                                              registrationController
                                                                   .residenceCountry
-                                                                  .value ==
-                                                              null ||
-                                                          (registrationController
-                                                                      .residenceCountry
-                                                                      .value !=
-                                                                  null &&
-                                                              validateCountry(registrationController
-                                                                      .residenceCountry
-                                                                      .value
-                                                                      .toString()) ==
-                                                                  null))
+                                                                  .value
+                                                                  .toString()) ==
+                                                          null))
                                                   ? const Color.fromARGB(
                                                       255, 237, 239, 240)
                                                   : Colors.red,

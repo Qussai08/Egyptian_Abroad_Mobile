@@ -7,6 +7,7 @@ import 'package:egyptians_abroad/app/modules/more/controllers/more_controller.da
 import 'package:egyptians_abroad/app/modules/more/views/more_view.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'widgets/column_element_widget.dart';
 import 'widgets/custom_card_widget.dart';
@@ -42,6 +43,8 @@ class ContactUsView extends GetView<MoreController> {
                 ),
                 SizedBox(height: 16.h),
                 ContactElementWidget(
+                  onTap: () =>
+                      launchUrl(Uri(scheme: 'tel', path: '0225864252')),
                   imageAsset: AppImages.callIcon,
                   imageScale: 2,
                   text: '0225864252',
@@ -49,11 +52,17 @@ class ContactUsView extends GetView<MoreController> {
                 ),
                 SizedBox(height: 24.h),
                 ContactElementWidget(
+                    onTap: () => launchUrl(Uri(
+                        scheme: 'https',
+                        host: 'www.facebook.com',
+                        path: 'eme/')),
                     imageAsset: AppImages.facebookIcon,
                     text: 'facebook/eme',
                     fontSize: fixDpiFont(14)),
                 SizedBox(height: 24.h),
                 ContactElementWidget(
+                    onTap: () => launchUrl(
+                        Uri(scheme: 'mailto', path: 'emigration@gov.eg')),
                     imageAsset: AppImages.gmailIcon,
                     text: 'emigration@gov.eg',
                     fontSize: fixDpiFont(14)),

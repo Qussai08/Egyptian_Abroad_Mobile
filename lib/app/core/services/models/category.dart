@@ -57,7 +57,6 @@ class Category {
     categoryName = json['categoryName'];
     categoryIcon = json['categoryIcon'];
     imagePath = json['imagePath'];
-    categoryColor =
-        json['categoryColor'] != null ? json['categoryColor'] : "ff0000";
+    categoryColor = json['categoryColor'] ?? "ff0000";
   }
 }

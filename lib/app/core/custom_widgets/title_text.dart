@@ -1,14 +1,14 @@
+import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:flutter/material.dart';
 
 class TitleText extends StatelessWidget {
   const TitleText(
-      {Key? key,
+      {super.key,
       required this.title,
       this.titleTextStyle,
       this.fontSize = 24,
-      this.color = Styles.black})
-      : super(key: key);
+      this.color = Styles.black});
 
   final String title;
 
@@ -21,7 +21,7 @@ class TitleText extends StatelessWidget {
     return Text(
       title,
       style: titleTextStyle ??
-          Styles.getBoldStyle(color: color, fontSize: fontSize),
+          Styles.getBoldStyle(color: color, fontSize: fixDpiFont(fontSize)),
     );
   }
 }

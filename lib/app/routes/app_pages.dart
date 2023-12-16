@@ -73,20 +73,8 @@ class AppPages {
       binding: RegistrationBinding(),
     ),
     GetPage(
-      name: _Paths.COMPLETEACCOUNTWORK,
-      page: () => const CompleteAccountWorkView(),
-      binding: RegistrationBinding(),
-    ),
-    GetPage(
       name: _Paths.EditACCOUNT,
-      page: () => const EditAccountView(isEdit: true),
-      binding: EditAccountBinding(),
-    ),
-    GetPage(
-      name: _Paths.ViewACCOUNT,
-      page: () => const EditAccountView(
-        isEdit: false,
-      ),
+      page: () => const EditAccountView(),
       binding: EditAccountBinding(),
     ),
     GetPage(

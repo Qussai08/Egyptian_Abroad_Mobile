@@ -26,7 +26,7 @@ class SplashView extends StatelessWidget {
             width: ScreenUtil().screenWidth,
             child: Container(
               alignment: Alignment.topLeft,
-              margin: EdgeInsets.only(left: 25.w, top: 10),
+              margin: EdgeInsets.only(left: 25.w),
               child: Column(
                 children: [
                   Image.asset(

@@ -5,6 +5,7 @@ import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/helper/secure_storage_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/core/services/app_response.dart';
+import 'package:egyptians_abroad/app/core/services/auth_service.dart';
 import 'package:egyptians_abroad/app/core/services/models/user_profile.dart';
 import 'package:egyptians_abroad/app/core/services/repositories/user_repository.dart';
 import 'package:egyptians_abroad/app/modules/home/controllers/home_controller.dart';
@@ -17,11 +18,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:otp_text_field/otp_text_field.dart';
 
-import '../../../core/services/auth_service.dart';
-
 class RegistrationController extends GetxController {
   // Auth service
   final AuthService authService = Get.find();
+
+  // Login controller
+  final LoginController loginController = Get.find();
   @override
   void onInit() {
     super.onInit();
@@ -53,8 +55,6 @@ class RegistrationController extends GetxController {
   }
 
   Future<void> register() async {
-    // Login Controller
-    final LoginController loginController = Get.find();
     AppResponse response = await UserRepository().registerReq({
       "name": nameTxtController.text,
       "nationalId": nationalIDTxtController.text,
