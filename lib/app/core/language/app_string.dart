@@ -112,6 +112,7 @@ abstract class AppStrings {
   static const confirmNewPassword = 'confirmNewPassword';
   static const invalidOldPassword = 'invalidOldPassword';
   static const successPasswordChange = 'successPasswordChange';
+  static const oldEqualNew = 'oldEqualNew';
 
   // forget password screen
   static const forgetPasswordTitle = 'forgetPasswordTitle';

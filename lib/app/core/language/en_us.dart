@@ -96,5 +96,7 @@ Map<String, String> en = {
   AppStrings.aboutUs: 'About Us',
   AppStrings.contactUs: 'Contact Us',
   AppStrings.language: 'Language (English)',
-  AppStrings.callUsVia: 'Contact us via:'
+  AppStrings.callUsVia: 'Contact us via:',
+  AppStrings.oldEqualNew:
+      'Your new password must be different from your current password'
 };

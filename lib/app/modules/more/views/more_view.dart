@@ -18,7 +18,7 @@ class MoreView extends GetView<MoreController> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => Container(child: controller.content()));
+    return Obx(() => controller.content());
   }
 }
 
@@ -58,62 +58,54 @@ class MoreListView extends GetView<MoreController> {
       ),
       body: Column(
         children: [
-          InkWell(
-            onTap: () {},
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 26.0),
-              height: 73.h,
-              child: ContactElementWidget(
-                  imageAsset: AppImages.profileIcon,
-                  text: AppStrings.profile.tr,
-                  fontSize: fixDpiFont(16)),
-            ),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 26.0),
+            height: 73.h,
+            child: ContactElementWidget(
+                onTap: () {},
+                imageAsset: AppImages.profileIcon,
+                text: AppStrings.profile.tr,
+                fontSize: fixDpiFont(16)),
+          ),
+
+          const Divider(color: Styles.grey_200),
+
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 26.0),
+            height: 71.h,
+            child: ContactElementWidget(
+                onTap: () => controller.changeView(const AboutUsView()),
+                imageAsset: AppImages.logo,
+                imageScale: 12,
+                text: AppStrings.aboutUs.tr,
+                fontSize: fixDpiFont(16)),
           ),
           const Divider(color: Styles.grey_200),
-          InkWell(
-            onTap: () {
-              controller.changeView(const AboutUsView());
-            },
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 26.0),
-              height: 71.h,
-              child: ContactElementWidget(
-                  imageAsset: AppImages.logo,
-                  imageScale: 12,
-                  text: AppStrings.aboutUs.tr,
-                  fontSize: fixDpiFont(16)),
-            ),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 26.0),
+            height: 71.h,
+            child: ContactElementWidget(
+                onTap: () => controller.changeView(const ContactUsView()),
+                imageAsset: AppImages.callIcon,
+                imageScale: 2,
+                text: AppStrings.contactUs.tr,
+                fontSize: fixDpiFont(16)),
           ),
-          const Divider(color: Styles.grey_200),
-          InkWell(
-            onTap: () {
-              controller.changeView(const ContactUsView());
-            },
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 26.0),
-              height: 71.h,
-              child: ContactElementWidget(
-                  imageAsset: AppImages.callIcon,
-                  imageScale: 2,
-                  text: AppStrings.contactUs.tr,
-                  fontSize: fixDpiFont(16)),
-            ),
-          ),
+
           // const Divider(color: Styles.grey_200),
           Visibility(
             visible: false, // hide change language button
-            child: InkWell(
-              onTap: () {
-                // const ChangeLangButtonWidget();
-              },
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 26.0),
-                height: 71.h,
-                child: ContactElementWidget(
-                    imageAsset: AppImages.languageIcon,
-                    text: AppStrings.language.tr,
-                    fontSize: fixDpiFont(16)),
-              ),
+
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 26.0),
+              height: 71.h,
+              child: ContactElementWidget(
+                  onTap: () {
+                    // const ChangeLangButtonWidget();
+                  },
+                  imageAsset: AppImages.languageIcon,
+                  text: AppStrings.language.tr,
+                  fontSize: fixDpiFont(16)),
             ),
           ),
           const Divider(color: Styles.grey_200),

@@ -63,17 +63,10 @@ class _ChangePasswordViewState extends State<ChangePasswordView>
                         ),
                         TextFieldTitle(title: AppStrings.oldPassword.tr),
                         CustomTextFormField(
+                          maxLength: 100,
                           controller: controller.oldPasswordTxtController,
-                          // validationFunc: (val) => validatePassword(
-                          //     controller.oldPasswordTxtController.text),
-                          // onChangedFunc: (val) {
-                          // _validationsValues.value = [
-                          //   passMinimumLenght(val),
-                          //   atLeastOneCharString(val),
-                          //   atLeastOneNumberString(val),
-                          //   atLeastOneSpecialCharString(val)
-                          // ];
-                          // },
+                          validationFunc: (val) => validatePassword(
+                              controller.oldPasswordTxtController.text),
                           inputData: TextInputType.text,
                           isPassword: true,
                         ),
@@ -82,6 +75,7 @@ class _ChangePasswordViewState extends State<ChangePasswordView>
                         ),
                         TextFieldTitle(title: AppStrings.newPassword.tr),
                         CustomTextFormField(
+                          maxLength: 100,
                           controller: controller.newPasswordTxtController,
                           validationFunc: (val) => validatePassword(
                               controller.newPasswordTxtController.text),
@@ -101,6 +95,7 @@ class _ChangePasswordViewState extends State<ChangePasswordView>
                         ),
                         TextFieldTitle(title: AppStrings.confirmNewPassword.tr),
                         CustomTextFormField(
+                          maxLength: 100,
                           controller:
                               controller.confirmNewPasswordTxtController,
                           validationFunc: (val) => validateConfirmPassword(

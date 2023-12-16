@@ -8,27 +8,32 @@ class ContactElementWidget extends StatelessWidget {
       required this.imageAsset,
       this.imageScale,
       required this.text,
-      required this.fontSize});
+      required this.fontSize,
+      this.onTap});
 
   final String imageAsset;
   final double? imageScale;
   final String text;
   final double? fontSize;
+  final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Image.asset(
-          imageAsset,
-          scale: imageScale,
-        ),
-        SizedBox(width: 12.w),
-        Text(
-          text,
-          style:
-              Styles.getRegularStyle(color: Styles.black, fontSize: fontSize!),
-        )
-      ],
+    return InkWell(
+      onTap: onTap,
+      child: Row(
+        children: [
+          Image.asset(
+            imageAsset,
+            scale: imageScale,
+          ),
+          SizedBox(width: 12.w),
+          Text(
+            text,
+            style: Styles.getRegularStyle(
+                color: Styles.black, fontSize: fontSize!),
+          )
+        ],
+      ),
     );
   }
 }

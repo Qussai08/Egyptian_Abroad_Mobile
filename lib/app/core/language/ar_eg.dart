@@ -97,4 +97,6 @@ Map<String, String> ar = {
   AppStrings.contactUs: 'اتصل بنا',
   AppStrings.language: 'اللغة (العربية)',
   AppStrings.callUsVia: 'تواصل معنا عبر الوسائل التالية:',
+  AppStrings.oldEqualNew:
+      'يجب ألا تكون كلمة المرور الجديدة متطابقة مع كلمة المرور الحالية ',
 };

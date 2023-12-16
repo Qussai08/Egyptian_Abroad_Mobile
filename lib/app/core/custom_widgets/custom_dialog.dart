@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class CustomDialog extends StatelessWidget {
   const CustomDialog({super.key, required this.icon, required this.text});
 
-  final Icon icon;
+  final Widget icon;
   final String text;
 
   @override

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class MoreController extends GetxController {
-  Rx content = const MoreListView().obs;
+  Rx content = Container(child: const MoreListView()).obs;
 
   changeView(var content) {
     this.content.value = Container(child: content);
