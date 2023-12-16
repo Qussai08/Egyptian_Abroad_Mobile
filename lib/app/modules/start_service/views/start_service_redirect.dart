@@ -8,6 +8,7 @@ import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/services/models/category.dart';
 import 'package:egyptians_abroad/app/core/services/models/service.dart';
 import 'package:egyptians_abroad/app/core/services/models/service_content.dart';
+import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:egyptians_abroad/app/modules/start_service/views/service_content_view.dart';
 import 'package:egyptians_abroad/app/modules/start_service/views/url_service_view.dart';
 import 'package:egyptians_abroad/app/routes/app_pages.dart';
@@ -57,11 +58,8 @@ class StartServiceRedir extends StatelessWidget {
                         ? "أنت على وشك فتح شاشة خدمة ${serviceContent.serviceName}، هل أنت متأكد من المتابعة؟"
                         : "برجاء العلم أنه سيتم تحويلك لتطبيق ${serviceContent.serviceName}. هل تريد المتابعة؟",
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: const Color(0xff3F3D56),
-                        fontFamily: "baloo",
-                        fontSize: fixDpiFont(15),
-                        fontWeight: FontWeight.w600),
+                    style: Styles.getSemiBoldStyle(
+                        color: Styles.blueGrey, fontSize: fixDpiFont(15)),
                   ),
                   const Spacer(),
                   CustomButton(

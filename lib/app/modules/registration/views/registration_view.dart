@@ -8,6 +8,7 @@ import 'package:egyptians_abroad/app/core/custom_widgets/title_text.dart';
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/core/services/app_response.dart';
+import 'package:egyptians_abroad/app/core/theme/app_images.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:egyptians_abroad/app/modules/registration/controllers/registration_controller.dart';
 import 'package:egyptians_abroad/app/routes/app_pages.dart';
@@ -43,10 +44,10 @@ class _RegistrationViewState extends State<RegistrationView>
                 child: GetBuilder<RegistrationController>(
                   builder: (registrationController) => registrationController
                           .countriesLoading
-                      ? Container(
+                      ? SizedBox(
                           height: fixDpiScreenHeight(),
                           width: fixDpiScreenWidth(),
-                          child: Center(
+                          child: const Center(
                             child: CircularProgressIndicator(
                               color: Styles.primaryColor,
                             ),
@@ -58,7 +59,7 @@ class _RegistrationViewState extends State<RegistrationView>
                               height: 48.h,
                             ),
                             Image.asset(
-                              'assets/images/user.png',
+                              AppImages.user,
                               width: 56.w,
                               fit: BoxFit.fitWidth,
                             ),
@@ -119,16 +120,14 @@ class _RegistrationViewState extends State<RegistrationView>
                                             ),
                                             DropDownListSelector(
                                               dropDownList: (controller
-                                                          .countriesList
-                                                          .length ==
-                                                      0)
+                                                      .countriesList.isEmpty)
                                                   ? <DropdownMenuItem>[]
                                                   : controller.countriesList
                                                       .map((e) =>
                                                           DropdownMenuItem(
+                                                            value: e.id,
                                                             child:
                                                                 Text(e.country),
-                                                            value: e.id,
                                                           ))
                                                       .toList(),
                                               borderColor: showCountryError ==
@@ -146,7 +145,7 @@ class _RegistrationViewState extends State<RegistrationView>
                                                                       .value
                                                                       .toString()) ==
                                                                   null))
-                                                  ? Color.fromARGB(
+                                                  ? const Color.fromARGB(
                                                       255, 237, 239, 240)
                                                   : Colors.red,
                                               value: residence,
@@ -225,11 +224,9 @@ class _RegistrationViewState extends State<RegistrationView>
                               children: [
                                 Text(
                                   AppStrings.alreadyHaveAccount.tr,
-                                  style: const TextStyle(
-                                      fontSize: 11,
-                                      fontWeight: FontWeight.w400,
+                                  style: Styles.getRegularStyle(
                                       color: Styles.lightBlack,
-                                      fontFamily: 'baloo'),
+                                      fontSize: fixDpiFont(11)),
                                 ),
                                 GestureDetector(
                                   onTap: () {
@@ -237,12 +234,9 @@ class _RegistrationViewState extends State<RegistrationView>
                                   },
                                   child: Text(
                                     AppStrings.logIn.tr,
-                                    style: const TextStyle(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w600,
+                                    style: Styles.getSemiBoldStyle(
                                         color: Styles.primaryColor,
-                                        decoration: TextDecoration.underline,
-                                        fontFamily: 'baloo'),
+                                        fontSize: fixDpiFont(12)),
                                   ),
                                 )
                               ],

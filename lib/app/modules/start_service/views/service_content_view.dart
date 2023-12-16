@@ -11,6 +11,7 @@ import 'package:egyptians_abroad/app/core/helper/localization_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/core/services/models/category.dart';
 import 'package:egyptians_abroad/app/core/services/models/service_content.dart';
+import 'package:egyptians_abroad/app/core/theme/app_images.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/custom_appbar.dart';
 import 'package:egyptians_abroad/app/modules/start_service/views/url_service_view.dart';
@@ -62,7 +63,7 @@ class _ServiceContentViewState extends State<ServiceContentView> {
                       child: Row(
                         children: [
                           Image.asset(
-                            'assets/icons/male.png',
+                            AppImages.maleIcon,
                             width: 36.w,
                             fit: BoxFit.fitWidth,
                           ),

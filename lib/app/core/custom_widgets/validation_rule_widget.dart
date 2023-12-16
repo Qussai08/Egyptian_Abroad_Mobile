@@ -1,4 +1,5 @@
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
+import 'package:egyptians_abroad/app/core/theme/app_images.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +19,7 @@ class ValidationRowWidget extends StatelessWidget {
               width: fixDpiWidth(16),
               height: fixDpiHeight(16),
               child: Image.asset(
-                'assets/icons/icon-check.png',
+                AppImages.checkIcon,
                 color: checked ? Styles.green : Styles.disabledGreyColor,
               )),
           const SizedBox(

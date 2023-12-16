@@ -7,7 +7,9 @@ import 'package:egyptians_abroad/app/core/custom_widgets/textfield_title.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/title_text.dart';
 import 'package:egyptians_abroad/app/core/helper/app_helper.dart';
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
+import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
+import 'package:egyptians_abroad/app/core/theme/app_images.dart';
 import 'package:egyptians_abroad/app/core/services/models/user_profile.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:egyptians_abroad/app/modules/registration/controllers/registration_controller.dart';
@@ -80,7 +82,7 @@ class _EditAccountViewState extends State<EditAccountView>
     return NetworkIndicator(
       child: SafeArea(
         child: Scaffold(
-          appBar: CustomAppBar(),
+          appBar: const CustomAppBar(),
           body: Container(
             padding: EdgeInsets.only(right: 16.w, left: 16.w),
             child: SingleChildScrollView(
@@ -88,10 +90,10 @@ class _EditAccountViewState extends State<EditAccountView>
                 builder: (controller) => Form(
                   key: _formKey,
                   child: controller.residenceLoading
-                      ? Container(
+                      ? SizedBox(
                           height: fixDpiScreenHeight(),
                           width: fixDpiScreenWidth(),
-                          child: Center(
+                          child: const Center(
                             child: CircularProgressIndicator(
                               color: Styles.primaryColor,
                             ),
@@ -137,7 +139,7 @@ class _EditAccountViewState extends State<EditAccountView>
                             CustomTextFormField(
                               inputData: TextInputType.number,
                               maxLength: null,
-                              fillColor: Color(0xffF8F8F8),
+                              fillColor: const Color(0xffF8F8F8),
                               enabled: false,
                               controller: _nationalIDTxtController,
                             ),
@@ -150,7 +152,7 @@ class _EditAccountViewState extends State<EditAccountView>
                             ),
                             CustomTextFormField(
                               inputData: TextInputType.emailAddress,
-                              fillColor: Color(0xffF8F8F8),
+                              fillColor: const Color(0xffF8F8F8),
                               enabled: false,
                               controller: _emailTxtController,
                             ),
@@ -183,8 +185,8 @@ class _EditAccountViewState extends State<EditAccountView>
                                     dropDownList: widget.isEdit!
                                         ? controller.countriesList
                                             .map((e) => DropdownMenuItem(
-                                                  child: Text(e.country),
                                                   value: e.id,
+                                                  child: Text(e.country),
                                                 ))
                                             .toList()
                                         : [],
@@ -218,8 +220,8 @@ class _EditAccountViewState extends State<EditAccountView>
                                         dropDownList: widget.isEdit!
                                             ? controller.residenceTypeList
                                                 .map((e) => DropdownMenuItem(
-                                                      child: Text(e.name),
                                                       value: e.id,
+                                                      child: Text(e.name),
                                                     ))
                                                 .toList()
                                             : [],
@@ -314,8 +316,8 @@ class _EditAccountViewState extends State<EditAccountView>
                                     dropDownList: widget.isEdit!
                                         ? controller.jobCategoryList
                                             .map((e) => DropdownMenuItem(
-                                                  child: Text(e.name),
                                                   value: e.id,
+                                                  child: Text(e.name),
                                                 ))
                                             .toList()
                                         : [],

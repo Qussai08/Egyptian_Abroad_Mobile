@@ -21,3 +21,4 @@ class MoreController extends GetxController {
 
   void increment() => count.value++;
 }
+

@@ -1,8 +1,10 @@
+import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'dart:async';
 import 'dart:convert';
 
 import 'package:egyptians_abroad/app/core/helper/secure_storage_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
+import 'package:egyptians_abroad/app/core/theme/app_images.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:egyptians_abroad/app/modules/login/controllers/login_controller.dart';
 import 'package:egyptians_abroad/app/modules/login/views/login_view.dart';
@@ -43,7 +45,7 @@ class _SplashViewState extends State<SplashView> {
     Get.put(SplashController());
     Timer(const Duration(seconds: 3), () async {
       var userData = await SecureStorageHelper.localRead('user');
-      print("userData ${userData}");
+      print("userData $userData");
       if (userData != null) {
         var json = jsonDecode(userData);
         final controller = Get.put(LoginController());
@@ -59,7 +61,7 @@ class _SplashViewState extends State<SplashView> {
     });
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage("assets/images/Splash.png"),
             fit: BoxFit.cover,
@@ -75,18 +77,15 @@ class _SplashViewState extends State<SplashView> {
               child: Column(
                 children: [
                   Image.asset(
-                    'assets/images/logo.png',
+                    AppImages.logo,
                     width: 90.w,
                     fit: BoxFit.fitWidth,
                   ),
                   Text(
                     AppStrings.appName.tr,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: 21.sp,
-                        fontWeight: FontWeight.w700,
-                        color: Styles.black,
-                        fontFamily: 'baloo'),
+                    style: Styles.getBoldStyle(
+                        color: Styles.black, fontSize: fixDpiFont(21)),
                   ),
                   Container(
                     width: 150.w,
@@ -94,11 +93,8 @@ class _SplashViewState extends State<SplashView> {
                     child: Text(
                       AppStrings.splashDiscription.tr,
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontSize: 11.sp,
-                          fontWeight: FontWeight.w400,
-                          color: Styles.blueBlack,
-                          fontFamily: 'baloo'),
+                      style: Styles.getRegularStyle(
+                          color: Styles.blueBlack, fontSize: fixDpiFont(11)),
                     ),
                   )
                 ],

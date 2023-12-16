@@ -2,6 +2,8 @@ import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../theme/styles.dart';
+
 enum DialogType {
   error,
   success,
@@ -47,10 +49,7 @@ Future<dynamic> buildCustomDialog({
           ),
           Text(
             dialogMsg,
-            style: TextStyle(
-                fontFamily: "baloo",
-                fontSize: fixDpiFont(14),
-                fontWeight: FontWeight.w400),
+            style: Styles.getRegularStyle(color: Styles.grey_400),
           ),
           SizedBox(
             height: fixDpiHeight(20),
