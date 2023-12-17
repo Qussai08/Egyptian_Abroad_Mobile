@@ -1,8 +1,6 @@
 import 'package:egyptians_abroad/app/core/custom_widgets/custom_dialog.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/custom_taost.dart';
 import 'package:egyptians_abroad/app/core/helper/app_helper.dart';
-import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
-import 'package:egyptians_abroad/app/core/helper/secure_storage_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/core/services/app_response.dart';
 import 'package:egyptians_abroad/app/core/services/auth_service.dart';
@@ -23,7 +21,7 @@ class RegistrationController extends GetxController {
   final AuthService authService = Get.find();
 
   // Login controller
-  final LoginController loginController = Get.find();
+  final LoginController loginController = Get.put(LoginController());
   @override
   void onInit() {
     super.onInit();
@@ -41,8 +39,12 @@ class RegistrationController extends GetxController {
   String otp = '';
 
   Future<void> createVerificationCode() async {
-    AppResponse response = await UserRepository()
-        .createOtp(queryParameters: {"email": emailTxtController.text});
+    AppResponse response = await UserRepository().createOtp(
+      queryParameters: {
+        "email": emailTxtController.text,
+        "verificationType": 1
+      },
+    );
     if (response.status) {
       print("createVerificationCode : ${response.status}");
     }
@@ -64,19 +66,13 @@ class RegistrationController extends GetxController {
       "verificationCode": otp
     });
     if (response.status) {
-      print("reg res -> ${response.data}");
       await loginController.login(
           email: emailTxtController.text,
           pass: passwordTxtController.text,
           navigateToHome: false);
 
       Future.delayed(const Duration(seconds: 3), () async {
-        // if (await SecureStorageHelper.checkIsFirstTime()) {
-
         Get.offAllNamed(Routes.COMPLETEACCOUNT);
-        // } else {
-        //   Get.offAllNamed(Routes.BOTTOMNAVIGATION);
-        // }
         passwordTxtController.clear();
       });
 
@@ -176,7 +172,6 @@ class RegistrationController extends GetxController {
   bool residenceLoading = true;
   setResidenceLoading(bool val) {
     residenceLoading = val;
-    print("residenceLoading $residenceLoading");
     update();
   }
 
@@ -200,7 +195,6 @@ class RegistrationController extends GetxController {
       Iterable iterable = response.data;
       List<ResidenceType> residenceTypeData =
           iterable.map((e) => ResidenceType.fromJson(e)).toList();
-      print("residenceTypeData $residenceTypeData");
       setResidenceTypeList(residenceTypeData);
     }
   }
@@ -218,8 +212,6 @@ class RegistrationController extends GetxController {
       Iterable iterable = response.data;
       List<JobCategory> joCatData =
           iterable.map((e) => JobCategory.fromJson(e)).toList();
-      print("joCatData $joCatData");
-
       setJobCategoryList(joCatData);
     }
   }
@@ -243,9 +235,8 @@ class RegistrationController extends GetxController {
     }
     AppResponse response = await UserRepository().editAccount(reqBody,
         // TODO : make it dynamic
-        queryParameters: {"guid": authService.userID});
+        queryParameters: {"guid": AppHelper.userId});
     if (response.status) {
-      print("complete account res -> ${response.data}");
       Future.delayed(const Duration(seconds: 3), () async {
         Get.offAllNamed(Routes.BOTTOMNAVIGATION);
       });
@@ -279,10 +270,8 @@ class RegistrationController extends GetxController {
 
     AppResponse response = await UserRepository().editAccount(reqBody,
         // TODO : make it dynamic
-        queryParameters: {"guid": authService.userID});
+        queryParameters: {"guid": AppHelper.userId});
     if (response.status) {
-      print("edit account res -> ${response.data}");
-
       buildCustomDialog(
           // TODO : translate
           dialogMsg: "تم تعديل بيانات الحساب بنجاح",

@@ -17,7 +17,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:egyptians_abroad/app/core/helper/validators.dart';
 
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 
 class RegistrationView extends StatefulWidget {
   const RegistrationView({super.key});
@@ -132,12 +131,19 @@ class _RegistrationViewState extends State<RegistrationView>
                                                       .toList(),
                                               borderColor: showCountryError ==
                                                           false &&
-                                                      ((validateCountry(
-                                                              registrationController
+                                                      (registrationController
                                                                   .residenceCountry
-                                                                  .value
-                                                                  .toString()) ==
-                                                          null))
+                                                                  .value ==
+                                                              null ||
+                                                          (registrationController
+                                                                      .residenceCountry
+                                                                      .value !=
+                                                                  null &&
+                                                              validateCountry(registrationController
+                                                                      .residenceCountry
+                                                                      .value
+                                                                      .toString()) ==
+                                                                  null))
                                                   ? const Color.fromARGB(
                                                       255, 237, 239, 240)
                                                   : Colors.red,
@@ -174,6 +180,7 @@ class _RegistrationViewState extends State<RegistrationView>
                                   });
                                   AppResponse res =
                                       await controller.verifyMailAndNID();
+
                                   if (res.status && res.data['data'] == true) {
                                     await controller.createVerificationCode();
                                     Get.toNamed(
@@ -191,9 +198,6 @@ class _RegistrationViewState extends State<RegistrationView>
                                     );
                                   }
                                 } else {
-                                  print(
-                                      " ddd  ${validateCountry(registrationController.residenceCountry.value.toString())}");
-
                                   if (validateCountry(registrationController
                                           .residenceCountry.value
                                           .toString()) !=

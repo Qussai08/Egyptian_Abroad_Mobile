@@ -30,7 +30,7 @@ class _OtpViewState extends State<OtpView> with ValidationMixin {
   final ValueNotifier<bool> _otpHasError = ValueNotifier(false);
   String? errormsg;
 
-  int endTime = DateTime.now().millisecondsSinceEpoch + 1000 * 120;
+  int endTime = DateTime.now().millisecondsSinceEpoch + 1000 * 600;
   intl.NumberFormat formatter = intl.NumberFormat("00");
 
   @override
@@ -119,17 +119,21 @@ class _OtpViewState extends State<OtpView> with ValidationMixin {
                                   },
                                 ),
                               ),
-                              if (hasError)
+                              if (hasError &&
+                                  validateOtpCode(controller.otp) !=
+                                      AppStrings.otpEmptyValidation.tr)
                                 Container(
                                   margin: const EdgeInsets.only(top: 10),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Icon(
-                                        Icons.error,
-                                        color: Colors.red,
-                                        size: fixDpiHeight(24),
-                                      ),
+                                      if (validateOtpCode(controller.otp) !=
+                                          AppStrings.otpEmptyValidation.tr)
+                                        Icon(
+                                          Icons.error,
+                                          color: Colors.red,
+                                          size: fixDpiHeight(24),
+                                        ),
                                       const SizedBox(
                                         width: 2,
                                       ),
@@ -149,7 +153,10 @@ class _OtpViewState extends State<OtpView> with ValidationMixin {
                                 ),
                               if (hasError)
                                 Text(
-                                  'كود التحقق غير صحيح',
+                                  validateOtpCode(controller.otp) ==
+                                          AppStrings.otpEmptyValidation.tr
+                                      ? ""
+                                      : "كود التحقق غير صحيح",
                                   textAlign: TextAlign.center,
                                   style:
                                       Styles.getRegularStyle(color: Styles.red),

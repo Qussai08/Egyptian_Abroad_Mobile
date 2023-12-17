@@ -7,7 +7,6 @@ import 'package:egyptians_abroad/app/core/custom_widgets/validation_rule_widget.
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/core/theme/app_images.dart';
-import 'package:egyptians_abroad/app/modules/login/controllers/login_controller.dart';
 import 'package:egyptians_abroad/app/modules/registration/controllers/registration_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -63,12 +62,16 @@ class _SetPasswordViewState extends State<SetPasswordView>
                   CustomTextFormField(
                     controller: controller.passwordTxtController,
                     validationFunc: (val) {
-                      return _validationsValues.value.firstWhereOrNull(
-                                  (element) => element == false) !=
-                              null
-                          ? AppStrings.passwordWeekValidation.tr
-                          : validatePassword(
-                              controller.passwordTxtController.text);
+                      return controller.passwordTxtController.text
+                              .trim()
+                              .isEmpty
+                          ? AppStrings.emptyValidation.tr
+                          : _validationsValues.value.firstWhereOrNull(
+                                      (element) => element == false) !=
+                                  null
+                              ? AppStrings.passwordWeekValidation.tr
+                              : validatePassword(
+                                  controller.passwordTxtController.text);
                     },
                     onChangedFunc: (val) {
                       _validationsValues.value = [
@@ -143,7 +146,6 @@ class _SetPasswordViewState extends State<SetPasswordView>
                     width: 300.w,
                     height: 50,
                     onPressed: () async {
-                      print(_validationsValues.value);
                       if (_formKey.currentState!.validate() &&
                           _validationsValues.value.firstWhereOrNull(
                                   (element) => element == false) ==

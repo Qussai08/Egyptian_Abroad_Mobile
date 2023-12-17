@@ -17,7 +17,7 @@ Map<String, String> ar = {
   AppStrings.newAccount: 'حساب جديد',
   AppStrings.registerNew: 'أنشئ حساب جديد',
   AppStrings.register: 'أنشئ حساب',
-  AppStrings.name: 'الاسم',
+  AppStrings.name: 'الاسم كما في بطاقة الرقم القومي',
   AppStrings.email: 'البريد الالكتروني',
   AppStrings.residence: 'بلد الاقامة',
   AppStrings.next: 'التالي',

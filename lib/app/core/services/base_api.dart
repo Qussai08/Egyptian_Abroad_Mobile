@@ -41,7 +41,7 @@ class BaseApi {
     Map<String, dynamic> headers = {
       "languageId": LocalizationHelper.isArabic() ? 1 : 2
     };
-    String token = authService.accessToken ?? '';
+    String token = AppHelper.token ?? '';
     token = "Bearer $token";
     headers["Authorization"] = token;
 
@@ -49,28 +49,17 @@ class BaseApi {
       headers.addAll(extraHeaders);
     }
 
-    print("queryParameters ${queryParameters.toString()}");
-    print("headers ${headers.toString()}");
+    try {
+      _response = await _dio.get(endPoint,
+          options: Options(headers: headers), queryParameters: queryParameters);
 
-    // try {
-    _response = await _dio.get(endPoint,
-        options: Options(headers: headers), queryParameters: queryParameters);
-
-    print("get res data ${_response.data.toString()}");
-    print("get res _response ${_response.toString()}");
-    print("get res _response statusCode ${_response.statusCode}");
-    print("get res _response headers ${_response.headers.toString()}");
-    print("get res _response extra ${_response.extra.toString()}");
-    print(
-        "get res _response requestOptions ${_response.requestOptions.toString()}");
-
-    return AppResponse(
-        statusCode: _response.statusCode,
-        status: jsonResponse! ? _response.data['isSuccess'] ?? true : true,
-        data: _response.data);
-    // } on DioException catch (e) {
-    //   return AppResponse(status: false, error: e, errorMessage: e.message);
-    // }
+      return AppResponse(
+          statusCode: _response.statusCode,
+          status: jsonResponse! ? _response.data['isSuccess'] ?? true : true,
+          data: _response.data);
+    } on DioException catch (e) {
+      return AppResponse(status: false, error: e, errorMessage: e.message);
+    }
   }
 
   // Perform POST request
@@ -79,7 +68,8 @@ class BaseApi {
       Map<String, dynamic>? options,
       required String endPoint,
       bool? jsonResponse = true}) async {
-    String token = authService.accessToken ?? '';
+    String token = AppHelper.token ?? '';
+    //  String token = authService.accessToken ?? '';
     token = "Bearer $token";
     var options0 = Options(headers: {
       "Authorization": token,

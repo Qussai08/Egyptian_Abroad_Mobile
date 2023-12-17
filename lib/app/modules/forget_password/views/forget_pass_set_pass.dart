@@ -1,24 +1,18 @@
 import 'package:egyptians_abroad/app/core/custom_widgets/custom_button.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/custom_textfield.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/network_indecator.dart';
-import 'package:egyptians_abroad/app/core/custom_widgets/textfield_container.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/textfield_title.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/title_text.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/validation_rule_widget.dart';
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
-import 'package:egyptians_abroad/app/core/helper/localization_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
-import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:egyptians_abroad/app/modules/forget_password/controllers/forget_password_controller.dart';
-import 'package:egyptians_abroad/app/modules/login/controllers/login_controller.dart';
-import 'package:egyptians_abroad/app/modules/registration/controllers/registration_controller.dart';
 import 'package:egyptians_abroad/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:egyptians_abroad/app/core/helper/validators.dart';
 
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 
 class ForgetPassSetPasswordView extends StatefulWidget {
   const ForgetPassSetPasswordView({super.key});
@@ -151,7 +145,6 @@ class _ForgetPassSetPasswordViewState extends State<ForgetPassSetPasswordView>
                     width: 300.w,
                     height: 50,
                     onPressed: () async {
-                      print(_validationsValues.value);
                       if (_formKey.currentState!.validate() &&
                           _validationsValues.value.firstWhereOrNull(
                                   (element) => element == false) ==

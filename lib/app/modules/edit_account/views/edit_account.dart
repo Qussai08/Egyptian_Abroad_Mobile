@@ -50,9 +50,9 @@ class _EditAccountViewState extends State<EditAccountView>
       TextEditingController(text: AppHelper.userProfile?.passportNo ?? "");
 
   final ValueNotifier<int?> _residenceCountry =
-      ValueNotifier(AppHelper.userProfile?.residencyCountryId ?? 0);
+      ValueNotifier(AppHelper.userProfile?.residencyCountryId);
   final ValueNotifier<int?> _residenceType =
-      ValueNotifier(AppHelper.userProfile?.residencyTypeId ?? 0);
+      ValueNotifier(AppHelper.userProfile?.residencyTypeId);
   final TextEditingController _residenceNumTxtController =
       TextEditingController(text: AppHelper.userProfile?.residencyNo ?? "");
   final TextEditingController _forignPassportNumTxtController =
@@ -63,7 +63,7 @@ class _EditAccountViewState extends State<EditAccountView>
       TextEditingController(
           text: AppHelper.userProfile?.residencyAddress ?? "");
   final ValueNotifier<int?> _jobCategory =
-      ValueNotifier(AppHelper.userProfile?.jobCategoryID ?? 0);
+      ValueNotifier(AppHelper.userProfile?.jobCategoryID);
 
   final TextEditingController _jobTitleTxtController =
       TextEditingController(text: AppHelper.userProfile?.jobTitle ?? "");
@@ -192,9 +192,16 @@ class _EditAccountViewState extends State<EditAccountView>
                                     value: residence,
                                     hint: !widget.isEdit!
                                         ? controller.countriesList
-                                            .firstWhereOrNull((element) =>
-                                                element.id == residence)!
-                                            .country
+                                                    .firstWhereOrNull(
+                                                        (element) =>
+                                                            element.id ==
+                                                            residence) !=
+                                                null
+                                            ? controller.countriesList
+                                                .firstWhereOrNull((element) =>
+                                                    element.id == residence)!
+                                                .country
+                                            : ""
                                         : "",
                                     blackHint: true,
                                     onChangeFunc: (val) {

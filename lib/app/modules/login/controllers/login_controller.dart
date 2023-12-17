@@ -1,3 +1,4 @@
+import 'package:egyptians_abroad/app/core/helper/app_helper.dart';
 import 'package:get/get.dart';
 
 import '../../../core/custom_widgets/custom_taost.dart';
@@ -23,17 +24,14 @@ class LoginController extends GetxController {
       authService.setAccessToken(response.data['accessToken'] ?? '');
       authService.setRefreshToken(response.data['refreshToken'] ?? '');
       // String? userID = authService.userID ?? '';
+      AppHelper.setToken(response.data['accessToken']);
 
       await notificationHelper.registerFCMToken();
       await notificationHelper.subscribeToTopic('broadcast');
 
-      // Get.offAllNamed(Routes.BOTTOMNAVIGATION);
       if (navigateToHome) Get.offAllNamed(Routes.BOTTOMNAVIGATION);
-      SecureStorageHelper.localWrite(
-          'user', {"email": email, "password": pass});
+      SecureStorageHelper.localWrite('token', response.data['accessToken']);
     } else {
-      // Get.offAllNamed(Routes.BOTTOMNAVIGATION);
-
       Get.showSnackbar(
         buildCustomToast(
           Get.context!,

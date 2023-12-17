@@ -11,9 +11,12 @@ class AuthService extends GetxService {
 
   RxBool isAuthUser = false.obs;
 
-  bool get isAuth {
+  Future<bool> get isAuth async {
     String? accessToken = storageService.getData(StorageConstants.kToken);
     isAuthUser.value = accessToken?.isNotEmpty ?? false;
+    if (accessToken != null) {
+      setAccessToken(accessToken);
+    }
     return isAuthUser();
   }
 

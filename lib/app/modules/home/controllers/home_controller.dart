@@ -3,6 +3,7 @@ import 'package:egyptians_abroad/app/core/services/app_response.dart';
 import 'package:egyptians_abroad/app/core/services/auth_service.dart';
 import 'package:egyptians_abroad/app/core/services/models/category.dart';
 import 'package:egyptians_abroad/app/core/services/repositories/categories_repository.dart';
+import 'package:egyptians_abroad/app/modules/registration/controllers/registration_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -16,10 +17,13 @@ class HomeController extends GetxController {
 
   // Auth service
   final AuthService authService = Get.find();
+  final RegistrationController registrationController =
+      Get.put(RegistrationController());
   @override
   void onInit() {
     super.onInit();
     getCategoriesList();
+    getUserProfile();
   }
 
   bool userProfileLoading = false;
@@ -34,12 +38,13 @@ class HomeController extends GetxController {
     AppResponse response = await UserRepository().viewAccountReq(
         // make it dynamic
         queryParameters: {
-          "Userid": authService.userID,
+          "Userid": AppHelper.userId,
           "languageId": LocalizationHelper.isArabic() ? 1 : 2
         });
+
     if (response.status) {
-      UserProfileModel userProfile = UserProfileModel.fromJson(response.data);
-      print("user profile => ${response.data}");
+      UserProfileModel userProfile =
+          UserProfileModel.fromJson(response.data['data']);
       AppHelper.setUserProfile(userProfile);
     }
 

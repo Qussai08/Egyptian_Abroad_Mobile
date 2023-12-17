@@ -6,7 +6,6 @@ import 'package:egyptians_abroad/app/core/custom_widgets/no_data_widget.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/title_text.dart';
 import 'package:egyptians_abroad/app/core/helper/app_helper.dart';
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
-import 'package:egyptians_abroad/app/core/helper/secure_storage_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:egyptians_abroad/app/modules/home/views/widgets/home_appbar.dart';
@@ -86,7 +85,7 @@ class HomeView extends GetView<HomeController> {
                                   ],
                                   // value: residence,
                                   hint:
-                                      "${AppStrings.hello.tr} ${AppHelper.userProfile?.name ?? ''}!",
+                                      "${AppStrings.hello.tr} ${AppHelper.userProfile!.name?.substring(0, AppHelper.userProfile?.name?.indexOf(' ', 0)) ?? ''} !",
 
                                   onChangeFunc: (val) async {
                                     // if (val == Routes.LOGIN) {

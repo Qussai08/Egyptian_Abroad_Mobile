@@ -17,8 +17,6 @@ class _URLServiceViewState extends State<URLServiceView> {
 
   @override
   Widget build(BuildContext context) {
-    // final controller = Get.put(LoginController());
-
     return NetworkIndicator(
       child: SafeArea(
         child: Scaffold(
@@ -30,19 +28,12 @@ class _URLServiceViewState extends State<URLServiceView> {
               child: InAppWebView(
                 initialUrlRequest: URLRequest(
                     url: Uri.parse(widget.url ?? "https://flutter.dev/")),
-                // URLRequest(url: WebUri("https://www.facebook.com/")),
                 initialOptions: InAppWebViewGroupOptions(
                     crossPlatform: InAppWebViewOptions(
                   javaScriptEnabled: true,
                 )),
                 onWebViewCreated: (InAppWebViewController controller) {
                   webView = controller;
-                  //                 webView!.loadUrl(urlRequest:  URLRequest(url: Uri(
-                  // scheme: 'https',
-                  // host: 'flutter.dev',
-                  // )),);
-
-                  // webView.postUrl(url: "https://samak.com.sa/api/payment-transaction/payment", postData: null)
                 },
                 onLoadStart: (controller, url) {
                   print(url!.path);

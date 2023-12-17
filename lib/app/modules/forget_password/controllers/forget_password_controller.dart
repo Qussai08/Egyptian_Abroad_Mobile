@@ -21,7 +21,6 @@ class ForgetPasswordController extends GetxController {
           "email": emailTxtController.text,
           "NID": "00000000000000"
         });
-    print("verifyMail ${response.data}");
     if (!response.data['data']) {
       await createVerificationCode();
       Get.toNamed(Routes.FORGETPASSOTP);
@@ -40,8 +39,10 @@ class ForgetPasswordController extends GetxController {
   }
 
   Future<void> createVerificationCode() async {
-    AppResponse response = await UserRepository()
-        .createOtp(queryParameters: {"email": emailTxtController.text});
+    AppResponse response = await UserRepository().createOtp(queryParameters: {
+      "email": emailTxtController.text,
+      "verificationType": 2
+    });
     if (response.status) {
       print("createVerificationCode : ${response.status}");
     }
@@ -57,8 +58,6 @@ class ForgetPasswordController extends GetxController {
 
     AppResponse response = await UserRepository().forgetPasswordReq(reqBody);
     if (response.status) {
-      print("forgetPass res -> ${response.data}");
-
       buildCustomDialog(
           // TODO : translate
           dialogMsg: "تم تعديل كلمة المرور بنجاح",

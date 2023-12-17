@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
 import '../services/models/user_profile.dart';
@@ -9,12 +11,12 @@ enum ServiceType {
 }
 
 class AppHelper {
-  // static String? _token;
-  // static String? get token => _token;
-  // static setToken(String? token) {
-  //   _token = token;
-  //   getUserIdFromToken(_token!);
-  // }
+  static String? _token;
+  static String? get token => _token;
+  static setToken(String? token) {
+    _token = token;
+    getUserIdFromToken(_token!);
+  }
 
   static UserProfileModel? userProfile;
   static setUserProfile(UserProfileModel? profile) => userProfile = profile;
@@ -33,15 +35,15 @@ class AppHelper {
     await launchUrl(url);
   }
 
-  // static String? userId;
+  static String? userId;
 
-  // static String getUserIdFromToken(String code) {
-  //   String normalizedSource = base64Url.normalize(code.split(".")[1]);
-  //   String id =
-  //       json.decode(utf8.decode(base64Url.decode(normalizedSource)))['sub'];
-  //   userId = id;
-  //   return id;
-  // }
+  static String getUserIdFromToken(String code) {
+    String normalizedSource = base64Url.normalize(code.split(".")[1]);
+    String id =
+        json.decode(utf8.decode(base64Url.decode(normalizedSource)))['sub'];
+    userId = id;
+    return id;
+  }
 }
 
 extension ColorExtension on String {

@@ -25,8 +25,6 @@ class StartServiceRedir extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // serviceContent.servicesType != ServiceType.content
-    // print("serviceContent.serviceName ${serviceContent.serviceName}");
     return NetworkIndicator(
       child: SafeArea(
         child: Scaffold(

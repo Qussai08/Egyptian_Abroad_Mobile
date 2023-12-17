@@ -22,7 +22,7 @@ class ApiService extends GetConnect {
         request.headers['languageId'] = request.headers['languageId'] =
             '${LocalizationHelper.isArabic() ? 1 : 2}';
         if (!request.url.path.contains('AccessToken')) {
-          if (authService.isAuth) {
+          if (await authService.isAuth) {
             if (isTokenExpired()) {
               // await getRefreshToken(
               //         refreshToken: authService.refreshToken ?? '')

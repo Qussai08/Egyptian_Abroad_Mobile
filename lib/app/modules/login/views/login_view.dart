@@ -118,7 +118,8 @@ class _LoginViewState extends State<LoginView> with ValidationMixin {
                       if (!_formKey.currentState!.validate()) return;
                       await controller.login(
                           email: _emailTxtController.text,
-                          pass: _passwordTxtController.text);
+                          pass: _passwordTxtController.text,
+                          navigateToHome: true);
                     },
                   ),
                   SizedBox(
