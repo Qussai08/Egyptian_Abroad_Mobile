@@ -5,9 +5,10 @@ import '../data/providers/change_password_provider.dart';
 class ChangePasswordBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<ChangePasswordController>(
-      () => ChangePasswordController(),
+    Get.put<ChangePasswordProvider>(ChangePasswordProvider());
+
+    Get.put<ChangePasswordController>(
+      ChangePasswordController(),
     );
-    Get.lazyPut<ChangePasswordProvider>(() => ChangePasswordProvider());
   }
 }

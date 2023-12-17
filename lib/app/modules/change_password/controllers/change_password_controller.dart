@@ -69,38 +69,4 @@ class ChangePasswordController extends GetxController {
       ),
     );
   }
-
-  // Future<void> changePassword(
-  //     {required String oldPassword, required String newPassword}) async {
-  //   AppResponse response = await UserRepository().changePasswordReq(
-  //       {"oldPassword": oldPassword, "newPassword": newPassword});
-  //   if (response.status) {
-
-  //     Get.dialog(CustomDialog(
-  //         icon: const Icon(
-  //           Icons.check_circle,
-  //           color: Styles.green,
-  //         ),
-  //         text: AppStrings.successPasswordChange.tr));
-
-  //     Future.delayed(const Duration(seconds: 3), () {
-  //       AuthService().logout();
-  //       Get.offAllNamed('/login');
-  //     });
-
-  //     // Get.showSnackbar(buildCustomToast(Get.context!,
-  //     //     toastMsg: AppStrings.success,
-  //     //     toastTitle: AppStrings.success,
-  //     //     toastType: ToastType.success));
-  //   } else {
-  //     Get.showSnackbar(
-  //       buildCustomToast(
-  //         Get.context!,
-  //         toastMsg: AppStrings.invalidOldPassword.tr,
-  //         toastTitle: AppStrings.sorry.tr,
-  //         toastType: ToastType.error,
-  //       ),
-  //     );
-  //   }
-  // }
 }

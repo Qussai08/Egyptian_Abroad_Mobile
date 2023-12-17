@@ -37,141 +37,136 @@ class _ChangePasswordViewState extends State<ChangePasswordView>
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: const CustomAppBar(),
-        body: SingleChildScrollView(
-          child: Column(
+        body: SafeArea(
+          child: ListView(
             children: [
-              SafeArea(
-                child: Container(
-                  padding: EdgeInsets.only(right: 16.w, left: 16.w),
-                  height: fixDpiScreenHeight(),
-                  width: fixDpiScreenWidth(),
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      children: [
-                        Image.asset(
-                          AppImages.forgetPassword,
-                          width: 56.w,
-                          fit: BoxFit.fitWidth,
-                        ),
-                        SizedBox(
-                          height: 16.h,
-                        ),
-                        TitleText(title: AppStrings.changePassword.tr),
-                        SizedBox(
-                          height: 40.h,
-                        ),
-                        TextFieldTitle(title: AppStrings.oldPassword.tr),
-                        CustomTextFormField(
-                          maxLength: 100,
-                          controller: controller.oldPasswordTxtController,
-                          validationFunc: (val) => validatePassword(
-                              controller.oldPasswordTxtController.text),
-                          inputData: TextInputType.text,
-                          isPassword: true,
-                        ),
-                        SizedBox(
-                          height: 16.h,
-                        ),
-                        TextFieldTitle(title: AppStrings.newPassword.tr),
-                        CustomTextFormField(
-                          maxLength: 100,
-                          controller: controller.newPasswordTxtController,
-                          validationFunc: (val) => validatePassword(
-                              controller.newPasswordTxtController.text),
-                          onChangedFunc: (val) {
-                            _validationsValues.value = [
-                              passMinimumLenght(val),
-                              atLeastOneCharString(val),
-                              atLeastOneNumberString(val),
-                              atLeastOneSpecialCharString(val)
-                            ];
-                          },
-                          inputData: TextInputType.text,
-                          isPassword: true,
-                        ),
-                        SizedBox(
-                          height: 16.h,
-                        ),
-                        TextFieldTitle(title: AppStrings.confirmNewPassword.tr),
-                        CustomTextFormField(
-                          maxLength: 100,
-                          controller:
-                              controller.confirmNewPasswordTxtController,
-                          validationFunc: (val) => validateConfirmPassword(
-                              controller.confirmNewPasswordTxtController.text),
-                          inputData: TextInputType.text,
-                          isPassword: true,
-                        ),
-                        SizedBox(
-                          height: 12.h,
-                        ),
-                        ValueListenableBuilder<dynamic>(
-                            valueListenable: _validationsValues,
-                            builder: (_, validations, __) {
-                              return SizedBox(
-                                // height: 140.h,
-                                child: ListView(
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  padding:
-                                      const EdgeInsets.symmetric(horizontal: 5),
-                                  scrollDirection: Axis.vertical,
-                                  shrinkWrap: true,
-                                  children: [
-                                    ValidationRowWidget(
-                                      text: AppStrings.passwordMinimum.tr,
-                                      checked: validations[0],
-                                    ),
-                                    ValidationRowWidget(
-                                      text: AppStrings.passwordContainsChar.tr,
-                                      checked: validations[1],
-                                    ),
-                                    ValidationRowWidget(
-                                      text: AppStrings.passwordContainsNum.tr,
-                                      checked: validations[2],
-                                    ),
-                                    ValidationRowWidget(
-                                      text: AppStrings
-                                          .passwordContainsSpecialChar.tr,
-                                      checked: validations[3],
-                                    ),
-                                  ],
-                                ),
-                              );
-                            }),
-                        SizedBox(
-                          height: 40.h,
-                        ),
-                        CustomButton(
-                          text: AppStrings.confirm.tr,
-                          // icon: Icons.arrow_foxrward,
-                          type: ButtonType.primary,
-                          width: 300.w,
-                          height: 50.h,
-                          onPressed: () async {
-                            if (_formKey.currentState!.validate() &&
-                                _validationsValues.value.firstWhereOrNull(
-                                        (element) => element == false) ==
-                                    null) {
-                              await controller.changePassword(
-                                  oldPassword:
-                                      controller.oldPasswordTxtController.text,
-                                  newPassword:
-                                      controller.newPasswordTxtController.text);
-                            }
-                          },
-                        ),
-                        SizedBox(height: 24.h),
-                        CustomButton(
-                          text: AppStrings.cancel.tr,
-                          // icon: Icons.arrow_back_ios,
-                          type: ButtonType.secondary,
-                          width: 300.w,
-                          height: 50.h,
-                          onPressed: () => Get.back(),
-                        ),
-                      ],
-                    ),
+              // Title and Image
+              Column(
+                children: [
+                  Image.asset(
+                    AppImages.forgetPassword,
+                    width: 56.w,
+                    fit: BoxFit.cover,
+                  ),
+                  SizedBox(
+                    height: 16.h,
+                  ),
+                  TitleText(title: AppStrings.changePassword.tr),
+                ],
+              ),
+              Container(
+                padding: EdgeInsets.only(right: 16.w, left: 16.w),
+                height: fixDpiScreenHeight(),
+                width: fixDpiScreenWidth(),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 40.h,
+                      ),
+                      TextFieldTitle(title: AppStrings.oldPassword.tr),
+                      CustomTextFormField(
+                        maxLength: 100,
+                        controller: controller.oldPasswordTxtController,
+                        validationFunc: (val) => validatePassword(
+                            controller.oldPasswordTxtController.text),
+                        inputData: TextInputType.text,
+                        isPassword: true,
+                      ),
+                      SizedBox(
+                        height: 16.h,
+                      ),
+                      TextFieldTitle(title: AppStrings.newPassword.tr),
+                      CustomTextFormField(
+                        maxLength: 100,
+                        controller: controller.newPasswordTxtController,
+                        validationFunc: (val) => validatePassword(
+                            controller.newPasswordTxtController.text),
+                        onChangedFunc: (val) {
+                          _validationsValues.value = [
+                            passMinimumLenght(val),
+                            atLeastOneCharString(val),
+                            atLeastOneNumberString(val),
+                            atLeastOneSpecialCharString(val)
+                          ];
+                        },
+                        inputData: TextInputType.text,
+                        isPassword: true,
+                      ),
+                      SizedBox(
+                        height: 16.h,
+                      ),
+                      TextFieldTitle(title: AppStrings.confirmNewPassword.tr),
+                      CustomTextFormField(
+                        maxLength: 100,
+                        controller: controller.confirmNewPasswordTxtController,
+                        validationFunc: (val) => validateConfirmPassword(
+                            controller.confirmNewPasswordTxtController.text),
+                        inputData: TextInputType.text,
+                        isPassword: true,
+                      ),
+                      SizedBox(
+                        height: 12.h,
+                      ),
+                      ValueListenableBuilder<dynamic>(
+                          valueListenable: _validationsValues,
+                          builder: (_, validations, __) {
+                            return SizedBox(
+                              // height: 140.h,
+                              child: Column(
+                                children: [
+                                  ValidationRowWidget(
+                                    text: AppStrings.passwordMinimum.tr,
+                                    checked: validations[0],
+                                  ),
+                                  ValidationRowWidget(
+                                    text: AppStrings.passwordContainsChar.tr,
+                                    checked: validations[1],
+                                  ),
+                                  ValidationRowWidget(
+                                    text: AppStrings.passwordContainsNum.tr,
+                                    checked: validations[2],
+                                  ),
+                                  ValidationRowWidget(
+                                    text: AppStrings
+                                        .passwordContainsSpecialChar.tr,
+                                    checked: validations[3],
+                                  ),
+                                ],
+                              ),
+                            );
+                          }),
+                      SizedBox(
+                        height: 40.h,
+                      ),
+                      CustomButton(
+                        text: AppStrings.confirm.tr,
+                        type: ButtonType.primary,
+                        width: 300.w,
+                        height: 50.h,
+                        onPressed: () async {
+                          if (_formKey.currentState!.validate() &&
+                              _validationsValues.value.firstWhereOrNull(
+                                      (element) => element == false) ==
+                                  null) {
+                            await controller.changePassword(
+                                oldPassword:
+                                    controller.oldPasswordTxtController.text,
+                                newPassword:
+                                    controller.newPasswordTxtController.text);
+                          }
+                        },
+                      ),
+                      SizedBox(height: 24.h),
+                      CustomButton(
+                        text: AppStrings.cancel.tr,
+                        type: ButtonType.secondary,
+                        width: 300.w,
+                        height: 50.h,
+                        onPressed: () => Get.back(),
+                      ),
+                    ],
                   ),
                 ),
               ),
