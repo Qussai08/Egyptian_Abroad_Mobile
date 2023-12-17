@@ -2,7 +2,6 @@ import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:validators/validators.dart';
-import 'package:flutter/services.dart';
 
 mixin ValidationMixin<T extends StatefulWidget> on State<T> {
   String _password = '';
