@@ -12,8 +12,8 @@ Map<String, String> ar = {
   AppStrings.logOut: 'تسجيل الخروج',
   AppStrings.nationalID: 'الرقم القومي',
   AppStrings.password: 'كلمة المرور',
-  AppStrings.forgetPassword: 'هل نسيت كلمة المرور ؟',
-  AppStrings.donotHaveAccount: ' ليس لديك حساب أنشئ ',
+  AppStrings.forgetPassword: 'نسيت كلمة المرور؟',
+  AppStrings.donotHaveAccount: 'ليس لديك حساب؟ ',
   AppStrings.newAccount: 'حساب جديد',
   AppStrings.registerNew: 'أنشئ حساب جديد',
   AppStrings.register: 'أنشئ حساب',
@@ -111,4 +111,5 @@ Map<String, String> ar = {
   AppStrings.callUsVia: 'تواصل معنا عبر الوسائل التالية:',
   AppStrings.oldEqualNew:
       'يجب ألا تكون كلمة المرور الجديدة متطابقة مع كلمة المرور الحالية ',
+  AppStrings.registerWithCarsAccount: 'التسجيل بحساب سيارات المصرين بالخارج',
 };

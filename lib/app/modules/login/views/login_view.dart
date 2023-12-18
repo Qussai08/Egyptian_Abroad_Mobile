@@ -6,6 +6,7 @@ import 'package:egyptians_abroad/app/core/custom_widgets/title_text.dart';
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
+import 'package:egyptians_abroad/app/modules/login/views/widgets/footer.dart';
 import 'package:egyptians_abroad/app/routes/app_pages.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:egyptians_abroad/app/routes/app_pages.dart';
@@ -70,6 +71,7 @@ class _LoginViewState extends State<LoginView> with ValidationMixin {
                   ),
                   TextFieldTitle(title: AppStrings.email.tr),
                   CustomTextFormField(
+                    hintTxt: 'Username@example.info',
                     controller: _emailTxtController,
                     validationFunc: (val) =>
                         validateUserEmail(_emailTxtController.text),
@@ -80,6 +82,7 @@ class _LoginViewState extends State<LoginView> with ValidationMixin {
                   ),
                   TextFieldTitle(title: AppStrings.password.tr),
                   CustomTextFormField(
+                    hintTxt: '**************',
                     controller: _passwordTxtController,
                     validationFunc: (val) =>
                         validatePassword(_passwordTxtController.text),
@@ -100,10 +103,12 @@ class _LoginViewState extends State<LoginView> with ValidationMixin {
                           padding: const EdgeInsets.symmetric(horizontal: 6),
                           child: Text(
                             AppStrings.forgetPassword.tr,
-                            style: const TextStyle(
-                              color: Styles.red,
-                              decoration: TextDecoration.underline,
-                            ),
+                            style: Styles.getRegularStyle(
+                                    color: Styles.primaryColor,
+                                    fontSize: fixDpiFont(11))
+                                .copyWith(
+                                    decoration: TextDecoration.underline,
+                                    decorationColor: Styles.primaryColor),
                           ),
                         ),
                       ],
@@ -114,8 +119,10 @@ class _LoginViewState extends State<LoginView> with ValidationMixin {
                     text: AppStrings.logIn.tr,
                     icon: Icons.arrow_forward,
                     type: ButtonType.primary,
-                    width: 300.w,
-                    height: 50,
+                    width: 358.w,
+                    height: 50.h,
+                    fontSize: fixDpiFont(16),
+                    iconSize: fixDpiFont(16),
                     onPressed: () async {
                       if (!_formKey.currentState!.validate()) return;
                       await controller.login(
@@ -124,16 +131,27 @@ class _LoginViewState extends State<LoginView> with ValidationMixin {
                           navigateToHome: true);
                     },
                   ),
-                  SizedBox(
-                    height: 16.h,
+                  SizedBox(height: 24.h),
+                  CustomButton(
+                    width: 358.w,
+                    height: 50.h,
+                    fontSize: fixDpiFont(16),
+                    type: ButtonType.ghost,
+                    iconIsAsset: true,
+                    assetString: AppImages.carsIcon,
+                    changeIconPosition: true,
+                    text: AppStrings.registerWithCarsAccount.tr,
+                    textColor: Styles.black3,
                   ),
+
+                  SizedBox(height: 16.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         AppStrings.donotHaveAccount.tr,
                         style: Styles.getRegularStyle(
-                            color: Styles.black, fontSize: fixDpiFont(11)),
+                            color: Styles.lightBlack, fontSize: fixDpiFont(11)),
                       ),
                       GestureDetector(
                         onTap: () {
@@ -142,22 +160,23 @@ class _LoginViewState extends State<LoginView> with ValidationMixin {
                           );
                         },
                         child: Text(
-                          AppStrings.newAccount.tr,
+                          AppStrings.register.tr,
 
                           // New style
-                          style: Styles.getSemiBoldStyle(
+                          style: Styles.getRegularStyle(
                                   color: Styles.primaryColor,
-                                  fontSize: FontSize.s12)
+                                  fontSize: fixDpiFont(11))
                               .copyWith(
                             decoration: TextDecoration.underline,
+                            decorationColor: Styles.primaryColor,
                           ),
                         ),
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: 35.h,
-                  ),
+                  SizedBox(height: 51.h),
+                  const FooterWidget(),
+                  SizedBox(height: 30.h),
                 ],
               ),
             ),

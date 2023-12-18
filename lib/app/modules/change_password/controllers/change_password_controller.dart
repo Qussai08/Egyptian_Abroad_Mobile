@@ -34,11 +34,24 @@ class ChangePasswordController extends GetxController {
     changePasswordProvider.postChangePassword(oldPassword, newPassword).then(
         (value) {
       if (value.isSuccess) {
-        buildCustomDialog(
-          dialogMsg: AppStrings.successPasswordChange.tr,
-          dialogType: DialogType.success,
+        Get.showSnackbar(
+          buildCustomToast(
+            Get.context!,
+            toastMsg: AppStrings.successPasswordChange.tr,
+            toastTitle: AppStrings.confirm.tr,
+            toastType: ToastType.success,
+          ),
         );
-        // OLD Code
+        AuthService().logout();
+        Get.offAllNamed(Routes.LOGIN);
+
+        //OLD CODE
+        // buildCustomDialog(
+        //   dialogMsg: AppStrings.successPasswordChange.tr,
+        //   dialogType: DialogType.success,
+        // );
+
+        // OLDER Code
         // Get.dialog(
         // CustomDialog(
         //   icon: const Icon(
@@ -47,10 +60,10 @@ class ChangePasswordController extends GetxController {
         //   ),
         //   text: AppStrings.successPasswordChange.tr)
         // );
-        Future.delayed(const Duration(seconds: 3), () {
-          AuthService().logout();
-          Get.offAllNamed(Routes.LOGIN);
-        });
+        // Future.delayed(const Duration(seconds: 3), () {
+        //   AuthService().logout();
+        //   Get.offAllNamed(Routes.LOGIN);
+        // });
       } else {
         handleError();
       }

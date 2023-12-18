@@ -27,4 +27,6 @@ class AppImages {
   static const languageIcon = 'assets/icons/language_icon.png';
   static const facebookIcon = 'assets/icons/facebook_icon.png';
   static const gmailIcon = 'assets/icons/gmail_icon.png';
+
+  static const carsIcon = 'assets/icons/cars_icon.png';
 }

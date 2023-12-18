@@ -69,6 +69,16 @@ mixin ValidationMixin<T extends StatefulWidget> on State<T> {
   //   return null;
   // }
 
+  //Please Do not remove this function
+  String? validateOldPassword(String password) {
+    if (password.trim().isEmpty) {
+      return AppStrings.emptyValidation.tr;
+    } else if (password.length > 100) {
+      return "${AppStrings.maxlength.tr}100 ${AppStrings.char.tr}";
+    }
+    return null;
+  }
+
   String? validatePassword(String password) {
     _password = password;
     if (password.trim().isEmpty) {
@@ -78,6 +88,7 @@ mixin ValidationMixin<T extends StatefulWidget> on State<T> {
     }
     return null;
   }
+
 
   String? validateConfirmPassword(String confirmPassword) {
     if (confirmPassword.trim().isEmpty) {

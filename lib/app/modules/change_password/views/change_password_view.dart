@@ -69,7 +69,7 @@ class _ChangePasswordViewState extends State<ChangePasswordView>
                       CustomTextFormField(
                         maxLength: 100,
                         controller: controller.oldPasswordTxtController,
-                        validationFunc: (val) => validatePassword(
+                        validationFunc: (val) => validateOldPassword(
                             controller.oldPasswordTxtController.text),
                         inputData: TextInputType.text,
                         isPassword: true,
@@ -82,12 +82,15 @@ class _ChangePasswordViewState extends State<ChangePasswordView>
                         maxLength: 100,
                         controller: controller.newPasswordTxtController,
                         validationFunc: (val) {
-                          return _validationsValues.value.firstWhereOrNull(
-                                      (element) => element == false) !=
+                          return validatePassword(controller
+                                      .newPasswordTxtController.text) ==
                                   null
-                              ? AppStrings.passwordWeekValidation.tr
-                              : validatePassword(
-                                  controller.newPasswordTxtController.text);
+                              ? _validationsValues.value.firstWhereOrNull(
+                                          (element) => element == false) !=
+                                      null
+                                  ? AppStrings.passwordWeekValidation.tr
+                                  : null
+                              : null;
                         },
                         onChangedFunc: (val) {
                           _validationsValues.value = [

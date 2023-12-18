@@ -33,6 +33,7 @@ abstract class AppStrings {
   static const passwordEmptyValidation = "passwordEmptyValidation";
   static const sorry = "sorry";
   static const invalidMailOrPass = "invalidMailOrPass";
+  static const registerWithCarsAccount = "registerWithCarsAccount";
 
   // register screen
   static const register = 'register';
