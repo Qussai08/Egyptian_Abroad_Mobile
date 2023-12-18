@@ -29,11 +29,13 @@ class SplashController extends GetxController {
 
   _goNext() async {
     // print("authService.isAuth ${await authService.isAuth}");
-    var token = await SecureStorageHelper.localRead('token');
+    // var token = await SecureStorageHelper.localRead('token');
+    String? token = authService.accessToken;
+
     if (token != null) {
-      token = json.decode(token);
-      AppHelper.setToken(token);
-      authService.setAccessToken(token!);
+      // token = json.decode(token);
+      // AppHelper.setToken(token);
+      // authService.setAccessToken(token!);
       await notificationHelper.registerFCMToken();
       await notificationHelper.subscribeToTopic('broadcast');
       await 2.delay();

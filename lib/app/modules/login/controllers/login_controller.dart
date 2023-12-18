@@ -30,7 +30,7 @@ class LoginController extends GetxController {
       await notificationHelper.subscribeToTopic('broadcast');
 
       if (navigateToHome) Get.offAllNamed(Routes.BOTTOMNAVIGATION);
-      SecureStorageHelper.localWrite('token', response.data['accessToken']);
+      // SecureStorageHelper.localWrite('token', response.data['accessToken']);
     } else {
       Get.showSnackbar(
         buildCustomToast(

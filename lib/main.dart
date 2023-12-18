@@ -10,6 +10,7 @@ import 'app/core/binding/initial_binding.dart';
 import 'app/core/helper/dpi_helper.dart';
 import 'app/core/helper/localization_helper.dart';
 import 'app/core/helper/notification_helper.dart';
+import 'app/core/services/storage_service.dart';
 import 'app/routes/app_pages.dart';
 import 'package:flutter_localizations/flutter_localizations.dart'
     show
@@ -19,6 +20,9 @@ import 'package:flutter_localizations/flutter_localizations.dart'
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // init storage service
+  await Get.putAsync(() => StorageService().init());
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );

@@ -90,7 +90,7 @@ class AuthService extends GetxService {
     await notificationHelper.deleteFCMToken();
 
     // Remove user from secure storage
-    await SecureStorageHelper.localRemove('user');
+    // await SecureStorageHelper.localRemove('user');
 
     storageService.removeAll();
     isAuthUser(false);

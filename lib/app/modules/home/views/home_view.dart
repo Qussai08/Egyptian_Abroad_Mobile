@@ -50,6 +50,7 @@ class HomeView extends GetView<HomeController> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
+                                // TODO: import user image from AppImages
                                 Image.asset(
                                   'assets/icons/male.png',
                                   width: 36.w,
@@ -84,8 +85,9 @@ class HomeView extends GetView<HomeController> {
                                     ),
                                   ],
                                   // value: residence,
+                                  // TODO: Need to fix the name, and userProfile may be null here use null safety operator (?.) to avoid null exception error
                                   hint:
-                                      "${AppStrings.hello.tr} ${AppHelper.userProfile!.name?.substring(0, AppHelper.userProfile?.name?.indexOf(' ', 0)) ?? ''} !",
+                                      "${AppStrings.hello.tr} ${AppHelper.userProfile?.name?.substring(0, AppHelper.userProfile?.name?.indexOf(' ', 0)) ?? ''} !",
 
                                   onChangeFunc: (val) async {
                                     // if (val == Routes.LOGIN) {
@@ -201,6 +203,7 @@ class HomeView extends GetView<HomeController> {
                               notifiy: true);
                         },
                         hintTxt: AppStrings.searchForService.tr,
+                        // TODO: need to handle TextStyle from Styles
                         hintStyle: TextStyle(
                             fontSize: fixDpiFont(14),
                             fontWeight: FontWeight.w400,
@@ -235,6 +238,7 @@ class HomeView extends GetView<HomeController> {
                             TitleText(
                               title: AppStrings.allServices.tr,
                               fontSize: fixDpiFont(14),
+                              // TODO: need to handle TextStyle from Styles
                               titleTextStyle: TextStyle(
                                   fontSize: fixDpiFont(14),
                                   fontWeight: FontWeight.w400,
@@ -307,6 +311,7 @@ class HomeView extends GetView<HomeController> {
                                               : Container()
                                         ],
                                       ),
+                            // TODO: kindly check this view on EN language, may spacing make issue with allignment
                             const Spacer(),
                           ],
                         ),
