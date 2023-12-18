@@ -235,7 +235,7 @@ class RegistrationController extends GetxController {
     }
     AppResponse response = await UserRepository().editAccount(reqBody,
         // TODO : make it dynamic
-        queryParameters: {"guid": AppHelper.userId});
+        queryParameters: {"guid": authService.userID});
     if (response.status) {
       Future.delayed(const Duration(seconds: 3), () async {
         Get.offAllNamed(Routes.BOTTOMNAVIGATION);
@@ -270,7 +270,7 @@ class RegistrationController extends GetxController {
 
     AppResponse response = await UserRepository().editAccount(reqBody,
         // TODO : make it dynamic
-        queryParameters: {"guid": AppHelper.userId});
+        queryParameters: {"guid": authService.userID});
     if (response.status) {
       buildCustomDialog(
           // TODO : translate

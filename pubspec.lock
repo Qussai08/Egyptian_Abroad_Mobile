@@ -125,10 +125,10 @@ packages:
     dependency: "direct main"
     description:
       name: dio
-      sha256: "01870acd87986f768e0c09cc4d7a19a59d814af7b34cbeb0b437d2c33bdfea4c"
+      sha256: "797e1e341c3dd2f69f2dad42564a6feff3bfb87187d05abb93b9609e6f1645c3"
       url: "https://pub.dev"
     source: hosted
-    version: "5.3.4"
+    version: "5.4.0"
   fake_async:
     dependency: transitive
     description:
@@ -173,26 +173,26 @@ packages:
     dependency: "direct main"
     description:
       name: firebase_messaging
-      sha256: b9b94c7d932d83d36efcf7eb21caf50486a8f330c6f681bb68e7b979d036491e
+      sha256: "199fe8186a5370d1cf5ce0819191079afc305914e8f38715f5e23943940dfe2d"
       url: "https://pub.dev"
     source: hosted
-    version: "14.7.8"
+    version: "14.7.9"
   firebase_messaging_platform_interface:
     dependency: transitive
     description:
       name: firebase_messaging_platform_interface
-      sha256: "200f27b70a6330d1ac3f0fbf5328412ef3b215cd9dbb7dcea1701d1fd705d37a"
+      sha256: "54e283a0e41d81d854636ad0dad73066adc53407a60a7c3189c9656e2f1b6107"
       url: "https://pub.dev"
     source: hosted
-    version: "4.5.17"
+    version: "4.5.18"
   firebase_messaging_web:
     dependency: transitive
     description:
       name: firebase_messaging_web
-      sha256: "1c254306714d4d76aea612d81775e8f18c712219f096a7e6abfa234de9fd4bd2"
+      sha256: "90dc7ed885e90a24bb0e56d661d4d2b5f84429697fd2cbb9e5890a0ca370e6f4"
       url: "https://pub.dev"
     source: hosted
-    version: "3.5.17"
+    version: "3.5.18"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -275,14 +275,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.1"
-  flutter_offline:
-    dependency: "direct main"
-    description:
-      name: flutter_offline
-      sha256: "3d569b2e0ae76366e66eea76cbf303b8a882ed657fdf2ac9dc2e8a58288a30d2"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.0.1"
   flutter_screenutil:
     dependency: "direct main"
     description:
@@ -349,11 +341,6 @@ packages:
     version: "2.0.9"
   flutter_test:
     dependency: "direct dev"
-    description: flutter
-    source: sdk
-    version: "0.0.0"
-  flutter_web_plugins:
-    dependency: transitive
     description: flutter
     source: sdk
     version: "0.0.0"
@@ -578,14 +565,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.4.0"
-  petitparser:
-    dependency: transitive
-    description:
-      name: petitparser
-      sha256: cb3798bef7fc021ac45b308f4b51208a152792445cce0448c9a4ba5879dd8750
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.4.0"
   platform:
     dependency: transitive
     description:
@@ -598,10 +577,10 @@ packages:
     dependency: transitive
     description:
       name: plugin_platform_interface
-      sha256: da3fdfeccc4d4ff2da8f8c556704c08f912542c5fb3cf2233ed75372384a034d
+      sha256: f4f88d4a900933e7267e2b353594774fc0d07fb072b47eedcd5b54e1ea3269f8
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.6"
+    version: "2.1.7"
   pointycastle:
     dependency: transitive
     description:
@@ -707,10 +686,10 @@ packages:
     dependency: transitive
     description:
       name: url_launcher_linux
-      sha256: "9f2d390e096fdbe1e6e6256f97851e51afc2d9c423d3432f1d6a02a8a9a8b9fd"
+      sha256: ab360eb661f8879369acac07b6bb3ff09d9471155357da8443fd5d3cf7363811
       url: "https://pub.dev"
     source: hosted
-    version: "3.1.0"
+    version: "3.1.1"
   url_launcher_macos:
     dependency: transitive
     description:
@@ -739,10 +718,10 @@ packages:
     dependency: transitive
     description:
       name: url_launcher_windows
-      sha256: "7754a1ad30ee896b265f8d14078b0513a4dba28d358eabb9d5f339886f4a1adc"
+      sha256: ecf9725510600aa2bb6d7ddabe16357691b6d2805f66216a97d1b881e21beff7
       url: "https://pub.dev"
     source: hosted
-    version: "3.1.0"
+    version: "3.1.1"
   validators:
     dependency: "direct main"
     description:
