@@ -94,7 +94,11 @@ class HomeView extends GetView<HomeController> {
                                     //   await SecureStorageHelper.localRemove(
                                     //       'user');
                                     // }
-                                    Get.toNamed(val);
+                                    if (val == Routes.LOGIN) {
+                                      Get.offAllNamed(val);
+                                    } else {
+                                      Get.toNamed(val);
+                                    }
                                     // _residenceCountry.value = val;
                                   },
                                 ),
