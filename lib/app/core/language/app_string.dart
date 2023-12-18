@@ -50,6 +50,7 @@ abstract class AppStrings {
   static const emptyValidation = "emptyValidation";
   static const nationalIDWrongValidation = "nationalIDWrongValidation";
   static const passwordWeekValidation = "passwordWeekValidation";
+  static const nameDisclamer = "nameDisclamer";
 
   // otp screen
   static const otpTitle = 'otpTitle';

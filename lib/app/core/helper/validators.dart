@@ -23,8 +23,11 @@ mixin ValidationMixin<T extends StatefulWidget> on State<T> {
     } else if (nationalID.length != 14) {
       return AppStrings.nationalIDShortValidation.tr;
     } else if (!RegExp(
-            r'(2[0-9][0-9]|3[0-2][0-3])[0-1][1-9][0-3][0-9][00-88]\d\d\d\d\d')
+            r'(2[0-9][0-9]|3[0-2][0-3])[0-1][1-9](0[1-9]|[1-2]\d|30|31)[00-88]\d\d\d\d\d')
         .hasMatch(nationalID)) {
+      // r'(([01-09]|[10-19]|[20-29]|30|31)[00-88]\d\d\d\d\d')
+
+//2900933
       return AppStrings.nationalIDWrongValidation.tr;
     }
 

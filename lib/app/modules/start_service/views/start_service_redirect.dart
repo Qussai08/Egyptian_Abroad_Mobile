@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:egyptians_abroad/app/core/custom_widgets/custom_appbar.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/custom_button.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/network_indecator.dart';
 import 'package:egyptians_abroad/app/core/helper/app_helper.dart';
@@ -29,6 +30,7 @@ class StartServiceRedir extends StatelessWidget {
       child: SafeArea(
         child: Scaffold(
             resizeToAvoidBottomInset: false,
+            appBar: CustomAppBar(title: ""),
             body: Container(
               width: fixDpiScreenWidth(),
               padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -48,9 +50,10 @@ class StartServiceRedir extends StatelessWidget {
                     height: 22.h,
                   ),
                   Text(
+                    // TODO : translate
                     serviceContent.servicesType == ServiceType.web
-                        ? "أنت على وشك فتح شاشة خدمة ${serviceContent.serviceName}، هل أنت متأكد من المتابعة؟"
-                        : "برجاء العلم أنه سيتم تحويلك لتطبيق ${serviceContent.serviceName}. هل تريد المتابعة؟",
+                        ? "برجاء العلم أنه سيتم تحويلك لموقع \"${serviceContent.serviceName}\"، هل تريد المتابعة؟"
+                        : "أنت على وشك فتح شاشة خدمة \"${serviceContent.serviceName}\". هل تريد المتابعة؟",
                     textAlign: TextAlign.center,
                     style: Styles.getSemiBoldStyle(
                         color: Styles.blueGrey, fontSize: fixDpiFont(15)),
@@ -84,19 +87,7 @@ class StartServiceRedir extends StatelessWidget {
                     },
                   ),
                   SizedBox(
-                    height: 16.h,
-                  ),
-                  CustomButton(
-                    text: AppStrings.backToApp.tr,
-                    type: ButtonType.secondary,
-                    width: 300.w,
-                    height: 50,
-                    onPressed: () {
-                      Get.back();
-                    },
-                  ),
-                  SizedBox(
-                    height: 50.h,
+                    height: 66.h,
                   ),
                 ],
               ),

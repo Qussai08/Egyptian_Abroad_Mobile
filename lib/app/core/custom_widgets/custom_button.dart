@@ -130,9 +130,7 @@ class CustomButton extends StatelessWidget {
                 )
               : widget ??
                   Row(
-                    mainAxisAlignment: (icon != null)
-                        ? MainAxisAlignment.spaceBetween
-                        : MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         type == ButtonType.disabled

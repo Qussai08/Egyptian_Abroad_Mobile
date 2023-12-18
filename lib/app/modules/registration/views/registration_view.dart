@@ -77,7 +77,31 @@ class _RegistrationViewState extends State<RegistrationView>
                               inputData: TextInputType.text,
                             ),
                             SizedBox(
-                              height: 16.h,
+                              height: 8.h,
+                            ),
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.error_outline,
+                                  color: Styles.primaryColor,
+                                  size: fixDpiWidth(16),
+                                ),
+                                SizedBox(
+                                  width: 3,
+                                ),
+                                Text(
+                                  AppStrings.nameDisclamer.tr,
+                                  // TODO : change it to custom
+                                  style: TextStyle(
+                                      fontFamily: 'baloo',
+                                      fontSize: fixDpiFont(10),
+                                      fontWeight: FontWeight.w400,
+                                      color: Color(0xff698097)),
+                                )
+                              ],
+                            ),
+                            SizedBox(
+                              height: 12.h,
                             ),
                             TextFieldTitle(title: AppStrings.nationalID.tr),
                             CustomTextFormField(
@@ -88,7 +112,7 @@ class _RegistrationViewState extends State<RegistrationView>
                               maxLength: null,
                             ),
                             SizedBox(
-                              height: 12.h,
+                              height: 16.h,
                             ),
                             TextFieldTitle(title: AppStrings.email.tr),
                             CustomTextFormField(
@@ -144,8 +168,7 @@ class _RegistrationViewState extends State<RegistrationView>
                                                                       .value
                                                                       .toString()) ==
                                                                   null))
-                                                  ? const Color.fromARGB(
-                                                      255, 237, 239, 240)
+                                                  ? Styles.grey_200
                                                   : Colors.red,
                                               value: residence,
                                               hint: "",
@@ -165,7 +188,7 @@ class _RegistrationViewState extends State<RegistrationView>
                                       }),
                             ),
                             SizedBox(
-                              height: 50.h,
+                              height: 40.h,
                             ),
                             CustomButton(
                               text: AppStrings.next.tr,
@@ -214,7 +237,7 @@ class _RegistrationViewState extends State<RegistrationView>
                               },
                             ),
                             SizedBox(
-                              height: 16.h,
+                              height: 8.h,
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -231,16 +254,39 @@ class _RegistrationViewState extends State<RegistrationView>
                                   },
                                   child: Text(
                                     AppStrings.logIn.tr,
-                                    style: Styles.getSemiBoldStyle(
+                                    // TODO : use custom style
+                                    style: TextStyle(
                                         color: Styles.primaryColor,
-                                        fontSize: fixDpiFont(12)),
+                                        decoration: TextDecoration.underline,
+                                        fontFamily: "baloo",
+                                        fontSize: fixDpiFont(11),
+                                        fontWeight: FontWeight.w600),
                                   ),
                                 )
                               ],
                             ),
                             SizedBox(
-                              height: 20.h,
+                              height: 25.h,
                             ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text('English Language support coming soon',
+                                    style: TextStyle(
+                                        color: Color(0xff667085),
+                                        fontFamily: "baloo",
+                                        fontSize: fixDpiFont(13),
+                                        fontWeight: FontWeight.w400)),
+                                SizedBox(
+                                  width: 3,
+                                ),
+                                Icon(
+                                  Icons.language,
+                                  color: Color(0xff667085),
+                                  size: fixDpiWidth(16),
+                                )
+                              ],
+                            )
                           ],
                         ),
                 ),

@@ -63,7 +63,8 @@ class _GridWidgetState extends State<GridWidget> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(
+                Container(
+                  color: Colors.transparent,
                   width: fixDpiWidth(82),
                   height: fixDpiHeight(82),
                   child: ClipRRect(
