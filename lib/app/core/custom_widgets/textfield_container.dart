@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// TODO : remove this file
 class TextFieldContainer extends StatelessWidget {
   const TextFieldContainer(
       {super.key,
@@ -20,6 +21,7 @@ class TextFieldContainer extends StatelessWidget {
         width: width,
         decoration: BoxDecoration(
             color: Colors.white,
+            border: Border.all(color: borderColor ?? Colors.transparent),
             borderRadius: BorderRadius.circular(37.0),
             boxShadow: const [
               BoxShadow(

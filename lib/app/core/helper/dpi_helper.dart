@@ -29,3 +29,8 @@ double fixDpiScreenWidth() {
 double fixDpiScreenHeight() {
   return ScreenUtil().screenHeight;
 }
+
+double pxToDp(BuildContext context, double pixel) {
+  final double devicePixelRatio = MediaQuery.of(context).devicePixelRatio;
+  return pixel / devicePixelRatio;
+}
