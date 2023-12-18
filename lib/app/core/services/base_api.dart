@@ -41,7 +41,7 @@ class BaseApi {
     Map<String, dynamic> headers = {
       "languageId": LocalizationHelper.isArabic() ? 1 : 2
     };
-    String token = AppHelper.token ?? '';
+    String token = authService.accessToken ?? '';
     token = "Bearer $token";
     headers["Authorization"] = token;
 
@@ -68,7 +68,7 @@ class BaseApi {
       Map<String, dynamic>? options,
       required String endPoint,
       bool? jsonResponse = true}) async {
-    String token = AppHelper.token ?? '';
+    String token = authService.accessToken ?? '';
     //  String token = authService.accessToken ?? '';
     token = "Bearer $token";
     var options0 = Options(headers: {

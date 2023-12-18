@@ -8,6 +8,7 @@ import 'package:egyptians_abroad/app/core/custom_widgets/title_text.dart';
 import 'package:egyptians_abroad/app/core/helper/app_helper.dart';
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
+import 'package:egyptians_abroad/app/core/services/auth_service.dart';
 import 'package:egyptians_abroad/app/core/services/models/user_profile.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:egyptians_abroad/app/modules/registration/controllers/registration_controller.dart';
@@ -41,38 +42,42 @@ class _EditAccountViewState extends State<EditAccountView>
   }
 
   final TextEditingController _nameTxtController =
-      TextEditingController(text: AppHelper.userProfile?.name ?? "");
-  final TextEditingController _nationalIDTxtController =
-      TextEditingController(text: AppHelper.userProfile?.nationalId ?? "");
+      TextEditingController(text: AuthService().getUserProfile?.name ?? "");
+  final TextEditingController _nationalIDTxtController = TextEditingController(
+      text: AuthService().getUserProfile?.nationalId ?? "");
   final TextEditingController _emailTxtController =
-      TextEditingController(text: AppHelper.userProfile?.email ?? "");
+      TextEditingController(text: AuthService().getUserProfile?.email ?? "");
   final TextEditingController _egPassportNumTxtController =
-      TextEditingController(text: AppHelper.userProfile?.passportNo ?? "");
+      TextEditingController(
+          text: AuthService().getUserProfile?.passportNo ?? "");
 
   final ValueNotifier<int?> _residenceCountry =
-      ValueNotifier(AppHelper.userProfile?.residencyCountryId);
+      ValueNotifier(AuthService().getUserProfile?.residencyCountryId);
   final ValueNotifier<int?> _residenceType =
-      ValueNotifier(AppHelper.userProfile?.residencyTypeId);
+      ValueNotifier(AuthService().getUserProfile?.residencyTypeId);
   final TextEditingController _residenceNumTxtController =
-      TextEditingController(text: AppHelper.userProfile?.residencyNo ?? "");
+      TextEditingController(
+          text: AuthService().getUserProfile?.residencyNo ?? "");
   final TextEditingController _forignPassportNumTxtController =
       TextEditingController(
-          text: AppHelper.userProfile?.foreignPassportNo ?? "");
+          text: AuthService().getUserProfile?.foreignPassportNo ?? "");
 
   final TextEditingController _residenceAddressTxtController =
       TextEditingController(
-          text: AppHelper.userProfile?.residencyAddress ?? "");
+          text: AuthService().getUserProfile?.residencyAddress ?? "");
   final ValueNotifier<int?> _jobCategory =
-      ValueNotifier(AppHelper.userProfile?.jobCategoryID);
+      ValueNotifier(AuthService().getUserProfile?.jobCategoryID);
 
   final TextEditingController _jobTitleTxtController =
-      TextEditingController(text: AppHelper.userProfile?.jobTitle ?? "");
+      TextEditingController(text: AuthService().getUserProfile?.jobTitle ?? "");
   final TextEditingController _egptionPhoneNumTxtController =
-      TextEditingController(text: AppHelper.userProfile?.egyptionMobile ?? "");
+      TextEditingController(
+          text: AuthService().getUserProfile?.egyptionMobile ?? "");
   final TextEditingController _forignPhoneNumTxtController =
-      TextEditingController(text: AppHelper.userProfile?.foreignMobile ?? "");
+      TextEditingController(
+          text: AuthService().getUserProfile?.foreignMobile ?? "");
   final TextEditingController _msgsAddressTxtController = TextEditingController(
-      text: AppHelper.userProfile?.messagingAddress ?? "");
+      text: AuthService().getUserProfile?.messagingAddress ?? "");
 
   final _formKey = GlobalKey<FormState>();
 

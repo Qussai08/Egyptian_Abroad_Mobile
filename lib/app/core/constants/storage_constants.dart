@@ -5,4 +5,5 @@ class StorageConstants {
   static const kUserEmail = 'user_email';
   static const kUserPhone = 'user_phone';
   static const kFcmToken = 'fcm_token';
+  static const kUserProfile = 'kUserProfile';
 }

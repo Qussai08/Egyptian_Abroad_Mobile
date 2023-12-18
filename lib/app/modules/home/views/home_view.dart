@@ -87,7 +87,7 @@ class HomeView extends GetView<HomeController> {
                                   // value: residence,
                                   // TODO: Need to fix the name, and userProfile may be null here use null safety operator (?.) to avoid null exception error
                                   hint:
-                                      "${AppStrings.hello.tr} ${AppHelper.userProfile?.name?.substring(0, AppHelper.userProfile?.name?.indexOf(' ', 0)) ?? ''} !",
+                                      "${AppStrings.hello.tr} ${controller.authService.getUserProfile?.shortName ?? ''} !",
 
                                   onChangeFunc: (val) async {
                                     // if (val == Routes.LOGIN) {
