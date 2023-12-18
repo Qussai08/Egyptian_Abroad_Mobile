@@ -19,6 +19,7 @@ class HomeController extends GetxController {
   final AuthService authService = Get.find();
   final RegistrationController registrationController =
       Get.put(RegistrationController());
+
   @override
   void onInit() {
     super.onInit();
@@ -37,15 +38,17 @@ class HomeController extends GetxController {
 
     AppResponse response = await UserRepository().viewAccountReq(
         // make it dynamic
+
         queryParameters: {
-          "Userid": AppHelper.userId,
+          "Userid": authService.userID,
           "languageId": LocalizationHelper.isArabic() ? 1 : 2
         });
 
     if (response.status) {
       UserProfileModel userProfile =
           UserProfileModel.fromJson(response.data['data']);
-      AppHelper.setUserProfile(userProfile);
+      // AppHelper.setUserProfile(userProfile);
+      authService.setUserProfile(userProfile);
     }
 
     setUserProfileLoading(false);

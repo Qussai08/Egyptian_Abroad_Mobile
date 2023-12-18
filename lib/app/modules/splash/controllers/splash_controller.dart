@@ -32,7 +32,7 @@ class SplashController extends GetxController {
     // var token = await SecureStorageHelper.localRead('token');
     String? token = authService.accessToken;
 
-    if (token != null) {
+    if (token?.isNotEmpty ?? false) {
       // token = json.decode(token);
       // AppHelper.setToken(token);
       // authService.setAccessToken(token!);

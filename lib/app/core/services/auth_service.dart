@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import '../constants/storage_constants.dart';
 import '../helper/notification_helper.dart';
 import '../helper/secure_storage_helper.dart';
+import 'models/user_profile.dart';
 import 'storage_service.dart';
 import 'package:jwt_decode/jwt_decode.dart';
 
@@ -35,6 +36,15 @@ class AuthService extends GetxService {
   void setExpireAt(int expireAt) {
     DateTime willExpireAt = DateTime.now().add(Duration(seconds: expireAt));
     storageService.setData(StorageConstants.kExpireAt, willExpireAt.toString());
+  }
+
+  // set User Profile
+  void setUserProfile(UserProfileModel profile) {
+    storageService.setData(StorageConstants.kUserProfile, profile);
+  }
+
+  UserProfileModel? get getUserProfile {
+    return storageService.getData(StorageConstants.kUserProfile);
   }
 
   void removeAccessToken() {
@@ -75,6 +85,7 @@ class AuthService extends GetxService {
   }
 
   String? get userID {
+    print(accessToken);
     if (accessToken?.isNotEmpty ?? false) {
       // Decode
       Map<String, dynamic> payload = Jwt.parseJwt(accessToken!);

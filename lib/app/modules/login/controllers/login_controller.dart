@@ -24,7 +24,7 @@ class LoginController extends GetxController {
       authService.setAccessToken(response.data['accessToken'] ?? '');
       authService.setRefreshToken(response.data['refreshToken'] ?? '');
       // String? userID = authService.userID ?? '';
-      AppHelper.setToken(response.data['accessToken']);
+      // AppHelper.setToken(response.data['accessToken']);
 
       await notificationHelper.registerFCMToken();
       await notificationHelper.subscribeToTopic('broadcast');
