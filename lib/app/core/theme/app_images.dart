@@ -29,4 +29,8 @@ class AppImages {
   static const gmailIcon = 'assets/icons/gmail_icon.png';
 
   static const carsIcon = 'assets/icons/cars_icon.png';
+
+  static const technicalPartner = 'assets/images/technical_partner.png';
+
+  static const logoutIcon = 'assets/icons/logout_icon.png';
 }

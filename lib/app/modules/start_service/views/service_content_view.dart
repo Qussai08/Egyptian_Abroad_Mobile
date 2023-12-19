@@ -48,7 +48,7 @@ class _ServiceContentViewState extends State<ServiceContentView> {
               title: widget.serviceContent!.servicesContentTitle,
             ),
             body: SingleChildScrollView(
-              physics: const NeverScrollableScrollPhysics(),
+              // physics: const NeverScrollableScrollPhysics(),
               child: Container(
                 height: fixDpiScreenHeight() * 0.9,
                 width: fixDpiScreenWidth(),

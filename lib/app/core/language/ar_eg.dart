@@ -113,4 +113,7 @@ Map<String, String> ar = {
   AppStrings.oldEqualNew:
       'يجب ألا تكون كلمة المرور الجديدة متطابقة مع كلمة المرور الحالية ',
   AppStrings.registerWithCarsAccount: 'التسجيل بحساب سيارات المصرين بالخارج',
+  AppStrings.somethingWentWrong: 'نأسف، حدث خطأ',
+  AppStrings.technicalPartner: 'الشريك التقني',
+  AppStrings.otpSentSuccessfully: 'تم إرسال كود التحقق إلى البريد الإلكترونى المُسجل',
 };

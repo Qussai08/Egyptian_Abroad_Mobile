@@ -74,6 +74,7 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView>
                       if (_formKey.currentState!.validate()) {
                         await controller.verifyMail();
                       }
+                      
                     },
                   ),
                   SizedBox(
