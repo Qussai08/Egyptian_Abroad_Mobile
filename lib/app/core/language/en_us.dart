@@ -115,4 +115,5 @@ Map<String, String> en = {
       'Egyptian phone number should be 11 digits',
   AppStrings.egPhoneNumWrongValidation:
       "The submitted Phone number is incorrect",
+  AppStrings.registerWithCarsAccount: 'Register with Cars Account',
 };

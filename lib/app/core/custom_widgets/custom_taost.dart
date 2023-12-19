@@ -63,7 +63,7 @@ GetSnackBar buildCustomToast(
         style: Styles.getRegularStyle(color: Styles.white)),
     duration: const Duration(seconds: 2),
     backgroundColor: toastType.backgroundColor,
-    borderRadius: 16,
+    borderRadius: fixDpiWidth(16),
     margin: const EdgeInsets.only(bottom: 0),
     padding: const EdgeInsets.only(top: 12, bottom: 10),
     snackStyle: SnackStyle.GROUNDED,
