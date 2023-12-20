@@ -170,7 +170,7 @@ class _EditAccountViewState extends State<EditAccountView>
                               validationFunc: (val) => validateEgyptionPassport(
                                   _egPassportNumTxtController.text),
                               inputData: TextInputType.text,
-                              enabled: false,
+                              enabled: widget.isEdit,
                               controller: _egPassportNumTxtController,
                             ),
                             SizedBox(
@@ -255,6 +255,25 @@ class _EditAccountViewState extends State<EditAccountView>
                                         blackHint: true,
                                         onChangeFunc: (val) {
                                           _residenceType.value = val;
+                                          if (residenceTP == 1) {
+                                            _residenceNumTxtController.clear();
+                                            _residenceAddressTxtController
+                                                .text = AuthService()
+                                                    .getUserProfile
+                                                    ?.residencyNo ??
+                                                "";
+                                            _formKey.currentState!.validate();
+                                          } else if (residenceTP == 2) {
+                                            _forignPassportNumTxtController
+                                                .clear();
+                                            _forignPassportNumTxtController
+                                                .text = AuthService()
+                                                    .getUserProfile
+                                                    ?.foreignPassportNo ??
+                                                "";
+
+                                            _formKey.currentState!.validate();
+                                          }
                                         },
                                       ),
                                       SizedBox(

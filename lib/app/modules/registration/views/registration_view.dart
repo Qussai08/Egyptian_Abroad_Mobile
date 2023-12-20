@@ -10,6 +10,7 @@ import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/core/services/app_response.dart';
 import 'package:egyptians_abroad/app/core/theme/app_images.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
+import 'package:egyptians_abroad/app/modules/otp/views/otp_view.dart';
 import 'package:egyptians_abroad/app/modules/registration/controllers/registration_controller.dart';
 import 'package:egyptians_abroad/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
@@ -149,8 +150,21 @@ class _RegistrationViewState extends State<RegistrationView>
                                                       .map((e) =>
                                                           DropdownMenuItem(
                                                             value: e.id,
-                                                            child:
+                                                            child: Row(
+                                                              children: [
+                                                                Image.network(
+                                                                  e.flag,
+                                                                  width: 21,
+                                                                  height: 15,
+                                                                  fit: BoxFit
+                                                                      .cover,
+                                                                ),
+                                                                SizedBox(
+                                                                  width: 8,
+                                                                ),
                                                                 Text(e.country),
+                                                              ],
+                                                            ),
                                                           ))
                                                       .toList(),
                                               borderColor: showCountryError ==
@@ -205,10 +219,15 @@ class _RegistrationViewState extends State<RegistrationView>
                                       await controller.verifyMailAndNID();
 
                                   if (res.status && res.data['data'] == true) {
-                                    await controller.createVerificationCode();
-                                    Get.toNamed(
-                                      Routes.OTP,
-                                    );
+                                    AppResponse verRes = await controller
+                                        .createVerificationCode();
+                                    Get.to(() => OtpView(
+                                          resendOtpTime: verRes.data['data']
+                                              ['data']['resendOtp'],
+                                        ));
+                                    // Get.toNamed(
+                                    //   Routes.OTP,
+                                    // );
                                   } else {
                                     Get.showSnackbar(
                                       buildCustomToast(

@@ -165,7 +165,9 @@ class _ForgetPassSetPasswordViewState extends State<ForgetPassSetPasswordView>
                     width: 300.w,
                     height: 50,
                     onPressed: () {
-                      Get.offAll(Routes.LOGIN);
+                      Get.offAllNamed(Routes.LOGIN);
+                      controller.newPasswordTxtController.clear();
+                      controller.confirmNewPassTxtController.clear();
                     },
                   ),
                 ],

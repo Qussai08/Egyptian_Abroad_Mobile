@@ -19,7 +19,8 @@ import 'package:otp_text_field/otp_text_field.dart';
 import 'package:otp_text_field/style.dart';
 
 class OtpView extends StatefulWidget {
-  const OtpView({super.key});
+  const OtpView({super.key, this.resendOtpTime});
+  final int? resendOtpTime;
 
   @override
   State<OtpView> createState() => _OtpViewState();
@@ -30,12 +31,13 @@ class _OtpViewState extends State<OtpView> with ValidationMixin {
   final ValueNotifier<bool> _otpHasError = ValueNotifier(false);
   String? errormsg;
 
-  int endTime = DateTime.now().millisecondsSinceEpoch + 1000 * 600;
   intl.NumberFormat formatter = intl.NumberFormat("00");
 
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(RegistrationController());
+    int endTime = DateTime.now().millisecondsSinceEpoch +
+        1000 * (widget.resendOtpTime ?? 2) * 60;
 
     return NetworkIndicator(
       child: Scaffold(

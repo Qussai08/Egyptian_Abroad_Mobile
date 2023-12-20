@@ -38,7 +38,7 @@ class RegistrationController extends GetxController {
   final TextEditingController passwordTxtController = TextEditingController();
   String otp = '';
 
-  Future<void> createVerificationCode() async {
+  Future<AppResponse> createVerificationCode() async {
     AppResponse response = await UserRepository().createOtp(
       queryParameters: {
         "email": emailTxtController.text,
@@ -48,6 +48,7 @@ class RegistrationController extends GetxController {
     if (response.status) {
       print("createVerificationCode : ${response.status}");
     }
+    return response;
   }
 
   Future<AppResponse> verifyCode(otp) async {
@@ -272,13 +273,19 @@ class RegistrationController extends GetxController {
         // TODO : make it dynamic
         queryParameters: {"guid": authService.userID});
     if (response.status) {
-      buildCustomDialog(
-          // TODO : translate
-          dialogMsg: "تم تعديل بيانات الحساب بنجاح",
-          dialogType: DialogType.success);
+      Get.showSnackbar(buildCustomToast(
+        Get.context!,
+        toastMsg: "تم تعديل بيانات الحساب بنجاح",
+        toastTitle: 'تاكيد',
+        toastType: ToastType.success,
+      ));
 
       var controller = Get.put(HomeController());
-      controller.getUserProfile();
+      await controller.getUserProfile();
+      Future.delayed(const Duration(seconds: 3), () async {
+        Get.back(closeOverlays: true);
+        Get.back();
+      });
     }
   }
 }

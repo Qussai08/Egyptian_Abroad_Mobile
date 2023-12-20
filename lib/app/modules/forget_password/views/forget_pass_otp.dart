@@ -18,7 +18,8 @@ import 'package:otp_text_field/otp_text_field.dart';
 import 'package:otp_text_field/style.dart';
 
 class ForgetPassOtpView extends StatefulWidget {
-  const ForgetPassOtpView({super.key});
+  const ForgetPassOtpView({super.key, this.resendOtpTime});
+  final int? resendOtpTime;
 
   @override
   State<ForgetPassOtpView> createState() => _ForgetPassOtpViewState();
@@ -30,11 +31,15 @@ class _ForgetPassOtpViewState extends State<ForgetPassOtpView>
   final ValueNotifier<bool> _otpHasError = ValueNotifier(false);
   String? errormsg;
 
-  int endTime = DateTime.now().millisecondsSinceEpoch + 1000 * 600;
   intl.NumberFormat formatter = intl.NumberFormat("00");
 
   @override
   Widget build(BuildContext context) {
+    int endTime = DateTime.now().millisecondsSinceEpoch +
+        1000 * (widget.resendOtpTime ?? 2) * 60;
+
+    print("resendOtpTime ${widget.resendOtpTime}");
+
     final controller = Get.put(ForgetPasswordController());
 
     return NetworkIndicator(
@@ -115,6 +120,10 @@ class _ForgetPassOtpViewState extends State<ForgetPassOtpView>
                                     if (res.status &&
                                         res.data['data'] == true) {
                                       controller.otp = pin;
+                                      controller.confirmNewPassTxtController
+                                          .clear();
+                                      controller.newPasswordTxtController
+                                          .clear();
                                       Get.toNamed(Routes.FORGETPASSSETPASS);
                                     } else {
                                       _otpHasError.value = true;
@@ -194,7 +203,9 @@ class _ForgetPassOtpViewState extends State<ForgetPassOtpView>
                                             .createVerificationCode();
                                         endTime = DateTime.now()
                                                 .millisecondsSinceEpoch +
-                                            1000 * 600;
+                                            1000 *
+                                                (widget.resendOtpTime ?? 2) *
+                                                60;
                                         _otpHasError.value = false;
                                         controller.otpTxtController.clear();
                                         setState(() {});
@@ -256,7 +267,7 @@ class _ForgetPassOtpViewState extends State<ForgetPassOtpView>
                             width: 300.w,
                             height: 50,
                             onPressed: () {
-                              Get.offAll(Routes.LOGIN);
+                              Get.offAllNamed(Routes.LOGIN);
                             },
                           ),
                           SizedBox(

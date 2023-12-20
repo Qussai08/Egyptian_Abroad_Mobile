@@ -1,6 +1,7 @@
 import 'package:egyptians_abroad/app/core/custom_widgets/custom_dialog.dart';
 import 'package:egyptians_abroad/app/core/services/app_response.dart';
 import 'package:egyptians_abroad/app/core/services/repositories/user_repository.dart';
+import 'package:egyptians_abroad/app/modules/forget_password/views/forget_pass_otp.dart';
 import 'package:egyptians_abroad/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -21,9 +22,17 @@ class ForgetPasswordController extends GetxController {
           "email": emailTxtController.text,
           "NID": "00000000000000"
         });
+    print("response.data ${response.data}");
+
     if (!response.data['data']) {
-      await createVerificationCode();
-      Get.toNamed(Routes.FORGETPASSOTP);
+      AppResponse verRes = await createVerificationCode();
+      print("verRes ${verRes.data}");
+      // Get.toNamed(Routes.FORGETPASSOTP);
+      if (verRes.status) {
+        Get.to(() => ForgetPassOtpView(
+              resendOtpTime: verRes.data['data']['data']['resendOtp'],
+            ));
+      }
     } else {
       buildCustomDialog(
           // TODO : translate
@@ -38,7 +47,7 @@ class ForgetPasswordController extends GetxController {
     return response;
   }
 
-  Future<void> createVerificationCode() async {
+  Future<AppResponse> createVerificationCode() async {
     AppResponse response = await UserRepository().createOtp(queryParameters: {
       "email": emailTxtController.text,
       "verificationType": 2
@@ -46,6 +55,7 @@ class ForgetPasswordController extends GetxController {
     if (response.status) {
       print("createVerificationCode : ${response.status}");
     }
+    return response;
   }
 
   Future<void> forgetPass() async {
