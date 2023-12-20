@@ -5,6 +5,7 @@ import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/helper/validators.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/core/services/app_response.dart';
+import 'package:egyptians_abroad/app/core/theme/app_images.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:egyptians_abroad/app/modules/forget_password/controllers/forget_password_controller.dart';
 import 'package:egyptians_abroad/app/routes/app_pages.dart';
@@ -29,7 +30,7 @@ class _ForgetPassOtpViewState extends State<ForgetPassOtpView>
     with ValidationMixin {
   final _formKey = GlobalKey<FormState>();
   final ValueNotifier<bool> _otpHasError = ValueNotifier(false);
-  String? errormsg;
+  String errormsg = 'hi';
 
   intl.NumberFormat formatter = intl.NumberFormat("00");
 
@@ -53,7 +54,7 @@ class _ForgetPassOtpViewState extends State<ForgetPassOtpView>
               child: Column(
                 children: [
                   Image.asset(
-                    'assets/images/Fingerprint2.png',
+                    AppImages.fingerPrint,
                     width: 333.w,
                     fit: BoxFit.fitWidth,
                   ),
@@ -68,13 +69,9 @@ class _ForgetPassOtpViewState extends State<ForgetPassOtpView>
                     height: 15.h,
                   ),
                   TitleText(
-                    title: AppStrings.otpDiscription.tr,
-                    titleTextStyle: const TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                        color: Styles.lightBlack,
-                        fontFamily: 'baloo'),
-                  ),
+                      title: AppStrings.otpDiscription.tr,
+                      titleTextStyle:
+                          Styles.getRegularStyle(color: Styles.lightBlack)),
                   SizedBox(
                     height: 25.h,
                   ),
@@ -180,6 +177,14 @@ class _ForgetPassOtpViewState extends State<ForgetPassOtpView>
                           );
                         }),
                   ),
+                  // Visibility(
+                  //     visible: controller.showValidation(),
+                  //     child: Text(
+                  //       validateOtpCode(controller.otp) ?? '',
+                  //       // errormsg,
+                  //       style: Styles.getRegularStyle(
+                  //           color: Styles.red, fontSize: fixDpiFont(12)),
+                  //     )),
                   const SizedBox(
                     height: 20,
                   ),
@@ -208,7 +213,9 @@ class _ForgetPassOtpViewState extends State<ForgetPassOtpView>
                                                 60;
                                         _otpHasError.value = false;
                                         controller.otpTxtController.clear();
-                                        setState(() {});
+                                        setState(() {
+                                          controller.showValidation = true.obs;
+                                        });
                                       }),
                                 )
                               : Container(
@@ -220,13 +227,10 @@ class _ForgetPassOtpViewState extends State<ForgetPassOtpView>
                                     color: Styles.secondaryButtonColor,
                                   ),
                                   child: Text(
-                                    " إعادة إرسال خلال "
-                                    '${formatter.format(time.min ?? 00)}:${formatter.format(time.sec ?? 00)}',
-                                    style: TextStyle(
-                                        fontFamily: 'baloo',
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: fixDpiFont(12)),
-                                  ),
+                                      '${AppStrings.resendOtp.tr} ${formatter.format(time.min ?? 00)}:${formatter.format(time.sec ?? 00)}',
+                                      style: Styles.getRegularStyle(
+                                          color: Styles.black,
+                                          fontSize: fixDpiFont(12))),
                                 ),
                           SizedBox(
                             height: 50.h,
@@ -248,7 +252,8 @@ class _ForgetPassOtpViewState extends State<ForgetPassOtpView>
                               }
 
                               if (_otpHasError.value == false) {
-                                errormsg = validateOtpCode(controller.otp);
+                                errormsg = validateOtpCode(controller.otp)!;
+
                                 if (errormsg ==
                                     AppStrings.otpEmptyValidation.tr)
                                   setState(() {});

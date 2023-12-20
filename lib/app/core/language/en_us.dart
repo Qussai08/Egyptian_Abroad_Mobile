@@ -116,4 +116,7 @@ Map<String, String> en = {
   AppStrings.egPhoneNumWrongValidation:
       "The submitted Phone number is incorrect",
   AppStrings.registerWithCarsAccount: 'Register with Cars Account',
+  AppStrings.somethingWentWrong: 'Sorry, something went wrong',
+  AppStrings.technicalPartner: 'Technical Partner',
+  AppStrings.otpSentSuccessfully: 'OTP Sent Successfully',
 };

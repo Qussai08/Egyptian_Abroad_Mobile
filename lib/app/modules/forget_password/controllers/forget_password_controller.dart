@@ -1,4 +1,6 @@
 import 'package:egyptians_abroad/app/core/custom_widgets/custom_dialog.dart';
+import 'package:egyptians_abroad/app/core/custom_widgets/custom_taost.dart';
+import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/core/services/app_response.dart';
 import 'package:egyptians_abroad/app/core/services/repositories/user_repository.dart';
 import 'package:egyptians_abroad/app/modules/forget_password/views/forget_pass_otp.dart';
@@ -15,6 +17,9 @@ class ForgetPasswordController extends GetxController {
       TextEditingController();
   final TextEditingController confirmNewPassTxtController =
       TextEditingController();
+  String otp = '';
+  RxString errorMessage = ''.obs;
+  RxBool showValidation = false.obs;
 
   Future<void> verifyMail() async {
     AppResponse response = await UserRepository().checkEmailAndNIIfExist(
@@ -28,6 +33,14 @@ class ForgetPasswordController extends GetxController {
       AppResponse verRes = await createVerificationCode();
       print("verRes ${verRes.data}");
       // Get.toNamed(Routes.FORGETPASSOTP);
+      Get.showSnackbar(
+        buildCustomToast(
+          Get.context!,
+          toastMsg: AppStrings.otpSentSuccessfully.tr,
+          toastTitle: AppStrings.confirm.tr,
+          toastType: ToastType.success,
+        ),
+      );
       if (verRes.status) {
         Get.to(() => ForgetPassOtpView(
               resendOtpTime: verRes.data['data']['data']['resendOtp'],

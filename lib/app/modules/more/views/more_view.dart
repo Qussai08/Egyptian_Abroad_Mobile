@@ -1,5 +1,6 @@
 import 'package:egyptians_abroad/app/core/theme/app_images.dart';
 import 'package:egyptians_abroad/app/modules/more/views/widgets/column_element_widget.dart';
+import 'package:egyptians_abroad/app/modules/more/views/widgets/list_tile_widget.dart';
 import 'package:egyptians_abroad/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -46,57 +47,53 @@ class MoreView extends GetView<MoreController> {
       ),
       body: Column(
         children: [
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 26.0),
-            height: 73.h,
-            child: ContactElementWidget(
-                onTap: () {},
-                imageAsset: AppImages.profileIcon,
-                text: AppStrings.profile.tr,
-                fontSize: fixDpiFont(16)),
-          ),
-
-          const Divider(color: Styles.grey_200),
-
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 26.0),
-            height: 71.h,
-            child: ContactElementWidget(
-                onTap: () => controller.changeView(Routes.ABOUTUS),
-                imageAsset: AppImages.logo,
-                imageScale: 12,
-                text: AppStrings.aboutUs.tr,
-                fontSize: fixDpiFont(16)),
-          ),
-          const Divider(color: Styles.grey_200),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 26.0),
-            height: 71.h,
-            child: ContactElementWidget(
-                onTap: () => controller.changeView(Routes.CONTACTUS),
-                imageAsset: AppImages.callIcon,
-                imageScale: 2,
-                text: AppStrings.contactUs.tr,
-                fontSize: fixDpiFont(16)),
-          ),
-
-          // const Divider(color: Styles.grey_200),
+          ListTileWidget(
+              text: AppStrings.profile.tr,
+              imageAsset: AppImages.profileIcon,
+              onTap: () => controller.changeView(Routes.ViewACCOUNT)),
+          const Divider(color: Styles.grey_200, height: 0),
+          ListTileWidget(
+              text: AppStrings.aboutUs.tr,
+              imageAsset: AppImages.logo,
+              imageScale: 12,
+              onTap: () => controller.changeView(Routes.ABOUTUS)),
+          const Divider(color: Styles.grey_200, height: 0),
+          ListTileWidget(
+              text: AppStrings.contactUs.tr,
+              imageAsset: AppImages.callIcon,
+              onTap: () => controller.changeView(Routes.CONTACTUS),
+              imageScale: 2),
+          const Divider(color: Styles.grey_200, height: 0),
           Visibility(
-            visible: false, // hide change language button
+            visible: true, // hide change language button
 
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 26.0),
-              height: 71.h,
-              child: ContactElementWidget(
-                  onTap: () {
-                    // const ChangeLangButtonWidget();
-                  },
-                  imageAsset: AppImages.languageIcon,
-                  text: AppStrings.language.tr,
-                  fontSize: fixDpiFont(16)),
+            child: ListTileWidget(
+              imageAsset: AppImages.languageIcon,
+              text: AppStrings.language.tr,
             ),
           ),
-          const Divider(color: Styles.grey_200),
+          const Divider(color: Styles.grey_200, height: 0),
+          ListTileWidget(
+            text: AppStrings.logOut.tr,
+            imageAsset: AppImages.logoutIcon,
+            onTap: () {
+              controller.onLogout();
+              Get.offAllNamed(Routes.LOGIN);
+            },
+          ),
+          const Divider(color: Styles.grey_200, height: 0),
+          Spacer(),
+          Column(
+            children: [
+              Text(
+                AppStrings.technicalPartner.tr,
+                style: Styles.getRegularStyle(
+                        fontSize: fixDpiFont(12), color: Styles.grey_600)
+                    .copyWith(fontFamily: 'helvetica'),
+              ),
+              Image.asset(AppImages.technicalPartner),
+            ],
+          ),
         ],
       ),
     );

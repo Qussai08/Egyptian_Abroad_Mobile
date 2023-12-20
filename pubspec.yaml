@@ -57,6 +57,10 @@ flutter:
     - family: baloo
       fonts:
         - asset: assets/fonts/baloo_ar.ttf
+        
+    - family: helvetica
+      fonts:
+        - asset: assets/fonts/helvetica.ttf
         #   weight: 400
         # - asset: assets/fonts/Baloo2-Bold.ttf
         #   weight: 700

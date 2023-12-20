@@ -31,6 +31,7 @@ abstract class AppStrings {
   static const emailFormatValidation = "emailFormatValidation";
   static const emailEmptyValidation = "emailEmptyValidation";
   static const passwordEmptyValidation = "passwordEmptyValidation";
+  static const otpSentSuccessfully = "otpSentSuccessfully";
   static const sorry = "sorry";
   static const invalidMailOrPass = "invalidMailOrPass";
   static const registerWithCarsAccount = "registerWithCarsAccount";
@@ -143,4 +144,7 @@ abstract class AppStrings {
   static const maxlength = 'maxlength';
   static const char = 'char';
   static const num = 'num';
+
+  static const somethingWentWrong = 'somethingWentWrong';
+  static const technicalPartner = 'technicalPartner';
 }

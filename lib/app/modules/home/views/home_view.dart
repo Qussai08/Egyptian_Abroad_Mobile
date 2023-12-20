@@ -76,13 +76,6 @@ class HomeView extends GetView<HomeController> {
                                       value: Routes.CHANGEPASSWORD,
                                       child: Text(AppStrings.changePassword.tr),
                                     ),
-                                    DropdownMenuItem(
-                                      onTap: () {
-                                        controller.onLogout();
-                                      },
-                                      value: Routes.LOGIN,
-                                      child: Text(AppStrings.logOut.tr),
-                                    ),
                                   ],
                                   // value: residence,
                                   // TODO: Need to fix the name, and userProfile may be null here use null safety operator (?.) to avoid null exception error
