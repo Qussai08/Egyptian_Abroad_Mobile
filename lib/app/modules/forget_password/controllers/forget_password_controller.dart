@@ -17,7 +17,7 @@ class ForgetPasswordController extends GetxController {
       TextEditingController();
   final TextEditingController confirmNewPassTxtController =
       TextEditingController();
-  String otp = '';
+
   RxString errorMessage = ''.obs;
   RxBool showValidation = false.obs;
 
