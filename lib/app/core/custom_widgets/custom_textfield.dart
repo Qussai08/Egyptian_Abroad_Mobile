@@ -2,6 +2,7 @@ import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/helper/localization_helper.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class CustomTextFormField extends StatefulWidget {
   final TextStyle? hintStyle;
@@ -32,6 +33,7 @@ class CustomTextFormField extends StatefulWidget {
   final OutlineInputBorder? disabledBorder;
   final TextInputAction? textInputAction;
   final Color? fillColor;
+  final List<TextInputFormatter>? inputFormatters;
 
   final TextEditingController? controller;
   const CustomTextFormField(
@@ -64,7 +66,8 @@ class CustomTextFormField extends StatefulWidget {
       this.textStyle,
       this.focusNode,
       this.textInputAction,
-      this.fillColor = Colors.white});
+      this.fillColor = Colors.white,
+      this.inputFormatters});
 
   @override
   _CustomTextFormFieldState createState() => _CustomTextFormFieldState();
@@ -114,6 +117,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             focusNode: _focusNode,
             maxLength: widget.maxLength,
             initialValue: widget.initialValue,
+            inputFormatters: widget.inputFormatters,
             textDirection: LocalizationHelper.isArabic()
                 ? TextDirection.rtl
                 : TextDirection.ltr,

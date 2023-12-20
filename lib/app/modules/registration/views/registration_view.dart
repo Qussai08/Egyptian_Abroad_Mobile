@@ -159,7 +159,7 @@ class _RegistrationViewState extends State<RegistrationView>
                                                                   fit: BoxFit
                                                                       .cover,
                                                                 ),
-                                                                SizedBox(
+                                                                const SizedBox(
                                                                   width: 8,
                                                                 ),
                                                                 Text(e.country),

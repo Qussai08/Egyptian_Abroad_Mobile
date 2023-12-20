@@ -18,8 +18,8 @@ class ForgetPasswordController extends GetxController {
   final TextEditingController confirmNewPassTxtController =
       TextEditingController();
 
-  RxString errorMessage = ''.obs;
-  RxBool showValidation = false.obs;
+  // RxString errorMessage = ''.obs;
+  // RxBool showValidation = false.obs;
 
   Future<void> verifyMail() async {
     AppResponse response = await UserRepository().checkEmailAndNIIfExist(
@@ -41,11 +41,14 @@ class ForgetPasswordController extends GetxController {
           toastType: ToastType.success,
         ),
       );
-      if (verRes.status) {
-        Get.to(() => ForgetPassOtpView(
-              resendOtpTime: verRes.data['data']['data']['resendOtp'],
-            ));
-      }
+      Future.delayed(const Duration(seconds: 2), () {
+        if (verRes.status) {
+          otp = '';
+          Get.to(() => ForgetPassOtpView(
+                resendOtpTime: verRes.data['data']['data']['resendOtp'],
+              ));
+        }
+      });
     } else {
       buildCustomDialog(
           // TODO : translate

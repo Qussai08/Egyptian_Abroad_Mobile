@@ -69,8 +69,8 @@ Map<String, String> ar = {
   AppStrings.skip: 'تخطي',
   AppStrings.sorry: 'عفوا',
   AppStrings.invalidMailOrPass: 'خطأ في البريد الإلكترونى أو كلمة المرور.',
-  AppStrings.accountInfos: 'بيانات الحساب',
-  AppStrings.editAccountInfos: 'تعديل بيانات الحساب',
+  AppStrings.accountInfos: 'الملف التعريفى',
+  AppStrings.editAccountInfos: 'تعديل الملف التعريفى',
   AppStrings.viewAccountInfos: 'عرض بيانات الحساب',
   AppStrings.forgetPasswordTitle: 'اعادة تعيين كلمة المرور',
   AppStrings.sendVerificationCode: 'ارسال كود التحقق',
@@ -115,5 +115,6 @@ Map<String, String> ar = {
   AppStrings.registerWithCarsAccount: 'التسجيل بحساب سيارات المصرين بالخارج',
   AppStrings.somethingWentWrong: 'نأسف، حدث خطأ',
   AppStrings.technicalPartner: 'الشريك التقني',
-  AppStrings.otpSentSuccessfully: 'تم إرسال كود التحقق إلى البريد الإلكترونى المُسجل',
+  AppStrings.otpSentSuccessfully:
+      'تم إرسال كود التحقق إلى البريد الإلكترونى المُسجل',
 };
