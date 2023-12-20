@@ -173,4 +173,6 @@ class CategoryController extends GetxController {
     }
     update();
   }
+
+
 }

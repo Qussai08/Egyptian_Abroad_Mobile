@@ -115,5 +115,7 @@ Map<String, String> ar = {
   AppStrings.registerWithCarsAccount: 'التسجيل بحساب سيارات المصرين بالخارج',
   AppStrings.somethingWentWrong: 'نأسف، حدث خطأ',
   AppStrings.technicalPartner: 'الشريك التقني',
-  AppStrings.otpSentSuccessfully: 'تم إرسال كود التحقق إلى البريد الإلكترونى المُسجل',
+  AppStrings.otpSentSuccessfully:
+      'تم إرسال كود التحقق إلى البريد الإلكترونى المُسجل',
+  AppStrings.favorites: 'المفضلة',
 };

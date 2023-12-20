@@ -119,4 +119,5 @@ Map<String, String> en = {
   AppStrings.somethingWentWrong: 'Sorry, something went wrong',
   AppStrings.technicalPartner: 'Technical Partner',
   AppStrings.otpSentSuccessfully: 'OTP Sent Successfully',
+  AppStrings.favorites: 'Favorites',
 };

@@ -33,4 +33,6 @@ class AppImages {
   static const technicalPartner = 'assets/images/technical_partner.png';
 
   static const logoutIcon = 'assets/icons/logout_icon.png';
+
+  static const heartIcon = 'assets/icons/heart_icon.png';
 }

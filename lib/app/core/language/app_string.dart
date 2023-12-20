@@ -106,7 +106,7 @@ abstract class AppStrings {
   static const showMore = 'showMore';
   static const searchForService = 'searchForService';
   static const noServices = 'noServices';
-
+  static const favorites = 'favorites';
   // category screen
   static const servicesNeeded = 'servicesNeeded';
 

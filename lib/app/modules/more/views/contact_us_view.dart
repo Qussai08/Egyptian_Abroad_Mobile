@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'widgets/column_element_widget.dart';
-import 'widgets/custom_card_widget.dart';
+import '../../../core/custom_widgets/custom_card_widget.dart';
 import 'widgets/header_widget.dart';
 import 'package:flutter/material.dart';
 
