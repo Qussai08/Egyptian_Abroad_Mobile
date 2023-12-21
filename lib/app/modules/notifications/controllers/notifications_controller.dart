@@ -33,10 +33,12 @@ class NotificationsController extends GetxController
           change(null, status: RxStatus.empty());
         }
       } else {
-        change(null, status: RxStatus.error('${value.error}'));
+        change(null, status: RxStatus.error('حدث خطأ ما'));
+        // change(null, status: RxStatus.error('${value.error}'));
       }
     }, onError: (error) {
-      change(null, status: RxStatus.error('$error'));
+      change(null, status: RxStatus.error('حدث خطأ ما'));
+      // change(null, status: RxStatus.error('$error'));
     });
   }
 
