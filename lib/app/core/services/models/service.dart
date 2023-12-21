@@ -1,3 +1,5 @@
+import 'package:get/get.dart';
+
 class ServicesResponse {
   ServicesResponse({
     required this.isSuccess,
@@ -45,16 +47,19 @@ class ServiceItem {
     this.servicesIcon,
     required this.serviceName,
     required this.categoryId,
+    required this.isFavorite,
   });
   late final int serviceId;
   late final String? servicesIcon;
   late final String serviceName;
   late final int categoryId;
+  RxBool isFavorite = false.obs;
 
   ServiceItem.fromJson(Map<String, dynamic> json) {
     serviceId = json['serviceId'];
     servicesIcon = json['servicesIcon'];
     serviceName = json['serviceName'];
     categoryId = json['categoryId'];
+    isFavorite = json['isFavorite'] ?? false.obs;
   }
 }

@@ -8,6 +8,7 @@ import 'package:egyptians_abroad/app/core/helper/app_helper.dart';
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
+import 'package:egyptians_abroad/app/modules/home/views/widgets/favorites_list.dart';
 import 'package:egyptians_abroad/app/modules/home/views/widgets/home_appbar.dart';
 import 'package:egyptians_abroad/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,7 @@ class HomeView extends GetView<HomeController> {
         resizeToAvoidBottomInset: false,
         appBar: const HomeAppBar(),
         body: SingleChildScrollView(
-          physics: const NeverScrollableScrollPhysics(),
+          // physics: const NeverScrollableScrollPhysics(),
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 16.w),
             child: homeContoller.userProfileLoading
@@ -206,6 +207,8 @@ class HomeView extends GetView<HomeController> {
                             fontWeight: FontWeight.w400,
                             fontFamily: 'baloo'),
                       ),
+                      SizedBox(height: 19.h),
+                      FavoritesList(),
                       Container(
                         margin: EdgeInsets.only(top: 20.h),
                         padding: EdgeInsets.symmetric(

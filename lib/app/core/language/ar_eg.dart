@@ -52,7 +52,7 @@ Map<String, String> ar = {
   AppStrings.passwordContainsChar: 'يحتوي على حرف واحد على الأقل',
   AppStrings.passwordContainsSpecialChar: 'يحتوي على حرف خاص واحد على الأقل',
   AppStrings.confirmPasswordValidation: 'كلمة المرور غير متطابقة.',
-  AppStrings.completeAccountTitle: 'استكمال بيانات الحساب',
+  AppStrings.completeAccountTitle: 'استكمال الملف التعريفي',
   AppStrings.egPassportNum: 'رقم جواز السفر المصرى',
   AppStrings.residenceCountry: 'بلد الاقامة',
   AppStrings.residenceType: 'نوع الاقامة',
@@ -66,7 +66,7 @@ Map<String, String> ar = {
   AppStrings.forignPhoneNumHint: ' (يجب ان يكون به تطبيق واتساب) ',
   AppStrings.msgsAddress: 'عنوان المراسلات داخل مصر',
   AppStrings.save: 'حفظ',
-  AppStrings.skip: 'تخطي',
+  AppStrings.skip: 'أكمل لاحقًا',
   AppStrings.sorry: 'عفوا',
   AppStrings.invalidMailOrPass: 'خطأ في البريد الإلكترونى أو كلمة المرور.',
   AppStrings.accountInfos: 'الملف التعريفى',
@@ -117,4 +117,5 @@ Map<String, String> ar = {
   AppStrings.technicalPartner: 'الشريك التقني',
   AppStrings.otpSentSuccessfully:
       'تم إرسال كود التحقق إلى البريد الإلكترونى المُسجل',
+  AppStrings.favorites: 'المفضلة',
 };

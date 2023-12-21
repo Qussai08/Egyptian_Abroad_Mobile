@@ -22,6 +22,7 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+
     getCategoriesList();
     getUserProfile();
   }
@@ -192,6 +193,4 @@ class HomeController extends GetxController {
     }
     update();
   }
-
- 
 }

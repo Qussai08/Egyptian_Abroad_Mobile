@@ -45,7 +45,11 @@ class _ServiceContentViewState extends State<ServiceContentView> {
           child: Scaffold(
             backgroundColor: Colors.transparent,
             appBar: CustomAppBar(
-              title: widget.serviceContent!.servicesContentTitle,
+              title: Text(
+                widget.serviceContent!.servicesContentTitle ?? "",
+                style: Styles.getBoldStyle(
+                    color: Styles.black, fontSize: fixDpiFont(26)),
+              ),
             ),
             body: SingleChildScrollView(
               // physics: const NeverScrollableScrollPhysics(),

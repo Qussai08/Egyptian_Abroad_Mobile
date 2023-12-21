@@ -1,9 +1,7 @@
 import 'package:egyptians_abroad/app/core/theme/app_images.dart';
-import 'package:egyptians_abroad/app/modules/more/views/widgets/column_element_widget.dart';
 import 'package:egyptians_abroad/app/modules/more/views/widgets/list_tile_widget.dart';
 import 'package:egyptians_abroad/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 
@@ -82,7 +80,7 @@ class MoreView extends GetView<MoreController> {
             },
           ),
           const Divider(color: Styles.grey_200, height: 0),
-          Spacer(),
+          const Spacer(),
           Column(
             children: [
               Text(

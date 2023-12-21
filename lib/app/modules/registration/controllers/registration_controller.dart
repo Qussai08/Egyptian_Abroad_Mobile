@@ -11,6 +11,8 @@ import 'package:egyptians_abroad/app/modules/login/controllers/login_controller.
 import 'package:egyptians_abroad/app/modules/registration/data/models/country.dart';
 import 'package:egyptians_abroad/app/modules/registration/data/models/job_category.dart';
 import 'package:egyptians_abroad/app/modules/registration/data/models/residence_type.dart';
+import 'package:egyptians_abroad/app/modules/registration/data/providers/avatars_provider.dart';
+import 'package:egyptians_abroad/app/modules/registration/views/widgets/avatar_widget.dart';
 import 'package:egyptians_abroad/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,10 +24,13 @@ class RegistrationController extends GetxController {
 
   // Login controller
   final LoginController loginController = Get.put(LoginController());
+
+  final avatarsProvider = Get.put<AvatarsProvider>(AvatarsProvider());
+
   @override
   void onInit() {
     super.onInit();
-    getCountriesList();
+    // getCountriesList();
   }
 
   final TextEditingController nameTxtController = TextEditingController();
@@ -286,6 +291,24 @@ class RegistrationController extends GetxController {
         Get.back(closeOverlays: true);
         Get.back();
       });
+    }
+  }
+
+  getAvatars() {
+    return avatarsProvider.avatars;
+  }
+
+  selectAvatar(int index) {
+    print(index);
+    avatarsProvider.avatars[index].isSelected.value = true;
+
+    for (int i = 0; i < 9; i++) {
+      if (avatarsProvider.avatars[i].index != index) {
+        avatarsProvider.avatars[i].isSelected.value = false;
+
+        print(
+            'index: $i \n isSelected: ${avatarsProvider.avatars[i].isSelected}');
+      }
     }
   }
 }

@@ -52,6 +52,8 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/avatars/
+
   
   fonts:
     - family: baloo
