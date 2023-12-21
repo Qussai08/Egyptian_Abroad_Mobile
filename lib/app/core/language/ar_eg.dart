@@ -2,7 +2,7 @@
 
 Map<String, String> ar = {
   AppStrings.success: 'نجاح',
-  AppStrings.appName: 'مصريين بالخارج',
+  AppStrings.appName: 'المصريون بالخارج',
   AppStrings.splashDiscription:
       'تقدر توصل لكل الخدمات اللى انت محتاجها من اى مكان بكل سهولة',
   AppStrings.noInternet: 'لا يوجد اتصال',

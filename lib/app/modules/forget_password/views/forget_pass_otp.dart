@@ -36,8 +36,9 @@ class _ForgetPassOtpViewState extends State<ForgetPassOtpView>
 
   @override
   Widget build(BuildContext context) {
-    int endTime = DateTime.now().millisecondsSinceEpoch + 1000 * (1) * 20;
-    // 1000 * (widget.resendOtpTime ?? 2) * 60;
+    int endTime = DateTime.now().millisecondsSinceEpoch +
+        //  1000 * (1) * 20;
+        1000 * (widget.resendOtpTime ?? 2) * 60;
 
     print("resendOtpTime ${widget.resendOtpTime}");
 
@@ -199,16 +200,13 @@ class _ForgetPassOtpViewState extends State<ForgetPassOtpView>
                                             .createVerificationCode();
                                         endTime = DateTime.now()
                                                 .millisecondsSinceEpoch +
-                                            1000 * (1) * 20;
-                                        // 1000 * (widget.resendOtpTime ?? 2) * 60;
-                                        // 1000 *
-                                        //     (widget.resendOtpTime ?? 2) *
-                                        //     60;
+                                            // 1000 * (1) * 20;
+                                            1000 *
+                                                (widget.resendOtpTime ?? 2) *
+                                                60;
                                         _otpHasError.value = false;
                                         controller.otpTxtController.clear();
-                                        setState(() {
-                                          // controller.showValidation = true.obs;
-                                        });
+                                        setState(() {});
                                       }),
                                 )
                               : Container(

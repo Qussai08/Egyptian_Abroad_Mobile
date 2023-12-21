@@ -7,6 +7,7 @@ class Country {
   Country.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     country = json['country'];
-    flag = json['flag'];
+    flag = json['flag'] ??
+        "https://cdn.iconscout.com/icon/premium/png-256-thumb/no-image-2840213-2359555.png";
   }
 }
