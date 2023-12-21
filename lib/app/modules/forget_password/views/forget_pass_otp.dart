@@ -106,21 +106,8 @@ class _ForgetPassOtpViewState extends State<ForgetPassOtpView>
                                   onChanged: (pin) {
                                     print("pin $pin");
                                     controller.otp = pin;
-                                    if (pin.isEmpty) {
-                                      _otpHasError.value = false;
-                                      // setState(() {
-                                      //   // controller.showValidation = true.obs;
-                                      // });
-                                      // return;
-                                    }
-                                    print(
-                                        "controller.otp onChanged ${controller.otpTxtController}");
                                   },
                                   onCompleted: (pin) async {
-                                    if (controller.otp.isEmpty) {
-                                      _otpHasError.value = false;
-                                      return;
-                                    }
                                     _otpHasError.value =
                                         validateOtpCode(pin) != null
                                             ? true
@@ -142,8 +129,9 @@ class _ForgetPassOtpViewState extends State<ForgetPassOtpView>
                                   },
                                 ),
                               ),
-                              // if (controller.otp.isNotEmpty)
-                              if (hasError)
+                              if (hasError &&
+                                  validateOtpCode(controller.otp) !=
+                                      AppStrings.otpEmptyValidation.tr)
                                 Container(
                                   margin: const EdgeInsets.only(top: 10),
                                   child: Row(
@@ -158,7 +146,10 @@ class _ForgetPassOtpViewState extends State<ForgetPassOtpView>
                                         width: 2,
                                       ),
                                       Text(
-                                        AppStrings.sorry.tr,
+                                        validateOtpCode(controller.otp) ==
+                                                AppStrings.otpEmptyValidation.tr
+                                            ? ""
+                                            : AppStrings.sorry.tr,
                                         style: TextStyle(
                                             color: Colors.red,
                                             fontSize: fixDpiFont(18),
@@ -168,10 +159,12 @@ class _ForgetPassOtpViewState extends State<ForgetPassOtpView>
                                     ],
                                   ),
                                 ),
-                              // if (controller.otp.isNotEmpty)
                               if (hasError)
                                 Text(
-                                  "كود التحقق غير صحيح",
+                                  validateOtpCode(controller.otp) ==
+                                          AppStrings.otpEmptyValidation.tr
+                                      ? ""
+                                      : "كود التحقق غير صحيح",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       color: Colors.red,
@@ -238,34 +231,25 @@ class _ForgetPassOtpViewState extends State<ForgetPassOtpView>
                           CustomButton(
                             text: AppStrings.confirm.tr,
                             icon: Icons.arrow_forward,
-                            type: controller.otp == ''
-                                ? ButtonType.disabled
-                                : ButtonType.primary,
+                            type: ButtonType.primary,
                             width: 300.w,
                             height: 50,
                             onPressed: () async {
-                              print("controller.otp ${controller.otp}");
-                              if (controller.otp == '') {
-                                _otpHasError.value = false;
-
-                                return;
+                              if (time == null) {
+                                _otpHasError.value = true;
                               } else {
-                                if (time == null) {
-                                  _otpHasError.value = true;
-                                } else {
-                                  _otpHasError.value =
-                                      validateOtpCode(controller.otp) != null
-                                          ? true
-                                          : false;
-                                }
+                                _otpHasError.value =
+                                    validateOtpCode(controller.otp) != null
+                                        ? true
+                                        : false;
+                              }
 
-                                if (_otpHasError.value == false) {
-                                  errormsg = validateOtpCode(controller.otp)!;
+                              if (_otpHasError.value == false) {
+                                errormsg = validateOtpCode(controller.otp)!;
 
-                                  if (errormsg ==
-                                      AppStrings.otpEmptyValidation.tr)
-                                    setState(() {});
-                                }
+                                if (errormsg ==
+                                    AppStrings.otpEmptyValidation.tr)
+                                  setState(() {});
                               }
 
                               print("_otpHasError.value ${_otpHasError.value}");

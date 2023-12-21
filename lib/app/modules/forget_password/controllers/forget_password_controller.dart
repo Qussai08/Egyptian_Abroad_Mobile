@@ -84,11 +84,15 @@ class ForgetPasswordController extends GetxController {
 
     AppResponse response = await UserRepository().forgetPasswordReq(reqBody);
     if (response.status) {
-      buildCustomDialog(
-          // TODO : translate
-          dialogMsg: "تم تعديل كلمة المرور بنجاح",
-          dialogType: DialogType.success);
-      Future.delayed(const Duration(seconds: 1), () async {
+      Get.showSnackbar(
+        buildCustomToast(
+          Get.context!,
+          toastMsg: "تم تعديل كلمة المرور بنجاح",
+          toastTitle: AppStrings.confirm.tr,
+          toastType: ToastType.success,
+        ),
+      );
+      Future.delayed(const Duration(seconds: 2), () {
         Get.back(closeOverlays: true);
 
         Get.toNamed(Routes.LOGIN);

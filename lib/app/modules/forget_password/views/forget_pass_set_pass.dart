@@ -62,12 +62,16 @@ class _ForgetPassSetPasswordViewState extends State<ForgetPassSetPasswordView>
                   CustomTextFormField(
                     controller: controller.newPasswordTxtController,
                     validationFunc: (val) {
-                      return _validationsValues.value.firstWhereOrNull(
-                                  (element) => element == false) !=
-                              null
-                          ? AppStrings.passwordWeekValidation.tr
-                          : validatePassword(
-                              controller.newPasswordTxtController.text);
+                      return controller.newPasswordTxtController.text
+                              .trim()
+                              .isEmpty
+                          ? AppStrings.emptyValidation.tr
+                          : _validationsValues.value.firstWhereOrNull(
+                                      (element) => element == false) !=
+                                  null
+                              ? AppStrings.passwordWeekValidation.tr
+                              : validatePassword(
+                                  controller.newPasswordTxtController.text);
                     },
                     onChangedFunc: (val) {
                       _validationsValues.value = [
@@ -92,12 +96,8 @@ class _ForgetPassSetPasswordViewState extends State<ForgetPassSetPasswordView>
                             .trim()
                             .isEmpty
                         ? AppStrings.emptyValidation.tr
-                        : _validationsValues.value.firstWhereOrNull(
-                                    (element) => element == false) !=
-                                null
-                            ? AppStrings.passwordWeekValidation.tr
-                            : validateConfirmPassword(
-                                controller.confirmNewPassTxtController.text),
+                        : validateConfirmPassword(
+                            controller.confirmNewPassTxtController.text),
                     inputData: TextInputType.text,
                     isPassword: true,
                   ),

@@ -112,11 +112,11 @@ class _CategoryViewState extends State<CategoryView> {
                         SizedBox(
                           height: 10.h,
                         ),
-                        // Image.network(
-                        //   widget.category!.categoryIcon!,
-                        //   width: 180.w,
-                        //   height: 180.w,
-                        // ),
+                        Image.network(
+                          widget.category!.categoryIcon!,
+                          width: 180.w,
+                          height: 180.w,
+                        ),
                         Expanded(
                           child: Container(
                             margin: EdgeInsets.only(top: 18.h),
@@ -149,7 +149,7 @@ class _CategoryViewState extends State<CategoryView> {
                                               SizedBox(
                                                 height: !controller.showMore
                                                     ? 350.h
-                                                    : fixDpiHeight(280),
+                                                    : fixDpiHeight(320),
                                                 child: GridView.builder(
                                                   shrinkWrap: true,
                                                   padding: EdgeInsets.only(
