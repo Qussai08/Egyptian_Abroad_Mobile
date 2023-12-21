@@ -30,7 +30,7 @@ class RegistrationController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    // getCountriesList();
+    getCountriesList();
   }
 
   final TextEditingController nameTxtController = TextEditingController();
