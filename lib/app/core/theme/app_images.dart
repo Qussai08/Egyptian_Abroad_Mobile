@@ -35,4 +35,16 @@ class AppImages {
   static const logoutIcon = 'assets/icons/logout_icon.png';
 
   static const heartIcon = 'assets/icons/heart_icon.png';
+
+  static const List<String> avatars = [
+    'assets/avatars/1.png',
+    'assets/avatars/2.png',
+    'assets/avatars/3.png',
+    'assets/avatars/4.png',
+    'assets/avatars/5.png',
+    'assets/avatars/6.png',
+    'assets/avatars/7.png',
+    'assets/avatars/8.png',
+    'assets/avatars/9.png',
+  ];
 }

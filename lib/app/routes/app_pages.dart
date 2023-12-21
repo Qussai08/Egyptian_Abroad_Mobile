@@ -1,5 +1,6 @@
 import 'package:egyptians_abroad/app/modules/more/views/about_us_view.dart';
 import 'package:egyptians_abroad/app/modules/more/views/contact_us_view.dart';
+import 'package:egyptians_abroad/app/modules/registration/views/select_avatar.dart';
 import 'package:get/get.dart';
 
 import '../modules/bottom_navigation.dart/bindings/bottom_navigation_binding.dart';
@@ -41,7 +42,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.SPLASH;
+  static const INITIAL = Routes.SELECTAVATAR;
 
   static final routes = [
     GetPage(
@@ -62,6 +63,11 @@ class AppPages {
     GetPage(
       name: _Paths.REGISTRATION,
       page: () => const RegistrationView(),
+      binding: RegistrationBinding(),
+    ),
+    GetPage(
+      name: _Paths.SELECTAVATAR,
+      page: () => const SelectAvatar(),
       binding: RegistrationBinding(),
     ),
     GetPage(

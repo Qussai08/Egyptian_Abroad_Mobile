@@ -30,7 +30,7 @@ class StartServiceRedir extends StatelessWidget {
       child: SafeArea(
         child: Scaffold(
             resizeToAvoidBottomInset: false,
-            appBar: CustomAppBar(title: ""),
+            appBar: CustomAppBar(),
             body: Container(
               width: fixDpiScreenWidth(),
               padding: EdgeInsets.symmetric(horizontal: 16.w),

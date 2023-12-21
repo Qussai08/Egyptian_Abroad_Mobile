@@ -10,6 +10,7 @@ abstract class Routes {
   static const LOGIN = _Paths.LOGIN;
   static const OTP = _Paths.OTP;
   static const REGISTRATION = _Paths.REGISTRATION;
+  static const SELECTAVATAR = _Paths.SELECTAVATAR;
   static const CATEGORY = _Paths.CATEGORY;
   static const BOTTOMNAVIGATION = _Paths.BOTTOMNAVIGATION;
   static const SETPASSWORD = _Paths.SETPASSWORD;
@@ -36,6 +37,7 @@ abstract class _Paths {
   static const LOGIN = '/login';
   static const OTP = '/otp';
   static const REGISTRATION = '/registration';
+  static const SELECTAVATAR = '/selectAvatar';
   static const CATEGORY = '/category';
   static const BOTTOMNAVIGATION = '/bottomNavigation';
   static const SETPASSWORD = '/setPassword';

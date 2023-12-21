@@ -53,7 +53,12 @@ class _CategoryViewState extends State<CategoryView> {
               child: Scaffold(
                 backgroundColor: Colors.transparent,
                 appBar: CustomAppBar(
-                  title: widget.category!.categoryName,
+                  title: Text(
+                    widget.category!.categoryName,
+                    textAlign: TextAlign.center,
+                    style: Styles.getBoldStyle(
+                        color: Styles.black, fontSize: fixDpiFont(26)),
+                  ),
                 ),
                 body: SingleChildScrollView(
                   physics: const NeverScrollableScrollPhysics(),
