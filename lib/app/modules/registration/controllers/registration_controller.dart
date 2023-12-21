@@ -1,6 +1,4 @@
-import 'package:egyptians_abroad/app/core/custom_widgets/custom_dialog.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/custom_taost.dart';
-import 'package:egyptians_abroad/app/core/helper/app_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/core/services/app_response.dart';
 import 'package:egyptians_abroad/app/core/services/auth_service.dart';
@@ -12,7 +10,6 @@ import 'package:egyptians_abroad/app/modules/registration/data/models/country.da
 import 'package:egyptians_abroad/app/modules/registration/data/models/job_category.dart';
 import 'package:egyptians_abroad/app/modules/registration/data/models/residence_type.dart';
 import 'package:egyptians_abroad/app/modules/registration/data/providers/avatars_provider.dart';
-import 'package:egyptians_abroad/app/modules/registration/views/widgets/avatar_widget.dart';
 import 'package:egyptians_abroad/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

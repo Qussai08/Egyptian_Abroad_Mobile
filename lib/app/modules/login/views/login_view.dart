@@ -131,20 +131,20 @@ class _LoginViewState extends State<LoginView> with ValidationMixin {
                           navigateToHome: true);
                     },
                   ),
-                  SizedBox(height: 24.h),
-                  CustomButton(
-                    width: 358.w,
-                    height: 50.h,
-                    fontSize: fixDpiFont(16),
-                    type: ButtonType.ghost,
-                    iconIsAsset: true,
-                    assetString: AppImages.carsIcon,
-                    changeIconPosition: true,
-                    text: AppStrings.registerWithCarsAccount.tr,
-                    textColor: Styles.black3,
-                  ),
+                  // SizedBox(height: 24.h),
+                  // CustomButton(
+                  //   width: 358.w,
+                  //   height: 50.h,
+                  //   fontSize: fixDpiFont(16),
+                  //   type: ButtonType.ghost,
+                  //   iconIsAsset: true,
+                  //   assetString: AppImages.carsIcon,
+                  //   changeIconPosition: true,
+                  //   text: AppStrings.registerWithCarsAccount.tr,
+                  //   textColor: Styles.black3,
+                  // ),
 
-                  SizedBox(height: 16.h),
+                  SizedBox(height: 12.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

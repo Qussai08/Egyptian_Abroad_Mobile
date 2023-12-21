@@ -130,15 +130,33 @@ class _EditAccountViewState extends State<EditAccountView>
                                         ? AppStrings.editAccountInfos.tr
                                         : AppStrings.accountInfos.tr),
                                 if (!widget.isEdit!)
-                                  GestureDetector(
-                                    onTap: () {
-                                      Get.toNamed(Routes.EditACCOUNT);
-                                    },
-                                    child: Image.asset(
-                                      'assets/icons/edit-icon.png',
-                                      width: 32.w,
-                                      height: 32.w,
-                                    ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      GestureDetector(
+                                        onTap: () {
+                                          Get.toNamed(Routes.EditACCOUNT);
+                                        },
+                                        child: Image.asset(
+                                          'assets/icons/edit-icon.png',
+                                          width: 40.h,
+                                          height: 40.h,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      GestureDetector(
+                                        onTap: () {
+                                          Get.toNamed(Routes.CHANGEPASSWORD);
+                                        },
+                                        child: Image.asset(
+                                          'assets/icons/reset-pass.png',
+                                          width: 40.h,
+                                          height: 40.h,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 SizedBox(
                                   height: 24.h,

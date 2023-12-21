@@ -33,144 +33,151 @@ class _ForgetPassSetPasswordViewState extends State<ForgetPassSetPasswordView>
     final controller = Get.put(ForgetPasswordController());
 
     return NetworkIndicator(
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: SafeArea(
-          child: Container(
-            padding: EdgeInsets.only(top: 48.h, right: 16.w, left: 16.w),
-            height: fixDpiScreenHeight(),
-            width: fixDpiScreenWidth(),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                  Image.asset(
-                    'assets/images/lock.png',
-                    width: 56.w,
-                    fit: BoxFit.fitWidth,
-                  ),
-                  SizedBox(
-                    height: 16.h,
-                  ),
-                  // TODO : translate
-                  TitleText(title: "تعيين كلمة مرور جديدة"),
-                  SizedBox(
-                    height: 40.h,
-                  ),
-                  // TODO : translate
-                  TextFieldTitle(title: "كلمة المرور الجديدة"),
-                  CustomTextFormField(
-                    controller: controller.newPasswordTxtController,
-                    validationFunc: (val) {
-                      return controller.newPasswordTxtController.text
+      child: WillPopScope(
+        onWillPop: () {
+          return Future(() => false);
+        },
+        child: Scaffold(
+          resizeToAvoidBottomInset: false,
+          body: SafeArea(
+            child: Container(
+              padding: EdgeInsets.only(top: 48.h, right: 16.w, left: 16.w),
+              height: fixDpiScreenHeight(),
+              width: fixDpiScreenWidth(),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    Image.asset(
+                      'assets/images/lock.png',
+                      width: 56.w,
+                      fit: BoxFit.fitWidth,
+                    ),
+                    SizedBox(
+                      height: 16.h,
+                    ),
+                    // TODO : translate
+                    TitleText(title: "تعيين كلمة مرور جديدة"),
+                    SizedBox(
+                      height: 40.h,
+                    ),
+                    // TODO : translate
+                    TextFieldTitle(title: "كلمة المرور الجديدة"),
+                    CustomTextFormField(
+                      controller: controller.newPasswordTxtController,
+                      validationFunc: (val) {
+                        return controller.newPasswordTxtController.text
+                                .trim()
+                                .isEmpty
+                            ? AppStrings.emptyValidation.tr
+                            : _validationsValues.value.firstWhereOrNull(
+                                        (element) => element == false) !=
+                                    null
+                                ? AppStrings.passwordWeekValidation.tr
+                                : validatePassword(
+                                    controller.newPasswordTxtController.text);
+                      },
+                      onChangedFunc: (val) {
+                        _validationsValues.value = [
+                          passMinimumLenght(val),
+                          atLeastOneCharString(val),
+                          atLeastOneNumberString(val),
+                          atLeastOneSpecialCharString(val)
+                        ];
+                      },
+                      inputData: TextInputType.text,
+                      isPassword: true,
+                    ),
+                    SizedBox(
+                      height: 16.h,
+                    ),
+                    // TODO : translate
+                    TextFieldTitle(title: "تأكيد كلمة المرور الجديدة"),
+                    CustomTextFormField(
+                      controller: controller.confirmNewPassTxtController,
+                      validationFunc: (val) => controller
+                              .confirmNewPassTxtController.text
                               .trim()
                               .isEmpty
                           ? AppStrings.emptyValidation.tr
-                          : _validationsValues.value.firstWhereOrNull(
-                                      (element) => element == false) !=
-                                  null
-                              ? AppStrings.passwordWeekValidation.tr
-                              : validatePassword(
-                                  controller.newPasswordTxtController.text);
-                    },
-                    onChangedFunc: (val) {
-                      _validationsValues.value = [
-                        passMinimumLenght(val),
-                        atLeastOneCharString(val),
-                        atLeastOneNumberString(val),
-                        atLeastOneSpecialCharString(val)
-                      ];
-                    },
-                    inputData: TextInputType.text,
-                    isPassword: true,
-                  ),
-                  SizedBox(
-                    height: 16.h,
-                  ),
-                  // TODO : translate
-                  TextFieldTitle(title: "تأكيد كلمة المرور الجديدة"),
-                  CustomTextFormField(
-                    controller: controller.confirmNewPassTxtController,
-                    validationFunc: (val) => controller
-                            .confirmNewPassTxtController.text
-                            .trim()
-                            .isEmpty
-                        ? AppStrings.emptyValidation.tr
-                        : validateConfirmPassword(
-                            controller.confirmNewPassTxtController.text),
-                    inputData: TextInputType.text,
-                    isPassword: true,
-                  ),
-                  SizedBox(
-                    height: 24.h,
-                  ),
-                  ValueListenableBuilder<dynamic>(
-                      valueListenable: _validationsValues,
-                      builder: (_, validations, __) {
-                        return SizedBox(
-                          height: 140.h,
-                          child: ListView(
-                            physics: const NeverScrollableScrollPhysics(),
-                            padding: const EdgeInsets.symmetric(horizontal: 5),
-                            scrollDirection: Axis.vertical,
-                            shrinkWrap: true,
-                            children: [
-                              ValidationRowWidget(
-                                text: AppStrings.passwordMinimum.tr,
-                                checked: validations[0],
-                              ),
-                              ValidationRowWidget(
-                                text: AppStrings.passwordContainsChar.tr,
-                                checked: validations[1],
-                              ),
-                              ValidationRowWidget(
-                                text: AppStrings.passwordContainsNum.tr,
-                                checked: validations[2],
-                              ),
-                              ValidationRowWidget(
-                                text: AppStrings.passwordContainsSpecialChar.tr,
-                                checked: validations[3],
-                              ),
-                            ],
-                          ),
-                        );
-                      }),
-                  SizedBox(
-                    height: 40.h,
-                  ),
-                  CustomButton(
-                    text: AppStrings.confirm.tr,
-                    icon: Icons.arrow_forward,
-                    type: ButtonType.primary,
-                    width: 300.w,
-                    height: 50,
-                    onPressed: () async {
-                      if (_formKey.currentState!.validate() &&
-                          _validationsValues.value.firstWhereOrNull(
-                                  (element) => element == false) ==
-                              null) {
-                        await controller.forgetPass();
-                      }
-                    },
-                  ),
-                  SizedBox(
-                    height: 16.h,
-                  ),
-                  CustomButton(
-                    // TODO : translate
-                    text: "الغاء",
-                    icon: Icons.arrow_forward,
+                          : validateConfirmPassword(
+                              controller.confirmNewPassTxtController.text),
+                      inputData: TextInputType.text,
+                      isPassword: true,
+                    ),
+                    SizedBox(
+                      height: 24.h,
+                    ),
+                    ValueListenableBuilder<dynamic>(
+                        valueListenable: _validationsValues,
+                        builder: (_, validations, __) {
+                          return SizedBox(
+                            height: 140.h,
+                            child: ListView(
+                              physics: const NeverScrollableScrollPhysics(),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 5),
+                              scrollDirection: Axis.vertical,
+                              shrinkWrap: true,
+                              children: [
+                                ValidationRowWidget(
+                                  text: AppStrings.passwordMinimum.tr,
+                                  checked: validations[0],
+                                ),
+                                ValidationRowWidget(
+                                  text: AppStrings.passwordContainsChar.tr,
+                                  checked: validations[1],
+                                ),
+                                ValidationRowWidget(
+                                  text: AppStrings.passwordContainsNum.tr,
+                                  checked: validations[2],
+                                ),
+                                ValidationRowWidget(
+                                  text:
+                                      AppStrings.passwordContainsSpecialChar.tr,
+                                  checked: validations[3],
+                                ),
+                              ],
+                            ),
+                          );
+                        }),
+                    SizedBox(
+                      height: 40.h,
+                    ),
+                    CustomButton(
+                      text: AppStrings.confirm.tr,
+                      icon: Icons.arrow_forward,
+                      type: ButtonType.primary,
+                      width: 300.w,
+                      height: 50,
+                      onPressed: () async {
+                        if (_formKey.currentState!.validate() &&
+                            _validationsValues.value.firstWhereOrNull(
+                                    (element) => element == false) ==
+                                null) {
+                          await controller.forgetPass();
+                        }
+                      },
+                    ),
+                    SizedBox(
+                      height: 16.h,
+                    ),
+                    CustomButton(
+                      // TODO : translate
+                      text: "الغاء",
+                      icon: Icons.arrow_forward,
 
-                    type: ButtonType.secondary,
-                    width: 300.w,
-                    height: 50,
-                    onPressed: () {
-                      Get.offAllNamed(Routes.LOGIN);
-                      controller.newPasswordTxtController.clear();
-                      controller.confirmNewPassTxtController.clear();
-                    },
-                  ),
-                ],
+                      type: ButtonType.secondary,
+                      width: 300.w,
+                      height: 50,
+                      onPressed: () {
+                        Get.offAllNamed(Routes.LOGIN);
+                        controller.newPasswordTxtController.clear();
+                        controller.confirmNewPassTxtController.clear();
+                      },
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
