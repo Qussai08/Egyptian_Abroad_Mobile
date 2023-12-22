@@ -1,7 +1,9 @@
 import 'package:egyptians_abroad/app/core/services/app_response.dart';
 import 'package:egyptians_abroad/app/core/services/auth_service.dart';
 import 'package:egyptians_abroad/app/core/services/models/category.dart';
+import 'package:egyptians_abroad/app/core/services/models/service.dart';
 import 'package:egyptians_abroad/app/core/services/repositories/categories_repository.dart';
+import 'package:egyptians_abroad/app/modules/home/data/providers/favorites_list_provider.dart';
 import 'package:egyptians_abroad/app/modules/registration/controllers/registration_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,17 +16,19 @@ class HomeController extends GetxController {
   String keySearch = '';
   final TextEditingController searchController = TextEditingController();
 
+  List<ServiceItem> favoritesList = [];
   // Auth service
   final AuthService authService = Get.find();
   final RegistrationController registrationController =
       Get.put(RegistrationController());
+  final favoritesListProvider = Get.find<FavoritesListProvider>();
 
   @override
   void onInit() {
     super.onInit();
-
     getCategoriesList();
     getUserProfile();
+    updateFavoritesList(userId: authService.userID!);
   }
 
   bool userProfileLoading = false;
@@ -191,6 +195,29 @@ class HomeController extends GetxController {
     } else {
       _showMore = true;
     }
+    update();
+  }
+
+  Future<void> addToFavorites(
+      {required String userId, required String serviceId}) async {
+    favoritesListProvider
+        .addToFavorites(userId, serviceId)
+        .then((value) {}, onError: (error) {});
+  }
+
+  Future<void> removeFromFavorites(
+      {required String userId, required String serviceId}) async {
+    favoritesListProvider
+        .removeFromFavorites(userId, serviceId)
+        .then((value) {}, onError: (error) {});
+  }
+
+  Future<void> updateFavoritesList({required String userId}) async {
+    favoritesListProvider.getFavoritesList(userId).then((value) {
+      Iterable list = value.body;
+      favoritesList = list.map((e) => ServiceItem.fromJson(e)).toList();
+    }, onError: (error) {});
+
     update();
   }
 }

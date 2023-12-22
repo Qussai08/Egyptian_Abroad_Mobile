@@ -22,7 +22,8 @@ class FavoritesListProvider extends ApiService {
   }
 
   Future<ApiResponse<dynamic>> getFavoritesList(String userId) async {
-    final Response response = await post('FavoriteList', {'userId': userId});
+    final Response response =
+        await post('FavoriteList', {'userId': userId, 'langId': 1});
 
     return ApiResponse.fromResponse(response, (json) => json);
   }

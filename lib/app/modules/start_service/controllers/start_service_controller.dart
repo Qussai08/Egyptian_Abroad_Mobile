@@ -1,13 +1,15 @@
 import 'package:egyptians_abroad/app/core/services/app_response.dart';
+import 'package:egyptians_abroad/app/core/services/auth_service.dart';
 import 'package:egyptians_abroad/app/core/services/models/service_content.dart';
 import 'package:egyptians_abroad/app/core/services/repositories/categories_repository.dart';
+import 'package:egyptians_abroad/app/modules/home/controllers/favorites_controller.dart';
+import 'package:egyptians_abroad/app/modules/home/controllers/home_controller.dart';
 import 'package:get/get.dart';
 
 import '../../../core/services/models/service.dart';
 
 class StartServiceController extends GetxController {
   Future<ServiceContent?> getServicesContent(int serviceID) async {
-    print('Petermining');
     AppResponse response = await CategoriesRepository()
         .getServicesContentByServiceId(
             queryParameters: {"serviceId": serviceID});
@@ -20,9 +22,19 @@ class StartServiceController extends GetxController {
     return null;
   }
 
-  // handel favorite button
-  toggleFavoriteButton(ServiceItem item) {
-    print(item.serviceId);
+  handleFavorite(ServiceItem item) {
+    var favoritesController = Get.find<HomeController>();
+    if (item.isFavorite.value) {
+      favoritesController.removeFromFavorites(
+          userId: AuthService().getUserProfile!.userId!,
+          serviceId: item.serviceId.toString());
+    } else {
+      favoritesController.addToFavorites(
+          userId: AuthService().getUserProfile!.userId!,
+          serviceId: item.serviceId.toString());
+    }
     item.isFavorite.value = !item.isFavorite();
+    favoritesController.updateFavoritesList(
+        userId: AuthService().getUserProfile!.userId!);
   }
 }
