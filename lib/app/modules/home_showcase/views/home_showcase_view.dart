@@ -15,7 +15,7 @@ class HomeShowcaseView extends GetView<HomeShowcaseController> {
       builder: (homeContoller) => Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: const HomeAppBar(),
-        body: HomeViewBodyWidget(homeContoller: homeContoller),
+        body: HomeViewBodyWidget(),
       ),
     );
   }

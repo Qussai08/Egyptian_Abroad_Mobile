@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../../core/helper/dpi_helper.dart';
 
@@ -9,12 +10,11 @@ import 'home_loading_widget.dart';
 import 'home_search_widget.dart';
 
 class HomeViewBodyWidget extends StatelessWidget {
-  const HomeViewBodyWidget({
+  HomeViewBodyWidget({
     super.key,
-    required this.homeContoller,
   });
 
-  final HomeShowcaseController homeContoller;
+  final homeContoller = Get.find<HomeShowcaseController>();
 
   @override
   Widget build(BuildContext context) {
@@ -27,13 +27,13 @@ class HomeViewBodyWidget extends StatelessWidget {
             : Column(
                 children: [
                   // Avatar and Name
-                  AvatarAndNameWidget(homeContoller: homeContoller),
+                  AvatarAndNameWidget(),
 
                   // Search TextField
-                  HomeSearchWidget(homeContoller: homeContoller),
+                  HomeSearchWidget(),
 
                   // Categories
-                  CategoriesListWidget(homeContoller: homeContoller)
+                  CategoriesListWidget(),
                 ],
               ),
       ),

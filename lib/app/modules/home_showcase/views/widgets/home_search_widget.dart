@@ -9,12 +9,11 @@ import '../../../../core/helper/dpi_helper.dart';
 import '../../../../core/language/app_string.dart';
 
 class HomeSearchWidget extends StatelessWidget {
-  const HomeSearchWidget({
+  HomeSearchWidget({
     super.key,
-    required this.homeContoller,
   });
 
-  final HomeShowcaseController homeContoller;
+  final homeContoller = Get.find<HomeShowcaseController>();
 
   @override
   Widget build(BuildContext context) {

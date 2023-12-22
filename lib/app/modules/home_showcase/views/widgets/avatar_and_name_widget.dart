@@ -11,12 +11,11 @@ import '../../../../routes/app_pages.dart';
 import '../../controllers/home_showcase_controller.dart';
 
 class AvatarAndNameWidget extends StatelessWidget {
-  const AvatarAndNameWidget({
+  AvatarAndNameWidget({
     super.key,
-    required this.homeContoller,
   });
 
-  final HomeShowcaseController homeContoller;
+  final homeContoller = Get.find<HomeShowcaseController>();
 
   @override
   Widget build(BuildContext context) {
@@ -61,8 +60,8 @@ class AvatarAndNameWidget extends StatelessWidget {
                     child: Text(AppStrings.logOut.tr),
                   ),
                 ],
-                hint:
-                    "${AppStrings.hello.tr} ${homeContoller.authService.getUserProfile?.shortName ?? ''} !",
+                hint: "",
+                // "${AppStrings.hello.tr} ${homeContoller.authService.getUserProfile?.shortName ?? ''} !",
                 onChangeFunc: (val) async {
                   Get.toNamed(val);
                 },

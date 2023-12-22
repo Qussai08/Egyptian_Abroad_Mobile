@@ -12,12 +12,11 @@ import '../../../../core/theme/styles.dart';
 import '../../controllers/home_showcase_controller.dart';
 
 class CategoriesListWidget extends StatelessWidget {
-  const CategoriesListWidget({
+  CategoriesListWidget({
     super.key,
-    required this.homeContoller,
   });
 
-  final HomeShowcaseController homeContoller;
+  final homeContoller = Get.find<HomeShowcaseController>();
 
   @override
   Widget build(BuildContext context) {
