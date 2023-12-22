@@ -11,6 +11,7 @@ import '../../../../core/helper/dpi_helper.dart';
 
 import '../../../../core/theme/app_images.dart';
 import '../../../../core/theme/styles.dart';
+import '../../../home/views/widgets/favorites_list.dart';
 import '../../controllers/home_showcase_controller.dart';
 import 'avatar_and_name_widget.dart';
 import 'categories_list_widget.dart';
@@ -27,7 +28,7 @@ class HomeViewBodyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      physics: const NeverScrollableScrollPhysics(),
+      controller: homeContoller.scrollController,
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: fixDpiWidth(16)),
         child: homeContoller.userProfileLoading
@@ -66,13 +67,19 @@ class HomeBodyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     homeContoller.startShowCase(context);
-    return Column(
+    return ListView(
+      shrinkWrap: true,
+      physics: const BouncingScrollPhysics(),
       children: [
         // Avatar and Name
         AvatarAndNameWidget(),
 
         // Search TextField
         HomeSearchWidget(),
+
+        // Favorites
+        SizedBox(height: 19.h),
+        FavoritesList(),
 
         // Categories
         CategoriesListWidget(),

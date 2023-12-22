@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 
 import '../../home/controllers/home_controller.dart';
 import '../../home_showcase/controllers/home_showcase_controller.dart';
+import '../../home_showcase/data/providers/favorites_list_provider.dart';
 import '../../notifications/controllers/notifications_controller.dart';
 import '../../notifications/data/providers/notifications_provider.dart';
 

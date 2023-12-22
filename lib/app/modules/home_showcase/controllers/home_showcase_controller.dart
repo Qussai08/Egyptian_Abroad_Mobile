@@ -16,7 +16,7 @@ class HomeShowcaseController extends GetxController {
   final TextEditingController searchController = TextEditingController();
 
   // Auth service
-  final AuthService authService = Get.find();
+  final authService = Get.find<AuthService>();
   final RegistrationController registrationController =
       Get.put(RegistrationController());
 
@@ -25,6 +25,7 @@ class HomeShowcaseController extends GetxController {
     super.onInit();
     getCategoriesList();
     getUserProfile();
+    // authService.showcaseViewed = true;
   }
 
   bool userProfileLoading = false;
@@ -202,32 +203,33 @@ class HomeShowcaseController extends GetxController {
   final GlobalKey one = GlobalKey();
   final GlobalKey two = GlobalKey();
   final GlobalKey three = GlobalKey();
-  final GlobalKey four = GlobalKey();
-  final GlobalKey five = GlobalKey();
+
   late BuildContext _homeContext;
+  final scrollController = ScrollController();
 
   // start showcase
   void startShowCase(BuildContext context) {
-    _homeContext = context;
-    ambiguate(WidgetsBinding.instance)?.addPostFrameCallback(
-      (_) => ShowCaseWidget.of(_homeContext).startShowCase([one, three]),
-    );
-
-    // WidgetsBinding.instance!.addPostFrameCallback((_) {
-    //   if (authService.isFirstTime) {
-    //     authService.setIsFirstTime(false);
-    //     showCase();
-    //   }
-    // });
+    if (authService.showcaseViewed) {
+      _homeContext = context;
+      ambiguate(WidgetsBinding.instance)?.addPostFrameCallback(
+        (_) => ShowCaseWidget.of(_homeContext).startShowCase([one, two, three]),
+      );
+    }
   }
 
   // next showcase
-  void nextShowCase(BuildContext context) {
-    // ShowCaseWidget.of(_homeContext).startShowCase([three]);
+  Future<void> nextShowCase({bool? isScroll = false}) async {
+    if (isScroll ?? false) {
+      scrollController.animateTo(
+        scrollController.position.maxScrollExtent,
+        duration: const Duration(milliseconds: 5),
+        curve: Curves.easeOut,
+      );
+      // wait 500 milliseconds
+      await Future.delayed(const Duration(milliseconds: 10));
+    }
+
     ShowCaseWidget.of(_homeContext).next();
-    // ambiguate(WidgetsBinding.instance)?.addPostFrameCallback(
-    //   (_) => ShowCaseWidget.of(context).startShowCase([three]),
-    // );
   }
 
   // dismiss showcase

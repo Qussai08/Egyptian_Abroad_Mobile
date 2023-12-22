@@ -11,6 +11,7 @@ import 'package:get/get.dart';
 import '../../../core/helper/localization_helper.dart';
 import '../../../core/services/models/user_profile.dart';
 import '../../../core/services/repositories/user_repository.dart';
+import '../../home_showcase/data/providers/favorites_list_provider.dart';
 
 class HomeController extends GetxController {
   String keySearch = '';

@@ -13,8 +13,11 @@ class DataSavedController extends GetxController {
     // authService.getUserProfile!.avatarId = data[0].toString();
     _goNext();
   }
-  
+
   _goNext() async {
+    // showcaseViewed must be set to true after the showcase is viewed for the first time only.
+    authService.showcaseViewed = true;
+
     await 2.delay();
     Get.offAllNamed(Routes.BOTTOMNAVIGATION);
   }

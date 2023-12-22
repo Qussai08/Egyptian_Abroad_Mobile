@@ -5,14 +5,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:showcaseview/showcaseview.dart';
 
-import '../../../../core/custom_widgets/dropdown_list_selector.dart';
-
 import '../../../../core/helper/dpi_helper.dart';
 import '../../../../core/language/app_string.dart';
-import '../../../../core/theme/app_images.dart';
-import '../../../../routes/app_pages.dart';
+
+import '../../../../core/theme/styles.dart';
 import '../../controllers/home_showcase_controller.dart';
 import 'custoum_showcase_widget.dart';
+import 'profile_icon_widget.dart';
 
 class AvatarAndNameWidget extends StatelessWidget {
   AvatarAndNameWidget({
@@ -47,46 +46,16 @@ class AvatarAndNameWidget extends StatelessWidget {
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Image.asset(
-                    AppImages.maleIcon,
-                    width: 36.w,
-                    fit: BoxFit.fitWidth,
-                  ),
+                  child: ProfileIconWidget(),
                 ),
               ),
 
-              // Dropdown List
-              DropDownListSelector(
-                decoration: const BoxDecoration(),
-                blackHint: true,
-                reverseArrowPosition: true,
-                dropDownList: <DropdownMenuItem>[
-                  DropdownMenuItem(
-                    value: Routes.ViewACCOUNT,
-                    child: Text(AppStrings.viewAccountInfos.tr),
-                  ),
-                  DropdownMenuItem(
-                    value: Routes.EditACCOUNT,
-                    child: Text(AppStrings.editAccountInfos.tr),
-                  ),
-                  DropdownMenuItem(
-                    value: Routes.CHANGEPASSWORD,
-                    child: Text(AppStrings.changePassword.tr),
-                  ),
-                  DropdownMenuItem(
-                    onTap: () {
-                      homeContoller.onLogout();
-                    },
-                    value: Routes.LOGIN,
-                    child: Text(AppStrings.logOut.tr),
-                  ),
-                ],
-                hint: "",
-                // "${AppStrings.hello.tr} ${homeContoller.authService.getUserProfile?.shortName ?? ''} !",
-                onChangeFunc: (val) async {
-                  Get.toNamed(val);
-                },
-              ),
+              SizedBox(width: 10.w),
+              Text(
+                "${AppStrings.hello.tr} ${homeContoller.authService.getUserProfile?.shortName ?? ''} !",
+                style: Styles.getBoldStyle(
+                    color: Styles.black, fontSize: fixDpiFont(18)),
+              )
             ],
           ),
         ],

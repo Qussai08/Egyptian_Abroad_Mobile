@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import '../constants/storage_constants.dart';
 import '../helper/notification_helper.dart';
-import '../helper/secure_storage_helper.dart';
 import 'models/user_profile.dart';
 import 'storage_service.dart';
 import 'package:jwt_decode/jwt_decode.dart';
@@ -11,6 +10,16 @@ class AuthService extends GetxService {
   var notificationHelper = NotificationHelper();
 
   RxBool isAuthUser = false.obs;
+
+  bool _showcaseViewed = false;
+
+  set showcaseViewed(bool value) {
+    _showcaseViewed = value;
+  }
+
+  bool get showcaseViewed {
+    return _showcaseViewed;
+  }
 
   Future<bool> get isAuth async {
     String? accessToken = storageService.getData(StorageConstants.kToken);
