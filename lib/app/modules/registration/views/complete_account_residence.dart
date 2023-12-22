@@ -8,6 +8,7 @@ import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:egyptians_abroad/app/modules/registration/controllers/registration_controller.dart';
+import 'package:egyptians_abroad/app/modules/registration/views/widgets/progress_indicator_widget.dart';
 import 'package:egyptians_abroad/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -79,41 +80,8 @@ class _CompleteAccountViewState extends State<CompleteAccountView>
                             ),
                             Row(
                               children: [
-                                Container(
-                                  width: 38.h,
-                                  height: 38.h,
-                                  decoration: new BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      border: Border.all(
-                                          color: Styles.primaryColor,
-                                          width: 3)),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        "/2",
-                                        textDirection: TextDirection.ltr,
-                                        style: TextStyle(
-                                            fontFamily: 'baloo',
-                                            fontSize: fixDpiFont(13),
-                                            fontWeight: FontWeight.w700,
-                                            color: Color(0xff91A8DD)),
-                                      ),
-                                      Text(
-                                        "1",
-                                        textDirection: TextDirection.ltr,
-                                        style: TextStyle(
-                                            fontFamily: 'baloo',
-                                            fontSize: fixDpiFont(17),
-                                            fontWeight: FontWeight.w700,
-                                            color: Styles.primaryColor),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 8,
-                                ),
+                                ProgressIndicatorWidget(step: '1'),
+                                SizedBox(width: 8.w),
                                 // todo: translate
                                 Text('بيانات الإقامة',
                                     style: TextStyle(
@@ -261,12 +229,11 @@ class _CompleteAccountViewState extends State<CompleteAccountView>
                               height: 50.h,
                             ),
                             CustomButton(
-                              text: AppStrings.save.tr,
-                              // icon: Icons.arrow_forward,
+                              text: AppStrings.next.tr,
+                              icon: Icons.arrow_forward,
                               type: ButtonType.primary,
                               width: 300.w,
-                              height: 50,
-
+                              height: 50.h,
                               onPressed: () {
                                 // registrationController.loadResidenceData();
                                 if (_formKey.currentState!.validate()) {
@@ -281,9 +248,9 @@ class _CompleteAccountViewState extends State<CompleteAccountView>
                               text: AppStrings.skip.tr,
                               type: ButtonType.secondary,
                               width: 300.w,
-                              height: 50,
+                              height: 50.h,
                               onPressed: () {
-                                Get.offAllNamed(Routes.BOTTOMNAVIGATION);
+                                Get.toNamed(Routes.REGITSRATIONSELECTAVATAR);
                               },
                             ),
                             SizedBox(

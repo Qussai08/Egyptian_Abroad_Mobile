@@ -23,6 +23,7 @@ class RegistrationController extends GetxController {
   final LoginController loginController = Get.put(LoginController());
 
   final avatarsProvider = Get.put<AvatarsProvider>(AvatarsProvider());
+  late int selectedAvatarIndex;
 
   @override
   void onInit() {
@@ -241,7 +242,7 @@ class RegistrationController extends GetxController {
         queryParameters: {"guid": authService.userID});
     if (response.status) {
       Future.delayed(const Duration(seconds: 3), () async {
-        Get.offAllNamed(Routes.BOTTOMNAVIGATION);
+        Get.toNamed(Routes.REGITSRATIONSELECTAVATAR);
       });
 
       Get.showSnackbar(
@@ -295,16 +296,15 @@ class RegistrationController extends GetxController {
     return avatarsProvider.avatars;
   }
 
+  RxBool isDisabled = true.obs;
   selectAvatar(int index) {
-    print(index);
+    isDisabled.value = false;
     avatarsProvider.avatars[index].isSelected.value = true;
+    selectedAvatarIndex = index;
 
     for (int i = 0; i < 9; i++) {
       if (avatarsProvider.avatars[i].index != index) {
         avatarsProvider.avatars[i].isSelected.value = false;
-
-        print(
-            'index: $i \n isSelected: ${avatarsProvider.avatars[i].isSelected}');
       }
     }
   }

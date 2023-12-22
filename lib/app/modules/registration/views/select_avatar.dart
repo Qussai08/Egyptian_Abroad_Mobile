@@ -1,26 +1,27 @@
 import 'package:egyptians_abroad/app/core/custom_widgets/custom_appbar.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/custom_button.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/network_indecator.dart';
+import 'package:egyptians_abroad/app/core/custom_widgets/select_avatar_grid_widget.dart';
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/core/theme/app_images.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:egyptians_abroad/app/modules/registration/controllers/registration_controller.dart';
-import 'package:egyptians_abroad/app/modules/registration/views/widgets/avatar_widget.dart';
+import 'package:egyptians_abroad/app/modules/registration/views/widgets/progress_indicator_widget.dart';
+import 'package:egyptians_abroad/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class SelectAvatar extends GetView<RegistrationController> {
-  const SelectAvatar({super.key});
+class RegistrationSelectAvatarView extends GetView<RegistrationController> {
+  const RegistrationSelectAvatarView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return NetworkIndicator(
       child: Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(100.0), // here the desired height
-
+          preferredSize: Size.fromHeight(100.0),
           child: CustomAppBar(
             toolbarHeight: 100,
             title: Column(
@@ -54,42 +55,29 @@ class SelectAvatar extends GetView<RegistrationController> {
                       SizedBox(height: 41.h),
                       Align(
                           alignment: Alignment.topRight,
-                          child: Text(
-                            'اختر الايقونة الخاصة بك.',
-                            style: Styles.getBoldStyle(
-                                color: Styles.black, fontSize: fixDpiFont(17)),
+                          child: Row(
+                            children: [
+                              const ProgressIndicatorWidget(step: '3'),
+                              SizedBox(width: 8.h),
+                              Text(
+                                'اختر الايقونة الخاصة بك.',
+                                style: Styles.getBoldStyle(
+                                    color: Styles.black,
+                                    fontSize: fixDpiFont(17)),
+                              ),
+                            ],
                           )),
                       SizedBox(height: 41.h),
-                      GridView.builder(
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisSpacing: 47.w,
-                            mainAxisSpacing: 49.h,
-                            crossAxisCount: 3,
-                          ),
-                          itemCount: 9,
-                          itemBuilder: (context, index) {
-                            return Obx(() {
-                              return AvatarWidget(
-                                backgroundColor:
-                                    Styles.avatarsBackground[index],
-                                imageAsset: AppImages.avatars[index],
-                                isSelected: controller
-                                    .avatarsProvider.avatars[index]
-                                    .isSelected(),
-                                onTap: () {
-                                  controller.selectAvatar(index);
-                                },
-                              );
-                            });
-                          }),
+                      SelectAvatarGridWidget(controller: controller),
                       SizedBox(height: 120.h),
                       CustomButton(
                         text: AppStrings.save.tr,
                         height: 50.h,
                         width: 358.w,
+                        onPressed: () {
+                          Get.toNamed(Routes.DATASAVED,
+                              arguments: [controller.selectedAvatarIndex, 0]);
+                        },
                       ),
                       SizedBox(height: 24.h),
                       CustomButton(

@@ -7,10 +7,11 @@ import 'package:egyptians_abroad/app/core/custom_widgets/title_text.dart';
 import 'package:egyptians_abroad/app/core/helper/app_helper.dart';
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
+import 'package:egyptians_abroad/app/core/theme/app_images.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:egyptians_abroad/app/modules/home/views/widgets/favorites_list.dart';
 import 'package:egyptians_abroad/app/modules/home/views/widgets/home_appbar.dart';
-import 'package:egyptians_abroad/app/routes/app_pages.dart';
+import 'package:egyptians_abroad/app/modules/home/views/widgets/profile_icon_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -52,130 +53,17 @@ class HomeView extends GetView<HomeController> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 // TODO: import user image from AppImages
-                                Image.asset(
-                                  'assets/icons/male.png',
-                                  width: 36.w,
-                                  fit: BoxFit.fitWidth,
-                                ),
 
-                                DropDownListSelector(
-                                  decoration: const BoxDecoration(),
-                                  blackHint: true,
-                                  reverseArrowPosition: true,
-                                  dropDownList: <DropdownMenuItem>[
-                                    DropdownMenuItem(
-                                      value: Routes.ViewACCOUNT,
-                                      child:
-                                          Text(AppStrings.viewAccountInfos.tr),
-                                    ),
-                                    DropdownMenuItem(
-                                      value: Routes.EditACCOUNT,
-                                      child:
-                                          Text(AppStrings.editAccountInfos.tr),
-                                    ),
-                                    DropdownMenuItem(
-                                      value: Routes.CHANGEPASSWORD,
-                                      child: Text(AppStrings.changePassword.tr),
-                                    ),
-                                  ],
-                                  // value: residence,
-                                  // TODO: Need to fix the name, and userProfile may be null here use null safety operator (?.) to avoid null exception error
-                                  hint:
-                                      "${AppStrings.hello.tr} ${controller.authService.getUserProfile?.shortName ?? ''} !",
-
-                                  onChangeFunc: (val) async {
-                                    // if (val == Routes.LOGIN) {
-                                    //   await SecureStorageHelper.localRemove(
-                                    //       'user');
-                                    // }
-                                    if (val == Routes.LOGIN) {
-                                      Get.offAllNamed(val);
-                                    } else {
-                                      Get.toNamed(val);
-                                    }
-                                    // _residenceCountry.value = val;
-                                  },
-                                ),
-                                // DropDownListSelector(
-                                //   decoration: const BoxDecoration(),
-                                //   blackHint: true,
-                                //   reverseArrowPosition: true,
-                                //   dropDownList: <DropdownMenuItem>[
-                                //     DropdownMenuItem(
-                                //       value: Routes.EditACCOUNT,
-                                //       child:
-                                //           Text(AppStrings.viewAccountInfos.tr),
-                                //     ),
-                                //     DropdownMenuItem(
-                                //       value: Routes.EditACCOUNT,
-                                //       child:
-                                //           Text(AppStrings.editAccountInfos.tr),
-                                //     ),
-                                //     DropdownMenuItem(
-                                //       value: Routes.CHANGEPASSWORD,
-                                //       child: Text(AppStrings.changePassword.tr),
-                                //     ),
-                                //     DropdownMenuItem(
-                                //       onTap: () {
-                                //         controller.onLogout();
-                                //       },
-                                //       value: Routes.LOGIN,
-                                //       child: Text(AppStrings.logOut.tr),
-                                //     ),
-                                //   ],
-                                //   // value: residence,
-                                //   hint: "!${AppStrings.hello.tr} احمد ",
-                                //   onChangeFunc: (val) {
-                                //     Get.toNamed(val);
-                                //     // _residenceCountry.value = val;
-                                //   },
-                                // ),
-
-                                // Container(
-                                //   margin: const EdgeInsets.symmetric(horizontal: 5),
-                                //   child: Image.asset(
-                                //     'assets/icons/arrow-down.png',
-                                //     width: 16.w,
-                                //     fit: BoxFit.fitWidth,
-                                //   ),
-                                // ),
-                                // TitleText(
-                                //   title: "${AppStrings.hello.tr} احمد" + "!",
-                                //   fontSize: fixDpiFont(18),
-                                //   color: const Color(0xff263238),
-                                // )
+                                ProfileIconWidget(controller: controller),
+                                SizedBox(width: 10.w),
+                                Text(
+                                  "${AppStrings.hello.tr} ${controller.authService.getUserProfile?.shortName ?? ''} !",
+                                  style: Styles.getBoldStyle(
+                                      color: Styles.black,
+                                      fontSize: fixDpiFont(18)),
+                                )
                               ],
                             ),
-                            // Container(
-                            //   width: 133.w,
-                            //   height: 37.h,
-                            //   padding: const EdgeInsets.symmetric(horizontal: 10),
-                            //   decoration: BoxDecoration(
-                            //       borderRadius: BorderRadius.circular(28),
-                            //       border: Border.all(color: const Color(0xffEBEBEB))),
-                            //   child: Row(
-                            //     mainAxisAlignment: MainAxisAlignment.center,
-                            //     children: [
-                            //       Image.asset(
-                            //         'assets/icons/location-icon.png',
-                            //         height: 24.w,
-                            //         width: 24.w,
-                            //         fit: BoxFit.fitWidth,
-                            //       ),
-                            //       const SizedBox(
-                            //         width: 5,
-                            //       ),
-                            //       Text(
-                            //         'ميونيخ 🇩🇪',
-                            //         style: TextStyle(
-                            //             fontSize: fixDpiFont(14),
-                            //             fontWeight: FontWeight.w400,
-                            //             color: const Color(0xff263238),
-                            //             fontFamily: 'baloo'),
-                            //       ),
-                            //     ],
-                            //   ),
-                            // )
                           ],
                         ),
                       ),

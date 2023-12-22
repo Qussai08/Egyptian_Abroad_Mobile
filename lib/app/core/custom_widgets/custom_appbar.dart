@@ -15,23 +15,24 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       toolbarHeight: toolbarHeight,
-      
       backgroundColor: Colors.transparent,
       shadowColor: Colors.transparent,
       title: title,
-      leading: GestureDetector(
-        onTap: () {
+      leading: TextButton(
+        onPressed: () {
           Get.back();
         },
-        child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 10),
-          child: Image.asset(
-            AppImages.backIcon,
-            width: 24.w,
-            height: 24.w,
-            fit: BoxFit.fitWidth,
-          ),
+        child: Image.asset(
+          AppImages.backIcon,
+          // width: 24.w,
+          // height: 24.w,
+          // fit: BoxFit.fitWidth,
         ),
+
+        //  Container(
+        //   margin: const EdgeInsets.symmetric(horizontal: 10),
+        //   child:
+        // ),
       ),
       actions: [
         Container(

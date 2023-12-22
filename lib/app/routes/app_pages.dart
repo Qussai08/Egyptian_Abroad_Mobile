@@ -1,5 +1,8 @@
+import 'package:egyptians_abroad/app/modules/edit_account/views/edit_select_avatar_view.dart';
 import 'package:egyptians_abroad/app/modules/more/views/about_us_view.dart';
 import 'package:egyptians_abroad/app/modules/more/views/contact_us_view.dart';
+import 'package:egyptians_abroad/app/modules/registration/bindings/data_saved_binding.dart';
+import 'package:egyptians_abroad/app/modules/registration/views/data_saved_view.dart';
 import 'package:egyptians_abroad/app/modules/registration/views/select_avatar.dart';
 import 'package:get/get.dart';
 
@@ -66,9 +69,14 @@ class AppPages {
       binding: RegistrationBinding(),
     ),
     GetPage(
-      name: _Paths.SELECTAVATAR,
-      page: () => const SelectAvatar(),
+      name: _Paths.REGISTRATIONSELECTAVATAR,
+      page: () => const RegistrationSelectAvatarView(),
       binding: RegistrationBinding(),
+    ),
+    GetPage(
+      name: _Paths.DATASAVED,
+      page: () => const DataSavedView(),
+      binding: DataSavedBinding(),
     ),
     GetPage(
       name: _Paths.SETPASSWORD,
@@ -96,6 +104,10 @@ class AppPages {
         isEdit: false,
       ),
       binding: EditAccountBinding(),
+    ),
+    GetPage(
+      name: _Paths.EDITSELECTAVATAR,
+      page: () => EditSelectAvatarView(),
     ),
     GetPage(
       name: _Paths.FORGETPASSWORD,

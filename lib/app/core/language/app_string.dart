@@ -54,6 +54,9 @@ abstract class AppStrings {
   static const passwordWeekValidation = "passwordWeekValidation";
   static const nameDisclamer = "nameDisclamer";
 
+  static const welcome = 'welcome';
+  static const dataSavedSuccessfully = 'dataSavedSuccessfully';
+
   // otp screen
   static const otpTitle = 'otpTitle';
   static const otpDiscription = 'otpDiscription';
