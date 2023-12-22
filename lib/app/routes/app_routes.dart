@@ -27,6 +27,7 @@ abstract class Routes {
   static const ViewACCOUNT = _Paths.ViewACCOUNT;
   static const FORGETPASSOTP = _Paths.FORGETPASSOTP;
   static const FORGETPASSSETPASS = _Paths.FORGETPASSSETPASS;
+  static const HOME_SHOWCASE = _Paths.HOME_SHOWCASE;
 }
 
 abstract class _Paths {
@@ -52,4 +53,5 @@ abstract class _Paths {
   static const MORE = '/more';
   static const CONTACTUS = '/contactus';
   static const ABOUTUS = '/aboutus';
+  static const HOME_SHOWCASE = '/home-showcase';
 }
