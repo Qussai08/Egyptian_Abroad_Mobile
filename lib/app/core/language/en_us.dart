@@ -120,4 +120,6 @@ Map<String, String> en = {
   AppStrings.technicalPartner: 'Technical Partner',
   AppStrings.otpSentSuccessfully: 'OTP Sent Successfully',
   AppStrings.favorites: 'Favorites',
+  AppStrings.welcome: 'Welcome',
+  AppStrings.dataSavedSuccessfully: 'Your data saved successfully',
 };

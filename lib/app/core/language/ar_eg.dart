@@ -118,4 +118,8 @@ Map<String, String> ar = {
   AppStrings.otpSentSuccessfully:
       'تم إرسال كود التحقق إلى البريد الإلكترونى المُسجل',
   AppStrings.favorites: 'المفضلة',
+  
+  AppStrings.welcome : 'أهلًا بك',
+  AppStrings.dataSavedSuccessfully : 'تم حفظ بياناتك بنجاح',
+
 };

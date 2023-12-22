@@ -10,8 +10,10 @@ import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/core/services/auth_service.dart';
 import 'package:egyptians_abroad/app/core/services/models/user_profile.dart';
+import 'package:egyptians_abroad/app/core/theme/app_images.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:egyptians_abroad/app/modules/registration/controllers/registration_controller.dart';
+import 'package:egyptians_abroad/app/modules/registration/views/widgets/avatar_widget.dart';
 import 'package:egyptians_abroad/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -116,10 +118,39 @@ class _EditAccountViewState extends State<EditAccountView>
                                 SizedBox(
                                   height: 12.h,
                                 ),
-                                Image.asset(
-                                  'assets/images/user.png',
-                                  width: 56.w,
-                                  fit: BoxFit.fitWidth,
+                                Stack(
+                                  children: [
+                                    AvatarWidget(
+                                        radius: 36.w,
+                                        // imageScale: 2.0,
+                                        backgroundColor:
+                                            Styles.avatarsBackground[int.parse(
+                                                controller
+                                                    .authService
+                                                    .getUserProfile!
+                                                    .avatarId!)],
+                                        imageAsset: AppImages.avatars[int.parse(
+                                            controller.authService
+                                                .getUserProfile!.avatarId!)],
+                                        isSelected: true),
+                                    widget.isEdit!
+                                        ? Positioned(
+                                            bottom: 0.0,
+                                            right: 0.0,
+                                            child: GestureDetector(
+                                              onTap: () {
+                                                Get.toNamed(
+                                                    Routes.EDITSELECTAVATAR);
+                                              },
+                                              child: Image.asset(
+                                                'assets/icons/edit-icon.png',
+                                                width: 32.w,
+                                                height: 32.w,
+                                              ),
+                                            ),
+                                          )
+                                        : SizedBox(),
+                                  ],
                                 ),
                                 SizedBox(
                                   height: 16.h,
