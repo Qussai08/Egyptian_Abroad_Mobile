@@ -74,9 +74,8 @@ class RegistrationSelectAvatarView extends GetView<RegistrationController> {
                         text: AppStrings.save.tr,
                         height: 50.h,
                         width: 358.w,
-                        onPressed: () {
-                          Get.toNamed(Routes.DATASAVED,
-                              arguments: [controller.selectedAvatarIndex, 0]);
+                        onPressed: () async {
+                          await controller.pushAvatar(0);
                         },
                       ),
                       SizedBox(height: 24.h),

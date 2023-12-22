@@ -295,6 +295,22 @@ class RegistrationController extends GetxController {
     }
   }
 
+  Future<void> pushAvatar(int route) async {
+    Map<String, dynamic> reqBody = {
+      "avatarId": selectedAvatarIndex,
+    };
+
+    AppResponse response = await UserRepository().editAccount(reqBody,
+        // TODO : make it dynamic
+        queryParameters: {"guid": authService.userID});
+    if (response.status) {
+      var controller = Get.put(HomeController());
+      await controller.getUserProfile();
+
+      Get.offNamed(Routes.DATASAVED, arguments: [selectedAvatarIndex, route]);
+    }
+  }
+
   getAvatars() {
     return avatarsProvider.avatars;
   }

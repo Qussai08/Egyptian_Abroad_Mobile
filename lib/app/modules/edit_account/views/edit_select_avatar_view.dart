@@ -34,8 +34,7 @@ class EditSelectAvatarView extends StatelessWidget {
         child: Column(
           children: [
             SizedBox(height: 96.h),
-            GestureDetector(
-                child: SelectAvatarGridWidget(controller: _controller)),
+            SelectAvatarGridWidget(controller: _controller),
             const Spacer(),
             Obx(() {
               return CustomButton(
@@ -48,8 +47,7 @@ class EditSelectAvatarView extends StatelessWidget {
                 onPressed: _controller.isDisabled.value
                     ? () {}
                     : () {
-                        Get.toNamed(Routes.DATASAVED,
-                            arguments: [_controller.selectedAvatarIndex, 1]);
+                        _controller.pushAvatar(1);
                       },
               );
             }),

@@ -13,7 +13,7 @@ class DataSavedController extends GetxController {
     // authService.getUserProfile!.avatarId = data[0].toString();
     _goNext();
   }
-
+  
   _goNext() async {
     await 2.delay();
     Get.offAllNamed(Routes.BOTTOMNAVIGATION);

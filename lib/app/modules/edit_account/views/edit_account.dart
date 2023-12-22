@@ -124,14 +124,14 @@ class _EditAccountViewState extends State<EditAccountView>
                                         radius: 36.w,
                                         // imageScale: 2.0,
                                         backgroundColor:
-                                            Styles.avatarsBackground[int.parse(
-                                                controller
-                                                    .authService
-                                                    .getUserProfile!
-                                                    .avatarId!)],
-                                        imageAsset: AppImages.avatars[int.parse(
-                                            controller.authService
-                                                .getUserProfile!.avatarId!)],
+                                            Styles.avatarsBackground[controller
+                                                .authService
+                                                .getUserProfile!
+                                                .avatarId!],
+                                        imageAsset: AppImages.avatars[controller
+                                            .authService
+                                            .getUserProfile!
+                                            .avatarId!],
                                         isSelected: true),
                                     widget.isEdit!
                                         ? Positioned(
