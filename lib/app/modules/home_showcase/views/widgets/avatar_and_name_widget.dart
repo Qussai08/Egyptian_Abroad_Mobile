@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:showcaseview/showcaseview.dart';
 
 import '../../../../core/custom_widgets/dropdown_list_selector.dart';
 
@@ -9,6 +12,7 @@ import '../../../../core/language/app_string.dart';
 import '../../../../core/theme/app_images.dart';
 import '../../../../routes/app_pages.dart';
 import '../../controllers/home_showcase_controller.dart';
+import 'custoum_showcase_widget.dart';
 
 class AvatarAndNameWidget extends StatelessWidget {
   AvatarAndNameWidget({
@@ -28,10 +32,27 @@ class AvatarAndNameWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               // Avatar Image
-              Image.asset(
-                AppImages.maleIcon,
-                width: 36.w,
-                fit: BoxFit.fitWidth,
+              Showcase.withWidget(
+                height: 144,
+                width: 255.w,
+                key: homeContoller.one,
+                targetShapeBorder: const CircleBorder(),
+                targetBorderRadius: const BorderRadius.all(
+                  Radius.circular(150),
+                ),
+                // disableDefaultTargetGestures: true,
+                container: CustoumShowcase1Widget(),
+                onBarrierClick: () {
+                  log('onBarrierClick');
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Image.asset(
+                    AppImages.maleIcon,
+                    width: 36.w,
+                    fit: BoxFit.fitWidth,
+                  ),
+                ),
               ),
 
               // Dropdown List

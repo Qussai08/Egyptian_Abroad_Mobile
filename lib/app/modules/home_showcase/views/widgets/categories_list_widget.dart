@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:showcaseview/showcaseview.dart';
 
 import '../../../../core/custom_widgets/custom_button.dart';
 import '../../../../core/custom_widgets/grid_widget.dart';
@@ -10,6 +13,7 @@ import '../../../../core/helper/dpi_helper.dart';
 import '../../../../core/language/app_string.dart';
 import '../../../../core/theme/styles.dart';
 import '../../controllers/home_showcase_controller.dart';
+import 'custoum_showcase_widget.dart';
 
 class CategoriesListWidget extends StatelessWidget {
   CategoriesListWidget({
@@ -91,20 +95,35 @@ class CategoriesListWidget extends StatelessWidget {
                           ),
                         ),
                         homeContoller.showMore
-                            ? Container(
-                                alignment: Alignment.bottomCenter,
-                                padding: EdgeInsets.only(bottom: 5.h, top: 5.h),
-                                child: CustomButton(
-                                  type: ButtonType.secondary,
-                                  text: AppStrings.showMore.tr,
-                                  width: 110.w,
-                                  height: 36.h,
-                                  fontSize: 10,
-                                  icon: Icons.arrow_forward,
-                                  iconSize: 13,
-                                  onPressed: () {
-                                    homeContoller.getMoreCategories();
-                                  },
+                            ? Showcase.withWidget(
+                                height: 140,
+                                width: 255.w,
+                                key: homeContoller.three,
+                                targetShapeBorder: const CircleBorder(),
+                                targetBorderRadius: const BorderRadius.all(
+                                  Radius.circular(150),
+                                ),
+                                disableDefaultTargetGestures: true,
+                                container: CustoumShowcase3Widget(),
+                                onBarrierClick: () {
+                                  log('onBarrierClick');
+                                },
+                                child: Container(
+                                  alignment: Alignment.bottomCenter,
+                                  padding:
+                                      EdgeInsets.only(bottom: 5.h, top: 5.h),
+                                  child: CustomButton(
+                                    type: ButtonType.secondary,
+                                    text: AppStrings.showMore.tr,
+                                    width: 110.w,
+                                    height: 36.h,
+                                    fontSize: 10,
+                                    icon: Icons.arrow_forward,
+                                    iconSize: 13,
+                                    onPressed: () {
+                                      homeContoller.getMoreCategories();
+                                    },
+                                  ),
                                 ),
                               )
                             : Container()

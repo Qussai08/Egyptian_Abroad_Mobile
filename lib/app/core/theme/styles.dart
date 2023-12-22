@@ -79,6 +79,7 @@ class Styles {
   static const grey_300 = Color.fromRGBO(163, 163, 163, 1);
   static const grey_200 = Color.fromRGBO(221, 221, 221, 1);
   static const grey_100 = Color.fromRGBO(245, 245, 245, 1);
+  static const dividerColor = Color(0xFFEBEBEB);
   static const greyText = Color(0xff848484);
   static const dropdownArrowGrey = Color(0xff6A6A6F);
   static const ghostGrey = Color(0xff717171);

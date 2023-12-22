@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:showcaseview/showcaseview.dart';
 
 import '../../../core/helper/localization_helper.dart';
 import '../../../core/services/app_response.dart';
@@ -195,5 +196,42 @@ class HomeShowcaseController extends GetxController {
 
   onLogout() {
     AuthService().logout();
+  }
+
+  // Show Case Handler
+  final GlobalKey one = GlobalKey();
+  final GlobalKey two = GlobalKey();
+  final GlobalKey three = GlobalKey();
+  final GlobalKey four = GlobalKey();
+  final GlobalKey five = GlobalKey();
+  late BuildContext _homeContext;
+
+  // start showcase
+  void startShowCase(BuildContext context) {
+    _homeContext = context;
+    ambiguate(WidgetsBinding.instance)?.addPostFrameCallback(
+      (_) => ShowCaseWidget.of(_homeContext).startShowCase([one, three]),
+    );
+
+    // WidgetsBinding.instance!.addPostFrameCallback((_) {
+    //   if (authService.isFirstTime) {
+    //     authService.setIsFirstTime(false);
+    //     showCase();
+    //   }
+    // });
+  }
+
+  // next showcase
+  void nextShowCase(BuildContext context) {
+    // ShowCaseWidget.of(_homeContext).startShowCase([three]);
+    ShowCaseWidget.of(_homeContext).next();
+    // ambiguate(WidgetsBinding.instance)?.addPostFrameCallback(
+    //   (_) => ShowCaseWidget.of(context).startShowCase([three]),
+    // );
+  }
+
+  // dismiss showcase
+  void dismissShowCase(BuildContext context) {
+    ShowCaseWidget.of(_homeContext).dismiss();
   }
 }
