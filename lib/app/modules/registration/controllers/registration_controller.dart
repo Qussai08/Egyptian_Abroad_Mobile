@@ -1,4 +1,5 @@
 import 'package:egyptians_abroad/app/core/custom_widgets/custom_taost.dart';
+import 'package:egyptians_abroad/app/core/helper/app_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/core/services/app_response.dart';
 import 'package:egyptians_abroad/app/core/services/auth_service.dart';
@@ -69,6 +70,10 @@ class RegistrationController extends GetxController {
       "password": passwordTxtController.text,
       "verificationCode": otp
     });
+
+    AppHelper.name = nameTxtController.text;
+
+    print("register nameTxtController.text  ${nameTxtController.text}");
     if (response.status) {
       await loginController.login(
           email: emailTxtController.text,
@@ -222,6 +227,7 @@ class RegistrationController extends GetxController {
 
   Future<void> completeAccount({bool? isEdit = true}) async {
     Map<String, dynamic> reqBody = {
+      "name": AppHelper.name,
       "jobCategoryID": jobCategory.value,
       "residencyCountryId": residenceCountry.value,
       "residencyTypeId": residenceType.value,
@@ -234,9 +240,11 @@ class RegistrationController extends GetxController {
       "messagingAddress": msgsAddressTxtController.text,
       "passportNo": egPassportNumTxtController.text
     };
-    if (isEdit!) {
-      reqBody['name'] = nameTxtController.text;
-    }
+    print("isEdit! ${isEdit!}");
+    print("completeAccount nameTxtController.text ${nameTxtController.text}");
+    // if (isEdit!) {
+    //   reqBody['name'] = nameTxtController.text;
+    // }
     AppResponse response = await UserRepository().editAccount(reqBody,
         // TODO : make it dynamic
         queryParameters: {"guid": authService.userID});

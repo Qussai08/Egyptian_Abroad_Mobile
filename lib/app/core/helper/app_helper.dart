@@ -13,6 +13,7 @@ class AppHelper {
   //   _token = token;
   //   getUserIdFromToken(_token!);
   // }
+  static String? name;
 
   // static UserProfileModel? userProfile;
   // static setUserProfile(UserProfileModel? profile) => userProfile = profile;

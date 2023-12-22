@@ -15,9 +15,10 @@ class GridWidget extends GetView<StartServiceController> {
   final int widgetTag;
   final Category? category;
   final ServiceItem? serviceItem;
+  final bool? inFavList;
 
   const GridWidget(this.widgetTag,
-      {this.category, this.serviceItem, super.key});
+      {this.category, this.serviceItem, this.inFavList = false, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -72,18 +73,36 @@ class GridWidget extends GetView<StartServiceController> {
                           : category!.imagePath ??
                               "https://www.kuleuven.be/communicatie/congresbureau/fotos-en-afbeeldingen/no-image.png/image"),
                       isService
-                          ? Obx(() {
-                              return Positioned(
-                                  bottom: 0.0,
-                                  left: 0.0,
-                                  child: FavoriteButton(
-                                    isFavorite: serviceItem!.isFavorite(),
-                                    onTap: () async {
-                                      await controller
-                                          .handleFavorite(serviceItem!);
-                                    },
-                                  ));
-                            })
+                          ? Positioned(
+                              bottom: 0.0,
+                              left: 0.0,
+                              child: inFavList!
+                                  ? !serviceItem!.isFixedFavorite
+                                      ? FavoriteButton(
+                                          isFavorite: true,
+                                          onTap: () async {
+                                            await controller
+                                                .removeFromFavoriteInHome(
+                                                    serviceItem!);
+                                          },
+                                        )
+                                      : Container()
+                                  :
+
+                                  /// for the services list
+
+                                  !serviceItem!.isFixedFavorite
+                                      ? Obx(() {
+                                          return FavoriteButton(
+                                            isFavorite:
+                                                serviceItem!.isMyFavorite(),
+                                            onTap: () async {
+                                              await controller
+                                                  .handleFavorite(serviceItem!);
+                                            },
+                                          );
+                                        })
+                                      : Container())
                           : Container(),
                     ],
                   )),

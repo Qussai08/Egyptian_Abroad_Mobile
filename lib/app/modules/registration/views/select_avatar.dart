@@ -80,10 +80,13 @@ class RegistrationSelectAvatarView extends GetView<RegistrationController> {
                       ),
                       SizedBox(height: 24.h),
                       CustomButton(
-                        type: ButtonType.disabled,
+                        type: ButtonType.secondary,
                         text: AppStrings.skip.tr,
                         height: 50.h,
                         width: 358.w,
+                        onPressed: () {
+                          Get.offNamed(Routes.DATASAVED, arguments: [7, 0]);
+                        },
                       ),
                     ],
                   ),

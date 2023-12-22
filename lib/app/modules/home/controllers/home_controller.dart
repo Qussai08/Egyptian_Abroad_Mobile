@@ -200,23 +200,22 @@ class HomeController extends GetxController {
 
   Future<void> addToFavorites(
       {required String userId, required String serviceId}) async {
-    favoritesListProvider
-        .addToFavorites(userId, serviceId)
-        .then((value) {}, onError: (error) {});
+    favoritesListProvider.addToFavorites(userId, serviceId).then((value) {
+      print("addToFavorites ${value.body}");
+    }, onError: (error) {});
   }
 
   Future<void> removeFromFavorites(
       {required String userId, required String serviceId}) async {
-    favoritesListProvider
-        .removeFromFavorites(userId, serviceId)
-        .then((value) {}, onError: (error) {});
+    favoritesListProvider.removeFromFavorites(userId, serviceId).then((value) {
+      print("removeFromFavorites ${value.body}");
+    }, onError: (error) {});
   }
 
   Future<void> updateFavoritesList({required String userId}) async {
-    favoritesListProvider.getFavoritesList(userId).then((value) {
+    await favoritesListProvider.getFavoritesList(userId).then((value) {
       Iterable list = value.body;
-      favoritesList =
-          list.map((e) => ServiceItem.fromJson(e)).toList().toSet().toList();
+      favoritesList = list.map((e) => ServiceItem.fromJson(e)).toList();
     }, onError: (error) {});
 
     update();

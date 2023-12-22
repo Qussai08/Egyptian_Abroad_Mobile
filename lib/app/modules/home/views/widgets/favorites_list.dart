@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class FavoritesList extends GetView<HomeController> {
+class FavoritesList extends StatelessWidget {
   const FavoritesList({super.key});
 
   @override
@@ -29,7 +29,7 @@ class FavoritesList extends GetView<HomeController> {
           child: Row(
             children: [
               CustomCardWidget(
-                padding: EdgeInsets.only(right: 10.w, top: 9.h, bottom: 9.h),
+                padding: EdgeInsets.only(right: 10.w, top: 5.h, bottom: 5.h),
                 child: GetBuilder<HomeController>(builder: (_controller) {
                   return ListView.builder(
                     scrollDirection: Axis.horizontal,
@@ -37,8 +37,11 @@ class FavoritesList extends GetView<HomeController> {
                     itemBuilder: (context, index) {
                       return Padding(
                         padding: const EdgeInsets.only(left: 8.0),
-                        child: GridWidget(index,
-                            serviceItem: _controller.favoritesList[index]),
+                        child: GridWidget(
+                          index,
+                          serviceItem: _controller.favoritesList[index],
+                          inFavList: true,
+                        ),
                       );
                     },
                   );

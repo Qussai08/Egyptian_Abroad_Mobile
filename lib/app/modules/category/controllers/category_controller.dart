@@ -1,10 +1,12 @@
 import 'package:egyptians_abroad/app/core/services/app_response.dart';
+import 'package:egyptians_abroad/app/core/services/auth_service.dart';
 import 'package:egyptians_abroad/app/core/services/models/service.dart';
 import 'package:egyptians_abroad/app/core/services/repositories/categories_repository.dart';
 import 'package:get/get.dart';
 
 class CategoryController extends GetxController {
   int? _categoryId;
+  final AuthService authService = Get.find();
 
   void setCategoryId(int val, {bool notifiy = false}) {
     _categoryId = val;
@@ -50,6 +52,7 @@ class CategoryController extends GetxController {
 
   Future<void> getServicesList(int categoryId,
       {int? pageNo = 1, applyLoading = true}) async {
+    print("getServicesList authService.userID ${authService.userID}");
     if (applyLoading) _updateServicesLoading(true);
     if ((_keySearch.isEmpty && _currentPage <= _noOfPages) ||
         (_keySearch.isNotEmpty && _currentPageSearch <= _noOfPagesSearch)) {
@@ -57,6 +60,7 @@ class CategoryController extends GetxController {
           await CategoriesRepository().getServicesByCategoryId({
         "categoryId": categoryId,
         "servicesName": _keySearch,
+        "userId": authService.userID,
         "pageNo": pageNo,
         "pageSize": 6
       });
@@ -173,6 +177,4 @@ class CategoryController extends GetxController {
     }
     update();
   }
-
-
 }

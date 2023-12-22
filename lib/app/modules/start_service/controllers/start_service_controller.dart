@@ -24,7 +24,7 @@ class StartServiceController extends GetxController {
 
   Future<void> handleFavorite(ServiceItem item) async {
     var favoritesController = Get.find<HomeController>();
-    if (item.isFavorite.value) {
+    if (item.isMyFavorite.value) {
       await favoritesController.removeFromFavorites(
           userId: AuthService().getUserProfile!.userId!,
           serviceId: item.serviceId.toString());
@@ -33,7 +33,18 @@ class StartServiceController extends GetxController {
           userId: AuthService().getUserProfile!.userId!,
           serviceId: item.serviceId.toString());
     }
-    item.isFavorite.value = !item.isFavorite();
+    item.isMyFavorite.value = !item.isMyFavorite();
+    await favoritesController.updateFavoritesList(
+        userId: AuthService().getUserProfile!.userId!);
+  }
+
+  Future<void> removeFromFavoriteInHome(ServiceItem item) async {
+    var favoritesController = Get.find<HomeController>();
+
+    await favoritesController.removeFromFavorites(
+        userId: AuthService().getUserProfile!.userId!,
+        serviceId: item.serviceId.toString());
+
     await favoritesController.updateFavoritesList(
         userId: AuthService().getUserProfile!.userId!);
   }

@@ -47,19 +47,21 @@ class ServiceItem {
     this.servicesIcon,
     required this.serviceName,
     required this.categoryId,
-    required this.isFavorite,
+    required this.isFixedFavorite,
   });
   late final int serviceId;
   late final String? servicesIcon;
   late final String serviceName;
   late final int categoryId;
-  RxBool isFavorite = false.obs;
+  bool isFixedFavorite = false;
+  RxBool isMyFavorite = false.obs;
 
   ServiceItem.fromJson(Map<String, dynamic> json) {
     serviceId = json['serviceId'];
     servicesIcon = json['servicesIcon'];
     serviceName = json['serviceName'];
     categoryId = json['categoryId'];
-    isFavorite = json['isFavorite'] ?? false.obs;
+    isFixedFavorite = json['isFixedFavorite'] ?? false;
+    isMyFavorite.value = json['isMyFavorite'] ?? false;
   }
 }

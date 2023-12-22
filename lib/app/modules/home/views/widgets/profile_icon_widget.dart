@@ -2,8 +2,10 @@ import 'package:egyptians_abroad/app/core/theme/app_images.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:egyptians_abroad/app/modules/home/controllers/home_controller.dart';
 import 'package:egyptians_abroad/app/modules/registration/views/widgets/avatar_widget.dart';
+import 'package:egyptians_abroad/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class ProfileIconWidget extends StatelessWidget {
   const ProfileIconWidget({
@@ -15,13 +17,18 @@ class ProfileIconWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AvatarWidget(
-        radius: 18.w,
-        imageScale: 2.0,
-        backgroundColor: Styles.avatarsBackground[
-            controller.authService.getUserProfile!.avatarId!],
-        imageAsset:
-            AppImages.avatars[controller.authService.getUserProfile!.avatarId!],
-        isSelected: false);
+    return GestureDetector(
+      onTap: () {
+        Get.toNamed(Routes.ViewACCOUNT);
+      },
+      child: AvatarWidget(
+          radius: 18.w,
+          imageScale: 2.0,
+          backgroundColor: Styles.avatarsBackground[
+              controller.authService.getUserProfile!.avatarId!],
+          imageAsset: AppImages
+              .avatars[controller.authService.getUserProfile!.avatarId!],
+          isSelected: false),
+    );
   }
 }
