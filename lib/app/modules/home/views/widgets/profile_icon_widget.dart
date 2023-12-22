@@ -19,9 +19,9 @@ class ProfileIconWidget extends StatelessWidget {
         radius: 18.w,
         imageScale: 2.0,
         backgroundColor: Styles.avatarsBackground[
-            int.parse(controller.authService.getUserProfile!.avatarId!)],
-        imageAsset: AppImages.avatars[
-            int.parse(controller.authService.getUserProfile!.avatarId!)],
+            controller.authService.getUserProfile!.avatarId!],
+        imageAsset:
+            AppImages.avatars[controller.authService.getUserProfile!.avatarId!],
         isSelected: false);
   }
 }
