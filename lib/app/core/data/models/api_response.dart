@@ -5,9 +5,9 @@ import 'package:get/get.dart';
 class ApiResponse<T> extends Response<T> {
   final bool isSuccess;
   final T? body;
-  final int? error;
+  final List<dynamic>? errors;
 
-  ApiResponse({required this.isSuccess, this.body, this.error});
+  ApiResponse({required this.isSuccess, this.body, this.errors});
 
   factory ApiResponse.fromResponse(Response response, Function fromJson) {
     if (response.hasError) {
@@ -26,36 +26,42 @@ class ApiResponse<T> extends Response<T> {
           body: fromJson(response.body!['data']),
         );
       } else {
-        throw int.parse(response.body!['error']['errorCode'] ?? '-1');
+        // return ApiResponse(
+        //   isSuccess: false,
+        //   body: null,
+        //   errors: fromJson(response.body!['errors']),
+        // );
+
+        throw response.body!['errors'].first['errorCode'] ?? '-1';
       }
     }
   }
 
-  factory ApiResponse.fromResponseNoException(
-      Response response, Function fromJson) {
-    if (response.hasError) {
-      if (response.statusCode == 500) {
-        return ApiResponse(isSuccess: false, error: response.statusCode);
-      } else {
-        // TODO: fix this error
-        int error = -8;
-        try {
-          error = int.parse(response.body!['error']['errorCode'] ?? '8');
-        } catch (e) {}
-        return ApiResponse(isSuccess: false, error: error);
-      }
-    } else {
-      if (response.body!['isSuccess'] ?? false) {
-        return ApiResponse(
-          isSuccess: true,
-          body: fromJson(response.body!['data']),
-        );
-      } else {
-        return ApiResponse(
-          isSuccess: false,
-          error: int.parse(response.body!['error']['errorCode'] ?? '8'),
-        );
-      }
-    }
-  }
+  // factory ApiResponse.fromResponseNoException(
+  //     Response response, Function fromJson) {
+  //   if (response.hasError) {
+  //     if (response.statusCode == 500) {
+  //       return ApiResponse(isSuccess: false, errors: response.statusCode);
+  //     } else {
+  //       // TODO: fix this errors
+  //       int errors = -8;
+  //       try {
+  //         errors = int.parse(response.body!['errors']['errorCode'] ?? '8');
+  //       } catch (e) {}
+  //       return ApiResponse(isSuccess: false, errors: errors);
+  //     }
+  //   } else {
+  //     if (response.body!['isSuccess'] ?? false) {
+  //       return ApiResponse(
+  //         isSuccess: true,
+  //         body: fromJson(response.body!['data']),
+  //       );
+  //     } else {
+  //       return ApiResponse(
+  //         isSuccess: false,
+  //         errors: int.parse(response.body!['errors']['errorCode'] ?? '8'),
+  //       );
+  //     }
+  //   }
+  // }
 }

@@ -7,7 +7,7 @@ import 'package:egyptians_abroad/app/modules/more/controllers/more_controller.da
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import 'widgets/custom_card_widget.dart';
+import '../../../core/custom_widgets/custom_card_widget.dart';
 import 'widgets/header_widget.dart';
 import 'package:flutter/material.dart';
 

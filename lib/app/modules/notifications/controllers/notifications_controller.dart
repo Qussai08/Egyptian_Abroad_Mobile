@@ -28,6 +28,7 @@ class NotificationsController extends GetxController
             return;
           }
           notificationsList.addAll(value.body ?? []);
+          notificationsList.value = notificationsList.value.reversed.toList();
           change(value.body, status: RxStatus.success());
         } else {
           change(null, status: RxStatus.empty());

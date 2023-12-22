@@ -1,6 +1,9 @@
 import 'package:egyptians_abroad/app/core/custom_widgets/custom_dialog.dart';
+import 'package:egyptians_abroad/app/core/custom_widgets/custom_taost.dart';
+import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/core/services/app_response.dart';
 import 'package:egyptians_abroad/app/core/services/repositories/user_repository.dart';
+import 'package:egyptians_abroad/app/modules/forget_password/views/forget_pass_otp.dart';
 import 'package:egyptians_abroad/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,15 +18,37 @@ class ForgetPasswordController extends GetxController {
   final TextEditingController confirmNewPassTxtController =
       TextEditingController();
 
+  // RxString errorMessage = ''.obs;
+  // RxBool showValidation = false.obs;
+
   Future<void> verifyMail() async {
     AppResponse response = await UserRepository().checkEmailAndNIIfExist(
         queryParameters: {
           "email": emailTxtController.text,
           "NID": "00000000000000"
         });
+    print("response.data ${response.data}");
+
     if (!response.data['data']) {
-      await createVerificationCode();
-      Get.toNamed(Routes.FORGETPASSOTP);
+      AppResponse verRes = await createVerificationCode();
+      print("verRes ${verRes.data}");
+      // Get.toNamed(Routes.FORGETPASSOTP);
+      Get.showSnackbar(
+        buildCustomToast(
+          Get.context!,
+          toastMsg: AppStrings.otpSentSuccessfully.tr,
+          toastTitle: AppStrings.confirm.tr,
+          toastType: ToastType.success,
+        ),
+      );
+      Future.delayed(const Duration(seconds: 2), () {
+        if (verRes.status) {
+          otp = '';
+          Get.to(() => ForgetPassOtpView(
+                resendOtpTime: verRes.data['data']['data']['resendOtp'],
+              ));
+        }
+      });
     } else {
       buildCustomDialog(
           // TODO : translate
@@ -38,7 +63,7 @@ class ForgetPasswordController extends GetxController {
     return response;
   }
 
-  Future<void> createVerificationCode() async {
+  Future<AppResponse> createVerificationCode() async {
     AppResponse response = await UserRepository().createOtp(queryParameters: {
       "email": emailTxtController.text,
       "verificationType": 2
@@ -46,6 +71,7 @@ class ForgetPasswordController extends GetxController {
     if (response.status) {
       print("createVerificationCode : ${response.status}");
     }
+    return response;
   }
 
   Future<void> forgetPass() async {
@@ -58,11 +84,15 @@ class ForgetPasswordController extends GetxController {
 
     AppResponse response = await UserRepository().forgetPasswordReq(reqBody);
     if (response.status) {
-      buildCustomDialog(
-          // TODO : translate
-          dialogMsg: "تم تعديل كلمة المرور بنجاح",
-          dialogType: DialogType.success);
-      Future.delayed(const Duration(seconds: 1), () async {
+      Get.showSnackbar(
+        buildCustomToast(
+          Get.context!,
+          toastMsg: "تم تعديل كلمة المرور بنجاح",
+          toastTitle: AppStrings.confirm.tr,
+          toastType: ToastType.success,
+        ),
+      );
+      Future.delayed(const Duration(seconds: 2), () {
         Get.back(closeOverlays: true);
 
         Get.toNamed(Routes.LOGIN);

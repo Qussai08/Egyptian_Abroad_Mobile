@@ -56,22 +56,26 @@ extension ButtonTypeExtension on ButtonType {
 }
 
 class CustomButton extends StatelessWidget {
-  const CustomButton(
-      {super.key,
-      this.text,
-      this.widget,
-      this.width = double.infinity,
-      this.height = 50,
-      this.type = ButtonType.primary,
-      this.disabledText,
-      this.onPressed,
-      this.onLongPressed,
-      this.fontSize = 16,
-      this.icon,
-      this.isLoading = false,
-      this.iconSize = 20,
-      this.fontWeight = FontWeight.w700})
-      : assert(
+  const CustomButton({
+    super.key,
+    this.text,
+    this.widget,
+    this.width = double.infinity,
+    this.height = 50,
+    this.type = ButtonType.primary,
+    this.disabledText,
+    this.onPressed,
+    this.onLongPressed,
+    this.fontSize = 16,
+    this.icon,
+    this.isLoading = false,
+    this.iconSize = 20,
+    this.fontWeight = FontWeight.w700,
+    this.changeIconPosition = false,
+    this.textColor,
+    this.iconIsAsset = false,
+    this.assetString,
+  })  : assert(
             (text == null && widget != null) ||
                 (text != null && widget == null),
             "text and widget cannot be defined simultaneously"),
@@ -89,7 +93,10 @@ class CustomButton extends StatelessWidget {
   final bool isLoading;
   final FontWeight fontWeight;
   final double iconSize;
-
+  final bool changeIconPosition;
+  final Color? textColor;
+  final bool iconIsAsset;
+  final String? assetString;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -103,7 +110,7 @@ class CustomButton extends StatelessWidget {
       ),
       width: width,
       height: height,
-      padding: const EdgeInsets.symmetric(horizontal: 8),
+      // padding: const EdgeInsets.symmetric(horizontal: 8),
       child: TextButton(
           style: TextButton.styleFrom(
             // backgroundColor:
@@ -130,9 +137,13 @@ class CustomButton extends StatelessWidget {
                 )
               : widget ??
                   Row(
-                    mainAxisAlignment: (icon != null)
-                        ? MainAxisAlignment.spaceBetween
-                        : MainAxisAlignment.center,
+                    // mainAxisAlignment: (icon != null)
+                    //     ? MainAxisAlignment.center
+                    //     : MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    textDirection: changeIconPosition
+                        ? TextDirection.ltr
+                        : TextDirection.rtl,
                     children: [
                       Text(
                         type == ButtonType.disabled
@@ -140,20 +151,22 @@ class CustomButton extends StatelessWidget {
                             : text!,
                         style: TextStyle(
                             fontSize: fontSize,
-                            color: type.textColor,
+                            color: textColor ?? type.textColor,
                             fontWeight: fontWeight,
                             fontFamily: 'baloo'),
                       ),
-                      if (icon != null)
+                      if (icon != null || iconIsAsset)
                         const SizedBox(
                           width: 5,
                         ),
-                      if (icon != null)
-                        Icon(
-                          icon,
-                          color: type.textColor,
-                          size: iconSize,
-                        ),
+                      if (icon != null || iconIsAsset)
+                        !iconIsAsset
+                            ? Icon(
+                                icon,
+                                color: type.textColor,
+                                size: iconSize,
+                              )
+                            : Image.asset(assetString!),
                     ],
                   )),
     );

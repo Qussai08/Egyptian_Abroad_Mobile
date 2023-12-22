@@ -1,4 +1,3 @@
-import 'package:egyptians_abroad/app/core/custom_widgets/custom_dialog.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/custom_taost.dart';
 import 'package:egyptians_abroad/app/core/helper/app_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
@@ -11,6 +10,7 @@ import 'package:egyptians_abroad/app/modules/login/controllers/login_controller.
 import 'package:egyptians_abroad/app/modules/registration/data/models/country.dart';
 import 'package:egyptians_abroad/app/modules/registration/data/models/job_category.dart';
 import 'package:egyptians_abroad/app/modules/registration/data/models/residence_type.dart';
+import 'package:egyptians_abroad/app/modules/registration/data/providers/avatars_provider.dart';
 import 'package:egyptians_abroad/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,6 +22,10 @@ class RegistrationController extends GetxController {
 
   // Login controller
   final LoginController loginController = Get.put(LoginController());
+
+  final avatarsProvider = Get.put<AvatarsProvider>(AvatarsProvider());
+  late int selectedAvatarIndex;
+
   @override
   void onInit() {
     super.onInit();
@@ -38,7 +42,7 @@ class RegistrationController extends GetxController {
   final TextEditingController passwordTxtController = TextEditingController();
   String otp = '';
 
-  Future<void> createVerificationCode() async {
+  Future<AppResponse> createVerificationCode() async {
     AppResponse response = await UserRepository().createOtp(
       queryParameters: {
         "email": emailTxtController.text,
@@ -48,6 +52,7 @@ class RegistrationController extends GetxController {
     if (response.status) {
       print("createVerificationCode : ${response.status}");
     }
+    return response;
   }
 
   Future<AppResponse> verifyCode(otp) async {
@@ -65,6 +70,10 @@ class RegistrationController extends GetxController {
       "password": passwordTxtController.text,
       "verificationCode": otp
     });
+
+    AppHelper.name = nameTxtController.text;
+
+    print("register nameTxtController.text  ${nameTxtController.text}");
     if (response.status) {
       await loginController.login(
           email: emailTxtController.text,
@@ -218,6 +227,7 @@ class RegistrationController extends GetxController {
 
   Future<void> completeAccount({bool? isEdit = true}) async {
     Map<String, dynamic> reqBody = {
+      "name": AppHelper.name,
       "jobCategoryID": jobCategory.value,
       "residencyCountryId": residenceCountry.value,
       "residencyTypeId": residenceType.value,
@@ -230,15 +240,17 @@ class RegistrationController extends GetxController {
       "messagingAddress": msgsAddressTxtController.text,
       "passportNo": egPassportNumTxtController.text
     };
-    if (isEdit!) {
-      reqBody['name'] = nameTxtController.text;
-    }
+    print("isEdit! ${isEdit!}");
+    print("completeAccount nameTxtController.text ${nameTxtController.text}");
+    // if (isEdit!) {
+    //   reqBody['name'] = nameTxtController.text;
+    // }
     AppResponse response = await UserRepository().editAccount(reqBody,
         // TODO : make it dynamic
         queryParameters: {"guid": authService.userID});
     if (response.status) {
       Future.delayed(const Duration(seconds: 3), () async {
-        Get.offAllNamed(Routes.BOTTOMNAVIGATION);
+        Get.toNamed(Routes.REGITSRATIONSELECTAVATAR);
       });
 
       Get.showSnackbar(
@@ -272,13 +284,52 @@ class RegistrationController extends GetxController {
         // TODO : make it dynamic
         queryParameters: {"guid": authService.userID});
     if (response.status) {
-      buildCustomDialog(
-          // TODO : translate
-          dialogMsg: "تم تعديل بيانات الحساب بنجاح",
-          dialogType: DialogType.success);
+      Get.showSnackbar(buildCustomToast(
+        Get.context!,
+        toastMsg: "تم تعديل بيانات الحساب بنجاح",
+        toastTitle: 'تاكيد',
+        toastType: ToastType.success,
+      ));
 
       var controller = Get.put(HomeController());
-      controller.getUserProfile();
+      await controller.getUserProfile();
+      Future.delayed(const Duration(seconds: 3), () async {
+        Get.back(closeOverlays: true);
+        Get.back();
+      });
+    }
+  }
+
+  Future<void> pushAvatar(int route) async {
+    Map<String, dynamic> reqBody = {
+      "avatarId": selectedAvatarIndex,
+    };
+
+    AppResponse response = await UserRepository().editAccount(reqBody,
+        // TODO : make it dynamic
+        queryParameters: {"guid": authService.userID});
+    if (response.status) {
+      var controller = Get.put(HomeController());
+      await controller.getUserProfile();
+
+      Get.offNamed(Routes.DATASAVED, arguments: [selectedAvatarIndex, route]);
+    }
+  }
+
+  getAvatars() {
+    return avatarsProvider.avatars;
+  }
+
+  RxBool isDisabled = true.obs;
+  selectAvatar(int index) {
+    isDisabled.value = false;
+    avatarsProvider.avatars[index].isSelected.value = true;
+    selectedAvatarIndex = index;
+
+    for (int i = 0; i < 9; i++) {
+      if (avatarsProvider.avatars[i].index != index) {
+        avatarsProvider.avatars[i].isSelected.value = false;
+      }
     }
   }
 }

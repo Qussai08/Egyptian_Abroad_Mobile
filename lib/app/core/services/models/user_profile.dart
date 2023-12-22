@@ -19,6 +19,7 @@ class UserProfileModel {
     this.foreignPassportNo,
     this.residencyAddress,
     this.shortName,
+    this.avatarId,
   });
   late final String? userId;
   late final String? name;
@@ -38,6 +39,7 @@ class UserProfileModel {
   late final String? residencyNo;
   late final String? foreignPassportNo;
   late final String? residencyAddress;
+  late final int? avatarId;
   String? shortName;
 
   UserProfileModel.fromJson(Map<String, dynamic> json) {
@@ -59,6 +61,7 @@ class UserProfileModel {
     residencyNo = json['residencyNo'];
     foreignPassportNo = json['foreignPassportNo'];
     residencyAddress = json['residencyAddress'];
+    avatarId = json['avatarId'] ?? 7;
     shortName = (json['name'] != null && json['name'] != '')
         ? name?.split(' ').first ?? ''
         : '';
@@ -85,6 +88,7 @@ class UserProfileModel {
     data['residencyTypeName'] = residencyTypeName;
     data['residencyNo'] = residencyNo;
     data['foreignPassportNo'] = foreignPassportNo;
+    data['avatarId'] = avatarId;
     data['residencyAddress'] = residencyAddress;
 
     return data;

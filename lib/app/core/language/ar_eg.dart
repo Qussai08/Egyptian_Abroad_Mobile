@@ -2,7 +2,7 @@
 
 Map<String, String> ar = {
   AppStrings.success: 'نجاح',
-  AppStrings.appName: 'مصريين بالخارج',
+  AppStrings.appName: 'المصريون بالخارج',
   AppStrings.splashDiscription:
       'تقدر توصل لكل الخدمات اللى انت محتاجها من اى مكان بكل سهولة',
   AppStrings.noInternet: 'لا يوجد اتصال',
@@ -12,16 +12,17 @@ Map<String, String> ar = {
   AppStrings.logOut: 'تسجيل الخروج',
   AppStrings.nationalID: 'الرقم القومي',
   AppStrings.password: 'كلمة المرور',
-  AppStrings.forgetPassword: 'هل نسيت كلمة المرور ؟',
-  AppStrings.donotHaveAccount: ' ليس لديك حساب أنشئ ',
+  AppStrings.forgetPassword: 'نسيت كلمة المرور؟',
+  AppStrings.donotHaveAccount: 'ليس لديك حساب؟ ',
   AppStrings.newAccount: 'حساب جديد',
-  AppStrings.registerNew: 'أنشئ حساب جديد',
-  AppStrings.register: 'أنشئ حساب',
-  AppStrings.name: 'الاسم كما في بطاقة الرقم القومي',
+  AppStrings.registerNew: "إنشاء حساب جديد",
+  AppStrings.register: 'إنشاء حساب',
+  AppStrings.name: 'الاسم',
+  AppStrings.nameDisclamer: 'الاسم كما في بطاقة الرقم القومي',
   AppStrings.email: 'البريد الالكتروني',
   AppStrings.residence: 'بلد الاقامة',
   AppStrings.next: 'التالي',
-  AppStrings.alreadyHaveAccount: ' هل تمتلك حساب بالفعل؟ ',
+  AppStrings.alreadyHaveAccount: ' هل لديك حساب بالفعل؟ ',
   AppStrings.otpTitle: 'تحقق من هويتك',
   AppStrings.otpDiscription:
       'أدخل الرمز المكون من 4 أرقام المرسل على البريد الإلكتروني الخاص بك ',
@@ -51,7 +52,7 @@ Map<String, String> ar = {
   AppStrings.passwordContainsChar: 'يحتوي على حرف واحد على الأقل',
   AppStrings.passwordContainsSpecialChar: 'يحتوي على حرف خاص واحد على الأقل',
   AppStrings.confirmPasswordValidation: 'كلمة المرور غير متطابقة.',
-  AppStrings.completeAccountTitle: 'استكمال بيانات الحساب',
+  AppStrings.completeAccountTitle: 'استكمال الملف التعريفي',
   AppStrings.egPassportNum: 'رقم جواز السفر المصرى',
   AppStrings.residenceCountry: 'بلد الاقامة',
   AppStrings.residenceType: 'نوع الاقامة',
@@ -65,11 +66,11 @@ Map<String, String> ar = {
   AppStrings.forignPhoneNumHint: ' (يجب ان يكون به تطبيق واتساب) ',
   AppStrings.msgsAddress: 'عنوان المراسلات داخل مصر',
   AppStrings.save: 'حفظ',
-  AppStrings.skip: 'تخطي',
+  AppStrings.skip: 'أكمل لاحقًا',
   AppStrings.sorry: 'عفوا',
   AppStrings.invalidMailOrPass: 'خطأ في البريد الإلكترونى أو كلمة المرور.',
-  AppStrings.accountInfos: 'بيانات الحساب',
-  AppStrings.editAccountInfos: 'تعديل بيانات الحساب',
+  AppStrings.accountInfos: 'الملف التعريفى',
+  AppStrings.editAccountInfos: 'تعديل الملف التعريفى',
   AppStrings.viewAccountInfos: 'عرض بيانات الحساب',
   AppStrings.forgetPasswordTitle: 'اعادة تعيين كلمة المرور',
   AppStrings.sendVerificationCode: 'ارسال كود التحقق',
@@ -111,4 +112,14 @@ Map<String, String> ar = {
   AppStrings.callUsVia: 'تواصل معنا عبر الوسائل التالية:',
   AppStrings.oldEqualNew:
       'يجب ألا تكون كلمة المرور الجديدة متطابقة مع كلمة المرور الحالية ',
+  AppStrings.registerWithCarsAccount: 'التسجيل بحساب سيارات المصرين بالخارج',
+  AppStrings.somethingWentWrong: 'نأسف، حدث خطأ',
+  AppStrings.technicalPartner: 'الشريك التقني',
+  AppStrings.otpSentSuccessfully:
+      'تم إرسال كود التحقق إلى البريد الإلكترونى المُسجل',
+  AppStrings.favorites: 'المفضلة',
+  
+  AppStrings.welcome : 'أهلًا بك',
+  AppStrings.dataSavedSuccessfully : 'تم حفظ بياناتك بنجاح',
+
 };

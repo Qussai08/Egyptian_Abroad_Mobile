@@ -96,6 +96,19 @@ class Styles {
   // Radio styles
   static const radioBorder = Color.fromRGBO(145, 168, 221, 1);
 
+  // Avatars background
+  static const List<Color> avatarsBackground = [
+    Color(0xFF8B41FF),
+    Color(0xFFE3EBFD),
+    Color(0xFFF76151),
+    Color(0xFF65C8FF),
+    Color(0xFFFFF9C6),
+    Color(0xFF0CD6DE),
+    Color(0xFFFFCFD2),
+    Color(0xFFA3F2A1),
+    Color(0xFFF7D251),
+  ];
+
   // Text Styles
   static TextStyle _getTextStyle(
       double fontSize, FontWeight fontWeight, color) {

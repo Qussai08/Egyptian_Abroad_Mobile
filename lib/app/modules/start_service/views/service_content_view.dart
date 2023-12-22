@@ -5,6 +5,7 @@ import 'package:egyptians_abroad/app/core/helper/app_helper.dart';
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/helper/localization_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
+import 'package:egyptians_abroad/app/core/services/auth_service.dart';
 import 'package:egyptians_abroad/app/core/services/models/category.dart';
 import 'package:egyptians_abroad/app/core/services/models/service_content.dart';
 import 'package:egyptians_abroad/app/core/theme/app_images.dart';
@@ -30,6 +31,7 @@ class ServiceContentView extends StatefulWidget {
 class _ServiceContentViewState extends State<ServiceContentView> {
   @override
   Widget build(BuildContext context) {
+    AuthService authService = Get.find();
     return NetworkIndicator(
         child: Scaffold(
       //   resizeToAvoidBottomInset: false,
@@ -43,10 +45,14 @@ class _ServiceContentViewState extends State<ServiceContentView> {
           child: Scaffold(
             backgroundColor: Colors.transparent,
             appBar: CustomAppBar(
-              title: widget.serviceContent!.servicesContentTitle,
+              title: Text(
+                widget.serviceContent!.servicesContentTitle ?? "",
+                style: Styles.getBoldStyle(
+                    color: Styles.black, fontSize: fixDpiFont(26)),
+              ),
             ),
             body: SingleChildScrollView(
-              physics: const NeverScrollableScrollPhysics(),
+              // physics: const NeverScrollableScrollPhysics(),
               child: Container(
                 height: fixDpiScreenHeight() * 0.9,
                 width: fixDpiScreenWidth(),
@@ -66,7 +72,8 @@ class _ServiceContentViewState extends State<ServiceContentView> {
                             width: 8,
                           ),
                           TitleText(
-                            title: "${AppStrings.hello.tr} احمد" "!",
+                            title:
+                                "${AppStrings.hello.tr} ${authService.getUserProfile?.shortName ?? ''} !",
                             fontSize: fixDpiFont(18),
                             color: const Color(0xff263238),
                           )
@@ -123,49 +130,10 @@ class _ServiceContentViewState extends State<ServiceContentView> {
                               ));
                         },
                       ),
-                      //     Text(
-                      //   widget.serviceContent!.servicesContentSummary!,
-                      //   textDirection: LocalizationHelper.isArabic()
-                      //       ? TextDirection.rtl
-                      //       : TextDirection.ltr,
-                      //   style: TextStyle(
-                      //       fontSize: fixDpiFont(16),
-                      //       fontFamily: 'baloo',
-                      //       fontWeight: FontWeight.w400,
-                      //       color: const Color.fromRGBO(62, 60, 60, 0.71)),
-                      // ),
                     ),
                     const SizedBox(
                       height: 8,
                     ),
-                    // TODO : add on press to open the url
-                    // GestureDetector(
-                    //   onTap: () {
-                    //     Get.to(() => URLServiceView(
-                    //           url: widget.serviceContent!.serviceContentLink,
-                    //         ));
-                    //     // launchUrl(
-                    //     //     mode: LaunchMode.platformDefault,
-                    //     //     Uri.parse(
-                    //     //         widget.serviceContent!.serviceContentLink!));
-                    //   },
-                    //   child: Align(
-                    //     alignment: LocalizationHelper.isArabic()
-                    //         ? Alignment.centerRight
-                    //         : Alignment.centerLeft,
-                    //     child: Text(
-                    //       widget.serviceContent!.serviceContentLink!,
-                    //       textDirection: TextDirection.ltr,
-                    //       style: TextStyle(
-                    //         fontSize: fixDpiFont(16),
-                    //         fontFamily: 'baloo',
-                    //         fontWeight: FontWeight.w400,
-                    //         color: const Color(0xff1B57E3),
-                    //         decoration: TextDecoration.underline,
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
                     const Spacer(),
                     CustomButton(
                       text: AppStrings.continueStr.tr,
@@ -177,33 +145,10 @@ class _ServiceContentViewState extends State<ServiceContentView> {
                         Get.to(() => URLServiceView(
                               url: widget.serviceContent!.serviceContentLink,
                             ));
-                        // await launchUrl(
-                        //     mode: LaunchMode.platformDefault,
-                        //     Uri.parse(
-                        //         "https://www.google.com/maps/search/?api=1&query=-3.823216,-38.481700"));
-                        // Uri(
-                        //     scheme: 'https',
-                        //     host: 'www.google.com/maps/search/',
-                        //     query: "?api=1&query=-3.823216,-38.481700"));
-                        // Get.toNamed(
-                        //   Routes.STARTSERVICE,
-                        // );
                       },
                     ),
                     SizedBox(
-                      height: 16.h,
-                    ),
-                    CustomButton(
-                      text: AppStrings.backToApp.tr,
-                      type: ButtonType.secondary,
-                      width: 300.w,
-                      height: 50,
-                      onPressed: () {
-                        Get.back();
-                      },
-                    ),
-                    SizedBox(
-                      height: 60.h,
+                      height: 76.h,
                     ),
                   ],
                 ),

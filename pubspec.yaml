@@ -1,5 +1,5 @@
 name: egyptians_abroad
-version: 1.1.2+7
+version: 1.1.4+10
 publish_to: none
 description: A new Flutter project.
 environment: 
@@ -53,11 +53,17 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/avatars/
+
   
   fonts:
     - family: baloo
       fonts:
         - asset: assets/fonts/baloo_ar.ttf
+        
+    - family: helvetica
+      fonts:
+        - asset: assets/fonts/helvetica.ttf
         #   weight: 400
         # - asset: assets/fonts/Baloo2-Bold.ttf
         #   weight: 700

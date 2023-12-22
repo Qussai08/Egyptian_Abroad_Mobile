@@ -73,7 +73,7 @@ class _DropDownListSelectorState extends State<DropDownListSelector> {
               icon: const Icon(
                 Icons.keyboard_arrow_down,
                 size: 20,
-                color: Styles.dropdownArrowGrey,
+                color: Styles.primaryColor,
               ),
               style: Styles.getRegularStyle(color: Styles.black),
               items: widget.dropDownList,
