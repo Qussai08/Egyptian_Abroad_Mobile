@@ -11,7 +11,6 @@ import 'package:egyptians_abroad/app/core/constants/globals.dart';
 import 'package:egyptians_abroad/app/core/services/app_response.dart';
 import 'package:get/instance_manager.dart';
 
-import '../helper/app_helper.dart';
 import '../helper/localization_helper.dart';
 import 'auth_service.dart';
 

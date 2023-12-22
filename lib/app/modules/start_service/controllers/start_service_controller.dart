@@ -22,19 +22,19 @@ class StartServiceController extends GetxController {
     return null;
   }
 
-  handleFavorite(ServiceItem item) {
+  Future<void> handleFavorite(ServiceItem item) async {
     var favoritesController = Get.find<HomeController>();
     if (item.isFavorite.value) {
-      favoritesController.removeFromFavorites(
+      await favoritesController.removeFromFavorites(
           userId: AuthService().getUserProfile!.userId!,
           serviceId: item.serviceId.toString());
     } else {
-      favoritesController.addToFavorites(
+      await favoritesController.addToFavorites(
           userId: AuthService().getUserProfile!.userId!,
           serviceId: item.serviceId.toString());
     }
     item.isFavorite.value = !item.isFavorite();
-    favoritesController.updateFavoritesList(
+    await favoritesController.updateFavoritesList(
         userId: AuthService().getUserProfile!.userId!);
   }
 }

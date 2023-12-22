@@ -30,18 +30,19 @@ class FavoritesList extends GetView<HomeController> {
             children: [
               CustomCardWidget(
                 padding: EdgeInsets.only(right: 10.w, top: 9.h, bottom: 9.h),
-                child: GetBuilder<HomeController>(
-                  builder: (_controller) {
-                    return ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: _controller.favoritesList.length,
-                      itemBuilder: (context, index) {
-                        return GridWidget(index,
-                            serviceItem: _controller.favoritesList[index]);
-                      },
-                    );
-                  }
-                ),
+                child: GetBuilder<HomeController>(builder: (_controller) {
+                  return ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: _controller.favoritesList.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: GridWidget(index,
+                            serviceItem: _controller.favoritesList[index]),
+                      );
+                    },
+                  );
+                }),
               ),
             ],
           ),

@@ -1,8 +1,4 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-
-import '../services/models/user_profile.dart';
 
 enum ServiceType {
   web,

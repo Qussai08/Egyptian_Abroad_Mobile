@@ -215,7 +215,8 @@ class HomeController extends GetxController {
   Future<void> updateFavoritesList({required String userId}) async {
     favoritesListProvider.getFavoritesList(userId).then((value) {
       Iterable list = value.body;
-      favoritesList = list.map((e) => ServiceItem.fromJson(e)).toList();
+      favoritesList =
+          list.map((e) => ServiceItem.fromJson(e)).toList().toSet().toList();
     }, onError: (error) {});
 
     update();
