@@ -4,11 +4,12 @@ import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:egyptians_abroad/app/modules/home/controllers/favorites_controller.dart';
+import 'package:egyptians_abroad/app/modules/home/controllers/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class FavoritesList extends GetView<FavoritesController> {
+class FavoritesList extends GetView<HomeController> {
   const FavoritesList({super.key});
 
   @override
@@ -29,13 +30,17 @@ class FavoritesList extends GetView<FavoritesController> {
             children: [
               CustomCardWidget(
                 padding: EdgeInsets.only(right: 10.w, top: 9.h, bottom: 9.h),
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: controller.favoritesList.length,
-                  itemBuilder: (context, index) {
-                    return GridWidget(index,
-                        serviceItem: controller.favoritesList[index]);
-                  },
+                child: GetBuilder<HomeController>(
+                  builder: (_controller) {
+                    return ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: _controller.favoritesList.length,
+                      itemBuilder: (context, index) {
+                        return GridWidget(index,
+                            serviceItem: _controller.favoritesList[index]);
+                      },
+                    );
+                  }
                 ),
               ),
             ],

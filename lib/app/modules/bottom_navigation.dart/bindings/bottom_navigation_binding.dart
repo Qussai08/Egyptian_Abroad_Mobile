@@ -14,7 +14,6 @@ class BottomNavigationBinding extends Bindings {
   void dependencies() {
     // Home
     Get.put<FavoritesListProvider>(FavoritesListProvider());
-    Get.put<FavoritesController>(FavoritesController());
     Get.put<StartServiceController>(StartServiceController());
     Get.put<HomeController>(HomeController());
 

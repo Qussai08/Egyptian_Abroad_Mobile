@@ -79,8 +79,7 @@ class GridWidget extends GetView<StartServiceController> {
                                   child: FavoriteButton(
                                     isFavorite: serviceItem!.isFavorite(),
                                     onTap: () {
-                                      controller
-                                          .toggleFavoriteButton(serviceItem!);
+                                      controller.handleFavorite(serviceItem!);
                                     },
                                   ));
                             })
