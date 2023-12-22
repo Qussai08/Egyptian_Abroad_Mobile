@@ -7,6 +7,7 @@ import 'package:egyptians_abroad/app/core/custom_widgets/title_text.dart';
 import 'package:egyptians_abroad/app/core/helper/app_helper.dart';
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
+import 'package:egyptians_abroad/app/core/services/auth_service.dart';
 import 'package:egyptians_abroad/app/core/services/models/category.dart';
 import 'package:egyptians_abroad/app/core/theme/app_images.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
@@ -33,6 +34,8 @@ class _CategoryViewState extends State<CategoryView> {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(CategoryController(widget.category!.id));
+    AuthService authService = Get.find();
+
     return NetworkIndicator(
       child: GetBuilder<CategoryController>(
         builder: (categoryController) => Scaffold(
@@ -50,7 +53,12 @@ class _CategoryViewState extends State<CategoryView> {
               child: Scaffold(
                 backgroundColor: Colors.transparent,
                 appBar: CustomAppBar(
-                  title: widget.category!.categoryName,
+                  title: Text(
+                    widget.category!.categoryName,
+                    textAlign: TextAlign.center,
+                    style: Styles.getBoldStyle(
+                        color: Styles.black, fontSize: fixDpiFont(26)),
+                  ),
                 ),
                 body: SingleChildScrollView(
                   physics: const NeverScrollableScrollPhysics(),
@@ -72,7 +80,8 @@ class _CategoryViewState extends State<CategoryView> {
                                 width: 8,
                               ),
                               TitleText(
-                                title: "${AppStrings.hello.tr} احمد" "!",
+                                title:
+                                    "${AppStrings.hello.tr} ${authService.getUserProfile?.shortName ?? ''} !",
                                 fontSize: fixDpiFont(18),
                                 color: const Color(0xff263238),
                               )

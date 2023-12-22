@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'widgets/column_element_widget.dart';
-import 'widgets/custom_card_widget.dart';
+import '../../../core/custom_widgets/custom_card_widget.dart';
 import 'widgets/header_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -53,6 +53,7 @@ class ContactUsView extends GetView<MoreController> {
                         path: 'eme/')),
                     imageAsset: AppImages.facebookIcon,
                     text: 'facebook/eme',
+                    textUnderline: true,
                     fontSize: fixDpiFont(14)),
                 SizedBox(height: 24.h),
                 ContactElementWidget(
@@ -60,6 +61,7 @@ class ContactUsView extends GetView<MoreController> {
                         Uri(scheme: 'mailto', path: 'emigration@gov.eg')),
                     imageAsset: AppImages.gmailIcon,
                     text: 'emigration@gov.eg',
+                    textUnderline: true,
                     fontSize: fixDpiFont(14)),
               ],
             )),

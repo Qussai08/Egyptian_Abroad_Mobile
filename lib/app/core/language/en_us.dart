@@ -16,8 +16,9 @@ Map<String, String> en = {
   AppStrings.donotHaveAccount: " Don't have account create ",
   AppStrings.newAccount: 'New Account',
   AppStrings.registerNew: 'Create New Account',
-  AppStrings.register: 'Create Account',
-  AppStrings.name: 'Name as in National ID',
+  AppStrings.register: 'Register New account',
+  AppStrings.name: 'Name',
+  AppStrings.nameDisclamer: 'Name as in National ID',
   AppStrings.email: 'Email',
   AppStrings.residence: 'Country of Residence',
   AppStrings.next: 'Next',
@@ -114,4 +115,11 @@ Map<String, String> en = {
       'Egyptian phone number should be 11 digits',
   AppStrings.egPhoneNumWrongValidation:
       "The submitted Phone number is incorrect",
+  AppStrings.registerWithCarsAccount: 'Register with Cars Account',
+  AppStrings.somethingWentWrong: 'Sorry, something went wrong',
+  AppStrings.technicalPartner: 'Technical Partner',
+  AppStrings.otpSentSuccessfully: 'OTP Sent Successfully',
+  AppStrings.favorites: 'Favorites',
+  AppStrings.welcome: 'Welcome',
+  AppStrings.dataSavedSuccessfully: 'Your data saved successfully',
 };

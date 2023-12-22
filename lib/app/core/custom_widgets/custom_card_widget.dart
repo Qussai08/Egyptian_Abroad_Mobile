@@ -5,14 +5,17 @@ class CustomCardWidget extends StatelessWidget {
   const CustomCardWidget({
     super.key,
     required this.child,
+    this.padding,
   });
   final Widget child;
+  final EdgeInsetsGeometry? padding;
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
         width: double.infinity,
-        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 24.h),
+        padding:
+            padding ?? EdgeInsets.symmetric(horizontal: 24.w, vertical: 24.h),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(12.0),

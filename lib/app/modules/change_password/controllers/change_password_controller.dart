@@ -1,4 +1,3 @@
-import 'package:egyptians_abroad/app/core/custom_widgets/custom_dialog.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/custom_taost.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/core/services/auth_service.dart';
@@ -6,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../routes/app_pages.dart';
 import '../data/providers/change_password_provider.dart';
+import '../../../core/helper/error_helper.dart';
 
 class ChangePasswordController extends GetxController {
   final TextEditingController oldPasswordTxtController =
@@ -33,37 +33,26 @@ class ChangePasswordController extends GetxController {
     }
     changePasswordProvider.postChangePassword(oldPassword, newPassword).then(
         (value) {
-      if (value.isSuccess) {
-        buildCustomDialog(
-          dialogMsg: AppStrings.successPasswordChange.tr,
-          dialogType: DialogType.success,
-        );
-        // OLD Code
-        // Get.dialog(
-        // CustomDialog(
-        //   icon: const Icon(
-        //     Icons.check_circle,
-        //     color: Styles.green,
-        //   ),
-        //   text: AppStrings.successPasswordChange.tr)
-        // );
-        Future.delayed(const Duration(seconds: 3), () {
-          AuthService().logout();
-          Get.offAllNamed(Routes.LOGIN);
-        });
-      } else {
-        handleError();
-      }
+      Get.showSnackbar(
+        buildCustomToast(
+          Get.context!,
+          toastMsg: AppStrings.successPasswordChange.tr,
+          toastTitle: AppStrings.confirm.tr,
+          toastType: ToastType.success,
+        ),
+      );
+      AuthService().logout();
+      Get.offAllNamed(Routes.LOGIN);
     }, onError: (error) {
-      handleError();
+      handleError(error);
     });
   }
 
-  void handleError() {
+  void handleError(String error) {
     Get.showSnackbar(
       buildCustomToast(
         Get.context!,
-        toastMsg: AppStrings.invalidOldPassword.tr,
+        toastMsg: ErrorHelper.getErrorMessage(error),
         toastTitle: AppStrings.sorry.tr,
         toastType: ToastType.error,
       ),

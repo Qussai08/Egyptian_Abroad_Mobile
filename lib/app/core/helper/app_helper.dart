@@ -1,8 +1,4 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-
-import '../services/models/user_profile.dart';
 
 enum ServiceType {
   web,
@@ -17,6 +13,7 @@ class AppHelper {
   //   _token = token;
   //   getUserIdFromToken(_token!);
   // }
+  static String? name;
 
   // static UserProfileModel? userProfile;
   // static setUserProfile(UserProfileModel? profile) => userProfile = profile;

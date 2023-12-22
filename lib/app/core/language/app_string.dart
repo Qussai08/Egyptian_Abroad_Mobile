@@ -31,8 +31,10 @@ abstract class AppStrings {
   static const emailFormatValidation = "emailFormatValidation";
   static const emailEmptyValidation = "emailEmptyValidation";
   static const passwordEmptyValidation = "passwordEmptyValidation";
+  static const otpSentSuccessfully = "otpSentSuccessfully";
   static const sorry = "sorry";
   static const invalidMailOrPass = "invalidMailOrPass";
+  static const registerWithCarsAccount = "registerWithCarsAccount";
 
   // register screen
   static const register = 'register';
@@ -50,6 +52,10 @@ abstract class AppStrings {
   static const emptyValidation = "emptyValidation";
   static const nationalIDWrongValidation = "nationalIDWrongValidation";
   static const passwordWeekValidation = "passwordWeekValidation";
+  static const nameDisclamer = "nameDisclamer";
+
+  static const welcome = 'welcome';
+  static const dataSavedSuccessfully = 'dataSavedSuccessfully';
 
   // otp screen
   static const otpTitle = 'otpTitle';
@@ -103,7 +109,7 @@ abstract class AppStrings {
   static const showMore = 'showMore';
   static const searchForService = 'searchForService';
   static const noServices = 'noServices';
-
+  static const favorites = 'favorites';
   // category screen
   static const servicesNeeded = 'servicesNeeded';
 
@@ -141,4 +147,7 @@ abstract class AppStrings {
   static const maxlength = 'maxlength';
   static const char = 'char';
   static const num = 'num';
+
+  static const somethingWentWrong = 'somethingWentWrong';
+  static const technicalPartner = 'technicalPartner';
 }

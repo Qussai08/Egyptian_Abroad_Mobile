@@ -6,9 +6,7 @@ import 'package:egyptians_abroad/app/core/custom_widgets/textfield_title.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/title_text.dart';
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
-import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:egyptians_abroad/app/modules/forget_password/controllers/forget_password_controller.dart';
-import 'package:egyptians_abroad/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:egyptians_abroad/app/core/helper/validators.dart';
@@ -76,6 +74,7 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView>
                       if (_formKey.currentState!.validate()) {
                         await controller.verifyMail();
                       }
+                      
                     },
                   ),
                   SizedBox(
