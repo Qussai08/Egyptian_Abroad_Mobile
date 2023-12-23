@@ -65,27 +65,32 @@ class HomeBodyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     homeContoller.startShowCase(context);
-    return Column(
+    return Flex(
+      direction: Axis.vertical,
       children: [
-        // Avatar and Name
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: fixDpiWidth(16)),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              AvatarAndNameWidget(),
-              // Search TextField
-              HomeSearchWidget(),
+        Column(
+          children: [
+            // Avatar and Name
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: fixDpiWidth(16)),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  AvatarAndNameWidget(),
+                  // Search TextField
+                  HomeSearchWidget(),
 
-              // Favorites
-              SizedBox(height: 19.h),
-              FavoritesList(),
-            ],
-          ),
+                  // Favorites
+                  SizedBox(height: 19.h),
+                  FavoritesList(),
+                ],
+              ),
+            ),
+
+            // Categories
+            CategoriesListWidget(),
+          ],
         ),
-
-        // Categories
-        CategoriesListWidget(),
       ],
     );
   }

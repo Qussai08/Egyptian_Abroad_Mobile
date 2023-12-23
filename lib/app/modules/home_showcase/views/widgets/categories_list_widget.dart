@@ -43,7 +43,7 @@ class CategoriesListWidget extends StatelessWidget {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
+        mainAxisSize: MainAxisSize.max,
         children: [
           TitleText(
             title: AppStrings.exploreServices.tr,

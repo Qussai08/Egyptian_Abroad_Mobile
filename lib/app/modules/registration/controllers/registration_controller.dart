@@ -188,6 +188,7 @@ class RegistrationController extends GetxController {
     // setResidenceLoading(true);
     await getResidenceTypeList();
     await getGobCategoryList();
+    await getCountriesList();
     setResidenceLoading(false);
   }
 
@@ -308,6 +309,8 @@ class RegistrationController extends GetxController {
     AppResponse response = await UserRepository().editAccount(reqBody,
         // TODO : make it dynamic
         queryParameters: {"guid": authService.userID});
+
+    print("pushAvatar ${response.data}");
     if (response.status) {
       var controller = Get.put(HomeShowcaseController());
       await controller.getUserProfile();
