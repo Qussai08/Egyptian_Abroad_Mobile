@@ -25,6 +25,8 @@ class HomeShowcaseController extends GetxController {
     super.onInit();
     getCategoriesList();
     getUserProfile();
+
+    // TODO: for testing only to be removed
     // authService.showcaseViewed = true;
   }
 
@@ -230,10 +232,12 @@ class HomeShowcaseController extends GetxController {
     }
 
     ShowCaseWidget.of(_homeContext).next();
+    authService.showcaseViewed = false;
   }
 
   // dismiss showcase
   void dismissShowCase(BuildContext context) {
     ShowCaseWidget.of(_homeContext).dismiss();
+    authService.showcaseViewed = false;
   }
 }
