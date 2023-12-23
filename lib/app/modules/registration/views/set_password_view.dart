@@ -98,7 +98,8 @@ class _SetPasswordViewState extends State<SetPasswordView>
                           _confirmPassTxtController.text.trim().isEmpty
                               ? AppStrings.emptyValidation.tr
                               : validateConfirmPassword(
-                                  _confirmPassTxtController.text),
+                                  _confirmPassTxtController.text,
+                                  controller.passwordTxtController.text),
                       inputData: TextInputType.text,
                       isPassword: true,
                     ),

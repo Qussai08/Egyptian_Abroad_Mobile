@@ -34,11 +34,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         //   child:
         // ),
       ),
-      actions: [
-        Container(
-          width: 24.w,
-        )
-      ],
+      // actions: [
+      //   Container(
+      //     width: 24.w,
+      //   )
+      // ],
       centerTitle: true,
     );
   }

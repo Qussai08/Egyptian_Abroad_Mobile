@@ -1,5 +1,5 @@
-import 'package:egyptians_abroad/app/modules/home/controllers/favorites_controller.dart';
-import 'package:egyptians_abroad/app/modules/home/data/providers/favorites_list_provider.dart';
+import 'package:egyptians_abroad/app/modules/old_home/controllers/favorites_controller.dart';
+import 'package:egyptians_abroad/app/modules/old_home/data/providers/favorites_list_provider.dart';
 import 'package:get/get.dart';
 
 import '../controllers/home_controller.dart';

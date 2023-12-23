@@ -47,5 +47,6 @@ class AppImages {
     'assets/avatars/7.png',
     'assets/avatars/8.png',
     'assets/avatars/9.png',
+    'assets/avatars/10.png',
   ];
 }

@@ -50,10 +50,14 @@ class ForgetPasswordController extends GetxController {
         }
       });
     } else {
-      buildCustomDialog(
-          // TODO : translate
-          dialogMsg: "البريد الإلكتروني غير مُسجل",
-          dialogType: DialogType.error);
+      Get.showSnackbar(
+        buildCustomToast(
+          Get.context!,
+          toastMsg: "البريد الإلكتروني غير مُسجل",
+          toastTitle: AppStrings.sorry.tr,
+          toastType: ToastType.error,
+        ),
+      );
     }
   }
 

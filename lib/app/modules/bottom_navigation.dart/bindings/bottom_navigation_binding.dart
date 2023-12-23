@@ -1,10 +1,8 @@
 import 'package:egyptians_abroad/app/modules/bottom_navigation.dart/controllers/bottom_navigation_controller.dart';
-import 'package:egyptians_abroad/app/modules/home/data/providers/favorites_list_provider.dart';
 import 'package:egyptians_abroad/app/modules/more/controllers/more_controller.dart';
 import 'package:egyptians_abroad/app/modules/start_service/controllers/start_service_controller.dart';
 import 'package:get/get.dart';
 
-import '../../home/controllers/home_controller.dart';
 import '../../home_showcase/controllers/home_showcase_controller.dart';
 import '../../home_showcase/data/providers/favorites_list_provider.dart';
 import '../../notifications/controllers/notifications_controller.dart';
@@ -18,7 +16,7 @@ class BottomNavigationBinding extends Bindings {
     Get.put<StartServiceController>(StartServiceController());
 
     // Home
-    Get.put<HomeController>(HomeController());
+    Get.put<HomeShowcaseController>(HomeShowcaseController());
     // Get.put<HomeController>(HomeController());
     Get.put<HomeShowcaseController>(HomeShowcaseController());
 

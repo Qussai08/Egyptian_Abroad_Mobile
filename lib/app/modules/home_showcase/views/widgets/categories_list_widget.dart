@@ -27,7 +27,7 @@ class CategoriesListWidget extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(top: 20.h),
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 19.h),
-      height: 524.h,
+      // height: 524.h,
       width: double.infinity,
       decoration: BoxDecoration(
         color: Colors.white,
@@ -43,6 +43,7 @@ class CategoriesListWidget extends StatelessWidget {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
           TitleText(
             title: AppStrings.exploreServices.tr,
@@ -73,10 +74,12 @@ class CategoriesListWidget extends StatelessWidget {
                       message: AppStrings.noServices.tr,
                     )
                   : Column(
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         SizedBox(
-                          height: !homeContoller.showMore ? 425.h : 385.h,
+                          // height: !homeContoller.showMore ? 425.h : 385.h,
                           child: GridView.builder(
+                            physics: NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             padding: EdgeInsets.only(top: 15.h),
                             gridDelegate:
@@ -130,7 +133,7 @@ class CategoriesListWidget extends StatelessWidget {
                       ],
                     ),
           // TODO: kindly check this view on EN language, may spacing make issue with allignment
-          const Spacer(),
+          // const Spacer(),
         ],
       ),
     );

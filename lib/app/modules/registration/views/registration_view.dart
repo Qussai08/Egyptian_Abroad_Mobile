@@ -221,6 +221,7 @@ class _RegistrationViewState extends State<RegistrationView>
                                   if (res.status && res.data['data'] == true) {
                                     AppResponse verRes = await controller
                                         .createVerificationCode();
+                                    print("verRes ${verRes.data}");
                                     Get.to(() => OtpView(
                                           resendOtpTime: verRes.data['data']
                                               ['data']['resendOtp'],

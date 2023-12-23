@@ -1,6 +1,5 @@
 import 'package:egyptians_abroad/app/core/custom_widgets/custom_button.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/network_indecator.dart';
-import 'package:egyptians_abroad/app/core/custom_widgets/title_text.dart';
 import 'package:egyptians_abroad/app/core/helper/app_helper.dart';
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/helper/localization_helper.dart';
@@ -8,7 +7,6 @@ import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/core/services/auth_service.dart';
 import 'package:egyptians_abroad/app/core/services/models/category.dart';
 import 'package:egyptians_abroad/app/core/services/models/service_content.dart';
-import 'package:egyptians_abroad/app/core/theme/app_images.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/custom_appbar.dart';
 import 'package:egyptians_abroad/app/modules/start_service/views/url_service_view.dart';
@@ -59,27 +57,6 @@ class _ServiceContentViewState extends State<ServiceContentView> {
                 padding: EdgeInsets.symmetric(horizontal: 16.w),
                 child: Column(
                   children: [
-                    Container(
-                      margin: EdgeInsets.symmetric(vertical: 15.h),
-                      child: Row(
-                        children: [
-                          Image.asset(
-                            AppImages.maleIcon,
-                            width: 36.w,
-                            fit: BoxFit.fitWidth,
-                          ),
-                          const SizedBox(
-                            width: 8,
-                          ),
-                          TitleText(
-                            title:
-                                "${AppStrings.hello.tr} ${authService.getUserProfile?.shortName ?? ''} !",
-                            fontSize: fixDpiFont(18),
-                            color: const Color(0xff263238),
-                          )
-                        ],
-                      ),
-                    ),
                     SizedBox(
                       height: 20.h,
                     ),

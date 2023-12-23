@@ -1,3 +1,4 @@
+import 'package:egyptians_abroad/app/core/custom_widgets/technical_partner_widget.dart';
 import 'package:egyptians_abroad/app/core/theme/app_images.dart';
 import 'package:egyptians_abroad/app/modules/more/views/widgets/list_tile_widget.dart';
 import 'package:egyptians_abroad/app/routes/app_pages.dart';
@@ -63,7 +64,7 @@ class MoreView extends GetView<MoreController> {
               imageScale: 2),
           const Divider(color: Styles.grey_200, height: 0),
           Visibility(
-            visible: true, // hide change language button
+            visible: false, // hide change language button
 
             child: ListTileWidget(
               imageAsset: AppImages.languageIcon,
@@ -81,17 +82,6 @@ class MoreView extends GetView<MoreController> {
           ),
           const Divider(color: Styles.grey_200, height: 0),
           const Spacer(),
-          Column(
-            children: [
-              Text(
-                AppStrings.technicalPartner.tr,
-                style: Styles.getRegularStyle(
-                        fontSize: fixDpiFont(12), color: Styles.grey_600)
-                    .copyWith(fontFamily: 'helvetica'),
-              ),
-              Image.asset(AppImages.technicalPartner),
-            ],
-          ),
         ],
       ),
     );

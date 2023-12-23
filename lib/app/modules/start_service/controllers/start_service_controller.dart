@@ -2,8 +2,7 @@ import 'package:egyptians_abroad/app/core/services/app_response.dart';
 import 'package:egyptians_abroad/app/core/services/auth_service.dart';
 import 'package:egyptians_abroad/app/core/services/models/service_content.dart';
 import 'package:egyptians_abroad/app/core/services/repositories/categories_repository.dart';
-import 'package:egyptians_abroad/app/modules/home/controllers/favorites_controller.dart';
-import 'package:egyptians_abroad/app/modules/home/controllers/home_controller.dart';
+import 'package:egyptians_abroad/app/modules/home_showcase/controllers/home_showcase_controller.dart';
 import 'package:get/get.dart';
 
 import '../../../core/services/models/service.dart';
@@ -23,7 +22,7 @@ class StartServiceController extends GetxController {
   }
 
   Future<void> handleFavorite(ServiceItem item) async {
-    var favoritesController = Get.find<HomeController>();
+    var favoritesController = Get.find<HomeShowcaseController>();
     if (item.isMyFavorite.value) {
       await favoritesController.removeFromFavorites(
           userId: AuthService().getUserProfile!.userId!,
@@ -39,7 +38,7 @@ class StartServiceController extends GetxController {
   }
 
   Future<void> removeFromFavoriteInHome(ServiceItem item) async {
-    var favoritesController = Get.find<HomeController>();
+    var favoritesController = Get.find<HomeShowcaseController>();
 
     await favoritesController.removeFromFavorites(
         userId: AuthService().getUserProfile!.userId!,
