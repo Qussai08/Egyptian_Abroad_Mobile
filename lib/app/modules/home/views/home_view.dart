@@ -1,13 +1,10 @@
 import 'package:egyptians_abroad/app/core/custom_widgets/custom_button.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/custom_textfield.dart';
-import 'package:egyptians_abroad/app/core/custom_widgets/dropdown_list_selector.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/grid_widget.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/no_data_widget.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/title_text.dart';
-import 'package:egyptians_abroad/app/core/helper/app_helper.dart';
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
-import 'package:egyptians_abroad/app/core/theme/app_images.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:egyptians_abroad/app/modules/home/views/widgets/favorites_list.dart';
 import 'package:egyptians_abroad/app/modules/home/views/widgets/home_appbar.dart';

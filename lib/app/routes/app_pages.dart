@@ -20,9 +20,13 @@ import '../modules/forget_password/views/forget_pass_set_pass.dart';
 import '../modules/forget_password/views/forget_password_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/home_showcase/bindings/home_showcase_binding.dart';
+import '../modules/home_showcase/views/home_showcase_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/more/bindings/more_binding.dart';
+import '../modules/more/views/about_us_view.dart';
+import '../modules/more/views/contact_us_view.dart';
 import '../modules/more/views/more_view.dart';
 import '../modules/notifications/bindings/notifications_binding.dart';
 import '../modules/notifications/views/notifications_view.dart';
@@ -167,6 +171,11 @@ class AppPages {
     GetPage(
       name: _Paths.CONTACTUS,
       page: () => const ContactUsView(),
+    ),
+    GetPage(
+      name: _Paths.HOME_SHOWCASE,
+      page: () => const HomeShowcaseView(),
+      binding: HomeShowcaseBinding(),
     ),
   ];
 }

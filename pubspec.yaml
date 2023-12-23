@@ -30,6 +30,7 @@ dependencies:
   firebase_core: ^2.24.2
   flutter_svg: ^2.0.9
   jwt_decode: ^0.3.1
+  showcaseview: ^2.0.3
 
 
 

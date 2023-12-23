@@ -1,35 +1,31 @@
-import 'package:egyptians_abroad/app/core/services/app_response.dart';
-import 'package:egyptians_abroad/app/core/services/auth_service.dart';
-import 'package:egyptians_abroad/app/core/services/models/category.dart';
-import 'package:egyptians_abroad/app/core/services/models/service.dart';
-import 'package:egyptians_abroad/app/core/services/repositories/categories_repository.dart';
-import 'package:egyptians_abroad/app/modules/home/data/providers/favorites_list_provider.dart';
-import 'package:egyptians_abroad/app/modules/registration/controllers/registration_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:showcaseview/showcaseview.dart';
 
 import '../../../core/helper/localization_helper.dart';
+import '../../../core/services/app_response.dart';
+import '../../../core/services/auth_service.dart';
+import '../../../core/services/models/category.dart';
 import '../../../core/services/models/user_profile.dart';
+import '../../../core/services/repositories/categories_repository.dart';
 import '../../../core/services/repositories/user_repository.dart';
-import '../../home_showcase/data/providers/favorites_list_provider.dart';
+import '../../registration/controllers/registration_controller.dart';
 
-class HomeController extends GetxController {
+class HomeShowcaseController extends GetxController {
   String keySearch = '';
   final TextEditingController searchController = TextEditingController();
 
-  List<ServiceItem> favoritesList = [];
   // Auth service
-  final AuthService authService = Get.find();
+  final authService = Get.find<AuthService>();
   final RegistrationController registrationController =
       Get.put(RegistrationController());
-  final favoritesListProvider = Get.find<FavoritesListProvider>();
 
   @override
   void onInit() {
     super.onInit();
     getCategoriesList();
     getUserProfile();
-    updateFavoritesList(userId: authService.userID!);
+    // authService.showcaseViewed = true;
   }
 
   bool userProfileLoading = false;
@@ -199,26 +195,45 @@ class HomeController extends GetxController {
     update();
   }
 
-  Future<void> addToFavorites(
-      {required String userId, required String serviceId}) async {
-    favoritesListProvider.addToFavorites(userId, serviceId).then((value) {
-      print("addToFavorites ${value.body}");
-    }, onError: (error) {});
+  onLogout() {
+    AuthService().logout();
   }
 
-  Future<void> removeFromFavorites(
-      {required String userId, required String serviceId}) async {
-    favoritesListProvider.removeFromFavorites(userId, serviceId).then((value) {
-      print("removeFromFavorites ${value.body}");
-    }, onError: (error) {});
+  // Show Case Handler
+  final GlobalKey one = GlobalKey();
+  final GlobalKey two = GlobalKey();
+  final GlobalKey three = GlobalKey();
+
+  late BuildContext _homeContext;
+  final scrollController = ScrollController();
+
+  // start showcase
+  void startShowCase(BuildContext context) {
+    if (authService.showcaseViewed) {
+      _homeContext = context;
+      ambiguate(WidgetsBinding.instance)?.addPostFrameCallback(
+        (_) => ShowCaseWidget.of(_homeContext).startShowCase([one, two, three]),
+      );
+    }
   }
 
-  Future<void> updateFavoritesList({required String userId}) async {
-    await favoritesListProvider.getFavoritesList(userId).then((value) {
-      Iterable list = value.body;
-      favoritesList = list.map((e) => ServiceItem.fromJson(e)).toList();
-    }, onError: (error) {});
+  // next showcase
+  Future<void> nextShowCase({bool? isScroll = false}) async {
+    if (isScroll ?? false) {
+      scrollController.animateTo(
+        scrollController.position.maxScrollExtent,
+        duration: const Duration(milliseconds: 5),
+        curve: Curves.easeOut,
+      );
+      // wait 500 milliseconds
+      await Future.delayed(const Duration(milliseconds: 10));
+    }
 
-    update();
+    ShowCaseWidget.of(_homeContext).next();
+  }
+
+  // dismiss showcase
+  void dismissShowCase(BuildContext context) {
+    ShowCaseWidget.of(_homeContext).dismiss();
   }
 }
