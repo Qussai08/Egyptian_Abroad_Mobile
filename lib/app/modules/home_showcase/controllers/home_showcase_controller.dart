@@ -25,7 +25,7 @@ class HomeShowcaseController extends GetxController {
     super.onInit();
     getCategoriesList();
     getUserProfile();
-    // authService.showcaseViewed = true;
+    authService.showcaseViewed = true;
   }
 
   bool userProfileLoading = false;

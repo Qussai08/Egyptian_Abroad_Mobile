@@ -34,6 +34,7 @@ class HomeViewBodyWidget extends StatelessWidget {
         child: homeContoller.userProfileLoading
             ? const HomeLoadingWidget()
             : ShowCaseWidget(
+                // add close button to the showcase view widget to close it manually
                 onStart: (index, key) {
                   log('onStart: $index, $key');
                 },
@@ -48,10 +49,12 @@ class HomeViewBodyWidget extends StatelessWidget {
                     );
                   }
                 },
+
                 blurValue: 3,
                 builder: Builder(builder: (context) => HomeBodyWidget()),
                 autoPlayDelay: const Duration(seconds: 3),
                 disableBarrierInteraction: true,
+                // enableShowcase: false,
               ),
       ),
     );
