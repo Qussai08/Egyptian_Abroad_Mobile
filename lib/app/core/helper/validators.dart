@@ -92,12 +92,12 @@ mixin ValidationMixin<T extends StatefulWidget> on State<T> {
     return null;
   }
 
-  String? validateConfirmPassword(String confirmPassword) {
+  String? validateConfirmPassword(String confirmPassword, String oldPassword) {
     if (confirmPassword.trim().isEmpty) {
       return AppStrings.emptyValidation.tr;
     } else if (confirmPassword.length > 100) {
       return "${AppStrings.maxlength.tr}100 ${AppStrings.char.tr}";
-    } else if (_password != confirmPassword) {
+    } else if (confirmPassword != oldPassword) {
       return AppStrings.confirmPasswordValidation.tr;
     }
     return null;

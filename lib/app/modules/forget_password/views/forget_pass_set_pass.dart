@@ -101,9 +101,11 @@ class _ForgetPassSetPasswordViewState extends State<ForgetPassSetPasswordView>
                               .isEmpty
                           ? AppStrings.emptyValidation.tr
                           : validateConfirmPassword(
-                              controller.confirmNewPassTxtController.text),
+                              controller.confirmNewPassTxtController.text,
+                              controller.newPasswordTxtController.text),
                       inputData: TextInputType.text,
                       isPassword: true,
+                      onChangedFunc: (val) {},
                     ),
                     SizedBox(
                       height: 24.h,

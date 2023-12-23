@@ -84,8 +84,8 @@ class CustoumShowcase1Widget extends StatelessWidget {
                               'التالي',
                               style: Styles.getBoldStyle(color: Styles.white),
                             ),
-                            onPress: () {
-                              homeController.nextShowCase();
+                            onPress: () async {
+                              await homeController.nextShowCase();
                             }),
                         // space 12
                         const SizedBox(width: 12),
@@ -203,8 +203,8 @@ class CustoumShowcase2Widget extends StatelessWidget {
                               'التالي',
                               style: Styles.getBoldStyle(color: Styles.white),
                             ),
-                            onPress: () {
-                              homeController.nextShowCase(isScroll: true);
+                            onPress: () async {
+                              await homeController.nextShowCase(isScroll: true);
                             }),
                         const SizedBox(width: 12),
                         MainButton(

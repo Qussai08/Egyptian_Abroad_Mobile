@@ -111,7 +111,8 @@ class _ChangePasswordViewState extends State<ChangePasswordView>
                         maxLength: 100,
                         controller: controller.confirmNewPasswordTxtController,
                         validationFunc: (val) => validateConfirmPassword(
-                            controller.confirmNewPasswordTxtController.text),
+                            controller.confirmNewPasswordTxtController.text,
+                            controller.newPasswordTxtController.text),
                         inputData: TextInputType.text,
                         isPassword: true,
                       ),

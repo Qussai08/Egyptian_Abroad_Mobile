@@ -28,13 +28,17 @@ class FavoritesList extends StatelessWidget {
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
-            AppStrings.favorites.tr,
-            style: Styles.getBoldStyle(
-                color: Styles.black, fontSize: fixDpiFont(18)),
+          Padding(
+            padding: const EdgeInsets.only(top: 5, right: 5, left: 5),
+            child: Text(
+              AppStrings.favorites.tr,
+              style: Styles.getBoldStyle(
+                  color: Styles.black, fontSize: fixDpiFont(18)),
+            ),
           ),
-          SizedBox(height: 18.h),
+          SizedBox(height: 12.h),
           SizedBox(
             height: 120.h,
             width: double.infinity,

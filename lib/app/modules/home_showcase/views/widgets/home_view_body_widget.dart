@@ -65,14 +65,13 @@ class HomeBodyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     homeContoller.startShowCase(context);
-    return ListView(
-      shrinkWrap: true,
-      physics: const BouncingScrollPhysics(),
+    return Column(
       children: [
         // Avatar and Name
         Padding(
           padding: EdgeInsets.symmetric(horizontal: fixDpiWidth(16)),
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               AvatarAndNameWidget(),
               // Search TextField

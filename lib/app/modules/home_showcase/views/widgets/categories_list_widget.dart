@@ -43,6 +43,7 @@ class CategoriesListWidget extends StatelessWidget {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
           TitleText(
             title: AppStrings.exploreServices.tr,
@@ -73,6 +74,7 @@ class CategoriesListWidget extends StatelessWidget {
                       message: AppStrings.noServices.tr,
                     )
                   : Column(
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         SizedBox(
                           // height: !homeContoller.showMore ? 425.h : 385.h,
@@ -85,7 +87,7 @@ class CategoriesListWidget extends StatelessWidget {
                               maxCrossAxisExtent: 125,
                               childAspectRatio: 0.96,
                             ),
-                            // scrollDirection: Axis.vertical,
+                            scrollDirection: Axis.vertical,
                             itemCount:
                                 homeContoller.displayedCategoriesList.length,
                             itemBuilder: (ctx, i) => GridWidget(

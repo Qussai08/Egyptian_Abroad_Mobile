@@ -24,7 +24,7 @@ class RegistrationController extends GetxController {
   final LoginController loginController = Get.put(LoginController());
 
   final avatarsProvider = Get.put<AvatarsProvider>(AvatarsProvider());
-  late int selectedAvatarIndex;
+  int selectedAvatarIndex = 9;
 
   @override
   void onInit() {
