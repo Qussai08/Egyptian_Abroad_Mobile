@@ -26,13 +26,14 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
       title: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 5.0),
             child: Image.asset(
               AppImages.travel,
-              width: 40.h,
+              width: 40.w,
               height: 40.h,
               fit: BoxFit.fitHeight,
             ),
@@ -45,19 +46,10 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
         ],
       ),
-      // leading: Container(
-      //   margin: const EdgeInsets.only(right: 10),
-      //   child: Image.asset(
-      //     'assets/icons/masr-dig.png',
-      //     width: 65.w,
-      //     fit: BoxFit.fitWidth,
-      //   ),
-      // ),
-      // actions: [
-      //   Container(
-      //     width: 65.w,
-      //   )
-      // ],
+      leading: Padding(
+        padding: EdgeInsets.only(right: 12.5.w),
+        child: Image.asset(AppImages.technicalPartner),
+      ),
       centerTitle: true,
     );
   }

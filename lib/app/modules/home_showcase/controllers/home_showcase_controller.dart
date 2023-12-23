@@ -88,7 +88,7 @@ class HomeShowcaseController extends GetxController {
     if ((_keySearch.isEmpty && _currentPageHome <= _noOfPagesHome) ||
         (_keySearch.isNotEmpty && _currentPageSearch <= _noOfPagesSearch)) {
       AppResponse response = await CategoriesRepository().getCategories(
-          {"categoryName": _keySearch, "pageNo": pageNo, "pageSize": 9});
+          {"categoryName": _keySearch, "pageNo": pageNo, "pageSize": 6});
       if (response.status) {
         CategoriesData categoriesData = CategoriesData.fromJson(response.data);
         if (_keySearch.isEmpty) {

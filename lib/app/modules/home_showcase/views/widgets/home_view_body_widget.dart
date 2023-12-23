@@ -25,7 +25,7 @@ class HomeViewBodyWidget extends StatelessWidget {
     return SingleChildScrollView(
       controller: homeContoller.scrollController,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: fixDpiWidth(16)),
+        // padding: EdgeInsets.symmetric(horizontal: fixDpiWidth(16)),
         child: homeContoller.userProfileLoading
             ? const HomeLoadingWidget()
             : ShowCaseWidget(
@@ -70,14 +70,20 @@ class HomeBodyWidget extends StatelessWidget {
       physics: const BouncingScrollPhysics(),
       children: [
         // Avatar and Name
-        AvatarAndNameWidget(),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: fixDpiWidth(16)),
+          child: Column(
+            children: [
+              AvatarAndNameWidget(),
+              // Search TextField
+              HomeSearchWidget(),
 
-        // Search TextField
-        HomeSearchWidget(),
-
-        // Favorites
-        SizedBox(height: 19.h),
-        FavoritesList(),
+              // Favorites
+              SizedBox(height: 19.h),
+              FavoritesList(),
+            ],
+          ),
+        ),
 
         // Categories
         CategoriesListWidget(),

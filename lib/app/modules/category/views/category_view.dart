@@ -3,13 +3,11 @@ import 'package:egyptians_abroad/app/core/custom_widgets/custom_textfield.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/grid_widget.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/network_indecator.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/no_data_widget.dart';
-import 'package:egyptians_abroad/app/core/custom_widgets/title_text.dart';
 import 'package:egyptians_abroad/app/core/helper/app_helper.dart';
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/core/services/auth_service.dart';
 import 'package:egyptians_abroad/app/core/services/models/category.dart';
-import 'package:egyptians_abroad/app/core/theme/app_images.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
@@ -67,27 +65,7 @@ class _CategoryViewState extends State<CategoryView> {
                     padding: EdgeInsets.symmetric(horizontal: 16.w),
                     child: Column(
                       children: [
-                        Container(
-                          margin: EdgeInsets.symmetric(vertical: 15.h),
-                          child: Row(
-                            children: [
-                              Image.asset(
-                                AppImages.maleIcon,
-                                width: 36.w,
-                                fit: BoxFit.fitWidth,
-                              ),
-                              const SizedBox(
-                                width: 8,
-                              ),
-                              TitleText(
-                                title:
-                                    "${AppStrings.hello.tr} ${authService.getUserProfile?.shortName ?? ''} !",
-                                fontSize: fixDpiFont(18),
-                                color: const Color(0xff263238),
-                              )
-                            ],
-                          ),
-                        ),
+                        SizedBox(height: 40.h),
                         CustomTextFormField(
                           controller: _searchController,
                           prefixIcon: const Icon(
@@ -96,7 +74,7 @@ class _CategoryViewState extends State<CategoryView> {
                           ),
                           inputData: TextInputType.text,
                           textInputAction: TextInputAction.search,
-                          hintTxt: "بتدور على ايه؟",
+                          hintTxt: "بحث",
                           hintStyle: TextStyle(
                               fontSize: fixDpiFont(14),
                               fontWeight: FontWeight.w400,
@@ -115,12 +93,7 @@ class _CategoryViewState extends State<CategoryView> {
                           },
                         ),
                         SizedBox(
-                          height: 10.h,
-                        ),
-                        Image.network(
-                          widget.category!.categoryIcon!,
-                          width: 180.w,
-                          height: 180.w,
+                          height: 45.h,
                         ),
                         Expanded(
                           child: Container(
@@ -152,9 +125,9 @@ class _CategoryViewState extends State<CategoryView> {
                                         : Column(
                                             children: [
                                               SizedBox(
-                                                height: !controller.showMore
-                                                    ? 350.h
-                                                    : fixDpiHeight(320),
+                                                // height: !controller.showMore
+                                                //     ? 350.h
+                                                //     : fixDpiHeight(320),
                                                 child: GridView.builder(
                                                   shrinkWrap: true,
                                                   padding: EdgeInsets.only(
@@ -210,7 +183,7 @@ class _CategoryViewState extends State<CategoryView> {
                                                   : Container(),
                                             ],
                                           ),
-                                const Spacer(),
+                                // const Spacer(),
                               ],
                             ),
                           ),
