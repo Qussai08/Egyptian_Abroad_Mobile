@@ -43,24 +43,24 @@ class UserProfileModel {
   String? shortName;
 
   UserProfileModel.fromJson(Map<String, dynamic> json) {
-    userId = json['userId'];
+    userId = json['userId'] ?? '';
     name = json['name'] ?? '';
-    email = json['email'];
-    nationalId = json['nationalId'];
-    jobCategoryID = json['jobCategoryID'];
-    jobCategoryName = json['jobCategoryName'];
-    jobTitle = json['jobTitle'];
-    egyptionMobile = json['egyptionMobile'];
-    foreignMobile = json['foreignMobile'];
-    messagingAddress = json['messagingAddress'];
-    passportNo = json['passportNo'];
-    residencyCountryId = json['residencyCountryId'];
-    residencyCountryName = json['residencyCountryName'];
-    residencyTypeId = json['residencyTypeId'];
-    residencyTypeName = json['residencyTypeName'];
-    residencyNo = json['residencyNo'];
-    foreignPassportNo = json['foreignPassportNo'];
-    residencyAddress = json['residencyAddress'];
+    email = json['email'] ?? '';
+    nationalId = json['nationalId'] ?? '';
+    jobCategoryID = json['jobCategoryID'] ?? 0;
+    jobCategoryName = json['jobCategoryName'] ?? '';
+    jobTitle = json['jobTitle'] ?? '';
+    egyptionMobile = json['egyptionMobile'] ?? '';
+    foreignMobile = json['foreignMobile'] ?? '';
+    messagingAddress = json['messagingAddress'] ?? '';
+    passportNo = json['passportNo'] ?? '';
+    residencyCountryId = json['residencyCountryId'] ?? 0;
+    residencyCountryName = json['residencyCountryName'] ?? '';
+    residencyTypeId = json['residencyTypeId'] ?? 0;
+    residencyTypeName = json['residencyTypeName'] ?? '';
+    residencyNo = json['residencyNo'] ?? '';
+    foreignPassportNo = json['foreignPassportNo'] ?? '';
+    residencyAddress = json['residencyAddress'] ?? '';
     avatarId = json['avatarId'] ?? 9;
     shortName = (json['name'] != null && json['name'] != '')
         ? name?.split(' ').first ?? ''
