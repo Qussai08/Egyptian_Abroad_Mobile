@@ -183,7 +183,7 @@ class _CategoryViewState extends State<CategoryView> {
                                                   : Container(),
                                             ],
                                           ),
-                                // const Spacer(),
+                                const Spacer(),
                               ],
                             ),
                           ),
