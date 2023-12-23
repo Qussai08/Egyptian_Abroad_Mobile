@@ -1,5 +1,4 @@
 import 'package:egyptians_abroad/app/modules/bottom_navigation.dart/controllers/bottom_navigation_controller.dart';
-import 'package:egyptians_abroad/app/modules/home/data/providers/favorites_list_provider.dart';
 import 'package:egyptians_abroad/app/modules/more/controllers/more_controller.dart';
 import 'package:egyptians_abroad/app/modules/start_service/controllers/start_service_controller.dart';
 import 'package:get/get.dart';

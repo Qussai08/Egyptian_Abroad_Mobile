@@ -85,7 +85,7 @@ class RegistrationSelectAvatarView extends GetView<RegistrationController> {
                         height: 50.h,
                         width: 358.w,
                         onPressed: () {
-                          Get.offNamed(Routes.DATASAVED, arguments: [7, 0]);
+                          Get.offNamed(Routes.DATASAVED, arguments: [9, 0]);
                         },
                       ),
                     ],

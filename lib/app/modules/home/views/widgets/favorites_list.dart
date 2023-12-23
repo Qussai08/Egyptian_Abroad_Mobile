@@ -1,11 +1,9 @@
 import 'dart:developer';
 
-import 'package:egyptians_abroad/app/core/custom_widgets/custom_card_widget.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/grid_widget.dart';
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
-import 'package:egyptians_abroad/app/modules/home/controllers/favorites_controller.dart';
 import 'package:egyptians_abroad/app/modules/home/controllers/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -50,25 +48,27 @@ class FavoritesList extends StatelessWidget {
               width: double.infinity,
               child: Row(
                 children: [
-                  CustomCardWidget(
-                    padding:
-                        EdgeInsets.only(right: 10.w, top: 5.h, bottom: 5.h),
-                    child: GetBuilder<HomeController>(builder: (controller) {
-                      return ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: controller.favoritesList.length,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.only(left: 8.0),
-                            child: GridWidget(
-                              index,
-                              serviceItem: controller.favoritesList[index],
-                              inFavList: true,
-                            ),
-                          );
-                        },
-                      );
-                    }),
+                  Expanded(
+                    child: Container(
+                      padding:
+                          EdgeInsets.only(right: 10.w, top: 5.h, bottom: 5.h),
+                      child: GetBuilder<HomeController>(builder: (controller) {
+                        return ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: controller.favoritesList.length,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.only(left: 8.0),
+                              child: GridWidget(
+                                index,
+                                serviceItem: controller.favoritesList[index],
+                                inFavList: true,
+                              ),
+                            );
+                          },
+                        );
+                      }),
+                    ),
                   ),
                 ],
               ),

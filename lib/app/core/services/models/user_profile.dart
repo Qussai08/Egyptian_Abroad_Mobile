@@ -61,7 +61,7 @@ class UserProfileModel {
     residencyNo = json['residencyNo'];
     foreignPassportNo = json['foreignPassportNo'];
     residencyAddress = json['residencyAddress'];
-    avatarId = json['avatarId'] ?? 7;
+    avatarId = json['avatarId'] ?? 9;
     shortName = (json['name'] != null && json['name'] != '')
         ? name?.split(' ').first ?? ''
         : '';

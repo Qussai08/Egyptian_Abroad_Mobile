@@ -107,6 +107,7 @@ class Styles {
     Color(0xFFFFCFD2),
     Color(0xFFA3F2A1),
     Color(0xFFF7D251),
+    Colors.blue,
   ];
 
   // Text Styles
