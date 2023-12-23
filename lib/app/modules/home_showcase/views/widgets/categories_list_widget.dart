@@ -27,7 +27,7 @@ class CategoriesListWidget extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(top: 20.h),
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 19.h),
-      height: 524.h,
+      // height: 524.h,
       width: double.infinity,
       decoration: BoxDecoration(
         color: Colors.white,
@@ -75,8 +75,9 @@ class CategoriesListWidget extends StatelessWidget {
                   : Column(
                       children: [
                         SizedBox(
-                          height: !homeContoller.showMore ? 425.h : 385.h,
+                          // height: !homeContoller.showMore ? 425.h : 385.h,
                           child: GridView.builder(
+                            physics: NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             padding: EdgeInsets.only(top: 15.h),
                             gridDelegate:
@@ -84,7 +85,7 @@ class CategoriesListWidget extends StatelessWidget {
                               maxCrossAxisExtent: 125,
                               childAspectRatio: 0.96,
                             ),
-                            scrollDirection: Axis.vertical,
+                            // scrollDirection: Axis.vertical,
                             itemCount:
                                 homeContoller.displayedCategoriesList.length,
                             itemBuilder: (ctx, i) => GridWidget(
@@ -130,7 +131,7 @@ class CategoriesListWidget extends StatelessWidget {
                       ],
                     ),
           // TODO: kindly check this view on EN language, may spacing make issue with allignment
-          const Spacer(),
+          // const Spacer(),
         ],
       ),
     );

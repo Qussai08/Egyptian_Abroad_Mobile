@@ -5,7 +5,7 @@ import 'package:egyptians_abroad/app/core/services/app_response.dart';
 import 'package:egyptians_abroad/app/core/services/auth_service.dart';
 import 'package:egyptians_abroad/app/core/services/models/user_profile.dart';
 import 'package:egyptians_abroad/app/core/services/repositories/user_repository.dart';
-import 'package:egyptians_abroad/app/modules/home/controllers/home_controller.dart';
+import 'package:egyptians_abroad/app/modules/home_showcase/controllers/home_showcase_controller.dart';
 import 'package:egyptians_abroad/app/modules/login/controllers/login_controller.dart';
 import 'package:egyptians_abroad/app/modules/registration/data/models/country.dart';
 import 'package:egyptians_abroad/app/modules/registration/data/models/job_category.dart';
@@ -291,7 +291,7 @@ class RegistrationController extends GetxController {
         toastType: ToastType.success,
       ));
 
-      var controller = Get.put(HomeController());
+      var controller = Get.put(HomeShowcaseController());
       await controller.getUserProfile();
       Future.delayed(const Duration(seconds: 3), () async {
         Get.back(closeOverlays: true);
@@ -309,7 +309,7 @@ class RegistrationController extends GetxController {
         // TODO : make it dynamic
         queryParameters: {"guid": authService.userID});
     if (response.status) {
-      var controller = Get.put(HomeController());
+      var controller = Get.put(HomeShowcaseController());
       await controller.getUserProfile();
 
       Get.offNamed(Routes.DATASAVED, arguments: [selectedAvatarIndex, route]);

@@ -1,3 +1,5 @@
+import 'package:egyptians_abroad/app/core/services/models/service.dart';
+import 'package:egyptians_abroad/app/modules/home_showcase/data/providers/favorites_list_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:showcaseview/showcaseview.dart';
@@ -14,6 +16,9 @@ import '../../registration/controllers/registration_controller.dart';
 class HomeShowcaseController extends GetxController {
   String keySearch = '';
   final TextEditingController searchController = TextEditingController();
+  List<ServiceItem> favoritesList = [];
+  // Auth service
+  final favoritesListProvider = Get.find<FavoritesListProvider>();
 
   // Auth service
   final authService = Get.find<AuthService>();
@@ -25,6 +30,7 @@ class HomeShowcaseController extends GetxController {
     super.onInit();
     getCategoriesList();
     getUserProfile();
+    updateFavoritesList(userId: authService.userID!);
 
     // TODO: for testing only to be removed
     // authService.showcaseViewed = true;
@@ -239,5 +245,28 @@ class HomeShowcaseController extends GetxController {
   void dismissShowCase(BuildContext context) {
     ShowCaseWidget.of(_homeContext).dismiss();
     authService.showcaseViewed = false;
+  }
+
+  Future<void> addToFavorites(
+      {required String userId, required String serviceId}) async {
+    favoritesListProvider.addToFavorites(userId, serviceId).then((value) {
+      print("addToFavorites ${value.body}");
+    }, onError: (error) {});
+  }
+
+  Future<void> removeFromFavorites(
+      {required String userId, required String serviceId}) async {
+    favoritesListProvider.removeFromFavorites(userId, serviceId).then((value) {
+      print("removeFromFavorites ${value.body}");
+    }, onError: (error) {});
+  }
+
+  Future<void> updateFavoritesList({required String userId}) async {
+    await favoritesListProvider.getFavoritesList(userId).then((value) {
+      Iterable list = value.body;
+      favoritesList = list.map((e) => ServiceItem.fromJson(e)).toList();
+    }, onError: (error) {});
+
+    update();
   }
 }

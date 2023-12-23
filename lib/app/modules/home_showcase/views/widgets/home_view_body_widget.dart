@@ -5,13 +5,8 @@ import 'package:get/get.dart';
 import 'package:showcaseview/showcaseview.dart';
 import 'dart:developer';
 
-import '../../../../core/custom_widgets/custom_button.dart';
-import '../../../../core/custom_widgets/main_button.dart';
 import '../../../../core/helper/dpi_helper.dart';
-
-import '../../../../core/theme/app_images.dart';
-import '../../../../core/theme/styles.dart';
-import '../../../home/views/widgets/favorites_list.dart';
+import '../../../home_showcase/views/widgets/favorites_list.dart';
 import '../../controllers/home_showcase_controller.dart';
 import 'avatar_and_name_widget.dart';
 import 'categories_list_widget.dart';

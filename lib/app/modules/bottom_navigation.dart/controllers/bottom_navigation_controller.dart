@@ -1,4 +1,3 @@
-import 'package:egyptians_abroad/app/modules/home/views/home_view.dart';
 import 'package:egyptians_abroad/app/modules/home_showcase/views/home_showcase_view.dart';
 import 'package:egyptians_abroad/app/modules/more/views/more_view.dart';
 import 'package:egyptians_abroad/app/modules/notifications/views/notifications_view.dart';

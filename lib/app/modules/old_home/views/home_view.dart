@@ -6,9 +6,9 @@ import 'package:egyptians_abroad/app/core/custom_widgets/title_text.dart';
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
-import 'package:egyptians_abroad/app/modules/home/views/widgets/favorites_list.dart';
-import 'package:egyptians_abroad/app/modules/home/views/widgets/home_appbar.dart';
-import 'package:egyptians_abroad/app/modules/home/views/widgets/profile_icon_widget.dart';
+import 'package:egyptians_abroad/app/modules/old_home/views/widgets/favorites_list.dart';
+import 'package:egyptians_abroad/app/modules/old_home/views/widgets/home_appbar.dart';
+import 'package:egyptians_abroad/app/modules/old_home/views/widgets/profile_icon_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

@@ -4,7 +4,7 @@ import 'package:egyptians_abroad/app/core/services/models/category.dart';
 import 'package:egyptians_abroad/app/core/services/models/service.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:egyptians_abroad/app/modules/category/views/category_view.dart';
-import 'package:egyptians_abroad/app/modules/home/views/widgets/favorite_button.dart';
+import 'package:egyptians_abroad/app/modules/home_showcase/views/widgets/favorite_button.dart';
 import 'package:egyptians_abroad/app/modules/start_service/controllers/start_service_controller.dart';
 import 'package:egyptians_abroad/app/modules/start_service/views/service_content_view.dart';
 import 'package:egyptians_abroad/app/modules/start_service/views/start_service_redirect.dart';
