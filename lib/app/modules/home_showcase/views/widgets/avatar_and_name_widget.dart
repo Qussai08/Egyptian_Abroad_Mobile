@@ -35,6 +35,8 @@ class AvatarAndNameWidget extends StatelessWidget {
                 height: 144,
                 width: 255.w,
                 key: homeContoller.one,
+                onTargetClick: () => log('onTargetClick'),
+
                 targetShapeBorder: const CircleBorder(),
                 targetBorderRadius: const BorderRadius.all(
                   Radius.circular(150),
