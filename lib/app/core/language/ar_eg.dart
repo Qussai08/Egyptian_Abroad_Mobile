@@ -34,7 +34,7 @@ Map<String, String> ar = {
   AppStrings.hello: 'اهلا،',
   AppStrings.exploreServices: 'استكشف الخدمات',
   AppStrings.allServices: 'كل الخدمات اللي هتحتاجها واكتر، اى خدمة!',
-  AppStrings.showMore: 'عرض المزيد',
+  AppStrings.showMore: 'عرض كل الخدمات',
   AppStrings.servicesNeeded: 'خدمات تهمك',
   AppStrings.emailFormatValidation: 'البريد الإلكتروني غير صحيح.',
   AppStrings.emailEmptyValidation: 'من فضلك ادخل البريد الإلكتروني الخاص بك.',

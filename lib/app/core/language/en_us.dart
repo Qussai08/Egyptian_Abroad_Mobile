@@ -33,7 +33,7 @@ Map<String, String> en = {
   AppStrings.hello: 'Hello,',
   AppStrings.exploreServices: 'Explore Services',
   AppStrings.allServices: 'All the services you will need and more',
-  AppStrings.showMore: 'Show more',
+  AppStrings.showMore: 'Show All Services',
   AppStrings.servicesNeeded: 'Services that interest you',
   AppStrings.emailFormatValidation: 'Email format is incorrect.',
   AppStrings.emailEmptyValidation: 'Please enter your email',
