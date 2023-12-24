@@ -118,9 +118,8 @@ class CategoriesListWidget extends StatelessWidget {
                                   child: CustomButton(
                                     type: ButtonType.secondary,
                                     text: AppStrings.showMore.tr,
-                                    width: 110.w,
-                                    height: 36.h,
-                                    fontSize: 10,
+                                    height: 50.h,
+                                    fontSize: 14,
                                     icon: Icons.arrow_forward,
                                     iconSize: 13,
                                     onPressed: () {

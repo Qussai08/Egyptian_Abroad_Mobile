@@ -39,9 +39,6 @@ class _ForgetPassOtpViewState extends State<ForgetPassOtpView>
     int endTime = DateTime.now().millisecondsSinceEpoch +
         //  1000 * (1) * 20;
         1000 * (widget.resendOtpTime ?? 2) * 60;
-
-    print("resendOtpTime ${widget.resendOtpTime}");
-
     final controller = Get.put(ForgetPasswordController());
 
     return NetworkIndicator(
@@ -109,7 +106,6 @@ class _ForgetPassOtpViewState extends State<ForgetPassOtpView>
                                     contentPadding:
                                         const EdgeInsets.only(left: 5),
                                     onChanged: (pin) {
-                                      print("pin $pin");
                                       controller.otp = pin;
                                     },
                                     onCompleted: (pin) async {

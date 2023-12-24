@@ -83,40 +83,51 @@ class HomeShowcaseController extends GetxController {
     // if (notifiy) update();
   }
 
-  Future<void> getCategoriesList({int? pageNo = 1, applyLoading = true}) async {
+  Future<void> getCategoriesList(
+      {int? pageNo = 1, applyLoading = true, bool showAll = false}) async {
     if (applyLoading) _updateCategoriesLoading(true);
     if ((_keySearch.isEmpty && _currentPageHome <= _noOfPagesHome) ||
         (_keySearch.isNotEmpty && _currentPageSearch <= _noOfPagesSearch)) {
-      AppResponse response = await CategoriesRepository().getCategories(
-          {"categoryName": _keySearch, "pageNo": pageNo, "pageSize": 6});
+      AppResponse response = await CategoriesRepository().getCategories({
+        "categoryName": _keySearch,
+        "pageNo": 1,
+        "pageSize": showAll ? 5000 : 6
+      });
       if (response.status) {
         CategoriesData categoriesData = CategoriesData.fromJson(response.data);
         if (_keySearch.isEmpty) {
           setCurrentPageHome(categoriesData.currentPage);
           setNoOfPagesHome(categoriesData.totalPages);
           setTotalCountHome(categoriesData.totalCount);
-          for (var cat in categoriesData.categories) {
-            if (allCategories
-                    .firstWhereOrNull((element) => element.id == cat.id) ==
-                null) {
-              allCategories.add(cat);
+          if (showAll) {
+            displayedCategoriesList = categoriesData.categories;
+          } else {
+            for (var cat in categoriesData.categories) {
+              if (allCategories
+                      .firstWhereOrNull((element) => element.id == cat.id) ==
+                  null) {
+                allCategories.add(cat);
+              }
             }
-          }
 
-          displayedCategoriesList = allCategories;
+            displayedCategoriesList = allCategories;
+          }
         } else {
           setCurrentPageSearch(categoriesData.currentPage);
           setNoOfPagesSearch(categoriesData.totalPages);
           setTotalCountSearch(categoriesData.totalCount);
-          for (var cat in categoriesData.categories) {
-            if (searchCategoriesList
-                    .firstWhereOrNull((element) => element.id == cat.id) ==
-                null) {
-              searchCategoriesList.add(cat);
+          if (showAll) {
+            displayedCategoriesList = categoriesData.categories;
+          } else {
+            for (var cat in categoriesData.categories) {
+              if (searchCategoriesList
+                      .firstWhereOrNull((element) => element.id == cat.id) ==
+                  null) {
+                searchCategoriesList.add(cat);
+              }
             }
+            displayedCategoriesList = searchCategoriesList;
           }
-          // searchCategoriesList.addAll(categoriesData.categories);
-          displayedCategoriesList = searchCategoriesList;
         }
         setShowMore();
       }
@@ -181,10 +192,10 @@ class HomeShowcaseController extends GetxController {
   Future<void> getMoreCategories() async {
     if (_keySearch.isEmpty) {
       await getCategoriesList(
-          pageNo: _currentPageHome + 1, applyLoading: false);
+          pageNo: _currentPageHome + 1, applyLoading: false, showAll: true);
     } else {
       await getCategoriesList(
-          pageNo: _currentPageSearch + 1, applyLoading: false);
+          pageNo: _currentPageSearch + 1, applyLoading: false, showAll: true);
     }
   }
 
@@ -249,16 +260,16 @@ class HomeShowcaseController extends GetxController {
 
   Future<void> addToFavorites(
       {required String userId, required String serviceId}) async {
-    favoritesListProvider.addToFavorites(userId, serviceId).then((value) {
-      print("addToFavorites ${value.body}");
-    }, onError: (error) {});
+    favoritesListProvider
+        .addToFavorites(userId, serviceId)
+        .then((value) {}, onError: (error) {});
   }
 
   Future<void> removeFromFavorites(
       {required String userId, required String serviceId}) async {
-    favoritesListProvider.removeFromFavorites(userId, serviceId).then((value) {
-      print("removeFromFavorites ${value.body}");
-    }, onError: (error) {});
+    favoritesListProvider
+        .removeFromFavorites(userId, serviceId)
+        .then((value) {}, onError: (error) {});
   }
 
   Future<void> updateFavoritesList({required String userId}) async {

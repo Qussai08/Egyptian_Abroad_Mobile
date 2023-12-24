@@ -52,7 +52,6 @@ class CategoryController extends GetxController {
 
   Future<void> getServicesList(int categoryId,
       {int? pageNo = 1, applyLoading = true}) async {
-    print("getServicesList authService.userID ${authService.userID}");
     if (applyLoading) _updateServicesLoading(true);
     if ((_keySearch.isEmpty && _currentPage <= _noOfPages) ||
         (_keySearch.isNotEmpty && _currentPageSearch <= _noOfPagesSearch)) {
