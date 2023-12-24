@@ -236,8 +236,8 @@ class _ForgetPassOtpViewState extends State<ForgetPassOtpView>
                               text: AppStrings.confirm.tr,
                               icon: Icons.arrow_forward,
                               type: ButtonType.primary,
-                              width: 300.w,
-                              height: 50,
+                              width: 358.w,
+                              height: 50.h,
                               onPressed: () async {
                                 if (time == null) {
                                   _otpHasError.value = true;
@@ -269,8 +269,8 @@ class _ForgetPassOtpViewState extends State<ForgetPassOtpView>
                               icon: Icons.arrow_forward,
 
                               type: ButtonType.secondary,
-                              width: 300.w,
-                              height: 50,
+                              width: 358.w,
+                              height: 50.h,
                               onPressed: () {
                                 Get.offAllNamed(Routes.LOGIN);
                               },

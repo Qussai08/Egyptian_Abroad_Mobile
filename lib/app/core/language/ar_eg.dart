@@ -59,7 +59,7 @@ Map<String, String> ar = {
   AppStrings.residenceNumber: 'رقم الاقامة',
   AppStrings.forignPassportNum: 'رقم جواز السفر الاجنبى',
   AppStrings.residenceAddress: 'عنوان الاقامة',
-  AppStrings.jobCategory: 'مجال العمل',
+  AppStrings.jobCategory: 'المهنة',
   AppStrings.jobTitle: 'المسمى الوظيفى',
   AppStrings.egPhoneNum: 'رقم الموبايل المصرى',
   AppStrings.forignPhoneNum: 'رقم الموبايل الاجنبى',
@@ -118,8 +118,6 @@ Map<String, String> ar = {
   AppStrings.otpSentSuccessfully:
       'تم إرسال كود التحقق إلى البريد الإلكترونى المُسجل',
   AppStrings.favorites: 'المفضلة',
-  
-  AppStrings.welcome : 'أهلًا بك',
-  AppStrings.dataSavedSuccessfully : 'تم حفظ بياناتك بنجاح',
-
+  AppStrings.welcome: 'أهلًا بك',
+  AppStrings.dataSavedSuccessfully: 'تم حفظ بياناتك بنجاح',
 };

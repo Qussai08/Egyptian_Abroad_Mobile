@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:egyptians_abroad/app/core/custom_widgets/custom_card_widget.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/grid_widget.dart';
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';

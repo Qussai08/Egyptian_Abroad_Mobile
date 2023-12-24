@@ -109,39 +109,6 @@ class _CompleteAccountViewState extends State<CompleteAccountView>
                               height: 16.h,
                             ),
                             TextFieldTitle(
-                                title: AppStrings.residence.tr,
-                                hasSubTitle: false),
-                            ValueListenableBuilder<int?>(
-                                valueListenable: registrationController
-                                    .completeResidenceCountry,
-                                builder: (_, residence, __) {
-                                  return DropDownListSelector(
-                                    dropDownList: (registrationController
-                                                .countriesList.length ==
-                                            0)
-                                        ? <DropdownMenuItem>[]
-                                        : registrationController.countriesList
-                                            .map((e) => DropdownMenuItem(
-                                                  child: Text(e.country),
-                                                  value: e.id,
-                                                ))
-                                            .toList(),
-                                    value: residence,
-                                    hint: "",
-                                    onChangeFunc: (val) {
-                                      registrationController
-                                          .completeResidenceTxtController
-                                          .text = val.toString();
-
-                                      registrationController
-                                          .completeResidenceCountry.value = val;
-                                    },
-                                  );
-                                }),
-                            SizedBox(
-                              height: 16.h,
-                            ),
-                            TextFieldTitle(
                                 title: AppStrings.residenceType.tr,
                                 hasSubTitle: false),
                             ValueListenableBuilder<int?>(
@@ -213,20 +180,20 @@ class _CompleteAccountViewState extends State<CompleteAccountView>
                                     ],
                                   );
                                 }),
-                            TextFieldTitle(
-                                title: AppStrings.residenceAddress.tr,
-                                hasSubTitle: false),
-                            CustomTextFormField(
-                              controller: registrationController
-                                  .residenceAddressTxtController,
-                              inputData: TextInputType.text,
-                              validationFunc: (val) => maxLenghtValidation(
-                                  registrationController
-                                      .residenceNumTxtController.text,
-                                  200),
-                            ),
+                            // TextFieldTitle(
+                            //     title: AppStrings.residenceAddress.tr,
+                            //     hasSubTitle: false),
+                            // CustomTextFormField(
+                            //   controller: registrationController
+                            //       .residenceAddressTxtController,
+                            //   inputData: TextInputType.text,
+                            //   validationFunc: (val) => maxLenghtValidation(
+                            //       registrationController
+                            //           .residenceNumTxtController.text,
+                            //       200),
+                            // ),
                             SizedBox(
-                              height: 50.h,
+                              height: 160.h,
                             ),
                             CustomButton(
                               text: AppStrings.next.tr,

@@ -59,7 +59,7 @@ Map<String, String> en = {
   AppStrings.residenceNumber: 'Residency Number',
   AppStrings.forignPassportNum: 'Foreign Passport Number',
   AppStrings.residenceAddress: 'Residency Address',
-  AppStrings.jobCategory: 'Job Category',
+  AppStrings.jobCategory: 'Profession',
   AppStrings.jobTitle: 'Job Title',
   AppStrings.egPhoneNum: 'Egyptian Mobile Number',
   AppStrings.forignPhoneNum: 'Foreign Mobile Number',

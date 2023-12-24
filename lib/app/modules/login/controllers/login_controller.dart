@@ -12,10 +12,14 @@ class LoginController extends GetxController {
   final AuthService authService = Get.find();
   var notificationHelper = NotificationHelper();
 
+  RxBool loginIsDimmed = false.obs;
+
   Future<void> login(
       {required String email,
       required String pass,
       bool navigateToHome = true}) async {
+    loginIsDimmed.value = true;
+    print(loginIsDimmed);
     AppResponse response =
         await UserRepository().loginReq({"email": email, "password": pass});
     if (response.status) {
@@ -30,6 +34,7 @@ class LoginController extends GetxController {
       if (navigateToHome) Get.offAllNamed(Routes.BOTTOMNAVIGATION);
       // SecureStorageHelper.localWrite('token', response.data['accessToken']);
     } else {
+      loginIsDimmed.value = false;
       Get.showSnackbar(
         buildCustomToast(
           Get.context!,

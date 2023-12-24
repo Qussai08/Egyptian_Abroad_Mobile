@@ -150,8 +150,8 @@ class _ForgetPassSetPasswordViewState extends State<ForgetPassSetPasswordView>
                       text: AppStrings.confirm.tr,
                       icon: Icons.arrow_forward,
                       type: ButtonType.primary,
-                      width: 300.w,
-                      height: 50,
+                      width: 358.w,
+                      height: 50.h,
                       onPressed: () async {
                         if (_formKey.currentState!.validate() &&
                             _validationsValues.value.firstWhereOrNull(
@@ -170,8 +170,8 @@ class _ForgetPassSetPasswordViewState extends State<ForgetPassSetPasswordView>
                       icon: Icons.arrow_forward,
 
                       type: ButtonType.secondary,
-                      width: 300.w,
-                      height: 50,
+                      width: 358.w,
+                      height: 50.h,
                       onPressed: () {
                         Get.offAllNamed(Routes.LOGIN);
                         controller.newPasswordTxtController.clear();
