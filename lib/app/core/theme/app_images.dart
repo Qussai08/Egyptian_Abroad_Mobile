@@ -13,7 +13,7 @@ class AppImages {
   static const lock = 'assets/images/lock.png';
 
   static const checkIcon = 'assets/icons/icon-check.png';
-  static const backIcon = 'assets/icons/back-icon.png';
+  static const backIcon = 'assets/icons/back_button.png';
   static const maleIcon = 'assets/icons/male.png';
   static const user = 'assets/images/user.png';
   static const fingerPrint = 'assets/images/Fingerprint2.png';

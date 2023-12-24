@@ -5,7 +5,6 @@ import 'package:egyptians_abroad/app/core/custom_widgets/dropdown_list_selector.
 import 'package:egyptians_abroad/app/core/custom_widgets/network_indecator.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/textfield_title.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/title_text.dart';
-import 'package:egyptians_abroad/app/core/helper/app_helper.dart';
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/core/services/auth_service.dart';
@@ -403,20 +402,20 @@ class _EditAccountViewState extends State<EditAccountView>
                                       );
                                     }),
 
-                                TextFieldTitle(
-                                    title: AppStrings.residenceAddress.tr,
-                                    hasSubTitle: false),
-                                CustomTextFormField(
-                                    inputData: TextInputType.text,
-                                    validationFunc: (val) =>
-                                        maxLenghtValidation(
-                                            _residenceAddressTxtController.text,
-                                            200),
-                                    enabled: widget.isEdit,
-                                    controller: _residenceAddressTxtController),
-                                SizedBox(
-                                  height: 16.h,
-                                ),
+                                // TextFieldTitle(
+                                //     title: AppStrings.residenceAddress.tr,
+                                //     hasSubTitle: false),
+                                // CustomTextFormField(
+                                //     inputData: TextInputType.text,
+                                //     validationFunc: (val) =>
+                                //         maxLenghtValidation(
+                                //             _residenceAddressTxtController.text,
+                                //             200),
+                                //     enabled: widget.isEdit,
+                                //     controller: _residenceAddressTxtController),
+                                // SizedBox(
+                                //   height: 16.h,
+                                // ),
                                 TextFieldTitle(
                                     title: AppStrings.jobCategory.tr,
                                     hasSubTitle: false),
@@ -577,6 +576,7 @@ class _EditAccountViewState extends State<EditAccountView>
                                       await controller.editAccount(
                                           UserProfileModel(
                                               name: _nameTxtController.text,
+                                              jobCategoryID: _jobCategory.value,
                                               residencyCountryId:
                                                   _residenceCountry.value,
                                               residencyTypeId:

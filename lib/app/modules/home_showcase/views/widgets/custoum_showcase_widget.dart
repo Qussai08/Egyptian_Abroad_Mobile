@@ -2,8 +2,6 @@ import 'package:egyptians_abroad/app/core/theme/app_images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
-import '../../../../core/custom_widgets/custom_button.dart';
 import '../../../../core/custom_widgets/main_button.dart';
 import '../../../../core/theme/styles.dart';
 import '../../controllers/home_showcase_controller.dart';

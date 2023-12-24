@@ -5,9 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../core/helper/dpi_helper.dart';
-import '../../../core/language/app_string.dart';
 import '../../../core/theme/app_images.dart';
-import '../../../core/theme/styles.dart';
 
 class SplashView extends StatelessWidget {
   const SplashView({super.key});

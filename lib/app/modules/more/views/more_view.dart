@@ -1,4 +1,3 @@
-import 'package:egyptians_abroad/app/core/custom_widgets/technical_partner_widget.dart';
 import 'package:egyptians_abroad/app/core/theme/app_images.dart';
 import 'package:egyptians_abroad/app/modules/more/views/widgets/list_tile_widget.dart';
 import 'package:egyptians_abroad/app/routes/app_pages.dart';

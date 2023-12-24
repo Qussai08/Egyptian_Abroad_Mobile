@@ -62,7 +62,7 @@ class CategoryController extends GetxController {
         "servicesName": _keySearch,
         "userId": authService.userID,
         "pageNo": pageNo,
-        "pageSize": 6
+        "pageSize": 5000
       });
       if (response.status) {
         ServicesData serviceData = ServicesData.fromJson(response.data);
