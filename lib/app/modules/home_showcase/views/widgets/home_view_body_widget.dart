@@ -64,7 +64,8 @@ class HomeBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    homeContoller.authService.showcaseViewed = true;
+    // TODO: for testing only to be removed
+    // homeContoller.authService.showcaseViewed = true;
     homeContoller.startShowCase(context);
     return Flex(
       direction: Axis.vertical,
