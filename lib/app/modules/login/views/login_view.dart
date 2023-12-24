@@ -8,8 +8,6 @@ import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:egyptians_abroad/app/modules/login/views/widgets/footer.dart';
 import 'package:egyptians_abroad/app/routes/app_pages.dart';
-import 'package:egyptians_abroad/app/core/theme/styles.dart';
-import 'package:egyptians_abroad/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:egyptians_abroad/app/core/helper/validators.dart';
@@ -115,22 +113,37 @@ class _LoginViewState extends State<LoginView> with ValidationMixin {
                     ),
                   ),
                   const Spacer(),
-                  CustomButton(
-                    text: AppStrings.logIn.tr,
-                    icon: Icons.arrow_forward,
-                    type: ButtonType.primary,
-                    width: 358.w,
-                    height: 50.h,
-                    fontSize: fixDpiFont(16),
-                    iconSize: fixDpiFont(16),
-                    onPressed: () async {
-                      if (!_formKey.currentState!.validate()) return;
-                      await controller.login(
-                          email: _emailTxtController.text,
-                          pass: _passwordTxtController.text,
-                          navigateToHome: true);
-                    },
-                  ),
+                  Obx(() {
+                    if (controller.loginIsDimmed()) {
+                      return CustomButton(
+                        text: AppStrings.logIn.tr,
+                        icon: Icons.arrow_forward,
+                        type: ButtonType.disabled,
+                        width: 358.w,
+                        height: 50.h,
+                        fontSize: fixDpiFont(16),
+                        iconSize: fixDpiFont(16),
+                      );
+                    } else {
+                      return CustomButton(
+                        text: AppStrings.logIn.tr,
+                        icon: Icons.arrow_forward,
+                        type: ButtonType.primary,
+                        width: 358.w,
+                        height: 50.h,
+                        fontSize: fixDpiFont(16),
+                        iconSize: fixDpiFont(16),
+                        onPressed: () async {
+                          // controller.loginIsDimmed.value = true;
+                          if (!_formKey.currentState!.validate()) return;
+                          await controller.login(
+                              email: _emailTxtController.text,
+                              pass: _passwordTxtController.text,
+                              navigateToHome: true);
+                        },
+                      );
+                    }
+                  }),
                   // SizedBox(height: 24.h),
                   // CustomButton(
                   //   width: 358.w,

@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:egyptians_abroad/app/core/custom_widgets/custom_card_widget.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/grid_widget.dart';
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
@@ -26,6 +25,7 @@ class FavoritesList extends StatelessWidget {
       onBarrierClick: () {
         log('onBarrierClick');
       },
+      onTargetClick: () => log('onTargetClick'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.max,
@@ -49,16 +49,16 @@ class FavoritesList extends StatelessWidget {
                     padding:
                         EdgeInsets.only(right: 10.w, top: 5.h, bottom: 5.h),
                     child: GetBuilder<HomeShowcaseController>(
-                        builder: (_controller) {
+                        builder: (controller) {
                       return ListView.builder(
                         scrollDirection: Axis.horizontal,
-                        itemCount: _controller.favoritesList.length,
+                        itemCount: controller.favoritesList.length,
                         itemBuilder: (context, index) {
                           return Padding(
                             padding: const EdgeInsets.only(left: 8.0),
                             child: GridWidget(
                               index,
-                              serviceItem: _controller.favoritesList[index],
+                              serviceItem: controller.favoritesList[index],
                               inFavList: true,
                             ),
                           );

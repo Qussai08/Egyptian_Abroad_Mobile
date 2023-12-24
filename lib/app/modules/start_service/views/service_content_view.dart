@@ -51,83 +51,102 @@ class _ServiceContentViewState extends State<ServiceContentView> {
             ),
             body: SingleChildScrollView(
               // physics: const NeverScrollableScrollPhysics(),
-              child: Container(
-                height: fixDpiScreenHeight() * 0.9,
-                width: fixDpiScreenWidth(),
-                padding: EdgeInsets.symmetric(horizontal: 16.w),
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 20.h,
-                    ),
-                    Image.network(
-                      widget.category!.categoryIcon!,
-                      width: 180.w,
-                      height: 180.w,
-                    ),
-                    SizedBox(
-                      height: 48.h,
-                    ),
-                    Align(
-                      alignment: LocalizationHelper.isArabic()
-                          ? Alignment.centerRight
-                          : Alignment.centerLeft,
-                      child: html.Html(
-                        data: widget.serviceContent!.servicesContentSummary!,
-                        style: {
-                          "*": html.Style(
-                              color: const Color.fromRGBO(62, 60, 60, 0.71),
-                              fontFamily: 'baloo',
-                              fontSize: html.FontSize.large,
-                              fontWeight: FontWeight.w400),
-                          "div": html.Style(
-                              color: const Color.fromRGBO(62, 60, 60, 0.71),
-                              fontFamily: 'baloo',
-                              fontSize: html.FontSize.large,
-                              fontWeight: FontWeight.w400),
-                          "span": html.Style(
-                              color: const Color.fromRGBO(62, 60, 60, 0.71),
-                              fontFamily: 'baloo',
-                              fontSize: html.FontSize.large,
-                              fontWeight: FontWeight.w400),
-                          "p": html.Style(
-                              color: const Color.fromRGBO(62, 60, 60, 0.71),
-                              fontFamily: 'baloo',
-                              fontSize: html.FontSize.large,
-                              fontWeight: FontWeight.w400),
-                          "a": html.Style(
-                              color: Styles.primaryColor,
-                              fontFamily: 'baloo',
-                              fontSize: html.FontSize.large,
-                              fontWeight: FontWeight.w400),
-                        },
-                        onLinkTap: (url, attributes, element) {
-                          Get.to(() => URLServiceView(
-                                url: url,
-                              ));
-                        },
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minHeight: fixDpiScreenHeight() * 0.9,
+                ), // Set the minimum height
+
+                child: Container(
+                  width: fixDpiScreenWidth(),
+                  padding: EdgeInsets.symmetric(horizontal: 16.w),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        children: [
+                          SizedBox(
+                            height: 20.h,
+                          ),
+                          Image.network(
+                            widget.category!.categoryIcon!,
+                            width: 180.w,
+                            height: 180.w,
+                          ),
+                          SizedBox(
+                            height: 48.h,
+                          ),
+                          Align(
+                            alignment: LocalizationHelper.isArabic()
+                                ? Alignment.centerRight
+                                : Alignment.centerLeft,
+                            child: html.Html(
+                              data: widget
+                                  .serviceContent!.servicesContentSummary!,
+                              style: {
+                                "*": html.Style(
+                                    color:
+                                        const Color.fromRGBO(62, 60, 60, 0.71),
+                                    fontFamily: 'baloo',
+                                    fontSize: html.FontSize.large,
+                                    fontWeight: FontWeight.w400),
+                                "div": html.Style(
+                                    color:
+                                        const Color.fromRGBO(62, 60, 60, 0.71),
+                                    fontFamily: 'baloo',
+                                    fontSize: html.FontSize.large,
+                                    fontWeight: FontWeight.w400),
+                                "span": html.Style(
+                                    color:
+                                        const Color.fromRGBO(62, 60, 60, 0.71),
+                                    fontFamily: 'baloo',
+                                    fontSize: html.FontSize.large,
+                                    fontWeight: FontWeight.w400),
+                                "p": html.Style(
+                                    color:
+                                        const Color.fromRGBO(62, 60, 60, 0.71),
+                                    fontFamily: 'baloo',
+                                    fontSize: html.FontSize.large,
+                                    fontWeight: FontWeight.w400),
+                                "a": html.Style(
+                                    color: Styles.primaryColor,
+                                    fontFamily: 'baloo',
+                                    fontSize: html.FontSize.large,
+                                    fontWeight: FontWeight.w400),
+                              },
+                              onLinkTap: (url, attributes, element) {
+                                Get.to(() => URLServiceView(
+                                      url: url,
+                                    ));
+                              },
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                        ],
                       ),
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    const Spacer(),
-                    CustomButton(
-                      text: AppStrings.continueStr.tr,
-                      icon: Icons.arrow_forward,
-                      type: ButtonType.primary,
-                      width: 300.w,
-                      height: 50,
-                      onPressed: () async {
-                        Get.to(() => URLServiceView(
-                              url: widget.serviceContent!.serviceContentLink,
-                            ));
-                      },
-                    ),
-                    SizedBox(
-                      height: 76.h,
-                    ),
-                  ],
+                      Column(
+                        children: [
+                          CustomButton(
+                            text: AppStrings.continueStr.tr,
+                            icon: Icons.arrow_forward,
+                            type: ButtonType.primary,
+                            width: 300.w,
+                            height: 50,
+                            onPressed: () async {
+                              Get.to(() => URLServiceView(
+                                    url: widget
+                                        .serviceContent!.serviceContentLink,
+                                  ));
+                            },
+                          ),
+                          SizedBox(
+                            height: 76.h,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

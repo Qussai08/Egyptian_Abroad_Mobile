@@ -22,7 +22,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         onPressed: () {
           Get.back();
         },
-        child: Image.asset(
+        child: 
+        Image.asset(
           AppImages.backIcon,
           // width: 24.w,
           // height: 24.w,

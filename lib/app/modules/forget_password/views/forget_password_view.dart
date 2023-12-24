@@ -68,13 +68,12 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView>
                     text: AppStrings.sendVerificationCode.tr,
                     icon: Icons.arrow_forward,
                     type: ButtonType.primary,
-                    width: 300.w,
-                    height: 50,
+                    width: 358.w,
+                    height: 50.h,
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
                         await controller.verifyMail();
                       }
-                      
                     },
                   ),
                   SizedBox(
@@ -86,8 +85,8 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView>
                     icon: Icons.arrow_forward,
 
                     type: ButtonType.secondary,
-                    width: 300.w,
-                    height: 50,
+                    width: 358.w,
+                    height: 50.h,
                     onPressed: () {
                       Get.back();
                     },

@@ -2,8 +2,6 @@ import 'package:egyptians_abroad/app/core/theme/app_images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
-import '../../../../core/custom_widgets/custom_button.dart';
 import '../../../../core/custom_widgets/main_button.dart';
 import '../../../../core/theme/styles.dart';
 import '../../controllers/home_showcase_controller.dart';
@@ -139,7 +137,7 @@ class CustoumShowcase2Widget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: 340.w,
-      height: 200.h,
+      height: 220.h,
       child: Stack(
         children: [
           Positioned(
@@ -182,7 +180,7 @@ class CustoumShowcase2Widget extends StatelessWidget {
                               color: Styles.black,
                               fontSize: 15,
                             ),
-                            maxLines: 3,
+                            maxLines: 5,
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
