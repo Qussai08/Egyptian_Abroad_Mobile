@@ -73,7 +73,6 @@ class RegistrationController extends GetxController {
 
     AppHelper.name = nameTxtController.text;
 
-    print("register nameTxtController.text  ${nameTxtController.text}");
     if (response.status) {
       await loginController.login(
           email: emailTxtController.text,
@@ -241,14 +240,9 @@ class RegistrationController extends GetxController {
       "messagingAddress": msgsAddressTxtController.text,
       "passportNo": egPassportNumTxtController.text
     };
-    print("isEdit! ${isEdit!}");
-    print("completeAccount nameTxtController.text ${nameTxtController.text}");
-    // if (isEdit!) {
-    //   reqBody['name'] = nameTxtController.text;
-    // }
-    AppResponse response = await UserRepository().editAccount(reqBody,
-        // TODO : make it dynamic
-        queryParameters: {"guid": authService.userID});
+
+    AppResponse response = await UserRepository()
+        .editAccount(reqBody, queryParameters: {"guid": authService.userID});
     if (response.status) {
       Future.delayed(const Duration(seconds: 3), () async {
         Get.toNamed(Routes.REGITSRATIONSELECTAVATAR);
@@ -306,11 +300,9 @@ class RegistrationController extends GetxController {
       "avatarId": selectedAvatarIndex,
     };
 
-    AppResponse response = await UserRepository().editAccount(reqBody,
-        // TODO : make it dynamic
-        queryParameters: {"guid": authService.userID});
+    AppResponse response = await UserRepository()
+        .editAccount(reqBody, queryParameters: {"guid": authService.userID});
 
-    print("pushAvatar ${response.data}");
     if (response.status) {
       var controller = Get.put(HomeShowcaseController());
       await controller.getUserProfile();

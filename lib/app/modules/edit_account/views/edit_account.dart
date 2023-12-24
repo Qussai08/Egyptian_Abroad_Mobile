@@ -259,7 +259,20 @@ class _EditAccountViewState extends State<EditAccountView>
                                             ? controller.countriesList
                                                 .map((e) => DropdownMenuItem(
                                                       value: e.id,
-                                                      child: Text(e.country),
+                                                      child: Row(
+                                                        children: [
+                                                          Image.network(
+                                                            e.flag,
+                                                            width: 21,
+                                                            height: 15,
+                                                            fit: BoxFit.cover,
+                                                          ),
+                                                          const SizedBox(
+                                                            width: 8,
+                                                          ),
+                                                          Text(e.country),
+                                                        ],
+                                                      ),
                                                     ))
                                                 .toList()
                                             : [],

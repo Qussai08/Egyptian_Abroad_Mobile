@@ -115,7 +115,6 @@ class _OtpViewState extends State<OtpView> with ValidationMixin {
 
                                       AppResponse res =
                                           await controller.verifyCode(pin);
-                                      print("res verifyCode ${res.data}");
                                       if (res.status &&
                                           res.data['data'] == true) {
                                         controller.otp = pin;

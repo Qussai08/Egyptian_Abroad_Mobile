@@ -115,7 +115,6 @@ class HomeShowcaseController extends GetxController {
               searchCategoriesList.add(cat);
             }
           }
-          // searchCategoriesList.addAll(categoriesData.categories);
           displayedCategoriesList = searchCategoriesList;
         }
         setShowMore();
@@ -249,16 +248,16 @@ class HomeShowcaseController extends GetxController {
 
   Future<void> addToFavorites(
       {required String userId, required String serviceId}) async {
-    favoritesListProvider.addToFavorites(userId, serviceId).then((value) {
-      print("addToFavorites ${value.body}");
-    }, onError: (error) {});
+    favoritesListProvider
+        .addToFavorites(userId, serviceId)
+        .then((value) {}, onError: (error) {});
   }
 
   Future<void> removeFromFavorites(
       {required String userId, required String serviceId}) async {
-    favoritesListProvider.removeFromFavorites(userId, serviceId).then((value) {
-      print("removeFromFavorites ${value.body}");
-    }, onError: (error) {});
+    favoritesListProvider
+        .removeFromFavorites(userId, serviceId)
+        .then((value) {}, onError: (error) {});
   }
 
   Future<void> updateFavoritesList({required String userId}) async {

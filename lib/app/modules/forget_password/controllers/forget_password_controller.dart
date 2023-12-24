@@ -26,12 +26,9 @@ class ForgetPasswordController extends GetxController {
           "email": emailTxtController.text,
           "NID": "00000000000000"
         });
-    print("response.data ${response.data}");
 
     if (!response.data['data']) {
       AppResponse verRes = await createVerificationCode();
-      print("verRes ${verRes.data}");
-      // Get.toNamed(Routes.FORGETPASSOTP);
       Get.showSnackbar(
         buildCustomToast(
           Get.context!,
