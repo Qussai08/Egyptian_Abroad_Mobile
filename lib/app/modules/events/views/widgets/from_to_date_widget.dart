@@ -23,9 +23,10 @@ class FromToDateWidget extends StatelessWidget {
               color: Styles.lightBlack, fontSize: fixDpiFont(12)),
         ),
         SizedBox(width: 4.w),
-        const Icon(
+        Icon(
           Icons.calendar_month,
           color: Styles.lightBlack,
+          size: fixDpiFont(12),
         ),
         SizedBox(width: 4.w),
         Text(fromDate,
@@ -36,10 +37,8 @@ class FromToDateWidget extends StatelessWidget {
             style: Styles.getMediumStyle(
                 color: Styles.lightBlack, fontSize: fixDpiFont(12))),
         SizedBox(width: 4.w),
-        const Icon(
-          Icons.calendar_month,
-          color: Styles.lightBlack,
-        ),
+        Icon(Icons.calendar_month,
+            color: Styles.lightBlack, size: fixDpiFont(12)),
         SizedBox(width: 4.w),
         Text(toDate,
             style: Styles.getMediumStyle(
