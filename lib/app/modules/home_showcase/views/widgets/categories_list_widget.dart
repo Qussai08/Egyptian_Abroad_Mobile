@@ -120,7 +120,7 @@ class CategoriesListWidget extends StatelessWidget {
                       text: AppStrings.showMore.tr,
                       height: 50.h,
                       fontSize: 14,
-                      icon: Icons.arrow_forward,
+                      // icon: Icons.arrow_forward,
                       iconSize: 13,
                       onPressed: () {
                         homeContoller.getMoreCategories();

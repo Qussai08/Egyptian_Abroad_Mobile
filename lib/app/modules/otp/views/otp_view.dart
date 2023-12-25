@@ -226,8 +226,8 @@ class _OtpViewState extends State<OtpView> with ValidationMixin {
                               text: AppStrings.confirm.tr,
                               icon: Icons.arrow_forward,
                               type: ButtonType.primary,
-                              width: 300.w,
-                              height: 50,
+                              width: 358.w,
+                              height: 50.h,
                               onPressed: () async {
                                 if (time == null) {
                                   _otpHasError.value = true;

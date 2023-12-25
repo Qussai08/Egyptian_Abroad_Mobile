@@ -201,14 +201,24 @@ class _RegistrationViewState extends State<RegistrationView>
                                       }),
                             ),
                             SizedBox(
-                              height: 40.h,
+                              height: 15.h,
+                            ),
+                            Text(
+                              'بالمتابعة انت موافق على مشاركة بيانات الدخول مع تطبيق سيارات المصريين بالخارج',
+                              textAlign: TextAlign.center,
+                              style: Styles.getRegularStyle(
+                                  color: Styles.lightBlack,
+                                  fontSize: fixDpiFont(13)),
+                            ),
+                            SizedBox(
+                              height: 15.h,
                             ),
                             CustomButton(
                               text: AppStrings.next.tr,
                               icon: Icons.arrow_forward,
                               type: ButtonType.primary,
-                              width: 300.w,
-                              height: 50,
+                              width: 358.w,
+                              height: 50.h,
                               onPressed: () async {
                                 if (_formKey.currentState!.validate()) {
                                   setState(() {
@@ -301,7 +311,10 @@ class _RegistrationViewState extends State<RegistrationView>
                                   size: fixDpiWidth(16),
                                 )
                               ],
-                            )
+                            ),
+                            SizedBox(
+                              height: 15.h,
+                            ),
                           ],
                         ),
                 ),

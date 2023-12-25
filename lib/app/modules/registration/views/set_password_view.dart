@@ -144,7 +144,7 @@ class _SetPasswordViewState extends State<SetPasswordView>
                     ),
                     CustomButton(
                       text: AppStrings.register.tr,
-                      icon: Icons.arrow_forward,
+                      // icon: Icons.arrow_forward,
                       type: ButtonType.primary,
                       width: 300.w,
                       height: 50,
