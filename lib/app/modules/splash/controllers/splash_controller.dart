@@ -1,4 +1,3 @@
-
 import 'package:egyptians_abroad/app/core/services/base_api.dart';
 import 'package:get/get.dart';
 
@@ -25,14 +24,9 @@ class SplashController extends GetxController {
   }
 
   _goNext() async {
-    // print("authService.isAuth ${await authService.isAuth}");
-    // var token = await SecureStorageHelper.localRead('token');
     String? token = authService.accessToken;
 
     if (token?.isNotEmpty ?? false) {
-      // token = json.decode(token);
-      // AppHelper.setToken(token);
-      // authService.setAccessToken(token!);
       await notificationHelper.registerFCMToken();
       await notificationHelper.subscribeToTopic('broadcast');
       await 2.delay();

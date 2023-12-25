@@ -17,8 +17,7 @@ class TechnicalPartnerWidget extends StatelessWidget {
         Text(
           AppStrings.technicalPartner.tr,
           style: Styles.getRegularStyle(
-                  fontSize: fixDpiFont(12), color: Styles.grey_600)
-              .copyWith(fontFamily: 'helvetica'),
+              fontSize: fixDpiFont(12), color: Styles.grey_600),
         ),
         Image.asset(AppImages.technicalPartner),
       ],

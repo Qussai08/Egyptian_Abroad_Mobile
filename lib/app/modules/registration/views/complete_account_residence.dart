@@ -193,7 +193,7 @@ class _CompleteAccountViewState extends State<CompleteAccountView>
                             //       200),
                             // ),
                             SizedBox(
-                              height: 160.h,
+                              height: 150.h,
                             ),
                             CustomButton(
                               text: AppStrings.next.tr,
