@@ -25,14 +25,11 @@ class LoginController extends GetxController {
     if (response.status) {
       authService.setAccessToken(response.data['accessToken'] ?? '');
       authService.setRefreshToken(response.data['refreshToken'] ?? '');
-      // String? userID = authService.userID ?? '';
-      // AppHelper.setToken(response.data['accessToken']);
 
       await notificationHelper.registerFCMToken();
       await notificationHelper.subscribeToTopic('broadcast');
 
       if (navigateToHome) Get.offAllNamed(Routes.BOTTOMNAVIGATION);
-      // SecureStorageHelper.localWrite('token', response.data['accessToken']);
     } else {
       loginIsDimmed.value = false;
       Get.showSnackbar(

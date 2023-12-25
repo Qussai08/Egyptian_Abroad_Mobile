@@ -25,7 +25,7 @@ class CategoriesListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 20.h),
+      margin: EdgeInsets.only(top: 10.h),
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 19.h),
       // height: 524.h,
       width: double.infinity,
@@ -43,7 +43,8 @@ class CategoriesListWidget extends StatelessWidget {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.max,
+        // mainAxisSize: MainAxisSize.max,
+        mainAxisSize: MainAxisSize.min,
         children: [
           TitleText(
             title: AppStrings.exploreServices.tr,
@@ -59,80 +60,76 @@ class CategoriesListWidget extends StatelessWidget {
                 color: const Color.fromRGBO(62, 60, 60, 0.71),
                 fontFamily: 'baloo'),
           ),
-          homeContoller.categoriesLoading ||
-                  homeContoller.displayedCategoriesList.isEmpty
-              ? const Spacer()
-              : Container(),
+
           homeContoller.categoriesLoading
-              ? const Center(
-                  child: CircularProgressIndicator(
-                    color: Styles.primaryColor,
+              ? Container(
+                  height: 200,
+                  child: const Center(
+                    child: CircularProgressIndicator(
+                      color: Styles.primaryColor,
+                    ),
                   ),
                 )
               : homeContoller.displayedCategoriesList.isEmpty
-                  ? NoDataWidget(
-                      message: AppStrings.noServices.tr,
+                  ? Container(
+                      height: 200,
+                      padding: EdgeInsets.only(top: 20),
+                      child: NoDataWidget(
+                        message: AppStrings.noServices.tr,
+                      ),
                     )
-                  : Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        SizedBox(
-                          // height: !homeContoller.showMore ? 425.h : 385.h,
-                          child: GridView.builder(
-                            physics: NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            padding: EdgeInsets.only(top: 15.h),
-                            gridDelegate:
-                                const SliverGridDelegateWithMaxCrossAxisExtent(
-                              maxCrossAxisExtent: 125,
-                              childAspectRatio: 0.96,
-                            ),
-                            scrollDirection: Axis.vertical,
-                            itemCount:
-                                homeContoller.displayedCategoriesList.length,
-                            itemBuilder: (ctx, i) => GridWidget(
-                              i,
-                              category:
-                                  homeContoller.displayedCategoriesList[i],
-                            ),
-                          ),
+                  : Flexible(
+                      child: GridView.builder(
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        padding: EdgeInsets.only(top: 15.h),
+                        gridDelegate:
+                            const SliverGridDelegateWithMaxCrossAxisExtent(
+                          maxCrossAxisExtent: 125,
+                          childAspectRatio: 0.96,
                         ),
-                        homeContoller.showMore
-                            ? Showcase.withWidget(
-                                height: 140,
-                                width: 255.w,
-                                key: homeContoller.three,
-                                targetShapeBorder: const CircleBorder(),
-                                targetBorderRadius: const BorderRadius.all(
-                                  Radius.circular(150),
-                                ),
-                                disableDefaultTargetGestures: true,
-                                container: CustoumShowcase3Widget(),
-                                onBarrierClick: () {
-                                  log('onBarrierClick');
-                                },
-                                child: Container(
-                                  alignment: Alignment.bottomCenter,
-                                  padding:
-                                      EdgeInsets.only(bottom: 5.h, top: 5.h),
-                                  child: CustomButton(
-                                    type: ButtonType.secondary,
-                                    text: AppStrings.showMore.tr,
-                                    height: 50.h,
-                                    fontSize: 14,
-                                    icon: Icons.arrow_forward,
-                                    iconSize: 13,
-                                    onPressed: () {
-                                      homeContoller.getMoreCategories();
-                                    },
-                                  ),
-                                ),
-                              )
-                            : Container()
-                      ],
+                        scrollDirection: Axis.vertical,
+                        itemCount: homeContoller.displayedCategoriesList.length,
+                        itemBuilder: (ctx, i) => GridWidget(
+                          i,
+                          category: homeContoller.displayedCategoriesList[i],
+                        ),
+                      ),
                     ),
+          !homeContoller.categoriesLoading &&
+                  homeContoller.displayedCategoriesList.isNotEmpty &&
+                  homeContoller.showMore
+              ? Showcase.withWidget(
+                  height: 140,
+                  width: 255.w,
+                  key: homeContoller.three,
+                  targetShapeBorder: const CircleBorder(),
+                  targetBorderRadius: const BorderRadius.all(
+                    Radius.circular(150),
+                  ),
+                  disableDefaultTargetGestures: true,
+                  container: CustoumShowcase3Widget(),
+                  onBarrierClick: () {
+                    log('onBarrierClick');
+                  },
+                  child: Container(
+                    alignment: Alignment.bottomCenter,
+                    padding: EdgeInsets.only(bottom: 5.h, top: 5.h),
+                    child: CustomButton(
+                      type: ButtonType.secondary,
+                      text: AppStrings.showMore.tr,
+                      height: 50.h,
+                      fontSize: 14,
+                      icon: Icons.arrow_forward,
+                      iconSize: 13,
+                      onPressed: () {
+                        homeContoller.getMoreCategories();
+                      },
+                    ),
+                  ),
+                )
+              : Container()
           // TODO: kindly check this view on EN language, may spacing make issue with allignment
-          // const Spacer(),
         ],
       ),
     );
