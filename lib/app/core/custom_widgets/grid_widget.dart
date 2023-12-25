@@ -9,6 +9,7 @@ import 'package:egyptians_abroad/app/modules/start_service/controllers/start_ser
 import 'package:egyptians_abroad/app/modules/start_service/views/service_content_view.dart';
 import 'package:egyptians_abroad/app/modules/start_service/views/start_service_redirect.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class GridWidget extends GetView<StartServiceController> {
@@ -114,14 +115,16 @@ class GridWidget extends GetView<StartServiceController> {
                   // fix overflow on english text
                   child: Align(
                     alignment: Alignment.center,
-                    child: FittedBox(
-                      fit: BoxFit.scaleDown,
+                    child: SizedBox(
+                      width: 100.w,
+                      height: 50.h,
                       child: Text(
                         isService
                             ? serviceItem!.serviceName
                             : category!.categoryName,
                         maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
+                        overflow: TextOverflow.visible,
+                        textAlign: TextAlign.center,
                         style: Styles.getLightStyle(
                             color: Colors.black, fontSize: 12),
                       ),
