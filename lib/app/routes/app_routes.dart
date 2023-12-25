@@ -32,6 +32,7 @@ abstract class Routes {
   static const FORGETPASSSETPASS = _Paths.FORGETPASSSETPASS;
   static const HOME_SHOWCASE = _Paths.HOME_SHOWCASE;
   static const EVENT_DETAILS = _Paths.EVENT_DETAILS;
+  static const EVENTS = _Paths.EVENTS;
 }
 
 abstract class _Paths {
@@ -62,4 +63,5 @@ abstract class _Paths {
   static const ABOUTUS = '/aboutus';
   static const HOME_SHOWCASE = '/home-showcase';
   static const EVENT_DETAILS = '/event-details';
+  static const EVENTS = '/events';
 }

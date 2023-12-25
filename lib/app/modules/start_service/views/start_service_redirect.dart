@@ -71,19 +71,10 @@ class StartServiceRedir extends StatelessWidget {
                                 url: serviceContent.servicesLink,
                               ))
                           : await launchApp(
-                              serviceContent.androidLink ??
-                                  'com.facebook.katana',
-                              serviceContent.iosLink ?? '284882215');
-                      // launchUrl(
-                      //     mode: LaunchMode.externalApplication,
-                      //     Uri.parse("https://www.facebook.com"));
-                      // Uri(
-                      //     scheme: 'https',
-                      //     host: 'www.google.com/maps/search/',
-                      //     query: "?api=1&query=-3.823216,-38.481700"));
-                      // Get.toNamed(
-                      //   Routes.STARTSERVICE,
-                      // );
+                              appLink: serviceContent.appLink,
+                              androidID:
+                                  serviceContent.androidLink ?? 'com.mcit.eca',
+                              iosID: serviceContent.iosLink ?? '6444364022');
                     },
                   ),
                   SizedBox(
@@ -96,17 +87,19 @@ class StartServiceRedir extends StatelessWidget {
     );
   }
 
-  launchApp(String androidID, String iosID) {
+  launchApp({String? appLink, String? androidID, String? iosID}) {
     if (Platform.isAndroid || Platform.isIOS) {
       final appId = Platform.isAndroid ? androidID : iosID;
       // 'com.mcit.eca' : '6444364022';
-      final url = androidID == iosID
-          ? Uri.parse(iosID)
-          : Uri.parse(
-              Platform.isAndroid
-                  ? "market://details?id=$appId"
-                  : "https://apps.apple.com/app/id$appId",
-            );
+      final url = appLink != null
+          ? Uri.parse(appLink)
+          : androidID == iosID
+              ? Uri.parse(iosID!)
+              : Uri.parse(
+                  Platform.isAndroid
+                      ? "market://details?id=$appId"
+                      : "https://apps.apple.com/app/id$appId",
+                );
 
       print("url : $url");
 

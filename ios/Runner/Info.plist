@@ -26,11 +26,16 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Allow access to your location</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Allow access to your location</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
+		<string>processing</string>
 		<string>remote-notification</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
@@ -48,12 +53,5 @@
 	</array>
 	<key>io.flutter.embedded_views_preview</key>
 	<string>YES</string>
-	<!-- NSLocationAlwaysAndWhenInUseUsageDescription -->
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Allow access to your location</string>
-
-	<!-- NSLocationWhenInUseUsageDescription -->
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Allow access to your location</string>
 </dict>
 </plist>

@@ -27,14 +27,14 @@ class BottomNavigationView extends GetView<BottomNavigationController> {
                   label: AppStrings.notifications.tr,
                   tabIcon: AppImages.notificationIcon,
                 ),
+                // _buildNavigationBarItem(
+                //   label: AppStrings.events.tr,
+                //   tabIcon: AppImages.bookIcon,
+                // ),
                 _buildNavigationBarItem(
                   label: AppStrings.more.tr,
                   tabIcon: AppImages.moreIcon,
                 ),
-                // _buildNavigationBarItem(
-                //   label: 'start service',
-                //   tabIcon: AppImages.homeIcon,
-                // ),
               ],
               currentIndex: bottomNavigationController.tabIndex,
               selectedItemColor: Styles.primaryColor,

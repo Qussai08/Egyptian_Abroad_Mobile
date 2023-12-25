@@ -156,4 +156,6 @@ abstract class AppStrings {
   static const from = 'from';
   static const to = 'to';
   static const recordingLink = 'recordingLink';
+  static const events = 'events';
+  static const search = 'search';
 }

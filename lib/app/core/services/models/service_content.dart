@@ -1,25 +1,25 @@
 import 'package:egyptians_abroad/app/core/helper/app_helper.dart';
 
 class ServiceContent {
-  ServiceContent({
-    this.serviceId,
-    this.servicesIcon,
-    this.androidLink,
-    this.iosLink,
-    this.servicesLink,
-    this.serviceContentId,
-    this.servicesType,
-    this.serviceName,
-    this.serviceDescription,
-    this.serviceContentLink,
-    this.serviceContentIcon,
-    this.servicesContentTitle,
-    this.servicesContentSummary,
-    this.nameLanguageId,
-    this.descriptionLanguageId,
-    this.titleLanguageId,
-    this.summaryLanguageId,
-  });
+  ServiceContent(
+      {this.serviceId,
+      this.servicesIcon,
+      this.androidLink,
+      this.iosLink,
+      this.servicesLink,
+      this.serviceContentId,
+      this.servicesType,
+      this.serviceName,
+      this.serviceDescription,
+      this.serviceContentLink,
+      this.serviceContentIcon,
+      this.servicesContentTitle,
+      this.servicesContentSummary,
+      this.nameLanguageId,
+      this.descriptionLanguageId,
+      this.titleLanguageId,
+      this.summaryLanguageId,
+      this.appLink});
   late int? serviceId;
   late String? servicesIcon;
   late String? androidLink;
@@ -37,6 +37,7 @@ class ServiceContent {
   late int? descriptionLanguageId;
   late int? titleLanguageId;
   late int? summaryLanguageId;
+  late String? appLink;
 
   ServiceContent.fromJson(Map<String, dynamic> json) {
     serviceId = json['serviceId'];
@@ -56,5 +57,6 @@ class ServiceContent {
     descriptionLanguageId = json['descriptionLanguageId'];
     titleLanguageId = json['titleLanguageId'];
     summaryLanguageId = json['summaryLanguageId'];
+    appLink = json['appLink'];
   }
 }

@@ -81,6 +81,25 @@ class MoreView extends GetView<MoreController> {
           ),
           const Divider(color: Styles.grey_200, height: 0),
           const Spacer(),
+          // TODO : display version
+          // Container(
+          //     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+          //     decoration: BoxDecoration(
+          //       // border: Border.all(color: Colors.black12),
+          //       borderRadius: BorderRadius.circular(5),
+          //       boxShadow: const [
+          //         BoxShadow(
+          //           color: Styles.blackShadow,
+          //           blurRadius: 45,
+          //           offset: Offset(10, 10),
+          //         ),
+          //       ],
+          //     ),
+          //     child: Text(
+          //       "v1.2.2",
+          //       style:
+          //           Styles.getRegularStyle(color: Styles.black3, fontSize: 16),
+          //     ))
         ],
       ),
     );
