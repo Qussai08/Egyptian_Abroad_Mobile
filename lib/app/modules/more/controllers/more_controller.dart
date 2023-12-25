@@ -6,7 +6,7 @@ class MoreController extends GetxController {
     Get.toNamed(route);
   }
 
-  onLogout() {
-    AuthService().logout();
+  Future<void> onLogout() async {
+    await AuthService().logout();
   }
 }

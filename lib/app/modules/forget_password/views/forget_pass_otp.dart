@@ -34,11 +34,21 @@ class _ForgetPassOtpViewState extends State<ForgetPassOtpView>
 
   intl.NumberFormat formatter = intl.NumberFormat("00");
 
+  late int endTime;
+  bool intialRun = true;
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    if (intialRun) {
+      endTime = endTime = DateTime.now().millisecondsSinceEpoch +
+          1000 * (widget.resendOtpTime ?? 2) * 60;
+      intialRun = false;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    int endTime = DateTime.now().millisecondsSinceEpoch +
-        //  1000 * (1) * 20;
-        1000 * (widget.resendOtpTime ?? 2) * 60;
     final controller = Get.put(ForgetPasswordController());
 
     return NetworkIndicator(

@@ -201,18 +201,21 @@ class _RegistrationViewState extends State<RegistrationView>
                                       }),
                             ),
                             SizedBox(
-                              height: 15.h,
+                              height: 40.h,
                             ),
-                            Text(
-                              'بالمتابعة انت موافق على مشاركة بيانات الدخول مع تطبيق سيارات المصريين بالخارج',
-                              textAlign: TextAlign.center,
-                              style: Styles.getRegularStyle(
-                                  color: Styles.lightBlack,
-                                  fontSize: fixDpiFont(13)),
-                            ),
-                            SizedBox(
-                              height: 15.h,
-                            ),
+                            // SizedBox(
+                            //   height: 15.h,
+                            // ),
+                            // Text(
+                            //   'بالمتابعة انت موافق على مشاركة بيانات الدخول مع تطبيق سيارات المصريين بالخارج',
+                            //   textAlign: TextAlign.center,
+                            //   style: Styles.getRegularStyle(
+                            //       color: Styles.lightBlack,
+                            //       fontSize: fixDpiFont(13)),
+                            // ),
+                            // SizedBox(
+                            //   height: 15.h,
+                            // ),
                             CustomButton(
                               text: AppStrings.next.tr,
                               icon: Icons.arrow_forward,

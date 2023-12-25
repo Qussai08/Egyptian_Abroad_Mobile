@@ -123,7 +123,7 @@ class GridWidget extends GetView<StartServiceController> {
                             ? serviceItem!.serviceName
                             : category!.categoryName,
                         maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
+                        overflow: TextOverflow.visible,
                         textAlign: TextAlign.center,
                         style: Styles.getLightStyle(
                             color: Colors.black, fontSize: 12),

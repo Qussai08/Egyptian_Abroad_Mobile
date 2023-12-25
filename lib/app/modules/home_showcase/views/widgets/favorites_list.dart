@@ -37,7 +37,7 @@ class FavoritesList extends StatelessWidget {
                   color: Styles.black, fontSize: fixDpiFont(18)),
             ),
           ),
-          SizedBox(height: 16.h),
+          SizedBox(height: 8.h),
           SizedBox(
             height: 130.h,
             width: double.infinity,

@@ -80,7 +80,7 @@ class HomeBodyWidget extends StatelessWidget {
               HomeSearchWidget(),
 
               // Favorites
-              SizedBox(height: 12.h),
+              SizedBox(height: 8.h),
               FavoritesList(),
             ],
           ),

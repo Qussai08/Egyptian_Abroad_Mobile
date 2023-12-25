@@ -74,9 +74,10 @@ class MoreView extends GetView<MoreController> {
           ListTileWidget(
             text: AppStrings.logOut.tr,
             imageAsset: AppImages.logoutIcon,
-            onTap: () {
-              controller.onLogout();
-              Get.offAllNamed(Routes.LOGIN);
+            onTap: () async {
+              await controller
+                  .onLogout()
+                  .then((value) => Get.offAllNamed(Routes.LOGIN));
             },
           ),
           const Divider(color: Styles.grey_200, height: 0),

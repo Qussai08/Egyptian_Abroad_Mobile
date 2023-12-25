@@ -23,7 +23,7 @@ class AvatarAndNameWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: fixDpiHeight(12)),
+      margin: EdgeInsets.symmetric(vertical: fixDpiHeight(8)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
