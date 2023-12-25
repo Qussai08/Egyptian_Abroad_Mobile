@@ -39,6 +39,8 @@ class AppImages {
 
   static const locationOutlinedIcon = 'assets/icons/location_outlined.png';
 
+  static const linkIcon = 'assets/icons/link_icon.png';
+
   static const List<String> avatars = [
     'assets/avatars/1.png',
     'assets/avatars/2.png',

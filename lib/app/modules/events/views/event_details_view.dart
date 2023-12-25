@@ -29,6 +29,7 @@ class EventDetailsView extends StatelessWidget {
             height: 35.h,
           ),
           Container(
+            margin: EdgeInsets.symmetric(horizontal: 16.w),
             padding: EdgeInsets.symmetric(horizontal: 13.w),
             decoration: BoxDecoration(
               color: Styles.white,
@@ -36,8 +37,8 @@ class EventDetailsView extends StatelessWidget {
               boxShadow: const [
                 BoxShadow(
                   color: Styles.blackShadow,
-                  blurRadius: 12,
-                  offset: Offset(5, 5),
+                  blurRadius: 19,
+                  offset: Offset(0, 0),
                 ),
               ],
             ),
@@ -56,7 +57,8 @@ class EventDetailsView extends StatelessWidget {
                 SizedBox(height: 12.h),
                 CustomButton(
                   type: ButtonType.primary,
-                  icon: Icons.link,
+                  iconIsAsset: true,
+                  assetString: AppImages.linkIcon,
                   iconSize: fixDpiFont(14),
                   changeIconPosition: true,
                   text: AppStrings.recordingLink.tr,
@@ -85,9 +87,9 @@ class EventDetailsView extends StatelessWidget {
                   'هذا نص توضيحى يستخدم لاغراض التصميم هذا نص توضيحى يستخدم لاغراض التصميم هذا نص توضيحى يستخدم لاغراض التصميم هذا نص توضيحى يستخدم لاغراض التصميم  هذا نص توضيحى هذا نص توضيحى يستخدم لاغراض التصميم هذا نص توضيحى يستخدم لاغراض التصميم هذا نص توضيحى يستخدم لاغراض التصميم هذا نص توضيحى يستخدم لاغراض التصميم  هذا نص توضيحىهذا نص توضيحى يستخدم لاغراض التصميم هذا نص توضيحى يستخدم لاغراض التصميم هذا نص توضيحى يستخدم لاغراض التصميم هذا نص توضيحى يستخدم لاغراض التصميم  هذا نص توضيحى هذا نص توضيحى يستخدم لاغراض التصميم هذا نص توضيحى يستخدم لاغراض التصميم هذا نص توضيحى يستخدم لاغراض التصميم هذا نص توضيحى يستخدم لاغراض',
                   style: Styles.getMediumStyle(
                           color: Styles.black, fontSize: fixDpiFont(12))
-                      .copyWith(height: 2.16.h),
+                      .copyWith(height: 2.0),
                 ),
-                SizedBox(height: 12.h),
+                SizedBox(height: 99.h),
               ],
             ),
           ),
