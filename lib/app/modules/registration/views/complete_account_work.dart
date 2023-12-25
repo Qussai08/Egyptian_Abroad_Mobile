@@ -183,8 +183,8 @@ class _CompleteAccountWorkViewState extends State<CompleteAccountWorkView>
                         text: AppStrings.next.tr,
                         icon: Icons.arrow_forward,
                         type: ButtonType.primary,
-                        width: 300.w,
-                        height: 50,
+                        width: 358.w,
+                        height: 50.h,
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
                             await registrationController.completeAccount(
@@ -198,7 +198,7 @@ class _CompleteAccountWorkViewState extends State<CompleteAccountWorkView>
                       CustomButton(
                         text: AppStrings.skip.tr,
                         type: ButtonType.secondary,
-                        width: 300.w,
+                        width: 358.w,
                         height: 50,
                         onPressed: () {
                           Get.toNamed(Routes.REGITSRATIONSELECTAVATAR);

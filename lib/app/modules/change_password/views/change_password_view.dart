@@ -82,15 +82,13 @@ class _ChangePasswordViewState extends State<ChangePasswordView>
                         maxLength: 100,
                         controller: controller.newPasswordTxtController,
                         validationFunc: (val) {
-                          return validatePassword(controller
-                                      .newPasswordTxtController.text) ==
-                                  null
-                              ? _validationsValues.value.firstWhereOrNull(
+                          return validatePassword(
+                                  controller.newPasswordTxtController.text) ??
+                              (_validationsValues.value.firstWhereOrNull(
                                           (element) => element == false) !=
                                       null
                                   ? AppStrings.passwordWeekValidation.tr
-                                  : null
-                              : null;
+                                  : null);
                         },
                         onChangedFunc: (val) {
                           _validationsValues.value = [
