@@ -120,4 +120,9 @@ Map<String, String> ar = {
   AppStrings.favorites: 'المفضلة',
   AppStrings.welcome: 'أهلًا بك',
   AppStrings.dataSavedSuccessfully: 'تم حفظ بياناتك بنجاح',
+  AppStrings.eventDetails: 'تفاصيل الفعالية',
+  AppStrings.from: 'من',
+  AppStrings.to: 'إلى',
+  AppStrings.recordingLink: 'رابط التسجيل',
+  
 };

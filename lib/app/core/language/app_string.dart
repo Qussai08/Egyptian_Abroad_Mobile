@@ -150,4 +150,10 @@ abstract class AppStrings {
 
   static const somethingWentWrong = 'somethingWentWrong';
   static const technicalPartner = 'technicalPartner';
+
+  // Events
+  static const eventDetails = 'eventDetails';
+  static const from = 'from';
+  static const to = 'to';
+  static const recordingLink = 'recordingLink';
 }

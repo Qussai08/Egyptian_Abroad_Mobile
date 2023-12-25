@@ -122,4 +122,8 @@ Map<String, String> en = {
   AppStrings.favorites: 'Favorites',
   AppStrings.welcome: 'Welcome',
   AppStrings.dataSavedSuccessfully: 'Your data saved successfully',
+  AppStrings.eventDetails: 'Event Details',
+  AppStrings.from: 'From',
+  AppStrings.to: 'To',
+  AppStrings.recordingLink: 'Recording Link',
 };

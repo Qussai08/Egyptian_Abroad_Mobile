@@ -39,14 +39,13 @@ class FavoritesList extends StatelessWidget {
           ),
           SizedBox(height: 8.h),
           SizedBox(
-            height: 120.h,
+            height: 130.h,
             width: double.infinity,
             child: Row(
               children: [
                 Expanded(
                   child: Container(
-                    padding:
-                        EdgeInsets.only(right: 10.w, top: 5.h, bottom: 5.h),
+                    padding: EdgeInsets.only(right: 10.w),
                     child: GetBuilder<HomeShowcaseController>(
                         builder: (controller) {
                       return ListView.builder(

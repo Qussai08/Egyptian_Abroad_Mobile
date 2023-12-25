@@ -173,9 +173,7 @@ class _EditAccountViewState extends State<EditAccountView>
                                           height: 40.h,
                                         ),
                                       ),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
+                                      SizedBox(width: 10.w),
                                       GestureDetector(
                                         onTap: () {
                                           Get.toNamed(Routes.CHANGEPASSWORD);
