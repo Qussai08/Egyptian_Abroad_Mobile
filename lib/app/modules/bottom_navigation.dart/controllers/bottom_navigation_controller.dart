@@ -15,7 +15,7 @@ class BottomNavigationController extends GetxController {
   final List<Widget> _navigationScreens = [
     const HomeShowcaseView(),
     const NotificationsView(),
-    // const EventsView(),
+    const EventsView(),
     const MoreView(),
   ];
 

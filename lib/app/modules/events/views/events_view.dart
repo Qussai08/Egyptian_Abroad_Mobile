@@ -1,3 +1,6 @@
+import 'package:egyptians_abroad/app/core/custom_widgets/custom_button.dart';
+import 'package:egyptians_abroad/app/core/custom_widgets/dropdown_list_selector.dart';
+import 'package:egyptians_abroad/app/core/custom_widgets/textfield_title.dart';
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/core/theme/app_images.dart';
@@ -89,7 +92,125 @@ class EventsView extends GetView<EventsController> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      //  Get.bottomSheet(Container(height: 400,,));
+                      Get.bottomSheet(Container(
+                        decoration: const BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(12),
+                                topRight: Radius.circular(12))),
+                        child: Column(children: [
+                          Container(
+                            padding: EdgeInsets.symmetric(horizontal: 8.w),
+                            decoration: const BoxDecoration(
+                                color: Color(0xffE7F2F4),
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(12),
+                                    topRight: Radius.circular(12))),
+                            height: 68.h,
+                            child: Row(children: [
+                              Container(
+                                width: fixDpiFont(24),
+                              ),
+                              Spacer(),
+                              Text(
+                                "بحث باستخدام",
+                                style: Styles.getMediumStyle(
+                                    color: Color(0xff201D61), fontSize: 24),
+                              ),
+                              Spacer(),
+                              Padding(
+                                padding: EdgeInsets.only(bottom: 20.h),
+                                child: Icon(
+                                  Icons.close,
+                                  size: fixDpiFont(24),
+                                ),
+                              )
+                            ]),
+                          ),
+                          SizedBox(
+                            height: 20.h,
+                          ),
+                          Container(
+                            padding: EdgeInsets.symmetric(horizontal: 12.w),
+                            child: Column(
+                              children: [
+                                TextFieldTitle(
+                                  title: "تاريخ بدء الفعالية",
+                                  hasSubTitle: false,
+                                ),
+                                Container(
+                                  height: 50,
+                                  decoration: BoxDecoration(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(37)),
+                                      border:
+                                          Border.all(color: Color(0xffEBEBEB))),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        AppStrings.from.tr,
+                                        style: Styles.getMediumStyle(
+                                            color: Styles.lightBlack,
+                                            fontSize: fixDpiFont(12)),
+                                      ),
+                                      SizedBox(width: 4.w),
+                                      Icon(
+                                        Icons.calendar_month,
+                                        color: Styles.lightBlack,
+                                        size: fixDpiFont(12),
+                                      ),
+                                      SizedBox(width: 4.w),
+                                      Text("21 ديسمبر 2023  7:00 ص",
+                                          style: Styles.getMediumStyle(
+                                              color: Styles.lightBlack,
+                                              fontSize: fixDpiFont(12))),
+                                      Container(
+                                        margin: EdgeInsets.symmetric(
+                                            horizontal: 17.w),
+                                        child: Container(
+                                          color: Color(0xffEBEBEB),
+                                          width: 1,
+                                        ),
+                                      ),
+                                      Text(AppStrings.to.tr,
+                                          style: Styles.getMediumStyle(
+                                              color: Styles.lightBlack,
+                                              fontSize: fixDpiFont(12))),
+                                      SizedBox(width: 4.w),
+                                      Icon(Icons.calendar_month,
+                                          color: Styles.lightBlack,
+                                          size: fixDpiFont(12)),
+                                      SizedBox(width: 4.w),
+                                      Text("21 ديسمبر 2023  7:00 ص",
+                                          style: Styles.getMediumStyle(
+                                              color: Styles.lightBlack,
+                                              fontSize: fixDpiFont(12))),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(height: 16.h),
+                                TextFieldTitle(
+                                  title: "دولة الفعالية",
+                                  hasSubTitle: false,
+                                ),
+                                DropDownListSelector(dropDownList: []),
+                                SizedBox(height: 16.h),
+                                TextFieldTitle(
+                                  title: "موضوع الفعالية",
+                                  hasSubTitle: false,
+                                ),
+                                DropDownListSelector(dropDownList: []),
+                                SizedBox(height: 30.h),
+                                CustomButton(
+                                  type: ButtonType.primary,
+                                  text: "إظهار النتائج",
+                                )
+                              ],
+                            ),
+                          ),
+                        ]),
+                      ));
                     },
                     child: Container(
                       width: 65,
