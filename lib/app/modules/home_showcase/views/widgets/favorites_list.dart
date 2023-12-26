@@ -28,7 +28,6 @@ class FavoritesList extends StatelessWidget {
       onTargetClick: () => log('onTargetClick'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.max,
         children: [
           Padding(
             padding: const EdgeInsets.only(top: 5, right: 5, left: 5),
@@ -38,16 +37,15 @@ class FavoritesList extends StatelessWidget {
                   color: Styles.black, fontSize: fixDpiFont(18)),
             ),
           ),
-          SizedBox(height: 12.h),
+          SizedBox(height: 8.h),
           SizedBox(
-            height: 120.h,
+            height: 130.h,
             width: double.infinity,
             child: Row(
               children: [
                 Expanded(
                   child: Container(
-                    padding:
-                        EdgeInsets.only(right: 10.w, top: 5.h, bottom: 5.h),
+                    padding: EdgeInsets.only(right: 10.w),
                     child: GetBuilder<HomeShowcaseController>(
                         builder: (controller) {
                       return ListView.builder(

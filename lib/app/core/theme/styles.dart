@@ -88,11 +88,13 @@ class Styles {
   static const secondaryButtonColor = Color(0xffF8F8F8);
   static const transGrey = Color.fromRGBO(62, 60, 60, 0.71);
   static const blueGrey = Color(0xff3F3D56);
+  static const darkGray = Color(0xFF3F3D56);
 
   static const red = Color(0xffD71A21);
   static const heavyRed = Color(0xffBA1212);
   static const disabledGreyColor = Color(0xffC7C7C7);
 
+  static const lightBlue = Color.fromRGBO(0, 85, 255, 0.1);
   // Radio styles
   static const radioBorder = Color.fromRGBO(145, 168, 221, 1);
 

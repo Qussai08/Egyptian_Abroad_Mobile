@@ -199,7 +199,7 @@ class _CompleteAccountViewState extends State<CompleteAccountView>
                               text: AppStrings.next.tr,
                               icon: Icons.arrow_forward,
                               type: ButtonType.primary,
-                              width: 300.w,
+                              width: 358.w,
                               height: 50.h,
                               onPressed: () {
                                 // registrationController.loadResidenceData();
@@ -214,7 +214,7 @@ class _CompleteAccountViewState extends State<CompleteAccountView>
                             CustomButton(
                               text: AppStrings.skip.tr,
                               type: ButtonType.secondary,
-                              width: 300.w,
+                              width: 358.w,
                               height: 50.h,
                               onPressed: () {
                                 Get.toNamed(Routes.REGITSRATIONSELECTAVATAR);

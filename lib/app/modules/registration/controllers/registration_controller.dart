@@ -290,7 +290,7 @@ class RegistrationController extends GetxController {
       await controller.getUserProfile();
       Future.delayed(const Duration(seconds: 3), () async {
         Get.back(closeOverlays: true);
-        Get.back();
+        Get.off(Routes.ViewACCOUNT);
       });
     }
   }

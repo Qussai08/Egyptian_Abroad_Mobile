@@ -24,34 +24,63 @@ class SplashView extends StatelessWidget {
           child: SizedBox(
             height: ScreenUtil().screenHeight,
             width: ScreenUtil().screenWidth,
-            child: Container(
-              alignment: Alignment.topLeft,
-              margin: EdgeInsets.only(left: 25.w),
-              child: Column(
-                children: [
-                  Image.asset(
-                    AppImages.logo,
-                    width: 90.w,
-                    fit: BoxFit.fitWidth,
+            child: Column(
+              children: [
+                Container(
+                  alignment: Alignment.topLeft,
+                  margin: EdgeInsets.only(left: 25.w),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Image.asset(
+                        AppImages.logo,
+                        width: 90.w,
+                        fit: BoxFit.fitWidth,
+                      ),
+                      Text(
+                        AppStrings.appName.tr,
+                        textAlign: TextAlign.center,
+                        style: Styles.getBoldStyle(
+                            color: Styles.black, fontSize: fixDpiFont(21)),
+                      ),
+                      Container(
+                        width: 150.w,
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        child: Text(
+                          AppStrings.splashDiscription.tr,
+                          textAlign: TextAlign.center,
+                          style: Styles.getRegularStyle(
+                              color: Styles.blueBlack,
+                              fontSize: fixDpiFont(11)),
+                        ),
+                      )
+                    ],
                   ),
-                  Text(
-                    AppStrings.appName.tr,
-                    textAlign: TextAlign.center,
-                    style: Styles.getBoldStyle(
-                        color: Styles.black, fontSize: fixDpiFont(21)),
-                  ),
-                  Container(
-                    width: 150.w,
-                    padding: const EdgeInsets.symmetric(horizontal: 12),
-                    child: Text(
-                      AppStrings.splashDiscription.tr,
-                      textAlign: TextAlign.center,
-                      style: Styles.getRegularStyle(
-                          color: Styles.blueBlack, fontSize: fixDpiFont(11)),
+                ),
+                Spacer(),
+                Container(
+                    alignment: Alignment.bottomLeft,
+                    margin: EdgeInsets.only(left: 80.w),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
                     ),
-                  )
-                ],
-              ),
+                    decoration: BoxDecoration(
+                      // border: Border.all(color: Colors.black12),
+                      borderRadius: BorderRadius.circular(5),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Styles.blackShadow,
+                          blurRadius: 45,
+                          offset: Offset(10, 10),
+                        ),
+                      ],
+                    ),
+                    child: Text(
+                      "v1.2.3",
+                      style: Styles.getMediumStyle(
+                          color: Styles.black3.withOpacity(0.9), fontSize: 17),
+                    ))
+              ],
             ),
           ),
         ),

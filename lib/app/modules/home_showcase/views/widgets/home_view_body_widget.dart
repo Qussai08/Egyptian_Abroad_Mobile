@@ -67,32 +67,27 @@ class HomeBodyWidget extends StatelessWidget {
     // TODO: for testing only to be removed
     // homeContoller.authService.showcaseViewed = true;
     homeContoller.startShowCase(context);
-    return Flex(
-      direction: Axis.vertical,
+    return Column(
       children: [
-        Column(
-          children: [
-            // Avatar and Name
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: fixDpiWidth(16)),
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  AvatarAndNameWidget(),
-                  // Search TextField
-                  HomeSearchWidget(),
+        // Avatar and Name
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: fixDpiWidth(16)),
+          child: Column(
+            // mainAxisSize: MainAxisSize.max,
+            children: [
+              AvatarAndNameWidget(),
+              // Search TextField
+              HomeSearchWidget(),
 
-                  // Favorites
-                  SizedBox(height: 19.h),
-                  FavoritesList(),
-                ],
-              ),
-            ),
-
-            // Categories
-            CategoriesListWidget(),
-          ],
+              // Favorites
+              SizedBox(height: 8.h),
+              FavoritesList(),
+            ],
+          ),
         ),
+
+        // Categories
+        CategoriesListWidget(),
       ],
     );
   }

@@ -33,11 +33,22 @@ class _OtpViewState extends State<OtpView> with ValidationMixin {
 
   intl.NumberFormat formatter = intl.NumberFormat("00");
 
+  late int endTime;
+  bool intialRun = true;
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    if (intialRun) {
+      endTime = DateTime.now().millisecondsSinceEpoch +
+          1000 * (widget.resendOtpTime ?? 2) * 60;
+      intialRun = false;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(RegistrationController());
-    int endTime = DateTime.now().millisecondsSinceEpoch +
-        1000 * (widget.resendOtpTime ?? 2) * 60;
 
     return NetworkIndicator(
       child: WillPopScope(
@@ -226,8 +237,8 @@ class _OtpViewState extends State<OtpView> with ValidationMixin {
                               text: AppStrings.confirm.tr,
                               icon: Icons.arrow_forward,
                               type: ButtonType.primary,
-                              width: 300.w,
-                              height: 50,
+                              width: 358.w,
+                              height: 50.h,
                               onPressed: () async {
                                 if (time == null) {
                                   _otpHasError.value = true;

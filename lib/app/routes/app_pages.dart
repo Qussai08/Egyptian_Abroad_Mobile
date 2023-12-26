@@ -1,4 +1,8 @@
 import 'package:egyptians_abroad/app/modules/edit_account/views/edit_select_avatar_view.dart';
+import 'package:egyptians_abroad/app/modules/events/bindings/event_binding.dart';
+import 'package:egyptians_abroad/app/modules/events/bindings/event_details_binding.dart';
+import 'package:egyptians_abroad/app/modules/events/views/event_details_view.dart';
+import 'package:egyptians_abroad/app/modules/events/views/events_view.dart';
 import 'package:egyptians_abroad/app/modules/more/views/about_us_view.dart';
 import 'package:egyptians_abroad/app/modules/more/views/contact_us_view.dart';
 import 'package:egyptians_abroad/app/modules/registration/bindings/data_saved_binding.dart';
@@ -173,5 +177,13 @@ class AppPages {
       page: () => const HomeShowcaseView(),
       binding: HomeShowcaseBinding(),
     ),
+    GetPage(
+        name: _Paths.EVENT_DETAILS,
+        page: () => const EventDetailsView(),
+        binding: EventDetailsBinding()),
+    GetPage(
+        name: _Paths.EVENTS,
+        page: () => const EventsView(),
+        binding: EventBinding()),
   ];
 }

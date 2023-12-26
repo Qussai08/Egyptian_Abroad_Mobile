@@ -1,3 +1,4 @@
+import 'package:egyptians_abroad/app/modules/events/views/events_view.dart';
 import 'package:egyptians_abroad/app/modules/home_showcase/views/home_showcase_view.dart';
 import 'package:egyptians_abroad/app/modules/more/views/more_view.dart';
 import 'package:egyptians_abroad/app/modules/notifications/views/notifications_view.dart';
@@ -12,11 +13,10 @@ class BottomNavigationController extends GetxController {
   var tabIndex = 0;
 
   final List<Widget> _navigationScreens = [
-    // const HomeView(),
     const HomeShowcaseView(),
     const NotificationsView(),
+    // const EventsView(),
     const MoreView(),
-    // const URLServiceView()
   ];
 
   void changeTabIndex(int index) {
@@ -34,5 +34,10 @@ class BottomNavigationController extends GetxController {
   // call notification api
   getNotifications() {
     notificationsController.loadNotifications();
+  }
+
+// TODO : load events
+  getEvents() {
+    // notificationsController.loadNotifications();
   }
 }
