@@ -49,25 +49,28 @@ class FavoritesList extends StatelessWidget {
                     padding: EdgeInsets.only(right: 10.w),
                     child: GetBuilder<HomeShowcaseController>(
                         builder: (controller) {
-                      return ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: controller.favoritesList.length,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.only(left: 8.0),
-                            child: GridWidget(
-                              index,
-                              category: controller.allCategories.firstWhere(
-                                  (element) =>
-                                      element.id ==
-                                      controller
-                                          .favoritesList[index].categoryId),
-                              serviceItem: controller.favoritesList[index],
-                              inFavList: true,
-                            ),
-                          );
-                        },
-                      );
+                      return controller.favoritesIsLoading()
+                          ? Center(child: CircularProgressIndicator())
+                          : ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: controller.favoritesList.length,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: const EdgeInsets.only(left: 8.0),
+                                  child: GridWidget(
+                                    index,
+                                    category: controller.allCategories
+                                        .firstWhere((element) =>
+                                            element.id ==
+                                            controller.favoritesList[index]
+                                                .categoryId),
+                                    serviceItem:
+                                        controller.favoritesList[index],
+                                    inFavList: true,
+                                  ),
+                                );
+                              },
+                            );
                     }),
                   ),
                 ),
