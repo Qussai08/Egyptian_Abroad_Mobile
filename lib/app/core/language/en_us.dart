@@ -127,6 +127,7 @@ Map<String, String> en = {
   AppStrings.from: 'From',
   AppStrings.to: 'To',
   AppStrings.recordingLink: 'Recording Link',
+  AppStrings.meetingLink: 'Conference Link',
   AppStrings.events: 'Events',
   AppStrings.search: 'Search',
 };

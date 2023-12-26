@@ -238,7 +238,7 @@ class EventsView extends GetView<EventsController> {
                   itemBuilder: (_, index) {
                     return GestureDetector(
                       onTap: () {
-                        Get.toNamed(Routes.EVENT_DETAILS);
+                        Get.toNamed(Routes.EVENT_DETAILS, arguments: 1);
                       },
                       child: Container(
                         margin: EdgeInsets.only(
