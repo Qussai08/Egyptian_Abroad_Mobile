@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:egyptians_abroad/app/core/custom_widgets/grid_widget.dart';
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
+import 'package:egyptians_abroad/app/core/services/models/category.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:egyptians_abroad/app/modules/home_showcase/controllers/home_showcase_controller.dart';
 import 'package:egyptians_abroad/app/modules/home_showcase/views/widgets/custoum_showcase_widget.dart';
@@ -56,6 +57,11 @@ class FavoritesList extends StatelessWidget {
                             padding: const EdgeInsets.only(left: 8.0),
                             child: GridWidget(
                               index,
+                              category: controller.allCategories.firstWhere(
+                                  (element) =>
+                                      element.id ==
+                                      controller
+                                          .favoritesList[index].categoryId),
                               serviceItem: controller.favoritesList[index],
                               inFavList: true,
                             ),

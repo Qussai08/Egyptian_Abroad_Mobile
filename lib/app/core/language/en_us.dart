@@ -17,6 +17,7 @@ Map<String, String> en = {
   AppStrings.newAccount: 'New Account',
   AppStrings.registerNew: 'Create New Account',
   AppStrings.register: 'Register New account',
+  AppStrings.registerNow: 'Register Now',
   AppStrings.name: 'Name',
   AppStrings.nameDisclamer: 'Name as in National ID',
   AppStrings.email: 'Email',

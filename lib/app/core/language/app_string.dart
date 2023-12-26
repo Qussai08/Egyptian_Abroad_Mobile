@@ -39,6 +39,7 @@ abstract class AppStrings {
   // register screen
   static const register = 'register';
   static const registerNew = 'registerNew';
+  static const registerNow = 'registerNow';
 
   static const name = 'name';
   static const email = 'email';

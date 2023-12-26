@@ -32,7 +32,7 @@ class EventsView extends GetView<EventsController> {
               gradient: LinearGradient(
                 begin: Alignment(1.00, -0.02),
                 end: Alignment(-1, 0.02),
-                colors: [Color(0xFF726CFD), Color(0xFF2665F7)],
+                colors: [Color(0xFF2665F7), Color(0xFF726CFD)],
               ),
             ),
             child: Column(
@@ -74,7 +74,7 @@ class EventsView extends GetView<EventsController> {
                           controller: controller.searchController,
                           prefixIcon: const Icon(
                             Icons.search,
-                            color: Styles.primaryColor,
+                            color: Styles.black,
                           ),
                           inputData: TextInputType.text,
                           textInputAction: TextInputAction.search,

@@ -278,6 +278,10 @@ class HomeShowcaseController extends GetxController {
       favoritesList = list.map((e) => ServiceItem.fromJson(e)).toList();
     }, onError: (error) {});
 
+    // favoritesList.forEach((item) => item.category)
+
+
+
     update();
   }
 }
