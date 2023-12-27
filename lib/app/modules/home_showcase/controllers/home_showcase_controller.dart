@@ -26,12 +26,12 @@ class HomeShowcaseController extends GetxController {
       Get.put(RegistrationController());
 
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
-    registrationController.getGobCategoryList();
-    getCategoriesList();
     getUserProfile();
-    updateFavoritesList(userId: authService.userID!);
+
+    await getCategoriesList();
+    await updateFavoritesList(userId: authService.userID!);
 
     // TODO: for testing only to be removed
     // authService.showcaseViewed = true;
@@ -273,16 +273,26 @@ class HomeShowcaseController extends GetxController {
         .then((value) {}, onError: (error) {});
   }
 
-  RxBool favoritesIsLoading = true.obs;
-    Future<void> updateFavoritesList({required String userId}) async {
+  List<Category> favoriteCategories = [];
+
+  bool favoritesIsLoading = true;
+  Future<void> updateFavoritesList({required String userId}) async {
     await favoritesListProvider.getFavoritesList(userId).then((value) {
       Iterable list = value.body;
       favoritesList = list.map((e) => ServiceItem.fromJson(e)).toList();
     }, onError: (error) {});
-
-    favoritesIsLoading.value = false;
-    // favoritesList.forEach((item) => item.category)
+    await loadFavoritesCategories();
+    favoritesIsLoading = false;
 
     update();
+  }
+
+  loadFavoritesCategories() async {
+    favoriteCategories = [];
+
+    await Future.forEach<ServiceItem>(favoritesList, (item) {
+      favoriteCategories.add(
+          allCategories.firstWhere((element) => element.id == item.categoryId));
+    });
   }
 }

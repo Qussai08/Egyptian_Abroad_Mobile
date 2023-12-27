@@ -39,6 +39,6 @@ class NotificationsModel {
     String time = date.hour == 0 && date.minute == 0
         ? '12:00 ${date.hour > 12 ? 'مساءا' : 'صباحا'}'
         : '${date.hour}:${date.minute} ${date.hour > 12 ? 'مساءا' : 'صباحا'}';
-    return '${date.day} ${date.month} ${date.year} $time';
+    return '${date.day}-${date.month}-${date.year} $time';
   }
 }

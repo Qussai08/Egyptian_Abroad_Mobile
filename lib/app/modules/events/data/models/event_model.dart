@@ -40,6 +40,7 @@ class EventData {
 
 class Event {
   Event({
+    this.eventId,
     this.eventName = '',
     this.eventDescription = '',
     this.eventAddress = '',
@@ -47,11 +48,12 @@ class Event {
     this.endDate = '',
     this.link = '',
     this.notifyBefore = 30,
-    this.jobCategoryIdList = '',
-    this.residencyTypeList = 0,
-    this.residenceCountryIdList = 0,
+    this.jobCategoryIdList,
+    this.residencyTypeList,
+    this.residenceCountryIdList,
     this.isActive = true,
   });
+  int? eventId;
   String? eventName;
   String? eventDescription;
   String? eventAddress;
@@ -65,6 +67,7 @@ class Event {
   bool? isActive;
 
   Event.fromJson(Map<String, dynamic> json) {
+    eventId = json['eventId'];
     eventName = json['eventName'];
     eventDescription = json['eventDescription'];
     eventAddress = json['eventAddress'];
@@ -83,8 +86,8 @@ class Event {
     link = json['link'];
     notifyBefore = json['notifyBefore'];
     jobCategoryIdList = json['jobCategoryIdList'];
-    residencyTypeList = null;
-    residenceCountryIdList = null;
+    residencyTypeList = json['residencyTypeList'];
+    residenceCountryIdList = json['residenceCountryIdList'];
     isActive = json['isActive'];
   }
 
@@ -97,8 +100,8 @@ class Event {
     DateTime date = DateTime.parse(dateTimestamp);
 
     String time = date.hour == 0 && date.minute == 0
-        ? '12:00 ${date.hour > 12 ? 'مساءا' : 'صباحا'}'
-        : '${date.hour}:${date.minute} ${date.hour > 12 ? 'مساءا' : 'صباحا'}';
+        ? '12:00 ${date.hour > 12 ? 'م' : 'ص'}'
+        : '${date.hour}:${date.minute} ${date.hour > 12 ? 'م' : 'ص'}';
     return '${date.day} ${date.month} ${date.year} $time';
   }
 }

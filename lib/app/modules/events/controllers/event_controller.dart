@@ -126,13 +126,35 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
     await loadEvents(body: body);
   }
 
+  String countryDisplayString = "";
+
   onSelectcountry(int index) {
     countryIds[index].isSelected = !countryIds[index].isSelected;
+    if (countryIds.isNotEmpty) {
+      List<String> selectedcountries = [];
+      for (var element in countryIds) {
+        if (element.isSelected) {
+          selectedcountries.add(element.country);
+        }
+      }
+      countryDisplayString = selectedcountries.join(" - ");
+    }
     update();
   }
 
+  String jobCatDisplayString = "";
+
   onSelectjobCategory(int index) {
     jobCategoryIds[index].isSelected = !jobCategoryIds[index].isSelected;
+    if (jobCategoryIds.isNotEmpty) {
+      List<String> selectedjobCategory = [];
+      for (var element in jobCategoryIds) {
+        if (element.isSelected) {
+          selectedjobCategory.add(element.name);
+        }
+      }
+      jobCatDisplayString = selectedjobCategory.join(" - ");
+    }
     update();
   }
 }

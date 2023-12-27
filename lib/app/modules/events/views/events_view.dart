@@ -22,6 +22,7 @@ import '../../../core/custom_widgets/loading_dialog.dart';
 import '../../../core/custom_widgets/title_text.dart';
 import '../../../core/theme/styles.dart';
 import '../../notifications/data/models/notifications_model/notifications_model.dart';
+import 'widgets/events_appbar.dart';
 import 'widgets/from_to_date_widget.dart';
 
 class EventsView extends GetView<EventsController> {
@@ -34,29 +35,7 @@ class EventsView extends GetView<EventsController> {
     return Scaffold(
         appBar: PreferredSize(
           preferredSize: Size(double.maxFinite, fixDpiHeight(110)),
-          child: Container(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment(1.00, -0.02),
-                end: Alignment(-1, 0.02),
-                colors: [Color(0xFF726CFD), Color(0xFF2665F7)],
-              ),
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                // space
-                SizedBox(height: fixDpiHeight(20)),
-                // title
-                TitleText(
-                  title: AppStrings.events.tr,
-                  color: Styles.white,
-                  fontSize: 20,
-                ),
-              ],
-            ),
-          ),
+          child: EventsAppbar(),
         ),
         body: Column(
           children: [
@@ -130,11 +109,16 @@ class EventsView extends GetView<EventsController> {
                                       color: Color(0xff201D61), fontSize: 24),
                                 ),
                                 Spacer(),
-                                Padding(
-                                  padding: EdgeInsets.only(bottom: 20.h),
-                                  child: Icon(
-                                    Icons.close,
-                                    size: fixDpiFont(24),
+                                GestureDetector(
+                                  onTap: () {
+                                    Get.back();
+                                  },
+                                  child: Padding(
+                                    padding: EdgeInsets.only(bottom: 20.h),
+                                    child: Icon(
+                                      Icons.close,
+                                      size: fixDpiFont(24),
+                                    ),
                                   ),
                                 )
                               ]),
@@ -195,10 +179,13 @@ class EventsView extends GetView<EventsController> {
                                                             height:
                                                                 size.height *
                                                                     0.27,
+                                                            width:
+                                                                fixDpiScreenWidth(),
                                                             child:
                                                                 CupertinoDatePicker(
-                                                              mode: CupertinoDatePickerMode
-                                                                  .dateAndTime,
+                                                              mode:
+                                                                  CupertinoDatePickerMode
+                                                                      .date,
                                                               onDateTimeChanged:
                                                                   (DateTime
                                                                       pickedDate) {
@@ -214,20 +201,16 @@ class EventsView extends GetView<EventsController> {
                                                               },
                                                               minimumDate:
                                                                   DateTime(
-                                                                      2023,
-                                                                      12,
-                                                                      20,
-                                                                      0,
-                                                                      0,
-                                                                      0),
+                                                                2023,
+                                                                12,
+                                                                20,
+                                                              ),
                                                               maximumDate:
                                                                   DateTime(
-                                                                      2025,
-                                                                      12,
-                                                                      20,
-                                                                      0,
-                                                                      0,
-                                                                      0),
+                                                                2025,
+                                                                12,
+                                                                20,
+                                                              ),
                                                               initialDateTime:
                                                                   _dateTime,
                                                             ),
@@ -312,8 +295,9 @@ class EventsView extends GetView<EventsController> {
                                                                     0.27,
                                                             child:
                                                                 CupertinoDatePicker(
-                                                              mode: CupertinoDatePickerMode
-                                                                  .dateAndTime,
+                                                              mode:
+                                                                  CupertinoDatePickerMode
+                                                                      .date,
                                                               onDateTimeChanged:
                                                                   (DateTime
                                                                       pickedDate) {
@@ -329,20 +313,16 @@ class EventsView extends GetView<EventsController> {
                                                               },
                                                               minimumDate:
                                                                   DateTime(
-                                                                      2023,
-                                                                      12,
-                                                                      20,
-                                                                      0,
-                                                                      0,
-                                                                      0),
+                                                                2023,
+                                                                12,
+                                                                20,
+                                                              ),
                                                               maximumDate:
                                                                   DateTime(
-                                                                      2025,
-                                                                      12,
-                                                                      20,
-                                                                      0,
-                                                                      0,
-                                                                      0),
+                                                                2025,
+                                                                12,
+                                                                20,
+                                                              ),
                                                               initialDateTime:
                                                                   _dateTime,
                                                             ),
@@ -449,67 +429,85 @@ class EventsView extends GetView<EventsController> {
                                                                 fontSize: 18),
                                                       ),
                                                       Spacer(),
-                                                      Padding(
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                                bottom: 20.h),
-                                                        child: Icon(
-                                                          Icons.close,
-                                                          size: fixDpiFont(24),
+                                                      GestureDetector(
+                                                        onTap: () {
+                                                          Get.back();
+                                                        },
+                                                        child: Padding(
+                                                          padding:
+                                                              EdgeInsets.only(
+                                                                  bottom: 20.h),
+                                                          child: Icon(
+                                                            Icons.close,
+                                                            size:
+                                                                fixDpiFont(24),
+                                                          ),
                                                         ),
                                                       )
                                                     ]),
                                                   ),
                                                   Expanded(
                                                     child: GetBuilder<
-                                                            EventsController>(
-                                                        builder:
-                                                            (evController) =>
-                                                                Container(
-                                                                  margin: EdgeInsets.only(
-                                                                      top: 10.h,
-                                                                      right:
-                                                                          8.w,
-                                                                      left:
-                                                                          8.w),
-                                                                  child: ListView
-                                                                      .builder(
-                                                                          itemCount: evController
-                                                                              .countryIds
-                                                                              .length,
-                                                                          shrinkWrap:
-                                                                              true,
-                                                                          itemBuilder:
-                                                                              (_, i) {
-                                                                            Country
-                                                                                country =
-                                                                                evController.countryIds[i];
-                                                                            return ListTile(
-                                                                              onTap: () {
-                                                                                evController.onSelectcountry(i);
-                                                                              },
-                                                                              contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
-                                                                              leading: Icon(
-                                                                                country.isSelected ? Icons.check_box : Icons.check_box_outline_blank,
-                                                                                color: Styles.primaryColor,
-                                                                              ),
-                                                                              title: Row(
-                                                                                children: [
-                                                                                  Image.network(
-                                                                                    country.flag,
-                                                                                    width: 21,
-                                                                                    height: 15,
-                                                                                    fit: BoxFit.cover,
-                                                                                  ),
-                                                                                  const SizedBox(
-                                                                                    width: 8,
-                                                                                  ),
-                                                                                  Text(country.country),
-                                                                                ],
-                                                                              ),
-                                                                            );
-                                                                          }),
-                                                                )),
+                                                        EventsController>(
+                                                      builder: (evController) =>
+                                                          Container(
+                                                        margin: EdgeInsets.only(
+                                                            top: 10.h,
+                                                            right: 8.w,
+                                                            left: 8.w),
+                                                        child: ListView.builder(
+                                                            itemCount:
+                                                                evController
+                                                                    .countryIds
+                                                                    .length,
+                                                            shrinkWrap: true,
+                                                            itemBuilder:
+                                                                (_, i) {
+                                                              Country country =
+                                                                  evController
+                                                                      .countryIds[i];
+                                                              return ListTile(
+                                                                onTap: () {
+                                                                  evController
+                                                                      .onSelectcountry(
+                                                                          i);
+                                                                },
+                                                                contentPadding:
+                                                                    EdgeInsets.symmetric(
+                                                                        horizontal:
+                                                                            16.w),
+                                                                leading: Icon(
+                                                                  country.isSelected
+                                                                      ? Icons
+                                                                          .check_box
+                                                                      : Icons
+                                                                          .check_box_outline_blank,
+                                                                  color: Styles
+                                                                      .primaryColor,
+                                                                ),
+                                                                title: Row(
+                                                                  children: [
+                                                                    Image
+                                                                        .network(
+                                                                      country
+                                                                          .flag,
+                                                                      width: 21,
+                                                                      height:
+                                                                          15,
+                                                                      fit: BoxFit
+                                                                          .cover,
+                                                                    ),
+                                                                    const SizedBox(
+                                                                      width: 8,
+                                                                    ),
+                                                                    Text(country
+                                                                        .country),
+                                                                  ],
+                                                                ),
+                                                              );
+                                                            }),
+                                                      ),
+                                                    ),
                                                   ),
                                                   Align(
                                                     alignment:
@@ -536,8 +534,17 @@ class EventsView extends GetView<EventsController> {
                                             ),
                                             isDismissible: false);
                                       },
-                                      child: DropDownListSelector(
-                                          dropDownList: [])),
+                                      child: GetBuilder<EventsController>(
+                                        builder: (evController) =>
+                                            DropDownListSelector(
+                                          dropDownList: [],
+                                          hint:
+                                              evController.countryDisplayString,
+                                          blackHint: true,
+                                          hintFontSize: 14,
+                                          hintFontWeight: FontWeight.w400,
+                                        ),
+                                      )),
                                   SizedBox(height: 16.h),
                                   const TextFieldTitle(
                                     title: "موضوع الفعالية",
@@ -590,56 +597,67 @@ class EventsView extends GetView<EventsController> {
                                                                 fontSize: 18),
                                                       ),
                                                       Spacer(),
-                                                      Padding(
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                                bottom: 20.h),
-                                                        child: Icon(
-                                                          Icons.close,
-                                                          size: fixDpiFont(24),
+                                                      GestureDetector(
+                                                        onTap: () {
+                                                          Get.back();
+                                                        },
+                                                        child: Padding(
+                                                          padding:
+                                                              EdgeInsets.only(
+                                                                  bottom: 20.h),
+                                                          child: Icon(
+                                                            Icons.close,
+                                                            size:
+                                                                fixDpiFont(24),
+                                                          ),
                                                         ),
                                                       )
                                                     ]),
                                                   ),
                                                   Expanded(
-                                                    child: GetBuilder<
-                                                            EventsController>(
-                                                        builder:
-                                                            (evController) =>
-                                                                Container(
-                                                                  height: 400,
-                                                                  margin: EdgeInsets.only(
-                                                                      top: 10.h,
-                                                                      right:
-                                                                          8.w,
-                                                                      left:
-                                                                          8.w),
-                                                                  child: ListView
-                                                                      .builder(
-                                                                          itemCount: evController
-                                                                              .jobCategoryIds
-                                                                              .length,
-                                                                          shrinkWrap:
-                                                                              true,
-                                                                          itemBuilder:
-                                                                              (_, i) {
-                                                                            JobCategory
-                                                                                cat =
-                                                                                evController.jobCategoryIds[i];
-                                                                            return ListTile(
-                                                                              onTap: () {
-                                                                                evController.onSelectjobCategory(i);
-                                                                              },
-                                                                              contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
-                                                                              leading: Icon(
-                                                                                cat.isSelected ? Icons.check_box : Icons.check_box_outline_blank,
-                                                                                color: Styles.primaryColor,
-                                                                              ),
-                                                                              title: Text(cat.name),
-                                                                            );
-                                                                          }),
-                                                                )),
-                                                  ),
+                                                      child: GetBuilder<
+                                                          EventsController>(
+                                                    builder: (evController) =>
+                                                        Container(
+                                                      height: 400,
+                                                      margin: EdgeInsets.only(
+                                                          top: 10.h,
+                                                          right: 8.w,
+                                                          left: 8.w),
+                                                      child: ListView.builder(
+                                                          itemCount: evController
+                                                              .jobCategoryIds
+                                                              .length,
+                                                          shrinkWrap: true,
+                                                          itemBuilder: (_, i) {
+                                                            JobCategory cat =
+                                                                evController
+                                                                    .jobCategoryIds[i];
+                                                            return ListTile(
+                                                              onTap: () {
+                                                                evController
+                                                                    .onSelectjobCategory(
+                                                                        i);
+                                                              },
+                                                              contentPadding:
+                                                                  EdgeInsets.symmetric(
+                                                                      horizontal:
+                                                                          16.w),
+                                                              leading: Icon(
+                                                                cat.isSelected
+                                                                    ? Icons
+                                                                        .check_box
+                                                                    : Icons
+                                                                        .check_box_outline_blank,
+                                                                color: Styles
+                                                                    .primaryColor,
+                                                              ),
+                                                              title: Text(
+                                                                  cat.name),
+                                                            );
+                                                          }),
+                                                    ),
+                                                  )),
                                                   Align(
                                                     alignment:
                                                         Alignment.bottomCenter,
@@ -665,8 +683,17 @@ class EventsView extends GetView<EventsController> {
                                             ),
                                             isDismissible: false);
                                       },
-                                      child: DropDownListSelector(
-                                          dropDownList: [])),
+                                      child: GetBuilder<EventsController>(
+                                        builder: (evController) =>
+                                            DropDownListSelector(
+                                          dropDownList: [],
+                                          hint:
+                                              evController.jobCatDisplayString,
+                                          blackHint: true,
+                                          hintFontSize: 14,
+                                          hintFontWeight: FontWeight.w400,
+                                        ),
+                                      )),
                                   SizedBox(height: 30.h),
                                   CustomButton(
                                     type: ButtonType.primary,
@@ -717,8 +744,9 @@ class EventsView extends GetView<EventsController> {
 
                                 return GestureDetector(
                                   onTap: () {
+                                    print("event.eventId ${event.eventId}");
                                     Get.toNamed(Routes.EVENT_DETAILS,
-                                        arguments: 2);
+                                        arguments: event.eventId);
                                   },
                                   child: Container(
                                     margin: EdgeInsets.only(

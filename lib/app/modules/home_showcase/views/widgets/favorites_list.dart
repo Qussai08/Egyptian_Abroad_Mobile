@@ -49,7 +49,7 @@ class FavoritesList extends StatelessWidget {
                     padding: EdgeInsets.only(right: 10.w),
                     child: GetBuilder<HomeShowcaseController>(
                         builder: (controller) {
-                      return controller.favoritesIsLoading()
+                      return controller.favoritesIsLoading
                           ? Center(child: CircularProgressIndicator())
                           : ListView.builder(
                               scrollDirection: Axis.horizontal,
@@ -59,11 +59,8 @@ class FavoritesList extends StatelessWidget {
                                   padding: const EdgeInsets.only(left: 8.0),
                                   child: GridWidget(
                                     index,
-                                    category: controller.allCategories
-                                        .firstWhere((element) =>
-                                            element.id ==
-                                            controller.favoritesList[index]
-                                                .categoryId),
+                                    category:
+                                        controller.favoriteCategories[index],
                                     serviceItem:
                                         controller.favoritesList[index],
                                     inFavList: true,

@@ -21,8 +21,8 @@ class EventDetailsController extends GetxController {
         .then((value) {
       if (value.isSuccess) {
         event.value = Event.fromJson(value.body);
-        event().startDate = dateFormatter(event().startDate!);
-        event().endDate = dateFormatter(event().endDate!);
+        event().startDate = dateFormatter(value.body['startDate']);
+        event().endDate = dateFormatter(value.body['endDate']);
         event().link = urlFormatter(event().link!);
         isLoading.value = false;
       }
