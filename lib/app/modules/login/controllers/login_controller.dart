@@ -22,6 +22,7 @@ class LoginController extends GetxController {
     print(loginIsDimmed);
     AppResponse response =
         await UserRepository().loginReq({"email": email, "password": pass});
+    print("login ${response.data}");
     if (response.status) {
       authService.setAccessToken(response.data['accessToken'] ?? '');
       authService.setRefreshToken(response.data['refreshToken'] ?? '');

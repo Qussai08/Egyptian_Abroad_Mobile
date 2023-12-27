@@ -43,6 +43,8 @@ class AppImages {
 
   static const filterIcon = 'assets/icons/filter-icon.png';
 
+  static const calendar = 'assets/icons/calendar.png';
+
   static const List<String> avatars = [
     'assets/avatars/1.png',
     'assets/avatars/2.png',

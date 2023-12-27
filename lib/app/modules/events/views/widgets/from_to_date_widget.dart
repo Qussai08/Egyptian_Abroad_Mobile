@@ -1,5 +1,6 @@
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
+import 'package:egyptians_abroad/app/core/theme/app_images.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,11 +24,13 @@ class FromToDateWidget extends StatelessWidget {
               color: Styles.lightBlack, fontSize: fixDpiFont(12)),
         ),
         SizedBox(width: 4.w),
-        Icon(
-          Icons.calendar_month,
-          color: Styles.lightBlack,
-          size: fixDpiFont(12),
-        ),
+
+        Image.asset(AppImages.calendar),
+        // Icon(
+        //   Icons.calendar_month,
+        //   color: Styles.lightBlack,
+        //   size: fixDpiFont(12),
+        // ),
         SizedBox(width: 4.w),
         Text(fromDate,
             style: Styles.getMediumStyle(
@@ -37,8 +40,10 @@ class FromToDateWidget extends StatelessWidget {
             style: Styles.getMediumStyle(
                 color: Styles.lightBlack, fontSize: fixDpiFont(12))),
         SizedBox(width: 4.w),
-        Icon(Icons.calendar_month,
-            color: Styles.lightBlack, size: fixDpiFont(12)),
+        Image.asset(AppImages.calendar),
+
+        // Icon(Icons.calendar_month,
+        //     color: Styles.lightBlack, size: fixDpiFont(12)),
         SizedBox(width: 4.w),
         Text(toDate,
             style: Styles.getMediumStyle(

@@ -173,7 +173,7 @@ class _LoginViewState extends State<LoginView> with ValidationMixin {
                           );
                         },
                         child: Text(
-                          AppStrings.register.tr,
+                          AppStrings.registerNow.tr,
 
                           // New style
                           style: Styles.getRegularStyle(

@@ -4,24 +4,28 @@ class NotificationsModel {
   String? title;
   String? message;
   String? sentDate;
+  int? notificationTypeId;
+  String? eventID;
 
-  NotificationsModel({
-    this.notificationId,
-    this.userId,
-    this.title,
-    this.message,
-    this.sentDate,
-  });
+  NotificationsModel(
+      {this.notificationId,
+      this.userId,
+      this.title,
+      this.message,
+      this.sentDate,
+      this.notificationTypeId,
+      this.eventID});
 
   factory NotificationsModel.fromJson(Map<String, dynamic> json) {
     return NotificationsModel(
-      notificationId: json['notificationId'] as int?,
-      userId: json['userId'] as String?,
-      title: json['title'] as String?,
-      message: json['message'] as String?,
-      sentDate:
-          (json['sentDate'] != null) ? formatDate(json['sentDate']) : null,
-    );
+        notificationId: json['notificationId'] as int?,
+        userId: json['userId'] as String?,
+        title: json['title'] as String?,
+        message: json['message'] as String?,
+        sentDate:
+            (json['sentDate'] != null) ? formatDate(json['sentDate']) : null,
+        notificationTypeId: json['notificationTypeId'],
+        eventID: json['routeId']);
   }
 
   static List<NotificationsModel> fromJsonList(List list) {
@@ -35,6 +39,6 @@ class NotificationsModel {
     String time = date.hour == 0 && date.minute == 0
         ? '12:00 ${date.hour > 12 ? 'مساءا' : 'صباحا'}'
         : '${date.hour}:${date.minute} ${date.hour > 12 ? 'مساءا' : 'صباحا'}';
-    return '${date.day} ${date.month} ${date.year} $time';
+    return '${date.day}-${date.month}-${date.year} $time';
   }
 }

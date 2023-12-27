@@ -39,6 +39,7 @@ abstract class AppStrings {
   // register screen
   static const register = 'register';
   static const registerNew = 'registerNew';
+  static const registerNow = 'registerNow';
 
   static const name = 'name';
   static const email = 'email';
@@ -155,6 +156,7 @@ abstract class AppStrings {
   static const eventDetails = 'eventDetails';
   static const from = 'from';
   static const to = 'to';
+  static const meetingLink = 'meetingLink';
   static const recordingLink = 'recordingLink';
   static const events = 'events';
   static const search = 'search';
