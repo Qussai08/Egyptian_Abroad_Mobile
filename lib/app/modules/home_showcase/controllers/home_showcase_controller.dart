@@ -273,11 +273,15 @@ class HomeShowcaseController extends GetxController {
         .then((value) {}, onError: (error) {});
   }
 
-  Future<void> updateFavoritesList({required String userId}) async {
+  RxBool favoritesIsLoading = true.obs;
+    Future<void> updateFavoritesList({required String userId}) async {
     await favoritesListProvider.getFavoritesList(userId).then((value) {
       Iterable list = value.body;
       favoritesList = list.map((e) => ServiceItem.fromJson(e)).toList();
     }, onError: (error) {});
+
+    favoritesIsLoading.value = false;
+    // favoritesList.forEach((item) => item.category)
 
     update();
   }

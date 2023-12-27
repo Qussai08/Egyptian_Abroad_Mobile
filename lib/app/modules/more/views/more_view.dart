@@ -24,7 +24,7 @@ class MoreView extends GetView<MoreController> {
             gradient: LinearGradient(
               begin: Alignment(1.00, -0.02),
               end: Alignment(-1, 0.02),
-              colors: [Color(0xFF726CFD), Color(0xFF2665F7)],
+              colors: [Color(0xFF2665F7), Color(0xFF726CFD)],
             ),
           ),
           child: Column(

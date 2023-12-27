@@ -35,8 +35,8 @@ extension ButtonTypeExtension on ButtonType {
 
   Color get backgroundColor {
     switch (this) {
-      case ButtonType.primary:
-        return Styles.primaryColor;
+      // case ButtonType.primary:
+      //   return Styles.primaryColor;
       case ButtonType.secondary:
         return Styles.secondaryButtonColor;
       case ButtonType.ghost:
@@ -105,7 +105,7 @@ class CustomButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(100),
         gradient: type == ButtonType.primary
             ? const LinearGradient(
-                colors: [Color(0xff2665F7), Color(0xff4D91C6)])
+                colors: [Color(0xff726CFD), Color(0xff2665F7)])
             : null,
       ),
       width: width,

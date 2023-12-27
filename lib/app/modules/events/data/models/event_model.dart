@@ -40,17 +40,17 @@ class EventData {
 
 class Event {
   Event({
-    this.eventName,
-    this.eventDescription,
-    this.eventAddress,
-    this.startDate,
-    this.endDate,
-    this.link,
-    this.notifyBefore,
-    this.jobCategoryIdList,
-    this.residencyTypeList,
-    this.residenceCountryIdList,
-    this.isActive,
+    this.eventName = '',
+    this.eventDescription = '',
+    this.eventAddress = '',
+    this.startDate = '',
+    this.endDate = '',
+    this.link = '',
+    this.notifyBefore = 30,
+    this.jobCategoryIdList = '',
+    this.residencyTypeList = 0,
+    this.residenceCountryIdList = 0,
+    this.isActive = true,
   });
   String? eventName;
   String? eventDescription;

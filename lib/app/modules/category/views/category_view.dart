@@ -145,7 +145,8 @@ class _CategoryViewState extends State<CategoryView> {
                                             ),
                                 ],
                               ),
-                            )
+                            ),
+                            SizedBox(height: 50.h),
                           ],
                         ),
                       ),

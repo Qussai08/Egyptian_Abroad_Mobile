@@ -17,6 +17,7 @@ Map<String, String> en = {
   AppStrings.newAccount: 'New Account',
   AppStrings.registerNew: 'Create New Account',
   AppStrings.register: 'Register New account',
+  AppStrings.registerNow: 'Register Now',
   AppStrings.name: 'Name',
   AppStrings.nameDisclamer: 'Name as in National ID',
   AppStrings.email: 'Email',
@@ -126,6 +127,7 @@ Map<String, String> en = {
   AppStrings.from: 'From',
   AppStrings.to: 'To',
   AppStrings.recordingLink: 'Recording Link',
+  AppStrings.meetingLink: 'Conference Link',
   AppStrings.events: 'Events',
   AppStrings.search: 'Search',
 };
