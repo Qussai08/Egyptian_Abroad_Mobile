@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 
 import '../controllers/category_controller.dart';
 
@@ -36,125 +37,130 @@ class _CategoryViewState extends State<CategoryView> {
 
     return NetworkIndicator(
       child: GetBuilder<CategoryController>(
-        builder: (categoryController) => Scaffold(
-          //   resizeToAvoidBottomInset: false,
-          body: Container(
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.center,
-                colors: [
-                  widget.category!.categoryColor!.toColor(),
-                  Colors.white
-                ],
-              )),
-              child: Scaffold(
-                backgroundColor: Colors.transparent,
-                appBar: CustomAppBar(
-                  title: Text(
-                    widget.category!.categoryName,
-                    textAlign: TextAlign.center,
-                    style: Styles.getBoldStyle(
-                        color: Styles.black, fontSize: fixDpiFont(26)),
+        builder: (categoryController) {
+          categoryController.servicesLoading
+              ? context.loaderOverlay.show()
+              : context.loaderOverlay.hide();
+          return Scaffold(
+            //   resizeToAvoidBottomInset: false,
+            body: Container(
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.center,
+                  colors: [
+                    widget.category!.categoryColor!.toColor(),
+                    Colors.white
+                  ],
+                )),
+                child: Scaffold(
+                  backgroundColor: Colors.transparent,
+                  appBar: CustomAppBar(
+                    title: Text(
+                      widget.category!.categoryName,
+                      textAlign: TextAlign.center,
+                      style: Styles.getBoldStyle(
+                          color: Styles.black, fontSize: fixDpiFont(26)),
+                    ),
                   ),
-                ),
-                body: Container(
-                  height: fixDpiScreenHeight(),
-                  padding: EdgeInsets.symmetric(horizontal: 16.w),
-                  child: ListView(
-                    physics: const NeverScrollableScrollPhysics(),
-                    children: [
-                      SizedBox(height: 40.h),
-                      CustomTextFormField(
-                        controller: _searchController,
-                        prefixIcon: const Icon(
-                          Icons.search,
-                          color: Styles.primaryColor,
-                        ),
-                        inputData: TextInputType.text,
-                        textInputAction: TextInputAction.search,
-                        hintTxt: "بحث",
-                        hintStyle: TextStyle(
-                            fontSize: fixDpiFont(14),
-                            fontWeight: FontWeight.w400,
-                            fontFamily: 'baloo'),
-                        onChangedFunc: (val) {
-                          if (val.isEmpty) {
+                  body: Container(
+                    height: fixDpiScreenHeight(),
+                    padding: EdgeInsets.symmetric(horizontal: 16.w),
+                    child: ListView(
+                      physics: const NeverScrollableScrollPhysics(),
+                      children: [
+                        SizedBox(height: 40.h),
+                        CustomTextFormField(
+                          controller: _searchController,
+                          prefixIcon: const Icon(
+                            Icons.search,
+                            color: Styles.primaryColor,
+                          ),
+                          inputData: TextInputType.text,
+                          textInputAction: TextInputAction.search,
+                          hintTxt: "بحث",
+                          hintStyle: TextStyle(
+                              fontSize: fixDpiFont(14),
+                              fontWeight: FontWeight.w400,
+                              fontFamily: 'baloo'),
+                          onChangedFunc: (val) {
+                            if (val.isEmpty) {
+                              _keySearch = val;
+                              controller.setKeySearch(_keySearch,
+                                  notifiy: true);
+                              FocusScope.of(context).unfocus();
+                            }
+                          },
+                          onFieldSubmitted: (val) {
                             _keySearch = val;
                             controller.setKeySearch(_keySearch, notifiy: true);
-                            FocusScope.of(context).unfocus();
-                          }
-                        },
-                        onFieldSubmitted: (val) {
-                          _keySearch = val;
-                          controller.setKeySearch(_keySearch, notifiy: true);
-                        },
-                      ),
-                      SizedBox(
-                        height: 45.h,
-                      ),
-                      SizedBox(
-                        height: fixDpiScreenHeight() * 0.7,
-                        child: ListView(
-                          shrinkWrap: true,
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(top: 18.h),
-                              padding: EdgeInsets.symmetric(horizontal: 16.w),
-                              width: double.infinity,
-                              child: Column(
-                                children: [
-                                  categoryController.servicesLoading
-                                      ? Container(
-                                          height: fixDpiScreenHeight(),
-                                          child: const Center(
-                                            child: CircularProgressIndicator(
-                                              color: Styles.primaryColor,
+                          },
+                        ),
+                        SizedBox(
+                          height: 45.h,
+                        ),
+                        SizedBox(
+                          height: fixDpiScreenHeight() * 0.7,
+                          child: ListView(
+                            shrinkWrap: true,
+                            children: [
+                              Container(
+                                margin: EdgeInsets.only(top: 18.h),
+                                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                                width: double.infinity,
+                                child: Column(
+                                  children: [
+                                    // categoryController.servicesLoading
+                                    //     ? Container(
+                                    //         height: fixDpiScreenHeight(),
+                                    //         child: const Center(
+                                    //           child: CircularProgressIndicator(
+                                    //             color: Styles.primaryColor,
+                                    //           ),
+                                    //         ),
+                                    //       )
+                                    //     :
+                                    categoryController
+                                            .displayedServicesList.isEmpty
+                                        ? NoDataWidget(
+                                            message: AppStrings.noServices.tr,
+                                            color: widget
+                                                .category!.categoryColor!
+                                                .toColor(),
+                                          )
+                                        : GridView.builder(
+                                            shrinkWrap: true,
+                                            padding: EdgeInsets.only(top: 15.h),
+                                            gridDelegate:
+                                                SliverGridDelegateWithMaxCrossAxisExtent(
+                                              maxCrossAxisExtent: 125.w,
+                                              mainAxisSpacing: 20.h,
+                                              childAspectRatio: 0.96,
+                                            ),
+                                            itemCount: categoryController
+                                                .displayedServicesList.length,
+                                            physics:
+                                                const NeverScrollableScrollPhysics(),
+                                            itemBuilder: (ctx, i) => GridWidget(
+                                              i,
+                                              category: widget.category,
+                                              serviceItem: categoryController
+                                                  .displayedServicesList[i],
                                             ),
                                           ),
-                                        )
-                                      : categoryController
-                                              .displayedServicesList.isEmpty
-                                          ? NoDataWidget(
-                                              message: AppStrings.noServices.tr,
-                                              color: widget
-                                                  .category!.categoryColor!
-                                                  .toColor(),
-                                            )
-                                          : GridView.builder(
-                                              shrinkWrap: true,
-                                              padding:
-                                                  EdgeInsets.only(top: 15.h),
-                                              gridDelegate:
-                                                  SliverGridDelegateWithMaxCrossAxisExtent(
-                                                maxCrossAxisExtent: 125.w,
-                                                mainAxisSpacing: 20.h,
-                                                childAspectRatio: 0.96,
-                                              ),
-                                              itemCount: categoryController
-                                                  .displayedServicesList.length,
-                                              physics:
-                                                  const NeverScrollableScrollPhysics(),
-                                              itemBuilder: (ctx, i) =>
-                                                  GridWidget(
-                                                i,
-                                                category: widget.category,
-                                                serviceItem: categoryController
-                                                    .displayedServicesList[i],
-                                              ),
-                                            ),
-                                ],
+                                  ],
+                                ),
                               ),
-                            ),
-                            SizedBox(height: 50.h),
-                          ],
+                              SizedBox(height: 50.h),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              )),
-        ),
+                )),
+          );
+        },
       ),
     );
   }
