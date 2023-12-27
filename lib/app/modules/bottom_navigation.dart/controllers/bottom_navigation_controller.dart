@@ -5,11 +5,13 @@ import 'package:egyptians_abroad/app/modules/notifications/views/notifications_v
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../events/controllers/event_controller.dart';
 import '../../notifications/controllers/notifications_controller.dart';
 
 class BottomNavigationController extends GetxController {
   final NotificationsController notificationsController =
       Get.find<NotificationsController>();
+  final EventsController eventsController = Get.find<EventsController>();
   var tabIndex = 0;
 
   final List<Widget> _navigationScreens = [
@@ -23,6 +25,9 @@ class BottomNavigationController extends GetxController {
     tabIndex = index;
     if (index == 1) {
       getNotifications();
+    }
+    if (index == 2) {
+      getEvents();
     }
     update();
   }
@@ -38,6 +43,6 @@ class BottomNavigationController extends GetxController {
 
 // TODO : load events
   getEvents() {
-    // notificationsController.loadNotifications();
+    eventsController.loadEvents();
   }
 }

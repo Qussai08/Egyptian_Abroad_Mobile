@@ -5,26 +5,18 @@ class EventsModel {
     required this.errors,
   });
   late final bool isSuccess;
-  late final Data data;
+  late final EventData data;
   late final List<dynamic> errors;
 
   EventsModel.fromJson(Map<String, dynamic> json) {
     isSuccess = json['isSuccess'];
-    data = Data.fromJson(json['data']);
+    data = EventData.fromJson(json['data']);
     errors = List.castFrom<dynamic, dynamic>(json['errors']);
-  }
-
-  Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['isSuccess'] = isSuccess;
-    _data['data'] = data.toJson();
-    _data['errors'] = errors;
-    return _data;
   }
 }
 
-class Data {
-  Data({
+class EventData {
+  EventData({
     required this.currentPage,
     required this.totalPages,
     required this.pageSize,
@@ -37,22 +29,12 @@ class Data {
   late final int totalCount;
   late final List<Event> events;
 
-  Data.fromJson(Map<String, dynamic> json) {
+  EventData.fromJson(Map<String, dynamic> json) {
     currentPage = json['currentPage'];
     totalPages = json['totalPages'];
     pageSize = json['pageSize'];
     totalCount = json['totalCount'];
-    events = List.from(json['events']).map((e) => Event.fromJson(e)).toList();
-  }
-
-  Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['currentPage'] = currentPage;
-    _data['totalPages'] = totalPages;
-    _data['pageSize'] = pageSize;
-    _data['totalCount'] = totalCount;
-    _data['events'] = events.map((e) => e.toJson()).toList();
-    return _data;
+    events = List.from(json['data']).map((e) => Event.fromJson(e)).toList();
   }
 }
 
@@ -86,8 +68,18 @@ class Event {
     eventName = json['eventName'];
     eventDescription = json['eventDescription'];
     eventAddress = json['eventAddress'];
-    startDate = json['startDate'];
-    endDate = json['endDate'];
+    startDate = (json['eventStartDate'] != null)
+        ? formatDate(json['eventStartDate'])
+        : (json['startDate'] != null)
+            ? formatDate(json['startDate'])
+            : '';
+
+    endDate = (json['eventEndtDate'] != null)
+        ? formatDate(json['eventEndtDate'])
+        : (json['endDate'] != null)
+            ? formatDate(json['endDate'])
+            : '';
+
     link = json['link'];
     notifyBefore = json['notifyBefore'];
     jobCategoryIdList = json['jobCategoryIdList'];
@@ -96,19 +88,17 @@ class Event {
     isActive = json['isActive'];
   }
 
-  Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['eventName'] = eventName;
-    _data['eventDescription'] = eventDescription;
-    _data['eventAddress'] = eventAddress;
-    _data['startDate'] = startDate;
-    _data['endDate'] = endDate;
-    _data['link'] = link;
-    _data['notifyBefore'] = notifyBefore;
-    _data['jobCategoryIdList'] = jobCategoryIdList;
-    _data['residencyTypeList'] = residencyTypeList;
-    _data['residenceCountryIdList'] = residenceCountryIdList;
-    _data['isActive'] = isActive;
-    return _data;
+  static List<Event> fromJsonList(List list) {
+    if (list.isEmpty) return [];
+    return list.map((item) => Event.fromJson(item)).toList();
+  }
+
+  static String formatDate(String dateTimestamp) {
+    DateTime date = DateTime.parse(dateTimestamp);
+
+    String time = date.hour == 0 && date.minute == 0
+        ? '12:00 ${date.hour > 12 ? 'مساءا' : 'صباحا'}'
+        : '${date.hour}:${date.minute} ${date.hour > 12 ? 'مساءا' : 'صباحا'}';
+    return '${date.day} ${date.month} ${date.year} $time';
   }
 }

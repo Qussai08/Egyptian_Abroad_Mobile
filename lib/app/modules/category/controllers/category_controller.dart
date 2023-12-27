@@ -32,11 +32,6 @@ class CategoryController extends GetxController {
   String _keySearch = '';
 
   void setKeySearch(String keySeacrh, {bool notifiy = false}) {
-    // searchServicesList = [];
-    // displayedServicesList = [];
-    // _keySearch = keySeacrh;
-    // if (notifiy) update();
-
     _currentPage = 0;
     _currentPageSearch = 0;
     _noOfPages = 1;

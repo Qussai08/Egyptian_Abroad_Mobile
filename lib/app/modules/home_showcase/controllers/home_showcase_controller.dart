@@ -28,6 +28,7 @@ class HomeShowcaseController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    registrationController.getGobCategoryList();
     getCategoriesList();
     getUserProfile();
     updateFavoritesList(userId: authService.userID!);
