@@ -144,18 +144,123 @@ class _LoginViewState extends State<LoginView> with ValidationMixin {
                       );
                     }
                   }),
-                  // SizedBox(height: 24.h),
-                  // CustomButton(
-                  //   width: 358.w,
-                  //   height: 50.h,
-                  //   fontSize: fixDpiFont(16),
-                  //   type: ButtonType.ghost,
-                  //   iconIsAsset: true,
-                  //   assetString: AppImages.carsIcon,
-                  //   changeIconPosition: true,
-                  //   text: AppStrings.registerWithCarsAccount.tr,
-                  //   textColor: Styles.black3,
-                  // ),
+                  SizedBox(height: 24.h),
+                  CustomButton(
+                    width: 358.w,
+                    height: 50.h,
+                    fontSize: fixDpiFont(16),
+                    type: ButtonType.ghost,
+                    iconIsAsset: true,
+                    assetString: AppImages.carsIcon,
+                    changeIconPosition: true,
+                    text: AppStrings.registerWithCarsAccount.tr,
+                    textColor: Styles.black3,
+                    onPressed: () {
+                      Get.bottomSheet(Container(
+                        decoration: const BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(12),
+                                topRight: Radius.circular(12))),
+                        child: Column(children: [
+                          Container(
+                            padding: EdgeInsets.symmetric(horizontal: 8.w),
+                            decoration: const BoxDecoration(
+                                color: Color(0xffE7F2F4),
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(12),
+                                    topRight: Radius.circular(12))),
+                            height: 100.h,
+                            child: Row(children: [
+                              Container(
+                                width: fixDpiFont(24),
+                              ),
+                              Spacer(),
+                              Container(
+                                width: 190.w,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Image.asset(
+                                      AppImages.carsIcon,
+                                      height: 16,
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    Text(
+                                      "التسجيل باستخدام تطبيق سيارات المصريين بالخارج",
+                                      maxLines: 2,
+                                      textAlign: TextAlign.center,
+                                      style: Styles.getRegularStyle(
+                                          color: Color(0xff201D61),
+                                          fontSize: 16),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Spacer(),
+                              Padding(
+                                padding: EdgeInsets.only(bottom: 50.h),
+                                child: Icon(
+                                  Icons.close,
+                                  size: fixDpiFont(24),
+                                ),
+                              )
+                            ]),
+                          ),
+                          SizedBox(
+                            height: 20.h,
+                          ),
+                          Container(
+                            padding: EdgeInsets.symmetric(horizontal: 12.w),
+                            child: Column(
+                              children: [
+                                TextFieldTitle(title: AppStrings.email.tr),
+                                CustomTextFormField(
+                                  hintTxt: 'Username@example.info',
+                                  controller: _emailTxtController,
+                                  validationFunc: (val) => validateUserEmail(
+                                      _emailTxtController.text),
+                                  inputData: TextInputType.emailAddress,
+                                ),
+                                SizedBox(
+                                  height: 16.h,
+                                ),
+                                TextFieldTitle(title: AppStrings.password.tr),
+                                CustomTextFormField(
+                                  hintTxt: '**************',
+                                  controller: _passwordTxtController,
+                                  validationFunc: (val) => validatePassword(
+                                      _passwordTxtController.text),
+                                  inputData: TextInputType.text,
+                                  isPassword: true,
+                                ),
+                                SizedBox(
+                                  height: 20.h,
+                                ),
+                                Text(
+                                  'سيتم مشاركه بيانات الدخول و الرقم القومي لتطبيق سيارات المصريين بالخارج مع تطبيق المصريين بالخارج',
+                                  textAlign: TextAlign.center,
+                                  style: Styles.getRegularStyle(
+                                      color: Styles.lightBlack,
+                                      fontSize: fixDpiFont(13)),
+                                ),
+                                SizedBox(
+                                  height: 15.h,
+                                ),
+                                CustomButton(
+                                  type: ButtonType.primary,
+                                  text: 'موافق',
+                                )
+                              ],
+                            ),
+                          ),
+                        ]),
+                      ));
+                    },
+                  ),
 
                   SizedBox(height: 12.h),
                   Row(

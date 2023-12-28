@@ -12,20 +12,22 @@ import 'package:egyptians_abroad/app/core/theme/app_images.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:egyptians_abroad/app/modules/otp/views/otp_view.dart';
 import 'package:egyptians_abroad/app/modules/registration/controllers/registration_controller.dart';
+import 'package:egyptians_abroad/app/modules/registration/views/complete_account_residence.dart';
+import 'package:egyptians_abroad/app/modules/registration/views/widgets/progress_indicator_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:egyptians_abroad/app/core/helper/validators.dart';
 
 import 'package:get/get.dart';
 
-class RegistrationView extends StatefulWidget {
-  const RegistrationView({super.key});
+class CarsFirstStepView extends StatefulWidget {
+  const CarsFirstStepView({super.key});
 
   @override
-  State<RegistrationView> createState() => _RegistrationViewState();
+  State<CarsFirstStepView> createState() => _CarsFirstStepViewState();
 }
 
-class _RegistrationViewState extends State<RegistrationView>
+class _CarsFirstStepViewState extends State<CarsFirstStepView>
     with ValidationMixin {
   final _formKey = GlobalKey<FormState>();
   bool showCountryError = false;
@@ -69,6 +71,46 @@ class _RegistrationViewState extends State<RegistrationView>
                             SizedBox(
                               height: 40.h,
                             ),
+                            Row(
+                              children: [
+                                ProgressIndicatorWidget(
+                                  step: '1',
+                                  total: '4',
+                                ),
+                                SizedBox(width: 8.w),
+                                // todo: translate
+                                Text('البيانات الشخصية',
+                                    style: TextStyle(
+                                        fontFamily: 'baloo',
+                                        fontSize: fixDpiFont(17),
+                                        fontWeight: FontWeight.w700,
+                                        color: Color(0xff3F3D56)))
+                              ],
+                            ),
+                            SizedBox(
+                              height: 8.h,
+                            ),
+                            TextFieldTitle(title: AppStrings.email.tr),
+                            CustomTextFormField(
+                              controller: controller.emailTxtController,
+                              validationFunc: (val) => validateUserEmail(
+                                  controller.emailTxtController.text),
+                              inputData: TextInputType.emailAddress,
+                            ),
+                            SizedBox(
+                              height: 16.h,
+                            ),
+                            TextFieldTitle(title: AppStrings.nationalID.tr),
+                            CustomTextFormField(
+                              controller: controller.nationalIDTxtController,
+                              validationFunc: (val) => validateNationalID(
+                                  controller.nationalIDTxtController.text),
+                              inputData: TextInputType.number,
+                              maxLength: null,
+                            ),
+                            SizedBox(
+                              height: 16.h,
+                            ),
                             TextFieldTitle(title: AppStrings.name.tr),
                             CustomTextFormField(
                               controller: controller.nameTxtController,
@@ -103,27 +145,7 @@ class _RegistrationViewState extends State<RegistrationView>
                             SizedBox(
                               height: 12.h,
                             ),
-                            TextFieldTitle(title: AppStrings.nationalID.tr),
-                            CustomTextFormField(
-                              controller: controller.nationalIDTxtController,
-                              validationFunc: (val) => validateNationalID(
-                                  controller.nationalIDTxtController.text),
-                              inputData: TextInputType.number,
-                              maxLength: null,
-                            ),
-                            SizedBox(
-                              height: 16.h,
-                            ),
-                            TextFieldTitle(title: AppStrings.email.tr),
-                            CustomTextFormField(
-                              controller: controller.emailTxtController,
-                              validationFunc: (val) => validateUserEmail(
-                                  controller.emailTxtController.text),
-                              inputData: TextInputType.emailAddress,
-                            ),
-                            SizedBox(
-                              height: 16.h,
-                            ),
+
                             TextFieldTitle(title: AppStrings.residence.tr),
                             GetBuilder<RegistrationController>(
                               builder: (registrationController) =>
@@ -227,27 +249,29 @@ class _RegistrationViewState extends State<RegistrationView>
                                   setState(() {
                                     showCountryError = false;
                                   });
-                                  AppResponse res =
-                                      await controller.verifyMailAndNID();
+                                  Get.offAll(() => CompleteAccountView());
+                                  // AppResponse res =
+                                  //     await controller.verifyMailAndNID();
 
-                                  if (res.status && res.data['data'] == true) {
-                                    AppResponse verRes = await controller
-                                        .createVerificationCode();
-                                    Get.to(() => OtpView(
-                                          resendOtpTime: verRes.data['data']
-                                              ['data']['resendOtp'],
-                                        ));
-                                  } else {
-                                    Get.showSnackbar(
-                                      buildCustomToast(
-                                        Get.context!,
-                                        toastMsg:
-                                            "الرقم القومي أو البريد الإلكتروني مُسجل بالفعل.",
-                                        toastTitle: AppStrings.sorry.tr,
-                                        toastType: ToastType.error,
-                                      ),
-                                    );
-                                  }
+                                  // if (res.status && res.data['data'] == true) {
+                                  //   // TODO : call cars api
+                                  //   // AppResponse verRes = await controller
+                                  //   //     .createVerificationCode();
+                                  //   // Get.to(() => OtpView(
+                                  //   //       resendOtpTime: verRes.data['data']
+                                  //   //           ['data']['resendOtp'],
+                                  //   //     ));
+                                  // } else {
+                                  //   Get.showSnackbar(
+                                  //     buildCustomToast(
+                                  //       Get.context!,
+                                  //       toastMsg:
+                                  //           "الرقم القومي أو البريد الإلكتروني مُسجل بالفعل.",
+                                  //       toastTitle: AppStrings.sorry.tr,
+                                  //       toastType: ToastType.error,
+                                  //     ),
+                                  //   );
+                                  // }
                                 } else {
                                   if (validateCountry(registrationController
                                           .residenceCountry.value

@@ -17,8 +17,8 @@ import 'package:egyptians_abroad/app/core/helper/validators.dart';
 import 'package:get/get.dart';
 
 class CompleteAccountView extends StatefulWidget {
-  const CompleteAccountView({Key? key}) : super(key: key);
-
+  const CompleteAccountView({super.key, this.carRegister = false});
+  final bool carRegister;
   @override
   State<CompleteAccountView> createState() => _CompleteAccountViewState();
 }
