@@ -15,14 +15,16 @@ class FavoriteButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      
       onTap: onTap,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(28.w),
-        child: Container(
-          width: 28.w,
-          height: 28.h,
-          color: Styles.white,
+      child: Container(
+        width: 32.w,
+        height: 32.w,
+        color: Colors.transparent,
+        child: Card(
+          color: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16.w),
+          ),
           child: isFavorite
               ? Icon(
                   Icons.favorite,

@@ -28,6 +28,7 @@ class CustomTextFormField extends StatefulWidget {
   final String? prefixIconImagePath;
   final String? labelText;
   final bool? expands;
+  final bool? autofocus;
   final bool? enableBorder;
   final FocusNode? focusNode;
   final OutlineInputBorder? disabledBorder;
@@ -57,6 +58,7 @@ class CustomTextFormField extends StatefulWidget {
       this.prefixIconIsImage = false,
       this.suffixIconIsImage = false,
       this.prefixIcon,
+      this.autofocus = false,
       this.labelText,
       this.controller,
       this.suffixIconImagePath,
@@ -109,6 +111,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                   //   ]
                 ),
           child: TextFormField(
+            autofocus: widget.autofocus ?? false,
             textAlignVertical: TextAlignVertical.center,
             expands: widget.expands ?? false,
             controller: widget.controller,

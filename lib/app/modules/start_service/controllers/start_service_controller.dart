@@ -5,18 +5,31 @@ import 'package:egyptians_abroad/app/core/services/repositories/categories_repos
 import 'package:egyptians_abroad/app/modules/home_showcase/controllers/home_showcase_controller.dart';
 import 'package:get/get.dart';
 
+import '../../../core/custom_widgets/custom_taost.dart';
+import '../../../core/helper/error_helper.dart';
 import '../../../core/services/models/service.dart';
 
 class StartServiceController extends GetxController {
   Future<ServiceContent?> getServicesContent(int serviceID) async {
-    AppResponse response = await CategoriesRepository()
-        .getServicesContentByServiceId(
-            queryParameters: {"serviceId": serviceID});
-    if (response.status) {
-      ServiceContent serviceContent =
-          ServiceContent.fromJson(response.data['data']);
+    try {
+      AppResponse response = await CategoriesRepository()
+          .getServicesContentByServiceId(
+              queryParameters: {"serviceId": serviceID});
+      if (response.status) {
+        ServiceContent serviceContent =
+            ServiceContent.fromJson(response.data['data']);
 
-      return serviceContent;
+        return serviceContent;
+      }
+    } catch (e) {
+      Get.showSnackbar(
+        buildCustomToast(
+          Get.context!,
+          toastMsg: ErrorHelper.getErrorMessage('genrealError'),
+          toastTitle: 'عفواً',
+          toastType: ToastType.error,
+        ),
+      );
     }
     return null;
   }

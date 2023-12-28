@@ -16,30 +16,45 @@ class ProgressIndicatorWidget extends StatelessWidget {
     return Container(
       width: 38.h,
       height: 38.h,
-      decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          border: Border.all(color: Styles.primaryColor, width: 3)),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+      margin: const EdgeInsets.symmetric(horizontal: 1),
+      child: Stack(
         children: [
-          Text(
-            "/3",
-            textDirection: TextDirection.ltr,
-            style: TextStyle(
-                fontFamily: 'baloo',
-                fontSize: fixDpiFont(13),
-                fontWeight: FontWeight.w700,
-                color: Color(0xff91A8DD)),
+          CircularProgressIndicator(
+            value: 0.33333333 * int.parse(step),
+            valueColor:
+                const AlwaysStoppedAnimation<Color>(Styles.primaryColor),
+            backgroundColor: const Color(0xffE7F2F4),
+            strokeWidth: 4,
           ),
-          Text(
-            step,
-            textDirection: TextDirection.ltr,
-            style: TextStyle(
-                fontFamily: 'baloo',
-                fontSize: fixDpiFont(17),
-                fontWeight: FontWeight.w700,
-                color: Styles.primaryColor),
-          )
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 3.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    "/3",
+                    textDirection: TextDirection.ltr,
+                    style: TextStyle(
+                        fontFamily: 'baloo',
+                        fontSize: fixDpiFont(13),
+                        fontWeight: FontWeight.w700,
+                        color: const Color(0xff91A8DD)),
+                  ),
+                  Text(
+                    step,
+                    textDirection: TextDirection.ltr,
+                    style: TextStyle(
+                        fontFamily: 'baloo',
+                        fontSize: fixDpiFont(17),
+                        fontWeight: FontWeight.w700,
+                        color: Styles.primaryColor),
+                  )
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );

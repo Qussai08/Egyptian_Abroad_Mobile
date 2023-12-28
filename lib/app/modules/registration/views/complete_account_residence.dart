@@ -42,192 +42,220 @@ class _CompleteAccountViewState extends State<CompleteAccountView>
   @override
   Widget build(BuildContext context) {
     return NetworkIndicator(
-      child: Scaffold(
-        body: SafeArea(
-          child: Container(
-            padding: EdgeInsets.only(right: 16.w, left: 16.w),
-            child: SingleChildScrollView(
-              child: GetBuilder<RegistrationController>(
-                builder: (registrationController) => Form(
-                  key: _formKey,
-                  child: registrationController.residenceLoading
-                      ? Container(
-                          height: fixDpiScreenHeight(),
-                          width: fixDpiScreenWidth(),
-                          child: Center(
-                            child: CircularProgressIndicator(
-                              color: Styles.primaryColor,
-                            ),
-                          ),
-                        )
-                      : Column(
-                          children: [
-                            SizedBox(
-                              height: 18.h,
-                            ),
-                            Image.asset(
-                              'assets/images/user.png',
-                              width: 56.w,
-                              fit: BoxFit.fitWidth,
-                            ),
-                            SizedBox(
-                              height: 16.h,
-                            ),
-                            TitleText(
-                                title: AppStrings.completeAccountTitle.tr),
-                            SizedBox(
-                              height: 20.h,
-                            ),
-                            Row(
+      child: SafeArea(
+        child: Scaffold(
+          body: Column(
+            children: [
+              Container(
+                padding: EdgeInsets.only(right: 16.w, left: 16.w),
+                // height: fixDpiScreenHeight() * 0.7,
+                // color: Colors.red,
+                child: SingleChildScrollView(
+                  child: GetBuilder<RegistrationController>(
+                    builder: (registrationController) => Form(
+                      key: _formKey,
+                      child: registrationController.residenceLoading
+                          ? Container(
+                              height: fixDpiScreenHeight(),
+                              width: fixDpiScreenWidth(),
+                              child: Center(
+                                child: CircularProgressIndicator(
+                                  color: Styles.primaryColor,
+                                ),
+                              ),
+                            )
+                          : Column(
                               children: [
-                                ProgressIndicatorWidget(step: '1'),
-                                SizedBox(width: 8.w),
-                                // todo: translate
-                                Text('بيانات الإقامة',
-                                    style: TextStyle(
-                                        fontFamily: 'baloo',
-                                        fontSize: fixDpiFont(17),
-                                        fontWeight: FontWeight.w700,
-                                        color: Color(0xff3F3D56)))
+                                SizedBox(
+                                  height: 18.h,
+                                ),
+                                Image.asset(
+                                  'assets/images/user.png',
+                                  width: 56.w,
+                                  fit: BoxFit.fitWidth,
+                                ),
+                                SizedBox(
+                                  height: 16.h,
+                                ),
+                                TitleText(
+                                    title: AppStrings.completeAccountTitle.tr),
+                                SizedBox(
+                                  height: 20.h,
+                                ),
+                                Row(
+                                  children: [
+                                    ProgressIndicatorWidget(step: '1'),
+                                    SizedBox(width: 8.w),
+                                    // todo: translate
+                                    Text('بيانات الإقامة',
+                                        style: TextStyle(
+                                            fontFamily: 'baloo',
+                                            fontSize: fixDpiFont(17),
+                                            fontWeight: FontWeight.w700,
+                                            color: Color(0xff3F3D56)))
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 8.h,
+                                ),
+                                TextFieldTitle(
+                                    title: AppStrings.egPassportNum.tr,
+                                    hasSubTitle: false),
+                                CustomTextFormField(
+                                  controller: registrationController
+                                      .egPassportNumTxtController,
+                                  validationFunc: (val) =>
+                                      validateEgyptionPassport(
+                                          registrationController
+                                              .egPassportNumTxtController.text),
+                                  inputData: TextInputType.text,
+                                ),
+                                SizedBox(
+                                  height: 16.h,
+                                ),
+                                TextFieldTitle(
+                                    title: AppStrings.residenceType.tr,
+                                    hasSubTitle: false),
+                                ValueListenableBuilder<int?>(
+                                    valueListenable:
+                                        registrationController.residenceType,
+                                    builder: (_, residenceTP, __) {
+                                      return Column(
+                                        children: [
+                                          DropDownListSelector(
+                                            dropDownList: registrationController
+                                                .residenceTypeList
+                                                .map((e) => DropdownMenuItem(
+                                                      child: Text(e.name),
+                                                      value: e.id,
+                                                    ))
+                                                .toList(),
+                                            value: residenceTP,
+                                            hint: "",
+                                            onChangeFunc: (val) {
+                                              registrationController
+                                                  .residenceType.value = val;
+                                            },
+                                          ),
+                                          SizedBox(
+                                            height: 16.h,
+                                          ),
+                                          if (residenceTP == 1)
+                                            TextFieldTitle(
+                                                title: AppStrings
+                                                    .residenceNumber.tr,
+                                                hasSubTitle: false),
+                                          if (residenceTP == 1)
+                                            CustomTextFormField(
+                                              controller: registrationController
+                                                  .residenceNumTxtController,
+                                              inputData: TextInputType.text,
+                                              validationFunc: (val) =>
+                                                  maxLenghtValidation(
+                                                      registrationController
+                                                          .residenceNumTxtController
+                                                          .text,
+                                                      20),
+                                            ),
+                                          if (residenceTP == 1)
+                                            SizedBox(
+                                              height: 16.h,
+                                            ),
+                                          if (residenceTP == 2)
+                                            TextFieldTitle(
+                                                title: AppStrings
+                                                    .forignPassportNum.tr,
+                                                hasSubTitle: false),
+                                          if (residenceTP == 2)
+                                            CustomTextFormField(
+                                              controller: registrationController
+                                                  .forignPassportNumTxtController,
+                                              inputData: TextInputType.text,
+                                              validationFunc: (val) =>
+                                                  maxLenghtValidation(
+                                                      registrationController
+                                                          .residenceNumTxtController
+                                                          .text,
+                                                      20),
+                                            ),
+                                          if (residenceTP == 2)
+                                            SizedBox(
+                                              height: 16.h,
+                                            ),
+                                        ],
+                                      );
+                                    }),
+                                TextFieldTitle(
+                                    title: AppStrings.residenceAddress.tr,
+                                    hasSubTitle: false),
+                                CustomTextFormField(
+                                  controller: registrationController
+                                      .residenceAddressTxtController,
+                                  inputData: TextInputType.text,
+                                  validationFunc: (val) => maxLenghtValidation(
+                                      registrationController
+                                          .residenceNumTxtController.text,
+                                      200),
+                                ),
+                                SizedBox(
+                                  height: 50.h,
+                                ),
                               ],
                             ),
-                            SizedBox(
-                              height: 8.h,
-                            ),
-                            TextFieldTitle(
-                                title: AppStrings.egPassportNum.tr,
-                                hasSubTitle: false),
-                            CustomTextFormField(
-                              controller: registrationController
-                                  .egPassportNumTxtController,
-                              validationFunc: (val) => validateEgyptionPassport(
-                                  registrationController
-                                      .egPassportNumTxtController.text),
-                              inputData: TextInputType.text,
-                            ),
-                            SizedBox(
-                              height: 16.h,
-                            ),
-                            TextFieldTitle(
-                                title: AppStrings.residenceType.tr,
-                                hasSubTitle: false),
-                            ValueListenableBuilder<int?>(
-                                valueListenable:
-                                    registrationController.residenceType,
-                                builder: (_, residenceTP, __) {
-                                  return Column(
-                                    children: [
-                                      DropDownListSelector(
-                                        dropDownList: registrationController
-                                            .residenceTypeList
-                                            .map((e) => DropdownMenuItem(
-                                                  child: Text(e.name),
-                                                  value: e.id,
-                                                ))
-                                            .toList(),
-                                        value: residenceTP,
-                                        hint: "",
-                                        onChangeFunc: (val) {
-                                          registrationController
-                                              .residenceType.value = val;
-                                        },
-                                      ),
-                                      SizedBox(
-                                        height: 16.h,
-                                      ),
-                                      if (residenceTP == 1)
-                                        TextFieldTitle(
-                                            title:
-                                                AppStrings.residenceNumber.tr,
-                                            hasSubTitle: false),
-                                      if (residenceTP == 1)
-                                        CustomTextFormField(
-                                          controller: registrationController
-                                              .residenceNumTxtController,
-                                          inputData: TextInputType.text,
-                                          validationFunc: (val) =>
-                                              maxLenghtValidation(
-                                                  registrationController
-                                                      .residenceNumTxtController
-                                                      .text,
-                                                  20),
-                                        ),
-                                      if (residenceTP == 1)
-                                        SizedBox(
-                                          height: 16.h,
-                                        ),
-                                      if (residenceTP == 2)
-                                        TextFieldTitle(
-                                            title:
-                                                AppStrings.forignPassportNum.tr,
-                                            hasSubTitle: false),
-                                      if (residenceTP == 2)
-                                        CustomTextFormField(
-                                          controller: registrationController
-                                              .forignPassportNumTxtController,
-                                          inputData: TextInputType.text,
-                                          validationFunc: (val) =>
-                                              maxLenghtValidation(
-                                                  registrationController
-                                                      .residenceNumTxtController
-                                                      .text,
-                                                  20),
-                                        ),
-                                      if (residenceTP == 2)
-                                        SizedBox(
-                                          height: 16.h,
-                                        ),
-                                    ],
-                                  );
-                                }),
-                            // TextFieldTitle(
-                            //     title: AppStrings.residenceAddress.tr,
-                            //     hasSubTitle: false),
-                            // CustomTextFormField(
-                            //   controller: registrationController
-                            //       .residenceAddressTxtController,
-                            //   inputData: TextInputType.text,
-                            //   validationFunc: (val) => maxLenghtValidation(
-                            //       registrationController
-                            //           .residenceNumTxtController.text,
-                            //       200),
-                            // ),
-                            SizedBox(
-                              height: 150.h,
-                            ),
-                            CustomButton(
-                              text: AppStrings.next.tr,
-                              icon: Icons.arrow_forward,
-                              type: ButtonType.primary,
-                              width: 358.w,
-                              height: 50.h,
-                              onPressed: () {
-                                // registrationController.loadResidenceData();
-                                if (_formKey.currentState!.validate()) {
-                                  Get.toNamed(Routes.COMPLETEACCOUNTWORK);
-                                }
-                              },
-                            ),
-                            SizedBox(
-                              height: 16.h,
-                            ),
-                            CustomButton(
-                              text: AppStrings.skip.tr,
-                              type: ButtonType.secondary,
-                              width: 358.w,
-                              height: 50.h,
-                              onPressed: () {
-                                Get.toNamed(Routes.REGITSRATIONSELECTAVATAR);
-                              },
-                            ),
-                            SizedBox(
-                              height: 20.h,
-                            ),
-                          ],
-                        ),
+                    ),
+                  ),
                 ),
               ),
-            ),
+              Spacer(),
+              Container(
+                width: double.infinity,
+                padding: EdgeInsets.symmetric(vertical: 11.h),
+                alignment: Alignment.bottomCenter,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(10),
+                      topLeft: Radius.circular(10)),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey,
+                      blurRadius: 4,
+                      offset: Offset(0, 0), // Shadow position
+                    ),
+                  ],
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CustomButton(
+                      text: AppStrings.next.tr,
+                      icon: Icons.arrow_forward,
+                      type: ButtonType.primary,
+                      width: 358.w,
+                      height: 50.h,
+                      onPressed: () {
+                        // registrationController.loadResidenceData();
+                        if (_formKey.currentState!.validate()) {
+                          Get.toNamed(Routes.COMPLETEACCOUNTWORK);
+                        }
+                      },
+                    ),
+                    SizedBox(
+                      height: 8.h,
+                    ),
+                    CustomButton(
+                      text: AppStrings.skip.tr,
+                      type: ButtonType.secondary,
+                      width: 358.w,
+                      height: 50.h,
+                      onPressed: () {
+                        Get.toNamed(Routes.REGITSRATIONSELECTAVATAR);
+                      },
+                    ),
+                  ],
+                ),
+              )
+            ],
           ),
         ),
       ),

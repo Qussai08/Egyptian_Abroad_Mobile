@@ -17,6 +17,7 @@ class HomeSearchWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    FocusNode _focusNode = FocusNode();
     return CustomTextFormField(
       controller: homeContoller.searchController,
       prefixIcon: const Icon(
@@ -25,7 +26,11 @@ class HomeSearchWidget extends StatelessWidget {
       ),
       inputData: TextInputType.text,
       textInputAction: TextInputAction.search,
+      // autofocus: true,
+      focusNode: _focusNode,
       onChangedFunc: (val) {
+        _focusNode.requestFocus();
+
         if (val.isEmpty) {
           homeContoller.keySearch = val;
           homeContoller.setKeySearch(homeContoller.keySearch, notifiy: true);

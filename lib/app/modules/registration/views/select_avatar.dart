@@ -19,27 +19,7 @@ class RegistrationSelectAvatarView extends GetView<RegistrationController> {
   Widget build(BuildContext context) {
     return NetworkIndicator(
       child: Scaffold(
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(100.0),
-          child: CustomAppBar(
-            toolbarHeight: 100,
-            title: Column(
-              children: [
-                Image.asset(
-                  AppImages.user,
-                  width: 56.w,
-                  fit: BoxFit.fitWidth,
-                ),
-                SizedBox(height: 24.h),
-                Text(
-                  AppStrings.completeAccountTitle.tr,
-                  style: Styles.getBoldStyle(
-                      color: Styles.black, fontSize: fixDpiFont(24)),
-                ),
-              ],
-            ),
-          ),
-        ),
+        appBar: CustomAppBar(),
         body: SafeArea(
           child: ListView(
             children: [
@@ -51,7 +31,18 @@ class RegistrationSelectAvatarView extends GetView<RegistrationController> {
                   child: Column(
                     // crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      SizedBox(height: 41.h),
+                      Image.asset(
+                        AppImages.user,
+                        width: 56.w,
+                        fit: BoxFit.fitWidth,
+                      ),
+                      SizedBox(height: 24.h),
+                      Text(
+                        AppStrings.completeAccountTitle.tr,
+                        style: Styles.getBoldStyle(
+                            color: Styles.black, fontSize: fixDpiFont(24)),
+                      ),
+                      SizedBox(height: 32.h),
                       Align(
                           alignment: Alignment.topRight,
                           child: Row(
@@ -66,9 +57,9 @@ class RegistrationSelectAvatarView extends GetView<RegistrationController> {
                               ),
                             ],
                           )),
-                      SizedBox(height: 41.h),
+                      SizedBox(height: 30.h),
                       SelectAvatarGridWidget(controller: controller),
-                      SizedBox(height: 120.h),
+                      SizedBox(height: 40.h),
                       CustomButton(
                         text: AppStrings.save.tr,
                         height: 50.h,
