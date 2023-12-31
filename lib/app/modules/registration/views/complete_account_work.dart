@@ -31,154 +31,178 @@ class _CompleteAccountWorkViewState extends State<CompleteAccountWorkView>
   @override
   Widget build(BuildContext context) {
     return NetworkIndicator(
-      child: Scaffold(
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(100.0),
-          child: CustomAppBar(
-            toolbarHeight: 100,
-            title: Column(
+      child: SafeArea(
+        child: Scaffold(
+          appBar: CustomAppBar(),
+          body: GetBuilder<RegistrationController>(
+            builder: (registrationController) => Column(
               children: [
-                Image.asset(
-                  AppImages.user,
-                  width: 56.w,
-                  fit: BoxFit.fitWidth,
-                ),
-                SizedBox(height: 24.h),
-                Text(
-                  AppStrings.completeAccountTitle.tr,
-                  style: Styles.getBoldStyle(
-                      color: Styles.black, fontSize: fixDpiFont(24)),
-                ),
-              ],
-            ),
-          ),
-        ),
-        body: SafeArea(
-          child: Container(
-            padding: EdgeInsets.only(right: 16.w, left: 16.w),
-            child: SingleChildScrollView(
-              child: GetBuilder<RegistrationController>(
-                builder: (registrationController) => Form(
-                  key: _formKey,
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: 20.h,
-                      ),
-                      Row(
+                Container(
+                  padding: EdgeInsets.only(right: 16.w, left: 16.w),
+                  height: fixDpiScreenHeight() * 0.67,
+                  child: SingleChildScrollView(
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
                         children: [
-                          const ProgressIndicatorWidget(
-                            step: '2',
+                          Image.asset(
+                            AppImages.user,
+                            width: 56.w,
+                            fit: BoxFit.fitWidth,
+                          ),
+                          Text(
+                            AppStrings.completeAccountTitle.tr,
+                            style: Styles.getBoldStyle(
+                                color: Styles.black, fontSize: fixDpiFont(24)),
                           ),
                           SizedBox(
-                            width: 8.w,
+                            height: 20.h,
                           ),
-                          // todo: translate
-                          Text('بيانات المهنة',
-                              style: TextStyle(
-                                  fontFamily: 'baloo',
-                                  fontSize: fixDpiFont(17),
-                                  fontWeight: FontWeight.w700,
-                                  color: Color(0xff3F3D56)))
-                        ],
-                      ),
-                      SizedBox(
-                        height: 8.h,
-                      ),
-                      TextFieldTitle(
-                          title: AppStrings.jobCategory.tr, hasSubTitle: false),
-                      ValueListenableBuilder<int?>(
-                          valueListenable: registrationController.jobCategory,
-                          builder: (_, category, __) {
-                            return DropDownListSelector(
-                              dropDownList: (registrationController
-                                          .jobCategoryList.length ==
-                                      0)
-                                  ? <DropdownMenuItem>[]
-                                  : registrationController.jobCategoryList
-                                      .map((e) => DropdownMenuItem(
-                                            child: Text(e.name),
-                                            value: e.id,
-                                          ))
-                                      .toList(),
-                              value: category,
-                              hint: "",
-                              onChangeFunc: (val) {
-                                registrationController.jobCategory.value = val;
-                              },
-                            );
-                          }),
-                      SizedBox(
-                        height: 16.h,
-                      ),
-                      TextFieldTitle(
-                          title: AppStrings.jobTitle.tr, hasSubTitle: false),
-                      CustomTextFormField(
-                        controller:
-                            registrationController.jobTitleTxtController,
-                        validationFunc: (val) => maxLenghtValidation(
-                            registrationController.jobTitleTxtController.text,
-                            100),
-                        inputData: TextInputType.text,
-                      ),
-                      SizedBox(
-                        height: 16.h,
-                      ),
-                      TextFieldTitle(
-                        title: AppStrings.egPhoneNum.tr,
-                        hasSubTitle: false,
-                      ),
-                      CustomTextFormField(
-                        controller:
-                            registrationController.egptionPhoneNumTxtController,
-                        validationFunc: (val) => validateEgyptionPhoneNum(
-                            registrationController
-                                .egptionPhoneNumTxtController.text),
-                        inputData: TextInputType.phone,
-                      ),
-                      SizedBox(
-                        height: 16.h,
-                      ),
-                      Row(
-                        children: [
+                          Row(
+                            children: [
+                              const ProgressIndicatorWidget(
+                                step: '2',
+                              ),
+                              SizedBox(
+                                width: 8.w,
+                              ),
+                              // todo: translate
+                              Text('بيانات المهنة',
+                                  style: TextStyle(
+                                      fontFamily: 'baloo',
+                                      fontSize: fixDpiFont(17),
+                                      fontWeight: FontWeight.w700,
+                                      color: Color(0xff3F3D56)))
+                            ],
+                          ),
+                          SizedBox(
+                            height: 8.h,
+                          ),
                           TextFieldTitle(
-                              title: AppStrings.forignPhoneNum.tr,
-                              hasSubTitle: false,
-                              hasHorizontalMargin: false),
+                              title: AppStrings.jobCategory.tr,
+                              hasSubTitle: false),
+                          ValueListenableBuilder<int?>(
+                              valueListenable:
+                                  registrationController.jobCategory,
+                              builder: (_, category, __) {
+                                return DropDownListSelector(
+                                  dropDownList: (registrationController
+                                              .jobCategoryList.length ==
+                                          0)
+                                      ? <DropdownMenuItem>[]
+                                      : registrationController.jobCategoryList
+                                          .map((e) => DropdownMenuItem(
+                                                child: Text(e.name),
+                                                value: e.id,
+                                              ))
+                                          .toList(),
+                                  value: category,
+                                  hint: "",
+                                  onChangeFunc: (val) {
+                                    registrationController.jobCategory.value =
+                                        val;
+                                  },
+                                );
+                              }),
+                          SizedBox(
+                            height: 16.h,
+                          ),
                           TextFieldTitle(
-                            title: AppStrings.forignPhoneNumHint.tr,
-                            fontSize: 10,
+                              title: AppStrings.jobTitle.tr,
+                              hasSubTitle: false),
+                          CustomTextFormField(
+                            controller:
+                                registrationController.jobTitleTxtController,
+                            validationFunc: (val) => maxLenghtValidation(
+                                registrationController
+                                    .jobTitleTxtController.text,
+                                100),
+                            inputData: TextInputType.text,
+                          ),
+                          SizedBox(
+                            height: 16.h,
+                          ),
+                          TextFieldTitle(
+                            title: AppStrings.egPhoneNum.tr,
                             hasSubTitle: false,
-                            hasHorizontalMargin: false,
+                          ),
+                          CustomTextFormField(
+                            controller: registrationController
+                                .egptionPhoneNumTxtController,
+                            validationFunc: (val) => validateEgyptionPhoneNum(
+                                registrationController
+                                    .egptionPhoneNumTxtController.text),
+                            inputData: TextInputType.phone,
+                          ),
+                          SizedBox(
+                            height: 16.h,
+                          ),
+                          Row(
+                            children: [
+                              TextFieldTitle(
+                                  title: AppStrings.forignPhoneNum.tr,
+                                  hasSubTitle: false,
+                                  hasHorizontalMargin: false),
+                              TextFieldTitle(
+                                title: AppStrings.forignPhoneNumHint.tr,
+                                fontSize: 10,
+                                hasSubTitle: false,
+                                hasHorizontalMargin: false,
+                              ),
+                            ],
+                          ),
+                          CustomTextFormField(
+                            controller: registrationController
+                                .forignPhoneNumTxtController,
+                            validationFunc: (val) => maxLenghtValidation(
+                                registrationController
+                                    .forignPhoneNumTxtController.text,
+                                15),
+                            inputData: TextInputType.phone,
+                          ),
+                          SizedBox(
+                            height: 16.h,
+                          ),
+                          TextFieldTitle(
+                              title: AppStrings.msgsAddress.tr,
+                              hasSubTitle: false),
+                          CustomTextFormField(
+                            controller:
+                                registrationController.msgsAddressTxtController,
+                            validationFunc: (val) => maxLenghtValidation(
+                                registrationController
+                                    .msgsAddressTxtController.text,
+                                200),
+                            inputData: TextInputType.text,
+                          ),
+                          SizedBox(
+                            height: 20.h,
                           ),
                         ],
                       ),
-                      CustomTextFormField(
-                        controller:
-                            registrationController.forignPhoneNumTxtController,
-                        validationFunc: (val) => maxLenghtValidation(
-                            registrationController
-                                .forignPhoneNumTxtController.text,
-                            15),
-                        inputData: TextInputType.phone,
+                    ),
+                  ),
+                ),
+                Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.symmetric(vertical: 11.h),
+                  alignment: Alignment.bottomCenter,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(10),
+                        topLeft: Radius.circular(10)),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey,
+                        blurRadius: 4,
+                        offset: Offset(0, 0), // Shadow position
                       ),
-                      SizedBox(
-                        height: 16.h,
-                      ),
-                      TextFieldTitle(
-                          title: AppStrings.msgsAddress.tr, hasSubTitle: false),
-                      CustomTextFormField(
-                        controller:
-                            registrationController.msgsAddressTxtController,
-                        validationFunc: (val) => maxLenghtValidation(
-                            registrationController
-                                .msgsAddressTxtController.text,
-                            200),
-                        inputData: TextInputType.text,
-                      ),
-                      SizedBox(
-                        height: 50.h,
-                      ),
+                    ],
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
                       CustomButton(
                         text: AppStrings.next.tr,
                         icon: Icons.arrow_forward,
@@ -193,7 +217,7 @@ class _CompleteAccountWorkViewState extends State<CompleteAccountWorkView>
                         },
                       ),
                       SizedBox(
-                        height: 16.h,
+                        height: 8.h,
                       ),
                       CustomButton(
                         text: AppStrings.skip.tr,
@@ -204,13 +228,10 @@ class _CompleteAccountWorkViewState extends State<CompleteAccountWorkView>
                           Get.toNamed(Routes.REGITSRATIONSELECTAVATAR);
                         },
                       ),
-                      SizedBox(
-                        height: 20.h,
-                      ),
                     ],
                   ),
-                ),
-              ),
+                )
+              ],
             ),
           ),
         ),

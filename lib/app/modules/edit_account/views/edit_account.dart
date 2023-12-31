@@ -413,20 +413,20 @@ class _EditAccountViewState extends State<EditAccountView>
                                       );
                                     }),
 
-                                // TextFieldTitle(
-                                //     title: AppStrings.residenceAddress.tr,
-                                //     hasSubTitle: false),
-                                // CustomTextFormField(
-                                //     inputData: TextInputType.text,
-                                //     validationFunc: (val) =>
-                                //         maxLenghtValidation(
-                                //             _residenceAddressTxtController.text,
-                                //             200),
-                                //     enabled: widget.isEdit,
-                                //     controller: _residenceAddressTxtController),
-                                // SizedBox(
-                                //   height: 16.h,
-                                // ),
+                                TextFieldTitle(
+                                    title: AppStrings.residenceAddress.tr,
+                                    hasSubTitle: false),
+                                CustomTextFormField(
+                                    inputData: TextInputType.text,
+                                    validationFunc: (val) =>
+                                        maxLenghtValidation(
+                                            _residenceAddressTxtController.text,
+                                            200),
+                                    enabled: widget.isEdit,
+                                    controller: _residenceAddressTxtController),
+                                SizedBox(
+                                  height: 16.h,
+                                ),
                                 TextFieldTitle(
                                     title: AppStrings.jobCategory.tr,
                                     hasSubTitle: false),

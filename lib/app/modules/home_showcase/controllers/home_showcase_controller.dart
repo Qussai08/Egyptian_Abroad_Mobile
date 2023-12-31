@@ -1,9 +1,11 @@
+import 'package:egyptians_abroad/app/core/custom_widgets/custom_taost.dart';
 import 'package:egyptians_abroad/app/core/services/models/service.dart';
 import 'package:egyptians_abroad/app/modules/home_showcase/data/providers/favorites_list_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:showcaseview/showcaseview.dart';
 
+import '../../../core/helper/error_helper.dart';
 import '../../../core/helper/localization_helper.dart';
 import '../../../core/services/app_response.dart';
 import '../../../core/services/auth_service.dart';
@@ -87,51 +89,63 @@ class HomeShowcaseController extends GetxController {
   Future<void> getCategoriesList(
       {int? pageNo = 1, applyLoading = true, bool showAll = false}) async {
     if (applyLoading) _updateCategoriesLoading(true);
-    if ((_keySearch.isEmpty && _currentPageHome <= _noOfPagesHome) ||
-        (_keySearch.isNotEmpty && _currentPageSearch <= _noOfPagesSearch)) {
-      AppResponse response = await CategoriesRepository().getCategories({
-        "categoryName": _keySearch,
-        "pageNo": 1,
-        "pageSize": showAll ? 5000 : 6
-      });
-      if (response.status) {
-        CategoriesData categoriesData = CategoriesData.fromJson(response.data);
-        if (_keySearch.isEmpty) {
-          setCurrentPageHome(categoriesData.currentPage);
-          setNoOfPagesHome(categoriesData.totalPages);
-          setTotalCountHome(categoriesData.totalCount);
-          if (showAll) {
-            displayedCategoriesList = categoriesData.categories;
-          } else {
-            for (var cat in categoriesData.categories) {
-              if (allCategories
-                      .firstWhereOrNull((element) => element.id == cat.id) ==
-                  null) {
-                allCategories.add(cat);
+    try {
+      if ((_keySearch.isEmpty && _currentPageHome <= _noOfPagesHome) ||
+          (_keySearch.isNotEmpty && _currentPageSearch <= _noOfPagesSearch)) {
+        AppResponse response = await CategoriesRepository().getCategories({
+          "categoryName": _keySearch,
+          "pageNo": 1,
+          "pageSize": showAll ? 5000 : 6
+        });
+        if (response.status) {
+          CategoriesData categoriesData =
+              CategoriesData.fromJson(response.data);
+          if (_keySearch.isEmpty) {
+            setCurrentPageHome(categoriesData.currentPage);
+            setNoOfPagesHome(categoriesData.totalPages);
+            setTotalCountHome(categoriesData.totalCount);
+            if (showAll) {
+              displayedCategoriesList = categoriesData.categories;
+            } else {
+              for (var cat in categoriesData.categories) {
+                if (allCategories
+                        .firstWhereOrNull((element) => element.id == cat.id) ==
+                    null) {
+                  allCategories.add(cat);
+                }
               }
-            }
 
-            displayedCategoriesList = allCategories;
-          }
-        } else {
-          setCurrentPageSearch(categoriesData.currentPage);
-          setNoOfPagesSearch(categoriesData.totalPages);
-          setTotalCountSearch(categoriesData.totalCount);
-          if (showAll) {
-            displayedCategoriesList = categoriesData.categories;
-          } else {
-            for (var cat in categoriesData.categories) {
-              if (searchCategoriesList
-                      .firstWhereOrNull((element) => element.id == cat.id) ==
-                  null) {
-                searchCategoriesList.add(cat);
-              }
+              displayedCategoriesList = allCategories;
             }
-            displayedCategoriesList = searchCategoriesList;
+          } else {
+            setCurrentPageSearch(categoriesData.currentPage);
+            setNoOfPagesSearch(categoriesData.totalPages);
+            setTotalCountSearch(categoriesData.totalCount);
+            if (showAll) {
+              displayedCategoriesList = categoriesData.categories;
+            } else {
+              for (var cat in categoriesData.categories) {
+                if (searchCategoriesList
+                        .firstWhereOrNull((element) => element.id == cat.id) ==
+                    null) {
+                  searchCategoriesList.add(cat);
+                }
+              }
+              displayedCategoriesList = searchCategoriesList;
+            }
           }
+          setShowMore();
         }
-        setShowMore();
       }
+    } catch (e) {
+      Get.showSnackbar(
+        buildCustomToast(
+          Get.context!,
+          toastMsg: ErrorHelper.getErrorMessage('genrealError'),
+          toastTitle: 'عفواً',
+          toastType: ToastType.error,
+        ),
+      );
     }
 
     if (applyLoading) _updateCategoriesLoading(false);

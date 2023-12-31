@@ -4,6 +4,9 @@ import 'package:egyptians_abroad/app/core/services/models/service.dart';
 import 'package:egyptians_abroad/app/core/services/repositories/categories_repository.dart';
 import 'package:get/get.dart';
 
+import '../../../core/custom_widgets/custom_taost.dart';
+import '../../../core/helper/error_helper.dart';
+
 class CategoryController extends GetxController {
   int? _categoryId;
   final AuthService authService = Get.find();
@@ -48,47 +51,58 @@ class CategoryController extends GetxController {
   Future<void> getServicesList(int categoryId,
       {int? pageNo = 1, applyLoading = true}) async {
     if (applyLoading) _updateServicesLoading(true);
-    if ((_keySearch.isEmpty && _currentPage <= _noOfPages) ||
-        (_keySearch.isNotEmpty && _currentPageSearch <= _noOfPagesSearch)) {
-      AppResponse response =
-          await CategoriesRepository().getServicesByCategoryId({
-        "categoryId": categoryId,
-        "servicesName": _keySearch,
-        "userId": authService.userID,
-        "pageNo": pageNo,
-        "pageSize": 5000
-      });
-      if (response.status) {
-        ServicesData serviceData = ServicesData.fromJson(response.data);
-        if (_keySearch.isEmpty) {
-          setCurrentPage(serviceData.currentPage);
-          setNoOfPages(serviceData.totalPages);
-          setTotalCount(serviceData.totalCount);
-          for (var serv in serviceData.services) {
-            if (allServices.firstWhereOrNull(
-                    (element) => element.serviceName == serv.serviceName) ==
-                null) {
-              allServices.add(serv);
+    try {
+      if ((_keySearch.isEmpty && _currentPage <= _noOfPages) ||
+          (_keySearch.isNotEmpty && _currentPageSearch <= _noOfPagesSearch)) {
+        AppResponse response =
+            await CategoriesRepository().getServicesByCategoryId({
+          "categoryId": categoryId,
+          "servicesName": _keySearch,
+          "userId": authService.userID,
+          "pageNo": pageNo,
+          "pageSize": 5000
+        });
+        if (response.status) {
+          ServicesData serviceData = ServicesData.fromJson(response.data);
+          if (_keySearch.isEmpty) {
+            setCurrentPage(serviceData.currentPage);
+            setNoOfPages(serviceData.totalPages);
+            setTotalCount(serviceData.totalCount);
+            for (var serv in serviceData.services) {
+              if (allServices.firstWhereOrNull(
+                      (element) => element.serviceName == serv.serviceName) ==
+                  null) {
+                allServices.add(serv);
+              }
             }
-          }
-          // allServices.addAll(serviceData.services);
-          displayedServicesList = allServices;
-        } else {
-          setCurrentPageSearch(serviceData.currentPage);
-          setNoOfPagesSearch(serviceData.totalPages);
-          setTotalCountSearch(serviceData.totalCount);
-          for (var serv in serviceData.services) {
-            if (searchServicesList.firstWhereOrNull(
-                    (element) => element.serviceName == serv.serviceName) ==
-                null) {
-              searchServicesList.add(serv);
+            // allServices.addAll(serviceData.services);
+            displayedServicesList = allServices;
+          } else {
+            setCurrentPageSearch(serviceData.currentPage);
+            setNoOfPagesSearch(serviceData.totalPages);
+            setTotalCountSearch(serviceData.totalCount);
+            for (var serv in serviceData.services) {
+              if (searchServicesList.firstWhereOrNull(
+                      (element) => element.serviceName == serv.serviceName) ==
+                  null) {
+                searchServicesList.add(serv);
+              }
             }
+            // searchServicesList.addAll(serviceData.services);
+            displayedServicesList = searchServicesList;
           }
-          // searchServicesList.addAll(serviceData.services);
-          displayedServicesList = searchServicesList;
+          setShowMore();
         }
-        setShowMore();
       }
+    } catch (e) {
+      Get.showSnackbar(
+        buildCustomToast(
+          Get.context!,
+          toastMsg: ErrorHelper.getErrorMessage('genrealError'),
+          toastTitle: 'عفواً',
+          toastType: ToastType.error,
+        ),
+      );
     }
 
     if (applyLoading) _updateServicesLoading(false);

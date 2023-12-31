@@ -30,10 +30,10 @@ class EventData {
   late final List<Event> events;
 
   EventData.fromJson(Map<String, dynamic> json) {
-    currentPage = json['currentPage'];
-    totalPages = json['totalPages'];
-    pageSize = json['pageSize'];
-    totalCount = json['totalCount'];
+    currentPage = json['currentPage'] ?? 0;
+    totalPages = json['totalPages'] ?? 0;
+    pageSize = json['pageSize'] ?? 0;
+    totalCount = json['totalCount'] ?? 0;
     events = List.from(json['data']).map((e) => Event.fromJson(e)).toList();
   }
 }
@@ -41,16 +41,16 @@ class EventData {
 class Event {
   Event({
     this.eventId,
-    this.eventName = '',
-    this.eventDescription = '',
-    this.eventAddress = '',
-    this.startDate = '',
-    this.endDate = '',
-    this.link = '',
-    this.notifyBefore = 30,
-    this.jobCategoryIdList,
-    this.residencyTypeList,
-    this.residenceCountryIdList,
+    this.eventName,
+    this.eventDescription,
+    this.eventAddress,
+    this.startDate,
+    this.endDate,
+    this.link,
+    this.notifyBefore,
+    // this.jobCategoryIdList,
+    // this.residencyTypeList,
+    // this.residenceCountryIdList,
     this.isActive = true,
   });
   int? eventId;
@@ -61,9 +61,9 @@ class Event {
   String? endDate;
   String? link;
   int? notifyBefore;
-  String? jobCategoryIdList;
-  int? residencyTypeList;
-  int? residenceCountryIdList;
+  // dynamic jobCategoryIdList;
+  // dynamic residencyTypeList;
+  // dynamic residenceCountryIdList;
   bool? isActive;
 
   Event.fromJson(Map<String, dynamic> json) {
@@ -85,10 +85,10 @@ class Event {
 
     link = json['link'];
     notifyBefore = json['notifyBefore'];
-    jobCategoryIdList = json['jobCategoryIdList'];
-    residencyTypeList = json['residencyTypeList'];
-    residenceCountryIdList = json['residenceCountryIdList'];
-    isActive = json['isActive'];
+    // jobCategoryIdList = json['jobCategoryIdList'];
+    // residencyTypeList = json['residencyTypeList'];
+    // residenceCountryIdList = json['residenceCountryIdList'];
+    isActive = json['isActive'] ?? false;
   }
 
   static List<Event> fromJsonList(List list) {

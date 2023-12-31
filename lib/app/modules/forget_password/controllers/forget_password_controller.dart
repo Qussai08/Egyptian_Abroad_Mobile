@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:otp_text_field/otp_text_field.dart';
 
+import '../../../core/helper/error_helper.dart';
+
 class ForgetPasswordController extends GetxController {
   final TextEditingController emailTxtController = TextEditingController();
   final OtpFieldController otpTxtController = OtpFieldController();
@@ -81,25 +83,35 @@ class ForgetPasswordController extends GetxController {
       "email": emailTxtController.text,
       "code": otp
     };
+    try {
+      AppResponse response = await UserRepository().forgetPasswordReq(reqBody);
+      if (response.status) {
+        Get.showSnackbar(
+          buildCustomToast(
+            Get.context!,
+            toastMsg: "تم تعديل كلمة المرور بنجاح",
+            toastTitle: AppStrings.confirm.tr,
+            toastType: ToastType.success,
+          ),
+        );
+        Future.delayed(const Duration(seconds: 2), () {
+          Get.back(closeOverlays: true);
 
-    AppResponse response = await UserRepository().forgetPasswordReq(reqBody);
-    if (response.status) {
+          Get.toNamed(Routes.LOGIN);
+          emailTxtController.clear();
+          newPasswordTxtController.clear();
+          confirmNewPassTxtController.clear();
+        });
+      }
+    } catch (e) {
       Get.showSnackbar(
         buildCustomToast(
           Get.context!,
-          toastMsg: "تم تعديل كلمة المرور بنجاح",
-          toastTitle: AppStrings.confirm.tr,
-          toastType: ToastType.success,
+          toastMsg: ErrorHelper.getErrorMessage('genrealError'),
+          toastTitle: 'عفواً',
+          toastType: ToastType.error,
         ),
       );
-      Future.delayed(const Duration(seconds: 2), () {
-        Get.back(closeOverlays: true);
-
-        Get.toNamed(Routes.LOGIN);
-        emailTxtController.clear();
-        newPasswordTxtController.clear();
-        confirmNewPassTxtController.clear();
-      });
     }
   }
 }

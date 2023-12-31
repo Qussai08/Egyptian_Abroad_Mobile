@@ -1,6 +1,7 @@
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 
@@ -8,7 +9,9 @@ import '../../../core/custom_widgets/app_error_widget.dart';
 import '../../../core/custom_widgets/loading_dialog.dart';
 import '../../../core/custom_widgets/title_text.dart';
 import '../../../core/theme/styles.dart';
+import '../../../routes/app_pages.dart';
 import '../controllers/notifications_controller.dart';
+import 'widgets/event_notification_widget.dart';
 import 'widgets/notification_card_widget.dart';
 
 class NotificationsView extends GetView<NotificationsController> {
@@ -46,12 +49,8 @@ class NotificationsView extends GetView<NotificationsController> {
       body: controller.obx(
           (state) => ListView(
                 children: [
-                  // space
                   SizedBox(height: fixDpiHeight(15)),
                   Obx(() {
-                    // if (controller.notificationsList.isEmpty) {
-                    //   return const Center(child: Text('No notifications'));
-                    // }
                     return ListView.builder(
                       physics: const ClampingScrollPhysics(),
                       shrinkWrap: true,
@@ -60,12 +59,16 @@ class NotificationsView extends GetView<NotificationsController> {
                         final notification =
                             controller.notificationsList[index];
 
-                        return Padding(
-                          padding:
-                              EdgeInsets.symmetric(horizontal: fixDpiWidth(16)),
-                          child: NotificationCardWidget(
-                              notification: notification),
-                        );
+                        return notification.notificationTypeId == null
+                            ? Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: fixDpiWidth(16)),
+                                child: NotificationCardWidget(
+                                    notification: notification),
+                              )
+                            : NotificationEventCardWidget(
+                                notification: notification,
+                              );
                       },
                     );
                   }),

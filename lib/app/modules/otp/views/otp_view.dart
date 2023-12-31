@@ -207,7 +207,9 @@ class _OtpViewState extends State<OtpView> with ValidationMixin {
                                               .createVerificationCode();
                                           endTime = DateTime.now()
                                                   .millisecondsSinceEpoch +
-                                              1000 * 600;
+                                              1000 *
+                                                  (widget.resendOtpTime ?? 2) *
+                                                  60;
                                           _otpHasError.value = false;
                                           controller.otpTxtController.clear();
                                           setState(() {});
