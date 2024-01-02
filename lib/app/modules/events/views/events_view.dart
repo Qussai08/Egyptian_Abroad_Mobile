@@ -31,6 +31,8 @@ class EventsView extends GetView<EventsController> {
 
   @override
   Widget build(BuildContext context) {
+    FocusNode _searchFocusNode = FocusNode();
+
     final con = Get.put(EventsController());
     // final RegistrationController regController = Get.find();
     return Scaffold(
@@ -63,14 +65,16 @@ class EventsView extends GetView<EventsController> {
                         ),
                         child: CustomTextFormField(
                             controller: controller.searchController,
-                            prefixIcon: const Icon(
+                            focusNode: _searchFocusNode,
+                          prefixIcon: const Icon(
                               Icons.search,
                               color: Styles.primaryColor,
                             ),
                             inputData: TextInputType.text,
                             textInputAction: TextInputAction.search,
                             onChangedFunc: (val) {
-                              if (val.isEmpty) {
+                              _searchFocusNode.requestFocus();
+                            if (val.isEmpty) {
                                 controller.keySearch = val;
                                 controller.filterEvents();
                                 FocusScope.of(context).unfocus();
@@ -142,7 +146,7 @@ class EventsView extends GetView<EventsController> {
                                     GetBuilder<EventsController>(
                                         builder: (eventsController) =>
                                             Container(
-                                              height: 50,
+                                              height: 50.h,
                                               decoration: BoxDecoration(
                                                   borderRadius:
                                                       BorderRadius.all(
@@ -317,84 +321,83 @@ class EventsView extends GetView<EventsController> {
                                                                           .format(
                                                                               pickedDate);
 
-                                                                  con.setDateTo(
-                                                                      formattedDate);
-                                                                },
-                                                                minimumDate:
-                                                                    DateTime(
-                                                                  2023,
-                                                                  12,
-                                                                  20,
-                                                                ),
-                                                                maximumDate:
-                                                                    DateTime(
-                                                                  2025,
-                                                                  12,
-                                                                  20,
-                                                                ),
-                                                                initialDateTime:
-                                                                    _dateTime,
+                                                                con.setDateTo(
+                                                                    formattedDate);
+                                                              },
+                                                              minimumDate:
+                                                                  DateTime(
+                                                                2023,
+                                                                12,
+                                                                20,
                                                               ),
-                                                            );
-                                                          });
-                                                    },
-                                                    child: Row(
-                                                      children: [
-                                                        Container(
+                                                              maximumDate:
+                                                                  DateTime(
+                                                                2025,
+                                                                12,
+                                                                20,
+                                                              ),
+                                                              initialDateTime:
+                                                                  _dateTime,
+                                                            ),
+                                                          );
+                                                        });
+                                                  },
+                                                  child: Row(
+                                                    children: [
+                                                      Container(
+                                                        color:
+                                                            Color(0xffEBEBEB),
+                                                        width: 1,
+                                                      ),
+                                                      SizedBox(width: 4.w),
+                                                      Text(AppStrings.to.tr,
+                                                          style: Styles
+                                                              .getMediumStyle(
+                                                                  color: Styles
+                                                                      .lightBlack,
+                                                                  fontSize:
+                                                                      fixDpiFont(
+                                                                          12))),
+                                                      SizedBox(width: 4.w),
+                                                      Icon(Icons.calendar_month,
                                                           color:
-                                                              Color(0xffEBEBEB),
-                                                          width: 1,
-                                                        ),
-                                                        SizedBox(width: 4.w),
-                                                        Text(AppStrings.to.tr,
+                                                              Styles.lightBlack,
+                                                          size: fixDpiFont(12)),
+                                                      SizedBox(width: 4.w),
+                                                      Container(
+                                                        width: 130,
+                                                        child: Text(
+                                                            eventsController
+                                                                    .dateTo
+                                                                    .isEmpty
+                                                                ? ""
+                                                                : NotificationsModel
+                                                                    .formatDate(
+                                                                        eventsController
+                                                                            .dateTo),
+                                                            textAlign:
+                                                                TextAlign.start,
                                                             style: Styles.getMediumStyle(
                                                                 color: Styles
                                                                     .lightBlack,
                                                                 fontSize:
                                                                     fixDpiFont(
                                                                         12))),
-                                                        SizedBox(width: 4.w),
-                                                        Icon(
-                                                            Icons
-                                                                .calendar_month,
-                                                            color: Styles
-                                                                .lightBlack,
-                                                            size:
-                                                                fixDpiFont(12)),
-                                                        SizedBox(width: 4.w),
-                                                        Container(
-                                                          width: 130,
-                                                          child: Text(
-                                                              eventsController
-                                                                      .dateTo
-                                                                      .isEmpty
-                                                                  ? ""
-                                                                  : NotificationsModel
-                                                                      .formatDate(
-                                                                          eventsController
-                                                                              .dateTo),
-                                                              textAlign:
-                                                                  TextAlign
-                                                                      .start,
-                                                              style: Styles.getMediumStyle(
-                                                                  color: Styles
-                                                                      .lightBlack,
-                                                                  fontSize:
-                                                                      fixDpiFont(
-                                                                          12))),
-                                                        ),
-                                                      ],
-                                                    ),
+                                                      ),
+                                                    ],
                                                   ),
-                                                ],
-                                              ),
-                                            )),
-                                    SizedBox(height: 16.h),
-                                    const TextFieldTitle(
-                                      title: "دولة الفعالية",
-                                      hasSubTitle: false,
-                                    ),
-                                    GestureDetector(
+                                                ),
+                                              ],
+                                            ),
+                                          )),
+                                  SizedBox(height: 12.h),
+                                  const TextFieldTitle(
+                                    title: "دولة الفعالية",
+                                    hasSubTitle: false,
+                                  ),
+                                  Container(
+                                    height: 50.h,
+                                    child: GestureDetector(
                                         onTap: () {
                                           Get.bottomSheet(
                                               Container(
@@ -562,12 +565,15 @@ class EventsView extends GetView<EventsController> {
                                             hintFontWeight: FontWeight.w400,
                                           ),
                                         )),
-                                    SizedBox(height: 16.h),
-                                    const TextFieldTitle(
-                                      title: "موضوع الفعالية",
-                                      hasSubTitle: false,
-                                    ),
-                                    GestureDetector(
+                                  ),
+                                  SizedBox(height: 12.h),
+                                  const TextFieldTitle(
+                                    title: "موضوع الفعالية",
+                                    hasSubTitle: false,
+                                  ),
+                                  Container(
+                                    height: 50.h,
+                                    child: GestureDetector(
                                         onTap: () {
                                           Get.bottomSheet(
                                               Container(
@@ -712,53 +718,54 @@ class EventsView extends GetView<EventsController> {
                                             hintFontWeight: FontWeight.w400,
                                           ),
                                         )),
-                                    SizedBox(height: 30.h),
-                                    CustomButton(
-                                      type: ButtonType.primary,
-                                      text: "إظهار النتائج",
-                                      onPressed: () async {
-                                        await controller.filterEvents();
-                                        Get.back();
-                                      },
-                                    )
-                                  ],
-                                ),
+                                  ),
+                                  SizedBox(height: 15.h),
+                                  CustomButton(
+                                    type: ButtonType.primary,
+                                    text: "إظهار النتائج",
+                                    onPressed: () async {
+                                      await controller.filterEvents();
+                                      Get.back();
+                                    },
+                                  )
+                                ],
                               ),
-                            ]),
-                          ),
-                        );
-                      },
-                      child: Container(
-                        width: 65,
-                        height: 65,
-                        decoration: const BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: Styles.blackShadow,
-                              blurRadius: 45,
-                              offset: Offset(10, 10),
                             ),
-                          ],
+                          ]),
                         ),
-                        child: Image.asset(
-                          AppImages.filterIcon,
-                        ),
+                      );
+                    },
+                    child: Container(
+                      width: 65,
+                      height: 65,
+                      decoration: const BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                            color: Styles.blackShadow,
+                            blurRadius: 45,
+                            offset: Offset(10, 10),
+                          ),
+                        ],
                       ),
-                    )
-                  ],
-                ),
+                      child: Image.asset(
+                        AppImages.filterIcon,
+                      ),
+                    ),
+                  )
+                ],
               ),
-              Flexible(
-                child: controller.obx(
-                    (state) => ListView(
-                          children: [
-                            Obx(() {
-                              return ListView.builder(
-                                physics: const ClampingScrollPhysics(),
-                                shrinkWrap: true,
-                                itemCount: controller.eventsList.length,
-                                itemBuilder: (context, index) {
-                                  final event = controller.eventsList[index];
+            ),
+            Flexible(
+              child: controller.obx(
+                  (state) => ListView(
+                        children: [
+                          Obx(() {
+                            return ListView.builder(
+                              physics: const ClampingScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: controller.eventsList.length,
+                              itemBuilder: (context, index) {
+                                final event = controller.eventsList[index];
 
                                   return GestureDetector(
                                     onTap: () {
@@ -796,7 +803,11 @@ class EventsView extends GetView<EventsController> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
-                                              Text(event.eventName ?? ""),
+                                              Text(
+                                              event.eventName ?? "",
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
                                               const Icon(
                                                 Icons
                                                     .arrow_back_ios_new_rounded,
