@@ -95,23 +95,28 @@ class NotificationHelper {
     AuthService authService = Get.find();
     AuthProvider authProvider = Get.find();
     final fcmToken = await getFcmToken() ?? '';
-    if ((authService.fcmToken?.isEmpty ?? true) ||
-        authService.fcmToken != fcmToken) {
-      await authProvider.registerFCMToken(fcmToken).then((value) {
+    final userId = authService.userID;
+    if (((authService.fcmToken?.isEmpty ?? true) ||
+            authService.fcmToken != fcmToken) &&
+        userId != null) {
+      await authProvider.registerFCMToken(fcmToken, userId).then((value) {
         if (value.body ?? false) {
           authService.setFCMToken(fcmToken);
         }
       }, onError: (err) {});
     }
-    FirebaseMessaging.instance.onTokenRefresh.listen((fcmToken) async {
-      await authProvider.registerFCMToken(fcmToken).then((value) {
-        if (value.body ?? false) {
-          authService.setFCMToken(fcmToken);
-        }
-      }, onError: (err) {});
-    }).onError((err) {
-      // print(err);
-    });
+    if (userId != null) {
+      FirebaseMessaging.instance.onTokenRefresh.listen((fcmToken) async {
+        await authProvider.registerFCMToken(fcmToken, userId).then((value) {
+          if (value.body ?? false) {
+            authService.setFCMToken(fcmToken);
+          }
+        }, onError: (err) {});
+      }).onError((err) {
+        print(err);
+        print("onTokenRefresh -> registerFCMToken");
+      });
+    }
   }
 
   // Get token form firebase for android and ios

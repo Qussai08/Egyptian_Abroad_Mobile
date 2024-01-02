@@ -25,7 +25,7 @@ class SplashController extends GetxController {
 
   _goNext() async {
     String? token = authService.accessToken;
-
+    print("registerFCMToken token ${token}");
     if (token?.isNotEmpty ?? false) {
       await notificationHelper.registerFCMToken();
       await notificationHelper.subscribeToTopic('broadcast');

@@ -137,9 +137,10 @@ class AuthProvider extends ApiService {
   // }
 
   // =================== Register FCM Token ===================
-  Future<ApiResponse<bool>> registerFCMToken(String fcmToken) async {
-    final Response response =
-        await post(Constants.registerFCMTokenPath, {"fcmToken": fcmToken});
+  Future<ApiResponse<bool>> registerFCMToken(
+      String fcmToken, String userId) async {
+    final Response response = await post(Constants.registerFCMTokenPath,
+        {"fcmToken": fcmToken, "userId": userId});
     return ApiResponse.fromResponse(response, (json) => json);
   }
 

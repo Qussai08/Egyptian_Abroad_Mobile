@@ -44,27 +44,26 @@ class _CompleteAccountViewState extends State<CompleteAccountView>
     return NetworkIndicator(
       child: SafeArea(
         child: Scaffold(
-          body: Column(
-            children: [
-              Container(
-                padding: EdgeInsets.only(right: 16.w, left: 16.w),
-                // height: fixDpiScreenHeight() * 0.7,
-                // color: Colors.red,
-                child: SingleChildScrollView(
-                  child: GetBuilder<RegistrationController>(
-                    builder: (registrationController) => Form(
-                      key: _formKey,
-                      child: registrationController.residenceLoading
-                          ? Container(
-                              height: fixDpiScreenHeight(),
-                              width: fixDpiScreenWidth(),
-                              child: Center(
-                                child: CircularProgressIndicator(
-                                  color: Styles.primaryColor,
-                                ),
-                              ),
-                            )
-                          : Column(
+          body: GetBuilder<RegistrationController>(
+            builder: (registrationController) => registrationController
+                    .residenceLoading
+                ? Container(
+                    height: fixDpiScreenHeight(),
+                    width: fixDpiScreenWidth(),
+                    child: Center(
+                      child: CircularProgressIndicator(
+                        color: Styles.primaryColor,
+                      ),
+                    ),
+                  )
+                : Column(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.only(right: 16.w, left: 16.w),
+                        child: SingleChildScrollView(
+                          child: Form(
+                            key: _formKey,
+                            child: Column(
                               children: [
                                 SizedBox(
                                   height: 18.h,
@@ -202,60 +201,60 @@ class _CompleteAccountViewState extends State<CompleteAccountView>
                                 ),
                               ],
                             ),
-                    ),
+                          ),
+                        ),
+                      ),
+                      Spacer(),
+                      Container(
+                        width: double.infinity,
+                        padding: EdgeInsets.symmetric(vertical: 11.h),
+                        alignment: Alignment.bottomCenter,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(10),
+                              topLeft: Radius.circular(10)),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey,
+                              blurRadius: 4,
+                              offset: Offset(0, 0), // Shadow position
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            CustomButton(
+                              text: AppStrings.next.tr,
+                              icon: Icons.arrow_forward,
+                              type: ButtonType.primary,
+                              width: 358.w,
+                              height: 50.h,
+                              onPressed: () {
+                                // registrationController.loadResidenceData();
+                                if (_formKey.currentState!.validate()) {
+                                  Get.toNamed(Routes.COMPLETEACCOUNTWORK);
+                                }
+                              },
+                            ),
+                            SizedBox(
+                              height: 8.h,
+                            ),
+                            CustomButton(
+                              text: AppStrings.skip.tr,
+                              type: ButtonType.secondary,
+                              width: 358.w,
+                              height: 50.h,
+                              onPressed: () {
+                                Get.toNamed(Routes.REGITSRATIONSELECTAVATAR);
+                              },
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
                   ),
-                ),
-              ),
-              Spacer(),
-              Container(
-                width: double.infinity,
-                padding: EdgeInsets.symmetric(vertical: 11.h),
-                alignment: Alignment.bottomCenter,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(10),
-                      topLeft: Radius.circular(10)),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey,
-                      blurRadius: 4,
-                      offset: Offset(0, 0), // Shadow position
-                    ),
-                  ],
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CustomButton(
-                      text: AppStrings.next.tr,
-                      icon: Icons.arrow_forward,
-                      type: ButtonType.primary,
-                      width: 358.w,
-                      height: 50.h,
-                      onPressed: () {
-                        // registrationController.loadResidenceData();
-                        if (_formKey.currentState!.validate()) {
-                          Get.toNamed(Routes.COMPLETEACCOUNTWORK);
-                        }
-                      },
-                    ),
-                    SizedBox(
-                      height: 8.h,
-                    ),
-                    CustomButton(
-                      text: AppStrings.skip.tr,
-                      type: ButtonType.secondary,
-                      width: 358.w,
-                      height: 50.h,
-                      onPressed: () {
-                        Get.toNamed(Routes.REGITSRATIONSELECTAVATAR);
-                      },
-                    ),
-                  ],
-                ),
-              )
-            ],
           ),
         ),
       ),

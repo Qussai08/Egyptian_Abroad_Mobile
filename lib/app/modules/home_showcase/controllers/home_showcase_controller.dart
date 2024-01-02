@@ -50,13 +50,11 @@ class HomeShowcaseController extends GetxController {
   Future<void> getUserProfile() async {
     setUserProfileLoading(true);
 
-    AppResponse response = await UserRepository().viewAccountReq(
-        // make it dynamic
-
-        queryParameters: {
-          "Userid": authService.userID,
-          "languageId": LocalizationHelper.isArabic() ? 1 : 2
-        });
+    AppResponse response =
+        await UserRepository().viewAccountReq(queryParameters: {
+      "Userid": authService.userID,
+      "languageId": LocalizationHelper.isArabic() ? 1 : 2
+    });
 
     if (response.status) {
       UserProfileModel userProfile =
