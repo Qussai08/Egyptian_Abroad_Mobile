@@ -55,12 +55,13 @@ class EventDetailsView extends GetView<EventDetailsController> {
                 children: [
                   SizedBox(height: 17.5.h),
                   TitleText(
-                      title: controller.event().eventName!,
+                      title: controller.event().eventName ?? "",
                       fontSize: 16,
                       color: Styles.darkGray),
                   SizedBox(height: 12.h),
                   FromToDateWidget(
-                      fromDate: event().startDate!, toDate: event().endDate!),
+                      fromDate: event().startDate ?? "",
+                      toDate: event().endDate ?? ""),
                   SizedBox(height: 12.h),
                   CustomButton(
                     type: ButtonType.primary,
@@ -68,7 +69,7 @@ class EventDetailsView extends GetView<EventDetailsController> {
                     assetString: AppImages.linkIcon,
                     iconSize: fixDpiFont(14),
                     changeIconPosition: true,
-                    text: event().isActive!
+                    text: event().isActive ?? false
                         ? AppStrings.meetingLink.tr
                         : AppStrings.recordingLink.tr,
                     width: 119.w,
@@ -88,9 +89,8 @@ class EventDetailsView extends GetView<EventDetailsController> {
                       SizedBox(width: 12.w),
                       Expanded(
                         child: Text(
-                          event().eventAddress!,
-                          style:
-                          Styles.getMediumStyle(color: Styles.black),
+                          event().eventAddress ?? "",
+                          style: Styles.getMediumStyle(color: Styles.black),
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -99,7 +99,7 @@ class EventDetailsView extends GetView<EventDetailsController> {
                   ),
                   SizedBox(height: 12.h),
                   Text(
-                    event().eventDescription!,
+                    event().eventDescription ?? "",
                     style: Styles.getMediumStyle(
                             color: Styles.black, fontSize: fixDpiFont(12))
                         .copyWith(height: 2.0),

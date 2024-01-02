@@ -22,7 +22,8 @@ class NotificationEventCardWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         print("notification.eventId ${notification.eventID}");
-        Get.toNamed(Routes.EVENT_DETAILS, arguments: 1);
+        Get.toNamed(Routes.EVENT_DETAILS,
+            arguments: int.parse(notification.eventID ?? ""));
       },
       child: Container(
         margin: EdgeInsets.only(bottom: 12.h, right: 16.w, left: 16.w),

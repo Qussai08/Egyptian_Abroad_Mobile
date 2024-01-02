@@ -16,6 +16,7 @@ class EventDetailsController extends GetxController {
   getEventDetails() async {
     var eventDetailsProvider = Get.find<EventDetailsProvider>();
 
+    print("eventId $eventId");
     await eventDetailsProvider
         .fetchEventDetails(eventId: eventId)
         .then((value) {
