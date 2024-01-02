@@ -21,6 +21,7 @@ class FavoritesList extends StatelessWidget {
     return Showcase.withWidget(
       height: 144.h,
       width: 255.w,
+      targetPadding: EdgeInsets.all(8.0),
       key: homeContoller.two,
       container: CustoumShowcase2Widget(),
       onBarrierClick: () {
