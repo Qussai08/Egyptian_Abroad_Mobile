@@ -13,6 +13,7 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
 
   RxList<Event> eventsList = <Event>[].obs;
   final RegistrationController registrationController = Get.find();
+  RxBool isLoading = false.obs;
 
   @override
   void onInit() {
@@ -21,8 +22,10 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
   }
 
   Future<void> loadEvents({Map<String, dynamic>? body}) async {
+    isLoading.value = true;
+
     eventsList.clear();
-    change([], status: RxStatus.loading());
+    // change([], status: RxStatus.loading());
 
     await eventsProvider
         .getEventsListReq(body ??
@@ -38,21 +41,26 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
         if (value.body != null) {
           if (value.body!.events.isEmpty) {
             change(null, status: RxStatus.empty());
+            isLoading.value = false;
             return;
           }
           eventsList.addAll(value.body!.events ?? []);
           change(value.body!.events, status: RxStatus.success());
+          isLoading.value = false;
         } else {
           change(null, status: RxStatus.empty());
+          isLoading.value = false;
         }
       } else {
         change(null, status: RxStatus.error('حدث خطأ ما'));
         // change(null, status: RxStatus.error('${value.error}'));
+        isLoading.value = false;
       }
     }, onError: (error) {
       print("errorrrr");
       change(null, status: RxStatus.error('حدث خطأ ما'));
       // change(null, status: RxStatus.error('$error'));
+      isLoading.value = false;
     });
     //TODO : refactor
     countryIds = registrationController.countriesList;
@@ -62,7 +70,7 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
   }
 
   Future<void> retry() async {
-    change([], status: RxStatus.loading());
+    // change([], status: RxStatus.loading());
     await loadEvents();
   }
 
@@ -87,7 +95,7 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
   }
 
   Future<void> filterEvents() async {
-    change([], status: RxStatus.loading());
+    // change([], status: RxStatus.loading());
     Map<String, dynamic> body = {
       "search": keySearch.isNotEmpty ? keySearch : "",
       "pageNo": 1,

@@ -15,6 +15,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 
 import '../../../core/custom_widgets/app_error_widget.dart';
 import '../../../core/custom_widgets/custom_textfield.dart';
@@ -40,166 +41,174 @@ class EventsView extends GetView<EventsController> {
           preferredSize: Size(double.maxFinite, fixDpiHeight(110)),
           child: EventsAppbar(),
         ),
-        body: Column(
-          children: [
-            Container(
-              height: 65,
-              margin: EdgeInsets.only(
-                  right: 16.w, left: 8.w, top: 12.h, bottom: 12.h),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            color: Styles.blackShadow,
-                            blurRadius: 45,
-                            offset: Offset(10, 10),
-                          ),
-                        ],
-                      ),
-                      child: CustomTextFormField(
-                          controller: controller.searchController,
-                          focusNode: _searchFocusNode,
+        body: Obx(() {
+          controller.isLoading()
+              ? context.loaderOverlay.show()
+              : context.loaderOverlay.hide();
+          return Column(
+            children: [
+              Container(
+                height: 65,
+                margin: EdgeInsets.only(
+                    right: 16.w, left: 8.w, top: 12.h, bottom: 12.h),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        decoration: const BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Styles.blackShadow,
+                              blurRadius: 45,
+                              offset: Offset(10, 10),
+                            ),
+                          ],
+                        ),
+                        child: CustomTextFormField(
+                            controller: controller.searchController,
+                            focusNode: _searchFocusNode,
                           prefixIcon: const Icon(
-                            Icons.search,
-                            color: Styles.primaryColor,
-                          ),
-                          inputData: TextInputType.text,
-                          textInputAction: TextInputAction.search,
-                          onChangedFunc: (val) {
-                            _searchFocusNode.requestFocus();
+                              Icons.search,
+                              color: Styles.primaryColor,
+                            ),
+                            inputData: TextInputType.text,
+                            textInputAction: TextInputAction.search,
+                            onChangedFunc: (val) {
+                              _searchFocusNode.requestFocus();
                             if (val.isEmpty) {
+                                controller.keySearch = val;
+                                controller.filterEvents();
+                                FocusScope.of(context).unfocus();
+                              }
+                            },
+                            onFieldSubmitted: (val) {
                               controller.keySearch = val;
                               controller.filterEvents();
-                              FocusScope.of(context).unfocus();
-                            }
-                          },
-                          onFieldSubmitted: (val) {
-                            controller.keySearch = val;
-                            controller.filterEvents();
-                          },
-                          hintTxt: AppStrings.search.tr,
-                          hintStyle:
-                              Styles.getRegularStyle(color: Styles.lightBlack)),
+                            },
+                            hintTxt: AppStrings.search.tr,
+                            hintStyle: Styles.getRegularStyle(
+                                color: Styles.lightBlack)),
+                      ),
                     ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Get.bottomSheet(
-                        Container(
-                          decoration: const BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(12),
-                                  topRight: Radius.circular(12))),
-                          child: Column(children: [
-                            Container(
-                              padding: EdgeInsets.symmetric(horizontal: 8.w),
-                              decoration: const BoxDecoration(
-                                  color: Color(0xffE7F2F4),
-                                  borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(12),
-                                      topRight: Radius.circular(12))),
-                              height: 68.h,
-                              child: Row(children: [
-                                Container(
-                                  width: fixDpiFont(24),
-                                ),
-                                Spacer(),
-                                Text(
-                                  "بحث باستخدام",
-                                  style: Styles.getMediumStyle(
-                                      color: Color(0xff201D61), fontSize: 24),
-                                ),
-                                Spacer(),
-                                GestureDetector(
-                                  onTap: () {
-                                    Get.back();
-                                  },
-                                  child: Padding(
-                                    padding: EdgeInsets.only(bottom: 20.h),
-                                    child: Icon(
-                                      Icons.close,
-                                      size: fixDpiFont(24),
+                    GestureDetector(
+                      onTap: () {
+                        Get.bottomSheet(
+                          Container(
+                            decoration: const BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(12),
+                                    topRight: Radius.circular(12))),
+                            child: Column(children: [
+                              Container(
+                                padding: EdgeInsets.symmetric(horizontal: 8.w),
+                                decoration: const BoxDecoration(
+                                    color: Color(0xffE7F2F4),
+                                    borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(12),
+                                        topRight: Radius.circular(12))),
+                                height: 68.h,
+                                child: Row(children: [
+                                  Container(
+                                    width: fixDpiFont(24),
+                                  ),
+                                  Spacer(),
+                                  Text(
+                                    "بحث باستخدام",
+                                    style: Styles.getMediumStyle(
+                                        color: Color(0xff201D61), fontSize: 24),
+                                  ),
+                                  Spacer(),
+                                  GestureDetector(
+                                    onTap: () {
+                                      Get.back();
+                                    },
+                                    child: Padding(
+                                      padding: EdgeInsets.only(bottom: 20.h),
+                                      child: Icon(
+                                        Icons.close,
+                                        size: fixDpiFont(24),
+                                      ),
                                     ),
-                                  ),
-                                )
-                              ]),
-                            ),
-                            SizedBox(
-                              height: 20.h,
-                            ),
-                            Container(
-                              padding: EdgeInsets.symmetric(horizontal: 12.w),
-                              child: Column(
-                                children: [
-                                  TextFieldTitle(
-                                    title: "تاريخ بدء الفعالية",
-                                    hasSubTitle: false,
-                                  ),
-                                  GetBuilder<EventsController>(
-                                      builder: (eventsController) => Container(
-                                            height: 50.h,
-                                            decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(37)),
-                                                border: Border.all(
-                                                    color: Color(0xffEBEBEB))),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceEvenly,
-                                              children: [
-                                                GestureDetector(
-                                                  onTap: () async {
-                                                    DateTime _dateTime =
-                                                        DateTime.now();
+                                  )
+                                ]),
+                              ),
+                              SizedBox(
+                                height: 20.h,
+                              ),
+                              Container(
+                                padding: EdgeInsets.symmetric(horizontal: 12.w),
+                                child: Column(
+                                  children: [
+                                    TextFieldTitle(
+                                      title: "تاريخ بدء الفعالية",
+                                      hasSubTitle: false,
+                                    ),
+                                    GetBuilder<EventsController>(
+                                        builder: (eventsController) =>
+                                            Container(
+                                              height: 50.h,
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(37)),
+                                                  border: Border.all(
+                                                      color:
+                                                          Color(0xffEBEBEB))),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
+                                                children: [
+                                                  GestureDetector(
+                                                    onTap: () async {
+                                                      DateTime _dateTime =
+                                                          DateTime.now();
 
-                                                    await showCupertinoModalPopup<
-                                                            void>(
-                                                        context: context,
-                                                        builder: (_) {
-                                                          final size =
-                                                              MediaQuery.of(
-                                                                      context)
-                                                                  .size;
+                                                      await showCupertinoModalPopup<
+                                                              void>(
+                                                          context: context,
+                                                          builder: (_) {
+                                                            final size =
+                                                                MediaQuery.of(
+                                                                        context)
+                                                                    .size;
 
-                                                          return Container(
-                                                            decoration:
-                                                                const BoxDecoration(
-                                                              color:
-                                                                  Colors.white,
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .only(
-                                                                topLeft: Radius
-                                                                    .circular(
-                                                                        12),
-                                                                topRight: Radius
-                                                                    .circular(
-                                                                        12),
+                                                            return Container(
+                                                              decoration:
+                                                                  const BoxDecoration(
+                                                                color: Colors
+                                                                    .white,
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .only(
+                                                                  topLeft: Radius
+                                                                      .circular(
+                                                                          12),
+                                                                  topRight: Radius
+                                                                      .circular(
+                                                                          12),
+                                                                ),
                                                               ),
-                                                            ),
-                                                            height:
-                                                                size.height *
-                                                                    0.27,
-                                                            width:
-                                                                fixDpiScreenWidth(),
-                                                            child:
-                                                                CupertinoDatePicker(
-                                                              mode:
-                                                                  CupertinoDatePickerMode
-                                                                      .date,
-                                                              onDateTimeChanged:
-                                                                  (DateTime
-                                                                      pickedDate) {
-                                                                String
-                                                                    formattedDate =
-                                                                    DateFormat(
-                                                                            'yyyy-MM-dd HH:mm:ss')
-                                                                        .format(
-                                                                            pickedDate);
+                                                              height:
+                                                                  size.height *
+                                                                      0.27,
+                                                              width:
+                                                                  fixDpiScreenWidth(),
+                                                              child:
+                                                                  CupertinoDatePicker(
+                                                                mode:
+                                                                    CupertinoDatePickerMode
+                                                                        .date,
+                                                                onDateTimeChanged:
+                                                                    (DateTime
+                                                                        pickedDate) {
+                                                                  String
+                                                                      formattedDate =
+                                                                      DateFormat(
+                                                                              'yyyy-MM-dd HH:mm:ss')
+                                                                          .format(
+                                                                              pickedDate);
 
                                                                 con.setDateFrom(
                                                                     formattedDate);
@@ -256,63 +265,63 @@ class EventsView extends GetView<EventsController> {
                                                                         true),
                                                             // TODO : refactor
 
-                                                            style: Styles.getMediumStyle(
-                                                                color: Styles
-                                                                    .lightBlack,
-                                                                fontSize:
-                                                                    fixDpiFont(
-                                                                        12))),
-                                                      ),
-                                                    ],
+                                                              style: Styles.getMediumStyle(
+                                                                  color: Styles
+                                                                      .lightBlack,
+                                                                  fontSize:
+                                                                      fixDpiFont(
+                                                                          12))),
+                                                        ),
+                                                      ],
+                                                    ),
                                                   ),
-                                                ),
-                                                GestureDetector(
-                                                  onTap: () async {
-                                                    DateTime _dateTime =
-                                                        DateTime.now();
+                                                  GestureDetector(
+                                                    onTap: () async {
+                                                      DateTime _dateTime =
+                                                          DateTime.now();
 
-                                                    await showCupertinoModalPopup<
-                                                            void>(
-                                                        context: context,
-                                                        builder: (_) {
-                                                          final size =
-                                                              MediaQuery.of(
-                                                                      context)
-                                                                  .size;
+                                                      await showCupertinoModalPopup<
+                                                              void>(
+                                                          context: context,
+                                                          builder: (_) {
+                                                            final size =
+                                                                MediaQuery.of(
+                                                                        context)
+                                                                    .size;
 
-                                                          return Container(
-                                                            decoration:
-                                                                const BoxDecoration(
-                                                              color:
-                                                                  Colors.white,
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .only(
-                                                                topLeft: Radius
-                                                                    .circular(
-                                                                        12),
-                                                                topRight: Radius
-                                                                    .circular(
-                                                                        12),
+                                                            return Container(
+                                                              decoration:
+                                                                  const BoxDecoration(
+                                                                color: Colors
+                                                                    .white,
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .only(
+                                                                  topLeft: Radius
+                                                                      .circular(
+                                                                          12),
+                                                                  topRight: Radius
+                                                                      .circular(
+                                                                          12),
+                                                                ),
                                                               ),
-                                                            ),
-                                                            height:
-                                                                size.height *
-                                                                    0.27,
-                                                            child:
-                                                                CupertinoDatePicker(
-                                                              mode:
-                                                                  CupertinoDatePickerMode
-                                                                      .date,
-                                                              onDateTimeChanged:
-                                                                  (DateTime
-                                                                      pickedDate) {
-                                                                String
-                                                                    formattedDate =
-                                                                    DateFormat(
-                                                                            'yyyy-MM-dd HH:mm:ss')
-                                                                        .format(
-                                                                            pickedDate);
+                                                              height:
+                                                                  size.height *
+                                                                      0.27,
+                                                              child:
+                                                                  CupertinoDatePicker(
+                                                                mode:
+                                                                    CupertinoDatePickerMode
+                                                                        .date,
+                                                                onDateTimeChanged:
+                                                                    (DateTime
+                                                                        pickedDate) {
+                                                                  String
+                                                                      formattedDate =
+                                                                      DateFormat(
+                                                                              'yyyy-MM-dd HH:mm:ss')
+                                                                          .format(
+                                                                              pickedDate);
 
                                                                 con.setDateTo(
                                                                     formattedDate);
@@ -761,90 +770,92 @@ class EventsView extends GetView<EventsController> {
                               itemBuilder: (context, index) {
                                 final event = controller.eventsList[index];
 
-                                return GestureDetector(
-                                  onTap: () {
-                                    print("event.eventId ${event.eventId}");
-                                    Get.toNamed(Routes.EVENT_DETAILS,
-                                        arguments: event.eventId);
-                                  },
-                                  child: Container(
-                                    margin: EdgeInsets.only(
-                                        bottom: 12.h, right: 16.w, left: 16.w),
-                                    decoration: const BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(12)),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Styles.blackShadow,
-                                          blurRadius: 45,
-                                          offset: Offset(10, 10),
-                                        ),
-                                      ],
-                                    ),
-                                    child: ListTile(
-                                      contentPadding:
-                                          const EdgeInsets.symmetric(
-                                              vertical: 8, horizontal: 16),
-                                      titleTextStyle: Styles.getBoldStyle(
-                                          color: Styles.black2, fontSize: 16),
-                                      title: Container(
-                                        margin:
-                                            const EdgeInsets.only(bottom: 12),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Expanded(
-                                              child: Text(
-                                                event.eventName ?? "",
-                                                maxLines: 1,
-                                                overflow: TextOverflow.ellipsis,
-                                              ),
-                                            ),
-                                            const Icon(
-                                              Icons.arrow_back_ios_new_rounded,
-                                              size: 16,
-                                              color: Color(0xff3F3D56),
-                                              weight: 20,
-                                            )
-                                          ],
-                                        ),
+                                  return GestureDetector(
+                                    onTap: () {
+                                      print("event.eventId ${event.eventId}");
+                                      Get.toNamed(Routes.EVENT_DETAILS,
+                                          arguments: event.eventId);
+                                    },
+                                    child: Container(
+                                      margin: EdgeInsets.only(
+                                          bottom: 12.h,
+                                          right: 16.w,
+                                          left: 16.w),
+                                      decoration: const BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(12)),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Styles.blackShadow,
+                                            blurRadius: 45,
+                                            offset: Offset(10, 10),
+                                          ),
+                                        ],
                                       ),
-                                      subtitle: FromToDateWidget(
-                                          fromDate: event.startDate!,
-                                          toDate: event.endDate!),
+                                      child: ListTile(
+                                        contentPadding:
+                                            const EdgeInsets.symmetric(
+                                                vertical: 8, horizontal: 16),
+                                        titleTextStyle: Styles.getBoldStyle(
+                                            color: Styles.black2, fontSize: 16),
+                                        title: Container(
+                                          margin:
+                                              const EdgeInsets.only(bottom: 12),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                              event.eventName ?? "",
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                              const Icon(
+                                                Icons
+                                                    .arrow_back_ios_new_rounded,
+                                                size: 16,
+                                                color: Color(0xff3F3D56),
+                                                weight: 20,
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                        subtitle: FromToDateWidget(
+                                            fromDate: event.startDate!,
+                                            toDate: event.endDate!),
+                                      ),
                                     ),
-                                  ),
-                                );
-                              },
-                            );
-                          }),
+                                  );
+                                },
+                              );
+                            }),
 
-                          // space
-                          SizedBox(height: fixDpiHeight(28)),
-                        ],
+                            // space
+                            SizedBox(height: fixDpiHeight(28)),
+                          ],
+                        ),
+                    onLoading: const LoadingDialog(),
+                    onError: (error) => AppErrorWidget(
+                          text: error ?? '',
+                          // text: ErrorHelper.getErrorMessage(int.parse(error ?? '')),
+                          onPress: () {
+                            controller.retry();
+                          },
+                        ),
+                    onEmpty: Center(
+                      child: Text(
+                        AppStrings.noResult.tr,
+                        style: Styles.getBoldStyle(
+                          color: Styles.black,
+                          fontSize: 18,
+                        ),
+                        overflow: TextOverflow.ellipsis,
                       ),
-                  onLoading: const LoadingDialog(),
-                  onError: (error) => AppErrorWidget(
-                        text: error ?? '',
-                        // text: ErrorHelper.getErrorMessage(int.parse(error ?? '')),
-                        onPress: () {
-                          controller.retry();
-                        },
-                      ),
-                  onEmpty: Center(
-                    child: Text(
-                      AppStrings.noResult.tr,
-                      style: Styles.getBoldStyle(
-                        color: Styles.black,
-                        fontSize: 18,
-                      ),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  )),
-            )
-          ],
-        ));
+                    )),
+              )
+            ],
+          );
+        }));
   }
 }

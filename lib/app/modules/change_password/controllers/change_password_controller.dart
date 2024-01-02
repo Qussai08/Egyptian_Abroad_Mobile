@@ -18,6 +18,8 @@ class ChangePasswordController extends GetxController {
   final ChangePasswordProvider changePasswordProvider =
       Get.find<ChangePasswordProvider>();
 
+  RxBool isLoading = false.obs;
+
   Future<void> changePassword(
       {required String oldPassword, required String newPassword}) async {
     if (oldPassword == newPassword) {
@@ -31,6 +33,7 @@ class ChangePasswordController extends GetxController {
       );
       return;
     }
+    isLoading.value = true;
     changePasswordProvider.postChangePassword(oldPassword, newPassword).then(
         (value) {
       Get.showSnackbar(
@@ -42,8 +45,10 @@ class ChangePasswordController extends GetxController {
         ),
       );
       AuthService().logout();
+      isLoading.value = false;
       Get.offAllNamed(Routes.LOGIN);
     }, onError: (error) {
+      isLoading.value = false;
       handleError(error);
     });
   }

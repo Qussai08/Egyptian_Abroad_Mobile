@@ -144,8 +144,8 @@ class CustoumShowcase2Widget extends StatelessWidget {
             left: 0,
             top: 13,
             child: Container(
-              width: 240,
-              // height: 131,
+              width: 331.w,
+              height: 169.h,
               decoration: ShapeDecoration(
                 color: const Color(0xFFFAFAFA),
                 shape: RoundedRectangleBorder(
@@ -161,7 +161,7 @@ class CustoumShowcase2Widget extends StatelessWidget {
                 ],
               ),
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.only(top: 11.h, left: 13.w, right: 12.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -169,7 +169,7 @@ class CustoumShowcase2Widget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(top: 4.0),
+                          padding: const EdgeInsets.only(top: 4.0, left: 4.0),
                           child: Image.asset(AppImages.icInfo,
                               width: 16, height: 16),
                         ),
@@ -180,6 +180,7 @@ class CustoumShowcase2Widget extends StatelessWidget {
                               color: Styles.black,
                               fontSize: 15,
                             ),
+                            textAlign: TextAlign.justify,
                             maxLines: 5,
                             overflow: TextOverflow.ellipsis,
                           ),
