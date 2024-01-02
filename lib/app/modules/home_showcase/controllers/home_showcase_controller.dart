@@ -26,15 +26,17 @@ class HomeShowcaseController extends GetxController {
   final authService = Get.find<AuthService>();
   final RegistrationController registrationController =
       Get.put(RegistrationController());
+  bool isLoading = false;
 
   @override
   void onInit() async {
     super.onInit();
+    isLoading = true;
     getUserProfile();
 
     await getCategoriesList();
     await updateFavoritesList(userId: authService.userID!);
-
+    isLoading = false;
     // TODO: for testing only to be removed
     // authService.showcaseViewed = true;
   }

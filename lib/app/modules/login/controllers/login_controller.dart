@@ -13,12 +13,15 @@ class LoginController extends GetxController {
   var notificationHelper = NotificationHelper();
 
   RxBool loginIsDimmed = false.obs;
+  RxBool isLoading = false.obs;
 
   Future<void> login(
       {required String email,
       required String pass,
       bool navigateToHome = true}) async {
     loginIsDimmed.value = true;
+    isLoading.value = true;
+
     print(loginIsDimmed);
     AppResponse response =
         await UserRepository().loginReq({"email": email, "password": pass});
@@ -29,9 +32,10 @@ class LoginController extends GetxController {
 
       await notificationHelper.registerFCMToken();
       await notificationHelper.subscribeToTopic('broadcast');
-
+      isLoading.value = false;
       if (navigateToHome) Get.offAllNamed(Routes.BOTTOMNAVIGATION);
     } else {
+      isLoading.value = false;
       loginIsDimmed.value = false;
       Get.showSnackbar(
         buildCustomToast(
