@@ -19,7 +19,7 @@ class FavoritesList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Showcase.withWidget(
-      height: 144,
+      height: 144.h,
       width: 255.w,
       key: homeContoller.two,
       container: CustoumShowcase2Widget(),

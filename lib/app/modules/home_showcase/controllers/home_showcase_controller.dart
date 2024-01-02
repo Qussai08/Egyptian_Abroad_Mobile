@@ -297,7 +297,7 @@ class HomeShowcaseController extends GetxController {
     }, onError: (error) {});
     await loadFavoritesCategories();
     favoritesIsLoading = false;
-
+    print(favoriteCategories);
     update();
   }
 
