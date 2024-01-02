@@ -89,9 +89,14 @@ class EventDetailsView extends GetView<EventDetailsController> {
                                   Image.asset(AppImages.locationOutlinedIcon),
                             ),
                             SizedBox(width: 12.w),
-                            Text(
-                              event().eventAddress!,
-                              style: Styles.getMediumStyle(color: Styles.black),
+                            Expanded(
+                              child: Text(
+                                event().eventAddress!,
+                                style:
+                                    Styles.getMediumStyle(color: Styles.black),
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             ),
                           ],
                         ),

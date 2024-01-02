@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class EventsModel {
   EventsModel({
     required this.isSuccess,
@@ -72,15 +74,15 @@ class Event {
     eventDescription = json['eventDescription'];
     eventAddress = json['eventAddress'];
     startDate = (json['eventStartDate'] != null)
-        ? formatDate(json['eventStartDate'])
+        ? dateFormatter(json['eventStartDate'])
         : (json['startDate'] != null)
-            ? formatDate(json['startDate'])
+            ? dateFormatter(json['startDate'])
             : '';
 
     endDate = (json['eventEndtDate'] != null)
-        ? formatDate(json['eventEndtDate'])
+        ? dateFormatter(json['eventEndtDate'])
         : (json['endDate'] != null)
-            ? formatDate(json['endDate'])
+            ? dateFormatter(json['endDate'])
             : '';
 
     link = json['link'];
@@ -103,5 +105,14 @@ class Event {
         ? '12:00 ${date.hour > 12 ? 'م' : 'ص'}'
         : '${date.hour}:${date.minute} ${date.hour > 12 ? 'م' : 'ص'}';
     return '${date.day} ${date.month} ${date.year} $time';
+  }
+
+  static String dateFormatter(String date, {bool dateOnly = false}) {
+    DateTime x = DateTime.parse(date);
+    if (dateOnly) {
+      return DateFormat('dd MMMM yyyy', 'ar_SA').format(x);
+    } else {
+      return DateFormat('dd MMMM yyyy hh:mm a', 'ar_SA').format(x);
+    }
   }
 }

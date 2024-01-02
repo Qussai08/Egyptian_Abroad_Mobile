@@ -22,6 +22,7 @@ import '../../../core/custom_widgets/loading_dialog.dart';
 import '../../../core/custom_widgets/title_text.dart';
 import '../../../core/theme/styles.dart';
 import '../../notifications/data/models/notifications_model/notifications_model.dart';
+import '../data/models/event_model.dart';
 import 'widgets/events_appbar.dart';
 import 'widgets/from_to_date_widget.dart';
 
@@ -203,18 +204,18 @@ class EventsView extends GetView<EventsController> {
                                                                 con.setDateFrom(
                                                                     formattedDate);
                                                               },
-                                                              minimumDate:
-                                                                  DateTime(
-                                                                2023,
-                                                                12,
-                                                                20,
-                                                              ),
-                                                              maximumDate:
-                                                                  DateTime(
-                                                                2025,
-                                                                12,
-                                                                20,
-                                                              ),
+                                                              // minimumDate:
+                                                              //     DateTime(
+                                                              //   2023,
+                                                              //   12,
+                                                              //   20,
+                                                              // ),
+                                                              // maximumDate:
+                                                              //     DateTime(
+                                                              //   2025,
+                                                              //   12,
+                                                              //   20,
+                                                              // ),
                                                               initialDateTime:
                                                                   _dateTime,
                                                             ),
@@ -248,10 +249,11 @@ class EventsView extends GetView<EventsController> {
                                                                     .dateFrom
                                                                     .isEmpty
                                                                 ? ""
-                                                                : NotificationsModel
-                                                                    .formatDate(
-                                                                        eventsController
-                                                                            .dateFrom),
+                                                                : Event.dateFormatter(
+                                                                    eventsController
+                                                                        .dateFrom,
+                                                                    dateOnly:
+                                                                        true),
                                                             // TODO : refactor
 
                                                             style: Styles.getMediumStyle(
@@ -315,18 +317,18 @@ class EventsView extends GetView<EventsController> {
                                                                 con.setDateTo(
                                                                     formattedDate);
                                                               },
-                                                              minimumDate:
-                                                                  DateTime(
-                                                                2023,
-                                                                12,
-                                                                20,
-                                                              ),
-                                                              maximumDate:
-                                                                  DateTime(
-                                                                2025,
-                                                                12,
-                                                                20,
-                                                              ),
+                                                              // minimumDate:
+                                                              //     DateTime(
+                                                              //   2023,
+                                                              //   12,
+                                                              //   20,
+                                                              // ),
+                                                              // maximumDate:
+                                                              //     DateTime(
+                                                              //   2025,
+                                                              //   12,
+                                                              //   20,
+                                                              // ),
                                                               initialDateTime:
                                                                   _dateTime,
                                                             ),
@@ -362,10 +364,11 @@ class EventsView extends GetView<EventsController> {
                                                                     .dateTo
                                                                     .isEmpty
                                                                 ? ""
-                                                                : NotificationsModel
-                                                                    .formatDate(
-                                                                        eventsController
-                                                                            .dateTo),
+                                                                : Event.dateFormatter(
+                                                                    eventsController
+                                                                        .dateTo,
+                                                                    dateOnly:
+                                                                        true),
                                                             textAlign:
                                                                 TextAlign.start,
                                                             style: Styles.getMediumStyle(
@@ -792,10 +795,12 @@ class EventsView extends GetView<EventsController> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Text(
-                                              event.eventName ?? "",
-                                              maxLines: 1,
-                                              overflow: TextOverflow.ellipsis,
+                                            Expanded(
+                                              child: Text(
+                                                event.eventName ?? "",
+                                                maxLines: 1,
+                                                overflow: TextOverflow.ellipsis,
+                                              ),
                                             ),
                                             const Icon(
                                               Icons.arrow_back_ios_new_rounded,
