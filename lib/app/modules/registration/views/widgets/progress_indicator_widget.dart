@@ -4,12 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProgressIndicatorWidget extends StatelessWidget {
-  const ProgressIndicatorWidget({
-    super.key,
-    required this.step,
-  });
+  const ProgressIndicatorWidget(
+      {super.key, required this.step, this.total = "3"});
 
   final String step;
+  final String total;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +33,7 @@ class ProgressIndicatorWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    "/3",
+                    "/$total",
                     textDirection: TextDirection.ltr,
                     style: TextStyle(
                         fontFamily: 'baloo',
