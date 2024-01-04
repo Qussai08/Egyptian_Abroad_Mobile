@@ -27,7 +27,7 @@ class HomeViewBodyWidget extends StatelessWidget {
       child: Container(
         // padding: EdgeInsets.symmetric(horizontal: fixDpiWidth(16)),
         child: homeContoller.userProfileLoading
-            ? const HomeLoadingWidget()
+            ? Container()
             : ShowCaseWidget(
                 // add close button to the showcase view widget to close it manually
                 onStart: (index, key) {

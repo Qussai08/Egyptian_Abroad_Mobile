@@ -54,7 +54,7 @@ class AvatarAndNameWidget extends StatelessWidget {
 
               SizedBox(width: 10.w),
               Text(
-                "${AppStrings.hello.tr} ${homeContoller.authService.getUserProfile?.shortName ?? ''} !",
+                "${AppStrings.hello.tr} ${homeContoller.authService.getUserProfile.shortName ?? ''} !",
                 style: Styles.getBoldStyle(
                     color: Styles.black, fontSize: fixDpiFont(18)),
               )

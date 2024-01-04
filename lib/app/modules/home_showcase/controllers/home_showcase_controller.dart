@@ -1,4 +1,5 @@
 import 'package:egyptians_abroad/app/core/custom_widgets/custom_taost.dart';
+import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/core/services/models/service.dart';
 import 'package:egyptians_abroad/app/modules/home_showcase/data/providers/favorites_list_provider.dart';
 import 'package:flutter/material.dart';
@@ -26,14 +27,13 @@ class HomeShowcaseController extends GetxController {
   final authService = Get.find<AuthService>();
   final RegistrationController registrationController =
       Get.put(RegistrationController());
-  bool isLoading = false;
+  bool isLoading = true;
 
   @override
   void onInit() async {
     super.onInit();
-    isLoading = true;
-    getUserProfile();
-
+    // isLoading = true;
+    await getUserProfile();
     await getCategoriesList();
     await updateFavoritesList(userId: authService.userID!);
     isLoading = false;
@@ -50,20 +50,35 @@ class HomeShowcaseController extends GetxController {
   Future<void> getUserProfile() async {
     setUserProfileLoading(true);
 
-    AppResponse response =
-        await UserRepository().viewAccountReq(queryParameters: {
+    // AppResponse response =
+    await UserRepository().viewAccountReq(queryParameters: {
       "Userid": authService.userID,
       "languageId": LocalizationHelper.isArabic() ? 1 : 2
+    }).then((value) {
+      if (value.status) {
+        UserProfileModel userProfile =
+            UserProfileModel.fromJson(value.data['data']);
+        // AppHelper.setUserProfile(userProfile);
+        authService.setUserProfile(userProfile);
+        setUserProfileLoading(false);
+      } else {
+        authService.setUserProfile(UserProfileModel.empty());
+        handleError(value.errorCode ?? '-1');
+        setUserProfileLoading(false);
+      }
+    }, onError: (error) {
+      print('UserProfile Error: $error');
+      setUserProfileLoading(false);
     });
+    print("userProfileLoading: $userProfileLoading");
+    // if (response.status) {
+    //   UserProfileModel userProfile =
+    //       UserProfileModel.fromJson(response.data['data']);
+    //   // AppHelper.setUserProfile(userProfile);
+    //   authService.setUserProfile(userProfile);
+    // }
 
-    if (response.status) {
-      UserProfileModel userProfile =
-          UserProfileModel.fromJson(response.data['data']);
-      // AppHelper.setUserProfile(userProfile);
-      authService.setUserProfile(userProfile);
-    }
-
-    setUserProfileLoading(false);
+    // setUserProfileLoading(false);
   }
 
   List<Category> allCategories = [];
@@ -149,6 +164,7 @@ class HomeShowcaseController extends GetxController {
     }
 
     if (applyLoading) _updateCategoriesLoading(false);
+    print("categoriesLoading: $categoriesLoading");
   }
 
   void _updateCategoriesLoading(bool val) {
@@ -292,21 +308,43 @@ class HomeShowcaseController extends GetxController {
   bool favoritesIsLoading = true;
   Future<void> updateFavoritesList({required String userId}) async {
     await favoritesListProvider.getFavoritesList(userId).then((value) {
-      Iterable list = value.body;
-      favoritesList = list.map((e) => ServiceItem.fromJson(e)).toList();
-    }, onError: (error) {});
-    await loadFavoritesCategories();
+      if (value.isSuccess) {
+        print('Favorites successfully updated');
+        Iterable list = value.body;
+        favoritesList = list.map((e) => ServiceItem.fromJson(e)).toList();
+        loadFavoritesCategories();
+      }
+    }, onError: (error) {
+      print('FavoritesList Error: $error');
+      favoritesIsLoading = false;
+      update();
+    });
     favoritesIsLoading = false;
-    print(favoriteCategories);
+    print("favoritesIsLoading: $favoritesIsLoading");
     update();
   }
 
   loadFavoritesCategories() async {
     favoriteCategories = [];
+    print(favoritesList.length);
+    print(allCategories.length);
 
-    await Future.forEach<ServiceItem>(favoritesList, (item) {
-      favoriteCategories.add(
-          allCategories.firstWhere((element) => element.id == item.categoryId));
-    });
+    if (favoritesList.isNotEmpty && allCategories.isNotEmpty) {
+      await Future.forEach<ServiceItem>(favoritesList, (item) {
+        favoriteCategories.add(allCategories
+            .firstWhere((element) => element.id == item.categoryId));
+      });
+    }
+  }
+
+  void handleError(String error) {
+    Get.showSnackbar(
+      buildCustomToast(
+        Get.context!,
+        toastMsg: ErrorHelper.getErrorMessage(error),
+        toastTitle: AppStrings.sorry.tr,
+        toastType: ToastType.error,
+      ),
+    );
   }
 }

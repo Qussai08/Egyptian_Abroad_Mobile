@@ -54,7 +54,7 @@ class HomeView extends GetView<HomeController> {
                                 ProfileIconWidget(controller: controller),
                                 SizedBox(width: 10.w),
                                 Text(
-                                  "${AppStrings.hello.tr} ${controller.authService.getUserProfile?.shortName ?? ''} !",
+                                  "${AppStrings.hello.tr} ${controller.authService.getUserProfile.shortName ?? ''} !",
                                   style: Styles.getBoldStyle(
                                       color: Styles.black,
                                       fontSize: fixDpiFont(18)),
