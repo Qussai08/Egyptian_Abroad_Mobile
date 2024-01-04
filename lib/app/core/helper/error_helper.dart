@@ -9,6 +9,9 @@ class ErrorHelper {
 
   static final Map<String, String> _errorMap = {
     //Change PW & Forget PW error Codes
+    "-1": AppStrings.somethingWentWrong.tr,
+    "400": AppStrings.somethingWentWrong.tr,
+    "500": AppStrings.somethingWentWrong.tr,
     "genrealError": "حدث خطأ ما !",
     "PasswordTooShort": "",
     "PasswordRequiresnonAlphanumeric": "",

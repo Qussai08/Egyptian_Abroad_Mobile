@@ -1,3 +1,6 @@
+import 'package:egyptians_abroad/app/core/custom_widgets/custom_taost.dart';
+import 'package:egyptians_abroad/app/core/helper/error_helper.dart';
+import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/modules/registration/controllers/registration_controller.dart';
 import 'package:egyptians_abroad/app/modules/registration/data/models/country.dart';
 import 'package:egyptians_abroad/app/modules/registration/data/models/job_category.dart';
@@ -52,13 +55,15 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
           isLoading.value = false;
         }
       } else {
-        change(null, status: RxStatus.error('حدث خطأ ما'));
+        handleError(value.errors!.first);
+        // change(null, status: RxStatus.error('حدث خطأ ما'));
         // change(null, status: RxStatus.error('${value.error}'));
         isLoading.value = false;
       }
     }, onError: (error) {
-      print("errorrrr");
-      change(null, status: RxStatus.error('حدث خطأ ما'));
+      print("errorrrr $error");
+      handleError(error);
+      // change(null, status: RxStatus.error('حدث خطأ ما'));
       // change(null, status: RxStatus.error('$error'));
       isLoading.value = false;
     });
@@ -164,5 +169,16 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
       jobCatDisplayString = selectedjobCategory.join(" - ");
     }
     update();
+  }
+
+  void handleError(String error) {
+    Get.showSnackbar(
+      buildCustomToast(
+        Get.context!,
+        toastMsg: ErrorHelper.getErrorMessage(error),
+        toastTitle: AppStrings.sorry.tr,
+        toastType: ToastType.error,
+      ),
+    );
   }
 }

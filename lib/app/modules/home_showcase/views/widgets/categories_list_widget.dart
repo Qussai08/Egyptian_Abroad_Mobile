@@ -61,16 +61,17 @@ class CategoriesListWidget extends StatelessWidget {
                 fontFamily: 'baloo'),
           ),
 
-          homeContoller.categoriesLoading
-              ? Container(
-                  height: 200,
-                  child: const Center(
-                    child: CircularProgressIndicator(
-                      color: Styles.primaryColor,
-                    ),
-                  ),
-                )
-              : homeContoller.displayedCategoriesList.isEmpty
+          // homeContoller.categoriesLoading
+          //     ? Container(
+          //         height: 200,
+          //         child: const Center(
+          //           child: CircularProgressIndicator(
+          //             color: Styles.primaryColor,
+          //           ),
+          //         ),
+          //       )
+          //     : 
+              homeContoller.displayedCategoriesList.isEmpty
                   ? Container(
                       height: 200,
                       padding: EdgeInsets.only(top: 20),

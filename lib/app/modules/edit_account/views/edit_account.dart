@@ -46,42 +46,42 @@ class _EditAccountViewState extends State<EditAccountView>
   }
 
   final TextEditingController _nameTxtController =
-      TextEditingController(text: AuthService().getUserProfile?.name ?? "");
+      TextEditingController(text: AuthService().getUserProfile.name ?? "");
   final TextEditingController _nationalIDTxtController = TextEditingController(
-      text: AuthService().getUserProfile?.nationalId ?? "");
+      text: AuthService().getUserProfile.nationalId ?? "");
   final TextEditingController _emailTxtController =
-      TextEditingController(text: AuthService().getUserProfile?.email ?? "");
+      TextEditingController(text: AuthService().getUserProfile.email ?? "");
   final TextEditingController _egPassportNumTxtController =
       TextEditingController(
-          text: AuthService().getUserProfile?.passportNo ?? "");
+          text: AuthService().getUserProfile.passportNo ?? "");
 
   final ValueNotifier<int?> _residenceCountry =
-      ValueNotifier(AuthService().getUserProfile?.residencyCountryId);
+      ValueNotifier(AuthService().getUserProfile.residencyCountryId);
   final ValueNotifier<int?> _residenceType =
-      ValueNotifier(AuthService().getUserProfile?.residencyTypeId);
+      ValueNotifier(AuthService().getUserProfile.residencyTypeId);
   final TextEditingController _residenceNumTxtController =
       TextEditingController(
-          text: AuthService().getUserProfile?.residencyNo ?? "");
+          text: AuthService().getUserProfile.residencyNo ?? "");
   final TextEditingController _forignPassportNumTxtController =
       TextEditingController(
-          text: AuthService().getUserProfile?.foreignPassportNo ?? "");
+          text: AuthService().getUserProfile.foreignPassportNo ?? "");
 
   final TextEditingController _residenceAddressTxtController =
       TextEditingController(
-          text: AuthService().getUserProfile?.residencyAddress ?? "");
+          text: AuthService().getUserProfile.residencyAddress ?? "");
   final ValueNotifier<int?> _jobCategory =
-      ValueNotifier(AuthService().getUserProfile?.jobCategoryID);
+      ValueNotifier(AuthService().getUserProfile.jobCategoryID);
 
   final TextEditingController _jobTitleTxtController =
-      TextEditingController(text: AuthService().getUserProfile?.jobTitle ?? "");
+      TextEditingController(text: AuthService().getUserProfile.jobTitle ?? "");
   final TextEditingController _egptionPhoneNumTxtController =
       TextEditingController(
-          text: AuthService().getUserProfile?.egyptionMobile ?? "");
+          text: AuthService().getUserProfile.egyptionMobile ?? "");
   final TextEditingController _forignPhoneNumTxtController =
       TextEditingController(
-          text: AuthService().getUserProfile?.foreignMobile ?? "");
+          text: AuthService().getUserProfile.foreignMobile ?? "");
   final TextEditingController _msgsAddressTxtController = TextEditingController(
-      text: AuthService().getUserProfile?.messagingAddress ?? "");
+      text: AuthService().getUserProfile.messagingAddress ?? "");
 
   final _formKey = GlobalKey<FormState>();
 
@@ -395,135 +395,130 @@ class _EditAccountViewState extends State<EditAccountView>
                                   );
                                 }),
 
-                                TextFieldTitle(
-                                    title: AppStrings.residenceAddress.tr,
-                                    hasSubTitle: false),
-                                CustomTextFormField(
-                                    inputData: TextInputType.text,
-                                    validationFunc: (val) =>
-                                        maxLenghtValidation(
-                                            _residenceAddressTxtController.text,
-                                            200),
-                                    enabled: widget.isEdit,
-                                    controller: _residenceAddressTxtController),
-                                SizedBox(
-                                  height: 16.h,
-                                ),
-                                TextFieldTitle(
-                                    title: AppStrings.jobCategory.tr,
-                                    hasSubTitle: false),
-                                ValueListenableBuilder<int?>(
-                                    valueListenable: _jobCategory,
-                                    builder: (_, category, __) {
-                                      return DropDownListSelector(
-                                        dropDownList: widget.isEdit!
-                                            ? controller.jobCategoryList
-                                                .map((e) => DropdownMenuItem(
-                                                      value: e.id,
-                                                      child: Text(e.name),
-                                                    ))
-                                                .toList()
-                                            : [],
-                                        value: category,
-                                        hint: !widget.isEdit!
-                                            ? controller.jobCategoryList
-                                                        .firstWhereOrNull(
-                                                            (element) =>
-                                                                element.id ==
-                                                                category) !=
-                                                    null
-                                                ? controller.jobCategoryList
+                            TextFieldTitle(
+                                title: AppStrings.residenceAddress.tr,
+                                hasSubTitle: false),
+                            CustomTextFormField(
+                                inputData: TextInputType.text,
+                                validationFunc: (val) => maxLenghtValidation(
+                                    _residenceAddressTxtController.text, 200),
+                                enabled: widget.isEdit,
+                                controller: _residenceAddressTxtController),
+                            SizedBox(
+                              height: 16.h,
+                            ),
+                            TextFieldTitle(
+                                title: AppStrings.jobCategory.tr,
+                                hasSubTitle: false),
+                            ValueListenableBuilder<int?>(
+                                valueListenable: _jobCategory,
+                                builder: (_, category, __) {
+                                  return DropDownListSelector(
+                                    dropDownList: widget.isEdit!
+                                        ? controller.jobCategoryList
+                                            .map((e) => DropdownMenuItem(
+                                                  value: e.id,
+                                                  child: Text(e.name),
+                                                ))
+                                            .toList()
+                                        : [],
+                                    value: category,
+                                    hint: !widget.isEdit!
+                                        ? controller.jobCategoryList
                                                     .firstWhereOrNull(
                                                         (element) =>
                                                             element.id ==
-                                                            category)!
-                                                    .name
-                                                : ""
-                                            : "",
-                                        blackHint: true,
-                                        hintFontSize: 14,
-                                        hintFontWeight: FontWeight.w400,
-                                        onChangeFunc: (val) {
-                                          _jobCategory.value = val;
-                                        },
-                                      );
-                                    }),
-                                SizedBox(
-                                  height: 16.h,
-                                ),
+                                                            category) !=
+                                                null
+                                            ? controller.jobCategoryList
+                                                .firstWhereOrNull((element) =>
+                                                    element.id == category)!
+                                                .name
+                                            : ""
+                                        : "",
+                                    blackHint: true,
+                                    hintFontSize: 14,
+                                    hintFontWeight: FontWeight.w400,
+                                    onChangeFunc: (val) {
+                                      _jobCategory.value = val;
+                                    },
+                                  );
+                                }),
+                            SizedBox(
+                              height: 16.h,
+                            ),
+                            TextFieldTitle(
+                                title: AppStrings.jobTitle.tr,
+                                hasSubTitle: false),
+                            CustomTextFormField(
+                              inputData: TextInputType.text,
+                              maxLength: null,
+                              enabled: widget.isEdit,
+                              controller: _jobTitleTxtController,
+                              validationFunc: (val) => maxLenghtValidation(
+                                  _jobTitleTxtController.text, 100),
+                            ),
+                            SizedBox(
+                              height: 16.h,
+                            ),
+                            TextFieldTitle(
+                              title: AppStrings.egPhoneNum.tr,
+                              hasSubTitle: false,
+                            ),
+                            CustomTextFormField(
+                              inputData: TextInputType.phone,
+                              maxLength: null,
+                              enabled: widget.isEdit,
+                              controller: _egptionPhoneNumTxtController,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.digitsOnly
+                              ],
+                              validationFunc: (val) => validateEgyptionPhoneNum(
+                                  _egptionPhoneNumTxtController.text),
+                            ),
+                            SizedBox(
+                              height: 16.h,
+                            ),
+                            Row(
+                              children: [
                                 TextFieldTitle(
-                                    title: AppStrings.jobTitle.tr,
-                                    hasSubTitle: false),
-                                CustomTextFormField(
-                                  inputData: TextInputType.text,
-                                  maxLength: null,
-                                  enabled: widget.isEdit,
-                                  controller: _jobTitleTxtController,
-                                  validationFunc: (val) => maxLenghtValidation(
-                                      _jobTitleTxtController.text, 100),
-                                ),
-                                SizedBox(
-                                  height: 16.h,
-                                ),
+                                    title: AppStrings.forignPhoneNum.tr,
+                                    hasSubTitle: false,
+                                    hasHorizontalMargin: false),
                                 TextFieldTitle(
-                                  title: AppStrings.egPhoneNum.tr,
+                                  title: AppStrings.forignPhoneNumHint.tr,
+                                  fontSize: 10,
                                   hasSubTitle: false,
+                                  hasHorizontalMargin: false,
                                 ),
-                                CustomTextFormField(
-                                  inputData: TextInputType.phone,
-                                  maxLength: null,
-                                  enabled: widget.isEdit,
-                                  controller: _egptionPhoneNumTxtController,
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.digitsOnly
-                                  ],
-                                  validationFunc: (val) =>
-                                      validateEgyptionPhoneNum(
-                                          _egptionPhoneNumTxtController.text),
-                                ),
-                                SizedBox(
-                                  height: 16.h,
-                                ),
-                                Row(
-                                  children: [
-                                    TextFieldTitle(
-                                        title: AppStrings.forignPhoneNum.tr,
-                                        hasSubTitle: false,
-                                        hasHorizontalMargin: false),
-                                    TextFieldTitle(
-                                      title: AppStrings.forignPhoneNumHint.tr,
-                                      fontSize: 10,
-                                      hasSubTitle: false,
-                                      hasHorizontalMargin: false,
-                                    ),
-                                  ],
-                                ),
-                                CustomTextFormField(
-                                  validationFunc: (val) => maxLenghtValidation(
-                                      _forignPhoneNumTxtController.text, 15),
-                                  inputData: TextInputType.phone,
-                                  maxLength: null,
-                                  enabled: widget.isEdit,
-                                  controller: _forignPhoneNumTxtController,
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.digitsOnly
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 16.h,
-                                ),
-                                TextFieldTitle(
-                                    title: AppStrings.msgsAddress.tr,
-                                    hasSubTitle: false),
-                                CustomTextFormField(
-                                  inputData: TextInputType.text,
-                                  maxLength: null,
-                                  enabled: widget.isEdit,
-                                  controller: _msgsAddressTxtController,
-                                  validationFunc: (val) => maxLenghtValidation(
-                                      _msgsAddressTxtController.text, 200),
-                                ),
-                                //------------------
+                              ],
+                            ),
+                            CustomTextFormField(
+                              validationFunc: (val) => maxLenghtValidation(
+                                  _forignPhoneNumTxtController.text, 15),
+                              inputData: TextInputType.phone,
+                              maxLength: null,
+                              enabled: widget.isEdit,
+                              controller: _forignPhoneNumTxtController,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.digitsOnly
+                              ],
+                            ),
+                            SizedBox(
+                              height: 16.h,
+                            ),
+                            TextFieldTitle(
+                                title: AppStrings.msgsAddress.tr,
+                                hasSubTitle: false),
+                            CustomTextFormField(
+                              inputData: TextInputType.text,
+                              maxLength: null,
+                              enabled: widget.isEdit,
+                              controller: _msgsAddressTxtController,
+                              validationFunc: (val) => maxLenghtValidation(
+                                  _msgsAddressTxtController.text, 200),
+                            ),
+                            //------------------
 
                             SizedBox(
                               height: 20.h,

@@ -93,4 +93,27 @@ class UserProfileModel {
 
     return data;
   }
+
+  UserProfileModel.empty() {
+    userId = '';
+    name = '';
+    email = '';
+    nationalId = '';
+    jobCategoryID;
+    jobCategoryName = '';
+    jobTitle = '';
+    egyptionMobile = '';
+    foreignMobile = '';
+    messagingAddress = '';
+    passportNo = '';
+    residencyCountryId;
+    residencyCountryName = '';
+    residencyTypeId;
+    residencyTypeName = '';
+    residencyNo = '';
+    foreignPassportNo = '';
+    residencyAddress = '';
+    avatarId = 9;
+    shortName = '';
+  }
 }

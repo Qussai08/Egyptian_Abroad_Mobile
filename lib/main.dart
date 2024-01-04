@@ -45,6 +45,7 @@ class MyApp extends StatelessWidget {
     ]);
 
     return GlobalLoaderOverlay(
+      closeOnBackButton: true,
       overlayColor: Colors.blue.withOpacity(0.20),
       useDefaultLoading: false,
       overlayWidgetBuilder: (_) {
