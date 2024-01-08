@@ -52,8 +52,9 @@ class AuthService extends GetxService {
     storageService.setData(StorageConstants.kUserProfile, profile);
   }
 
-  UserProfileModel? get getUserProfile {
-    return storageService.getData(StorageConstants.kUserProfile);
+  UserProfileModel get getUserProfile {
+    return storageService.getData(StorageConstants.kUserProfile) ??
+        UserProfileModel.empty();
   }
 
   void removeAccessToken() {

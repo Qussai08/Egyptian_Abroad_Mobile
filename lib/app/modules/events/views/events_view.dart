@@ -5,24 +5,19 @@ import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/core/theme/app_images.dart';
 import 'package:egyptians_abroad/app/modules/events/controllers/event_controller.dart';
-import 'package:egyptians_abroad/app/modules/registration/controllers/registration_controller.dart';
 import 'package:egyptians_abroad/app/modules/registration/data/models/country.dart';
 import 'package:egyptians_abroad/app/modules/registration/data/models/job_category.dart';
 import 'package:egyptians_abroad/app/routes/app_pages.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-
 import '../../../core/custom_widgets/app_error_widget.dart';
 import '../../../core/custom_widgets/custom_textfield.dart';
 import '../../../core/custom_widgets/loading_dialog.dart';
-import '../../../core/custom_widgets/title_text.dart';
 import '../../../core/theme/styles.dart';
-import '../../notifications/data/models/notifications_model/notifications_model.dart';
 import '../data/models/event_model.dart';
 import 'widgets/events_appbar.dart';
 import 'widgets/from_to_date_widget.dart';
@@ -67,7 +62,7 @@ class EventsView extends GetView<EventsController> {
                         child: CustomTextFormField(
                             controller: controller.searchController,
                             focusNode: _searchFocusNode,
-                          prefixIcon: const Icon(
+                            prefixIcon: const Icon(
                               Icons.search,
                               color: Styles.primaryColor,
                             ),
@@ -75,7 +70,7 @@ class EventsView extends GetView<EventsController> {
                             textInputAction: TextInputAction.search,
                             onChangedFunc: (val) {
                               _searchFocusNode.requestFocus();
-                            if (val.isEmpty) {
+                              if (val.isEmpty) {
                                 controller.keySearch = val;
                                 controller.filterEvents();
                                 FocusScope.of(context).unfocus();
@@ -210,60 +205,60 @@ class EventsView extends GetView<EventsController> {
                                                                           .format(
                                                                               pickedDate);
 
-                                                                con.setDateFrom(
-                                                                    formattedDate);
-                                                              },
-                                                              // minimumDate:
-                                                              //     DateTime(
-                                                              //   2023,
-                                                              //   12,
-                                                              //   20,
-                                                              // ),
-                                                              // maximumDate:
-                                                              //     DateTime(
-                                                              //   2025,
-                                                              //   12,
-                                                              //   20,
-                                                              // ),
-                                                              initialDateTime:
-                                                                  _dateTime,
-                                                            ),
-                                                          );
-                                                        });
-                                                  },
-                                                  child: Row(
-                                                    children: [
-                                                      Text(
-                                                        AppStrings.from.tr,
-                                                        style: Styles
-                                                            .getMediumStyle(
-                                                                color: Styles
-                                                                    .lightBlack,
-                                                                fontSize:
-                                                                    fixDpiFont(
-                                                                        12)),
-                                                      ),
-                                                      SizedBox(width: 4.w),
-                                                      Icon(
-                                                        Icons.calendar_month,
-                                                        color:
-                                                            Styles.lightBlack,
-                                                        size: fixDpiFont(12),
-                                                      ),
-                                                      SizedBox(width: 4.w),
-                                                      Container(
-                                                        width: 130,
-                                                        child: Text(
-                                                            eventsController
-                                                                    .dateFrom
-                                                                    .isEmpty
-                                                                ? ""
-                                                                : Event.dateFormatter(
-                                                                    eventsController
-                                                                        .dateFrom,
-                                                                    dateOnly:
-                                                                        true),
-                                                            // TODO : refactor
+                                                                  con.setDateFrom(
+                                                                      formattedDate);
+                                                                },
+                                                                // minimumDate:
+                                                                //     DateTime(
+                                                                //   2023,
+                                                                //   12,
+                                                                //   20,
+                                                                // ),
+                                                                // maximumDate:
+                                                                //     DateTime(
+                                                                //   2025,
+                                                                //   12,
+                                                                //   20,
+                                                                // ),
+                                                                initialDateTime:
+                                                                    _dateTime,
+                                                              ),
+                                                            );
+                                                          });
+                                                    },
+                                                    child: Row(
+                                                      children: [
+                                                        Text(
+                                                          AppStrings.from.tr,
+                                                          style: Styles
+                                                              .getMediumStyle(
+                                                                  color: Styles
+                                                                      .lightBlack,
+                                                                  fontSize:
+                                                                      fixDpiFont(
+                                                                          12)),
+                                                        ),
+                                                        SizedBox(width: 4.w),
+                                                        Icon(
+                                                          Icons.calendar_month,
+                                                          color:
+                                                              Styles.lightBlack,
+                                                          size: fixDpiFont(12),
+                                                        ),
+                                                        SizedBox(width: 4.w),
+                                                        Container(
+                                                          width: 130,
+                                                          child: Text(
+                                                              eventsController
+                                                                      .dateFrom
+                                                                      .isEmpty
+                                                                  ? ""
+                                                                  : Event.dateFormatter(
+                                                                      eventsController
+                                                                          .dateFrom,
+                                                                      dateOnly:
+                                                                          true),
+                                                              // TODO : refactor
 
                                                               style: Styles.getMediumStyle(
                                                                   color: Styles
@@ -323,153 +318,331 @@ class EventsView extends GetView<EventsController> {
                                                                           .format(
                                                                               pickedDate);
 
-                                                                con.setDateTo(
-                                                                    formattedDate);
-                                                              },
-                                                              // minimumDate:
-                                                              //     DateTime(
-                                                              //   2023,
-                                                              //   12,
-                                                              //   20,
-                                                              // ),
-                                                              // maximumDate:
-                                                              //     DateTime(
-                                                              //   2025,
-                                                              //   12,
-                                                              //   20,
-                                                              // ),
-                                                              initialDateTime:
-                                                                  _dateTime,
-                                                            ),
-                                                          );
-                                                        });
-                                                  },
-                                                  child: Row(
-                                                    children: [
-                                                      Container(
-                                                        color:
-                                                            Color(0xffEBEBEB),
-                                                        width: 1,
-                                                      ),
-                                                      SizedBox(width: 4.w),
-                                                      Text(AppStrings.to.tr,
-                                                          style: Styles
-                                                              .getMediumStyle(
-                                                                  color: Styles
-                                                                      .lightBlack,
-                                                                  fontSize:
-                                                                      fixDpiFont(
-                                                                          12))),
-                                                      SizedBox(width: 4.w),
-                                                      Icon(Icons.calendar_month,
+                                                                  con.setDateTo(
+                                                                      formattedDate);
+                                                                },
+                                                                // minimumDate:
+                                                                //     DateTime(
+                                                                //   2023,
+                                                                //   12,
+                                                                //   20,
+                                                                // ),
+                                                                // maximumDate:
+                                                                //     DateTime(
+                                                                //   2025,
+                                                                //   12,
+                                                                //   20,
+                                                                // ),
+                                                                initialDateTime:
+                                                                    _dateTime,
+                                                              ),
+                                                            );
+                                                          });
+                                                    },
+                                                    child: Row(
+                                                      children: [
+                                                        Container(
                                                           color:
-                                                              Styles.lightBlack,
-                                                          size: fixDpiFont(12)),
-                                                      SizedBox(width: 4.w),
-                                                      Container(
-                                                        width: 130,
-                                                        child: Text(
-                                                            eventsController
-                                                                    .dateTo
-                                                                    .isEmpty
-                                                                ? ""
-                                                                : Event.dateFormatter(
-                                                                    eventsController
-                                                                        .dateTo,
-                                                                    dateOnly:
-                                                                        true),
-                                                            textAlign:
-                                                                TextAlign.start,
+                                                              Color(0xffEBEBEB),
+                                                          width: 1,
+                                                        ),
+                                                        SizedBox(width: 4.w),
+                                                        Text(AppStrings.to.tr,
                                                             style: Styles.getMediumStyle(
                                                                 color: Styles
                                                                     .lightBlack,
                                                                 fontSize:
                                                                     fixDpiFont(
                                                                         12))),
+                                                        SizedBox(width: 4.w),
+                                                        Icon(
+                                                            Icons
+                                                                .calendar_month,
+                                                            color: Styles
+                                                                .lightBlack,
+                                                            size:
+                                                                fixDpiFont(12)),
+                                                        SizedBox(width: 4.w),
+                                                        Container(
+                                                          width: 130,
+                                                          child: Text(
+                                                              eventsController
+                                                                      .dateTo
+                                                                      .isEmpty
+                                                                  ? ""
+                                                                  : Event.dateFormatter(
+                                                                      eventsController
+                                                                          .dateTo,
+                                                                      dateOnly:
+                                                                          true),
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .start,
+                                                              style: Styles.getMediumStyle(
+                                                                  color: Styles
+                                                                      .lightBlack,
+                                                                  fontSize:
+                                                                      fixDpiFont(
+                                                                          12))),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            )),
+                                    SizedBox(height: 12.h),
+                                    const TextFieldTitle(
+                                      title: "دولة الفعالية",
+                                      hasSubTitle: false,
+                                    ),
+                                    Container(
+                                      height: 50.h,
+                                      child: GestureDetector(
+                                          onTap: () {
+                                            Get.bottomSheet(
+                                                Container(
+                                                  decoration: const BoxDecoration(
+                                                      color: Colors.white,
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                              topLeft: Radius
+                                                                  .circular(12),
+                                                              topRight: Radius
+                                                                  .circular(
+                                                                      12))),
+                                                  height: 500,
+                                                  child: Column(
+                                                    children: [
+                                                      Container(
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal:
+                                                                    8.w),
+                                                        decoration: const BoxDecoration(
+                                                            color: Color(
+                                                                0xffE7F2F4),
+                                                            borderRadius: BorderRadius.only(
+                                                                topLeft: Radius
+                                                                    .circular(
+                                                                        12),
+                                                                topRight: Radius
+                                                                    .circular(
+                                                                        12))),
+                                                        height: 68.h,
+                                                        child: Row(children: [
+                                                          Container(
+                                                            width:
+                                                                fixDpiFont(24),
+                                                          ),
+                                                          Spacer(),
+                                                          Text(
+                                                            "اختر دولة الفعالية",
+                                                            style: Styles
+                                                                .getMediumStyle(
+                                                                    color: Color(
+                                                                        0xff201D61),
+                                                                    fontSize:
+                                                                        18),
+                                                          ),
+                                                          Spacer(),
+                                                          GestureDetector(
+                                                            onTap: () {
+                                                              Get.back();
+                                                            },
+                                                            child: Padding(
+                                                              padding: EdgeInsets
+                                                                  .only(
+                                                                      bottom:
+                                                                          20.h),
+                                                              child: Icon(
+                                                                Icons.close,
+                                                                size:
+                                                                    fixDpiFont(
+                                                                        24),
+                                                              ),
+                                                            ),
+                                                          )
+                                                        ]),
                                                       ),
+                                                      Expanded(
+                                                        child: GetBuilder<
+                                                            EventsController>(
+                                                          builder:
+                                                              (evController) =>
+                                                                  Container(
+                                                            margin:
+                                                                EdgeInsets.only(
+                                                                    top: 10.h,
+                                                                    right: 8.w,
+                                                                    left: 8.w),
+                                                            child: ListView
+                                                                .builder(
+                                                                    itemCount: evController
+                                                                        .countryIds
+                                                                        .length,
+                                                                    shrinkWrap:
+                                                                        true,
+                                                                    itemBuilder:
+                                                                        (_, i) {
+                                                                      Country
+                                                                          country =
+                                                                          evController
+                                                                              .countryIds[i];
+                                                                      return ListTile(
+                                                                        onTap:
+                                                                            () {
+                                                                          evController
+                                                                              .onSelectcountry(i);
+                                                                        },
+                                                                        contentPadding:
+                                                                            EdgeInsets.symmetric(horizontal: 16.w),
+                                                                        leading:
+                                                                            Icon(
+                                                                          country.isSelected
+                                                                              ? Icons.check_box
+                                                                              : Icons.check_box_outline_blank,
+                                                                          color:
+                                                                              Styles.primaryColor,
+                                                                        ),
+                                                                        title:
+                                                                            Row(
+                                                                          children: [
+                                                                            Image.network(
+                                                                              country.flag,
+                                                                              width: 21,
+                                                                              height: 15,
+                                                                              fit: BoxFit.cover,
+                                                                            ),
+                                                                            const SizedBox(
+                                                                              width: 8,
+                                                                            ),
+                                                                            Text(country.country),
+                                                                          ],
+                                                                        ),
+                                                                      );
+                                                                    }),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      Align(
+                                                        alignment: Alignment
+                                                            .bottomCenter,
+                                                        child: Container(
+                                                          margin: EdgeInsets
+                                                              .fromLTRB(
+                                                                  16.w,
+                                                                  16.h,
+                                                                  16.w,
+                                                                  20.h),
+                                                          child: CustomButton(
+                                                            type: ButtonType
+                                                                .primary,
+                                                            text: "تأكيد",
+                                                            onPressed: () {
+                                                              Get.back();
+                                                            },
+                                                          ),
+                                                        ),
+                                                      )
                                                     ],
                                                   ),
                                                 ),
-                                              ],
+                                                isDismissible: false);
+                                          },
+                                          child: GetBuilder<EventsController>(
+                                            builder: (evController) =>
+                                                DropDownListSelector(
+                                              dropDownList: [],
+                                              hint: evController
+                                                  .countryDisplayString,
+                                              blackHint: true,
+                                              hintFontSize: 14,
+                                              hintFontWeight: FontWeight.w400,
                                             ),
                                           )),
-                                  SizedBox(height: 12.h),
-                                  const TextFieldTitle(
-                                    title: "دولة الفعالية",
-                                    hasSubTitle: false,
-                                  ),
-                                  Container(
-                                    height: 50.h,
-                                    child: GestureDetector(
-                                        onTap: () {
-                                          Get.bottomSheet(
-                                              Container(
-                                                decoration: const BoxDecoration(
-                                                    color: Colors.white,
-                                                    borderRadius:
-                                                        BorderRadius.only(
-                                                            topLeft: Radius
-                                                                .circular(12),
-                                                            topRight:
-                                                                Radius.circular(
-                                                                    12))),
-                                                height: 500,
-                                                child: Column(
-                                                  children: [
-                                                    Container(
-                                                      padding:
-                                                          EdgeInsets.symmetric(
-                                                              horizontal: 8.w),
-                                                      decoration: const BoxDecoration(
-                                                          color:
-                                                              Color(0xffE7F2F4),
-                                                          borderRadius:
-                                                              BorderRadius.only(
-                                                                  topLeft: Radius
-                                                                      .circular(
-                                                                          12),
-                                                                  topRight: Radius
-                                                                      .circular(
-                                                                          12))),
-                                                      height: 68.h,
-                                                      child: Row(children: [
-                                                        Container(
-                                                          width: fixDpiFont(24),
-                                                        ),
-                                                        Spacer(),
-                                                        Text(
-                                                          "اختر دولة الفعالية",
-                                                          style: Styles
-                                                              .getMediumStyle(
-                                                                  color: Color(
-                                                                      0xff201D61),
-                                                                  fontSize: 18),
-                                                        ),
-                                                        Spacer(),
-                                                        GestureDetector(
-                                                          onTap: () {
-                                                            Get.back();
-                                                          },
-                                                          child: Padding(
-                                                            padding:
-                                                                EdgeInsets.only(
-                                                                    bottom:
-                                                                        20.h),
-                                                            child: Icon(
-                                                              Icons.close,
-                                                              size: fixDpiFont(
-                                                                  24),
-                                                            ),
+                                    ),
+                                    SizedBox(height: 12.h),
+                                    const TextFieldTitle(
+                                      title: "موضوع الفعالية",
+                                      hasSubTitle: false,
+                                    ),
+                                    Container(
+                                      height: 50.h,
+                                      child: GestureDetector(
+                                          onTap: () {
+                                            Get.bottomSheet(
+                                                Container(
+                                                  height: 500,
+                                                  decoration: const BoxDecoration(
+                                                      color: Colors.white,
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                              topLeft: Radius
+                                                                  .circular(12),
+                                                              topRight: Radius
+                                                                  .circular(
+                                                                      12))),
+                                                  child: Column(
+                                                    children: [
+                                                      Container(
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal:
+                                                                    8.w),
+                                                        decoration: const BoxDecoration(
+                                                            color: Color(
+                                                                0xffE7F2F4),
+                                                            borderRadius: BorderRadius.only(
+                                                                topLeft: Radius
+                                                                    .circular(
+                                                                        12),
+                                                                topRight: Radius
+                                                                    .circular(
+                                                                        12))),
+                                                        height: 68.h,
+                                                        child: Row(children: [
+                                                          Container(
+                                                            width:
+                                                                fixDpiFont(24),
                                                           ),
-                                                        )
-                                                      ]),
-                                                    ),
-                                                    Expanded(
-                                                      child: GetBuilder<
-                                                          EventsController>(
+                                                          Spacer(),
+                                                          Text(
+                                                            "اختر موضوع الفعالية",
+                                                            style: Styles
+                                                                .getMediumStyle(
+                                                                    color: Color(
+                                                                        0xff201D61),
+                                                                    fontSize:
+                                                                        18),
+                                                          ),
+                                                          Spacer(),
+                                                          GestureDetector(
+                                                            onTap: () {
+                                                              Get.back();
+                                                            },
+                                                            child: Padding(
+                                                              padding: EdgeInsets
+                                                                  .only(
+                                                                      bottom:
+                                                                          20.h),
+                                                              child: Icon(
+                                                                Icons.close,
+                                                                size:
+                                                                    fixDpiFont(
+                                                                        24),
+                                                              ),
+                                                            ),
+                                                          )
+                                                        ]),
+                                                      ),
+                                                      Expanded(
+                                                          child: GetBuilder<
+                                                              EventsController>(
                                                         builder:
                                                             (evController) =>
                                                                 Container(
+                                                          height: 400,
                                                           margin:
                                                               EdgeInsets.only(
                                                                   top: 10.h,
@@ -479,296 +652,123 @@ class EventsView extends GetView<EventsController> {
                                                               ListView.builder(
                                                                   itemCount:
                                                                       evController
-                                                                          .countryIds
+                                                                          .jobCategoryIds
                                                                           .length,
                                                                   shrinkWrap:
                                                                       true,
                                                                   itemBuilder:
                                                                       (_, i) {
-                                                                    Country
-                                                                        country =
+                                                                    JobCategory
+                                                                        cat =
                                                                         evController
-                                                                            .countryIds[i];
+                                                                            .jobCategoryIds[i];
                                                                     return ListTile(
                                                                       onTap:
                                                                           () {
                                                                         evController
-                                                                            .onSelectcountry(i);
+                                                                            .onSelectjobCategory(i);
                                                                       },
                                                                       contentPadding:
                                                                           EdgeInsets.symmetric(
                                                                               horizontal: 16.w),
                                                                       leading:
                                                                           Icon(
-                                                                        country.isSelected
+                                                                        cat.isSelected
                                                                             ? Icons.check_box
                                                                             : Icons.check_box_outline_blank,
                                                                         color: Styles
                                                                             .primaryColor,
                                                                       ),
-                                                                      title:
-                                                                          Row(
-                                                                        children: [
-                                                                          Image
-                                                                              .network(
-                                                                            country.flag,
-                                                                            width:
-                                                                                21,
-                                                                            height:
-                                                                                15,
-                                                                            fit:
-                                                                                BoxFit.cover,
-                                                                          ),
-                                                                          const SizedBox(
-                                                                            width:
-                                                                                8,
-                                                                          ),
-                                                                          Text(country
-                                                                              .country),
-                                                                        ],
-                                                                      ),
+                                                                      title: Text(
+                                                                          cat.name),
                                                                     );
                                                                   }),
                                                         ),
-                                                      ),
-                                                    ),
-                                                    Align(
-                                                      alignment: Alignment
-                                                          .bottomCenter,
-                                                      child: Container(
-                                                        margin:
-                                                            EdgeInsets.fromLTRB(
-                                                                16.w,
-                                                                16.h,
-                                                                16.w,
-                                                                20.h),
-                                                        child: CustomButton(
-                                                          type: ButtonType
-                                                              .primary,
-                                                          text: "تأكيد",
-                                                          onPressed: () {
-                                                            Get.back();
-                                                          },
-                                                        ),
-                                                      ),
-                                                    )
-                                                  ],
-                                                ),
-                                              ),
-                                              isDismissible: false);
-                                        },
-                                        child: GetBuilder<EventsController>(
-                                          builder: (evController) =>
-                                              DropDownListSelector(
-                                            dropDownList: [],
-                                            hint: evController
-                                                .countryDisplayString,
-                                            blackHint: true,
-                                            hintFontSize: 14,
-                                            hintFontWeight: FontWeight.w400,
-                                          ),
-                                        )),
-                                  ),
-                                  SizedBox(height: 12.h),
-                                  const TextFieldTitle(
-                                    title: "موضوع الفعالية",
-                                    hasSubTitle: false,
-                                  ),
-                                  Container(
-                                    height: 50.h,
-                                    child: GestureDetector(
-                                        onTap: () {
-                                          Get.bottomSheet(
-                                              Container(
-                                                height: 500,
-                                                decoration: const BoxDecoration(
-                                                    color: Colors.white,
-                                                    borderRadius:
-                                                        BorderRadius.only(
-                                                            topLeft: Radius
-                                                                .circular(12),
-                                                            topRight:
-                                                                Radius.circular(
-                                                                    12))),
-                                                child: Column(
-                                                  children: [
-                                                    Container(
-                                                      padding:
-                                                          EdgeInsets.symmetric(
-                                                              horizontal: 8.w),
-                                                      decoration: const BoxDecoration(
-                                                          color:
-                                                              Color(0xffE7F2F4),
-                                                          borderRadius:
-                                                              BorderRadius.only(
-                                                                  topLeft: Radius
-                                                                      .circular(
-                                                                          12),
-                                                                  topRight: Radius
-                                                                      .circular(
-                                                                          12))),
-                                                      height: 68.h,
-                                                      child: Row(children: [
-                                                        Container(
-                                                          width: fixDpiFont(24),
-                                                        ),
-                                                        Spacer(),
-                                                        Text(
-                                                          "اختر موضوع الفعالية",
-                                                          style: Styles
-                                                              .getMediumStyle(
-                                                                  color: Color(
-                                                                      0xff201D61),
-                                                                  fontSize: 18),
-                                                        ),
-                                                        Spacer(),
-                                                        GestureDetector(
-                                                          onTap: () {
-                                                            Get.back();
-                                                          },
-                                                          child: Padding(
-                                                            padding:
-                                                                EdgeInsets.only(
-                                                                    bottom:
-                                                                        20.h),
-                                                            child: Icon(
-                                                              Icons.close,
-                                                              size: fixDpiFont(
-                                                                  24),
-                                                            ),
+                                                      )),
+                                                      Align(
+                                                        alignment: Alignment
+                                                            .bottomCenter,
+                                                        child: Container(
+                                                          margin: EdgeInsets
+                                                              .fromLTRB(
+                                                                  16.w,
+                                                                  16.h,
+                                                                  16.w,
+                                                                  20.h),
+                                                          child: CustomButton(
+                                                            type: ButtonType
+                                                                .primary,
+                                                            text: "تأكيد",
+                                                            onPressed: () {
+                                                              Get.back();
+                                                            },
                                                           ),
-                                                        )
-                                                      ]),
-                                                    ),
-                                                    Expanded(
-                                                        child: GetBuilder<
-                                                            EventsController>(
-                                                      builder: (evController) =>
-                                                          Container(
-                                                        height: 400,
-                                                        margin: EdgeInsets.only(
-                                                            top: 10.h,
-                                                            right: 8.w,
-                                                            left: 8.w),
-                                                        child: ListView.builder(
-                                                            itemCount: evController
-                                                                .jobCategoryIds
-                                                                .length,
-                                                            shrinkWrap: true,
-                                                            itemBuilder:
-                                                                (_, i) {
-                                                              JobCategory cat =
-                                                                  evController
-                                                                      .jobCategoryIds[i];
-                                                              return ListTile(
-                                                                onTap: () {
-                                                                  evController
-                                                                      .onSelectjobCategory(
-                                                                          i);
-                                                                },
-                                                                contentPadding:
-                                                                    EdgeInsets.symmetric(
-                                                                        horizontal:
-                                                                            16.w),
-                                                                leading: Icon(
-                                                                  cat.isSelected
-                                                                      ? Icons
-                                                                          .check_box
-                                                                      : Icons
-                                                                          .check_box_outline_blank,
-                                                                  color: Styles
-                                                                      .primaryColor,
-                                                                ),
-                                                                title: Text(
-                                                                    cat.name),
-                                                              );
-                                                            }),
-                                                      ),
-                                                    )),
-                                                    Align(
-                                                      alignment: Alignment
-                                                          .bottomCenter,
-                                                      child: Container(
-                                                        margin:
-                                                            EdgeInsets.fromLTRB(
-                                                                16.w,
-                                                                16.h,
-                                                                16.w,
-                                                                20.h),
-                                                        child: CustomButton(
-                                                          type: ButtonType
-                                                              .primary,
-                                                          text: "تأكيد",
-                                                          onPressed: () {
-                                                            Get.back();
-                                                          },
                                                         ),
-                                                      ),
-                                                    )
-                                                  ],
+                                                      )
+                                                    ],
+                                                  ),
                                                 ),
-                                              ),
-                                              isDismissible: false);
-                                        },
-                                        child: GetBuilder<EventsController>(
-                                          builder: (evController) =>
-                                              DropDownListSelector(
-                                            dropDownList: [],
-                                            hint: evController
-                                                .jobCatDisplayString,
-                                            blackHint: true,
-                                            hintFontSize: 14,
-                                            hintFontWeight: FontWeight.w400,
-                                          ),
-                                        )),
-                                  ),
-                                  SizedBox(height: 15.h),
-                                  CustomButton(
-                                    type: ButtonType.primary,
-                                    text: "إظهار النتائج",
-                                    onPressed: () async {
-                                      await controller.filterEvents();
-                                      Get.back();
-                                    },
-                                  )
-                                ],
+                                                isDismissible: false);
+                                          },
+                                          child: GetBuilder<EventsController>(
+                                            builder: (evController) =>
+                                                DropDownListSelector(
+                                              dropDownList: [],
+                                              hint: evController
+                                                  .jobCatDisplayString,
+                                              blackHint: true,
+                                              hintFontSize: 14,
+                                              hintFontWeight: FontWeight.w400,
+                                            ),
+                                          )),
+                                    ),
+                                    SizedBox(height: 15.h),
+                                    CustomButton(
+                                      type: ButtonType.primary,
+                                      text: "إظهار النتائج",
+                                      onPressed: () async {
+                                        await controller.filterEvents();
+                                        Get.back();
+                                      },
+                                    )
+                                  ],
+                                ),
                               ),
-                            ),
-                          ]),
-                        ),
-                      );
-                    },
-                    child: Container(
-                      width: 65,
-                      height: 65,
-                      decoration: const BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            color: Styles.blackShadow,
-                            blurRadius: 45,
-                            offset: Offset(10, 10),
+                            ]),
                           ),
-                        ],
+                        );
+                      },
+                      child: Container(
+                        width: 65,
+                        height: 65,
+                        decoration: const BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Styles.blackShadow,
+                              blurRadius: 45,
+                              offset: Offset(10, 10),
+                            ),
+                          ],
+                        ),
+                        child: Image.asset(
+                          AppImages.filterIcon,
+                        ),
                       ),
-                      child: Image.asset(
-                        AppImages.filterIcon,
-                      ),
-                    ),
-                  )
-                ],
+                    )
+                  ],
+                ),
               ),
-            ),
-            Flexible(
-              child: controller.obx(
-                  (state) => ListView(
-                        children: [
-                          Obx(() {
-                            return ListView.builder(
-                              physics: const ClampingScrollPhysics(),
-                              shrinkWrap: true,
-                              itemCount: controller.eventsList.length,
-                              itemBuilder: (context, index) {
-                                final event = controller.eventsList[index];
+              Flexible(
+                child: controller.obx(
+                    (state) => ListView(
+                          children: [
+                            Obx(() {
+                              return ListView.builder(
+                                physics: const ClampingScrollPhysics(),
+                                shrinkWrap: true,
+                                itemCount: controller.eventsList.length,
+                                itemBuilder: (context, index) {
+                                  final event = controller.eventsList[index];
 
                                   return GestureDetector(
                                     onTap: () {
@@ -806,11 +806,14 @@ class EventsView extends GetView<EventsController> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
-                                              Text(
-                                              event.eventName ?? "",
-                                              maxLines: 1,
-                                              overflow: TextOverflow.ellipsis,
-                                            ),
+                                              Expanded(
+                                                child: Text(
+                                                  event.eventName ?? "",
+                                                  maxLines: 1,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                ),
+                                              ),
                                               const Icon(
                                                 Icons
                                                     .arrow_back_ios_new_rounded,
