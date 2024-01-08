@@ -66,12 +66,14 @@ class StartServiceRedir extends GetView<StartServiceController> {
                     width: 300.w,
                     height: 50,
                     onPressed: () async {
+                      print(
+                          "serviceContent.appLink ${serviceContent.serviceName} ${serviceContent.appLink}");
                       serviceContent.servicesType == ServiceType.web
                           ? Get.to(() => URLServiceView(
                                 url: serviceContent.servicesLink,
                               ))
                           : await controller.launchApp(
-                              appLink: serviceContent.servicesLink ?? "",
+                              appLink: serviceContent.appLink ?? "",
                               androidID: serviceContent.androidLink ?? "",
                               iosID: serviceContent.iosLink ?? "");
                     },

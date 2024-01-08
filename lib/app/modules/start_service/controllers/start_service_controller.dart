@@ -10,15 +10,19 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/custom_widgets/custom_taost.dart';
 import '../../../core/helper/error_helper.dart';
+import '../../../core/helper/localization_helper.dart';
 import '../../../core/services/models/service.dart';
 
 class StartServiceController extends GetxController {
   Future<ServiceContent?> getServicesContent(int serviceID) async {
     try {
       AppResponse response = await CategoriesRepository()
-          .getServicesContentByServiceId(
-              queryParameters: {"serviceId": serviceID});
+          .getServicesContentByServiceId(queryParameters: {
+        "serviceId": serviceID,
+        "languageId": LocalizationHelper.isArabic() ? 1 : 2
+      });
       if (response.status) {
+        print("response.data['data'] ${response.data['data']}");
         ServiceContent serviceContent =
             ServiceContent.fromJson(response.data['data']);
 
@@ -65,6 +69,7 @@ class StartServiceController extends GetxController {
   }
 
   launchApp({String? appLink, String? androidID, String? iosID}) async {
+    print("appLink $appLink");
     if (appLink != null && appLink.isNotEmpty) {
       try {
         final isLaunch = await launchUrl(
