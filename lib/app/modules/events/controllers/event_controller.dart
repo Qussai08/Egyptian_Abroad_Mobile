@@ -62,7 +62,7 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
       }
     }, onError: (error) {
       print("errorrrr $error");
-      handleError(error);
+      handleError(error.toString());
       // change(null, status: RxStatus.error('حدث خطأ ما'));
       // change(null, status: RxStatus.error('$error'));
       isLoading.value = false;
