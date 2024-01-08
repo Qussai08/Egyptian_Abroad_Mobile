@@ -71,10 +71,9 @@ class StartServiceRedir extends StatelessWidget {
                                 url: serviceContent.servicesLink,
                               ))
                           : await launchApp(
-                              appLink: serviceContent.appLink,
-                              androidID:
-                                  serviceContent.androidLink ?? 'com.mcit.eca',
-                              iosID: serviceContent.iosLink ?? '6444364022');
+                              appLink: serviceContent.appLink ?? "",
+                              androidID: serviceContent.androidLink ?? '',
+                              iosID: serviceContent.iosLink ?? '');
                     },
                   ),
                   SizedBox(
@@ -87,26 +86,32 @@ class StartServiceRedir extends StatelessWidget {
     );
   }
 
-  launchApp({String? appLink, String? androidID, String? iosID}) {
+  launchApp({String? appLink, String? androidID, String? iosID}) async {
     if (Platform.isAndroid || Platform.isIOS) {
       final appId = Platform.isAndroid ? androidID : iosID;
-      // 'com.mcit.eca' : '6444364022';
-      final url = appLink != null
-          ? Uri.parse(appLink)
-          : androidID == iosID
-              ? Uri.parse(iosID!)
-              : Uri.parse(
-                  Platform.isAndroid
-                      ? "market://details?id=$appId"
-                      : "https://apps.apple.com/app/id$appId",
-                );
-
-      print("url : $url");
-
-      launchUrl(
-        url,
-        mode: LaunchMode.externalApplication,
-      );
+      if (appLink != null &&
+          appLink.isNotEmpty &&
+          await canLaunchUrl(Uri.parse(appLink))) {
+        print("appLink : $appLink");
+        await launchUrl(
+          Uri.parse(appLink),
+          mode: LaunchMode.externalApplication,
+        );
+      } else {
+        // can't launch url go to store links
+        final url2 = androidID == iosID
+            ? Uri.parse(iosID!)
+            : Uri.parse(
+                Platform.isAndroid
+                    ? "market://details?id=$appId"
+                    : "https://apps.apple.com/app/id$appId",
+              );
+        print("url2 : $url2");
+        await launchUrl(
+          url2,
+          mode: LaunchMode.externalApplication,
+        );
+      }
     }
   }
 }
