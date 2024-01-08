@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 class StartServiceBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<StartServiceController>(
-      () => StartServiceController(),
+    Get.put<StartServiceController>(
+      StartServiceController(),
     );
   }
 }
