@@ -13,11 +13,11 @@ import 'package:egyptians_abroad/app/modules/start_service/views/url_service_vie
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/language/app_string.dart';
+import '../controllers/start_service_controller.dart';
 
-class StartServiceRedir extends StatelessWidget {
+class StartServiceRedir extends GetView<StartServiceController> {
   final ServiceContent serviceContent;
   final Category? category;
 
@@ -30,7 +30,7 @@ class StartServiceRedir extends StatelessWidget {
       child: SafeArea(
         child: Scaffold(
             resizeToAvoidBottomInset: false,
-            appBar: CustomAppBar(),
+            appBar: const CustomAppBar(),
             body: Container(
               width: fixDpiScreenWidth(),
               padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -70,10 +70,10 @@ class StartServiceRedir extends StatelessWidget {
                           ? Get.to(() => URLServiceView(
                                 url: serviceContent.servicesLink,
                               ))
-                          : await launchApp(
-                              appLink: serviceContent.appLink ?? "",
-                              androidID: serviceContent.androidLink ?? '',
-                              iosID: serviceContent.iosLink ?? '');
+                          : await controller.launchApp(
+                              appLink: serviceContent.servicesLink ?? "",
+                              androidID: serviceContent.androidLink ?? "",
+                              iosID: serviceContent.iosLink ?? "");
                     },
                   ),
                   SizedBox(
@@ -84,34 +84,5 @@ class StartServiceRedir extends StatelessWidget {
             )),
       ),
     );
-  }
-
-  launchApp({String? appLink, String? androidID, String? iosID}) async {
-    if (Platform.isAndroid || Platform.isIOS) {
-      final appId = Platform.isAndroid ? androidID : iosID;
-      if (appLink != null &&
-          appLink.isNotEmpty &&
-          await canLaunchUrl(Uri.parse(appLink))) {
-        print("appLink : $appLink");
-        await launchUrl(
-          Uri.parse(appLink),
-          mode: LaunchMode.externalApplication,
-        );
-      } else {
-        // can't launch url go to store links
-        final url2 = androidID == iosID
-            ? Uri.parse(iosID!)
-            : Uri.parse(
-                Platform.isAndroid
-                    ? "market://details?id=$appId"
-                    : "https://apps.apple.com/app/id$appId",
-              );
-        print("url2 : $url2");
-        await launchUrl(
-          url2,
-          mode: LaunchMode.externalApplication,
-        );
-      }
-    }
   }
 }
