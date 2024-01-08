@@ -36,7 +36,7 @@ class EventDetailsController extends GetxController {
 
   String dateFormatter(String date) {
     DateTime x = DateTime.parse(date);
-    return DateFormat('dd MMMM yyyy hh:mm a', 'ar_SA').format(x);
+    return DateFormat('dd MMMM yyyy \t hh:mm a', 'ar_SA').format(x);
   }
 
   String urlFormatter(String url) {

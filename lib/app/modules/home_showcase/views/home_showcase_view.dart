@@ -13,11 +13,11 @@ class HomeShowcaseView extends GetView<HomeShowcaseController> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeShowcaseController>(builder: (homeContoller) {
-      controller.categoriesLoading ||
-              controller.userProfileLoading ||
-              controller.favoritesIsLoading
-          ? context.loaderOverlay.show()
-          : context.loaderOverlay.hide();
+      // controller.categoriesLoading ||
+      //         controller.userProfileLoading ||
+      //         controller.favoritesIsLoading
+      //     ? context.loaderOverlay.show()
+      //     : context.loaderOverlay.hide();
       return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: const HomeAppBar(),
