@@ -128,4 +128,6 @@ Map<String, String> ar = {
   AppStrings.meetingLink: 'رابط الاجتماع',
   AppStrings.events: 'الفعاليات',
   AppStrings.search: 'ابحث',
+  AppStrings.existInCarsValidationMsg:
+      "بيانات الحساب مُسجلة بالفعل، برجاء التسجيل بحساب سيارات المصريين بالخارج.",
 };

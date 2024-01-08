@@ -18,6 +18,8 @@ import 'package:egyptians_abroad/app/core/helper/validators.dart';
 
 import 'package:get/get.dart';
 
+import '../../../core/helper/localization_helper.dart';
+
 class RegistrationView extends StatefulWidget {
   const RegistrationView({super.key});
 
@@ -206,12 +208,29 @@ class _RegistrationViewState extends State<RegistrationView>
                             SizedBox(
                               height: 15.h,
                             ),
-                            Text(
-                              'بالمتابعة انت موافق على مشاركة بيانات الدخول مع تطبيق سيارات المصريين بالخارج',
-                              textAlign: TextAlign.center,
-                              style: Styles.getRegularStyle(
-                                  color: Styles.lightBlack,
-                                  fontSize: fixDpiFont(13)),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Icon(
+                                  Icons.check_box_outline_blank,
+                                  color: Styles.grey_200,
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    'سيتم مشاركة بيانات الدخول مع تطبيق سيارات المصريين بالخارج',
+                                    textDirection: LocalizationHelper.isArabic()
+                                        ? TextDirection.rtl
+                                        : TextDirection.ltr,
+                                    textAlign: TextAlign.start,
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: Styles.getRegularStyle(
+                                        color: Styles.lightBlack,
+                                        fontSize: fixDpiFont(13)),
+                                  ),
+                                ),
+                              ],
                             ),
                             SizedBox(
                               height: 15.h,

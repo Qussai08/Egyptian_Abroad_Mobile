@@ -17,8 +17,6 @@ import 'package:get/get.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
 class CompleteAccountView extends StatefulWidget {
-  const CompleteAccountView({super.key});
-
   const CompleteAccountView({super.key, this.carRegister = false});
   final bool carRegister;
   @override

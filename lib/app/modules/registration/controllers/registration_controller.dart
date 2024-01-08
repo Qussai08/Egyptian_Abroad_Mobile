@@ -327,4 +327,50 @@ class RegistrationController extends GetxController {
       }
     }
   }
+
+  Future<void> checkNIDAndEmailInCars() async {
+    AppResponse response = await UserRepository().checkNIDAndEmailInCarsReq(
+      queryParameters: {
+        "Email": emailTxtController.text,
+        "NID": nationalIDTxtController.text
+      },
+    );
+    if (response.status) {
+      //TODO : navigate to otp
+      print("checkNIDAndEmailInCars ${response.status}");
+    } else {
+      switch (response.statusCode) {
+        case -2:
+          handleError(AppStrings.existInCarsValidationMsg.tr);
+
+          break;
+        case -1:
+          handleError(AppStrings.existInCarsValidationMsg.tr);
+          break;
+
+        case 500:
+          handleError(AppStrings.somethingWentWrong.tr);
+          break;
+        default:
+          handleError(AppStrings.somethingWentWrong.tr);
+      }
+    }
+  }
+
+  void handleError(String error) {
+    Get.showSnackbar(
+      buildCustomToast(
+        Get.context!,
+        toastMsg: error,
+        toastTitle: AppStrings.sorry.tr,
+        toastType: ToastType.error,
+      ),
+    );
+  }
+
+  bool agreeToShareWithCars = false;
+  setAgreeToShareWithCars(bool val) {
+    agreeToShareWithCars = val;
+    update();
+  }
 }
