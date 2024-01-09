@@ -206,34 +206,58 @@ class _RegistrationViewState extends State<RegistrationView>
                             //   height: 40.h,
                             // ),
                             SizedBox(
-                              height: 15.h,
+                              height: 19.h,
                             ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Icon(
-                                  Icons.check_box_outline_blank,
-                                  color: Styles.grey_200,
-                                ),
-                                Expanded(
-                                  child: Text(
-                                    'سيتم مشاركة بيانات الدخول مع تطبيق سيارات المصريين بالخارج',
-                                    textDirection: LocalizationHelper.isArabic()
-                                        ? TextDirection.rtl
-                                        : TextDirection.ltr,
-                                    textAlign: TextAlign.start,
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: Styles.getRegularStyle(
-                                        color: Styles.lightBlack,
-                                        fontSize: fixDpiFont(13)),
+                            GetBuilder<RegistrationController>(
+                              builder: (registrationController) =>
+                                  ValueListenableBuilder<bool>(
+                                valueListenable:
+                                    controller.showAgreeToShareWithCarsError,
+                                builder: (_, showError, __) => GestureDetector(
+                                  onTap: () {
+                                    registrationController
+                                        .setAgreeToShareWithCars(true);
+                                  },
+                                  child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Icon(
+                                        Icons.check_box_outline_blank,
+                                        color: showError
+                                            ? Colors.red
+                                            : Styles.lightBlack
+                                                .withOpacity(0.3),
+                                        size: 20,
+                                      ),
+                                      const SizedBox(
+                                        width: 5,
+                                      ),
+                                      Expanded(
+                                        child: Text(
+                                          'سيتم مشاركة بيانات الدخول مع تطبيق سيارات المصريين بالخارج',
+                                          textDirection:
+                                              LocalizationHelper.isArabic()
+                                                  ? TextDirection.rtl
+                                                  : TextDirection.ltr,
+                                          textAlign: TextAlign.start,
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: Styles.getRegularStyle(
+                                              color: showError
+                                                  ? Colors.red
+                                                  : Styles.lightBlack,
+                                              fontSize: fixDpiFont(13)),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                              ],
+                              ),
                             ),
                             SizedBox(
-                              height: 15.h,
+                              height: 19.h,
                             ),
                             CustomButton(
                               text: AppStrings.next.tr,
@@ -242,7 +266,9 @@ class _RegistrationViewState extends State<RegistrationView>
                               width: 358.w,
                               height: 50.h,
                               onPressed: () async {
-                                if (_formKey.currentState!.validate()) {
+                                if (_formKey.currentState!.validate() &&
+                                    registrationController
+                                        .agreeToShareWithCars) {
                                   setState(() {
                                     showCountryError = false;
                                   });
@@ -250,12 +276,12 @@ class _RegistrationViewState extends State<RegistrationView>
                                       await controller.verifyMailAndNID();
 
                                   if (res.status && res.data['data'] == true) {
-                                    AppResponse verRes = await controller
-                                        .createVerificationCode();
-                                    Get.to(() => OtpView(
-                                          resendOtpTime: verRes.data['data']
-                                              ['data']['resendOtp'],
-                                        ));
+                                    // AppResponse verRes = await controller
+                                    //     .createVerificationCode();
+                                    // Get.to(() => OtpView(
+                                    //       resendOtpTime: verRes.data['data']
+                                    //           ['data']['resendOtp'],
+                                    //     ));
                                   } else {
                                     Get.showSnackbar(
                                       buildCustomToast(
@@ -279,6 +305,14 @@ class _RegistrationViewState extends State<RegistrationView>
                                     setState(() {
                                       showCountryError = false;
                                     });
+                                  }
+
+                                  if (!registrationController
+                                      .agreeToShareWithCars) {
+                                    registrationController
+                                        .setShowAgreeToShareWithCarsError(true);
+                                    print(
+                                        "registrationController.agreeToShareWithCars ${registrationController.agreeToShareWithCars}");
                                   }
                                 }
                               },

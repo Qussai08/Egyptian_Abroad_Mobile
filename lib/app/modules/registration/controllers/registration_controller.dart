@@ -373,4 +373,12 @@ class RegistrationController extends GetxController {
     agreeToShareWithCars = val;
     update();
   }
+
+  final ValueNotifier<bool> showAgreeToShareWithCarsError =
+      ValueNotifier(false);
+
+  setShowAgreeToShareWithCarsError(bool val) {
+    showAgreeToShareWithCarsError.value = val;
+    update();
+  }
 }
