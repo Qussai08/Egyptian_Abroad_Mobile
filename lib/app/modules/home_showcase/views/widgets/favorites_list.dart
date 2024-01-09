@@ -19,8 +19,8 @@ class FavoritesList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Showcase.withWidget(
-      height: 144.h,
-      width: 255.w,
+      height: 169.h,
+      width: 331.w,
       targetPadding: EdgeInsets.all(8.0),
       key: homeContoller.two,
       disposeOnTap: false,

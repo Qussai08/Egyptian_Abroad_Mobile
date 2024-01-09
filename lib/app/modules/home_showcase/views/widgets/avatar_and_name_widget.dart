@@ -32,8 +32,8 @@ class AvatarAndNameWidget extends StatelessWidget {
             children: [
               // Avatar Image
               Showcase.withWidget(
-                height: 144,
-                width: 255.w,
+                height: 144.h,
+                width: 240.w,
                 key: homeContoller.one,
                 onTargetClick: () => log('onTargetClick'),
                 targetShapeBorder: const CircleBorder(),

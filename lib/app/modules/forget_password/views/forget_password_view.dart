@@ -77,22 +77,7 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView>
                     },
                   ),
                   SizedBox(
-                    height: 16.h,
-                  ),
-                  CustomButton(
-                    // TODO : translate
-                    text: "الغاء",
-                    icon: Icons.arrow_forward,
-
-                    type: ButtonType.secondary,
-                    width: 358.w,
-                    height: 50.h,
-                    onPressed: () {
-                      Get.back();
-                    },
-                  ),
-                  SizedBox(
-                    height: 20.h,
+                    height: 128.h,
                   ),
                 ],
               ),

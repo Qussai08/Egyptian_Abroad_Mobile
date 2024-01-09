@@ -1,3 +1,4 @@
+import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/theme/app_images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,16 +15,16 @@ class CustoumShowcase1Widget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 340.w,
-      height: 200.h,
+      width: 240.w,
+      height: 144.h,
       child: Stack(
         children: [
           Positioned(
             left: 0,
-            top: 13,
+            top: 13.h,
             child: Container(
-              width: 240,
-              // height: 131,
+              width: 240.w,
+              height: 131.h,
               decoration: ShapeDecoration(
                 color: const Color(0xFFFAFAFA),
                 shape: RoundedRectangleBorder(
@@ -39,7 +40,8 @@ class CustoumShowcase1Widget extends StatelessWidget {
                 ],
               ),
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.only(
+                    top: 16.h, right: 11.w, left: 11.w, bottom: 12.h),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -48,9 +50,9 @@ class CustoumShowcase1Widget extends StatelessWidget {
                       children: [
                         // logo image info
                         Padding(
-                          padding: const EdgeInsets.only(top: 4.0),
+                          padding: const EdgeInsets.only(left: 4.0),
                           child: Image.asset(AppImages.icInfo,
-                              width: 16, height: 16),
+                              width: 16.w, height: 16.h),
                         ),
 
                         Expanded(
@@ -59,7 +61,7 @@ class CustoumShowcase1Widget extends StatelessWidget {
                             // textAlign: TextAlign.justify,
                             style: Styles.getMediumStyle(
                               color: Styles.black,
-                              fontSize: 15,
+                              fontSize: fixDpiFont(15),
                             ),
                             maxLines: 3,
                             overflow: TextOverflow.ellipsis,
@@ -67,37 +69,51 @@ class CustoumShowcase1Widget extends StatelessWidget {
                         ),
                       ],
                     ),
-
+                    SizedBox(height: 10.h),
                     // Divider line
                     const Divider(
+                      height: 0,
                       color: Styles.dividerColor,
-                      thickness: 2,
+                      thickness: 1,
                     ),
+                    SizedBox(height: 13.h),
 
                     Row(
                       children: [
-                        MainButton(
-                            enable: true,
-                            text: Text(
-                              'التالي',
-                              style: Styles.getBoldStyle(color: Styles.white),
-                            ),
-                            onPress: () async {
-                              await homeController.nextShowCase();
-                            }),
+                        SizedBox(
+                          width: 75.w,
+                          height: 32.h,
+                          child: MainButton(
+                              enable: true,
+                              text: Text(
+                                'التالي',
+                                style: Styles.getBoldStyle(
+                                    color: Styles.white,
+                                    fontSize: fixDpiFont(11)),
+                              ),
+                              onPress: () async {
+                                await homeController.nextShowCase();
+                              }),
+                        ),
                         // space 12
-                        const SizedBox(width: 12),
+                        SizedBox(width: 12.w),
 
-                        MainButton(
-                            enable: true,
-                            color: Styles.secondaryButtonColor,
-                            text: Text(
-                              'تخطى',
-                              style: Styles.getBoldStyle(color: Styles.black),
-                            ),
-                            onPress: () {
-                              homeController.dismissShowCase(context);
-                            }),
+                        SizedBox(
+                          width: 75.w,
+                          height: 32.h,
+                          child: MainButton(
+                              enable: true,
+                              color: Styles.secondaryButtonColor,
+                              text: Text(
+                                'تخطى',
+                                style: Styles.getBoldStyle(
+                                    color: Styles.black,
+                                    fontSize: fixDpiFont(11)),
+                              ),
+                              onPress: () {
+                                homeController.dismissShowCase(context);
+                              }),
+                        ),
                       ],
                     ),
                   ],
@@ -108,14 +124,15 @@ class CustoumShowcase1Widget extends StatelessWidget {
 
           // top arrow
           Positioned(
-            left: 192,
+            right: 24.w,
             top: 0,
             child: Container(
-              width: 24,
+              width: 24.w,
               height: 24.h,
               decoration: const ShapeDecoration(
                 color: Color(0xFFFAFAFA),
                 shape: StarBorder.polygon(
+                  pointRounding: 0.5,
                   sides: 3,
                   // borderRadius: BorderRadius.circular(3),
                 ),
@@ -136,16 +153,15 @@ class CustoumShowcase2Widget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 340.w,
-      height: 220.h,
+      width: 331.w,
+      height: 169.h,
       child: Stack(
         children: [
           Positioned(
-            left: 0,
-            top: 13,
+            top: 13.h,
             child: Container(
               width: 331.w,
-              height: 169.h,
+              height: 153.h,
               decoration: ShapeDecoration(
                 color: const Color(0xFFFAFAFA),
                 shape: RoundedRectangleBorder(
@@ -169,7 +185,7 @@ class CustoumShowcase2Widget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(top: 4.0, left: 4.0),
+                          padding: const EdgeInsets.only(left: 8.0),
                           child: Image.asset(AppImages.icInfo,
                               width: 16, height: 16),
                         ),
@@ -178,7 +194,7 @@ class CustoumShowcase2Widget extends StatelessWidget {
                             ' يتم إضافة الخدمات المفضلة لديك فى هذه القائمة و يمكنك الحذف و الاضافة من خلال الضغط على علامة المفضلة',
                             style: Styles.getMediumStyle(
                               color: Styles.black,
-                              fontSize: 15,
+                              fontSize: fixDpiFont(15),
                             ),
                             textAlign: TextAlign.justify,
                             maxLines: 5,
@@ -187,35 +203,51 @@ class CustoumShowcase2Widget extends StatelessWidget {
                         ),
                       ],
                     ),
+                    SizedBox(height: 10.h),
 
                     // Divider line
                     const Divider(
+                      height: 0,
                       color: Styles.dividerColor,
-                      thickness: 2,
+                      thickness: 1,
                     ),
+                    SizedBox(height: 13.h),
 
                     Row(
                       children: [
-                        MainButton(
-                            enable: true,
-                            text: Text(
-                              'التالي',
-                              style: Styles.getBoldStyle(color: Styles.white),
-                            ),
-                            onPress: () async {
-                              await homeController.nextShowCase(isScroll: true);
-                            }),
+                        SizedBox(
+                          height: 32.h,
+                          width: 75.w,
+                          child: MainButton(
+                              enable: true,
+                              text: Text(
+                                'التالي',
+                                style: Styles.getBoldStyle(
+                                    color: Styles.white,
+                                    fontSize: fixDpiFont(11)),
+                              ),
+                              onPress: () async {
+                                await homeController.nextShowCase(
+                                    isScroll: true);
+                              }),
+                        ),
                         const SizedBox(width: 12),
-                        MainButton(
-                            enable: true,
-                            color: Styles.secondaryButtonColor,
-                            text: Text(
-                              'تخطى',
-                              style: Styles.getBoldStyle(color: Styles.black),
-                            ),
-                            onPress: () {
-                              homeController.dismissShowCase(context);
-                            }),
+                        SizedBox(
+                          height: 32.h,
+                          width: 75.w,
+                          child: MainButton(
+                              enable: true,
+                              color: Styles.secondaryButtonColor,
+                              text: Text(
+                                'تخطى',
+                                style: Styles.getBoldStyle(
+                                    color: Styles.black,
+                                    fontSize: fixDpiFont(11)),
+                              ),
+                              onPress: () {
+                                homeController.dismissShowCase(context);
+                              }),
+                        ),
                       ],
                     ),
                   ],
@@ -226,14 +258,15 @@ class CustoumShowcase2Widget extends StatelessWidget {
 
           // top arrow
           Positioned(
-            left: 192,
+            right: 16.w,
             top: 0,
             child: Container(
-              width: 24,
+              width: 24.w,
               height: 24.h,
               decoration: const ShapeDecoration(
                 color: Color(0xFFFAFAFA),
                 shape: StarBorder.polygon(
+                  pointRounding: 0.5,
                   sides: 3,
                   // borderRadius: BorderRadius.circular(3),
                 ),
@@ -255,16 +288,15 @@ class CustoumShowcase3Widget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 340.w,
-      height: 180.h,
+      width: 334.w,
+      height: 150.h,
       child: Stack(
         children: [
           Positioned(
-            left: 0,
-            top: 13,
+            top: 13.h,
             child: Container(
-              width: 240,
-              // height: 131,
+              width: 331.w,
+              height: 125.h,
               decoration: ShapeDecoration(
                 color: const Color(0xFFFAFAFA),
                 shape: RoundedRectangleBorder(
@@ -280,7 +312,7 @@ class CustoumShowcase3Widget extends StatelessWidget {
                 ],
               ),
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.only(top: 8.h, right: 10.w, left: 10.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -288,9 +320,9 @@ class CustoumShowcase3Widget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(top: 4.0),
+                          padding: EdgeInsets.only(left: 4.w),
                           child: Image.asset(AppImages.icInfo,
-                              width: 16, height: 16),
+                              width: 16.w, height: 16.h),
                         ),
                         Expanded(
                           child: Text(
@@ -298,7 +330,7 @@ class CustoumShowcase3Widget extends StatelessWidget {
                             // textAlign: TextAlign.justify,
                             style: Styles.getMediumStyle(
                               color: Styles.black,
-                              fontSize: 15,
+                              fontSize: fixDpiFont(15),
                             ),
                             maxLines: 3,
                             overflow: TextOverflow.ellipsis,
@@ -307,21 +339,29 @@ class CustoumShowcase3Widget extends StatelessWidget {
                       ],
                     ),
 
+                    SizedBox(height: 10.h),
                     // Divider line
                     const Divider(
+                      height: 0,
                       color: Styles.dividerColor,
-                      thickness: 2,
+                      thickness: 1,
                     ),
+                    SizedBox(height: 13.h),
 
-                    MainButton(
-                        enable: true,
-                        text: Text(
-                          'تم',
-                          style: Styles.getBoldStyle(color: Styles.white),
-                        ),
-                        onPress: () {
-                          homeController.dismissShowCase(context);
-                        }),
+                    SizedBox(
+                      width: 75.w,
+                      height: 32.h,
+                      child: MainButton(
+                          enable: true,
+                          text: Text(
+                            'تم',
+                            style: Styles.getBoldStyle(
+                                color: Styles.white, fontSize: fixDpiFont(11)),
+                          ),
+                          onPress: () {
+                            homeController.dismissShowCase(context);
+                          }),
+                    ),
                   ],
                 ),
               ),
@@ -330,17 +370,18 @@ class CustoumShowcase3Widget extends StatelessWidget {
 
           // top arrow
           Positioned(
-            left: 192,
-            bottom: 5,
+            right: 18.w,
+            bottom: 0,
             // rotate arrow
             child: Transform.flip(
               flipY: true,
               child: Container(
-                width: 24,
+                width: 24.w,
                 height: 24.h,
                 decoration: const ShapeDecoration(
                   color: Color(0xFFFAFAFA),
                   shape: StarBorder.polygon(
+                    pointRounding: 0.5,
                     sides: 3,
                     // borderRadius: BorderRadius.circular(3),
                   ),
