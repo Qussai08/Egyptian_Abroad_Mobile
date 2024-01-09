@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:loader_overlay/loader_overlay.dart';
 
 import '../controllers/home_showcase_controller.dart';
 import 'widgets/home_appbar.dart';

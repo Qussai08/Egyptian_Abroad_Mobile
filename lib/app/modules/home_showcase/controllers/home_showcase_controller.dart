@@ -259,7 +259,7 @@ class HomeShowcaseController extends GetxController {
 
   // start showcase
   void startShowCase(BuildContext context) {
-    if (true) {
+    if (authService.showcaseViewed) {
       _homeContext = context;
       ambiguate(WidgetsBinding.instance)?.addPostFrameCallback(
         (_) => ShowCaseWidget.of(_homeContext).startShowCase([one, two, three]),
