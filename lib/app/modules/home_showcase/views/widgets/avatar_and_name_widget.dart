@@ -36,12 +36,12 @@ class AvatarAndNameWidget extends StatelessWidget {
                 width: 255.w,
                 key: homeContoller.one,
                 onTargetClick: () => log('onTargetClick'),
-
                 targetShapeBorder: const CircleBorder(),
                 targetBorderRadius: const BorderRadius.all(
                   Radius.circular(150),
                 ),
                 // disableDefaultTargetGestures: true,
+                disposeOnTap: false,
                 container: CustoumShowcase1Widget(),
                 onBarrierClick: () {
                   log('onBarrierClick');

@@ -307,18 +307,21 @@ class HomeShowcaseController extends GetxController {
 
   bool favoritesIsLoading = true;
   Future<void> updateFavoritesList({required String userId}) async {
-    await favoritesListProvider.getFavoritesList(userId).then((value) {
-      if (value.isSuccess) {
-        print('Favorites successfully updated');
-        Iterable list = value.body;
-        favoritesList = list.map((e) => ServiceItem.fromJson(e)).toList();
-        loadFavoritesCategories();
-      }
-    }, onError: (error) {
-      print('FavoritesList Error: $error');
-      favoritesIsLoading = false;
-      update();
-    });
+    await favoritesListProvider.getFavoritesList(userId).then(
+      (value) {
+        if (value.isSuccess) {
+          print('Favorites successfully updated');
+          Iterable list = value.body;
+          favoritesList = list.map((e) => ServiceItem.fromJson(e)).toList();
+          loadFavoritesCategories();
+        }
+      },
+      onError: (error) {
+        print('FavoritesList Error: $error');
+        favoritesIsLoading = false;
+        update();
+      },
+    );
     favoritesIsLoading = false;
     print("favoritesIsLoading: $favoritesIsLoading");
     update();

@@ -118,6 +118,7 @@ abstract class AppStrings {
   static const accountInfos = 'accountInfos';
   static const editAccountInfos = 'editAccountInfos';
   static const viewAccountInfos = 'viewAccountInfos';
+  static const successEdit = 'successEdit';
 
   // change password screen
   static const changePassword = 'changePassword';

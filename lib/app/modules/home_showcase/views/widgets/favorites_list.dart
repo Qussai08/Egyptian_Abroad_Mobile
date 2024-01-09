@@ -23,6 +23,7 @@ class FavoritesList extends StatelessWidget {
       width: 255.w,
       targetPadding: EdgeInsets.all(8.0),
       key: homeContoller.two,
+      disposeOnTap: false,
       container: CustoumShowcase2Widget(),
       onBarrierClick: () {
         log('onBarrierClick');

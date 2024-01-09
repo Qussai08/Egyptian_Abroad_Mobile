@@ -70,33 +70,35 @@ class CategoriesListWidget extends StatelessWidget {
           //           ),
           //         ),
           //       )
-          //     : 
-              homeContoller.displayedCategoriesList.isEmpty
-                  ? Container(
-                      height: 200,
-                      padding: EdgeInsets.only(top: 20),
-                      child: NoDataWidget(
-                        message: AppStrings.noServices.tr,
-                      ),
-                    )
-                  : Flexible(
-                      child: GridView.builder(
-                        physics: NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        padding: EdgeInsets.only(top: 15.h),
-                        gridDelegate:
-                            const SliverGridDelegateWithMaxCrossAxisExtent(
-                          maxCrossAxisExtent: 125,
-                          childAspectRatio: 0.96,
-                        ),
-                        scrollDirection: Axis.vertical,
-                        itemCount: homeContoller.displayedCategoriesList.length,
-                        itemBuilder: (ctx, i) => GridWidget(
-                          i,
-                          category: homeContoller.displayedCategoriesList[i],
-                        ),
-                      ),
+          //     :
+          homeContoller.displayedCategoriesList.isEmpty
+              ? Container(
+                  height: 200,
+                  padding: EdgeInsets.only(top: 20),
+                  child: NoDataWidget(
+                    message: AppStrings.noServices.tr,
+                  ),
+                )
+              : Flexible(
+                  child: GridView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    padding: EdgeInsets.only(top: 15.h),
+                    gridDelegate:
+                        const SliverGridDelegateWithMaxCrossAxisExtent(
+                      maxCrossAxisExtent: 125,
+                      childAspectRatio: 0.96,
                     ),
+                    scrollDirection: Axis.vertical,
+                    itemCount: homeContoller.displayedCategoriesList.length,
+                    itemBuilder: (ctx, i) {
+                      return GridWidget(
+                        i,
+                        category: homeContoller.displayedCategoriesList[i],
+                      );
+                    },
+                  ),
+                ),
           !homeContoller.categoriesLoading &&
                   homeContoller.displayedCategoriesList.isNotEmpty &&
                   homeContoller.showMore
@@ -104,12 +106,14 @@ class CategoriesListWidget extends StatelessWidget {
                   height: 140,
                   width: 255.w,
                   key: homeContoller.three,
+                  disposeOnTap: false,
                   targetShapeBorder: const CircleBorder(),
                   targetBorderRadius: const BorderRadius.all(
                     Radius.circular(150),
                   ),
-                  disableDefaultTargetGestures: true,
+                  // disableDefaultTargetGestures: true,
                   container: CustoumShowcase3Widget(),
+                  onTargetClick: () => log('onTargerClick'),
                   onBarrierClick: () {
                     log('onBarrierClick');
                   },

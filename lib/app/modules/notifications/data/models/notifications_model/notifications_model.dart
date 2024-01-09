@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class NotificationsModel {
   int? notificationId;
   String? userId;
@@ -34,11 +36,21 @@ class NotificationsModel {
   }
 
   static String formatDate(String dateTimestamp) {
-    DateTime date = DateTime.parse(dateTimestamp);
+    // DateTime date = DateTime.parse(dateTimestamp);
 
-    String time = date.hour == 0 && date.minute == 0
-        ? '12:00 ${date.hour > 12 ? 'مساءا' : 'صباحا'}'
-        : '${date.hour}:${date.minute} ${date.hour > 12 ? 'مساءا' : 'صباحا'}';
-    return '${date.day}-${date.month}-${date.year} $time';
+    // String time = date.hour == 0 && date.minute == 0
+    //     ? '12:00 ${date.hour > 12 ? 'مساءً' : 'صباحًا'}'
+    //     : '${date.hour}:${date.minute} ${date.hour > 12 ? 'مساءً' : 'صباحًا'}';
+    // return '${date.day}-${date.month}-${date.year} $time';
+    DateTime x = DateTime.parse(dateTimestamp);
+    String formattedDate =
+        DateFormat('dd MMMM yyyy \t hh:mm a', 'ar_SA').format(x);
+
+    formattedDate.split(' ').last.contains('ص')
+        ? formattedDate = formattedDate.replaceRange(formattedDate.length - 1, null, 'صباحًا')
+        : formattedDate = formattedDate.replaceRange(formattedDate.length - 1, null, 'مساءً');
+
+    print(formattedDate);
+    return formattedDate;
   }
 }
