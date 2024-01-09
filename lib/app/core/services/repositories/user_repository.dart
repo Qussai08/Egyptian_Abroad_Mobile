@@ -99,4 +99,11 @@ class UserRepository {
       queryParameters: queryParameters,
     );
   }
+
+  Future<AppResponse> signUpWithCarsReq(
+      {Map<String, dynamic>? queryParameters,
+      Map<String, dynamic>? body}) async {
+    return await CarsBaseApi().postRequest(
+        endPoint: "SignUpWithCars", options: queryParameters, body: body);
+  }
 }

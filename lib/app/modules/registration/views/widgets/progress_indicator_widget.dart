@@ -19,7 +19,9 @@ class ProgressIndicatorWidget extends StatelessWidget {
       child: Stack(
         children: [
           CircularProgressIndicator(
-            value: 0.33333333 * int.parse(step),
+            value: total == "3"
+                ? 0.33333333 * int.parse(step)
+                : 0.25 * int.parse(step),
             valueColor:
                 const AlwaysStoppedAnimation<Color>(Styles.primaryColor),
             backgroundColor: const Color(0xffE7F2F4),

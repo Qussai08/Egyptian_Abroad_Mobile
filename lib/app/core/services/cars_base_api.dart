@@ -53,17 +53,18 @@ class CarsBaseApi {
     try {
       _response = await _dio.get(endPoint,
           options: Options(headers: headers), queryParameters: queryParameters);
+      print("_response get _response.data ${_response.data}");
 
       return AppResponse(
-          statusCode: int.parse(_response.data['AppResponseCode']),
+          statusCode: int.parse(_response.data['appResponseCode']),
           status:
-              _response.data['AppResponseMessage'] == "Success" ? true : false,
+              _response.data['appResponseMessage'] == "Success" ? true : false,
           data: _response.data);
     } on DioException catch (e) {
       if (e.response != null) {
         if (e.response!.statusCode != null) {
           if (e.response!.statusCode! == 401) {
-            await await AuthService()
+            await AuthService()
                 .logout()
                 .then((value) => getx.Get.offAllNamed(Routes.LOGIN));
           }
@@ -75,10 +76,7 @@ class CarsBaseApi {
 
   // Perform POST request
   Future<AppResponse> postRequest(
-      {body,
-      Map<String, dynamic>? options,
-      required String endPoint,
-      bool? jsonResponse = true}) async {
+      {body, Map<String, dynamic>? options, required String endPoint}) async {
     String token = authService.accessToken ?? '';
     //  String token = authService.accessToken ?? '';
     token = "Bearer $token";
@@ -99,18 +97,15 @@ class CarsBaseApi {
           data: body, options: options0, queryParameters: queryParms);
 
       return AppResponse(
-          statusCode: _response.statusCode,
-          status: jsonResponse!
-              ? _response.data['isSuccess']
-              : _response.statusCode == 200
-                  ? true
-                  : false,
-          data: jsonResponse ? _response.data['data'] : {});
+          statusCode: int.parse(_response.data['appResponseCode']),
+          status:
+              _response.data['appResponseMessage'] == "Success" ? true : false,
+          data: _response.data);
     } on DioException catch (e) {
       if (e.response != null) {
         if (e.response!.statusCode != null) {
           if (e.response!.statusCode! == 401) {
-            await await AuthService()
+            await AuthService()
                 .logout()
                 .then((value) => getx.Get.offAllNamed(Routes.LOGIN));
           }
