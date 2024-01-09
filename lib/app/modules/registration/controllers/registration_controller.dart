@@ -281,7 +281,7 @@ class RegistrationController extends GetxController {
     if (response.status) {
       Get.showSnackbar(buildCustomToast(
         Get.context!,
-        toastMsg: "تم تعديل بيانات الحساب بنجاح",
+        toastMsg: AppStrings.successEdit.tr,
         toastTitle: 'تاكيد',
         toastType: ToastType.success,
       ));

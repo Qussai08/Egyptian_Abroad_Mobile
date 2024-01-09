@@ -91,6 +91,7 @@ Map<String, String> en = {
   AppStrings.confirmNewPassword: 'Confirm New Password',
   AppStrings.invalidOldPassword: 'Invalid Old Password',
   AppStrings.successPasswordChange: 'Password has been changed successfully',
+  AppStrings.successEdit: 'Profile has been edited successfully',
   AppStrings.more: 'More',
   AppStrings.evening: 'PM',
   AppStrings.morning: 'AM',
