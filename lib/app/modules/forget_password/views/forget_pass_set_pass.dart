@@ -1,3 +1,4 @@
+import 'package:egyptians_abroad/app/core/custom_widgets/custom_appbar.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/custom_button.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/custom_textfield.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/network_indecator.dart';
@@ -39,6 +40,15 @@ class _ForgetPassSetPasswordViewState extends State<ForgetPassSetPasswordView>
         },
         child: Scaffold(
           resizeToAvoidBottomInset: false,
+          appBar: CustomAppBar(
+            onClose: () {
+              Get.offAllNamed(Routes.LOGIN);
+              controller.newPasswordTxtController.clear();
+              controller.confirmNewPassTxtController.clear();
+            },
+            actionsEnabled: true,
+            leadingEnabled: false,
+          ),
           body: SafeArea(
             child: Container(
               padding: EdgeInsets.only(top: 48.h, right: 16.w, left: 16.w),
@@ -164,20 +174,20 @@ class _ForgetPassSetPasswordViewState extends State<ForgetPassSetPasswordView>
                     SizedBox(
                       height: 16.h,
                     ),
-                    CustomButton(
-                      // TODO : translate
-                      text: "الغاء",
-                      icon: Icons.arrow_forward,
+                    // CustomButton(
+                    //   // TODO : translate
+                    //   text: "الغاء",
+                    //   icon: Icons.arrow_forward,
 
-                      type: ButtonType.secondary,
-                      width: 358.w,
-                      height: 50.h,
-                      onPressed: () {
-                        Get.offAllNamed(Routes.LOGIN);
-                        controller.newPasswordTxtController.clear();
-                        controller.confirmNewPassTxtController.clear();
-                      },
-                    ),
+                    //   type: ButtonType.secondary,
+                    //   width: 358.w,
+                    //   height: 50.h,
+                    //   onPressed: () {
+                    //     Get.offAllNamed(Routes.LOGIN);
+                    //     controller.newPasswordTxtController.clear();
+                    //     controller.confirmNewPassTxtController.clear();
+                    //   },
+                    // ),
                   ],
                 ),
               ),

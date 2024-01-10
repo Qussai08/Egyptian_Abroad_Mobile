@@ -54,7 +54,7 @@ class FavoritesList extends StatelessWidget {
                       // controller.favoritesIsLoading
                       //     ? context.loaderOverlay.show()
                       //     : context.loaderOverlay.hide();
-                      return controller.favoriteCategories.isEmpty ||
+                      return controller.favoriteCategories.isEmpty &&
                               controller.favoritesList.isEmpty
                           ? Container()
                           : ListView.builder(
@@ -65,8 +65,10 @@ class FavoritesList extends StatelessWidget {
                                   padding: const EdgeInsets.only(left: 8.0),
                                   child: GridWidget(
                                     index,
-                                    category:
-                                        controller.favoriteCategories[index],
+                                    category: controller
+                                            .favoriteCategories.isNotEmpty
+                                        ? controller.favoriteCategories[index]
+                                        : null,
                                     serviceItem:
                                         controller.favoritesList[index],
                                     inFavList: true,

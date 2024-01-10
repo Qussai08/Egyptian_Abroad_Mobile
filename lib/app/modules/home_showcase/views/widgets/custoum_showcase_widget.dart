@@ -16,7 +16,7 @@ class CustoumShowcase1Widget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: 240.w,
-      height: 144.h,
+      height: 150.h,
       child: Stack(
         children: [
           Positioned(
@@ -24,7 +24,7 @@ class CustoumShowcase1Widget extends StatelessWidget {
             top: 13.h,
             child: Container(
               width: 240.w,
-              height: 131.h,
+              height: 140.h,
               decoration: ShapeDecoration(
                 color: const Color(0xFFFAFAFA),
                 shape: RoundedRectangleBorder(

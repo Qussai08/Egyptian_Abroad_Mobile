@@ -36,21 +36,16 @@ class NotificationsModel {
   }
 
   static String formatDate(String dateTimestamp) {
-    // DateTime date = DateTime.parse(dateTimestamp);
+    DateTime myDateTime = DateTime.parse(dateTimestamp);
 
-    // String time = date.hour == 0 && date.minute == 0
-    //     ? '12:00 ${date.hour > 12 ? 'مساءً' : 'صباحًا'}'
-    //     : '${date.hour}:${date.minute} ${date.hour > 12 ? 'مساءً' : 'صباحًا'}';
-    // return '${date.day}-${date.month}-${date.year} $time';
-    DateTime x = DateTime.parse(dateTimestamp);
+    String month = DateFormat('MMMM', 'ar_EG').format(myDateTime).toString();
+
     String formattedDate =
-        DateFormat('dd MMMM yyyy \t hh:mm a', 'ar_SA').format(x);
+        DateFormat('dd MMMM yyyy hh:mm a', 'ar_EG').format(myDateTime);
 
-    formattedDate.split(' ').last.contains('ص')
-        ? formattedDate = formattedDate.replaceRange(formattedDate.length - 1, null, 'صباحًا')
-        : formattedDate = formattedDate.replaceRange(formattedDate.length - 1, null, 'مساءً');
+    String formatWithEngNums =
+        "${myDateTime.day} $month ${myDateTime.year} ${myDateTime.hour}:${myDateTime.minute} ${formattedDate.split(' ').last.contains('ص') ? 'صباحًا' : 'مساءً'}";
 
-    print(formattedDate);
-    return formattedDate;
+    return formatWithEngNums;
   }
 }
