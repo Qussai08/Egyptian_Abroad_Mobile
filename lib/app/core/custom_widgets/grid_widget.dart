@@ -89,14 +89,24 @@ class GridWidget extends GetView<StartServiceController> {
                       child: Stack(
                     children: [
                       isNotPng
-                          ? SvgPicture.network(isService
-                              ? serviceItem!.servicesIcon!
-                              : category!.imagePath!)
-                          : Image.network(isService
-                              ? serviceItem!.servicesIcon ??
-                                  "https://www.kuleuven.be/communicatie/congresbureau/fotos-en-afbeeldingen/no-image.png/image"
-                              : category!.imagePath ??
-                                  "https://www.kuleuven.be/communicatie/congresbureau/fotos-en-afbeeldingen/no-image.png/image"),
+                          ? SvgPicture.network(
+                              isService
+                                  ? serviceItem!.servicesIcon!
+                                  : category!.imagePath!,
+                              placeholderBuilder: (context) => Image.network(
+                                    "https://www.kuleuven.be/communicatie/congresbureau/fotos-en-afbeeldingen/no-image.png/image",
+                                  ))
+                          : Image.network(
+                              isService
+                                  ? serviceItem!.servicesIcon ??
+                                      "https://www.kuleuven.be/communicatie/congresbureau/fotos-en-afbeeldingen/no-image.png/image"
+                                  : category!.imagePath ??
+                                      "https://www.kuleuven.be/communicatie/congresbureau/fotos-en-afbeeldingen/no-image.png/image",
+                              errorBuilder: (context, error, stackTrace) =>
+                                  Image.network(
+                                "https://www.kuleuven.be/communicatie/congresbureau/fotos-en-afbeeldingen/no-image.png/image",
+                              ),
+                            ),
                       isService
                           ? Positioned(
                               bottom: 0.0,
