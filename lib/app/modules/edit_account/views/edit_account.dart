@@ -103,7 +103,7 @@ class _EditAccountViewState extends State<EditAccountView>
                   Container(
                     padding: EdgeInsets.only(right: 16.w, left: 16.w),
                     height: (widget.isEdit!)
-                        ? fixDpiScreenHeight() * 0.67
+                        ? fixDpiScreenHeight() * 0.68
                         : fixDpiScreenHeight() * 0.8,
                     child: SingleChildScrollView(
                       child: Form(
@@ -253,12 +253,13 @@ class _EditAccountViewState extends State<EditAccountView>
                                         enabled: false,
                                       ),
                                       widget.isEdit!
-                                          ? Positioned(
-                                              top: 17.h,
-                                              left: 16.w,
-                                              child: const Icon(
+                                          ? const Positioned(
+                                              top: 14,
+                                              left: 10,
+                                              child: Icon(
                                                 Icons.keyboard_arrow_down,
                                                 color: Styles.primaryColor,
+                                                size: 20,
                                               ))
                                           : Container(),
                                       Padding(

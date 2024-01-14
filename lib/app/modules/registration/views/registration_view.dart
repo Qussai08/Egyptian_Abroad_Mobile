@@ -142,12 +142,13 @@ class _RegistrationViewState extends State<RegistrationView>
                                                       residence.toString()),
                                               enabled: false,
                                             ),
-                                            Positioned(
-                                                top: 17.h,
-                                                left: 16.w,
-                                                child: const Icon(
+                                            const Positioned(
+                                                top: 14,
+                                                left: 10,
+                                                child: Icon(
                                                   Icons.keyboard_arrow_down,
                                                   color: Styles.primaryColor,
+                                                  size: 20,
                                                 )),
                                             SelectorButton(
                                                 countries:
