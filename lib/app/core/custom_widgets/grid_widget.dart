@@ -88,6 +88,16 @@ class GridWidget extends GetView<StartServiceController> {
                       // borderRadius: BorderRadius.circular(15.0),
                       child: Stack(
                     children: [
+                      // isNotPng
+                      //     ? SvgPicture.network(isService
+                      //         ? serviceItem!.servicesIcon!
+                      //         : category!.imagePath!)
+                      //     : Image.network(isService
+                      //         ? serviceItem!.servicesIcon ??
+                      //             "https://www.kuleuven.be/communicatie/congresbureau/fotos-en-afbeeldingen/no-image.png/image"
+                      //         : category!.imagePath ??
+                      //             "https://www.kuleuven.be/communicatie/congresbureau/fotos-en-afbeeldingen/no-image.png/image"),
+
                       isNotPng
                           ? SvgPicture.network(
                               isService

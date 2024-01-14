@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 
 import '../../../core/custom_widgets/custom_taost.dart';
