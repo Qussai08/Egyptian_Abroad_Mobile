@@ -21,6 +21,7 @@ import 'package:egyptians_abroad/app/core/helper/validators.dart';
 import 'package:get/get.dart';
 
 import '../../../core/custom_widgets/custom_appbar.dart';
+import '../../../core/custom_widgets/selector_button.dart';
 
 class CarsFirstStepView extends StatefulWidget {
   const CarsFirstStepView({super.key});
@@ -182,69 +183,169 @@ class _CarsFirstStepViewState extends State<CarsFirstStepView>
                                                           residence.toString()),
                                                   enabled: false,
                                                 ),
-                                                DropDownListSelector(
-                                                  dropDownList: (controller
-                                                          .countriesList
-                                                          .isEmpty)
-                                                      ? <DropdownMenuItem>[]
-                                                      : controller.countriesList
-                                                          .map((e) =>
-                                                              DropdownMenuItem(
-                                                                value: e.id,
-                                                                child: Row(
-                                                                  children: [
-                                                                    Image
-                                                                        .network(
-                                                                      e.flag,
-                                                                      width: 21,
-                                                                      height:
-                                                                          15,
-                                                                      fit: BoxFit
-                                                                          .cover,
-                                                                    ),
-                                                                    const SizedBox(
-                                                                      width: 8,
-                                                                    ),
-                                                                    Text(e
-                                                                        .country),
-                                                                  ],
-                                                                ),
-                                                              ))
-                                                          .toList(),
-                                                  borderColor: showCountryError ==
-                                                              false &&
-                                                          (registrationController
-                                                                      .residenceCountry
-                                                                      .value ==
-                                                                  null ||
-                                                              (registrationController
-                                                                          .residenceCountry
-                                                                          .value !=
-                                                                      null &&
-                                                                  validateCountry(registrationController
-                                                                          .residenceCountry
-                                                                          .value
-                                                                          .toString()) ==
-                                                                      null))
-                                                      ? Styles.grey_200
-                                                      : Colors.red,
-                                                  value: residence,
-                                                  hint: "",
-                                                  onChangeFunc: (val) {
-                                                    controller
-                                                        .residenceTxtController
-                                                        .text = val.toString();
+                                                const Positioned(
+                                                    top: 14,
+                                                    left: 10,
+                                                    child: Icon(
+                                                      Icons.keyboard_arrow_down,
+                                                      color:
+                                                          Styles.primaryColor,
+                                                      size: 20,
+                                                    )),
+                                                SelectorButton(
+                                                    countries: controller
+                                                        .countriesList,
+                                                    selectedCountry: residence,
+                                                    // country: controller.countriesList[0],
+                                                    selectorTextStyle: null,
+                                                    searchBoxDecoration: null,
+                                                    autoFocusSearchField: false,
+                                                    locale: null,
+                                                    onCountryChanged: (val) {
+                                                      controller
+                                                          .residenceCountry
+                                                          .value = val;
+                                                    },
+                                                    isEnabled: true,
+                                                    isScrollControlled: true),
+                                                // DropDownListSelector(
+                                                //   dropDownList: (controller
+                                                //           .countriesList.isEmpty)
+                                                //       ? <DropdownMenuItem>[]
+                                                //       : controller.countriesList
+                                                //           .map((e) =>
+                                                //               DropdownMenuItem(
+                                                //                 value: e.id,
+                                                //                 child: Row(
+                                                //                   children: [
+                                                //                     Image.network(
+                                                //                       e.flag,
+                                                //                       width: 21,
+                                                //                       height: 15,
+                                                //                       fit: BoxFit
+                                                //                           .cover,
+                                                //                     ),
+                                                //                     const SizedBox(
+                                                //                       width: 8,
+                                                //                     ),
+                                                //                     Text(e.country),
+                                                //                   ],
+                                                //                 ),
+                                                //               ))
+                                                //           .toList(),
+                                                //   borderColor: showCountryError ==
+                                                //               false &&
+                                                //           (registrationController
+                                                //                       .residenceCountry
+                                                //                       .value ==
+                                                //                   null ||
+                                                //               (registrationController
+                                                //                           .residenceCountry
+                                                //                           .value !=
+                                                //                       null &&
+                                                //                   validateCountry(registrationController
+                                                //                           .residenceCountry
+                                                //                           .value
+                                                //                           .toString()) ==
+                                                //                       null))
+                                                //       ? Styles.grey_200
+                                                //       : Colors.red,
+                                                //   value: residence,
+                                                //   hint: "",
+                                                //   onChangeFunc: (val) {
+                                                //     controller
+                                                //         .residenceTxtController
+                                                //         .text = val.toString();
 
-                                                    controller.residenceCountry
-                                                        .value = val;
-                                                    // showCountryError = true;
-                                                    // setState(() {});
-                                                  },
-                                                ),
+                                                //     controller.residenceCountry
+                                                //         .value = val;
+                                                //     // showCountryError = true;
+                                                //     // setState(() {});
+                                                //   },
+                                                // ),
                                               ],
                                             );
                                           }),
                                 ),
+                                // GetBuilder<RegistrationController>(
+                                //   builder: (registrationController) =>
+                                //       ValueListenableBuilder<int?>(
+                                //           valueListenable:
+                                //               controller.residenceCountry,
+                                //           builder: (_, residence, __) {
+                                //             return Stack(
+                                //               children: [
+                                //                 CustomTextFormField(
+                                //                   // controller:
+                                //                   //     controller.residenceTxtController,
+                                //                   validationFunc: (val) =>
+                                //                       validateCountry(
+                                //                           residence.toString()),
+                                //                   enabled: false,
+                                //                 ),
+                                //                 DropDownListSelector(
+                                //                   dropDownList: (controller
+                                //                           .countriesList
+                                //                           .isEmpty)
+                                //                       ? <DropdownMenuItem>[]
+                                //                       : controller.countriesList
+                                //                           .map((e) =>
+                                //                               DropdownMenuItem(
+                                //                                 value: e.id,
+                                //                                 child: Row(
+                                //                                   children: [
+                                //                                     Image
+                                //                                         .network(
+                                //                                       e.flag,
+                                //                                       width: 21,
+                                //                                       height:
+                                //                                           15,
+                                //                                       fit: BoxFit
+                                //                                           .cover,
+                                //                                     ),
+                                //                                     const SizedBox(
+                                //                                       width: 8,
+                                //                                     ),
+                                //                                     Text(e
+                                //                                         .country),
+                                //                                   ],
+                                //                                 ),
+                                //                               ))
+                                //                           .toList(),
+                                //                   borderColor: showCountryError ==
+                                //                               false &&
+                                //                           (registrationController
+                                //                                       .residenceCountry
+                                //                                       .value ==
+                                //                                   null ||
+                                //                               (registrationController
+                                //                                           .residenceCountry
+                                //                                           .value !=
+                                //                                       null &&
+                                //                                   validateCountry(registrationController
+                                //                                           .residenceCountry
+                                //                                           .value
+                                //                                           .toString()) ==
+                                //                                       null))
+                                //                       ? Styles.grey_200
+                                //                       : Colors.red,
+                                //                   value: residence,
+                                //                   hint: "",
+                                //                   onChangeFunc: (val) {
+                                //                     controller
+                                //                         .residenceTxtController
+                                //                         .text = val.toString();
+
+                                //                     controller.residenceCountry
+                                //                         .value = val;
+                                //                     // showCountryError = true;
+                                //                     // setState(() {});
+                                //                   },
+                                //                 ),
+                                //               ],
+                                //             );
+                                //           }),
+                                // ),
                               ],
                             ),
                           ),
