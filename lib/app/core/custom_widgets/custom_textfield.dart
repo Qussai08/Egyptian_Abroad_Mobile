@@ -34,6 +34,7 @@ class CustomTextFormField extends StatefulWidget {
   final OutlineInputBorder? disabledBorder;
   final TextInputAction? textInputAction;
   final Color? fillColor;
+  final Color? enabledBorderColor;
   final List<TextInputFormatter>? inputFormatters;
 
   final TextEditingController? controller;
@@ -69,6 +70,7 @@ class CustomTextFormField extends StatefulWidget {
       this.focusNode,
       this.textInputAction,
       this.fillColor = Colors.white,
+      this.enabledBorderColor,
       this.inputFormatters});
 
   @override
@@ -145,9 +147,12 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
               border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(37),
                   borderSide: BorderSide(
-                      color: _focusNode.hasFocus
-                          ? Styles.primaryColor
-                          : Styles.grey_200)),
+                    color: widget.enabledBorderColor != null
+                        ? widget.enabledBorderColor!
+                        : _focusNode.hasFocus
+                            ? Styles.primaryColor
+                            : Styles.grey_200,
+                  )),
               enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(37),
                   borderSide: BorderSide(
