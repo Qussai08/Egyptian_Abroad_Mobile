@@ -290,17 +290,27 @@ class HomeShowcaseController extends GetxController {
   }
 
   Future<void> addToFavorites(
-      {required String userId, required String serviceId}) async {
+      {required String userId,
+      required String serviceId,
+      required ServiceItem? service}) async {
     favoritesListProvider
         .addToFavorites(userId, serviceId)
         .then((value) {}, onError: (error) {});
+    favoritesList.add(service!);
+    update();
   }
 
   Future<void> removeFromFavorites(
-      {required String userId, required String serviceId}) async {
+      {required String userId,
+      required String serviceId,
+      required ServiceItem? service}) async {
     favoritesListProvider
         .removeFromFavorites(userId, serviceId)
         .then((value) {}, onError: (error) {});
+    favoritesList.removeWhere(
+      (element) => element.serviceId == int.parse(serviceId),
+    );
+    update();
   }
 
   List<Category> favoriteCategories = [];
@@ -308,12 +318,12 @@ class HomeShowcaseController extends GetxController {
   bool favoritesIsLoading = true;
   Future<void> updateFavoritesList({required String userId}) async {
     await favoritesListProvider.getFavoritesList(userId).then(
-      (value) {
+      (value) async {
         if (value.isSuccess) {
           print('Favorites successfully updated');
           Iterable list = value.body;
           favoritesList = list.map((e) => ServiceItem.fromJson(e)).toList();
-          loadFavoritesCategories();
+          await loadFavoritesCategories();
         }
       },
       onError: (error) {
@@ -334,8 +344,11 @@ class HomeShowcaseController extends GetxController {
 
     if (favoritesList.isNotEmpty && allCategories.isNotEmpty) {
       await Future.forEach<ServiceItem>(favoritesList, (item) {
-        favoriteCategories.add(allCategories
-            .firstWhere((element) => element.id == item.categoryId));
+        Category? favCat = allCategories
+            .firstWhereOrNull((element) => element.id == item.categoryId);
+        if (favCat != null) {
+          favoriteCategories.add(favCat);
+        }
       });
     }
   }

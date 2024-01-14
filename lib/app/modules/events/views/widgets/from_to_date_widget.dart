@@ -25,29 +25,33 @@ class FromToDateWidget extends StatelessWidget {
         ),
         SizedBox(width: 4.w),
 
-        Image.asset(AppImages.calendar),
+        Image.asset(AppImages.calendar, width: fixDpiFont(12)),
         // Icon(
         //   Icons.calendar_month,
         //   color: Styles.lightBlack,
         //   size: fixDpiFont(12),
         // ),
         SizedBox(width: 4.w),
-        Text(fromDate,
-            style: Styles.getMediumStyle(
-                color: Styles.lightBlack, fontSize: fixDpiFont(12))),
+        Expanded(
+          child: Text(fromDate,
+              style: Styles.getMediumStyle(
+                  color: Styles.lightBlack, fontSize: fixDpiFont(12))),
+        ),
         SizedBox(width: 12.w),
         Text(AppStrings.to.tr,
             style: Styles.getMediumStyle(
                 color: Styles.lightBlack, fontSize: fixDpiFont(12))),
         SizedBox(width: 4.w),
-        Image.asset(AppImages.calendar),
+        Image.asset(AppImages.calendar, width: fixDpiFont(12)),
 
         // Icon(Icons.calendar_month,
         //     color: Styles.lightBlack, size: fixDpiFont(12)),
         SizedBox(width: 4.w),
-        Text(toDate,
-            style: Styles.getMediumStyle(
-                color: Styles.lightBlack, fontSize: fixDpiFont(12))),
+        Expanded(
+          child: Text(toDate,
+              style: Styles.getMediumStyle(
+                  color: Styles.lightBlack, fontSize: fixDpiFont(12))),
+        ),
       ],
     );
   }

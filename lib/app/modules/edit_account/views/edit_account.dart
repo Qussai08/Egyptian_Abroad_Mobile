@@ -3,6 +3,7 @@ import 'package:egyptians_abroad/app/core/custom_widgets/custom_button.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/custom_textfield.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/dropdown_list_selector.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/network_indecator.dart';
+import 'package:egyptians_abroad/app/core/custom_widgets/selector_button.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/textfield_title.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/title_text.dart';
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
@@ -102,7 +103,7 @@ class _EditAccountViewState extends State<EditAccountView>
                   Container(
                     padding: EdgeInsets.only(right: 16.w, left: 16.w),
                     height: (widget.isEdit!)
-                        ? fixDpiScreenHeight() * 0.67
+                        ? fixDpiScreenHeight() * 0.68
                         : fixDpiScreenHeight() * 0.8,
                     child: SingleChildScrollView(
                       child: Form(
@@ -237,52 +238,93 @@ class _EditAccountViewState extends State<EditAccountView>
                               title: AppStrings.residence.tr,
                               hasSubTitle: false,
                             ),
+
                             ValueListenableBuilder<int?>(
                                 valueListenable: _residenceCountry,
                                 builder: (_, residence, __) {
-                                  return DropDownListSelector(
-                                    hintFontSize: 14,
-                                    hintFontWeight: FontWeight.w400,
-                                    dropDownList: widget.isEdit!
-                                        ? controller.countriesList
-                                            .map((e) => DropdownMenuItem(
-                                                  value: e.id,
-                                                  child: Row(
-                                                    children: [
-                                                      Image.network(
-                                                        e.flag,
-                                                        width: 21,
-                                                        height: 15,
-                                                        fit: BoxFit.cover,
-                                                      ),
-                                                      const SizedBox(
-                                                        width: 8,
-                                                      ),
-                                                      Text(e.country),
-                                                    ],
-                                                  ),
-                                                ))
-                                            .toList()
-                                        : [],
-                                    value: residence,
-                                    hint: !widget.isEdit!
-                                        ? controller.countriesList
-                                                    .firstWhereOrNull(
-                                                        (element) =>
-                                                            element.id ==
-                                                            residence) !=
-                                                null
-                                            ? controller.countriesList
-                                                .firstWhereOrNull((element) =>
-                                                    element.id == residence)!
-                                                .country
-                                            : ""
-                                        : "",
-                                    blackHint: true,
-                                    onChangeFunc: (val) {
-                                      _residenceCountry.value = val;
-                                    },
+                                  return Stack(
+                                    children: [
+                                      CustomTextFormField(
+                                        // controller:
+                                        //     controller.residenceTxtController,
+                                        validationFunc: (val) =>
+                                            validateCountry(
+                                                residence.toString()),
+                                        enabled: false,
+                                      ),
+                                      widget.isEdit!
+                                          ? const Positioned(
+                                              top: 14,
+                                              left: 10,
+                                              child: Icon(
+                                                Icons.keyboard_arrow_down,
+                                                color: Styles.primaryColor,
+                                                size: 20,
+                                              ))
+                                          : Container(),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 8.0),
+                                        child: SelectorButton(
+                                            countries: controller.countriesList,
+                                            selectedCountry: residence,
+                                            // country: controller.countriesList[0],
+                                            selectorTextStyle: null,
+                                            searchBoxDecoration: null,
+                                            autoFocusSearchField: false,
+                                            locale: null,
+                                            onCountryChanged: (val) {
+                                              _residenceCountry.value = val;
+                                            },
+                                            isEnabled: widget.isEdit!,
+                                            isScrollControlled: true),
+                                      ),
+                                    ],
                                   );
+
+                                  // DropDownListSelector(
+                                  //   hintFontSize: 14,
+                                  //   hintFontWeight: FontWeight.w400,
+                                  //   dropDownList: widget.isEdit!
+                                  //       ? controller.countriesList
+                                  //           .map((e) => DropdownMenuItem(
+                                  //                 value: e.id,
+                                  //                 child: Row(
+                                  //                   children: [
+                                  //                     Image.network(
+                                  //                       e.flag,
+                                  //                       width: 21,
+                                  //                       height: 15,
+                                  //                       fit: BoxFit.cover,
+                                  //                     ),
+                                  //                     const SizedBox(
+                                  //                       width: 8,
+                                  //                     ),
+                                  //                     Text(e.country),
+                                  //                   ],
+                                  //                 ),
+                                  //               ))
+                                  //           .toList()
+                                  //       : [],
+                                  //   value: residence,
+                                  //   hint: !widget.isEdit!
+                                  //       ? controller.countriesList
+                                  //                   .firstWhereOrNull(
+                                  //                       (element) =>
+                                  //                           element.id ==
+                                  //                           residence) !=
+                                  //               null
+                                  //           ? controller.countriesList
+                                  //               .firstWhereOrNull((element) =>
+                                  //                   element.id == residence)!
+                                  //               .country
+                                  //           : ""
+                                  //       : "",
+                                  //   blackHint: true,
+                                  //   onChangeFunc: (val) {
+                                  //     _residenceCountry.value = val;
+                                  //   },
+                                  // );
                                 }),
                             SizedBox(
                               height: 16.h,

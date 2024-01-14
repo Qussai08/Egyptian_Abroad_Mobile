@@ -50,9 +50,6 @@ class Event {
     this.endDate,
     this.link,
     this.notifyBefore,
-    // this.jobCategoryIdList,
-    // this.residencyTypeList,
-    // this.residenceCountryIdList,
     this.isActive = true,
   });
   int? eventId;
@@ -63,9 +60,7 @@ class Event {
   String? endDate;
   String? link;
   int? notifyBefore;
-  // dynamic jobCategoryIdList;
-  // dynamic residencyTypeList;
-  // dynamic residenceCountryIdList;
+
   bool? isActive;
 
   Event.fromJson(Map<String, dynamic> json) {
@@ -87,9 +82,6 @@ class Event {
 
     link = json['link'];
     notifyBefore = json['notifyBefore'];
-    // jobCategoryIdList = json['jobCategoryIdList'];
-    // residencyTypeList = json['residencyTypeList'];
-    // residenceCountryIdList = json['residenceCountryIdList'];
     isActive = json['isActive'] ?? false;
   }
 
@@ -98,21 +90,38 @@ class Event {
     return list.map((item) => Event.fromJson(item)).toList();
   }
 
-  static String formatDate(String dateTimestamp) {
-    DateTime date = DateTime.parse(dateTimestamp);
+  static String dateFormatter(String date, {bool dateOnly = false}) {
+    DateTime myDateTime = DateTime.parse(date);
+    String month = DateFormat('MMMM', 'ar_EG').format(myDateTime).toString();
 
-    String time = date.hour == 0 && date.minute == 0
-        ? '12:00 ${date.hour > 12 ? 'م' : 'ص'}'
-        : '${date.hour}:${date.minute} ${date.hour > 12 ? 'م' : 'ص'}';
-    return '${date.day} ${date.month} ${date.year} $time';
+    if (dateOnly) {
+      String formattedDate =
+          DateFormat('dd MMMM yyyy', 'ar_EG').format(myDateTime);
+
+      String formatWithEngNums =
+          "${myDateTime.day} $month ${myDateTime.year} ${myDateTime.hour}:${myDateTime.minute} ${formattedDate.split(' ').last.contains('ص') ? 'صباحًا' : 'مساءً'}";
+      return formatWithEngNums;
+    } else {
+      String formattedDate =
+          DateFormat('dd MMMM yyyy hh:mm a', 'ar_EG').format(myDateTime);
+
+      String formatWithEngNums =
+          "${myDateTime.day} $month ${myDateTime.year} ${myDateTime.hour}:${myDateTime.minute} ${formattedDate.split(' ').last.contains('ص') ? 'صباحًا' : 'مساءً'}";
+      return formatWithEngNums;
+    }
   }
 
-  static String dateFormatter(String date, {bool dateOnly = false}) {
-    DateTime x = DateTime.parse(date);
-    if (dateOnly) {
-      return DateFormat('dd MMMM yyyy', 'ar_SA').format(x);
-    } else {
-      return DateFormat('dd MMMM yyyy hh:mm a', 'ar_SA').format(x);
-    }
+  static String formatDate(String dateTimestamp) {
+    DateTime myDateTime = DateTime.parse(dateTimestamp);
+
+    String month = DateFormat('MMMM', 'ar_EG').format(myDateTime).toString();
+
+    String formattedDate =
+        DateFormat('dd MMMM yyyy hh:mm a', 'ar_EG').format(myDateTime);
+
+    String formatWithEngNums =
+        "${myDateTime.day} $month ${myDateTime.year} ${myDateTime.hour}:${myDateTime.minute} ${formattedDate.split(' ').last.contains('ص') ? 'صباحًا' : 'مساءً'}";
+
+    return formatWithEngNums;
   }
 }

@@ -23,6 +23,7 @@ class LoginController extends GetxController {
     isLoading.value = true;
 
     print(loginIsDimmed);
+
     AppResponse response =
         await UserRepository().loginReq({"email": email, "password": pass});
     print("login ${response.data}");
@@ -30,21 +31,34 @@ class LoginController extends GetxController {
       authService.setAccessToken(response.data['accessToken'] ?? '');
       authService.setRefreshToken(response.data['refreshToken'] ?? '');
 
-      await notificationHelper.registerFCMToken();
-      await notificationHelper.subscribeToTopic('broadcast');
+      // await notificationHelper.registerFCMToken();
+      // await notificationHelper.subscribeToTopic('broadcast');
       isLoading.value = false;
       if (navigateToHome) Get.offAllNamed(Routes.BOTTOMNAVIGATION);
     } else {
+      print("resdd ${response.statusCode}");
+
       isLoading.value = false;
       loginIsDimmed.value = false;
-      Get.showSnackbar(
-        buildCustomToast(
-          Get.context!,
-          toastMsg: AppStrings.invalidMailOrPass.tr,
-          toastTitle: AppStrings.sorry.tr,
-          toastType: ToastType.error,
-        ),
-      );
+      if (response.statusCode == 500) {
+        Get.showSnackbar(
+          buildCustomToast(
+            Get.context!,
+            toastMsg: 'حدث خطأ ما',
+            toastTitle: AppStrings.sorry.tr,
+            toastType: ToastType.error,
+          ),
+        );
+      } else {
+        Get.showSnackbar(
+          buildCustomToast(
+            Get.context!,
+            toastMsg: AppStrings.invalidMailOrPass.tr,
+            toastTitle: AppStrings.sorry.tr,
+            toastType: ToastType.error,
+          ),
+        );
+      }
     }
   }
 }

@@ -68,7 +68,11 @@ class BaseApi {
           }
         }
       }
-      return AppResponse(status: false, error: e, errorMessage: e.message);
+      return AppResponse(
+          status: false,
+          error: e,
+          errorMessage: e.message,
+          statusCode: e.response!.statusCode);
     }
   }
 
@@ -115,7 +119,11 @@ class BaseApi {
           }
         }
       }
-      return AppResponse(status: false, error: e, errorMessage: e.message);
+      return AppResponse(
+          status: false,
+          error: e,
+          errorMessage: e.message,
+          statusCode: e.response!.statusCode);
     }
   }
 }
