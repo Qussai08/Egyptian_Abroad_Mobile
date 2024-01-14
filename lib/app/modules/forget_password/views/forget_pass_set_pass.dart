@@ -40,7 +40,7 @@ class _ForgetPassSetPasswordViewState extends State<ForgetPassSetPasswordView>
         child: Scaffold(
           resizeToAvoidBottomInset: false,
           appBar: AppBar(
-            backgroundColor: Colors.red,
+            backgroundColor: Colors.transparent,
             shadowColor: Colors.transparent,
             title: Text(""),
             leading: TextButton(
