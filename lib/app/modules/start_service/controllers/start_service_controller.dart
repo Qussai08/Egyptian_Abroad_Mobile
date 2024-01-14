@@ -56,8 +56,6 @@ class StartServiceController extends GetxController {
     }
     item.isMyFavorite.value = !item.isMyFavorite();
     update();
-    // await favoritesController.updateFavoritesList(
-    //     userId: AuthService().getUserProfile.userId!);
   }
 
   Future<void> removeFromFavoriteInHome(ServiceItem item) async {
