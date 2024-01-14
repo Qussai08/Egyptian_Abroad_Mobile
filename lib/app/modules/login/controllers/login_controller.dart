@@ -37,6 +37,7 @@ class LoginController extends GetxController {
     } else {
       isLoading.value = false;
       loginIsDimmed.value = false;
+      print(response.errorCode);
       Get.showSnackbar(
         buildCustomToast(
           Get.context!,
