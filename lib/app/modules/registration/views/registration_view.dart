@@ -139,10 +139,27 @@ class _RegistrationViewState extends State<RegistrationView>
                                             CustomTextFormField(
                                               // controller:
                                               //     controller.residenceTxtController,
+                                              enabledBorderColor: showCountryError ==
+                                                          false &&
+                                                      (registrationController
+                                                                  .residenceCountry
+                                                                  .value ==
+                                                              null ||
+                                                          (registrationController
+                                                                      .residenceCountry
+                                                                      .value !=
+                                                                  null &&
+                                                              validateCountry(registrationController
+                                                                      .residenceCountry
+                                                                      .value
+                                                                      .toString()) ==
+                                                                  null))
+                                                  ? Styles.grey_200
+                                                  : Colors.red,
                                               validationFunc: (val) =>
                                                   validateCountry(
                                                       residence.toString()),
-                                              enabled: false,
+                                              // enabled: false,
                                             ),
                                             const Positioned(
                                                 top: 14,

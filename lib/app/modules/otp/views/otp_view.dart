@@ -59,9 +59,6 @@ class _OtpViewState extends State<OtpView> with ValidationMixin {
         child: SafeArea(
           child: Scaffold(
               appBar: CustomAppBar(
-                onClose: () {
-                  Get.offAllNamed(Routes.LOGIN);
-                },
                 actionsEnabled: true,
                 leadingEnabled: false,
               ),

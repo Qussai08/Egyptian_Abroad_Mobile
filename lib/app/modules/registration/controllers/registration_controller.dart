@@ -76,6 +76,7 @@ class RegistrationController extends GetxController {
       "password": passwordTxtController.text,
       "verificationCode": carsOtp ?? otp
     });
+    print("register response ${response.statusCode} ");
 
     AppHelper.name = nameTxtController.text;
 
@@ -106,15 +107,25 @@ class RegistrationController extends GetxController {
       );
     } else {
       // Get.offAllNamed(Routes.BOTTOMNAVIGATION);
-
-      Get.showSnackbar(
-        buildCustomToast(
-          Get.context!,
-          toastMsg: "الرقم القومي أو البريد الإلكتروني مُسجل بالفعل.",
-          toastTitle: AppStrings.sorry.tr,
-          toastType: ToastType.error,
-        ),
-      );
+      if (response.statusCode == 500 || response.statusCode == 400) {
+        Get.showSnackbar(
+          buildCustomToast(
+            Get.context!,
+            toastMsg: 'حدث خطأ ما',
+            toastTitle: AppStrings.sorry.tr,
+            toastType: ToastType.error,
+          ),
+        );
+      } else {
+        Get.showSnackbar(
+          buildCustomToast(
+            Get.context!,
+            toastMsg: "الرقم القومي أو البريد الإلكتروني مُسجل بالفعل.",
+            toastTitle: AppStrings.sorry.tr,
+            toastType: ToastType.error,
+          ),
+        );
+      }
     }
   }
 

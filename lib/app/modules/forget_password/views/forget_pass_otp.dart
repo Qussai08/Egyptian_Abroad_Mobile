@@ -19,6 +19,8 @@ import 'package:intl/intl.dart' as intl;
 import 'package:otp_text_field/otp_text_field.dart';
 import 'package:otp_text_field/style.dart';
 
+import 'forget_pass_set_pass.dart';
+
 class ForgetPassOtpView extends StatefulWidget {
   const ForgetPassOtpView({super.key, this.resendOtpTime});
   final int? resendOtpTime;
@@ -140,8 +142,10 @@ class _ForgetPassOtpViewState extends State<ForgetPassOtpView>
                                                 .clear();
                                             controller.newPasswordTxtController
                                                 .clear();
-                                            Get.toNamed(
-                                                Routes.FORGETPASSSETPASS);
+                                            Get.to(() =>
+                                                ForgetPassSetPasswordView());
+                                            // Get.toNamed(
+                                            //     Routes.FORGETPASSSETPASS);
                                           } else {
                                             _otpHasError.value = true;
                                           }
