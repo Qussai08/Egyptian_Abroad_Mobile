@@ -85,6 +85,8 @@ class _RegisterWithCarsBottomSheetState
               GestureDetector(
                 onTap: () {
                   Get.back();
+                  registrationController.passwordTxtController.clear();
+                  registrationController.emailTxtController.clear();
                 },
                 child: Padding(
                   padding: EdgeInsets.only(bottom: 50.h),

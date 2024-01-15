@@ -297,6 +297,7 @@ class HomeShowcaseController extends GetxController {
         .addToFavorites(userId, serviceId)
         .then((value) {}, onError: (error) {});
     favoritesList.add(service!);
+    loadFavoritesCategories();
     update();
   }
 
@@ -310,11 +311,12 @@ class HomeShowcaseController extends GetxController {
     favoritesList.removeWhere(
       (element) => element.serviceId == int.parse(serviceId),
     );
+    loadFavoritesCategories();
     update();
   }
 
   List<Category> favoriteCategories = [];
-
+  List<Category> allCategoriesFavUse = [];
   bool favoritesIsLoading = true;
   Future<void> updateFavoritesList({required String userId}) async {
     await favoritesListProvider.getFavoritesList(userId).then(
@@ -332,6 +334,13 @@ class HomeShowcaseController extends GetxController {
         update();
       },
     );
+    List<Category> favoriteCategories = [];
+    AppResponse response = await CategoriesRepository()
+        .getCategories({"categoryName": "", "pageNo": 1, "pageSize": 5000});
+    if (response.status) {
+      CategoriesData categoriesData = CategoriesData.fromJson(response.data);
+      allCategoriesFavUse = categoriesData.categories;
+    }
     favoritesIsLoading = false;
     print("favoritesIsLoading: $favoritesIsLoading");
     update();
@@ -340,11 +349,12 @@ class HomeShowcaseController extends GetxController {
   loadFavoritesCategories() async {
     favoriteCategories = [];
     print(favoritesList.length);
-    print(allCategories.length);
 
-    if (favoritesList.isNotEmpty && allCategories.isNotEmpty) {
+    print(allCategoriesFavUse.length);
+
+    if (favoritesList.isNotEmpty && allCategoriesFavUse.isNotEmpty) {
       await Future.forEach<ServiceItem>(favoritesList, (item) {
-        Category? favCat = allCategories
+        Category? favCat = allCategoriesFavUse
             .firstWhereOrNull((element) => element.id == item.categoryId);
         if (favCat != null) {
           favoriteCategories.add(favCat);

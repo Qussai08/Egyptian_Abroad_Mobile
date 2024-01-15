@@ -114,7 +114,7 @@ Map<String, String> ar = {
   AppStrings.callUsVia: 'تواصل معنا عبر الوسائل التالية:',
   AppStrings.oldEqualNew:
       'يجب ألا تكون كلمة المرور الجديدة متطابقة مع كلمة المرور الحالية ',
-  AppStrings.registerWithCarsAccount: 'التسجيل بحساب سيارات المصرين بالخارج',
+  AppStrings.registerWithCarsAccount: 'التسجيل بحساب سيارات المصريين بالخارج',
   AppStrings.somethingWentWrong: 'نأسف، حدث خطأ',
   AppStrings.technicalPartner: 'الشريك التقني',
   AppStrings.otpSentSuccessfully:

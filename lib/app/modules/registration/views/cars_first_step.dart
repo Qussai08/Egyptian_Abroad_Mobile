@@ -178,10 +178,27 @@ class _CarsFirstStepViewState extends State<CarsFirstStepView>
                                                 CustomTextFormField(
                                                   // controller:
                                                   //     controller.residenceTxtController,
+                                                  enabledBorderColor: showCountryError ==
+                                                              false &&
+                                                          (registrationController
+                                                                      .residenceCountry
+                                                                      .value ==
+                                                                  null ||
+                                                              (registrationController
+                                                                          .residenceCountry
+                                                                          .value !=
+                                                                      null &&
+                                                                  validateCountry(registrationController
+                                                                          .residenceCountry
+                                                                          .value
+                                                                          .toString()) ==
+                                                                      null))
+                                                      ? Styles.grey_200
+                                                      : Colors.red,
                                                   validationFunc: (val) =>
                                                       validateCountry(
                                                           residence.toString()),
-                                                  enabled: false,
+                                                  // enabled: false,
                                                 ),
                                                 const Positioned(
                                                     top: 14,
@@ -411,6 +428,16 @@ class _CarsFirstStepViewState extends State<CarsFirstStepView>
                               height: 50.h,
                               onPressed: () {
                                 Get.back();
+                                registrationController.passwordTxtController
+                                    .clear();
+                                registrationController.emailTxtController
+                                    .clear();
+                                registrationController.nationalIDTxtController
+                                    .clear();
+                                registrationController.nameTxtController
+                                    .clear();
+                                registrationController.residenceCountry.value =
+                                    null;
                               },
                             ),
                           ],

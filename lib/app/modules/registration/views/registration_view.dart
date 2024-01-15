@@ -263,7 +263,7 @@ class _RegistrationViewState extends State<RegistrationView>
                                       registrationController
                                           .setShowAgreeToShareWithCarsError(
                                               false);
-
+                                      setState(() {});
                                       print(
                                           "agreeToShareWithCars ${registrationController.agreeToShareWithCars}");
                                     },
