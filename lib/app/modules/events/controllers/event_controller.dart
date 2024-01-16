@@ -17,11 +17,39 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
   RxList<Event> eventsList = <Event>[].obs;
   final RegistrationController registrationController = Get.find();
   RxBool isLoading = false.obs;
-
+  int pageNo = 1;
+  int pageSize = 10;
+  bool hasMore = true;
   @override
   void onInit() {
     super.onInit();
-    loadEvents();
+    scrollController.addListener(_scrollListener);
+    // loadEvents(body: {
+    //   "search": "",
+    //   "countryIds": [],
+    //   "jobCategoryIds": [],
+    //   "pageNo": pageNo,
+    //   "pageSize": 6
+    // });
+  }
+
+  @override
+  void dispose() {
+    scrollController.removeListener(_scrollListener);
+    eventsList.clear();
+    super.dispose();
+  }
+
+  ScrollController scrollController = ScrollController();
+  void _scrollListener() {
+    if (scrollController.position.pixels >=
+            scrollController.position.maxScrollExtent &&
+        !isLoading.value &&
+        hasMore) {
+      pageNo++;
+      print(pageNo);
+      loadEvents();
+    }
   }
 
   Future<void> loadEvents({Map<String, dynamic>? body}) async {
@@ -36,8 +64,8 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
               "search": "",
               "countryIds": [],
               "jobCategoryIds": [],
-              "pageNo": 1,
-              "pageSize": 10
+              "pageNo": pageNo,
+              "pageSize": pageSize,
             })
         .then((value) {
       if (value.isSuccess) {
@@ -45,7 +73,13 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
           if (value.body!.isEmpty) {
             change(null, status: RxStatus.empty());
             isLoading.value = false;
+            hasMore = false;
             return;
+          }
+          if (value.body!.length >= pageSize) {
+            hasMore = true;
+          } else {
+            hasMore = false;
           }
           eventsList.addAll(value.body! ?? []);
           change(value.body!, status: RxStatus.success());
