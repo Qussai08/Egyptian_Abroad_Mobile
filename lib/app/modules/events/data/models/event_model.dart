@@ -7,38 +7,38 @@ class EventsModel {
     required this.errors,
   });
   late final bool isSuccess;
-  late final List<Event> data;
+  late final EventData data;
   late final List<dynamic> errors;
 
   EventsModel.fromJson(Map<String, dynamic> json) {
     isSuccess = json['isSuccess'];
-    data = List.from(json['data']).map((e) => Event.fromJson(e)).toList();
+    data = EventData.fromJson(json['data']);
     errors = List.castFrom<dynamic, dynamic>(json['errors']);
   }
 }
 
-// class EventData {
-//   EventData({
-//     required this.currentPage,
-//     required this.totalPages,
-//     required this.pageSize,
-//     required this.totalCount,
-//     required this.events,
-//   });
-//   late final int currentPage;
-//   late final int totalPages;
-//   late final int pageSize;
-//   late final int totalCount;
-//   late final List<Event> events;
+class EventData {
+  EventData({
+    required this.currentPage,
+    required this.totalPages,
+    required this.pageSize,
+    required this.totalCount,
+    required this.events,
+  });
+  late final int currentPage;
+  late final int totalPages;
+  late final int pageSize;
+  late final int totalCount;
+  late final List<Event> events;
 
-//   EventData.fromJson(Map<String, dynamic> json) {
-//     currentPage = json['currentPage'] ?? 0;
-//     totalPages = json['totalPages'] ?? 0;
-//     pageSize = json['pageSize'] ?? 0;
-//     totalCount = json['totalCount'] ?? 0;
-//     events = List.from(json['data']).map((e) => Event.fromJson(e)).toList();
-//   }
-// }
+  EventData.fromJson(Map<String, dynamic> json) {
+    currentPage = json['currentPage'] ?? 0;
+    totalPages = json['totalPages'] ?? 0;
+    pageSize = json['pageSize'] ?? 0;
+    totalCount = json['totalCount'] ?? 0;
+    events = List.from(json['data']).map((e) => Event.fromJson(e)).toList();
+  }
+}
 
 class Event {
   Event({

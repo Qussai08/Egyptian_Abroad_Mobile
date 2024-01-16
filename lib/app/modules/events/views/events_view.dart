@@ -765,10 +765,10 @@ class EventsView extends GetView<EventsController> {
                             Obx(() {
                               return Expanded(
                                 child: ListView.builder(
-                                  // physics: const ClampingScrollPhysics(),
-                                  // controller: controller.scrollController,
+                                  physics: const ClampingScrollPhysics(),
+                                  controller: controller.scrollController,
                                   // shrinkWrap: true,
-                                  itemCount: controller.eventsList.length + 1,
+                                  itemCount: controller.eventsList.length,
                                   itemBuilder: (context, index) {
                                     final event = controller.eventsList[index];
                                     print(controller.eventsList.length);

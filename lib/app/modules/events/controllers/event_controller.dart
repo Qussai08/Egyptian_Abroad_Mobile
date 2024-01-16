@@ -16,6 +16,8 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
 
   RxList<Event> eventsList = <Event>[].obs;
   final RegistrationController registrationController = Get.find();
+  ScrollController scrollController = ScrollController();
+
   RxBool isLoading = false.obs;
   int pageNo = 1;
   int pageSize = 10;
@@ -23,7 +25,7 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
   @override
   void onInit() {
     super.onInit();
-    scrollController.addListener(_scrollListener);
+    scrollController.addListener(scrollListener);
     // loadEvents(body: {
     //   "search": "",
     //   "countryIds": [],
@@ -35,13 +37,14 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
 
   @override
   void dispose() {
-    scrollController.removeListener(_scrollListener);
+    scrollController.removeListener(scrollListener);
+    pageNo = 1;
+    hasMore = true;
     eventsList.clear();
     super.dispose();
   }
 
-  ScrollController scrollController = ScrollController();
-  void _scrollListener() {
+  void scrollListener() {
     if (scrollController.position.pixels >=
             scrollController.position.maxScrollExtent &&
         !isLoading.value &&
@@ -55,7 +58,7 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
   Future<void> loadEvents({Map<String, dynamic>? body}) async {
     isLoading.value = true;
 
-    eventsList.clear();
+    // eventsList.clear();
     // change([], status: RxStatus.loading());
 
     await eventsProvider
@@ -70,19 +73,19 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
         .then((value) {
       if (value.isSuccess) {
         if (value.body != null) {
-          if (value.body!.isEmpty) {
+          if (value.body!.events.isEmpty) {
             change(null, status: RxStatus.empty());
             isLoading.value = false;
             hasMore = false;
             return;
           }
-          if (value.body!.length >= pageSize) {
+          if (value.body!.events.length >= pageSize) {
             hasMore = true;
           } else {
             hasMore = false;
           }
-          eventsList.addAll(value.body! ?? []);
-          change(value.body!, status: RxStatus.success());
+          eventsList.addAll(value.body!.events ?? []);
+          change(value.body!.events, status: RxStatus.success());
           isLoading.value = false;
         } else {
           change(null, status: RxStatus.empty());
