@@ -98,35 +98,60 @@ class EventsView extends GetView<EventsController> {
                               Container(
                                 padding: EdgeInsets.symmetric(horizontal: 8.w),
                                 decoration: const BoxDecoration(
-                                    color: Color(0xffE7F2F4),
-                                    borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(12),
-                                        topRight: Radius.circular(12))),
+                                  color: Color(0xffE7F2F4),
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(12),
+                                    topRight: Radius.circular(12),
+                                  ),
+                                ),
                                 height: 68.h,
-                                child: Row(children: [
-                                  Container(
-                                    width: fixDpiFont(24),
-                                  ),
-                                  Spacer(),
-                                  Text(
-                                    "بحث باستخدام",
-                                    style: Styles.getMediumStyle(
-                                        color: Color(0xff201D61), fontSize: 24),
-                                  ),
-                                  Spacer(),
-                                  GestureDetector(
-                                    onTap: () {
-                                      Get.back();
-                                    },
-                                    child: Padding(
-                                      padding: EdgeInsets.only(bottom: 20.h),
-                                      child: Icon(
-                                        Icons.close,
-                                        size: fixDpiFont(24),
-                                      ),
-                                    ),
-                                  )
-                                ]),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8.0),
+                                  child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        GestureDetector(
+                                          // padding: EdgeInsets.zero,
+                                          onTap: () {
+                                            controller.clearFilters();
+                                            controller.clear();
+                                            controller.filterEvents();
+                                            Get.back();
+                                          },
+                                          child: Icon(
+                                            Icons.restart_alt,
+                                            size: fixDpiFont(24),
+                                          ),
+                                          // iconSize: fixDpiFont(24),
+                                        ),
+                                        // Container(
+                                        //   width: fixDpiFont(24),
+                                        // ),
+                                        // Spacer(),
+                                        Text(
+                                          "بحث باستخدام",
+                                          style: Styles.getMediumStyle(
+                                              color: Color(0xff201D61),
+                                              fontSize: fixDpiFont(24)),
+                                        ),
+                                        // Spacer(),
+                                        GestureDetector(
+                                          onTap: () {
+                                            Get.back();
+                                          },
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsets.only(bottom: 20.h),
+                                            child: Icon(
+                                              Icons.close,
+                                              size: fixDpiFont(24),
+                                            ),
+                                          ),
+                                        )
+                                      ]),
+                                ),
                               ),
                               SizedBox(
                                 height: 20.h,

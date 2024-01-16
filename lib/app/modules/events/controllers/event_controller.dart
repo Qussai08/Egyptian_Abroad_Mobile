@@ -35,6 +35,20 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
     // });
   }
 
+  void clear() {
+    eventsList.clear();
+    pageNo = 1;
+    hasMore = true;
+  }
+
+  void clearFilters() {
+    jobCategoryIds = [];
+    countryIds = [];
+    dateFrom = '';
+    dateTo = '';
+    update();
+  }
+
   @override
   void dispose() {
     scrollController.removeListener(scrollListener);
@@ -73,18 +87,26 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
         .then((value) {
       if (value.isSuccess) {
         if (value.body != null) {
-          if (value.body!.events.isEmpty) {
+          if (value.body!.events.isEmpty && pageNo == 1) {
             change(null, status: RxStatus.empty());
+            isLoading.value = false;
+            return;
+          }
+          if (value.body!.events.isEmpty) {
+            print('Empty Events');
             isLoading.value = false;
             hasMore = false;
             return;
           }
           if (value.body!.events.length >= pageSize) {
+            print('hasMore & pageNo $pageNo');
             hasMore = true;
           } else {
+            print('No hasMore & pageNo $pageNo');
             hasMore = false;
           }
           eventsList.addAll(value.body!.events ?? []);
+
           change(value.body!.events, status: RxStatus.success());
           isLoading.value = false;
         } else {
@@ -137,11 +159,12 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
   }
 
   Future<void> filterEvents() async {
+    clear();
     // change([], status: RxStatus.loading());
     Map<String, dynamic> body = {
       "search": keySearch.isNotEmpty ? keySearch : "",
-      "pageNo": 1,
-      "pageSize": 1000000
+      "pageNo": pageNo,
+      "pageSize": pageSize
     };
     if (countryIds.isNotEmpty) {
       List<int> selectedIDs = [];
