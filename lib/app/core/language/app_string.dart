@@ -161,4 +161,7 @@ abstract class AppStrings {
   static const recordingLink = 'recordingLink';
   static const events = 'events';
   static const search = 'search';
+
+  // register with cars
+  static const existInCarsValidationMsg = 'existInCarsValidationMsg';
 }

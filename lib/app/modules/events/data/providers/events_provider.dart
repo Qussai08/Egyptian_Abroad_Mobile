@@ -10,13 +10,15 @@ import '../models/event_model.dart';
 
 class EventsProvider extends ApiService {
   // =================== Get Events List ===================
-  Future<ApiResponse<EventData>> getEventsListReq(
+  Future<ApiResponse<List<Event>>> getEventsListReq(
       Map<String, dynamic> body) async {
     final Response response = await post(
         "${Constants.getEventsList}?LanguageId=${LocalizationHelper.isArabic() ? 1 : 2}",
         body);
-    print("getEventsListReq ${response.body}");
+
+    print("getEventsListReq response.body ${response.body}");
+    print("getEventsListReq response ${response.body}");
     return ApiResponse.fromResponse(
-        response, (json) => EventData.fromJson(json));
+        response, (json) => Event.fromJsonList(json));
   }
 }

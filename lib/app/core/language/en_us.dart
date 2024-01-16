@@ -131,4 +131,6 @@ Map<String, String> en = {
   AppStrings.meetingLink: 'Conference Link',
   AppStrings.events: 'Events',
   AppStrings.search: 'Search',
+  AppStrings.existInCarsValidationMsg:
+      "The Submitted Account is already registered, Please Register with Abroad Egyptian Cars Account.",
 };

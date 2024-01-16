@@ -62,7 +62,7 @@ class BaseApi {
       if (e.response != null) {
         if (e.response!.statusCode != null) {
           if (e.response!.statusCode! == 401) {
-            await await AuthService()
+            await AuthService()
                 .logout()
                 .then((value) => getx.Get.offAllNamed(Routes.LOGIN));
           }
@@ -113,7 +113,7 @@ class BaseApi {
       if (e.response != null) {
         if (e.response!.statusCode != null) {
           if (e.response!.statusCode! == 401) {
-            await await AuthService()
+            await AuthService()
                 .logout()
                 .then((value) => getx.Get.offAllNamed(Routes.LOGIN));
           }

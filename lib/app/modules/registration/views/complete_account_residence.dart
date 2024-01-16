@@ -1,3 +1,4 @@
+import 'package:egyptians_abroad/app/core/custom_widgets/custom_appbar.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/custom_button.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/custom_textfield.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/dropdown_list_selector.dart';
@@ -7,6 +8,7 @@ import 'package:egyptians_abroad/app/core/custom_widgets/title_text.dart';
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/modules/registration/controllers/registration_controller.dart';
+import 'package:egyptians_abroad/app/modules/registration/views/complete_account_work.dart';
 import 'package:egyptians_abroad/app/modules/registration/views/widgets/progress_indicator_widget.dart';
 import 'package:egyptians_abroad/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
@@ -16,9 +18,11 @@ import 'package:egyptians_abroad/app/core/helper/validators.dart';
 import 'package:get/get.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
-class CompleteAccountView extends StatefulWidget {
-  const CompleteAccountView({super.key});
+import 'select_avatar.dart';
 
+class CompleteAccountView extends StatefulWidget {
+  const CompleteAccountView({super.key, this.carRegister = false});
+  final bool carRegister;
   @override
   State<CompleteAccountView> createState() => _CompleteAccountViewState();
 }
@@ -44,6 +48,7 @@ class _CompleteAccountViewState extends State<CompleteAccountView>
     return NetworkIndicator(
       child: SafeArea(
         child: Scaffold(
+          appBar: widget.carRegister ? const CustomAppBar() : null,
           body: GetBuilder<RegistrationController>(
             builder: (registrationController) {
               registrationController.residenceLoading
@@ -76,7 +81,12 @@ class _CompleteAccountViewState extends State<CompleteAccountView>
                             ),
                             Row(
                               children: [
-                                const ProgressIndicatorWidget(step: '1'),
+                                widget.carRegister
+                                    ? const ProgressIndicatorWidget(step: '1')
+                                    : const ProgressIndicatorWidget(
+                                        step: '2',
+                                        total: '4',
+                                      ),
                                 SizedBox(width: 8.w),
                                 // todo: translate
                                 Text('بيانات الإقامة',
@@ -84,7 +94,7 @@ class _CompleteAccountViewState extends State<CompleteAccountView>
                                         fontFamily: 'baloo',
                                         fontSize: fixDpiFont(17),
                                         fontWeight: FontWeight.w700,
-                                        color: Color(0xff3F3D56)))
+                                        color: const Color(0xff3F3D56)))
                               ],
                             ),
                             SizedBox(
@@ -226,7 +236,13 @@ class _CompleteAccountViewState extends State<CompleteAccountView>
                           onPressed: () {
                             // registrationController.loadResidenceData();
                             if (_formKey.currentState!.validate()) {
-                              Get.toNamed(Routes.COMPLETEACCOUNTWORK);
+                              if (widget.carRegister) {
+                                Get.to(() => const CompleteAccountWorkView(
+                                      carRegister: true,
+                                    ));
+                              } else {
+                                Get.toNamed(Routes.COMPLETEACCOUNTWORK);
+                              }
                             }
                           },
                         ),
@@ -239,7 +255,13 @@ class _CompleteAccountViewState extends State<CompleteAccountView>
                           width: 358.w,
                           height: 50.h,
                           onPressed: () {
-                            Get.toNamed(Routes.REGITSRATIONSELECTAVATAR);
+                            if (widget.carRegister) {
+                              Get.to(() => const RegistrationSelectAvatarView(
+                                    carRegister: true,
+                                  ));
+                            } else {
+                              Get.toNamed(Routes.REGITSRATIONSELECTAVATAR);
+                            }
                           },
                         ),
                       ],

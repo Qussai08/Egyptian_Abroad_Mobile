@@ -13,7 +13,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class RegistrationSelectAvatarView extends GetView<RegistrationController> {
-  const RegistrationSelectAvatarView({super.key});
+  const RegistrationSelectAvatarView({super.key, this.carRegister = false});
+  final bool carRegister;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +48,12 @@ class RegistrationSelectAvatarView extends GetView<RegistrationController> {
                           alignment: Alignment.topRight,
                           child: Row(
                             children: [
-                              const ProgressIndicatorWidget(step: '3'),
+                              carRegister
+                                  ? const ProgressIndicatorWidget(step: '4')
+                                  : const ProgressIndicatorWidget(
+                                      step: '4',
+                                      total: '4',
+                                    ),
                               SizedBox(width: 8.h),
                               Text(
                                 'اختر الايقونة الخاصة بك.',

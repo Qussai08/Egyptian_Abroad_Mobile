@@ -19,6 +19,8 @@ import 'package:egyptians_abroad/app/core/helper/validators.dart';
 
 import 'package:get/get.dart';
 
+import '../../../core/helper/localization_helper.dart';
+
 class RegistrationView extends StatefulWidget {
   const RegistrationView({super.key});
 
@@ -241,22 +243,75 @@ class _RegistrationViewState extends State<RegistrationView>
                                         );
                                       }),
                             ),
+                            // SizedBox(
+                            //   height: 40.h,
+                            // ),
                             SizedBox(
-                              height: 40.h,
+                              height: 19.h,
                             ),
-                            // SizedBox(
-                            //   height: 15.h,
-                            // ),
-                            // Text(
-                            //   'بالمتابعة انت موافق على مشاركة بيانات الدخول مع تطبيق سيارات المصريين بالخارج',
-                            //   textAlign: TextAlign.center,
-                            //   style: Styles.getRegularStyle(
-                            //       color: Styles.lightBlack,
-                            //       fontSize: fixDpiFont(13)),
-                            // ),
-                            // SizedBox(
-                            //   height: 15.h,
-                            // ),
+                            GetBuilder<RegistrationController>(
+                              builder: (registrationController) =>
+                                  ValueListenableBuilder<bool>(
+                                valueListenable:
+                                    controller.showAgreeToShareWithCarsError,
+                                builder: (_, showError, __) => Container(
+                                  // color: Colors.blueAccent,
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      registrationController
+                                          .setAgreeToShareWithCars(true);
+                                      registrationController
+                                          .setShowAgreeToShareWithCarsError(
+                                              false);
+                                      setState(() {});
+                                      print(
+                                          "agreeToShareWithCars ${registrationController.agreeToShareWithCars}");
+                                    },
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        Icon(
+                                          registrationController
+                                                  .agreeToShareWithCars.value
+                                              ? Icons.check_box
+                                              : Icons.check_box_outline_blank,
+                                          color: showError
+                                              ? Colors.red
+                                              : Styles.primaryColor,
+                                          size: 20,
+                                        ),
+                                        const SizedBox(
+                                          width: 5,
+                                        ),
+                                        Expanded(
+                                          child: Text(
+                                            'سيتم مشاركة بيانات الدخول مع تطبيق سيارات المصريين بالخارج',
+                                            textDirection:
+                                                LocalizationHelper.isArabic()
+                                                    ? TextDirection.rtl
+                                                    : TextDirection.ltr,
+                                            textAlign: TextAlign.start,
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: Styles.getRegularStyle(
+                                                color: showError
+                                                    ? Colors.red
+                                                    : Styles.lightBlack,
+                                                fontSize: fixDpiFont(13)),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 19.h,
+                            ),
                             CustomButton(
                               text: AppStrings.next.tr,
                               icon: Icons.arrow_forward,
@@ -265,31 +320,15 @@ class _RegistrationViewState extends State<RegistrationView>
                               width: 358.w,
                               height: 50.h,
                               onPressed: () async {
-                                if (_formKey.currentState!.validate()) {
+                                if (_formKey.currentState!.validate() &&
+                                    registrationController
+                                        .agreeToShareWithCars.value) {
                                   setState(() {
                                     showCountryError = false;
                                   });
-                                  AppResponse res =
-                                      await controller.verifyMailAndNID();
 
-                                  if (res.status && res.data['data'] == true) {
-                                    AppResponse verRes = await controller
-                                        .createVerificationCode();
-                                    Get.to(() => OtpView(
-                                          resendOtpTime: verRes.data['data']
-                                              ['data']['resendOtp'],
-                                        ));
-                                  } else {
-                                    Get.showSnackbar(
-                                      buildCustomToast(
-                                        Get.context!,
-                                        toastMsg:
-                                            "الرقم القومي أو البريد الإلكتروني مُسجل بالفعل.",
-                                        toastTitle: AppStrings.sorry.tr,
-                                        toastType: ToastType.error,
-                                      ),
-                                    );
-                                  }
+                                  await controller.checkNIDAndEmailInCars();
+                                  //  verfiy on cars first then on egy abroad
                                 } else {
                                   if (validateCountry(registrationController
                                           .residenceCountry.value
@@ -302,6 +341,14 @@ class _RegistrationViewState extends State<RegistrationView>
                                     setState(() {
                                       showCountryError = false;
                                     });
+                                  }
+
+                                  if (!registrationController
+                                      .agreeToShareWithCars.value) {
+                                    registrationController
+                                        .setShowAgreeToShareWithCarsError(true);
+                                    print(
+                                        "registrationController.agreeToShareWithCars ${registrationController.agreeToShareWithCars}");
                                   }
                                 }
                               },

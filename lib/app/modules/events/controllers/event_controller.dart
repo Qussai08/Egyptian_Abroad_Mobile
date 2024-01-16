@@ -42,13 +42,13 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
         .then((value) {
       if (value.isSuccess) {
         if (value.body != null) {
-          if (value.body!.events.isEmpty) {
+          if (value.body!.isEmpty) {
             change(null, status: RxStatus.empty());
             isLoading.value = false;
             return;
           }
-          eventsList.addAll(value.body!.events ?? []);
-          change(value.body!.events, status: RxStatus.success());
+          eventsList.addAll(value.body! ?? []);
+          change(value.body!, status: RxStatus.success());
           isLoading.value = false;
         } else {
           change(null, status: RxStatus.empty());

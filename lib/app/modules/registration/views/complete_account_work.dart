@@ -17,9 +17,11 @@ import 'package:egyptians_abroad/app/core/helper/validators.dart';
 
 import 'package:get/get.dart';
 
-class CompleteAccountWorkView extends StatefulWidget {
-  const CompleteAccountWorkView({Key? key}) : super(key: key);
+import 'select_avatar.dart';
 
+class CompleteAccountWorkView extends StatefulWidget {
+  const CompleteAccountWorkView({super.key, this.carRegister = false});
+  final bool carRegister;
   @override
   State<CompleteAccountWorkView> createState() =>
       _CompleteAccountWorkViewState();
@@ -60,9 +62,13 @@ class _CompleteAccountWorkViewState extends State<CompleteAccountWorkView>
                           ),
                           Row(
                             children: [
-                              const ProgressIndicatorWidget(
-                                step: '2',
-                              ),
+                              widget.carRegister
+                                  ? const ProgressIndicatorWidget(step: '2')
+                                  : const ProgressIndicatorWidget(
+                                      step: '3',
+                                      total: '4',
+                                    ),
+
                               SizedBox(
                                 width: 8.w,
                               ),
@@ -212,7 +218,7 @@ class _CompleteAccountWorkViewState extends State<CompleteAccountWorkView>
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
                             await registrationController.completeAccount(
-                                isEdit: false);
+                                isEdit: false, carRegister: widget.carRegister);
                           }
                         },
                       ),
@@ -225,7 +231,11 @@ class _CompleteAccountWorkViewState extends State<CompleteAccountWorkView>
                         width: 358.w,
                         height: 50,
                         onPressed: () {
-                          Get.toNamed(Routes.REGITSRATIONSELECTAVATAR);
+                          widget.carRegister
+                              ? Get.to(() => const RegistrationSelectAvatarView(
+                                    carRegister: true,
+                                  ))
+                              : Get.toNamed(Routes.REGITSRATIONSELECTAVATAR);
                         },
                       ),
                     ],

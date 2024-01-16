@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:egyptians_abroad/app/core/services/app_response.dart';
 import 'package:egyptians_abroad/app/core/services/base_api.dart';
+import 'package:egyptians_abroad/app/core/services/cars_base_api.dart';
 
 import '../../helper/localization_helper.dart';
 
@@ -89,5 +90,20 @@ class UserRepository {
         body: jsonEncode(body),
         options: queryParameters,
         jsonResponse: true);
+  }
+
+  Future<AppResponse> checkNIDAndEmailInCarsReq(
+      {Map<String, dynamic>? queryParameters}) async {
+    return await CarsBaseApi().getRequest(
+      endPoint: "CheckNIDAndEmailInCars",
+      queryParameters: queryParameters,
+    );
+  }
+
+  Future<AppResponse> signUpWithCarsReq(
+      {Map<String, dynamic>? queryParameters,
+      Map<String, dynamic>? body}) async {
+    return await CarsBaseApi().postRequest(
+        endPoint: "SignUpWithCars", options: queryParameters, body: body);
   }
 }
