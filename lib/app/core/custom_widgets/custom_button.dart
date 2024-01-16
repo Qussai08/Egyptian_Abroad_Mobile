@@ -1,3 +1,4 @@
+import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:flutter/material.dart';
 
@@ -149,11 +150,9 @@ class CustomButton extends StatelessWidget {
                         type == ButtonType.disabled
                             ? disabledText ?? text!
                             : text!,
-                        style: TextStyle(
-                            fontSize: fontSize,
+                        style: Styles.getSemiBoldStyle(
                             color: textColor ?? type.textColor,
-                            fontWeight: fontWeight,
-                            fontFamily: 'baloo'),
+                            fontSize: fixDpiFont(16)),
                       ),
                       if (icon != null || iconIsAsset)
                         const SizedBox(

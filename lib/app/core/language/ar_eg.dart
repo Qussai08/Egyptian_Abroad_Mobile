@@ -127,6 +127,6 @@ Map<String, String> ar = {
   AppStrings.to: 'إلى',
   AppStrings.recordingLink: 'رابط التسجيل',
   AppStrings.meetingLink: 'رابط الاجتماع',
-  AppStrings.events: 'الفعاليات',
+  AppStrings.events: 'الفاعليات',
   AppStrings.search: 'ابحث',
 };

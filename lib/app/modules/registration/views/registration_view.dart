@@ -260,6 +260,7 @@ class _RegistrationViewState extends State<RegistrationView>
                             CustomButton(
                               text: AppStrings.next.tr,
                               icon: Icons.arrow_forward,
+                              iconSize: 14.w,
                               type: ButtonType.primary,
                               width: 358.w,
                               height: 50.h,

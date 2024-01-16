@@ -37,7 +37,7 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
               "countryIds": [],
               "jobCategoryIds": [],
               "pageNo": 1,
-              "pageSize": 1000000
+              "pageSize": 10
             })
         .then((value) {
       if (value.isSuccess) {
