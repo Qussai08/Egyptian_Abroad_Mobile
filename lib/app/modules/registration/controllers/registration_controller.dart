@@ -87,10 +87,13 @@ class RegistrationController extends GetxController {
           navigateToHome: false);
 
       Future.delayed(const Duration(seconds: 3), () async {
-        if (carsOtp != null) {
+        print('carsOtp $carsOtp');
+        if (carsOtp == null) {
+          print('Normal register');
           Get.offAllNamed(Routes.COMPLETEACCOUNT);
           passwordTxtController.clear();
         } else {
+          print('Cars Register');
           Get.offAll(() => const CompleteAccountView(
                 carRegister: true,
               ));
@@ -323,9 +326,9 @@ class RegistrationController extends GetxController {
     }
   }
 
-  Future<void> pushAvatar(int route) async {
+  Future<void> pushAvatar({int? avatar, required int route}) async {
     Map<String, dynamic> reqBody = {
-      "avatarId": selectedAvatarIndex,
+      "avatarId": avatar ?? selectedAvatarIndex,
     };
 
     AppResponse response = await UserRepository()
@@ -335,7 +338,7 @@ class RegistrationController extends GetxController {
       var controller = Get.put(HomeShowcaseController());
       await controller.getUserProfile();
 
-      Get.offNamed(Routes.DATASAVED, arguments: [selectedAvatarIndex, route]);
+      Get.offNamed(Routes.DATASAVED, arguments: [avatar ?? selectedAvatarIndex, route]);
     }
   }
 
