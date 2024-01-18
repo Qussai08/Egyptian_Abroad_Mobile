@@ -158,7 +158,7 @@ abstract class AppStrings {
   static const from = 'from';
   static const to = 'to';
   static const meetingLink = 'meetingLink';
-  static const recordingLink = 'recordingLink';
+  static const registrationLink = 'registrationLink';
   static const events = 'events';
   static const search = 'search';
 

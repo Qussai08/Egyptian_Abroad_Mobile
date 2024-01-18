@@ -125,8 +125,8 @@ Map<String, String> ar = {
   AppStrings.eventDetails: 'تفاصيل الفعالية',
   AppStrings.from: 'من',
   AppStrings.to: 'إلى',
-  AppStrings.recordingLink: 'رابط التسجيل',
-  AppStrings.meetingLink: 'رابط الاجتماع',
+  AppStrings.registrationLink: 'سجل الآن',
+  AppStrings.meetingLink: 'انضم للاجتماع',
   AppStrings.events: 'الفاعليات',
   AppStrings.search: 'ابحث',
   AppStrings.existInCarsValidationMsg:

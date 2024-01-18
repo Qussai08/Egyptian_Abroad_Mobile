@@ -17,40 +17,37 @@ class FromToDateWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        Text(
-          AppStrings.from.tr,
-          style: Styles.getMediumStyle(
-              color: Styles.lightBlack, fontSize: fixDpiFont(12)),
-        ),
-        SizedBox(width: 4.w),
-
-        Image.asset(AppImages.calendar, width: fixDpiFont(12)),
-        // Icon(
-        //   Icons.calendar_month,
-        //   color: Styles.lightBlack,
-        //   size: fixDpiFont(12),
-        // ),
-        SizedBox(width: 4.w),
-        Expanded(
-          child: Text(fromDate,
+        Row(
+          children: [
+            Text(
+              AppStrings.from.tr,
               style: Styles.getMediumStyle(
-                  color: Styles.lightBlack, fontSize: fixDpiFont(12))),
+                  color: Styles.lightBlack, fontSize: fixDpiFont(12)),
+            ),
+            SizedBox(width: 4.w),
+            Image.asset(AppImages.calendar, width: fixDpiFont(12)),
+            SizedBox(width: 4.w),
+            Text(fromDate,
+                style: Styles.getMediumStyle(
+                    color: Styles.lightBlack, fontSize: fixDpiFont(12))),
+          ],
         ),
-        SizedBox(width: 12.w),
-        Text(AppStrings.to.tr,
-            style: Styles.getMediumStyle(
-                color: Styles.lightBlack, fontSize: fixDpiFont(12))),
-        SizedBox(width: 4.w),
-        Image.asset(AppImages.calendar, width: fixDpiFont(12)),
 
-        // Icon(Icons.calendar_month,
-        //     color: Styles.lightBlack, size: fixDpiFont(12)),
-        SizedBox(width: 4.w),
-        Expanded(
-          child: Text(toDate,
-              style: Styles.getMediumStyle(
-                  color: Styles.lightBlack, fontSize: fixDpiFont(12))),
+        // SizedBox(width: 12.w),
+        Row(
+          children: [
+            Text(AppStrings.to.tr,
+                style: Styles.getMediumStyle(
+                    color: Styles.lightBlack, fontSize: fixDpiFont(12))),
+            SizedBox(width: 4.w),
+            Image.asset(AppImages.calendar, width: fixDpiFont(12)),
+            SizedBox(width: 4.w),
+            Text(toDate,
+                style: Styles.getMediumStyle(
+                    color: Styles.lightBlack, fontSize: fixDpiFont(12))),
+          ],
         ),
       ],
     );
