@@ -26,6 +26,7 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
   void onInit() {
     super.onInit();
     scrollController.addListener(scrollListener);
+    registrationController.getGobCategoryList();
     // loadEvents(body: {
     //   "search": "",
     //   "countryIds": [],
@@ -43,7 +44,9 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
 
   void clearFilters() {
     jobCategoryIds = [];
+    jobCatDisplayString = "";
     countryIds = [];
+    countryDisplayString = "";
     dateFrom = '';
     dateTo = '';
     update();
@@ -128,9 +131,11 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
     });
     //TODO : refactor
     countryIds = registrationController.countriesList;
+    onSelectcountry();
     print(
         "registrationController.jobCategoryList ${registrationController.jobCategoryList}");
     jobCategoryIds = registrationController.jobCategoryList;
+    onSelectjobCategory();
   }
 
   Future<void> retry() async {
@@ -201,8 +206,10 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
 
   String countryDisplayString = "";
 
-  onSelectcountry(int index) {
-    countryIds[index].isSelected = !countryIds[index].isSelected;
+  onSelectcountry({int? index}) {
+    if (index != null) {
+      countryIds[index].isSelected = !countryIds[index].isSelected;
+    }
     if (countryIds.isNotEmpty) {
       List<String> selectedcountries = [];
       for (var element in countryIds) {
@@ -217,8 +224,11 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
 
   String jobCatDisplayString = "";
 
-  onSelectjobCategory(int index) {
-    jobCategoryIds[index].isSelected = !jobCategoryIds[index].isSelected;
+  onSelectjobCategory({int? index}) {
+    if (index != null) {
+      jobCategoryIds[index].isSelected = !jobCategoryIds[index].isSelected;
+    }
+
     if (jobCategoryIds.isNotEmpty) {
       List<String> selectedjobCategory = [];
       for (var element in jobCategoryIds) {

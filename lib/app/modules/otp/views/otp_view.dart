@@ -122,6 +122,7 @@ class _OtpViewState extends State<OtpView> with ValidationMixin {
                                         contentPadding:
                                             const EdgeInsets.only(left: 5),
                                         onChanged: (pin) {
+                                          print("pin $pin");
                                           controller.otp = pin;
                                         },
                                         onCompleted: (pin) async {
@@ -222,6 +223,7 @@ class _OtpViewState extends State<OtpView> with ValidationMixin {
                                               _otpHasError.value = false;
                                               controller.otpTxtController
                                                   .clear();
+                                              controller.otp = '';
                                               setState(() {});
                                             }),
                                       )
@@ -261,14 +263,22 @@ class _OtpViewState extends State<OtpView> with ValidationMixin {
                                                   null
                                               ? true
                                               : false;
-                                    }
-
-                                    if (_otpHasError.value == false) {
-                                      errormsg =
-                                          validateOtpCode(controller.otp);
-                                      if (errormsg ==
-                                          AppStrings.otpEmptyValidation.tr) {
-                                        setState(() {});
+                                      if (_otpHasError.value == false) {
+                                        errormsg =
+                                            validateOtpCode(controller.otp);
+                                        if (errormsg ==
+                                            AppStrings.otpEmptyValidation.tr) {
+                                          setState(() {});
+                                        }
+                                      } else {
+                                        AppResponse res = await controller
+                                            .verifyCode(controller.otp);
+                                        if (res.status &&
+                                            res.data['data'] == true) {
+                                          Get.toNamed(Routes.SETPASSWORD);
+                                        } else {
+                                          _otpHasError.value = true;
+                                        }
                                       }
                                     }
                                   },

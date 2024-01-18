@@ -232,6 +232,7 @@ class _ForgetPassOtpViewState extends State<ForgetPassOtpView>
                                               _otpHasError.value = false;
                                               controller.otpTxtController
                                                   .clear();
+                                              controller.otp = '';
                                               setState(() {});
                                             }),
                                       )
@@ -268,20 +269,63 @@ class _ForgetPassOtpViewState extends State<ForgetPassOtpView>
                                                   null
                                               ? true
                                               : false;
-                                    }
+                                      if (_otpHasError.value == false) {
+                                        errormsg =
+                                            validateOtpCode(controller.otp)!;
 
-                                    if (_otpHasError.value == false) {
-                                      errormsg =
-                                          validateOtpCode(controller.otp)!;
-
-                                      if (errormsg ==
-                                          AppStrings.otpEmptyValidation.tr)
-                                        setState(() {});
+                                        if (errormsg ==
+                                            AppStrings.otpEmptyValidation.tr)
+                                          setState(() {});
+                                      } else {
+                                        AppResponse res = await controller
+                                            .verifyCode(controller.otp);
+                                        if (res.status &&
+                                            res.data['data'] == true) {
+                                          controller.confirmNewPassTxtController
+                                              .clear();
+                                          controller.newPasswordTxtController
+                                              .clear();
+                                          Get.to(() =>
+                                              ForgetPassSetPasswordView());
+                                        } else {
+                                          _otpHasError.value = true;
+                                        }
+                                      }
                                     }
 
                                     print(
                                         "_otpHasError.value ${_otpHasError.value}");
                                   },
+
+                                  // {
+                                  //   if (time == null) {
+                                  //     _otpHasError.value = true;
+                                  //   } else {
+                                  //     _otpHasError.value =
+                                  //         validateOtpCode(controller.otp) !=
+                                  //                 null
+                                  //             ? true
+                                  //             : false;
+                                  //     if (_otpHasError.value == false) {
+                                  //       errormsg =
+                                  //           validateOtpCode(controller.otp);
+                                  //       if (errormsg ==
+                                  //           AppStrings.otpEmptyValidation.tr) {
+                                  //         setState(() {});
+                                  //       }
+                                  //     } else {
+                                  //       AppResponse res = await controller
+                                  //           .verifyCode(controller.otp);
+                                  //       if (res.status &&
+                                  //           res.data['data'] == true) {
+                                  //         controller.otp = controller.otp;
+                                  //         Get.toNamed(Routes.SETPASSWORD);
+                                  //       } else {
+                                  //         _otpHasError.value = true;
+                                  //       }
+                                  //     }
+                                  //   }
+                                  // }
                                 ),
                                 SizedBox(
                                   height: 16.h,

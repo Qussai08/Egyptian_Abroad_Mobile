@@ -83,6 +83,7 @@ class _LoginViewState extends State<LoginView> with ValidationMixin {
                         validationFunc: (val) =>
                             validateUserEmail(_emailTxtController.text),
                         inputData: TextInputType.emailAddress,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
                       ),
                       SizedBox(
                         height: 16.h,
@@ -95,6 +96,7 @@ class _LoginViewState extends State<LoginView> with ValidationMixin {
                             validatePassword(_passwordTxtController.text),
                         inputData: TextInputType.text,
                         isPassword: true,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
                       ),
                       SizedBox(
                         height: 16.h,

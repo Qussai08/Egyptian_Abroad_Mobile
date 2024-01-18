@@ -118,7 +118,7 @@ class EventsView extends GetView<EventsController> {
                                             controller.clearFilters();
                                             controller.clear();
                                             controller.filterEvents();
-                                            Get.back();
+                                            // Get.back();
                                           },
                                           child: Icon(
                                             Icons.restart_alt,
@@ -517,8 +517,8 @@ class EventsView extends GetView<EventsController> {
                                                                       return ListTile(
                                                                         onTap:
                                                                             () {
-                                                                          evController
-                                                                              .onSelectcountry(i);
+                                                                          evController.onSelectcountry(
+                                                                              index: i);
                                                                         },
                                                                         contentPadding:
                                                                             EdgeInsets.symmetric(horizontal: 16.w),
@@ -565,6 +565,8 @@ class EventsView extends GetView<EventsController> {
                                                                 .primary,
                                                             text: "تأكيد",
                                                             onPressed: () {
+                                                              controller
+                                                                  .onSelectcountry();
                                                               Get.back();
                                                             },
                                                           ),
@@ -690,8 +692,9 @@ class EventsView extends GetView<EventsController> {
                                                                     return ListTile(
                                                                       onTap:
                                                                           () {
-                                                                        evController
-                                                                            .onSelectjobCategory(i);
+                                                                        evController.onSelectjobCategory(
+                                                                            index:
+                                                                                i);
                                                                       },
                                                                       contentPadding:
                                                                           EdgeInsets.symmetric(
@@ -725,6 +728,8 @@ class EventsView extends GetView<EventsController> {
                                                                 .primary,
                                                             text: "تأكيد",
                                                             onPressed: () {
+                                                              controller
+                                                                  .onSelectjobCategory();
                                                               Get.back();
                                                             },
                                                           ),

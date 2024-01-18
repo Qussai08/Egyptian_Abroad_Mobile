@@ -31,8 +31,8 @@ class LoginController extends GetxController {
       authService.setAccessToken(response.data['accessToken'] ?? '');
       authService.setRefreshToken(response.data['refreshToken'] ?? '');
 
-      // await notificationHelper.registerFCMToken();
-      // await notificationHelper.subscribeToTopic('broadcast');
+      await notificationHelper.registerFCMToken();
+      await notificationHelper.subscribeToTopic('broadcast');
       isLoading.value = false;
       if (navigateToHome) Get.offAllNamed(Routes.BOTTOMNAVIGATION);
     } else {

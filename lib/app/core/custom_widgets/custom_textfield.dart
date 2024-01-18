@@ -36,6 +36,7 @@ class CustomTextFormField extends StatefulWidget {
   final Color? fillColor;
   final Color? enabledBorderColor;
   final List<TextInputFormatter>? inputFormatters;
+  final AutovalidateMode? autovalidateMode;
 
   final TextEditingController? controller;
   const CustomTextFormField(
@@ -44,6 +45,7 @@ class CustomTextFormField extends StatefulWidget {
       this.inputData,
       this.disabledBorder,
       this.hasHorizontalMargin = false,
+      this.autovalidateMode,
       this.isPassword = false,
       this.validationFunc,
       this.onFieldSubmitted,
@@ -113,6 +115,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                   //   ]
                 ),
           child: TextFormField(
+            autovalidateMode:
+                widget.autovalidateMode ?? AutovalidateMode.disabled,
             autofocus: widget.autofocus ?? false,
             textAlignVertical: TextAlignVertical.center,
             expands: widget.expands ?? false,
