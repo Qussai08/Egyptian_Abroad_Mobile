@@ -44,7 +44,7 @@ class NotificationsModel {
         DateFormat('dd MMMM yyyy hh:mm a', 'ar_EG').format(myDateTime);
 
     String formatWithEngNums =
-        "${myDateTime.day} $month ${myDateTime.year} ${myDateTime.hour}:${myDateTime.minute} ${formattedDate.split(' ').last.contains('ص') ? 'صباحًا' : 'مساءً'}";
+        "${myDateTime.day} $month ${myDateTime.year} ${myDateTime.hour.toString().padLeft(2, '0')}:${myDateTime.minute.toString().padLeft(2, '0')} ${formattedDate.split(' ').last.contains('ص') ? 'صباحًا' : 'مساءً'}";
 
     return formatWithEngNums;
   }

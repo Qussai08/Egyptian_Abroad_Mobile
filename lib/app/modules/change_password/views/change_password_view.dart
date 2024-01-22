@@ -78,6 +78,7 @@ class _ChangePasswordViewState extends State<ChangePasswordView>
                               controller.oldPasswordTxtController.text),
                           inputData: TextInputType.text,
                           isPassword: true,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
                         ),
                         SizedBox(
                           height: 16.h,
@@ -105,6 +106,7 @@ class _ChangePasswordViewState extends State<ChangePasswordView>
                           },
                           inputData: TextInputType.text,
                           isPassword: true,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
                         ),
                         SizedBox(
                           height: 16.h,
@@ -119,6 +121,7 @@ class _ChangePasswordViewState extends State<ChangePasswordView>
                               controller.newPasswordTxtController.text),
                           inputData: TextInputType.text,
                           isPassword: true,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
                         ),
                         SizedBox(
                           height: 12.h,

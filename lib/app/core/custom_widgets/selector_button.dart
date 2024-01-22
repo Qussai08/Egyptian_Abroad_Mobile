@@ -62,7 +62,10 @@ class SelectorButton extends StatelessWidget {
                   const SizedBox(
                     width: 8,
                   ),
-                  Text(countries[selectedCountry!].country),
+                  Text(
+                    countries[selectedCountry!].country,
+                    style: Styles.getRegularStyle(color: Styles.black),
+                  ),
                 ],
               ),
             )

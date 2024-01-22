@@ -8,12 +8,14 @@ import 'package:showcaseview/showcaseview.dart';
 
 import '../../../core/helper/error_helper.dart';
 import '../../../core/helper/localization_helper.dart';
+import '../../../core/helper/secure_storage_helper.dart';
 import '../../../core/services/app_response.dart';
 import '../../../core/services/auth_service.dart';
 import '../../../core/services/models/category.dart';
 import '../../../core/services/models/user_profile.dart';
 import '../../../core/services/repositories/categories_repository.dart';
 import '../../../core/services/repositories/user_repository.dart';
+import '../../../core/services/storage_service.dart';
 import '../../registration/controllers/registration_controller.dart';
 
 class HomeShowcaseController extends GetxController {
@@ -258,9 +260,13 @@ class HomeShowcaseController extends GetxController {
   final scrollController = ScrollController();
 
   // start showcase
-  void startShowCase(BuildContext context) {
-    if (authService.showcaseViewed) {
+  Future<void> startShowCase(BuildContext context) async {
+    var isFirstTime = await StorageService().getData("first_time");
+    if (authService.showcaseViewed ||
+        isFirstTime == true ||
+        isFirstTime == null) {
       _homeContext = context;
+      StorageService().setData("first_time", false);
       ambiguate(WidgetsBinding.instance)?.addPostFrameCallback(
         (_) => ShowCaseWidget.of(_homeContext).startShowCase([one, two, three]),
       );

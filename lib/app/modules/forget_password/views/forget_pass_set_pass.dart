@@ -114,6 +114,7 @@ class _ForgetPassSetPasswordViewState extends State<ForgetPassSetPasswordView>
                     },
                     inputData: TextInputType.text,
                     isPassword: true,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                   ),
                   SizedBox(
                     height: 16.h,
@@ -131,6 +132,7 @@ class _ForgetPassSetPasswordViewState extends State<ForgetPassSetPasswordView>
                             controller.confirmNewPassTxtController.text,
                             controller.newPasswordTxtController.text),
                     inputData: TextInputType.text,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     isPassword: true,
                     onChangedFunc: (val) {},
                   ),

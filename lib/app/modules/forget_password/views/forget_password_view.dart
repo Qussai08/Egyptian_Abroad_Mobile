@@ -62,6 +62,7 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView>
                     validationFunc: (val) =>
                         validateUserEmail(controller.emailTxtController.text),
                     inputData: TextInputType.emailAddress,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                   ),
                   const Spacer(),
                   CustomButton(

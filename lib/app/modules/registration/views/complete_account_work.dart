@@ -127,6 +127,8 @@ class _CompleteAccountWorkViewState extends State<CompleteAccountWorkView>
                                       .jobTitleTxtController.text,
                                   100),
                               inputData: TextInputType.text,
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
                             ),
                             SizedBox(
                               height: 16.h,
@@ -142,6 +144,8 @@ class _CompleteAccountWorkViewState extends State<CompleteAccountWorkView>
                                   registrationController
                                       .egptionPhoneNumTxtController.text),
                               inputData: TextInputType.phone,
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
                             ),
                             SizedBox(
                               height: 16.h,
@@ -168,6 +172,8 @@ class _CompleteAccountWorkViewState extends State<CompleteAccountWorkView>
                                       .forignPhoneNumTxtController.text,
                                   15),
                               inputData: TextInputType.phone,
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
                             ),
                             SizedBox(
                               height: 16.h,
@@ -183,6 +189,8 @@ class _CompleteAccountWorkViewState extends State<CompleteAccountWorkView>
                                       .msgsAddressTxtController.text,
                                   200),
                               inputData: TextInputType.text,
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
                             ),
                             SizedBox(
                               height: 20.h,

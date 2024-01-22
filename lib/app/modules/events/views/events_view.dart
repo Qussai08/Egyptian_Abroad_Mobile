@@ -28,6 +28,9 @@ class EventsView extends GetView<EventsController> {
   @override
   Widget build(BuildContext context) {
     FocusNode _searchFocusNode = FocusNode();
+    FocusNode _countrySearchFocusNode = FocusNode();
+
+    FocusNode _jobCatSearchFocusNode = FocusNode();
 
     final con = Get.put(EventsController());
     // final RegistrationController regController = Get.find();
@@ -72,7 +75,7 @@ class EventsView extends GetView<EventsController> {
                               _searchFocusNode.requestFocus();
                               if (val.isEmpty) {
                                 controller.keySearch = val;
-                                controller.filterEvents();
+                                controller.loadEvents();
                                 FocusScope.of(context).unfocus();
                               }
                             },
@@ -160,262 +163,273 @@ class EventsView extends GetView<EventsController> {
                                 padding: EdgeInsets.symmetric(horizontal: 12.w),
                                 child: Column(
                                   children: [
-                                    TextFieldTitle(
+                                    const TextFieldTitle(
                                       title: "تاريخ بدء الفعالية",
                                       hasSubTitle: false,
                                     ),
                                     GetBuilder<EventsController>(
-                                        builder: (eventsController) =>
-                                            Container(
-                                              height: 50.h,
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(37)),
-                                                  border: Border.all(
-                                                      color:
-                                                          Color(0xffEBEBEB))),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceEvenly,
-                                                children: [
-                                                  GestureDetector(
-                                                    onTap: () async {
-                                                      DateTime _dateTime =
-                                                          DateTime.now();
+                                        builder:
+                                            (eventsController) => Container(
+                                                  height: 50.h,
+                                                  decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          const BorderRadius
+                                                              .all(
+                                                              Radius.circular(
+                                                                  37)),
+                                                      border: Border.all(
+                                                          color: const Color(
+                                                              0xffEBEBEB))),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceEvenly,
+                                                    children: [
+                                                      GestureDetector(
+                                                        onTap: () async {
+                                                          DateTime _dateTime =
+                                                              DateTime.now();
 
-                                                      await showCupertinoModalPopup<
-                                                              void>(
-                                                          context: context,
-                                                          builder: (_) {
-                                                            final size =
-                                                                MediaQuery.of(
-                                                                        context)
-                                                                    .size;
+                                                          await showCupertinoModalPopup<
+                                                                  void>(
+                                                              context: context,
+                                                              builder: (_) {
+                                                                final size =
+                                                                    MediaQuery.of(
+                                                                            context)
+                                                                        .size;
 
-                                                            return Container(
-                                                              decoration:
-                                                                  const BoxDecoration(
-                                                                color: Colors
-                                                                    .white,
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .only(
-                                                                  topLeft: Radius
-                                                                      .circular(
-                                                                          12),
-                                                                  topRight: Radius
-                                                                      .circular(
-                                                                          12),
-                                                                ),
-                                                              ),
-                                                              height:
-                                                                  size.height *
-                                                                      0.27,
-                                                              width:
-                                                                  fixDpiScreenWidth(),
-                                                              child:
-                                                                  CupertinoDatePicker(
-                                                                mode:
-                                                                    CupertinoDatePickerMode
+                                                                return Container(
+                                                                  decoration:
+                                                                      const BoxDecoration(
+                                                                    color: Colors
+                                                                        .white,
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .only(
+                                                                      topLeft: Radius
+                                                                          .circular(
+                                                                              12),
+                                                                      topRight:
+                                                                          Radius.circular(
+                                                                              12),
+                                                                    ),
+                                                                  ),
+                                                                  height:
+                                                                      size.height *
+                                                                          0.27,
+                                                                  width:
+                                                                      fixDpiScreenWidth(),
+                                                                  child:
+                                                                      CupertinoDatePicker(
+                                                                    mode: CupertinoDatePickerMode
                                                                         .date,
-                                                                onDateTimeChanged:
-                                                                    (DateTime
-                                                                        pickedDate) {
-                                                                  String
-                                                                      formattedDate =
-                                                                      DateFormat(
-                                                                              'yyyy-MM-dd HH:mm:ss')
-                                                                          .format(
-                                                                              pickedDate);
+                                                                    onDateTimeChanged:
+                                                                        (DateTime
+                                                                            pickedDate) {
+                                                                      String
+                                                                          formattedDate =
+                                                                          DateFormat('yyyy-MM-dd HH:mm:ss')
+                                                                              .format(pickedDate);
 
-                                                                  con.setDateFrom(
-                                                                      formattedDate);
-                                                                },
-                                                                // minimumDate:
-                                                                //     DateTime(
-                                                                //   2023,
-                                                                //   12,
-                                                                //   20,
-                                                                // ),
-                                                                // maximumDate:
-                                                                //     DateTime(
-                                                                //   2025,
-                                                                //   12,
-                                                                //   20,
-                                                                // ),
-                                                                initialDateTime:
-                                                                    _dateTime,
-                                                              ),
-                                                            );
-                                                          });
-                                                    },
-                                                    child: Row(
-                                                      children: [
-                                                        Text(
-                                                          AppStrings.from.tr,
-                                                          style: Styles
-                                                              .getMediumStyle(
+                                                                      con.setDateFrom(
+                                                                          formattedDate);
+                                                                    },
+                                                                    // minimumDate:
+                                                                    //     DateTime(
+                                                                    //   2023,
+                                                                    //   12,
+                                                                    //   20,
+                                                                    // ),
+                                                                    maximumDate: con
+                                                                            .dateTo
+                                                                            .isNotEmpty
+                                                                        ? DateTime.parse(
+                                                                            con.dateTo)
+                                                                        : null,
+
+                                                                    initialDateTime: con
+                                                                            .dateTo
+                                                                            .isNotEmpty
+                                                                        ? DateTime.parse(
+                                                                            con.dateTo)
+                                                                        : _dateTime,
+                                                                  ),
+                                                                );
+                                                              });
+                                                        },
+                                                        child: Row(
+                                                          children: [
+                                                            Text(
+                                                              AppStrings
+                                                                  .from.tr,
+                                                              style: Styles.getMediumStyle(
                                                                   color: Styles
                                                                       .lightBlack,
                                                                   fontSize:
                                                                       fixDpiFont(
                                                                           12)),
-                                                        ),
-                                                        SizedBox(width: 4.w),
-                                                        Icon(
-                                                          Icons.calendar_month,
-                                                          color:
-                                                              Styles.lightBlack,
-                                                          size: fixDpiFont(12),
-                                                        ),
-                                                        SizedBox(width: 4.w),
-                                                        Container(
-                                                          width: 130,
-                                                          child: Text(
-                                                              eventsController
-                                                                      .dateFrom
-                                                                      .isEmpty
-                                                                  ? ""
-                                                                  : Event.dateFormatter(
-                                                                      eventsController
-                                                                          .dateFrom,
-                                                                      dateOnly:
-                                                                          true),
-                                                              // TODO : refactor
+                                                            ),
+                                                            SizedBox(
+                                                                width: 4.w),
+                                                            Icon(
+                                                              Icons
+                                                                  .calendar_month,
+                                                              color: Styles
+                                                                  .lightBlack,
+                                                              size: fixDpiFont(
+                                                                  12),
+                                                            ),
+                                                            SizedBox(
+                                                                width: 4.w),
+                                                            Container(
+                                                              width: 130,
+                                                              child: Text(
+                                                                  eventsController
+                                                                          .dateFrom
+                                                                          .isEmpty
+                                                                      ? ""
+                                                                      : Event.dateFormatter(
+                                                                          eventsController
+                                                                              .dateFrom,
+                                                                          dateOnly:
+                                                                              true),
+                                                                  // TODO : refactor
 
-                                                              style: Styles.getMediumStyle(
-                                                                  color: Styles
-                                                                      .lightBlack,
-                                                                  fontSize:
-                                                                      fixDpiFont(
-                                                                          12))),
+                                                                  style: Styles.getMediumStyle(
+                                                                      color: Styles
+                                                                          .lightBlack,
+                                                                      fontSize:
+                                                                          fixDpiFont(
+                                                                              12))),
+                                                            ),
+                                                          ],
                                                         ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  GestureDetector(
-                                                    onTap: () async {
-                                                      DateTime _dateTime =
-                                                          DateTime.now();
+                                                      ),
+                                                      GestureDetector(
+                                                        onTap: () async {
+                                                          DateTime _dateTime =
+                                                              DateTime.now();
 
-                                                      await showCupertinoModalPopup<
-                                                              void>(
-                                                          context: context,
-                                                          builder: (_) {
-                                                            final size =
-                                                                MediaQuery.of(
-                                                                        context)
-                                                                    .size;
+                                                          await showCupertinoModalPopup<
+                                                                  void>(
+                                                              context: context,
+                                                              builder: (_) {
+                                                                final size =
+                                                                    MediaQuery.of(
+                                                                            context)
+                                                                        .size;
 
-                                                            return Container(
-                                                              decoration:
-                                                                  const BoxDecoration(
-                                                                color: Colors
-                                                                    .white,
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .only(
-                                                                  topLeft: Radius
-                                                                      .circular(
-                                                                          12),
-                                                                  topRight: Radius
-                                                                      .circular(
-                                                                          12),
-                                                                ),
-                                                              ),
-                                                              height:
-                                                                  size.height *
-                                                                      0.27,
-                                                              child:
-                                                                  CupertinoDatePicker(
-                                                                mode:
-                                                                    CupertinoDatePickerMode
+                                                                return Container(
+                                                                  decoration:
+                                                                      const BoxDecoration(
+                                                                    color: Colors
+                                                                        .white,
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .only(
+                                                                      topLeft: Radius
+                                                                          .circular(
+                                                                              12),
+                                                                      topRight:
+                                                                          Radius.circular(
+                                                                              12),
+                                                                    ),
+                                                                  ),
+                                                                  height:
+                                                                      size.height *
+                                                                          0.27,
+                                                                  child:
+                                                                      CupertinoDatePicker(
+                                                                    mode: CupertinoDatePickerMode
                                                                         .date,
-                                                                onDateTimeChanged:
-                                                                    (DateTime
-                                                                        pickedDate) {
-                                                                  String
-                                                                      formattedDate =
-                                                                      DateFormat(
-                                                                              'yyyy-MM-dd HH:mm:ss')
-                                                                          .format(
-                                                                              pickedDate);
+                                                                    onDateTimeChanged:
+                                                                        (DateTime
+                                                                            pickedDate) {
+                                                                      String
+                                                                          formattedDate =
+                                                                          DateFormat('yyyy-MM-dd HH:mm:ss')
+                                                                              .format(pickedDate);
 
-                                                                  con.setDateTo(
-                                                                      formattedDate);
-                                                                },
-                                                                // minimumDate:
-                                                                //     DateTime(
-                                                                //   2023,
-                                                                //   12,
-                                                                //   20,
-                                                                // ),
-                                                                // maximumDate:
-                                                                //     DateTime(
-                                                                //   2025,
-                                                                //   12,
-                                                                //   20,
-                                                                // ),
-                                                                initialDateTime:
-                                                                    _dateTime,
-                                                              ),
-                                                            );
-                                                          });
-                                                    },
-                                                    child: Row(
-                                                      children: [
-                                                        Container(
-                                                          color:
-                                                              Color(0xffEBEBEB),
-                                                          width: 1,
-                                                        ),
-                                                        SizedBox(width: 4.w),
-                                                        Text(AppStrings.to.tr,
-                                                            style: Styles.getMediumStyle(
+                                                                      con.setDateTo(
+                                                                          formattedDate);
+                                                                    },
+                                                                    minimumDate: con
+                                                                            .dateFrom
+                                                                            .isNotEmpty
+                                                                        ? DateTime.parse(
+                                                                            con.dateFrom)
+                                                                        : null,
+                                                                    // maximumDate:
+                                                                    //     DateTime(
+                                                                    //   2025,
+                                                                    //   12,
+                                                                    //   20,
+                                                                    // ),
+                                                                    initialDateTime:
+                                                                        _dateTime,
+                                                                  ),
+                                                                );
+                                                              });
+                                                        },
+                                                        child: Row(
+                                                          children: [
+                                                            Container(
+                                                              color: Color(
+                                                                  0xffEBEBEB),
+                                                              width: 1,
+                                                            ),
+                                                            SizedBox(
+                                                                width: 4.w),
+                                                            Text(
+                                                                AppStrings
+                                                                    .to.tr,
+                                                                style: Styles.getMediumStyle(
+                                                                    color: Styles
+                                                                        .lightBlack,
+                                                                    fontSize:
+                                                                        fixDpiFont(
+                                                                            12))),
+                                                            SizedBox(
+                                                                width: 4.w),
+                                                            Icon(
+                                                                Icons
+                                                                    .calendar_month,
                                                                 color: Styles
                                                                     .lightBlack,
-                                                                fontSize:
+                                                                size:
                                                                     fixDpiFont(
-                                                                        12))),
-                                                        SizedBox(width: 4.w),
-                                                        Icon(
-                                                            Icons
-                                                                .calendar_month,
-                                                            color: Styles
-                                                                .lightBlack,
-                                                            size:
-                                                                fixDpiFont(12)),
-                                                        SizedBox(width: 4.w),
-                                                        Container(
-                                                          width: 130,
-                                                          child: Text(
-                                                              eventsController
-                                                                      .dateTo
-                                                                      .isEmpty
-                                                                  ? ""
-                                                                  : Event.dateFormatter(
-                                                                      eventsController
-                                                                          .dateTo,
-                                                                      dateOnly:
-                                                                          true),
-                                                              textAlign:
-                                                                  TextAlign
-                                                                      .start,
-                                                              style: Styles.getMediumStyle(
-                                                                  color: Styles
-                                                                      .lightBlack,
-                                                                  fontSize:
-                                                                      fixDpiFont(
-                                                                          12))),
+                                                                        12)),
+                                                            SizedBox(
+                                                                width: 4.w),
+                                                            Container(
+                                                              width: 130,
+                                                              child: Text(
+                                                                  eventsController
+                                                                          .dateTo
+                                                                          .isEmpty
+                                                                      ? ""
+                                                                      : Event.dateFormatter(
+                                                                          eventsController
+                                                                              .dateTo,
+                                                                          dateOnly:
+                                                                              true),
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .start,
+                                                                  style: Styles.getMediumStyle(
+                                                                      color: Styles
+                                                                          .lightBlack,
+                                                                      fontSize:
+                                                                          fixDpiFont(
+                                                                              12))),
+                                                            ),
+                                                          ],
                                                         ),
-                                                      ],
-                                                    ),
+                                                      ),
+                                                    ],
                                                   ),
-                                                ],
-                                              ),
-                                            )),
+                                                )),
                                     SizedBox(height: 12.h),
                                     const TextFieldTitle(
                                       title: "دولة الفعالية",
@@ -490,6 +504,76 @@ class EventsView extends GetView<EventsController> {
                                                           )
                                                         ]),
                                                       ),
+                                                      Container(
+                                                        margin: const EdgeInsets
+                                                            .only(
+                                                            top: 10,
+                                                            right: 12,
+                                                            left: 12),
+                                                        decoration:
+                                                            const BoxDecoration(
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                              color: Styles
+                                                                  .blackShadow,
+                                                              blurRadius: 45,
+                                                              offset: Offset(
+                                                                  10, 10),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        child:
+                                                            CustomTextFormField(
+                                                                controller:
+                                                                    controller
+                                                                        .countriesSearchController,
+                                                                focusNode:
+                                                                    _countrySearchFocusNode,
+                                                                prefixIcon:
+                                                                    const Icon(
+                                                                  Icons.search,
+                                                                  color: Styles
+                                                                      .primaryColor,
+                                                                ),
+                                                                inputData:
+                                                                    TextInputType
+                                                                        .text,
+                                                                textInputAction:
+                                                                    TextInputAction
+                                                                        .search,
+                                                                onChangedFunc:
+                                                                    (val) {
+                                                                  _searchFocusNode
+                                                                      .requestFocus();
+                                                                  if (val
+                                                                      .isEmpty) {
+                                                                    controller
+                                                                            .countriesKeySearch =
+                                                                        val;
+                                                                    controller
+                                                                        .filterCountriesByName();
+                                                                    FocusScope.of(
+                                                                            context)
+                                                                        .unfocus();
+                                                                  }
+                                                                },
+                                                                onFieldSubmitted:
+                                                                    (val) {
+                                                                  controller
+                                                                          .countriesKeySearch =
+                                                                      val;
+                                                                  controller
+                                                                      .filterCountriesByName();
+                                                                },
+                                                                hintTxt:
+                                                                    AppStrings
+                                                                        .search
+                                                                        .tr,
+                                                                hintStyle: Styles
+                                                                    .getRegularStyle(
+                                                                        color: Styles
+                                                                            .lightBlack)),
+                                                      ),
                                                       Expanded(
                                                         child: GetBuilder<
                                                             EventsController>(
@@ -498,7 +582,7 @@ class EventsView extends GetView<EventsController> {
                                                                   Container(
                                                             margin:
                                                                 EdgeInsets.only(
-                                                                    top: 10.h,
+                                                                    top: 10,
                                                                     right: 8.w,
                                                                     left: 8.w),
                                                             child: ListView
@@ -662,6 +746,76 @@ class EventsView extends GetView<EventsController> {
                                                             ),
                                                           )
                                                         ]),
+                                                      ),
+                                                      Container(
+                                                        margin: const EdgeInsets
+                                                            .only(
+                                                            top: 10,
+                                                            right: 12,
+                                                            left: 12),
+                                                        decoration:
+                                                            const BoxDecoration(
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                              color: Styles
+                                                                  .blackShadow,
+                                                              blurRadius: 45,
+                                                              offset: Offset(
+                                                                  10, 10),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        child:
+                                                            CustomTextFormField(
+                                                                controller:
+                                                                    controller
+                                                                        .jobCategorySearchController,
+                                                                focusNode:
+                                                                    _jobCatSearchFocusNode,
+                                                                prefixIcon:
+                                                                    const Icon(
+                                                                  Icons.search,
+                                                                  color: Styles
+                                                                      .primaryColor,
+                                                                ),
+                                                                inputData:
+                                                                    TextInputType
+                                                                        .text,
+                                                                textInputAction:
+                                                                    TextInputAction
+                                                                        .search,
+                                                                onChangedFunc:
+                                                                    (val) {
+                                                                  _searchFocusNode
+                                                                      .requestFocus();
+                                                                  if (val
+                                                                      .isEmpty) {
+                                                                    controller
+                                                                            .jobCategoryKeySearch =
+                                                                        val;
+                                                                    controller
+                                                                        .filterJobCategoriesByName();
+                                                                    FocusScope.of(
+                                                                            context)
+                                                                        .unfocus();
+                                                                  }
+                                                                },
+                                                                onFieldSubmitted:
+                                                                    (val) {
+                                                                  controller
+                                                                          .jobCategoryKeySearch =
+                                                                      val;
+                                                                  controller
+                                                                      .filterJobCategoriesByName();
+                                                                },
+                                                                hintTxt:
+                                                                    AppStrings
+                                                                        .search
+                                                                        .tr,
+                                                                hintStyle: Styles
+                                                                    .getRegularStyle(
+                                                                        color: Styles
+                                                                            .lightBlack)),
                                                       ),
                                                       Expanded(
                                                           child: GetBuilder<

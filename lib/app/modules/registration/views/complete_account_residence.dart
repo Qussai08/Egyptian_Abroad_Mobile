@@ -117,6 +117,8 @@ class _CompleteAccountViewState extends State<CompleteAccountView>
                                         registrationController
                                             .egPassportNumTxtController.text),
                                 inputData: TextInputType.text,
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction,
                               ),
                               SizedBox(
                                 height: 16.h,
@@ -164,6 +166,8 @@ class _CompleteAccountViewState extends State<CompleteAccountView>
                                                         .residenceNumTxtController
                                                         .text,
                                                     20),
+                                            autovalidateMode: AutovalidateMode
+                                                .onUserInteraction,
                                           ),
                                         if (residenceTP == 1)
                                           SizedBox(
@@ -185,6 +189,8 @@ class _CompleteAccountViewState extends State<CompleteAccountView>
                                                         .residenceNumTxtController
                                                         .text,
                                                     20),
+                                            autovalidateMode: AutovalidateMode
+                                                .onUserInteraction,
                                           ),
                                         if (residenceTP == 2)
                                           SizedBox(
@@ -204,6 +210,8 @@ class _CompleteAccountViewState extends State<CompleteAccountView>
                                     registrationController
                                         .residenceNumTxtController.text,
                                     200),
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction,
                               ),
                               SizedBox(
                                 height: 50.h,

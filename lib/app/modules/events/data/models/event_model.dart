@@ -98,30 +98,15 @@ class Event {
       String formattedDate =
           DateFormat('dd MMMM yyyy', 'ar_EG').format(myDateTime);
 
-      String formatWithEngNums =
-          "${myDateTime.day} $month ${myDateTime.year} ${myDateTime.hour}:${myDateTime.minute} ${formattedDate.split(' ').last.contains('ص') ? 'صباحًا' : 'مساءً'}";
+      String formatWithEngNums = "${myDateTime.day} $month ${myDateTime.year}";
       return formatWithEngNums;
     } else {
       String formattedDate =
           DateFormat('dd MMMM yyyy hh:mm a', 'ar_EG').format(myDateTime);
 
       String formatWithEngNums =
-          "${myDateTime.day} $month ${myDateTime.year} ${myDateTime.hour}:${myDateTime.minute} ${formattedDate.split(' ').last.contains('ص') ? 'صباحًا' : 'مساءً'}";
+          "${myDateTime.day} $month ${myDateTime.year} ${myDateTime.hour.toString().padLeft(2, '0')}:${myDateTime.minute.toString().padLeft(2, '0')} ${formattedDate.split(' ').last.contains('ص') ? 'صباحًا' : 'مساءً'}";
       return formatWithEngNums;
     }
-  }
-
-  static String formatDate(String dateTimestamp) {
-    DateTime myDateTime = DateTime.parse(dateTimestamp);
-
-    String month = DateFormat('MMMM', 'ar_EG').format(myDateTime).toString();
-
-    String formattedDate =
-        DateFormat('dd MMMM yyyy hh:mm a', 'ar_EG').format(myDateTime);
-
-    String formatWithEngNums =
-        "${myDateTime.day} $month ${myDateTime.year} ${myDateTime.hour}:${myDateTime.minute} ${formattedDate.split(' ').last.contains('ص') ? 'صباحًا' : 'مساءً'}";
-
-    return formatWithEngNums;
   }
 }

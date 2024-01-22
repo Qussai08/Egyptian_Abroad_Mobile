@@ -15,7 +15,8 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
   final EventsProvider eventsProvider = Get.find<EventsProvider>();
 
   RxList<Event> eventsList = <Event>[].obs;
-  final RegistrationController registrationController = Get.find();
+  final RegistrationController registrationController =
+      Get.put(RegistrationController());
   ScrollController scrollController = ScrollController();
 
   RxBool isLoading = false.obs;
@@ -148,10 +149,54 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
   String keySearch = '';
   final TextEditingController searchController = TextEditingController();
 
+  String countriesKeySearch = '';
+  final TextEditingController countriesSearchController =
+      TextEditingController();
+
+  String jobCategoryKeySearch = '';
+  final TextEditingController jobCategorySearchController =
+      TextEditingController();
+
   List<Country> countryIds = <Country>[];
   List<JobCategory> jobCategoryIds = <JobCategory>[];
   String dateFrom = "";
   String dateTo = "";
+
+  filterCountriesByName() {
+    countryIds = [];
+    if (countriesKeySearch.isEmpty) {
+      countryIds = registrationController.countriesList;
+    } else {
+      for (var i = 0;
+          i < registrationController.countriesList.length - 1;
+          i++) {
+        if (registrationController.countriesList[i].country
+            .toLowerCase()
+            .contains(countriesKeySearch.toLowerCase())) {
+          countryIds.add(registrationController.countriesList[i]);
+        }
+      }
+    }
+    update();
+  }
+
+  filterJobCategoriesByName() {
+    jobCategoryIds = [];
+    if (jobCategoryKeySearch.isEmpty) {
+      jobCategoryIds = registrationController.jobCategoryList;
+    } else {
+      for (var i = 0;
+          i < registrationController.jobCategoryList.length - 1;
+          i++) {
+        if (registrationController.jobCategoryList[i].name
+            .toLowerCase()
+            .contains(jobCategoryKeySearch.toLowerCase())) {
+          jobCategoryIds.add(registrationController.jobCategoryList[i]);
+        }
+      }
+    }
+    update();
+  }
 
   setDateFrom(String from) {
     dateFrom = from;
@@ -171,6 +216,12 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
       "pageNo": pageNo,
       "pageSize": pageSize
     };
+    if (dateFrom.isNotEmpty) {
+      body['dateFrom'] = dateFrom;
+    }
+    if (dateTo.isNotEmpty) {
+      body['dateTo'] = dateTo;
+    }
     if (countryIds.isNotEmpty) {
       List<int> selectedIDs = [];
       for (var element in countryIds) {
@@ -178,7 +229,11 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
           selectedIDs.add(element.id);
         }
       }
-      body['countryIds'] = selectedIDs;
+
+      body['countryIds'] =
+          selectedIDs.length == registrationController.countriesList.length
+              ? []
+              : selectedIDs;
     } else {
       body['countryIds'] = [];
     }
@@ -189,16 +244,15 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
           selectedIDs.add(element.id);
         }
       }
-      body['jobCategoryIds'] = selectedIDs;
+
+      body['jobCategoryIds'] =
+          selectedIDs.length == registrationController.jobCategoryList.length
+              ? []
+              : selectedIDs;
     } else {
       body['jobCategoryIds'] = [];
     }
-    if (dateFrom.isNotEmpty) {
-      body['dateFrom'] = dateFrom;
-    }
-    if (dateTo.isNotEmpty) {
-      body['dateTo'] = dateTo;
-    }
+
     print("filterEvents $body");
 
     await loadEvents(body: body);

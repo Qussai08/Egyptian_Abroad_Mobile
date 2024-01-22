@@ -88,6 +88,7 @@ class _SetPasswordViewState extends State<SetPasswordView>
                       },
                       inputData: TextInputType.text,
                       isPassword: true,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
                     ),
                     SizedBox(
                       height: 16.h,
@@ -103,6 +104,7 @@ class _SetPasswordViewState extends State<SetPasswordView>
                                   controller.passwordTxtController.text),
                       inputData: TextInputType.text,
                       isPassword: true,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
                     ),
                     SizedBox(
                       height: 24.h,

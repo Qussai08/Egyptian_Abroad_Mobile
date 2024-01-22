@@ -19,6 +19,7 @@ class NotificationEventCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("notification.notificationTypeId ${notification.notificationTypeId}");
     return GestureDetector(
       onTap: () {
         print("notification.eventId ${notification.eventID}");
@@ -78,10 +79,12 @@ class NotificationEventCardWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-              if (notification.notificationTypeId == 2)
+              if (notification.notificationTypeId == 2 ||
+                  notification.notificationTypeId == 1)
                 SizedBox(height: fixDpiHeight(8)),
               Text(
-                notification.title ?? '',
+                "${notification.notificationTypeId == 1 ? 'تم اضافة فاعلية ' : ''}"
+                "${notification.notificationTypeId == 2 ? notification.message : notification.title} ",
                 maxLines: 2,
                 textAlign: TextAlign.start,
                 style: Styles.getBoldStyle(
