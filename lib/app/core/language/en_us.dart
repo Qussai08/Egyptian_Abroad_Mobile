@@ -127,8 +127,8 @@ Map<String, String> en = {
   AppStrings.eventDetails: 'Event Details',
   AppStrings.from: 'From',
   AppStrings.to: 'To',
-  AppStrings.recordingLink: 'Recording Link',
-  AppStrings.meetingLink: 'Conference Link',
+  AppStrings.registrationLink: 'Register Now',
+  AppStrings.meetingLink: 'Join Conference',
   AppStrings.events: 'Events',
   AppStrings.search: 'Search',
   AppStrings.existInCarsValidationMsg:

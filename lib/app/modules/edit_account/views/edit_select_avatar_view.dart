@@ -45,7 +45,7 @@ class EditSelectAvatarView extends StatelessWidget {
                 onPressed: _controller.isDisabled.value
                     ? () {}
                     : () {
-                        _controller.pushAvatar(1);
+                        _controller.pushAvatar(route: 1);
                       },
               );
             }),

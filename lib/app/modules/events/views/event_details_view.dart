@@ -59,26 +59,6 @@ class EventDetailsView extends GetView<EventDetailsController> {
                       fontSize: 16,
                       color: Styles.darkGray),
                   SizedBox(height: 12.h),
-                  FromToDateWidget(
-                      fromDate: event().startDate ?? "",
-                      toDate: event().endDate ?? ""),
-                  SizedBox(height: 12.h),
-                  CustomButton(
-                    type: ButtonType.primary,
-                    iconIsAsset: true,
-                    assetString: AppImages.linkIcon,
-                    iconSize: fixDpiFont(14),
-                    changeIconPosition: true,
-                    text: event().isActive ?? false
-                        ? AppStrings.meetingLink.tr
-                        : AppStrings.recordingLink.tr,
-                    width: 119.w,
-                    height: 40.h,
-                    fontSize: fixDpiFont(14),
-                    fontWeight: FontWeight.w500,
-                    onPressed: () => launchUrl(Uri.parse(event().link!)),
-                  ),
-                  SizedBox(height: 12.h),
                   Row(
                     children: [
                       CircleAvatar(
@@ -104,7 +84,27 @@ class EventDetailsView extends GetView<EventDetailsController> {
                             color: Styles.black, fontSize: fixDpiFont(12))
                         .copyWith(height: 2.0),
                   ),
-                  SizedBox(height: 99.h),
+                  SizedBox(height: 12.h),
+                  FromToDateWidget(
+                      fromDate: event().startDate ?? "",
+                      toDate: event().endDate ?? ""),
+                  SizedBox(height: 12.h),
+                  CustomButton(
+                    type: ButtonType.primary,
+                    // iconIsAsset: true,
+                    // assetString: AppImages.linkIcon,
+                    // iconSize: fixDpiFont(14),
+                    changeIconPosition: true,
+                    text: event().isActive ?? false
+                        ? AppStrings.meetingLink.tr
+                        : AppStrings.registrationLink.tr,
+                    width: double.infinity,
+                    height: 50.h,
+                    fontSize: fixDpiFont(16),
+                    fontWeight: FontWeight.w600,
+                    onPressed: () => launchUrl(Uri.parse(event().link!)),
+                  ),
+                  SizedBox(height: 81.h),
                 ],
               ),
             ),
