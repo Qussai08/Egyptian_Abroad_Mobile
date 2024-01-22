@@ -69,15 +69,15 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
         hasMore) {
       pageNo++;
       print(pageNo);
-      loadEvents();
+      filterEvents();
     }
   }
 
   Future<void> loadEvents({Map<String, dynamic>? body}) async {
     isLoading.value = true;
 
-    // eventsList.clear();
-    // change([], status: RxStatus.loading());
+    eventsList.clear();
+    change([], status: RxStatus.loading());
 
     await eventsProvider
         .getEventsListReq(body ??
@@ -102,16 +102,19 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
             hasMore = false;
             return;
           }
-          if (value.body!.events.length >= pageSize) {
+          print("value.body!.events.length ${value.body!.events.length}");
+          if (pageNo < value.body!.totalPages) {
             print('hasMore & pageNo $pageNo');
             hasMore = true;
           } else {
             print('No hasMore & pageNo $pageNo');
             hasMore = false;
           }
-          eventsList.addAll(value.body!.events ?? []);
+          pageNo == 1
+              ? eventsList.value = value.body!.events ?? []
+              : eventsList.addAll(value.body!.events ?? []);
 
-          change(value.body!.events, status: RxStatus.success());
+          change(eventsList, status: RxStatus.success());
           isLoading.value = false;
         } else {
           change(null, status: RxStatus.empty());
@@ -209,7 +212,7 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
   }
 
   Future<void> filterEvents() async {
-    clear();
+    // clear();
     // change([], status: RxStatus.loading());
     Map<String, dynamic> body = {
       "search": keySearch.isNotEmpty ? keySearch : "",

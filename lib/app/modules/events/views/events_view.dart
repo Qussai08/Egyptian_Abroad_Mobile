@@ -75,12 +75,14 @@ class EventsView extends GetView<EventsController> {
                               _searchFocusNode.requestFocus();
                               if (val.isEmpty) {
                                 controller.keySearch = val;
+                                controller.clear();
                                 controller.loadEvents();
                                 FocusScope.of(context).unfocus();
                               }
                             },
                             onFieldSubmitted: (val) {
                               controller.keySearch = val;
+                              controller.clear();
                               controller.filterEvents();
                             },
                             hintTxt: AppStrings.search.tr,
@@ -1015,8 +1017,10 @@ class EventsView extends GetView<EventsController> {
                                             ),
                                           ),
                                           subtitle: FromToDateWidget(
-                                              fromDate: event.startDate!,
-                                              toDate: event.endDate!),
+                                            fromDate: event.startDate!,
+                                            toDate: event.endDate!,
+                                            inEventsList: true,
+                                          ),
                                         ),
                                       ),
                                     );

@@ -86,8 +86,10 @@ class EventDetailsView extends GetView<EventDetailsController> {
                   ),
                   SizedBox(height: 12.h),
                   FromToDateWidget(
-                      fromDate: event().startDate ?? "",
-                      toDate: event().endDate ?? ""),
+                    fromDate: event().startDate ?? "",
+                    toDate: event().endDate ?? "",
+                    inEventsList: false,
+                  ),
                   SizedBox(height: 12.h),
                   CustomButton(
                     type: ButtonType.primary,

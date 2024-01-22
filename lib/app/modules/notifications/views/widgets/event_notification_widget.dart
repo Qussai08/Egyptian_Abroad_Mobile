@@ -45,7 +45,9 @@ class NotificationEventCardWidget extends StatelessWidget {
           titleTextStyle:
               Styles.getMediumStyle(color: Styles.black2, fontSize: 12),
           title: Container(
-            margin: const EdgeInsets.only(bottom: 12),
+            margin: notification.notificationTypeId == 1
+                ? const EdgeInsets.only(bottom: 12)
+                : const EdgeInsets.only(bottom: 0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -79,8 +81,7 @@ class NotificationEventCardWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-              if (notification.notificationTypeId == 2 ||
-                  notification.notificationTypeId == 1)
+              if (notification.notificationTypeId == 2)
                 SizedBox(height: fixDpiHeight(8)),
               Text(
                 "${notification.notificationTypeId == 1 ? 'تم اضافة فاعلية ' : ''}"
@@ -92,6 +93,17 @@ class NotificationEventCardWidget extends StatelessWidget {
                   color: Styles.black3,
                 ),
               ),
+              if (notification.notificationTypeId == 1)
+                Text(
+                  "${notification.eventDescription}",
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.start,
+                  style: Styles.getMediumStyle(
+                    fontSize: 12,
+                    color: Styles.black3,
+                  ),
+                ),
             ],
           ),
         ),

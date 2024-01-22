@@ -8,6 +8,7 @@ class NotificationsModel {
   String? sentDate;
   int? notificationTypeId;
   String? eventID;
+  String? eventDescription;
 
   NotificationsModel(
       {this.notificationId,
@@ -16,7 +17,8 @@ class NotificationsModel {
       this.message,
       this.sentDate,
       this.notificationTypeId,
-      this.eventID});
+      this.eventID,
+      this.eventDescription});
 
   factory NotificationsModel.fromJson(Map<String, dynamic> json) {
     return NotificationsModel(
@@ -27,7 +29,8 @@ class NotificationsModel {
         sentDate:
             (json['sentDate'] != null) ? formatDate(json['sentDate']) : null,
         notificationTypeId: json['notificationTypeId'],
-        eventID: json['routeId']);
+        eventID: json['routeId'],
+        eventDescription: json['eventDescription']);
   }
 
   static List<NotificationsModel> fromJsonList(List list) {
