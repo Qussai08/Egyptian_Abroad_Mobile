@@ -42,7 +42,7 @@ Map<String, String> ar = {
   AppStrings.passwordEmptyValidation: 'من فضلك ادخل كلمة المرور',
   AppStrings.nameEmptyValidation: 'من فضلك ادخل الاسم',
   AppStrings.nationalIDEmptyValidation: 'من فضلك ادخل رقمك القومي.',
-  AppStrings.onlyNumericValidation: 'ادخل ارقام فقط',
+  AppStrings.onlyNumericValidation: 'ادخل ارقام انجليزية فقط',
   AppStrings.nationalIDShortValidation: 'يجب ادخال ١٤ رقم',
   AppStrings.otpEmptyValidation: 'من فضلك ادخل رمز التحقق',
   AppStrings.otpShortValidation: 'رمز التحقق يجب ان يكون ٤ ارقام',
@@ -102,7 +102,8 @@ Map<String, String> ar = {
   AppStrings.newPassword: 'كلمة المرور الجديدة',
   AppStrings.confirmNewPassword: 'تأكيد كلمة المرور الجديدة',
   AppStrings.invalidOldPassword: 'كلمة المرور الحالية غير صحيحة',
-  AppStrings.successPasswordChange: 'تم تعديل الملف التعريفى بنجاح',
+  AppStrings.successPasswordChange: 'تم تعديل كلمة المرور بنجاح',
+  AppStrings.successEdit: 'تم تعديل الملف التعريفى بنجاح',
   AppStrings.more: 'المزيد',
   AppStrings.evening: 'مساء',
   AppStrings.morning: 'صباحا',
@@ -113,7 +114,7 @@ Map<String, String> ar = {
   AppStrings.callUsVia: 'تواصل معنا عبر الوسائل التالية:',
   AppStrings.oldEqualNew:
       'يجب ألا تكون كلمة المرور الجديدة متطابقة مع كلمة المرور الحالية ',
-  AppStrings.registerWithCarsAccount: 'التسجيل بحساب سيارات المصرين بالخارج',
+  AppStrings.registerWithCarsAccount: 'التسجيل بحساب سيارات المصريين بالخارج',
   AppStrings.somethingWentWrong: 'نأسف، حدث خطأ',
   AppStrings.technicalPartner: 'الشريك التقني',
   AppStrings.otpSentSuccessfully:
@@ -124,8 +125,10 @@ Map<String, String> ar = {
   AppStrings.eventDetails: 'تفاصيل الفعالية',
   AppStrings.from: 'من',
   AppStrings.to: 'إلى',
-  AppStrings.recordingLink: 'رابط التسجيل',
-  AppStrings.meetingLink: 'رابط الاجتماع',
-  AppStrings.events: 'الفعاليات',
+  AppStrings.registrationLink: 'سجل الآن',
+  AppStrings.meetingLink: 'انضم للاجتماع',
+  AppStrings.events: 'الفاعليات',
   AppStrings.search: 'ابحث',
+  AppStrings.existInCarsValidationMsg:
+      "بيانات الحساب مُسجلة بالفعل، برجاء التسجيل بحساب سيارات المصريين بالخارج.",
 };

@@ -91,6 +91,7 @@ Map<String, String> en = {
   AppStrings.confirmNewPassword: 'Confirm New Password',
   AppStrings.invalidOldPassword: 'Invalid Old Password',
   AppStrings.successPasswordChange: 'Password has been changed successfully',
+  AppStrings.successEdit: 'Profile has been edited successfully',
   AppStrings.more: 'More',
   AppStrings.evening: 'PM',
   AppStrings.morning: 'AM',
@@ -126,8 +127,10 @@ Map<String, String> en = {
   AppStrings.eventDetails: 'Event Details',
   AppStrings.from: 'From',
   AppStrings.to: 'To',
-  AppStrings.recordingLink: 'Recording Link',
-  AppStrings.meetingLink: 'Conference Link',
+  AppStrings.registrationLink: 'Register Now',
+  AppStrings.meetingLink: 'Join Conference',
   AppStrings.events: 'Events',
   AppStrings.search: 'Search',
+  AppStrings.existInCarsValidationMsg:
+      "The Submitted Account is already registered, Please Register with Abroad Egyptian Cars Account.",
 };

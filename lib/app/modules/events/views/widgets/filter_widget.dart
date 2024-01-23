@@ -309,7 +309,8 @@ class FilterWidget extends GetView<EventsController> {
                                                 return ListTile(
                                                   onTap: () {
                                                     evController
-                                                        .onSelectcountry(i);
+                                                        .onSelectcountry(
+                                                            index: i);
                                                   },
                                                   contentPadding:
                                                       EdgeInsets.symmetric(
@@ -432,7 +433,8 @@ class FilterWidget extends GetView<EventsController> {
                                               return ListTile(
                                                 onTap: () {
                                                   evController
-                                                      .onSelectjobCategory(i);
+                                                      .onSelectjobCategory(
+                                                          index: i);
                                                 },
                                                 contentPadding:
                                                     EdgeInsets.symmetric(

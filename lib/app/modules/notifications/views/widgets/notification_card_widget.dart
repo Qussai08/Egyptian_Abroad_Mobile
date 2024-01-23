@@ -98,6 +98,7 @@ class NotificationCardWidget extends StatelessWidget {
                   notification.message ?? '',
                   maxLines: isExpanded() ? null : 2,
                   overflow: isExpanded() ? null : TextOverflow.ellipsis,
+                  textAlign: TextAlign.justify,
                   style: Styles.getMediumStyle(
                     color: Styles.black3,
                   ),

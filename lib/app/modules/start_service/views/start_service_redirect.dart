@@ -13,11 +13,11 @@ import 'package:egyptians_abroad/app/modules/start_service/views/url_service_vie
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/language/app_string.dart';
+import '../controllers/start_service_controller.dart';
 
-class StartServiceRedir extends StatelessWidget {
+class StartServiceRedir extends GetView<StartServiceController> {
   final ServiceContent serviceContent;
   final Category? category;
 
@@ -30,7 +30,7 @@ class StartServiceRedir extends StatelessWidget {
       child: SafeArea(
         child: Scaffold(
             resizeToAvoidBottomInset: false,
-            appBar: CustomAppBar(),
+            appBar: const CustomAppBar(),
             body: Container(
               width: fixDpiScreenWidth(),
               padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -66,15 +66,16 @@ class StartServiceRedir extends StatelessWidget {
                     width: 300.w,
                     height: 50,
                     onPressed: () async {
+                      print(
+                          "serviceContent.appLink ${serviceContent.serviceName} ${serviceContent.appLink}");
                       serviceContent.servicesType == ServiceType.web
                           ? Get.to(() => URLServiceView(
                                 url: serviceContent.servicesLink,
                               ))
-                          : await launchApp(
-                              appLink: serviceContent.appLink,
-                              androidID:
-                                  serviceContent.androidLink ?? 'com.mcit.eca',
-                              iosID: serviceContent.iosLink ?? '6444364022');
+                          : await controller.launchApp(
+                              appLink: serviceContent.appLink ?? "",
+                              androidID: serviceContent.androidLink ?? "",
+                              iosID: serviceContent.iosLink ?? "");
                     },
                   ),
                   SizedBox(
@@ -85,28 +86,5 @@ class StartServiceRedir extends StatelessWidget {
             )),
       ),
     );
-  }
-
-  launchApp({String? appLink, String? androidID, String? iosID}) {
-    if (Platform.isAndroid || Platform.isIOS) {
-      final appId = Platform.isAndroid ? androidID : iosID;
-      // 'com.mcit.eca' : '6444364022';
-      final url = appLink != null
-          ? Uri.parse(appLink)
-          : androidID == iosID
-              ? Uri.parse(iosID!)
-              : Uri.parse(
-                  Platform.isAndroid
-                      ? "market://details?id=$appId"
-                      : "https://apps.apple.com/app/id$appId",
-                );
-
-      print("url : $url");
-
-      launchUrl(
-        url,
-        mode: LaunchMode.externalApplication,
-      );
-    }
   }
 }

@@ -28,6 +28,10 @@ class BottomNavigationController extends GetxController {
     }
     if (index == 2) {
       getEvents();
+    } else {
+      eventsController.clear();
+      eventsController.clearFilters();
+
     }
     update();
   }

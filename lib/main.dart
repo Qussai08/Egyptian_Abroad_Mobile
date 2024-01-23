@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
+import 'package:loader_overlay/loader_overlay.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import 'app/core/binding/initial_binding.dart';
 import 'app/core/helper/dpi_helper.dart';
@@ -42,25 +44,39 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitDown,
     ]);
 
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: "Egyptians Abroad",
-      supportedLocales: LocalizationHelper.locales,
-      localizationsDelegates: const [
-        GlobalCupertinoLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ],
-      locale: LocalizationHelper.local,
-      translations: LocalizationHelper(),
-      initialRoute: AppPages.INITIAL,
-      getPages: AppPages.routes,
-      theme: Styles.myTheme,
-      initialBinding: InitialBinding(),
-      builder: (buildContext, widget) {
-        handleFixSize(buildContext);
-        return widget!;
+    return GlobalLoaderOverlay(
+      closeOnBackButton: true,
+      overlayColor: Colors.blue.withOpacity(0.20),
+      useDefaultLoading: false,
+      overlayWidgetBuilder: (_) {
+        //ignored progress for the moment
+        return const Center(
+          child: SpinKitRotatingCircle(
+            color: Styles.white,
+            size: 100.0,
+          ),
+        );
       },
+      child: GetMaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: "Egyptians Abroad",
+        supportedLocales: LocalizationHelper.locales,
+        localizationsDelegates: const [
+          GlobalCupertinoLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        locale: LocalizationHelper.local,
+        translations: LocalizationHelper(),
+        initialRoute: AppPages.INITIAL,
+        getPages: AppPages.routes,
+        theme: Styles.myTheme,
+        initialBinding: InitialBinding(),
+        builder: (buildContext, widget) {
+          handleFixSize(buildContext);
+          return widget!;
+        },
+      ),
     );
   }
 }

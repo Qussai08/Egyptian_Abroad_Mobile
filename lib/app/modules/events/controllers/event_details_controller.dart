@@ -16,6 +16,7 @@ class EventDetailsController extends GetxController {
   getEventDetails() async {
     var eventDetailsProvider = Get.find<EventDetailsProvider>();
 
+    print("eventId $eventId");
     await eventDetailsProvider
         .fetchEventDetails(eventId: eventId)
         .then((value) {
@@ -33,11 +34,23 @@ class EventDetailsController extends GetxController {
     });
   }
 
-  String dateFormatter(String date) {
-    DateTime x = DateTime.parse(date);
-    return DateFormat('dd MMMM yyyy hh:mm a', 'ar_SA').format(x);
-  }
+  // String dateFormatter(String date) {
+  //   DateTime x = DateTime.parse(date);
+  //   return DateFormat('dd MMMM yyyy \t hh:mm a', 'ar_SA').format(x);
+  // }
+ static String dateFormatter(String dateTimestamp) {
+    DateTime myDateTime = DateTime.parse(dateTimestamp);
 
+    String month = DateFormat('MMMM', 'ar_EG').format(myDateTime).toString();
+
+    String formattedDate =
+        DateFormat('dd MMMM yyyy hh:mm a', 'ar_EG').format(myDateTime);
+
+    String formatWithEngNums =
+        "${myDateTime.day} $month ${myDateTime.year} ${myDateTime.hour}:${myDateTime.minute} ${formattedDate.split(' ').last}";
+
+    return formatWithEngNums;
+  }
   String urlFormatter(String url) {
     if (url.startsWith('https://') || url.startsWith('http://')) {
       return url;

@@ -14,6 +14,7 @@ class AppImages {
 
   static const checkIcon = 'assets/icons/icon-check.png';
   static const backIcon = 'assets/icons/back_button.png';
+  static const closeIcon = 'assets/icons/close_icon.png';
   static const maleIcon = 'assets/icons/male.png';
   static const user = 'assets/images/user.png';
   static const fingerPrint = 'assets/images/Fingerprint2.png';

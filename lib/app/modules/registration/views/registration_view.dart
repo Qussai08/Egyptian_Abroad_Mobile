@@ -3,6 +3,7 @@ import 'package:egyptians_abroad/app/core/custom_widgets/custom_taost.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/custom_textfield.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/dropdown_list_selector.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/network_indecator.dart';
+import 'package:egyptians_abroad/app/core/custom_widgets/selector_button.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/textfield_title.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/title_text.dart';
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
@@ -17,6 +18,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:egyptians_abroad/app/core/helper/validators.dart';
 
 import 'package:get/get.dart';
+
+import '../../../core/helper/localization_helper.dart';
 
 class RegistrationView extends StatefulWidget {
   const RegistrationView({super.key});
@@ -75,6 +78,8 @@ class _RegistrationViewState extends State<RegistrationView>
                               validationFunc: (val) => validateName(
                                   controller.nameTxtController.text),
                               inputData: TextInputType.text,
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
                             ),
                             SizedBox(
                               height: 8.h,
@@ -110,6 +115,8 @@ class _RegistrationViewState extends State<RegistrationView>
                                   controller.nationalIDTxtController.text),
                               inputData: TextInputType.number,
                               maxLength: null,
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
                             ),
                             SizedBox(
                               height: 16.h,
@@ -120,6 +127,8 @@ class _RegistrationViewState extends State<RegistrationView>
                               validationFunc: (val) => validateUserEmail(
                                   controller.emailTxtController.text),
                               inputData: TextInputType.emailAddress,
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
                             ),
                             SizedBox(
                               height: 16.h,
@@ -136,37 +145,7 @@ class _RegistrationViewState extends State<RegistrationView>
                                             CustomTextFormField(
                                               // controller:
                                               //     controller.residenceTxtController,
-                                              validationFunc: (val) =>
-                                                  validateCountry(
-                                                      residence.toString()),
-                                              enabled: false,
-                                            ),
-                                            DropDownListSelector(
-                                              dropDownList: (controller
-                                                      .countriesList.isEmpty)
-                                                  ? <DropdownMenuItem>[]
-                                                  : controller.countriesList
-                                                      .map((e) =>
-                                                          DropdownMenuItem(
-                                                            value: e.id,
-                                                            child: Row(
-                                                              children: [
-                                                                Image.network(
-                                                                  e.flag,
-                                                                  width: 21,
-                                                                  height: 15,
-                                                                  fit: BoxFit
-                                                                      .cover,
-                                                                ),
-                                                                const SizedBox(
-                                                                  width: 8,
-                                                                ),
-                                                                Text(e.country),
-                                                              ],
-                                                            ),
-                                                          ))
-                                                      .toList(),
-                                              borderColor: showCountryError ==
+                                              enabledBorderColor: showCountryError ==
                                                           false &&
                                                       (registrationController
                                                                   .residenceCountry
@@ -183,71 +162,131 @@ class _RegistrationViewState extends State<RegistrationView>
                                                                   null))
                                                   ? Styles.grey_200
                                                   : Colors.red,
-                                              value: residence,
-                                              hint: "",
-                                              onChangeFunc: (val) {
-                                                controller
-                                                    .residenceTxtController
-                                                    .text = val.toString();
-
-                                                controller.residenceCountry
-                                                    .value = val;
-                                                // showCountryError = true;
-                                                // setState(() {});
-                                              },
+                                              validationFunc: (val) =>
+                                                  validateCountry(
+                                                      residence.toString()),
+                                              // autovalidateMode:
+                                              //     showCountryError == false
+                                              //         ? null
+                                              //         : AutovalidateMode
+                                              //             .onUserInteraction,
+                                              // enabled: false,
                                             ),
+                                            const Positioned(
+                                                top: 14,
+                                                left: 10,
+                                                child: Icon(
+                                                  Icons.keyboard_arrow_down,
+                                                  color: Styles.primaryColor,
+                                                  size: 20,
+                                                )),
+                                            SelectorButton(
+                                                countries:
+                                                    controller.countriesList,
+                                                selectedCountry: residence,
+                                                selectorTextStyle: null,
+                                                searchBoxDecoration: null,
+                                                autoFocusSearchField: false,
+                                                locale: null,
+                                                onCountryChanged: (val) {
+                                                  controller.residenceCountry
+                                                      .value = val;
+                                                  if (residence != null) {
+                                                    _formKey.currentState!
+                                                        .validate();
+                                                  }
+                                                  print(
+                                                      "showCountryError ${showCountryError}");
+                                                },
+                                                isEnabled: true,
+                                                isScrollControlled: true),
                                           ],
                                         );
                                       }),
                             ),
                             SizedBox(
-                              height: 40.h,
+                              height: 19.h,
                             ),
-                            // SizedBox(
-                            //   height: 15.h,
-                            // ),
-                            // Text(
-                            //   'بالمتابعة انت موافق على مشاركة بيانات الدخول مع تطبيق سيارات المصريين بالخارج',
-                            //   textAlign: TextAlign.center,
-                            //   style: Styles.getRegularStyle(
-                            //       color: Styles.lightBlack,
-                            //       fontSize: fixDpiFont(13)),
-                            // ),
-                            // SizedBox(
-                            //   height: 15.h,
-                            // ),
+                            GetBuilder<RegistrationController>(
+                              builder: (registrationController) =>
+                                  ValueListenableBuilder<bool>(
+                                valueListenable:
+                                    controller.showAgreeToShareWithCarsError,
+                                builder: (_, showError, __) => Container(
+                                  // color: Colors.blueAccent,
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      registrationController
+                                          .setAgreeToShareWithCars(true);
+                                      registrationController
+                                          .setShowAgreeToShareWithCarsError(
+                                              false);
+                                      setState(() {});
+                                      print(
+                                          "agreeToShareWithCars ${registrationController.agreeToShareWithCars}");
+                                    },
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        Icon(
+                                          registrationController
+                                                  .agreeToShareWithCars.value
+                                              ? Icons.check_box
+                                              : Icons.check_box_outline_blank,
+                                          color: showError
+                                              ? Colors.red
+                                              : Styles.primaryColor,
+                                          size: 20,
+                                        ),
+                                        const SizedBox(
+                                          width: 5,
+                                        ),
+                                        Expanded(
+                                          child: Text(
+                                            'سيتم مشاركة بيانات الدخول مع تطبيق سيارات المصريين بالخارج',
+                                            textDirection:
+                                                LocalizationHelper.isArabic()
+                                                    ? TextDirection.rtl
+                                                    : TextDirection.ltr,
+                                            textAlign: TextAlign.start,
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: Styles.getRegularStyle(
+                                                color: showError
+                                                    ? Colors.red
+                                                    : Styles.lightBlack,
+                                                fontSize: fixDpiFont(13)),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 19.h,
+                            ),
                             CustomButton(
                               text: AppStrings.next.tr,
                               icon: Icons.arrow_forward,
+                              iconSize: 14.w,
                               type: ButtonType.primary,
                               width: 358.w,
                               height: 50.h,
                               onPressed: () async {
-                                if (_formKey.currentState!.validate()) {
+                                if (_formKey.currentState!.validate() &&
+                                    registrationController
+                                        .agreeToShareWithCars.value) {
                                   setState(() {
                                     showCountryError = false;
                                   });
-                                  AppResponse res =
-                                      await controller.verifyMailAndNID();
 
-                                  if (res.status && res.data['data'] == true) {
-                                    AppResponse verRes = await controller
-                                        .createVerificationCode();
-                                    Get.to(() => OtpView(
-                                          resendOtpTime: verRes.data['data']
-                                              ['data']['resendOtp'],
-                                        ));
-                                  } else {
-                                    Get.showSnackbar(
-                                      buildCustomToast(
-                                        Get.context!,
-                                        toastMsg:
-                                            "الرقم القومي أو البريد الإلكتروني مُسجل بالفعل.",
-                                        toastTitle: AppStrings.sorry.tr,
-                                        toastType: ToastType.error,
-                                      ),
-                                    );
-                                  }
+                                  await controller.checkNIDAndEmailInCars();
+                                  //  verfiy on cars first then on egy abroad
                                 } else {
                                   if (validateCountry(registrationController
                                           .residenceCountry.value
@@ -260,6 +299,14 @@ class _RegistrationViewState extends State<RegistrationView>
                                     setState(() {
                                       showCountryError = false;
                                     });
+                                  }
+
+                                  if (!registrationController
+                                      .agreeToShareWithCars.value) {
+                                    registrationController
+                                        .setShowAgreeToShareWithCarsError(true);
+                                    print(
+                                        "registrationController.agreeToShareWithCars ${registrationController.agreeToShareWithCars}");
                                   }
                                 }
                               },

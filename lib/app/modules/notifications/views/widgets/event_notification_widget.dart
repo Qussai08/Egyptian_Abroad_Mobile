@@ -19,10 +19,12 @@ class NotificationEventCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("notification.notificationTypeId ${notification.notificationTypeId}");
     return GestureDetector(
       onTap: () {
         print("notification.eventId ${notification.eventID}");
-        Get.toNamed(Routes.EVENT_DETAILS, arguments: 1);
+        Get.toNamed(Routes.EVENT_DETAILS,
+            arguments: int.parse(notification.eventID ?? ""));
       },
       child: Container(
         margin: EdgeInsets.only(bottom: 12.h, right: 16.w, left: 16.w),
@@ -43,7 +45,9 @@ class NotificationEventCardWidget extends StatelessWidget {
           titleTextStyle:
               Styles.getMediumStyle(color: Styles.black2, fontSize: 12),
           title: Container(
-            margin: const EdgeInsets.only(bottom: 12),
+            margin: notification.notificationTypeId == 1
+                ? const EdgeInsets.only(bottom: 12)
+                : const EdgeInsets.only(bottom: 0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -80,7 +84,8 @@ class NotificationEventCardWidget extends StatelessWidget {
               if (notification.notificationTypeId == 2)
                 SizedBox(height: fixDpiHeight(8)),
               Text(
-                notification.title ?? '',
+                "${notification.notificationTypeId == 1 ? 'تم اضافة فاعلية ' : ''}"
+                "${notification.notificationTypeId == 2 ? notification.message : notification.title} ",
                 maxLines: 2,
                 textAlign: TextAlign.start,
                 style: Styles.getBoldStyle(
@@ -88,6 +93,17 @@ class NotificationEventCardWidget extends StatelessWidget {
                   color: Styles.black3,
                 ),
               ),
+              if (notification.notificationTypeId == 1)
+                Text(
+                  "${notification.eventDescription}",
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.start,
+                  style: Styles.getMediumStyle(
+                    fontSize: 12,
+                    color: Styles.black3,
+                  ),
+                ),
             ],
           ),
         ),

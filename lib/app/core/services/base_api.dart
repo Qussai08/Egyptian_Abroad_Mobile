@@ -9,8 +9,10 @@ import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:egyptians_abroad/app/core/constants/globals.dart';
 import 'package:egyptians_abroad/app/core/services/app_response.dart';
+import 'package:get/get.dart' as getx;
 import 'package:get/instance_manager.dart';
 
+import '../../routes/app_pages.dart';
 import '../helper/localization_helper.dart';
 import 'auth_service.dart';
 
@@ -57,7 +59,20 @@ class BaseApi {
           status: jsonResponse! ? _response.data['isSuccess'] ?? true : true,
           data: _response.data);
     } on DioException catch (e) {
-      return AppResponse(status: false, error: e, errorMessage: e.message);
+      if (e.response != null) {
+        if (e.response!.statusCode != null) {
+          if (e.response!.statusCode! == 401) {
+            await AuthService()
+                .logout()
+                .then((value) => getx.Get.offAllNamed(Routes.LOGIN));
+          }
+        }
+      }
+      return AppResponse(
+          status: false,
+          error: e,
+          errorMessage: e.message,
+          statusCode: e.response!.statusCode);
     }
   }
 
@@ -95,7 +110,20 @@ class BaseApi {
                   : false,
           data: jsonResponse ? _response.data['data'] : {});
     } on DioException catch (e) {
-      return AppResponse(status: false, error: e, errorMessage: e.message);
+      if (e.response != null) {
+        if (e.response!.statusCode != null) {
+          if (e.response!.statusCode! == 401) {
+            await AuthService()
+                .logout()
+                .then((value) => getx.Get.offAllNamed(Routes.LOGIN));
+          }
+        }
+      }
+      return AppResponse(
+          status: false,
+          error: e,
+          errorMessage: e.message,
+          statusCode: e.response!.statusCode);
     }
   }
 }

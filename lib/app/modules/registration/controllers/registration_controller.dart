@@ -11,10 +11,16 @@ import 'package:egyptians_abroad/app/modules/registration/data/models/country.da
 import 'package:egyptians_abroad/app/modules/registration/data/models/job_category.dart';
 import 'package:egyptians_abroad/app/modules/registration/data/models/residence_type.dart';
 import 'package:egyptians_abroad/app/modules/registration/data/providers/avatars_provider.dart';
+import 'package:egyptians_abroad/app/modules/registration/views/cars_first_step.dart';
 import 'package:egyptians_abroad/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:otp_text_field/otp_text_field.dart';
+
+import '../../otp/views/otp_view.dart';
+import '../views/complete_account_residence.dart';
+import '../views/select_avatar.dart';
 
 class RegistrationController extends GetxController {
   // Auth service
@@ -61,15 +67,16 @@ class RegistrationController extends GetxController {
     return response;
   }
 
-  Future<void> register() async {
+  Future<void> register({String? carsOtp}) async {
     AppResponse response = await UserRepository().registerReq({
       "name": nameTxtController.text,
       "nationalId": nationalIDTxtController.text,
       "email": emailTxtController.text,
       "residenceCountryId": residenceCountry.value,
       "password": passwordTxtController.text,
-      "verificationCode": otp
+      "verificationCode": carsOtp ?? otp
     });
+    print("register response ${response.statusCode} ");
 
     AppHelper.name = nameTxtController.text;
 
@@ -80,8 +87,17 @@ class RegistrationController extends GetxController {
           navigateToHome: false);
 
       Future.delayed(const Duration(seconds: 3), () async {
-        Get.offAllNamed(Routes.COMPLETEACCOUNT);
-        passwordTxtController.clear();
+        print('carsOtp $carsOtp');
+        if (carsOtp == null) {
+          print('Normal register');
+          Get.offAllNamed(Routes.COMPLETEACCOUNT);
+          passwordTxtController.clear();
+        } else {
+          print('Cars Register');
+          Get.offAll(() => const CompleteAccountView(
+                carRegister: true,
+              ));
+        }
       });
 
       Get.showSnackbar(
@@ -94,15 +110,25 @@ class RegistrationController extends GetxController {
       );
     } else {
       // Get.offAllNamed(Routes.BOTTOMNAVIGATION);
-
-      Get.showSnackbar(
-        buildCustomToast(
-          Get.context!,
-          toastMsg: "الرقم القومي أو البريد الإلكتروني مُسجل بالفعل.",
-          toastTitle: AppStrings.sorry.tr,
-          toastType: ToastType.error,
-        ),
-      );
+      if (response.statusCode == 500 || response.statusCode == 400) {
+        Get.showSnackbar(
+          buildCustomToast(
+            Get.context!,
+            toastMsg: 'حدث خطأ ما',
+            toastTitle: AppStrings.sorry.tr,
+            toastType: ToastType.error,
+          ),
+        );
+      } else {
+        Get.showSnackbar(
+          buildCustomToast(
+            Get.context!,
+            toastMsg: "الرقم القومي أو البريد الإلكتروني مُسجل بالفعل.",
+            toastTitle: AppStrings.sorry.tr,
+            toastType: ToastType.error,
+          ),
+        );
+      }
     }
   }
 
@@ -225,7 +251,8 @@ class RegistrationController extends GetxController {
     }
   }
 
-  Future<void> completeAccount({bool? isEdit = true}) async {
+  Future<void> completeAccount(
+      {bool? isEdit = true, bool carRegister = false}) async {
     Map<String, dynamic> reqBody = {
       "name": AppHelper.name,
       "jobCategoryID": jobCategory.value,
@@ -245,7 +272,11 @@ class RegistrationController extends GetxController {
         .editAccount(reqBody, queryParameters: {"guid": authService.userID});
     if (response.status) {
       Future.delayed(const Duration(seconds: 3), () async {
-        Get.toNamed(Routes.REGITSRATIONSELECTAVATAR);
+        carRegister
+            ? Get.to(() => const RegistrationSelectAvatarView(
+                  carRegister: true,
+                ))
+            : Get.toNamed(Routes.REGITSRATIONSELECTAVATAR);
       });
 
       Get.showSnackbar(
@@ -281,7 +312,7 @@ class RegistrationController extends GetxController {
     if (response.status) {
       Get.showSnackbar(buildCustomToast(
         Get.context!,
-        toastMsg: "تم تعديل بيانات الحساب بنجاح",
+        toastMsg: AppStrings.successEdit.tr,
         toastTitle: 'تاكيد',
         toastType: ToastType.success,
       ));
@@ -295,9 +326,9 @@ class RegistrationController extends GetxController {
     }
   }
 
-  Future<void> pushAvatar(int route) async {
+  Future<void> pushAvatar({int? avatar, required int route}) async {
     Map<String, dynamic> reqBody = {
-      "avatarId": selectedAvatarIndex,
+      "avatarId": avatar ?? selectedAvatarIndex,
     };
 
     AppResponse response = await UserRepository()
@@ -307,7 +338,7 @@ class RegistrationController extends GetxController {
       var controller = Get.put(HomeShowcaseController());
       await controller.getUserProfile();
 
-      Get.offNamed(Routes.DATASAVED, arguments: [selectedAvatarIndex, route]);
+      Get.offNamed(Routes.DATASAVED, arguments: [avatar ?? selectedAvatarIndex, route]);
     }
   }
 
@@ -324,6 +355,149 @@ class RegistrationController extends GetxController {
     for (int i = 0; i < 9; i++) {
       if (avatarsProvider.avatars[i].index != index) {
         avatarsProvider.avatars[i].isSelected.value = false;
+      }
+    }
+  }
+
+  Future<void> checkNIDAndEmailInCars() async {
+    // check if exist in cars first
+    AppResponse response = await UserRepository().checkNIDAndEmailInCarsReq(
+      queryParameters: {
+        "Email": emailTxtController.text,
+        "NID": nationalIDTxtController.text
+      },
+    );
+    if (response.status) {
+      print("checkNIDAndEmailInCars - response.status ${response.status}");
+      print(
+          "checkNIDAndEmailInCars - response.statusCode ${response.statusCode}");
+
+// check if exist in egy abroad
+      AppResponse res = await verifyMailAndNID();
+
+      if (res.status && res.data['data'] == true) {
+        AppResponse verRes = await createVerificationCode();
+        Get.to(() => OtpView(
+              resendOtpTime: verRes.data['data']['data']['resendOtp'],
+            ));
+      } else {
+        Get.showSnackbar(
+          buildCustomToast(
+            Get.context!,
+            toastMsg: "الرقم القومي أو البريد الإلكتروني مُسجل بالفعل.",
+            toastTitle: AppStrings.sorry.tr,
+            toastType: ToastType.error,
+          ),
+        );
+      }
+    } else {
+      switch (response.statusCode) {
+        case -1:
+          handleError("الرقم القومي مسجل بالفعل");
+          break;
+        case -2:
+          handleError(AppStrings.existInCarsValidationMsg.tr);
+          break;
+        case 500:
+          handleError(AppStrings.somethingWentWrong.tr);
+          break;
+        default:
+          handleError(AppStrings.somethingWentWrong.tr);
+      }
+    }
+  }
+
+  void handleError(String error) {
+    Get.showSnackbar(
+      buildCustomToast(
+        Get.context!,
+        toastMsg: error,
+        toastTitle: AppStrings.sorry.tr,
+        toastType: ToastType.error,
+      ),
+    );
+  }
+
+  final ValueNotifier<bool> agreeToShareWithCars = ValueNotifier(false);
+  setAgreeToShareWithCars(bool val) {
+    agreeToShareWithCars.value = val;
+  }
+
+  final ValueNotifier<bool> showAgreeToShareWithCarsError =
+      ValueNotifier(false);
+
+  setShowAgreeToShareWithCarsError(bool val) {
+    showAgreeToShareWithCarsError.value = val;
+  }
+
+  bool registerWithCars = false;
+  setRegisterWithCars(bool val) {
+    registerWithCars = val;
+    update();
+  }
+
+  bool nationalIDCameFromCars = false;
+
+  Future<void> verifyCarsMail() async {
+    AppResponse response = await UserRepository().signUpWithCarsReq(body: {
+      "email": emailTxtController.text,
+      "password": passwordTxtController.text
+    });
+    print(response.toString());
+
+    if (response.status) {
+      nationalIDTxtController.text = response.data['data']['nid'];
+      nationalIDCameFromCars =
+          response.data['data']['nid'] != null ? true : false;
+      Get.back(closeOverlays: true);
+      Get.to(() => CarsFirstStepView());
+    } else {
+      switch (response.statusCode) {
+        case -3:
+          handleError("البريد الإلكتروني مسجل بالفعل");
+          break;
+        case 0:
+          handleError("الرقم القومي الخاص بهذا الحساب مسجل بالفعل");
+          break;
+        case 201:
+          handleError("خطأ في البريد الإلكترونى أو كلمة المرور");
+          break;
+        case 500:
+          handleError(AppStrings.somethingWentWrong.tr);
+          break;
+        default:
+          handleError(AppStrings.somethingWentWrong.tr);
+      }
+    }
+  }
+
+  Future<void> checkNIDInCars() async {
+    // check if exist in cars first
+    AppResponse response = await UserRepository().checkNIDAndEmailInCarsReq(
+      queryParameters: {"Email": "", "NID": nationalIDTxtController.text},
+    );
+    if (response.status) {
+      print("checkNIDAndEmailInCars - response.status ${response.status}");
+      print(
+          "checkNIDAndEmailInCars - response.statusCode ${response.statusCode}");
+// register the user with email from cars + nid ( from cars or app ) + name + residence
+
+      await register(carsOtp: "");
+    } else {
+      switch (response.statusCode) {
+        case -1:
+          nationalIDCameFromCars
+              ? await register(carsOtp: "")
+              : handleError("الرقم القومي مسجل بالفعل");
+          break;
+        case -2:
+          handleError(AppStrings.existInCarsValidationMsg.tr);
+          break;
+        case 500:
+          handleError(AppStrings.somethingWentWrong.tr);
+          break;
+        default:
+          handleError(AppStrings.somethingWentWrong.tr);
       }
     }
   }

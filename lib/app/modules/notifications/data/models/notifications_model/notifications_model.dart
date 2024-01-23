@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class NotificationsModel {
   int? notificationId;
   String? userId;
@@ -6,6 +8,7 @@ class NotificationsModel {
   String? sentDate;
   int? notificationTypeId;
   String? eventID;
+  String? eventDescription;
 
   NotificationsModel(
       {this.notificationId,
@@ -14,7 +17,8 @@ class NotificationsModel {
       this.message,
       this.sentDate,
       this.notificationTypeId,
-      this.eventID});
+      this.eventID,
+      this.eventDescription});
 
   factory NotificationsModel.fromJson(Map<String, dynamic> json) {
     return NotificationsModel(
@@ -25,7 +29,8 @@ class NotificationsModel {
         sentDate:
             (json['sentDate'] != null) ? formatDate(json['sentDate']) : null,
         notificationTypeId: json['notificationTypeId'],
-        eventID: json['routeId']);
+        eventID: json['routeId'],
+        eventDescription: json['eventDescription']);
   }
 
   static List<NotificationsModel> fromJsonList(List list) {
@@ -34,11 +39,16 @@ class NotificationsModel {
   }
 
   static String formatDate(String dateTimestamp) {
-    DateTime date = DateTime.parse(dateTimestamp);
+    DateTime myDateTime = DateTime.parse(dateTimestamp);
 
-    String time = date.hour == 0 && date.minute == 0
-        ? '12:00 ${date.hour > 12 ? 'مساءا' : 'صباحا'}'
-        : '${date.hour}:${date.minute} ${date.hour > 12 ? 'مساءا' : 'صباحا'}';
-    return '${date.day}-${date.month}-${date.year} $time';
+    String month = DateFormat('MMMM', 'ar_EG').format(myDateTime).toString();
+
+    String formattedDate =
+        DateFormat('dd MMMM yyyy hh:mm a', 'ar_EG').format(myDateTime);
+
+    String formatWithEngNums =
+        "${myDateTime.day} $month ${myDateTime.year} ${myDateTime.hour.toString().padLeft(2, '0')}:${myDateTime.minute.toString().padLeft(2, '0')} ${formattedDate.split(' ').last.contains('ص') ? 'صباحًا' : 'مساءً'}";
+
+    return formatWithEngNums;
   }
 }

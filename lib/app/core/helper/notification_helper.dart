@@ -95,23 +95,25 @@ class NotificationHelper {
     AuthService authService = Get.find();
     AuthProvider authProvider = Get.find();
     final fcmToken = await getFcmToken() ?? '';
-    if ((authService.fcmToken?.isEmpty ?? true) ||
-        authService.fcmToken != fcmToken) {
-      await authProvider.registerFCMToken(fcmToken).then((value) {
-        if (value.body ?? false) {
-          authService.setFCMToken(fcmToken);
-        }
-      }, onError: (err) {});
-    }
+    final userId = authService.userID ?? "";
+
+    await authProvider.registerFCMToken(fcmToken, userId).then((value) {
+      if (value.body ?? false) {
+        authService.setFCMToken(fcmToken);
+      }
+    }, onError: (err) {});
+
     FirebaseMessaging.instance.onTokenRefresh.listen((fcmToken) async {
-      await authProvider.registerFCMToken(fcmToken).then((value) {
+      await authProvider.registerFCMToken(fcmToken, userId).then((value) {
         if (value.body ?? false) {
           authService.setFCMToken(fcmToken);
         }
       }, onError: (err) {});
     }).onError((err) {
-      // print(err);
+      print(err);
+      print("onTokenRefresh -> registerFCMToken");
     });
+    //   }
   }
 
   // Get token form firebase for android and ios

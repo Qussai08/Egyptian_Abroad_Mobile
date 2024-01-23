@@ -1,4 +1,5 @@
 import 'package:egyptians_abroad/app/core/custom_widgets/custom_taost.dart';
+import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/core/services/models/service.dart';
 import 'package:egyptians_abroad/app/modules/home_showcase/data/providers/favorites_list_provider.dart';
 import 'package:flutter/material.dart';
@@ -7,12 +8,14 @@ import 'package:showcaseview/showcaseview.dart';
 
 import '../../../core/helper/error_helper.dart';
 import '../../../core/helper/localization_helper.dart';
+import '../../../core/helper/secure_storage_helper.dart';
 import '../../../core/services/app_response.dart';
 import '../../../core/services/auth_service.dart';
 import '../../../core/services/models/category.dart';
 import '../../../core/services/models/user_profile.dart';
 import '../../../core/services/repositories/categories_repository.dart';
 import '../../../core/services/repositories/user_repository.dart';
+import '../../../core/services/storage_service.dart';
 import '../../registration/controllers/registration_controller.dart';
 
 class HomeShowcaseController extends GetxController {
@@ -26,15 +29,16 @@ class HomeShowcaseController extends GetxController {
   final authService = Get.find<AuthService>();
   final RegistrationController registrationController =
       Get.put(RegistrationController());
+  bool isLoading = true;
 
   @override
   void onInit() async {
     super.onInit();
-    getUserProfile();
-
+    // isLoading = true;
+    await getUserProfile();
     await getCategoriesList();
     await updateFavoritesList(userId: authService.userID!);
-
+    isLoading = false;
     // TODO: for testing only to be removed
     // authService.showcaseViewed = true;
   }
@@ -48,22 +52,35 @@ class HomeShowcaseController extends GetxController {
   Future<void> getUserProfile() async {
     setUserProfileLoading(true);
 
-    AppResponse response = await UserRepository().viewAccountReq(
-        // make it dynamic
+    // AppResponse response =
+    await UserRepository().viewAccountReq(queryParameters: {
+      "Userid": authService.userID,
+      "languageId": LocalizationHelper.isArabic() ? 1 : 2
+    }).then((value) {
+      if (value.status) {
+        UserProfileModel userProfile =
+            UserProfileModel.fromJson(value.data['data']);
+        // AppHelper.setUserProfile(userProfile);
+        authService.setUserProfile(userProfile);
+        setUserProfileLoading(false);
+      } else {
+        authService.setUserProfile(UserProfileModel.empty());
+        handleError(value.errorCode ?? '-1');
+        setUserProfileLoading(false);
+      }
+    }, onError: (error) {
+      print('UserProfile Error: $error');
+      setUserProfileLoading(false);
+    });
+    print("userProfileLoading: $userProfileLoading");
+    // if (response.status) {
+    //   UserProfileModel userProfile =
+    //       UserProfileModel.fromJson(response.data['data']);
+    //   // AppHelper.setUserProfile(userProfile);
+    //   authService.setUserProfile(userProfile);
+    // }
 
-        queryParameters: {
-          "Userid": authService.userID,
-          "languageId": LocalizationHelper.isArabic() ? 1 : 2
-        });
-
-    if (response.status) {
-      UserProfileModel userProfile =
-          UserProfileModel.fromJson(response.data['data']);
-      // AppHelper.setUserProfile(userProfile);
-      authService.setUserProfile(userProfile);
-    }
-
-    setUserProfileLoading(false);
+    // setUserProfileLoading(false);
   }
 
   List<Category> allCategories = [];
@@ -149,6 +166,7 @@ class HomeShowcaseController extends GetxController {
     }
 
     if (applyLoading) _updateCategoriesLoading(false);
+    print("categoriesLoading: $categoriesLoading");
   }
 
   void _updateCategoriesLoading(bool val) {
@@ -242,9 +260,13 @@ class HomeShowcaseController extends GetxController {
   final scrollController = ScrollController();
 
   // start showcase
-  void startShowCase(BuildContext context) {
-    if (authService.showcaseViewed) {
+  Future<void> startShowCase(BuildContext context) async {
+    var isFirstTime = await StorageService().getData("first_time");
+    if (authService.showcaseViewed ||
+        isFirstTime == true ||
+        isFirstTime == null) {
       _homeContext = context;
+      StorageService().setData("first_time", false);
       ambiguate(WidgetsBinding.instance)?.addPostFrameCallback(
         (_) => ShowCaseWidget.of(_homeContext).startShowCase([one, two, three]),
       );
@@ -274,39 +296,87 @@ class HomeShowcaseController extends GetxController {
   }
 
   Future<void> addToFavorites(
-      {required String userId, required String serviceId}) async {
+      {required String userId,
+      required String serviceId,
+      required ServiceItem? service}) async {
     favoritesListProvider
         .addToFavorites(userId, serviceId)
         .then((value) {}, onError: (error) {});
+    favoritesList.add(service!);
+    loadFavoritesCategories();
+    update();
   }
 
   Future<void> removeFromFavorites(
-      {required String userId, required String serviceId}) async {
+      {required String userId,
+      required String serviceId,
+      required ServiceItem? service}) async {
     favoritesListProvider
         .removeFromFavorites(userId, serviceId)
         .then((value) {}, onError: (error) {});
+    favoritesList.removeWhere(
+      (element) => element.serviceId == int.parse(serviceId),
+    );
+    loadFavoritesCategories();
+    update();
   }
 
   List<Category> favoriteCategories = [];
-
+  List<Category> allCategoriesFavUse = [];
   bool favoritesIsLoading = true;
   Future<void> updateFavoritesList({required String userId}) async {
-    await favoritesListProvider.getFavoritesList(userId).then((value) {
-      Iterable list = value.body;
-      favoritesList = list.map((e) => ServiceItem.fromJson(e)).toList();
-    }, onError: (error) {});
-    await loadFavoritesCategories();
+    await favoritesListProvider.getFavoritesList(userId).then(
+      (value) async {
+        if (value.isSuccess) {
+          print('Favorites successfully updated');
+          Iterable list = value.body;
+          favoritesList = list.map((e) => ServiceItem.fromJson(e)).toList();
+          await loadFavoritesCategories();
+        }
+      },
+      onError: (error) {
+        print('FavoritesList Error: $error');
+        favoritesIsLoading = false;
+        update();
+      },
+    );
+    List<Category> favoriteCategories = [];
+    AppResponse response = await CategoriesRepository()
+        .getCategories({"categoryName": "", "pageNo": 1, "pageSize": 5000});
+    if (response.status) {
+      CategoriesData categoriesData = CategoriesData.fromJson(response.data);
+      allCategoriesFavUse = categoriesData.categories;
+    }
     favoritesIsLoading = false;
-
+    print("favoritesIsLoading: $favoritesIsLoading");
     update();
   }
 
   loadFavoritesCategories() async {
     favoriteCategories = [];
+    print(favoritesList.length);
 
-    await Future.forEach<ServiceItem>(favoritesList, (item) {
-      favoriteCategories.add(
-          allCategories.firstWhere((element) => element.id == item.categoryId));
-    });
+    print(allCategoriesFavUse.length);
+
+    if (favoritesList.isNotEmpty && allCategoriesFavUse.isNotEmpty) {
+      await Future.forEach<ServiceItem>(favoritesList, (item) {
+        Category? favCat = allCategoriesFavUse
+            .firstWhereOrNull((element) => element.id == item.categoryId);
+        if (favCat != null) {
+          favoriteCategories.add(favCat);
+        }
+      });
+    }
+  }
+
+  void handleError(String error) {
+    Get.showSnackbar(
+      buildCustomToast(
+        Get.context!,
+        toastMsg: ErrorHelper.getErrorMessage(error),
+        toastTitle: AppStrings.sorry.tr,
+        toastType: ToastType.error,
+      ),
+    );
   }
 }

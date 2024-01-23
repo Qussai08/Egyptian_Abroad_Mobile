@@ -112,8 +112,7 @@ mixin ValidationMixin<T extends StatefulWidget> on State<T> {
   }
 
   bool atLeastOneCharString(String stringToCheck) {
-    if (RegExp(r'[A-Za-z\u0621-\u064A\u0660-\u0669 ]')
-        .hasMatch(stringToCheck)) {
+    if (RegExp(r'[a-z\u0621-\u064A\u0660-\u0669 ]').hasMatch(stringToCheck)) {
       return true;
     } else {
       return false;

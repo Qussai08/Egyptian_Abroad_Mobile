@@ -10,6 +10,7 @@ import 'package:egyptians_abroad/app/modules/start_service/views/service_content
 import 'package:egyptians_abroad/app/modules/start_service/views/start_service_redirect.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class GridWidget extends GetView<StartServiceController> {
@@ -18,12 +19,31 @@ class GridWidget extends GetView<StartServiceController> {
   final ServiceItem? serviceItem;
   final bool? inFavList;
 
-  const GridWidget(this.widgetTag,
-      {this.category, this.serviceItem, this.inFavList = false, super.key});
+  const GridWidget(
+    this.widgetTag, {
+    this.category,
+    this.serviceItem,
+    this.inFavList = false,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     bool isService = serviceItem != null ? true : false;
+    bool isNotPng;
+    if (isService) {
+      serviceItem!.servicesIcon != null
+          ? serviceItem!.servicesIcon!.split('.').last.toLowerCase() != 'png'
+              ? isNotPng = true
+              : isNotPng = false
+          : isNotPng = false;
+    } else {
+      category!.imagePath != null
+          ? category!.imagePath!.split('.').last.toLowerCase() != 'png'
+              ? isNotPng = true
+              : isNotPng = false
+          : isNotPng = false;
+    }
     return GestureDetector(
       onTap: () async {
         if (isService) {
@@ -68,11 +88,35 @@ class GridWidget extends GetView<StartServiceController> {
                       // borderRadius: BorderRadius.circular(15.0),
                       child: Stack(
                     children: [
-                      Image.network(isService
-                          ? serviceItem!.servicesIcon ??
-                              "https://www.kuleuven.be/communicatie/congresbureau/fotos-en-afbeeldingen/no-image.png/image"
-                          : category!.imagePath ??
-                              "https://www.kuleuven.be/communicatie/congresbureau/fotos-en-afbeeldingen/no-image.png/image"),
+                      // isNotPng
+                      //     ? SvgPicture.network(isService
+                      //         ? serviceItem!.servicesIcon!
+                      //         : category!.imagePath!)
+                      //     : Image.network(isService
+                      //         ? serviceItem!.servicesIcon ??
+                      //             "https://www.kuleuven.be/communicatie/congresbureau/fotos-en-afbeeldingen/no-image.png/image"
+                      //         : category!.imagePath ??
+                      //             "https://www.kuleuven.be/communicatie/congresbureau/fotos-en-afbeeldingen/no-image.png/image"),
+
+                      isNotPng
+                          ? SvgPicture.network(
+                              isService
+                                  ? serviceItem!.servicesIcon!
+                                  : category!.imagePath!,
+                              placeholderBuilder: (context) => Image.network(
+                                    "https://www.kuleuven.be/communicatie/congresbureau/fotos-en-afbeeldingen/no-image.png/image",
+                                  ))
+                          : Image.network(
+                              isService
+                                  ? serviceItem!.servicesIcon ??
+                                      "https://www.kuleuven.be/communicatie/congresbureau/fotos-en-afbeeldingen/no-image.png/image"
+                                  : category!.imagePath ??
+                                      "https://www.kuleuven.be/communicatie/congresbureau/fotos-en-afbeeldingen/no-image.png/image",
+                              errorBuilder: (context, error, stackTrace) =>
+                                  Image.network(
+                                "https://www.kuleuven.be/communicatie/congresbureau/fotos-en-afbeeldingen/no-image.png/image",
+                              ),
+                            ),
                       isService
                           ? Positioned(
                               bottom: 0.0,

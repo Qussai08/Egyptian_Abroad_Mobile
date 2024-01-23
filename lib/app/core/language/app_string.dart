@@ -118,6 +118,7 @@ abstract class AppStrings {
   static const accountInfos = 'accountInfos';
   static const editAccountInfos = 'editAccountInfos';
   static const viewAccountInfos = 'viewAccountInfos';
+  static const successEdit = 'successEdit';
 
   // change password screen
   static const changePassword = 'changePassword';
@@ -157,7 +158,10 @@ abstract class AppStrings {
   static const from = 'from';
   static const to = 'to';
   static const meetingLink = 'meetingLink';
-  static const recordingLink = 'recordingLink';
+  static const registrationLink = 'registrationLink';
   static const events = 'events';
   static const search = 'search';
+
+  // register with cars
+  static const existInCarsValidationMsg = 'existInCarsValidationMsg';
 }

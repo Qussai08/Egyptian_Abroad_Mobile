@@ -1,3 +1,6 @@
+import 'package:egyptians_abroad/app/core/custom_widgets/custom_taost.dart';
+import 'package:egyptians_abroad/app/core/helper/error_helper.dart';
+import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/modules/registration/controllers/registration_controller.dart';
 import 'package:egyptians_abroad/app/modules/registration/data/models/country.dart';
 import 'package:egyptians_abroad/app/modules/registration/data/models/job_category.dart';
@@ -12,15 +15,67 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
   final EventsProvider eventsProvider = Get.find<EventsProvider>();
 
   RxList<Event> eventsList = <Event>[].obs;
-  final RegistrationController registrationController = Get.find();
+  final RegistrationController registrationController =
+      Get.put(RegistrationController());
+  ScrollController scrollController = ScrollController();
 
+  RxBool isLoading = false.obs;
+  int pageNo = 1;
+  int pageSize = 10;
+  bool hasMore = true;
   @override
   void onInit() {
     super.onInit();
-    loadEvents();
+    scrollController.addListener(scrollListener);
+    registrationController.getGobCategoryList();
+    // loadEvents(body: {
+    //   "search": "",
+    //   "countryIds": [],
+    //   "jobCategoryIds": [],
+    //   "pageNo": pageNo,
+    //   "pageSize": 6
+    // });
+  }
+
+  void clear() {
+    eventsList.clear();
+    pageNo = 1;
+    hasMore = true;
+  }
+
+  void clearFilters() {
+    jobCategoryIds = [];
+    jobCatDisplayString = "";
+    countryIds = [];
+    countryDisplayString = "";
+    dateFrom = '';
+    dateTo = '';
+    update();
+  }
+
+  @override
+  void dispose() {
+    scrollController.removeListener(scrollListener);
+    pageNo = 1;
+    hasMore = true;
+    eventsList.clear();
+    super.dispose();
+  }
+
+  void scrollListener() {
+    if (scrollController.position.pixels >=
+            scrollController.position.maxScrollExtent &&
+        !isLoading.value &&
+        hasMore) {
+      pageNo++;
+      print(pageNo);
+      filterEvents();
+    }
   }
 
   Future<void> loadEvents({Map<String, dynamic>? body}) async {
+    isLoading.value = true;
+
     eventsList.clear();
     change([], status: RxStatus.loading());
 
@@ -30,39 +85,65 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
               "search": "",
               "countryIds": [],
               "jobCategoryIds": [],
-              "pageNo": 1,
-              "pageSize": 1000000
+              "pageNo": pageNo,
+              "pageSize": pageSize,
             })
         .then((value) {
       if (value.isSuccess) {
         if (value.body != null) {
-          if (value.body!.events.isEmpty) {
+          if (value.body!.events.isEmpty && pageNo == 1) {
             change(null, status: RxStatus.empty());
+            isLoading.value = false;
             return;
           }
-          eventsList.addAll(value.body!.events ?? []);
-          change(value.body!.events, status: RxStatus.success());
+          if (value.body!.events.isEmpty) {
+            print('Empty Events');
+            isLoading.value = false;
+            hasMore = false;
+            return;
+          }
+          print("value.body!.events.length ${value.body!.events.length}");
+          if (pageNo < value.body!.totalPages) {
+            print('hasMore & pageNo $pageNo');
+            hasMore = true;
+          } else {
+            print('No hasMore & pageNo $pageNo');
+            hasMore = false;
+          }
+          pageNo == 1
+              ? eventsList.value = value.body!.events ?? []
+              : eventsList.addAll(value.body!.events ?? []);
+
+          change(eventsList, status: RxStatus.success());
+          isLoading.value = false;
         } else {
           change(null, status: RxStatus.empty());
+          isLoading.value = false;
         }
       } else {
-        change(null, status: RxStatus.error('حدث خطأ ما'));
+        handleError(value.errors!.first);
+        // change(null, status: RxStatus.error('حدث خطأ ما'));
         // change(null, status: RxStatus.error('${value.error}'));
+        isLoading.value = false;
       }
     }, onError: (error) {
-      print("errorrrr");
-      change(null, status: RxStatus.error('حدث خطأ ما'));
+      print("errorrrr $error");
+      handleError(error.toString());
+      // change(null, status: RxStatus.error('حدث خطأ ما'));
       // change(null, status: RxStatus.error('$error'));
+      isLoading.value = false;
     });
     //TODO : refactor
     countryIds = registrationController.countriesList;
+    onSelectcountry();
     print(
         "registrationController.jobCategoryList ${registrationController.jobCategoryList}");
     jobCategoryIds = registrationController.jobCategoryList;
+    onSelectjobCategory();
   }
 
   Future<void> retry() async {
-    change([], status: RxStatus.loading());
+    // change([], status: RxStatus.loading());
     await loadEvents();
   }
 
@@ -71,10 +152,54 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
   String keySearch = '';
   final TextEditingController searchController = TextEditingController();
 
+  String countriesKeySearch = '';
+  final TextEditingController countriesSearchController =
+      TextEditingController();
+
+  String jobCategoryKeySearch = '';
+  final TextEditingController jobCategorySearchController =
+      TextEditingController();
+
   List<Country> countryIds = <Country>[];
   List<JobCategory> jobCategoryIds = <JobCategory>[];
   String dateFrom = "";
   String dateTo = "";
+
+  filterCountriesByName() {
+    countryIds = [];
+    if (countriesKeySearch.isEmpty) {
+      countryIds = registrationController.countriesList;
+    } else {
+      for (var i = 0;
+          i < registrationController.countriesList.length - 1;
+          i++) {
+        if (registrationController.countriesList[i].country
+            .toLowerCase()
+            .contains(countriesKeySearch.toLowerCase())) {
+          countryIds.add(registrationController.countriesList[i]);
+        }
+      }
+    }
+    update();
+  }
+
+  filterJobCategoriesByName() {
+    jobCategoryIds = [];
+    if (jobCategoryKeySearch.isEmpty) {
+      jobCategoryIds = registrationController.jobCategoryList;
+    } else {
+      for (var i = 0;
+          i < registrationController.jobCategoryList.length - 1;
+          i++) {
+        if (registrationController.jobCategoryList[i].name
+            .toLowerCase()
+            .contains(jobCategoryKeySearch.toLowerCase())) {
+          jobCategoryIds.add(registrationController.jobCategoryList[i]);
+        }
+      }
+    }
+    update();
+  }
 
   setDateFrom(String from) {
     dateFrom = from;
@@ -87,12 +212,19 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
   }
 
   Future<void> filterEvents() async {
-    change([], status: RxStatus.loading());
+    // clear();
+    // change([], status: RxStatus.loading());
     Map<String, dynamic> body = {
       "search": keySearch.isNotEmpty ? keySearch : "",
-      "pageNo": 1,
-      "pageSize": 1000000
+      "pageNo": pageNo,
+      "pageSize": pageSize
     };
+    if (dateFrom.isNotEmpty) {
+      body['dateFrom'] = dateFrom;
+    }
+    if (dateTo.isNotEmpty) {
+      body['dateTo'] = dateTo;
+    }
     if (countryIds.isNotEmpty) {
       List<int> selectedIDs = [];
       for (var element in countryIds) {
@@ -100,7 +232,11 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
           selectedIDs.add(element.id);
         }
       }
-      body['countryIds'] = selectedIDs;
+
+      body['countryIds'] =
+          selectedIDs.length == registrationController.countriesList.length
+              ? []
+              : selectedIDs;
     } else {
       body['countryIds'] = [];
     }
@@ -111,16 +247,15 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
           selectedIDs.add(element.id);
         }
       }
-      body['jobCategoryIds'] = selectedIDs;
+
+      body['jobCategoryIds'] =
+          selectedIDs.length == registrationController.jobCategoryList.length
+              ? []
+              : selectedIDs;
     } else {
       body['jobCategoryIds'] = [];
     }
-    if (dateFrom.isNotEmpty) {
-      body['dateFrom'] = dateFrom;
-    }
-    if (dateTo.isNotEmpty) {
-      body['dateTo'] = dateTo;
-    }
+
     print("filterEvents $body");
 
     await loadEvents(body: body);
@@ -128,8 +263,10 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
 
   String countryDisplayString = "";
 
-  onSelectcountry(int index) {
-    countryIds[index].isSelected = !countryIds[index].isSelected;
+  onSelectcountry({int? index}) {
+    if (index != null) {
+      countryIds[index].isSelected = !countryIds[index].isSelected;
+    }
     if (countryIds.isNotEmpty) {
       List<String> selectedcountries = [];
       for (var element in countryIds) {
@@ -144,8 +281,11 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
 
   String jobCatDisplayString = "";
 
-  onSelectjobCategory(int index) {
-    jobCategoryIds[index].isSelected = !jobCategoryIds[index].isSelected;
+  onSelectjobCategory({int? index}) {
+    if (index != null) {
+      jobCategoryIds[index].isSelected = !jobCategoryIds[index].isSelected;
+    }
+
     if (jobCategoryIds.isNotEmpty) {
       List<String> selectedjobCategory = [];
       for (var element in jobCategoryIds) {
@@ -156,5 +296,16 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
       jobCatDisplayString = selectedjobCategory.join(" - ");
     }
     update();
+  }
+
+  void handleError(String error) {
+    Get.showSnackbar(
+      buildCustomToast(
+        Get.context!,
+        toastMsg: ErrorHelper.getErrorMessage(error),
+        toastTitle: AppStrings.sorry.tr,
+        toastType: ToastType.error,
+      ),
+    );
   }
 }

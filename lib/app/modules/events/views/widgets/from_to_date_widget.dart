@@ -7,48 +7,90 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class FromToDateWidget extends StatelessWidget {
-  const FromToDateWidget({
-    super.key,
-    required this.fromDate,
-    required this.toDate,
-  });
+  const FromToDateWidget(
+      {super.key,
+      required this.fromDate,
+      required this.toDate,
+      required this.inEventsList});
   final String fromDate;
   final String toDate;
+  final bool inEventsList;
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Text(
-          AppStrings.from.tr,
-          style: Styles.getMediumStyle(
-              color: Styles.lightBlack, fontSize: fixDpiFont(12)),
-        ),
-        SizedBox(width: 4.w),
+    return !inEventsList
+        ? Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Row(
+                children: [
+                  Text(
+                    AppStrings.from.tr,
+                    style: Styles.getMediumStyle(
+                        color: Styles.lightBlack, fontSize: fixDpiFont(12)),
+                  ),
+                  SizedBox(width: 4.w),
+                  Image.asset(AppImages.calendar, width: fixDpiFont(12)),
+                  SizedBox(width: 4.w),
+                  Text(fromDate,
+                      style: Styles.getMediumStyle(
+                          color: Styles.lightBlack, fontSize: fixDpiFont(12))),
+                ],
+              ),
 
-        Image.asset(AppImages.calendar),
-        // Icon(
-        //   Icons.calendar_month,
-        //   color: Styles.lightBlack,
-        //   size: fixDpiFont(12),
-        // ),
-        SizedBox(width: 4.w),
-        Text(fromDate,
-            style: Styles.getMediumStyle(
-                color: Styles.lightBlack, fontSize: fixDpiFont(12))),
-        SizedBox(width: 12.w),
-        Text(AppStrings.to.tr,
-            style: Styles.getMediumStyle(
-                color: Styles.lightBlack, fontSize: fixDpiFont(12))),
-        SizedBox(width: 4.w),
-        Image.asset(AppImages.calendar),
-
-        // Icon(Icons.calendar_month,
-        //     color: Styles.lightBlack, size: fixDpiFont(12)),
-        SizedBox(width: 4.w),
-        Text(toDate,
-            style: Styles.getMediumStyle(
-                color: Styles.lightBlack, fontSize: fixDpiFont(12))),
-      ],
-    );
+              // SizedBox(width: 12.w),
+              Row(
+                children: [
+                  Text(AppStrings.to.tr,
+                      style: Styles.getMediumStyle(
+                          color: Styles.lightBlack, fontSize: fixDpiFont(12))),
+                  SizedBox(width: 4.w),
+                  Image.asset(AppImages.calendar, width: fixDpiFont(12)),
+                  SizedBox(width: 4.w),
+                  Text(toDate,
+                      style: Styles.getMediumStyle(
+                          color: Styles.lightBlack, fontSize: fixDpiFont(12))),
+                ],
+              ),
+            ],
+          )
+        : Row(
+            children: [
+              Text(
+                AppStrings.from.tr,
+                style: Styles.getMediumStyle(
+                    color: Styles.lightBlack, fontSize: fixDpiFont(12)),
+              ),
+              SizedBox(width: 4.w),
+              Image.asset(AppImages.calendar, width: fixDpiFont(12)),
+              SizedBox(width: 4.w),
+              Expanded(
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(fromDate,
+                      maxLines: 1,
+                      style: Styles.getMediumStyle(
+                          color: Styles.lightBlack, fontSize: fixDpiFont(12))),
+                ),
+              ),
+              SizedBox(width: 12.w),
+              Text(AppStrings.to.tr,
+                  style: Styles.getMediumStyle(
+                      color: Styles.lightBlack, fontSize: fixDpiFont(12))),
+              SizedBox(width: 4.w),
+              Image.asset(AppImages.calendar, width: fixDpiFont(12)),
+              SizedBox(width: 4.w),
+              Expanded(
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(toDate,
+                      maxLines: 1,
+                      style: Styles.getMediumStyle(
+                        color: Styles.lightBlack,
+                        fontSize: fixDpiFont(12),
+                      )),
+                ),
+              ),
+            ],
+          );
   }
 }

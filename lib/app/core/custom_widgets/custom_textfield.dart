@@ -34,7 +34,9 @@ class CustomTextFormField extends StatefulWidget {
   final OutlineInputBorder? disabledBorder;
   final TextInputAction? textInputAction;
   final Color? fillColor;
+  final Color? enabledBorderColor;
   final List<TextInputFormatter>? inputFormatters;
+  final AutovalidateMode? autovalidateMode;
 
   final TextEditingController? controller;
   const CustomTextFormField(
@@ -43,6 +45,7 @@ class CustomTextFormField extends StatefulWidget {
       this.inputData,
       this.disabledBorder,
       this.hasHorizontalMargin = false,
+      this.autovalidateMode,
       this.isPassword = false,
       this.validationFunc,
       this.onFieldSubmitted,
@@ -69,6 +72,7 @@ class CustomTextFormField extends StatefulWidget {
       this.focusNode,
       this.textInputAction,
       this.fillColor = Colors.white,
+      this.enabledBorderColor,
       this.inputFormatters});
 
   @override
@@ -111,6 +115,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                   //   ]
                 ),
           child: TextFormField(
+            autovalidateMode:
+                widget.autovalidateMode ?? AutovalidateMode.disabled,
             autofocus: widget.autofocus ?? false,
             textAlignVertical: TextAlignVertical.center,
             expands: widget.expands ?? false,
@@ -145,9 +151,12 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
               border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(37),
                   borderSide: BorderSide(
-                      color: _focusNode.hasFocus
-                          ? Styles.primaryColor
-                          : Styles.grey_200)),
+                    color: widget.enabledBorderColor != null
+                        ? widget.enabledBorderColor!
+                        : _focusNode.hasFocus
+                            ? Styles.primaryColor
+                            : Styles.grey_200,
+                  )),
               enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(37),
                   borderSide: BorderSide(

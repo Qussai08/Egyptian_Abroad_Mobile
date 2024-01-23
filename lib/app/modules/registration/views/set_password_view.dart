@@ -1,3 +1,4 @@
+import 'package:egyptians_abroad/app/core/custom_widgets/custom_appbar.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/custom_button.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/custom_textfield.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/network_indecator.dart';
@@ -87,6 +88,7 @@ class _SetPasswordViewState extends State<SetPasswordView>
                       },
                       inputData: TextInputType.text,
                       isPassword: true,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
                     ),
                     SizedBox(
                       height: 16.h,
@@ -102,6 +104,7 @@ class _SetPasswordViewState extends State<SetPasswordView>
                                   controller.passwordTxtController.text),
                       inputData: TextInputType.text,
                       isPassword: true,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
                     ),
                     SizedBox(
                       height: 24.h,

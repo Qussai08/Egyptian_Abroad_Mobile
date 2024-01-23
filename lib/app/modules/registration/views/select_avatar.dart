@@ -13,7 +13,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class RegistrationSelectAvatarView extends GetView<RegistrationController> {
-  const RegistrationSelectAvatarView({super.key});
+  const RegistrationSelectAvatarView({super.key, this.carRegister = false});
+  final bool carRegister;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +48,12 @@ class RegistrationSelectAvatarView extends GetView<RegistrationController> {
                           alignment: Alignment.topRight,
                           child: Row(
                             children: [
-                              const ProgressIndicatorWidget(step: '3'),
+                              !carRegister
+                                  ? const ProgressIndicatorWidget(step: '3')
+                                  : const ProgressIndicatorWidget(
+                                      step: '4',
+                                      total: '4',
+                                    ),
                               SizedBox(width: 8.h),
                               Text(
                                 'اختر الايقونة الخاصة بك.',
@@ -60,14 +66,21 @@ class RegistrationSelectAvatarView extends GetView<RegistrationController> {
                       SizedBox(height: 30.h),
                       SelectAvatarGridWidget(controller: controller),
                       SizedBox(height: 40.h),
-                      CustomButton(
-                        text: AppStrings.save.tr,
-                        height: 50.h,
-                        width: 358.w,
-                        onPressed: () async {
-                          await controller.pushAvatar(0);
-                        },
-                      ),
+                      Obx(() {
+                        return CustomButton(
+                          type: controller.isDisabled.value
+                              ? ButtonType.disabled
+                              : ButtonType.primary,
+                          text: AppStrings.save.tr,
+                          height: 50.h,
+                          width: 358.w,
+                          onPressed: () async {
+                            await controller.pushAvatar(
+                                avatar: controller.selectedAvatarIndex,
+                                route: 0);
+                          },
+                        );
+                      }),
                       SizedBox(height: 24.h),
                       CustomButton(
                         type: ButtonType.secondary,
@@ -75,7 +88,7 @@ class RegistrationSelectAvatarView extends GetView<RegistrationController> {
                         height: 50.h,
                         width: 358.w,
                         onPressed: () async {
-                          await controller.pushAvatar(0);
+                          await controller.pushAvatar(avatar: 9, route: 0);
                         },
                       ),
                     ],

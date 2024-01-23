@@ -62,6 +62,7 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView>
                     validationFunc: (val) =>
                         validateUserEmail(controller.emailTxtController.text),
                     inputData: TextInputType.emailAddress,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                   ),
                   const Spacer(),
                   CustomButton(
@@ -77,22 +78,7 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView>
                     },
                   ),
                   SizedBox(
-                    height: 16.h,
-                  ),
-                  CustomButton(
-                    // TODO : translate
-                    text: "الغاء",
-                    icon: Icons.arrow_forward,
-
-                    type: ButtonType.secondary,
-                    width: 358.w,
-                    height: 50.h,
-                    onPressed: () {
-                      Get.back();
-                    },
-                  ),
-                  SizedBox(
-                    height: 20.h,
+                    height: 128.h,
                   ),
                 ],
               ),

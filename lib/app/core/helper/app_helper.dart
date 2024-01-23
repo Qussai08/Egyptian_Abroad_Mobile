@@ -60,4 +60,6 @@ extension on String {
     print(this);
     return (toLowerCase() == "true") ? true : false;
   }
+
+  
 }

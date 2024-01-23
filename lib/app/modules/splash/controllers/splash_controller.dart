@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../../../core/helper/localization_helper.dart';
 import '../../../core/helper/notification_helper.dart';
 import '../../../core/services/auth_service.dart';
+import '../../../core/services/cars_base_api.dart';
 import '../../../routes/app_pages.dart';
 
 class SplashController extends GetxController {
@@ -14,6 +15,7 @@ class SplashController extends GetxController {
   void onInit() {
     super.onInit();
     BaseApi.initializeDio();
+    CarsBaseApi.initializeDio();
     LocalizationHelper().changeLocale(
         Language.arabic); // TODO: Change this to the user's preferred language
     _startDelay();
@@ -25,7 +27,7 @@ class SplashController extends GetxController {
 
   _goNext() async {
     String? token = authService.accessToken;
-
+    print("registerFCMToken token ${token}");
     if (token?.isNotEmpty ?? false) {
       await notificationHelper.registerFCMToken();
       await notificationHelper.subscribeToTopic('broadcast');
