@@ -65,13 +65,6 @@ mixin ValidationMixin<T extends StatefulWidget> on State<T> {
     return null;
   }
 
-  // String validateOldPassword(String oldPassword) {
-  //   if (oldPassword.trim().length == 0) {
-  //     return AppLocalizations.of(context).translate('old_password_validation');
-  //   }
-  //   return null;
-  // }
-
   //Please Do not remove this function
   String? validateOldPassword(String password) {
     if (password.trim().isEmpty) {

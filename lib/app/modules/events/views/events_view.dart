@@ -12,11 +12,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
+import 'package:intl/intl.dart' as intl;
 import 'package:loader_overlay/loader_overlay.dart';
 import '../../../core/custom_widgets/app_error_widget.dart';
 import '../../../core/custom_widgets/custom_textfield.dart';
 import '../../../core/custom_widgets/loading_dialog.dart';
+import '../../../core/helper/localization_helper.dart';
 import '../../../core/theme/styles.dart';
 import '../data/models/event_model.dart';
 import 'widgets/events_appbar.dart';
@@ -159,7 +160,7 @@ class EventsView extends GetView<EventsController> {
                                 ),
                               ),
                               SizedBox(
-                                height: 20.h,
+                                height: 16.h,
                               ),
                               Container(
                                 padding: EdgeInsets.symmetric(horizontal: 12.w),
@@ -231,7 +232,7 @@ class EventsView extends GetView<EventsController> {
                                                                             pickedDate) {
                                                                       String
                                                                           formattedDate =
-                                                                          DateFormat('yyyy-MM-dd HH:mm:ss')
+                                                                          intl.DateFormat('yyyy-MM-dd HH:mm:ss')
                                                                               .format(pickedDate);
 
                                                                       con.setDateFrom(
@@ -350,7 +351,7 @@ class EventsView extends GetView<EventsController> {
                                                                             pickedDate) {
                                                                       String
                                                                           formattedDate =
-                                                                          DateFormat('yyyy-MM-dd HH:mm:ss')
+                                                                          intl.DateFormat('yyyy-MM-dd HH:mm:ss')
                                                                               .format(pickedDate);
 
                                                                       con.setDateTo(
@@ -432,6 +433,48 @@ class EventsView extends GetView<EventsController> {
                                                     ],
                                                   ),
                                                 )),
+                                    GetBuilder<EventsController>(
+                                      builder: (eventsController) =>
+                                          eventsController.showDatesError
+                                              ? Container(
+                                                  margin: EdgeInsets.only(
+                                                      top: 4,
+                                                      right: 8.w,
+                                                      left: 8.w),
+                                                  child: Row(
+                                                    children: [
+                                                      Text(
+                                                        'يجب اختيار تاريخ بدء ونهاية الفاعلية',
+                                                        textAlign:
+                                                            LocalizationHelper
+                                                                    .isArabic()
+                                                                ? TextAlign
+                                                                    .right
+                                                                : TextAlign
+                                                                    .left,
+                                                        maxLines: 1,
+                                                        textDirection:
+                                                            LocalizationHelper
+                                                                    .isArabic()
+                                                                ? TextDirection
+                                                                    .rtl
+                                                                : TextDirection
+                                                                    .ltr,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        style: Styles
+                                                            .getRegularStyle(
+                                                                color:
+                                                                    Colors.red,
+                                                                fontSize:
+                                                                    fixDpiFont(
+                                                                        12)),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                )
+                                              : Container(),
+                                    ),
                                     SizedBox(height: 12.h),
                                     const TextFieldTitle(
                                       title: "دولة الفعالية",
@@ -914,7 +957,6 @@ class EventsView extends GetView<EventsController> {
                                       text: "إظهار النتائج",
                                       onPressed: () async {
                                         await controller.filterEvents();
-                                        Get.back();
                                       },
                                     )
                                   ],

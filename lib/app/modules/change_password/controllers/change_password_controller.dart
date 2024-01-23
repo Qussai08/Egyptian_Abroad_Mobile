@@ -36,6 +36,7 @@ class ChangePasswordController extends GetxController {
     isLoading.value = true;
     changePasswordProvider.postChangePassword(oldPassword, newPassword).then(
         (value) {
+      isLoading.value = false;
       Get.showSnackbar(
         buildCustomToast(
           Get.context!,
@@ -44,9 +45,11 @@ class ChangePasswordController extends GetxController {
           toastType: ToastType.success,
         ),
       );
-      AuthService().logout();
-      isLoading.value = false;
-      Get.offAllNamed(Routes.LOGIN);
+
+      Future.delayed(Duration(seconds: 2), () {
+        AuthService().logout();
+        Get.offAllNamed(Routes.LOGIN);
+      });
     }, onError: (error) {
       isLoading.value = false;
       handleError(error);
