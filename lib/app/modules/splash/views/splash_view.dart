@@ -76,7 +76,7 @@ class SplashView extends StatelessWidget {
                       ],
                     ),
                     child: Text(
-                      "v1.3.3",
+                      "v1.3.5",
                       style: Styles.getMediumStyle(
                           color: Styles.black3.withOpacity(0.9), fontSize: 17),
                     ))

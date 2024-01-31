@@ -153,7 +153,7 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
       // change(null, status: RxStatus.error('$error'));
       isLoading.value = false;
     });
-    //TODO : refactor
+
     countryIds = registrationController.countriesList;
     onSelectcountry();
     print(

@@ -6,11 +6,11 @@ import 'package:validators/validators.dart';
 mixin ValidationMixin<T extends StatefulWidget> on State<T> {
   String _password = '';
 
-  String? validateName(String name) {
+  String? validateName(String name, {int? maxlength = 100}) {
     if (name.trim().isEmpty) {
       return AppStrings.emptyValidation.tr;
-    } else if (name.length > 100) {
-      return "${AppStrings.maxlength.tr}100 ${AppStrings.char.tr}";
+    } else if (name.length > maxlength!) {
+      return "${AppStrings.maxlength.tr}$maxlength ${AppStrings.char.tr}";
     }
     return null;
   }

@@ -450,7 +450,7 @@ class RegistrationController extends GetxController {
     print(response.toString());
 
     if (response.status) {
-      nationalIDTxtController.text = response.data['data']['nid'];
+      nationalIDTxtController.text = response.data['data']['nid'] ?? "";
       nationalIDCameFromCars =
           response.data['data']['nid'] != null ? true : false;
       carsUserId = response.data['data']['userId'];
@@ -462,7 +462,7 @@ class RegistrationController extends GetxController {
           handleError("البريد الإلكتروني مسجل بالفعل");
           break;
         case 0:
-          handleError("الرقم القومي الخاص بهذا الحساب مسجل بالفعل");
+          handleError("الرقم القومي مُسجل بالفعل");
           break;
         case 201:
           handleError("خطأ في البريد الإلكترونى أو كلمة المرور");

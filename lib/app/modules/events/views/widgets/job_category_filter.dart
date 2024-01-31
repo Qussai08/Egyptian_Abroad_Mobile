@@ -8,18 +8,18 @@ import '../../../../core/custom_widgets/dropdown_list_selector.dart';
 import '../../../../core/helper/dpi_helper.dart';
 import '../../../../core/language/app_string.dart';
 import '../../../../core/theme/styles.dart';
-import '../../../registration/data/models/country.dart';
+import '../../../registration/data/models/job_category.dart';
 import '../../controllers/event_controller.dart';
 
-class FilterWithCountryWidget extends StatelessWidget {
-  const FilterWithCountryWidget({
+class FilterWithJobCatWidget extends StatelessWidget {
+  const FilterWithJobCatWidget({
     super.key,
     required this.controller,
-    required this.countrySearchFocusNode,
+    required this.jobCatSearchFocusNode,
   });
 
   final EventsController controller;
-  final FocusNode countrySearchFocusNode;
+  final FocusNode jobCatSearchFocusNode;
 
   @override
   Widget build(BuildContext context) {
@@ -29,12 +29,12 @@ class FilterWithCountryWidget extends StatelessWidget {
           onTap: () {
             Get.bottomSheet(
                 Container(
+                  height: 500,
                   decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(12),
                           topRight: Radius.circular(12))),
-                  height: 500,
                   child: Column(
                     children: [
                       Container(
@@ -51,7 +51,7 @@ class FilterWithCountryWidget extends StatelessWidget {
                           ),
                           Spacer(),
                           Text(
-                            "اختر دولة الفعالية",
+                            "اختر موضوع الفعالية",
                             style: Styles.getMediumStyle(
                                 color: Color(0xff201D61), fontSize: 18),
                           ),
@@ -83,8 +83,8 @@ class FilterWithCountryWidget extends StatelessWidget {
                           ],
                         ),
                         child: CustomTextFormField(
-                            controller: controller.countriesSearchController,
-                            focusNode: countrySearchFocusNode,
+                            controller: controller.jobCategorySearchController,
+                            focusNode: jobCatSearchFocusNode,
                             prefixIcon: const Icon(
                               Icons.search,
                               color: Styles.primaryColor,
@@ -92,62 +92,50 @@ class FilterWithCountryWidget extends StatelessWidget {
                             inputData: TextInputType.text,
                             textInputAction: TextInputAction.search,
                             onChangedFunc: (val) {
-                              countrySearchFocusNode.requestFocus();
+                              jobCatSearchFocusNode.requestFocus();
                               if (val.isEmpty) {
-                                controller.countriesKeySearch = val;
-                                controller.filterCountriesByName();
+                                controller.jobCategoryKeySearch = val;
+                                controller.filterJobCategoriesByName();
                                 FocusScope.of(context).unfocus();
                               }
                             },
                             onFieldSubmitted: (val) {
-                              controller.countriesKeySearch = val;
-                              controller.filterCountriesByName();
+                              controller.jobCategoryKeySearch = val;
+                              controller.filterJobCategoriesByName();
                             },
                             hintTxt: AppStrings.search.tr,
                             hintStyle: Styles.getRegularStyle(
                                 color: Styles.lightBlack)),
                       ),
                       Expanded(
-                        child: GetBuilder<EventsController>(
-                          builder: (evController) => Container(
-                            margin:
-                                EdgeInsets.only(top: 10, right: 8.w, left: 8.w),
-                            child: ListView.builder(
-                                itemCount: evController.countryIds.length,
-                                shrinkWrap: true,
-                                itemBuilder: (_, i) {
-                                  Country country = evController.countryIds[i];
-                                  return ListTile(
-                                    onTap: () {
-                                      evController.onSelectcountry(index: i);
-                                    },
-                                    contentPadding:
-                                        EdgeInsets.symmetric(horizontal: 16.w),
-                                    leading: Icon(
-                                      country.isSelected
-                                          ? Icons.check_box
-                                          : Icons.check_box_outline_blank,
-                                      color: Styles.primaryColor,
-                                    ),
-                                    title: Row(
-                                      children: [
-                                        Image.network(
-                                          country.flag,
-                                          width: 21,
-                                          height: 15,
-                                          fit: BoxFit.cover,
-                                        ),
-                                        const SizedBox(
-                                          width: 8,
-                                        ),
-                                        Text(country.country),
-                                      ],
-                                    ),
-                                  );
-                                }),
-                          ),
+                          child: GetBuilder<EventsController>(
+                        builder: (evController) => Container(
+                          height: 400,
+                          margin:
+                              EdgeInsets.only(top: 10.h, right: 8.w, left: 8.w),
+                          child: ListView.builder(
+                              itemCount: evController.jobCategoryIds.length,
+                              shrinkWrap: true,
+                              itemBuilder: (_, i) {
+                                JobCategory cat =
+                                    evController.jobCategoryIds[i];
+                                return ListTile(
+                                  onTap: () {
+                                    evController.onSelectjobCategory(index: i);
+                                  },
+                                  contentPadding:
+                                      EdgeInsets.symmetric(horizontal: 16.w),
+                                  leading: Icon(
+                                    cat.isSelected
+                                        ? Icons.check_box
+                                        : Icons.check_box_outline_blank,
+                                    color: Styles.primaryColor,
+                                  ),
+                                  title: Text(cat.name),
+                                );
+                              }),
                         ),
-                      ),
+                      )),
                       Align(
                         alignment: Alignment.bottomCenter,
                         child: Container(
@@ -156,7 +144,7 @@ class FilterWithCountryWidget extends StatelessWidget {
                             type: ButtonType.primary,
                             text: "تأكيد",
                             onPressed: () {
-                              controller.onSelectcountry();
+                              controller.onSelectjobCategory();
                               Get.back();
                             },
                           ),
@@ -170,7 +158,7 @@ class FilterWithCountryWidget extends StatelessWidget {
           child: GetBuilder<EventsController>(
             builder: (evController) => DropDownListSelector(
               dropDownList: [],
-              hint: evController.countryDisplayString,
+              hint: evController.jobCatDisplayString,
               blackHint: true,
               hintFontSize: 14,
               hintFontWeight: FontWeight.w400,
