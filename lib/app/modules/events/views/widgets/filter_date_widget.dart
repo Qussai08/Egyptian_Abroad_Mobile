@@ -2,29 +2,31 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
+import 'package:intl/intl.dart' as intl;
 
 import '../../../../core/helper/dpi_helper.dart';
 import '../../../../core/language/app_string.dart';
 import '../../../../core/theme/styles.dart';
 import '../../../notifications/data/models/notifications_model/notifications_model.dart';
 import '../../controllers/event_controller.dart';
+import '../../data/models/event_model.dart';
 
-class FilterDateWidget extends StatelessWidget {
-  const FilterDateWidget({
+class FilterWithDateWidget extends StatelessWidget {
+  const FilterWithDateWidget({
     super.key,
+    required this.con,
   });
+
+  final EventsController con;
 
   @override
   Widget build(BuildContext context) {
-    EventsController con = Get.find();
-
     return GetBuilder<EventsController>(
         builder: (eventsController) => Container(
-              height: 50,
+              height: 50.h,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(37)),
-                  border: Border.all(color: Color(0xffEBEBEB))),
+                  borderRadius: const BorderRadius.all(Radius.circular(37)),
+                  border: Border.all(color: const Color(0xffEBEBEB))),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -51,22 +53,17 @@ class FilterDateWidget extends StatelessWidget {
                                 mode: CupertinoDatePickerMode.date,
                                 onDateTimeChanged: (DateTime pickedDate) {
                                   String formattedDate =
-                                      DateFormat('yyyy-MM-dd HH:mm:ss')
+                                      intl.DateFormat('yyyy-MM-dd HH:mm:ss')
                                           .format(pickedDate);
 
                                   con.setDateFrom(formattedDate);
                                 },
-                                minimumDate: DateTime(
-                                  2023,
-                                  12,
-                                  20,
-                                ),
-                                maximumDate: DateTime(
-                                  2025,
-                                  12,
-                                  20,
-                                ),
-                                initialDateTime: _dateTime,
+                                maximumDate: con.dateTo.isNotEmpty
+                                    ? DateTime.parse(con.dateTo)
+                                    : null,
+                                initialDateTime: con.dateTo.isNotEmpty
+                                    ? DateTime.parse(con.dateTo)
+                                    : _dateTime,
                               ),
                             );
                           });
@@ -91,10 +88,9 @@ class FilterDateWidget extends StatelessWidget {
                           child: Text(
                               eventsController.dateFrom.isEmpty
                                   ? ""
-                                  : NotificationsModel.formatDate(
-                                      eventsController.dateFrom),
-                              // TODO : refactor
-
+                                  : Event.dateFormatter(
+                                      eventsController.dateFrom,
+                                      dateOnly: true),
                               style: Styles.getMediumStyle(
                                   color: Styles.lightBlack,
                                   fontSize: fixDpiFont(12))),
@@ -124,21 +120,14 @@ class FilterDateWidget extends StatelessWidget {
                                 mode: CupertinoDatePickerMode.date,
                                 onDateTimeChanged: (DateTime pickedDate) {
                                   String formattedDate =
-                                      DateFormat('yyyy-MM-dd HH:mm:ss')
+                                      intl.DateFormat('yyyy-MM-dd HH:mm:ss')
                                           .format(pickedDate);
 
                                   con.setDateTo(formattedDate);
                                 },
-                                minimumDate: DateTime(
-                                  2023,
-                                  12,
-                                  20,
-                                ),
-                                maximumDate: DateTime(
-                                  2025,
-                                  12,
-                                  20,
-                                ),
+                                minimumDate: con.dateFrom.isNotEmpty
+                                    ? DateTime.parse(con.dateFrom)
+                                    : null,
                                 initialDateTime: _dateTime,
                               ),
                             );
@@ -164,8 +153,8 @@ class FilterDateWidget extends StatelessWidget {
                           child: Text(
                               eventsController.dateTo.isEmpty
                                   ? ""
-                                  : NotificationsModel.formatDate(
-                                      eventsController.dateTo),
+                                  : Event.dateFormatter(eventsController.dateTo,
+                                      dateOnly: true),
                               textAlign: TextAlign.start,
                               style: Styles.getMediumStyle(
                                   color: Styles.lightBlack,

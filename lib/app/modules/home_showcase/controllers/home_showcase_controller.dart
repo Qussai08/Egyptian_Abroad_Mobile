@@ -23,7 +23,7 @@ class HomeShowcaseController extends GetxController {
   final TextEditingController searchController = TextEditingController();
   List<ServiceItem> favoritesList = [];
   // Auth service
-  final favoritesListProvider = Get.find<FavoritesListProvider>();
+  final favoritesListProvider = Get.put(FavoritesListProvider());
 
   // Auth service
   final authService = Get.find<AuthService>();

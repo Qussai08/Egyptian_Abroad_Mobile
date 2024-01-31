@@ -186,6 +186,7 @@ class _LoginViewState extends State<LoginView> with ValidationMixin {
                           ),
                           GestureDetector(
                             onTap: () {
+                              registrationController.setRegisterWithCars(false);
                               Get.toNamed(
                                 Routes.REGISTRATION,
                               );

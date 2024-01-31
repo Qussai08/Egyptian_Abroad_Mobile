@@ -138,7 +138,8 @@ class _CarsFirstStepViewState extends State<CarsFirstStepView>
                                 CustomTextFormField(
                                   controller: controller.nameTxtController,
                                   validationFunc: (val) => validateName(
-                                      controller.nameTxtController.text),
+                                      controller.nameTxtController.text,
+                                      maxlength: 50),
                                   inputData: TextInputType.text,
                                   autovalidateMode:
                                       AutovalidateMode.onUserInteraction,

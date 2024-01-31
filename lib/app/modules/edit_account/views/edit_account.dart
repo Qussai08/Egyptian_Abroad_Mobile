@@ -41,6 +41,7 @@ class _EditAccountViewState extends State<EditAccountView>
     super.didChangeDependencies();
     if (intialRun) {
       var controller = Get.find<RegistrationController>();
+      controller.residenceDataLoading = true;
       controller.loadResidenceData();
       intialRun = false;
     }

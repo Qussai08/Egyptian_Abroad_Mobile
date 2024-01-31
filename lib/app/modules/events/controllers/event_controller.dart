@@ -53,6 +53,26 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
     update();
   }
 
+  bool showDatesError = false;
+
+  setShowDatesError(bool val) {
+    showDatesError = val;
+    update();
+  }
+
+  bool checkFilterDatesValidation() {
+    if (dateFrom.isNotEmpty && dateTo.isEmpty) {
+      setShowDatesError(true);
+      return false;
+    } else if (dateTo.isNotEmpty && dateFrom.isEmpty) {
+      setShowDatesError(true);
+      return false;
+    } else {
+      setShowDatesError(false);
+      return true;
+    }
+  }
+
   @override
   void dispose() {
     scrollController.removeListener(scrollListener);
@@ -133,7 +153,7 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
       // change(null, status: RxStatus.error('$error'));
       isLoading.value = false;
     });
-    //TODO : refactor
+
     countryIds = registrationController.countriesList;
     onSelectcountry();
     print(
@@ -212,53 +232,56 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
   }
 
   Future<void> filterEvents() async {
-    // clear();
-    // change([], status: RxStatus.loading());
-    Map<String, dynamic> body = {
-      "search": keySearch.isNotEmpty ? keySearch : "",
-      "pageNo": pageNo,
-      "pageSize": pageSize
-    };
-    if (dateFrom.isNotEmpty) {
-      body['dateFrom'] = dateFrom;
-    }
-    if (dateTo.isNotEmpty) {
-      body['dateTo'] = dateTo;
-    }
-    if (countryIds.isNotEmpty) {
-      List<int> selectedIDs = [];
-      for (var element in countryIds) {
-        if (element.isSelected) {
-          selectedIDs.add(element.id);
+    if (checkFilterDatesValidation()) {
+      // clear();
+      // change([], status: RxStatus.loading());
+      Map<String, dynamic> body = {
+        "search": keySearch.isNotEmpty ? keySearch : "",
+        "pageNo": pageNo,
+        "pageSize": pageSize
+      };
+      if (dateFrom.isNotEmpty) {
+        body['dateFrom'] = dateFrom;
+      }
+      if (dateTo.isNotEmpty) {
+        body['dateTo'] = dateTo;
+      }
+      if (countryIds.isNotEmpty) {
+        List<int> selectedIDs = [];
+        for (var element in countryIds) {
+          if (element.isSelected) {
+            selectedIDs.add(element.id);
+          }
         }
+
+        body['countryIds'] =
+            selectedIDs.length == registrationController.countriesList.length
+                ? []
+                : selectedIDs;
+      } else {
+        body['countryIds'] = [];
+      }
+      if (jobCategoryIds.isNotEmpty) {
+        List<int> selectedIDs = [];
+        for (var element in jobCategoryIds) {
+          if (element.isSelected) {
+            selectedIDs.add(element.id);
+          }
+        }
+
+        body['jobCategoryIds'] =
+            selectedIDs.length == registrationController.jobCategoryList.length
+                ? []
+                : selectedIDs;
+      } else {
+        body['jobCategoryIds'] = [];
       }
 
-      body['countryIds'] =
-          selectedIDs.length == registrationController.countriesList.length
-              ? []
-              : selectedIDs;
-    } else {
-      body['countryIds'] = [];
+      print("filterEvents $body");
+
+      await loadEvents(body: body);
+      Get.back();
     }
-    if (jobCategoryIds.isNotEmpty) {
-      List<int> selectedIDs = [];
-      for (var element in jobCategoryIds) {
-        if (element.isSelected) {
-          selectedIDs.add(element.id);
-        }
-      }
-
-      body['jobCategoryIds'] =
-          selectedIDs.length == registrationController.jobCategoryList.length
-              ? []
-              : selectedIDs;
-    } else {
-      body['jobCategoryIds'] = [];
-    }
-
-    print("filterEvents $body");
-
-    await loadEvents(body: body);
   }
 
   String countryDisplayString = "";

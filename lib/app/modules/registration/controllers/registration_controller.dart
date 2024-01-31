@@ -67,14 +67,15 @@ class RegistrationController extends GetxController {
     return response;
   }
 
-  Future<void> register({String? carsOtp}) async {
+  Future<void> register({String? carsOtp, String? carsUserId}) async {
     AppResponse response = await UserRepository().registerReq({
       "name": nameTxtController.text,
       "nationalId": nationalIDTxtController.text,
       "email": emailTxtController.text,
       "residenceCountryId": residenceCountry.value,
       "password": passwordTxtController.text,
-      "verificationCode": carsOtp ?? otp
+      "verificationCode": carsOtp ?? otp,
+      "userId": registerWithCars ? carsUserId : ""
     });
     print("register response ${response.statusCode} ");
 
@@ -338,7 +339,8 @@ class RegistrationController extends GetxController {
       var controller = Get.put(HomeShowcaseController());
       await controller.getUserProfile();
 
-      Get.offNamed(Routes.DATASAVED, arguments: [avatar ?? selectedAvatarIndex, route]);
+      Get.offNamed(Routes.DATASAVED,
+          arguments: [avatar ?? selectedAvatarIndex, route]);
     }
   }
 
@@ -438,6 +440,8 @@ class RegistrationController extends GetxController {
 
   bool nationalIDCameFromCars = false;
 
+  String carsUserId = "";
+
   Future<void> verifyCarsMail() async {
     AppResponse response = await UserRepository().signUpWithCarsReq(body: {
       "email": emailTxtController.text,
@@ -446,9 +450,10 @@ class RegistrationController extends GetxController {
     print(response.toString());
 
     if (response.status) {
-      nationalIDTxtController.text = response.data['data']['nid'];
+      nationalIDTxtController.text = response.data['data']['nid'] ?? "";
       nationalIDCameFromCars =
           response.data['data']['nid'] != null ? true : false;
+      carsUserId = response.data['data']['userId'];
       Get.back(closeOverlays: true);
       Get.to(() => CarsFirstStepView());
     } else {
@@ -457,7 +462,7 @@ class RegistrationController extends GetxController {
           handleError("البريد الإلكتروني مسجل بالفعل");
           break;
         case 0:
-          handleError("الرقم القومي الخاص بهذا الحساب مسجل بالفعل");
+          handleError("الرقم القومي مُسجل بالفعل");
           break;
         case 201:
           handleError("خطأ في البريد الإلكترونى أو كلمة المرور");
@@ -482,12 +487,12 @@ class RegistrationController extends GetxController {
           "checkNIDAndEmailInCars - response.statusCode ${response.statusCode}");
 // register the user with email from cars + nid ( from cars or app ) + name + residence
 
-      await register(carsOtp: "");
+      await register(carsOtp: "", carsUserId: carsUserId);
     } else {
       switch (response.statusCode) {
         case -1:
           nationalIDCameFromCars
-              ? await register(carsOtp: "")
+              ? await register(carsOtp: "", carsUserId: carsUserId)
               : handleError("الرقم القومي مسجل بالفعل");
           break;
         case -2:
