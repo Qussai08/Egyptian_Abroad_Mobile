@@ -92,7 +92,11 @@ class _EditAccountViewState extends State<EditAccountView>
     return NetworkIndicator(
       child: SafeArea(
         child: Scaffold(
-          appBar: const CustomAppBar(),
+          appBar: CustomAppBar(
+              // onBack: () {
+              //   Get.offAllNamed(Routes.BOTTOMNAVIGATION);
+              // },
+              ),
           resizeToAvoidBottomInset: true,
           body: GetBuilder<RegistrationController>(
             builder: (controller) {
@@ -284,7 +288,9 @@ class _EditAccountViewState extends State<EditAccountView>
                                               autoFocusSearchField: false,
                                               locale: null,
                                               onCountryChanged: (val) {
-                                                _residenceCountry.value = val;
+                                                _residenceCountry.value =
+                                                    controller
+                                                        .countriesList[val!].id;
                                               },
                                               isEnabled: widget.isEdit!,
                                               isScrollControlled: true),
@@ -615,6 +621,7 @@ class _EditAccountViewState extends State<EditAccountView>
                                                 _egPassportNumTxtController
                                                     .text));
                                   }
+                                  controller.update();
                                 },
                               ),
                             if (widget.isEdit!)
