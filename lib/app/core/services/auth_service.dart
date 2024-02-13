@@ -1,82 +1,121 @@
-// import 'package:get/get.dart';
-// import 'package:get_storage/get_storage.dart';
-// import '../constants/storage_constants.dart';
-// import '../language/app_string.dart';
-// import 'storage_service.dart';
+import 'package:get/get.dart';
+import '../constants/storage_constants.dart';
+import '../helper/notification_helper.dart';
+import 'models/user_profile.dart';
+import 'storage_service.dart';
+import 'package:jwt_decode/jwt_decode.dart';
 
-// class AuthService extends GetxService {
-//   final storageService = Get.find<StorageService>();
-//   final rateService = Get.find<RateService>();
+class AuthService extends GetxService {
+  final storageService = Get.find<StorageService>();
+  var notificationHelper = NotificationHelper();
 
-//   RxBool isAuthUser = false.obs;
-//   Rxn<UserModel> user = Rxn();
+  RxBool isAuthUser = false.obs;
 
-//   bool get isAuth {
-//     String accessToken = storageService.getData(StorageConstants.kToken);
-//     isAuthUser.value = accessToken.isNotEmpty;
-//     return isAuthUser();
-//   }
+  bool _showcaseViewed = false;
 
-//   void setAccessToken(String token) {
-//     storageService.setData(StorageConstants.kToken, token);
-//   }
+  set showcaseViewed(bool value) {
+    _showcaseViewed = value;
+  }
 
-//   void setRefreshToken(String refreshToken) {
-//     storageService.setData(StorageConstants.kRefreshToken, refreshToken);
-//   }
+  bool get showcaseViewed {
+    return _showcaseViewed;
+  }
 
-//   void setFCMToken(String fcmToken) {
-//     storageService.setData(StorageConstants.fcmToken, fcmToken);
-//   }
+  Future<bool> get isAuth async {
+    String? accessToken = storageService.getData(StorageConstants.kToken);
+    isAuthUser.value = accessToken?.isNotEmpty ?? false;
+    if (accessToken != null) {
+      setAccessToken(accessToken);
+    }
+    return isAuthUser();
+  }
 
-//   void setExpireAt(int expireAt) {
-//     DateTime willExpireAt = DateTime.now().add(Duration(seconds: expireAt));
-//     storageService.setData(StorageConstants.kExpireAt, willExpireAt.toString());
-//   }
+  void setAccessToken(String token) {
+    storageService.setData(StorageConstants.kToken, token);
+  }
 
-//   void removeAccessToken() {
-//     storageService.removeData(StorageConstants.kToken);
-//   }
+  void setRefreshToken(String refreshToken) {
+    storageService.setData(StorageConstants.kRefreshToken, refreshToken);
+  }
 
-//   void setUserEmail(String email) {
-//     storageService.setData(StorageConstants.kUserEmail, email);
-//   }
+  void setFCMToken(String fcmToken) {
+    storageService.setData(StorageConstants.kFcmToken, fcmToken);
+  }
 
-//   void setUserPhone(String phone) {
-//     storageService.setData(StorageConstants.kUserPhone, phone);
-//   }
+  void setExpireAt(int expireAt) {
+    DateTime willExpireAt = DateTime.now().add(Duration(seconds: expireAt));
+    storageService.setData(StorageConstants.kExpireAt, willExpireAt.toString());
+  }
 
-//   String get getUserPhone {
-//     return storageService.getData(StorageConstants.kUserPhone);
-//   }
+  // set User Profile
+  void setUserProfile(UserProfileModel profile) {
+    storageService.setData(StorageConstants.kUserProfile, profile);
+  }
 
-//   String get getUserEmail {
-//     return storageService.getData(StorageConstants.kUserEmail);
-//   }
+  UserProfileModel get getUserProfile {
+    return storageService.getData(StorageConstants.kUserProfile) ??
+        UserProfileModel.empty();
+  }
 
-//   String get accessToken {
-//     return storageService.getData(StorageConstants.kToken);
-//   }
+  void removeAccessToken() {
+    storageService.removeData(StorageConstants.kToken);
+  }
 
-//   String get refreshToken {
-//     return storageService.getData(StorageConstants.kRefreshToken);
-//   }
+  void setUserEmail(String email) {
+    storageService.setData(StorageConstants.kUserEmail, email);
+  }
 
-//   String get fcmToken {
-//     return storageService.getData(StorageConstants.fcmToken);
-//   }
+  void setUserPhone(String phone) {
+    storageService.setData(StorageConstants.kUserPhone, phone);
+  }
 
-//   DateTime get expireAt {
-//     String value = storageService.getData(StorageConstants.kExpireAt);
-//     return value.isNotEmpty ? DateTime.parse(value) : DateTime.now();
-//   }
+  String? get getUserPhone {
+    return storageService.getData(StorageConstants.kUserPhone);
+  }
 
-//   void logout() {
-//     storageService.removeAll();
-//     isAuthUser(false);
-//     user.value = null;
-//     rateService.removeRate();
-//     GetStorage().write(StorageHelper().encrypt(AppStrings.appCar),
-//         StorageHelper().encrypt(AppStrings.appCar));
-//   }
-// }
+  String? get getUserEmail {
+    return storageService.getData(StorageConstants.kUserEmail);
+  }
+
+  String? get accessToken {
+    return storageService.getData(StorageConstants.kToken);
+  }
+
+  String? get refreshToken {
+    return storageService.getData(StorageConstants.kRefreshToken);
+  }
+
+  String? get fcmToken {
+    return storageService.getData(StorageConstants.kFcmToken);
+  }
+
+  DateTime? get expireAt {
+    String value = storageService.getData(StorageConstants.kExpireAt);
+    return value.isNotEmpty ? DateTime.parse(value) : DateTime.now();
+  }
+
+  String? get userID {
+    print(accessToken);
+    if (accessToken?.isNotEmpty ?? false) {
+      // Decode
+      Map<String, dynamic> payload = Jwt.parseJwt(accessToken!);
+      String userId = payload['sub'];
+      print(userId);
+      return userId;
+    } else {
+      return null;
+    }
+  }
+
+  Future<void> logout() async {
+    await notificationHelper.unSubscribeFromTopic('broadcast');
+    await notificationHelper.deleteFCMToken();
+
+    // Remove user from secure storage
+    // await SecureStorageHelper.localRemove('user');
+
+    storageService.removeAll();
+    StorageService().setData("first_time", false);
+    isAuthUser(false);
+  }
+}

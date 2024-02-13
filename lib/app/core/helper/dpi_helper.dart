@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 handleFixSize(context) {
   ScreenUtil.init(
     context,
-    designSize: const Size(375, 812),
+    designSize: const Size(390, 844),
     minTextAdapt: true,
     splitScreenMode: true,
   );
@@ -28,4 +28,9 @@ double fixDpiScreenWidth() {
 
 double fixDpiScreenHeight() {
   return ScreenUtil().screenHeight;
+}
+
+double pxToDp(BuildContext context, double pixel) {
+  final double devicePixelRatio = MediaQuery.of(context).devicePixelRatio;
+  return pixel / devicePixelRatio;
 }

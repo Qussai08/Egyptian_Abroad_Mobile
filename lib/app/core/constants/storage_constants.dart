@@ -4,5 +4,7 @@ class StorageConstants {
   static const kExpireAt = 'expires_at';
   static const kUserEmail = 'user_email';
   static const kUserPhone = 'user_phone';
-  static const fcmToken = 'fcm_token';
+  static const kFcmToken = 'fcm_token';
+  static const kUserProfile = 'kUserProfile';
+  static const kShowcaseViewed = 'kShowcaseViewed';
 }

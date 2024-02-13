@@ -1,0 +1,96 @@
+import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
+import 'package:egyptians_abroad/app/core/language/app_string.dart';
+import 'package:egyptians_abroad/app/core/theme/app_images.dart';
+import 'package:egyptians_abroad/app/core/theme/styles.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+
+class FromToDateWidget extends StatelessWidget {
+  const FromToDateWidget(
+      {super.key,
+      required this.fromDate,
+      required this.toDate,
+      required this.inEventsList});
+  final String fromDate;
+  final String toDate;
+  final bool inEventsList;
+  @override
+  Widget build(BuildContext context) {
+    return !inEventsList
+        ? Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Row(
+                children: [
+                  Text(
+                    AppStrings.from.tr,
+                    style: Styles.getMediumStyle(
+                        color: Styles.lightBlack, fontSize: fixDpiFont(12)),
+                  ),
+                  SizedBox(width: 4.w),
+                  Image.asset(AppImages.calendar, width: fixDpiFont(12)),
+                  SizedBox(width: 4.w),
+                  Text(fromDate,
+                      style: Styles.getMediumStyle(
+                          color: Styles.lightBlack, fontSize: fixDpiFont(12))),
+                ],
+              ),
+
+              // SizedBox(width: 12.w),
+              Row(
+                children: [
+                  Text(AppStrings.to.tr,
+                      style: Styles.getMediumStyle(
+                          color: Styles.lightBlack, fontSize: fixDpiFont(12))),
+                  SizedBox(width: 4.w),
+                  Image.asset(AppImages.calendar, width: fixDpiFont(12)),
+                  SizedBox(width: 4.w),
+                  Text(toDate,
+                      style: Styles.getMediumStyle(
+                          color: Styles.lightBlack, fontSize: fixDpiFont(12))),
+                ],
+              ),
+            ],
+          )
+        : Row(
+            children: [
+              Text(
+                AppStrings.from.tr,
+                style: Styles.getMediumStyle(
+                    color: Styles.lightBlack, fontSize: fixDpiFont(12)),
+              ),
+              SizedBox(width: 4.w),
+              Image.asset(AppImages.calendar, width: fixDpiFont(12)),
+              SizedBox(width: 4.w),
+              Expanded(
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(fromDate,
+                      maxLines: 1,
+                      style: Styles.getMediumStyle(
+                          color: Styles.lightBlack, fontSize: fixDpiFont(12))),
+                ),
+              ),
+              SizedBox(width: 12.w),
+              Text(AppStrings.to.tr,
+                  style: Styles.getMediumStyle(
+                      color: Styles.lightBlack, fontSize: fixDpiFont(12))),
+              SizedBox(width: 4.w),
+              Image.asset(AppImages.calendar, width: fixDpiFont(12)),
+              SizedBox(width: 4.w),
+              Expanded(
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(toDate,
+                      maxLines: 1,
+                      style: Styles.getMediumStyle(
+                        color: Styles.lightBlack,
+                        fontSize: fixDpiFont(12),
+                      )),
+                ),
+              ),
+            ],
+          );
+  }
+}
