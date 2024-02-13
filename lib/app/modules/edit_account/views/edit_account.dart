@@ -92,11 +92,7 @@ class _EditAccountViewState extends State<EditAccountView>
     return NetworkIndicator(
       child: SafeArea(
         child: Scaffold(
-          appBar: CustomAppBar(
-              // onBack: () {
-              //   Get.offAllNamed(Routes.BOTTOMNAVIGATION);
-              // },
-              ),
+          appBar: const CustomAppBar(),
           resizeToAvoidBottomInset: true,
           body: GetBuilder<RegistrationController>(
             builder: (controller) {
