@@ -115,6 +115,7 @@ class AuthService extends GetxService {
     // await SecureStorageHelper.localRemove('user');
 
     storageService.removeAll();
+    StorageService().setData("first_time", false);
     isAuthUser(false);
   }
 }

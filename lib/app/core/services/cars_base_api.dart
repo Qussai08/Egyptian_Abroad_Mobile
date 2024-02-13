@@ -61,6 +61,7 @@ class CarsBaseApi {
               _response.data['appResponseMessage'] == "Success" ? true : false,
           data: _response.data);
     } on DioException catch (e) {
+      print("DioException -> ${endPoint} ${e.response}");
       if (e.response != null) {
         if (e.response!.statusCode != null) {
           if (e.response!.statusCode! == 401) {
@@ -92,16 +93,18 @@ class CarsBaseApi {
       if (options != null) {
         queryParms.addAll(options);
       }
-
+      print("_response body ${body}");
       _response = await _dio.post(Constants.baseUrl + endPoint,
           data: body, options: options0, queryParameters: queryParms);
 
+      print("_response postRequest $endPoint ${_response}");
       return AppResponse(
           statusCode: int.parse(_response.data['appResponseCode']),
           status:
               _response.data['appResponseMessage'] == "Success" ? true : false,
           data: _response.data);
     } on DioException catch (e) {
+      print("DioException -> ${endPoint} ${e.response}");
       if (e.response != null) {
         if (e.response!.statusCode != null) {
           if (e.response!.statusCode! == 401) {

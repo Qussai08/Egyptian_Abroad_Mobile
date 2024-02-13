@@ -16,6 +16,6 @@ class Country {
     country = json['country'];
     flag = json['flag'] ??
         "https://cdn.iconscout.com/icon/premium/png-256-thumb/no-image-2840213-2359555.png";
-    isSelected = true;
+    isSelected = false;
   }
 }

@@ -188,7 +188,7 @@ class _RegistrationViewState extends State<RegistrationView>
                                                 searchBoxDecoration: null,
                                                 autoFocusSearchField: false,
                                                 locale: null,
-                                                onCountryChanged: (val) {
+                                                onChanged: (val) {
                                                   controller.residenceCountry
                                                       .value = val;
                                                   if (residence != null) {
@@ -217,10 +217,15 @@ class _RegistrationViewState extends State<RegistrationView>
                                   child: GestureDetector(
                                     onTap: () {
                                       registrationController
-                                          .setAgreeToShareWithCars(true);
-                                      registrationController
-                                          .setShowAgreeToShareWithCarsError(
-                                              false);
+                                          .setAgreeToShareWithCars(
+                                              !registrationController
+                                                  .agreeToShareWithCars.value);
+                                      if (registrationController
+                                          .agreeToShareWithCars.value) {
+                                        registrationController
+                                            .setShowAgreeToShareWithCarsError(
+                                                false);
+                                      }
                                       setState(() {});
                                       print(
                                           "agreeToShareWithCars ${registrationController.agreeToShareWithCars}");

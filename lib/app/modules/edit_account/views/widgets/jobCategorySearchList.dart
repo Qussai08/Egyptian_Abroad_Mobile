@@ -2,12 +2,13 @@
 
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:egyptians_abroad/app/modules/registration/data/models/country.dart';
+import 'package:egyptians_abroad/app/modules/registration/data/models/job_category.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 /// Creates a list of Countries with a search textfield.
-class CountrySearchListWidget extends StatefulWidget {
-  final List<Country> countries;
+class CategoriesSearchListWidget extends StatefulWidget {
+  final List<JobCategory> cats;
   final InputDecoration? searchBoxDecoration;
   final String? locale;
   final ScrollController? scrollController;
@@ -16,7 +17,7 @@ class CountrySearchListWidget extends StatefulWidget {
   final bool? useEmoji;
   final bool isCountrySearch;
 
-  const CountrySearchListWidget(this.countries, this.locale,
+  const CategoriesSearchListWidget(this.cats, this.locale,
       {super.key,
       this.searchBoxDecoration,
       this.scrollController,
@@ -26,17 +27,18 @@ class CountrySearchListWidget extends StatefulWidget {
       this.isCountrySearch = true});
 
   @override
-  _CountrySearchListWidgetState createState() =>
-      _CountrySearchListWidgetState();
+  _CategoriesSearchListWidgetState createState() =>
+      _CategoriesSearchListWidgetState();
 }
 
-class _CountrySearchListWidgetState extends State<CountrySearchListWidget> {
+class _CategoriesSearchListWidgetState
+    extends State<CategoriesSearchListWidget> {
   TextEditingController _searchController = TextEditingController();
-  late List<Country> filteredCountries;
+  late List<JobCategory> filteredCats;
 
   @override
   void initState() {
-    filteredCountries = filterCountries();
+    filteredCats = filterCats();
     super.initState();
   }
 
@@ -57,18 +59,17 @@ class _CountrySearchListWidgetState extends State<CountrySearchListWidget> {
               size: 20.0,
             ),
             labelStyle: Styles.getRegularStyle(color: Styles.ghostGrey),
-            labelText:
-                widget.isCountrySearch ? 'البحث باسم الدولة' : 'البحث بالمهنة');
+            labelText: 'البحث بالمهنة');
   }
 
   /// Filters the list of Country by text from the search box.
-  List<Country> filterCountries() {
+  List<JobCategory> filterCats() {
     final value = _searchController.text.trim();
 
     if (value.isNotEmpty) {
-      return widget.countries
-          .where((Country country) =>
-                  country.country.toLowerCase().contains(value.toLowerCase())
+      return widget.cats
+          .where((JobCategory cat) =>
+                  cat.name.toLowerCase().contains(value.toLowerCase())
               // ||
               // getCountryName(country)!
               //     .toLowerCase()
@@ -78,7 +79,7 @@ class _CountrySearchListWidgetState extends State<CountrySearchListWidget> {
           .toList();
     }
 
-    return widget.countries;
+    return widget.cats;
   }
 
   /// Returns the country name of a [Country]. if the locale is set and translation in available.
@@ -105,8 +106,7 @@ class _CountrySearchListWidgetState extends State<CountrySearchListWidget> {
             decoration: getSearchBoxDecoration(),
             controller: _searchController,
             autofocus: widget.autoFocus,
-            onChanged: (value) =>
-                setState(() => filteredCountries = filterCountries()),
+            onChanged: (value) => setState(() => filteredCats = filterCats()),
           ),
         ),
         const Divider(indent: 16, endIndent: 16, color: Styles.ghostGrey),
@@ -114,26 +114,19 @@ class _CountrySearchListWidgetState extends State<CountrySearchListWidget> {
           child: ListView.builder(
             controller: widget.scrollController,
             shrinkWrap: true,
-            itemCount: filteredCountries.length,
+            itemCount: filteredCats.length,
             itemBuilder: (BuildContext context, int index) {
-              Country country = filteredCountries[index];
+              JobCategory cat = filteredCats[index];
               return ListTile(
-                key: Key(
-                    'intl_country_${country.id.toString().toUpperCase()}_key'),
-                leading: widget.showFlags!
-                    ? Image.network(
-                        country.flag,
-                        width: 25.w,
-                      )
-                    : null,
+                key: Key('intl_country_${cat.id.toString().toUpperCase()}_key'),
                 title: Align(
                   alignment: AlignmentDirectional.centerStart,
                   // child: Text('${getCountryName(country)}',textAlign: TextAlign.start),
-                  child: Text(country.country,
+                  child: Text(cat.name,
                       style: Styles.getLightStyle(color: Styles.black),
                       textAlign: TextAlign.start),
                 ),
-                onTap: () => Navigator.of(context).pop(country),
+                onTap: () => Navigator.of(context).pop(cat),
               );
             },
           ),

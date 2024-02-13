@@ -1,12 +1,15 @@
 import 'package:egyptians_abroad/app/core/custom_widgets/countries_search_list_widget.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:egyptians_abroad/app/modules/registration/data/models/country.dart';
+import 'package:egyptians_abroad/app/modules/registration/data/models/job_category.dart';
 import 'package:flutter/material.dart';
 
+import 'jobCategorySearchList.dart';
+
 /// [SelectorButton]
-class SelectorButton extends StatelessWidget {
-  final List<Country> countries;
-  final int? selectedCountry;
+class JobCategorySelectorButton extends StatelessWidget {
+  final List<JobCategory> jobCategories;
+  final int? selectedCat;
   final TextStyle? selectorTextStyle;
   final InputDecoration? searchBoxDecoration;
   final bool autoFocusSearchField;
@@ -16,10 +19,10 @@ class SelectorButton extends StatelessWidget {
 
   final ValueChanged<int?> onChanged;
 
-  const SelectorButton({
+  const JobCategorySelectorButton({
     super.key,
-    required this.countries,
-    required this.selectedCountry,
+    required this.jobCategories,
+    required this.selectedCat,
     required this.selectorTextStyle,
     required this.searchBoxDecoration,
     required this.autoFocusSearchField,
@@ -35,35 +38,31 @@ class SelectorButton extends StatelessWidget {
       key: const Key('intl_dropdown_key'),
       padding: EdgeInsets.zero,
       minWidth: 0,
-      onPressed: countries.isNotEmpty && countries.length > 1 && isEnabled
+      onPressed: jobCategories.isNotEmpty &&
+              jobCategories.length > 1 &&
+              isEnabled
           ? () async {
-              Country? selected;
+              JobCategory? selected;
 
               selected =
-                  await showCountrySelectorBottomSheet(context, countries);
+                  await showCategorySelectorBottomSheet(context, jobCategories);
 
               if (selected != null) {
-                onChanged(countries
+                onChanged(jobCategories
                     .indexWhere((element) => element.id == selected!.id));
               }
             }
           : null,
-      child: selectedCountry != null
+      child: selectedCat != null
           ? Padding(
               padding: const EdgeInsets.only(right: 8.0),
               child: Row(
                 children: [
-                  Image.network(
-                    countries[selectedCountry!].flag,
-                    width: 21,
-                    height: 15,
-                    fit: BoxFit.cover,
-                  ),
                   const SizedBox(
                     width: 8,
                   ),
                   Text(
-                    countries[selectedCountry!].country,
+                    jobCategories[selectedCat!].name,
                     style: Styles.getRegularStyle(color: Styles.black),
                   ),
                 ],
@@ -73,8 +72,8 @@ class SelectorButton extends StatelessWidget {
     );
   }
 
-  Future<Country?> showCountrySelectorBottomSheet(
-      BuildContext context, List<Country> countries) {
+  Future<JobCategory?> showCategorySelectorBottomSheet(
+      BuildContext context, List<JobCategory> cats) {
     return showModalBottomSheet(
       context: context,
       clipBehavior: Clip.hardEdge,
@@ -101,8 +100,8 @@ class SelectorButton extends StatelessWidget {
                     ),
                   ),
                 ),
-                child: CountrySearchListWidget(
-                  countries,
+                child: CategoriesSearchListWidget(
+                  cats,
                   locale,
                   searchBoxDecoration: searchBoxDecoration,
                   scrollController: controller,

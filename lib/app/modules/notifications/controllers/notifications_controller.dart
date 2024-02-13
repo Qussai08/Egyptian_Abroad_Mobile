@@ -13,7 +13,7 @@ class NotificationsController extends GetxController
   @override
   void onInit() {
     super.onInit();
-    loadNotifications(); 
+    loadNotifications();
     // Call the method to load notifications when the controller is initialized
   }
 
@@ -31,7 +31,11 @@ class NotificationsController extends GetxController
             return;
           }
           notificationsList.addAll(value.body ?? []);
-          notificationsList.value = notificationsList.value.reversed.toList();
+          notificationsList.value.sort((a, b) {
+            var adate = DateTime.parse(a.originalsentDate!);
+            var bdate = DateTime.parse(b.originalsentDate!);
+            return bdate.compareTo(adate);
+          });
           change(value.body, status: RxStatus.success());
           isLoading.value = false;
         } else {

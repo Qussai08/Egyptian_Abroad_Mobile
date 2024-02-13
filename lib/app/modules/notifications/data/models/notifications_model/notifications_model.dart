@@ -6,6 +6,7 @@ class NotificationsModel {
   String? title;
   String? message;
   String? sentDate;
+  String? originalsentDate;
   int? notificationTypeId;
   String? eventID;
   String? eventDescription;
@@ -17,6 +18,7 @@ class NotificationsModel {
       this.message,
       this.sentDate,
       this.notificationTypeId,
+      this.originalsentDate,
       this.eventID,
       this.eventDescription});
 
@@ -28,6 +30,7 @@ class NotificationsModel {
         message: json['message'] as String?,
         sentDate:
             (json['sentDate'] != null) ? formatDate(json['sentDate']) : null,
+        originalsentDate: json['sentDate'],
         notificationTypeId: json['notificationTypeId'],
         eventID: json['routeId'],
         eventDescription: json['eventDescription']);

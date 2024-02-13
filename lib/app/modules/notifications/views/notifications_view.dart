@@ -68,19 +68,19 @@ class NotificationsView extends GetView<NotificationsController> {
                           final notification =
                               controller.notificationsList[index];
 
-                        return notification.notificationTypeId == null
-                            ? Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: fixDpiWidth(16)),
-                                child: NotificationCardWidget(
-                                    notification: notification),
-                              )
-                            : NotificationEventCardWidget(
-                                notification: notification,
-                              );
-                      },
-                    );
-                  }),
+                          return notification.notificationTypeId == null
+                              ? Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: fixDpiWidth(16)),
+                                  child: NotificationCardWidget(
+                                      notification: notification),
+                                )
+                              : NotificationEventCardWidget(
+                                  notification: notification,
+                                );
+                        },
+                      );
+                    }),
 
                     // space
                     SizedBox(height: fixDpiHeight(28)),

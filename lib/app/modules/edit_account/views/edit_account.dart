@@ -23,6 +23,8 @@ import 'package:egyptians_abroad/app/core/helper/validators.dart';
 import 'package:get/get.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
+import 'widgets/jobCategorySelector.dart';
+
 class EditAccountView extends StatefulWidget {
   final bool? isEdit;
   const EditAccountView({super.key, this.isEdit = true});
@@ -41,6 +43,7 @@ class _EditAccountViewState extends State<EditAccountView>
     super.didChangeDependencies();
     if (intialRun) {
       var controller = Get.find<RegistrationController>();
+      controller.residenceDataLoading = true;
       controller.loadResidenceData();
       intialRun = false;
     }
@@ -83,6 +86,8 @@ class _EditAccountViewState extends State<EditAccountView>
           text: AuthService().getUserProfile.foreignMobile ?? "");
   final TextEditingController _msgsAddressTxtController = TextEditingController(
       text: AuthService().getUserProfile.messagingAddress ?? "");
+
+  FocusNode jobCatSearchFocusNode = FocusNode();
 
   final _formKey = GlobalKey<FormState>();
 
@@ -282,7 +287,7 @@ class _EditAccountViewState extends State<EditAccountView>
                                               searchBoxDecoration: null,
                                               autoFocusSearchField: false,
                                               locale: null,
-                                              onCountryChanged: (val) {
+                                              onChanged: (val) {
                                                 _residenceCountry.value = val;
                                               },
                                               isEnabled: widget.isEdit!,
@@ -427,37 +432,82 @@ class _EditAccountViewState extends State<EditAccountView>
                               ValueListenableBuilder<int?>(
                                   valueListenable: _jobCategory,
                                   builder: (_, category, __) {
-                                    return DropDownListSelector(
-                                      dropDownList: widget.isEdit!
-                                          ? controller.jobCategoryList
-                                              .map((e) => DropdownMenuItem(
-                                                    value: e.id,
-                                                    child: Text(e.name),
-                                                  ))
-                                              .toList()
-                                          : [],
-                                      value: category,
-                                      hint: !widget.isEdit!
-                                          ? controller.jobCategoryList
-                                                      .firstWhereOrNull(
-                                                          (element) =>
-                                                              element.id ==
-                                                              category) !=
-                                                  null
-                                              ? controller.jobCategoryList
-                                                  .firstWhereOrNull((element) =>
-                                                      element.id == category)!
-                                                  .name
-                                              : ""
-                                          : "",
-                                      blackHint: true,
-                                      hintFontSize: 14,
-                                      hintFontWeight: FontWeight.w400,
-                                      onChangeFunc: (val) {
-                                        _jobCategory.value = val;
-                                      },
+                                    return Stack(
+                                      children: [
+                                        CustomTextFormField(
+                                          // controller:
+                                          //     controller.residenceTxtController,
+                                          // validationFunc: (val) =>
+                                          //     validateCountry(
+                                          //         residence.toString()),
+                                          enabled: false,
+                                        ),
+                                        widget.isEdit!
+                                            ? const Positioned(
+                                                top: 14,
+                                                left: 10,
+                                                child: Icon(
+                                                  Icons.keyboard_arrow_down,
+                                                  color: Styles.primaryColor,
+                                                  size: 20,
+                                                ))
+                                            : Container(),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 8.0),
+                                          child: JobCategorySelectorButton(
+                                              jobCategories:
+                                                  controller.jobCategoryList,
+                                              selectedCat: category,
+                                              // country: controller.countriesList[0],
+                                              selectorTextStyle: null,
+                                              searchBoxDecoration: null,
+                                              autoFocusSearchField: false,
+                                              locale: null,
+                                              onChanged: (val) {
+                                                _jobCategory.value = val;
+                                              },
+                                              isEnabled: widget.isEdit!,
+                                              isScrollControlled: true),
+                                        ),
+                                      ],
                                     );
                                   }),
+
+                              // ValueListenableBuilder<int?>(
+                              //     valueListenable: _jobCategory,
+                              //     builder: (_, category, __) {
+                              //       return DropDownListSelector(
+                              //         dropDownList: widget.isEdit!
+                              //             ? controller.jobCategoryList
+                              //                 .map((e) => DropdownMenuItem(
+                              //                       value: e.id,
+                              //                       child: Text(e.name),
+                              //                     ))
+                              //                 .toList()
+                              //             : [],
+                              //         value: category,
+                              //         hint: !widget.isEdit!
+                              //             ? controller.jobCategoryList
+                              //                         .firstWhereOrNull(
+                              //                             (element) =>
+                              //                                 element.id ==
+                              //                                 category) !=
+                              //                     null
+                              //                 ? controller.jobCategoryList
+                              //                     .firstWhereOrNull((element) =>
+                              //                         element.id == category)!
+                              //                     .name
+                              //                 : ""
+                              //             : "",
+                              //         blackHint: true,
+                              //         hintFontSize: 14,
+                              //         hintFontWeight: FontWeight.w400,
+                              //         onChangeFunc: (val) {
+                              //           _jobCategory.value = val;
+                              //         },
+                              //       );
+                              //     }),
                               SizedBox(
                                 height: 16.h,
                               ),
@@ -574,8 +624,7 @@ class _EditAccountViewState extends State<EditAccountView>
                           children: [
                             if (widget.isEdit!)
                               CustomButton(
-                                // TODO : translate
-                                text: "حفظ",
+                                text: AppStrings.save.tr,
                                 type: widget.isEdit!
                                     ? ButtonType.primary
                                     : ButtonType.disabled,
@@ -622,8 +671,7 @@ class _EditAccountViewState extends State<EditAccountView>
                               ),
                             if (widget.isEdit!)
                               CustomButton(
-                                // TODO : translate
-                                text: "الغاء",
+                                text: AppStrings.cancel.tr,
                                 type: ButtonType.secondary,
                                 width: 300.w,
                                 height: 50,

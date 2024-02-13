@@ -88,7 +88,9 @@ class RegistrationSelectAvatarView extends GetView<RegistrationController> {
                         height: 50.h,
                         width: 358.w,
                         onPressed: () async {
-                          await controller.pushAvatar(avatar: 9, route: 0);
+                          controller.selectedAvatarIndex = 9;
+                          await controller.pushAvatar(
+                              avatar: controller.selectedAvatarIndex, route: 0);
                         },
                       ),
                     ],

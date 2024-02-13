@@ -6,16 +6,16 @@ import 'package:validators/validators.dart';
 mixin ValidationMixin<T extends StatefulWidget> on State<T> {
   String _password = '';
 
-  String? validateName(String name) {
+  String? validateName(String name, {int? maxlength = 100}) {
     if (name.trim().isEmpty) {
       return AppStrings.emptyValidation.tr;
-    } else if (name.length > 100) {
-      return "${AppStrings.maxlength.tr}100 ${AppStrings.char.tr}";
+    } else if (name.length > maxlength!) {
+      return "${AppStrings.maxlength.tr}$maxlength ${AppStrings.char.tr}";
     }
     return null;
   }
 
-  String? validateNationalID(String nationalID) {
+  String? validateNationalID(String nationalID, {bool carsRegister = false}) {
     if (nationalID.isEmpty) {
       return AppStrings.emptyValidation.tr;
     } else if (int.tryParse(nationalID) == null) {
@@ -25,7 +25,11 @@ mixin ValidationMixin<T extends StatefulWidget> on State<T> {
     } else if (!RegExp(
             r'(2[0-9][0-9]|3([0][0-9]|[1][0-9]|2[0-3]))[0-1][1-9](0[1-9]|[1-2]\d|30|31)[00-88]\d\d\d\d\d')
         .hasMatch(nationalID)) {
-      return AppStrings.nationalIDWrongValidation.tr;
+      if (carsRegister) {
+        return "الرقم القومى المُسجل لدى تطبيق سيارات المصريين بالخارج غير صحيح";
+      } else {
+        return AppStrings.nationalIDWrongValidation.tr;
+      }
     }
 
     return null;
@@ -64,13 +68,6 @@ mixin ValidationMixin<T extends StatefulWidget> on State<T> {
     }
     return null;
   }
-
-  // String validateOldPassword(String oldPassword) {
-  //   if (oldPassword.trim().length == 0) {
-  //     return AppLocalizations.of(context).translate('old_password_validation');
-  //   }
-  //   return null;
-  // }
 
   //Please Do not remove this function
   String? validateOldPassword(String password) {

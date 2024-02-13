@@ -115,7 +115,8 @@ class _CarsFirstStepViewState extends State<CarsFirstStepView>
                                   controller:
                                       controller.nationalIDTxtController,
                                   validationFunc: (val) => validateNationalID(
-                                      controller.nationalIDTxtController.text),
+                                      controller.nationalIDTxtController.text,
+                                      carsRegister: true),
                                   inputData: TextInputType.number,
                                   fillColor: controller.nationalIDTxtController
                                           .text.isNotEmpty
@@ -138,7 +139,8 @@ class _CarsFirstStepViewState extends State<CarsFirstStepView>
                                 CustomTextFormField(
                                   controller: controller.nameTxtController,
                                   validationFunc: (val) => validateName(
-                                      controller.nameTxtController.text),
+                                      controller.nameTxtController.text,
+                                      maxlength: 50),
                                   inputData: TextInputType.text,
                                   autovalidateMode:
                                       AutovalidateMode.onUserInteraction,
@@ -222,7 +224,7 @@ class _CarsFirstStepViewState extends State<CarsFirstStepView>
                                                     searchBoxDecoration: null,
                                                     autoFocusSearchField: false,
                                                     locale: null,
-                                                    onCountryChanged: (val) {
+                                                    onChanged: (val) {
                                                       controller
                                                           .residenceCountry
                                                           .value = val;

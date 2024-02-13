@@ -296,52 +296,10 @@ class _ForgetPassOtpViewState extends State<ForgetPassOtpView>
                                     print(
                                         "_otpHasError.value ${_otpHasError.value}");
                                   },
-
-                                  // {
-                                  //   if (time == null) {
-                                  //     _otpHasError.value = true;
-                                  //   } else {
-                                  //     _otpHasError.value =
-                                  //         validateOtpCode(controller.otp) !=
-                                  //                 null
-                                  //             ? true
-                                  //             : false;
-                                  //     if (_otpHasError.value == false) {
-                                  //       errormsg =
-                                  //           validateOtpCode(controller.otp);
-                                  //       if (errormsg ==
-                                  //           AppStrings.otpEmptyValidation.tr) {
-                                  //         setState(() {});
-                                  //       }
-                                  //     } else {
-                                  //       AppResponse res = await controller
-                                  //           .verifyCode(controller.otp);
-                                  //       if (res.status &&
-                                  //           res.data['data'] == true) {
-                                  //         controller.otp = controller.otp;
-                                  //         Get.toNamed(Routes.SETPASSWORD);
-                                  //       } else {
-                                  //         _otpHasError.value = true;
-                                  //       }
-                                  //     }
-                                  //   }
-                                  // }
                                 ),
                                 SizedBox(
                                   height: 16.h,
                                 ),
-                                // CustomButton(
-                                //   // TODO : translate
-                                //   text: "الغاء",
-                                //   icon: Icons.arrow_forward,
-
-                                //   type: ButtonType.secondary,
-                                //   width: 358.w,
-                                //   height: 50.h,
-                                //   onPressed: () {
-                                //     Get.offAllNamed(Routes.LOGIN);
-                                //   },
-                                // ),
                                 SizedBox(
                                   height: 20.h,
                                 ),
