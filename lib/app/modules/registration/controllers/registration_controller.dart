@@ -320,9 +320,9 @@ class RegistrationController extends GetxController {
 
       var controller = Get.put(HomeShowcaseController());
       await controller.getUserProfile();
-      Future.delayed(const Duration(seconds: 3), () async {
+      Future.delayed(const Duration(seconds: 1), () async {
         Get.back(closeOverlays: true);
-        Get.off(Routes.ViewACCOUNT);
+        Get.offAndToNamed(Routes.ViewACCOUNT);
       });
     }
   }

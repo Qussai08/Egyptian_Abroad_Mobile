@@ -54,7 +54,9 @@ class SelectorButton extends StatelessWidget {
               child: Row(
                 children: [
                   Image.network(
-                    countries[selectedCountry!].flag,
+                    countries
+                        .firstWhere((element) => element.id == selectedCountry)
+                        .flag,
                     width: 21,
                     height: 15,
                     fit: BoxFit.cover,
@@ -63,7 +65,9 @@ class SelectorButton extends StatelessWidget {
                     width: 8,
                   ),
                   Text(
-                    countries[selectedCountry!].country,
+                    countries
+                        .firstWhere((element) => element.id == selectedCountry)
+                        .country,
                     style: Styles.getRegularStyle(color: Styles.black),
                   ),
                 ],

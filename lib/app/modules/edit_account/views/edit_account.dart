@@ -288,7 +288,9 @@ class _EditAccountViewState extends State<EditAccountView>
                                               autoFocusSearchField: false,
                                               locale: null,
                                               onChanged: (val) {
-                                                _residenceCountry.value = val;
+                                                _residenceCountry.value =
+                                                    controller
+                                                        .countriesList[val!].id;
                                               },
                                               isEnabled: widget.isEdit!,
                                               isScrollControlled: true),
@@ -663,6 +665,7 @@ class _EditAccountViewState extends State<EditAccountView>
                                                 _egPassportNumTxtController
                                                     .text));
                                   }
+                                  controller.update();
                                 },
                               ),
                             if (widget.isEdit!)

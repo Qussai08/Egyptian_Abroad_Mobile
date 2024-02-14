@@ -283,6 +283,7 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
       }
 
       print("filterEvents $body");
+      print("filterEvents $body");
 
       await loadEvents(body: body, clearFilters: clearFilters);
       if (closeBottomSheet) Get.back();

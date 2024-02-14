@@ -35,9 +35,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: actionsEnabled!
           ? [
               TextButton(
-                  onPressed: () {
-                    onClose ?? Get.close(2);
-                  },
+                  onPressed: onClose ??
+                      () {
+                        Get.close(2);
+                      },
                   child: Image.asset(
                     actionAsset ?? AppImages.closeIcon,
                   )),
@@ -45,9 +46,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           : null,
       leading: leadingEnabled!
           ? TextButton(
-              onPressed: () {
-                onBack ?? Get.back();
-              },
+              onPressed: onBack ??
+                  () {
+                    Get.back();
+                  },
               child: Image.asset(
                 backButtonImageAsset ?? AppImages.backIcon,
               ),
