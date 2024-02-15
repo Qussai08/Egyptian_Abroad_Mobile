@@ -303,7 +303,7 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
     print("selectedcountries ${selectedcountries.length}");
 
     if (clearFilters) {
-      selectAllCountries = true;
+      setSelectAllCountries(false);
     }
 
     if (selectAllCountries) {
@@ -370,7 +370,7 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
     print("selectAllJobCategory 2 $selectAllJobCategory");
 
     if (clearFilters) {
-      selectAllJobCategory = true;
+      setSelectAllJobCategory(false);
     }
     if (selectAllJobCategory) {
       print("222222");
