@@ -293,46 +293,35 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
   String countryDisplayString = "";
 
   onSelectcountry({int? index, bool clearFilters = false}) {
+    List<String> selectedcountries = [];
+
     if (index != null) {
       countryIds[index].isSelected = !countryIds[index].isSelected;
+      selectAllCountries = false;
     }
-
-    List<String> selectedcountries = [];
 
     print("selectedcountries ${selectedcountries.length}");
 
     if (clearFilters) {
-      countryIds = registrationController.countriesList;
-      for (var i = 0; i < countryIds.length - 1; i++) {
-        if (!countryIds[i].isSelected) {
-          countryIds[i].isSelected = true;
-        }
-        selectedcountries.add(countryIds[i].country);
-      }
-    } else if (selectAllCountries) {
+      selectAllCountries = true;
+    }
+
+    if (selectAllCountries) {
       print("222222");
-      countryIds = registrationController.countriesList;
       for (var i = 0; i < countryIds.length - 1; i++) {
-        if (!countryIds[i].isSelected) {
-          countryIds[i].isSelected = true;
-        }
+        countryIds[i].isSelected = true;
         selectedcountries.add(countryIds[i].country);
       }
-    } else if (selectAllCountries == false) {
-      print("33333");
-      countryIds = registrationController.countriesList;
-      for (var i = 0; i < countryIds.length - 1; i++) {
-        countryIds[i].isSelected = false;
-      }
-      selectedcountries = [];
     } else {
+      selectedcountries = [];
       for (var element in countryIds) {
         if (element.isSelected) {
           selectedcountries.add(element.country);
         }
       }
     }
-    if (selectAllCountries || clearFilters) {
+
+    if (selectAllCountries) {
       countryDisplayString = "الكل";
     } else {
       countryDisplayString = selectedcountries.join(" - ");
@@ -347,6 +336,11 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
   setSelectAllJobCategory(bool val) {
     selectAllJobCategory = val;
     print("selectAllJobCategory 1 $selectAllJobCategory");
+    if (selectAllJobCategory == false) {
+      for (var i = 0; i < jobCategoryIds.length - 1; i++) {
+        jobCategoryIds[i].isSelected = false;
+      }
+    }
     update();
   }
 
@@ -355,53 +349,45 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
   setSelectAllCountries(bool val) {
     selectAllCountries = val;
     print("selectAllCountries 1 $selectAllCountries");
+    if (selectAllCountries == false) {
+      for (var i = 0; i < countryIds.length - 1; i++) {
+        countryIds[i].isSelected = false;
+      }
+    }
     update();
   }
 
   String jobCatDisplayString = "";
 
   onSelectjobCategory({int? index, bool clearFilters = false}) {
+    List<String> selectedjobCategory = [];
+
     if (index != null) {
       jobCategoryIds[index].isSelected = !jobCategoryIds[index].isSelected;
+      selectAllJobCategory = false;
     }
 
-    List<String> selectedjobCategory = [];
     print("selectAllJobCategory 2 $selectAllJobCategory");
 
     if (clearFilters) {
-      print("111111");
-      jobCategoryIds = registrationController.jobCategoryList;
-      for (var i = 0; i < jobCategoryIds.length - 1; i++) {
-        if (!jobCategoryIds[i].isSelected) {
-          jobCategoryIds[i].isSelected = true;
-        }
-        selectedjobCategory.add(jobCategoryIds[i].name);
-      }
-    } else if (selectAllJobCategory) {
+      selectAllJobCategory = true;
+    }
+    if (selectAllJobCategory) {
       print("222222");
       jobCategoryIds = registrationController.jobCategoryList;
       for (var i = 0; i < jobCategoryIds.length - 1; i++) {
-        if (!jobCategoryIds[i].isSelected) {
-          jobCategoryIds[i].isSelected = true;
-        }
+        jobCategoryIds[i].isSelected = true;
         selectedjobCategory.add(jobCategoryIds[i].name);
       }
-    } else if (selectAllJobCategory == false) {
-      print("33333");
-      jobCategoryIds = registrationController.jobCategoryList;
-      for (var i = 0; i < jobCategoryIds.length - 1; i++) {
-        jobCategoryIds[i].isSelected = false;
-      }
-      selectedjobCategory = [];
     } else {
-      print("44444");
+      selectedjobCategory = [];
       for (var element in jobCategoryIds) {
         if (element.isSelected) {
           selectedjobCategory.add(element.name);
         }
       }
     }
-    if (selectAllJobCategory || clearFilters) {
+    if (selectAllJobCategory) {
       jobCatDisplayString = "الكل";
     } else {
       jobCatDisplayString = selectedjobCategory.join(" - ");

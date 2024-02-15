@@ -156,7 +156,8 @@ class FilterWithCountryWidget extends StatelessWidget {
                                     contentPadding:
                                         EdgeInsets.symmetric(horizontal: 16.w),
                                     leading: Icon(
-                                      evController.selectAllCountries
+                                      // evController.selectAllCountries
+                                      country.isSelected
                                           ? Icons.check_box
                                           : country.isSelected
                                               ? Icons.check_box
