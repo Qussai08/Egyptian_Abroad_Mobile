@@ -190,7 +190,11 @@ class _RegistrationViewState extends State<RegistrationView>
                                                 locale: null,
                                                 onChanged: (val) {
                                                   controller.residenceCountry
-                                                      .value = val;
+                                                          .value =
+                                                      controller
+                                                          .countriesList[val!]
+                                                          .id;
+
                                                   if (residence != null) {
                                                     _formKey.currentState!
                                                         .validate();

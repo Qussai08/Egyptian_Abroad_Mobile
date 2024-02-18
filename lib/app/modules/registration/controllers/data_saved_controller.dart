@@ -17,11 +17,13 @@ class DataSavedController extends GetxController {
   _goNext() async {
     // showcaseViewed must be set to true after the showcase is viewed for the first time only.
     // check if argument is 0 come from registration or 1 come from edit profile
+    await 2.delay();
     if (data[1] == 0) {
       authService.showcaseViewed = true;
+      Get.offAllNamed(Routes.BOTTOMNAVIGATION);
+    } else {
+      Get.back(closeOverlays: true);
+      Get.offAndToNamed(Routes.EditACCOUNT);
     }
-
-    await 2.delay();
-    Get.offAllNamed(Routes.BOTTOMNAVIGATION);
   }
 }

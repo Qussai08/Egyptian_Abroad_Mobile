@@ -115,30 +115,40 @@ class FilterWithJobCatWidget extends StatelessWidget {
                       ),
                       GetBuilder<EventsController>(
                         builder: (evController) => evController
-                                .jobCategoryKeySearch.isEmpty
+                                .jobCategoryIds.isEmpty
                             ? Container(
-                                margin: EdgeInsets.only(
-                                    top: 10.h, right: 8.w, left: 8.w),
-                                child: ListTile(
-                                  onTap: () {
-                                    evController.setSelectAllJobCategory(
-                                        evController.selectAllJobCategory
-                                            ? false
-                                            : true);
-                                    evController.onSelectjobCategory();
-                                  },
-                                  contentPadding:
-                                      EdgeInsets.symmetric(horizontal: 16.w),
-                                  leading: Icon(
-                                    evController.selectAllJobCategory
-                                        ? Icons.check_box
-                                        : Icons.check_box_outline_blank,
-                                    color: Styles.primaryColor,
-                                  ),
-                                  title: Text("الكل"),
+                                // height: 200.h,
+                                padding: EdgeInsets.only(top: 120.h),
+                                child: Text(
+                                  'لا توجد بيانات',
+                                  style: Styles.getMediumStyle(
+                                      color: Styles.lightBlack),
                                 ),
                               )
-                            : Container(),
+                            : evController.jobCategoryKeySearch.isEmpty
+                                ? Container(
+                                    margin: EdgeInsets.only(
+                                        top: 10.h, right: 8.w, left: 8.w),
+                                    child: ListTile(
+                                      onTap: () {
+                                        evController.setSelectAllJobCategory(
+                                            evController.selectAllJobCategory
+                                                ? false
+                                                : true);
+                                        evController.onSelectjobCategory();
+                                      },
+                                      contentPadding: EdgeInsets.symmetric(
+                                          horizontal: 16.w),
+                                      leading: Icon(
+                                        evController.selectAllJobCategory
+                                            ? Icons.check_box
+                                            : Icons.check_box_outline_blank,
+                                        color: Styles.primaryColor,
+                                      ),
+                                      title: Text("الكل"),
+                                    ),
+                                  )
+                                : Container(),
                       ),
                       Expanded(
                           child: GetBuilder<EventsController>(

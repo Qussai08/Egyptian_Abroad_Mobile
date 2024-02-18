@@ -134,9 +134,9 @@ class _ForgetPassOtpViewState extends State<ForgetPassOtpView>
 
                                           AppResponse res =
                                               await controller.verifyCode(pin);
+                                          controller.otp = pin;
                                           if (res.status &&
                                               res.data['data'] == true) {
-                                            controller.otp = pin;
                                             controller
                                                 .confirmNewPassTxtController
                                                 .clear();
@@ -161,11 +161,15 @@ class _ForgetPassOtpViewState extends State<ForgetPassOtpView>
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
                                           children: [
-                                            Icon(
-                                              Icons.error,
-                                              color: Colors.red,
-                                              size: fixDpiHeight(24),
-                                            ),
+                                            if (validateOtpCode(
+                                                    controller.otp) !=
+                                                AppStrings
+                                                    .otpEmptyValidation.tr)
+                                              Icon(
+                                                Icons.error,
+                                                color: Colors.red,
+                                                size: fixDpiHeight(24),
+                                              ),
                                             const SizedBox(
                                               width: 2,
                                             ),
@@ -271,11 +275,27 @@ class _ForgetPassOtpViewState extends State<ForgetPassOtpView>
                                               : false;
                                       if (_otpHasError.value == false) {
                                         errormsg =
-                                            validateOtpCode(controller.otp)!;
-
+                                            validateOtpCode(controller.otp);
+                                        print("errormsg ${errormsg}");
                                         if (errormsg ==
-                                            AppStrings.otpEmptyValidation.tr)
+                                            AppStrings.otpEmptyValidation.tr) {
                                           setState(() {});
+                                        } else {
+                                          AppResponse res = await controller
+                                              .verifyCode(controller.otp);
+                                          if (res.status &&
+                                              res.data['data'] == true) {
+                                            controller
+                                                .confirmNewPassTxtController
+                                                .clear();
+                                            controller.newPasswordTxtController
+                                                .clear();
+                                            Get.to(() =>
+                                                ForgetPassSetPasswordView());
+                                          } else {
+                                            _otpHasError.value = true;
+                                          }
+                                        }
                                       } else {
                                         AppResponse res = await controller
                                             .verifyCode(controller.otp);

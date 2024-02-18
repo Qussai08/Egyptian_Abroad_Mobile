@@ -50,6 +50,7 @@ class FilterWithDateWidget extends StatelessWidget {
                               height: size.height * 0.27,
                               width: fixDpiScreenWidth(),
                               child: CupertinoDatePicker(
+                                
                                 mode: CupertinoDatePickerMode.date,
                                 onDateTimeChanged: (DateTime pickedDate) {
                                   String formattedDate =

@@ -114,31 +114,41 @@ class FilterWithCountryWidget extends StatelessWidget {
                                   ),
                       ),
                       GetBuilder<EventsController>(
-                        builder: (evController) => evController
-                                .countriesKeySearch.isEmpty
-                            ? Container(
-                                margin: EdgeInsets.only(
-                                    top: 10.h, right: 8.w, left: 8.w),
-                                child: ListTile(
-                                  onTap: () {
-                                    evController.setSelectAllCountries(
-                                        evController.selectAllCountries
-                                            ? false
-                                            : true);
-                                    evController.onSelectcountry();
-                                  },
-                                  contentPadding:
-                                      EdgeInsets.symmetric(horizontal: 16.w),
-                                  leading: Icon(
-                                    evController.selectAllCountries
-                                        ? Icons.check_box
-                                        : Icons.check_box_outline_blank,
-                                    color: Styles.primaryColor,
-                                  ),
-                                  title: Text("الكل"),
-                                ),
-                              )
-                            : Container(),
+                        builder: (evController) =>
+                            evController.countryIds.isEmpty
+                                ? Container(
+                                    // height: 200.h,
+                                    padding: EdgeInsets.only(top: 120.h),
+                                    child: Text(
+                                      'لا توجد بيانات',
+                                      style: Styles.getMediumStyle(
+                                          color: Styles.lightBlack),
+                                    ),
+                                  )
+                                : evController.countriesKeySearch.isEmpty
+                                    ? Container(
+                                        margin: EdgeInsets.only(
+                                            top: 10.h, right: 8.w, left: 8.w),
+                                        child: ListTile(
+                                          onTap: () {
+                                            evController.setSelectAllCountries(
+                                                evController.selectAllCountries
+                                                    ? false
+                                                    : true);
+                                            evController.onSelectcountry();
+                                          },
+                                          contentPadding: EdgeInsets.symmetric(
+                                              horizontal: 16.w),
+                                          leading: Icon(
+                                            evController.selectAllCountries
+                                                ? Icons.check_box
+                                                : Icons.check_box_outline_blank,
+                                            color: Styles.primaryColor,
+                                          ),
+                                          title: Text("الكل"),
+                                        ),
+                                      )
+                                    : Container(),
                       ),
                       Expanded(
                         child: GetBuilder<EventsController>(
@@ -156,7 +166,8 @@ class FilterWithCountryWidget extends StatelessWidget {
                                     contentPadding:
                                         EdgeInsets.symmetric(horizontal: 16.w),
                                     leading: Icon(
-                                      evController.selectAllCountries
+                                      // evController.selectAllCountries
+                                      country.isSelected
                                           ? Icons.check_box
                                           : country.isSelected
                                               ? Icons.check_box
