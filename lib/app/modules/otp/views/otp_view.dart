@@ -264,34 +264,28 @@ class _OtpViewState extends State<OtpView> with ValidationMixin {
                                               ? true
                                               : false;
                                       if (_otpHasError.value == false) {
-                                        print("11111");
                                         errormsg =
                                             validateOtpCode(controller.otp);
-                                        print("errormsg ${errormsg}");
                                         if (errormsg ==
                                             AppStrings.otpEmptyValidation.tr) {
                                           setState(() {});
                                         } else {
-                                          print("33333");
                                           AppResponse res = await controller
                                               .verifyCode(controller.otp);
                                           if (res.status &&
                                               res.data['data'] == true) {
                                             Get.toNamed(Routes.SETPASSWORD);
                                           } else {
-                                            print("444444");
                                             _otpHasError.value = true;
                                           }
                                         }
                                       } else {
-                                        print("22222");
                                         AppResponse res = await controller
                                             .verifyCode(controller.otp);
                                         if (res.status &&
                                             res.data['data'] == true) {
                                           Get.toNamed(Routes.SETPASSWORD);
                                         } else {
-                                          print("444444");
                                           _otpHasError.value = true;
                                         }
                                       }
