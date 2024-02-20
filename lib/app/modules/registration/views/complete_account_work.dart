@@ -35,177 +35,160 @@ class _CompleteAccountWorkViewState extends State<CompleteAccountWorkView>
     return NetworkIndicator(
       child: SafeArea(
         child: Scaffold(
-          resizeToAvoidBottomInset: false,
+          resizeToAvoidBottomInset: true,
           appBar: CustomAppBar(),
           body: GetBuilder<RegistrationController>(
-            builder: (registrationController) => Stack(
-              children: [
-                Container(
-                  padding: EdgeInsets.only(right: 16.w, left: 16.w),
-                  // height: fixDpiScreenHeight() * 0.67,
-                  child: ListView(
-                    children: [
-                      Form(
-                        key: _formKey,
-                        child: Column(
+            builder: (registrationController) => Container(
+              padding: EdgeInsets.only(right: 16.w, left: 16.w),
+              // height: fixDpiScreenHeight() * 0.67,
+              child: ListView(
+                children: [
+                  Form(
+                    key: _formKey,
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          AppImages.user,
+                          width: 56.w,
+                          fit: BoxFit.fitWidth,
+                        ),
+                        Text(
+                          AppStrings.completeAccountTitle.tr,
+                          style: Styles.getBoldStyle(
+                              color: Styles.black, fontSize: fixDpiFont(24)),
+                        ),
+                        SizedBox(
+                          height: 20.h,
+                        ),
+                        Row(
                           children: [
-                            Image.asset(
-                              AppImages.user,
-                              width: 56.w,
-                              fit: BoxFit.fitWidth,
-                            ),
-                            Text(
-                              AppStrings.completeAccountTitle.tr,
-                              style: Styles.getBoldStyle(
-                                  color: Styles.black,
-                                  fontSize: fixDpiFont(24)),
-                            ),
-                            SizedBox(
-                              height: 20.h,
-                            ),
-                            Row(
-                              children: [
-                                !widget.carRegister
-                                    ? const ProgressIndicatorWidget(step: '2')
-                                    : const ProgressIndicatorWidget(
-                                        step: '3',
-                                        total: '4',
-                                      ),
+                            !widget.carRegister
+                                ? const ProgressIndicatorWidget(step: '2')
+                                : const ProgressIndicatorWidget(
+                                    step: '3',
+                                    total: '4',
+                                  ),
 
-                                SizedBox(
-                                  width: 8.w,
-                                ),
-                                // todo: translate
-                                Text('بيانات المهنة',
-                                    style: TextStyle(
-                                        fontFamily: 'baloo',
-                                        fontSize: fixDpiFont(17),
-                                        fontWeight: FontWeight.w700,
-                                        color: Color(0xff3F3D56)))
-                              ],
-                            ),
                             SizedBox(
-                              height: 8.h,
+                              width: 8.w,
                             ),
-                            TextFieldTitle(
-                                title: AppStrings.jobCategory.tr,
-                                hasSubTitle: false),
-                            ValueListenableBuilder<int?>(
-                                valueListenable:
-                                    registrationController.jobCategory,
-                                builder: (_, category, __) {
-                                  return DropDownListSelector(
-                                    dropDownList: (registrationController
-                                                .jobCategoryList.length ==
-                                            0)
-                                        ? <DropdownMenuItem>[]
-                                        : registrationController.jobCategoryList
-                                            .map((e) => DropdownMenuItem(
-                                                  child: Text(e.name),
-                                                  value: e.id,
-                                                ))
-                                            .toList(),
-                                    value: category,
-                                    hint: "",
-                                    onChangeFunc: (val) {
-                                      registrationController.jobCategory.value =
-                                          val;
-                                    },
-                                  );
-                                }),
-                            SizedBox(
-                              height: 16.h,
-                            ),
-                            TextFieldTitle(
-                                title: AppStrings.jobTitle.tr,
-                                hasSubTitle: false),
-                            CustomTextFormField(
-                              controller:
-                                  registrationController.jobTitleTxtController,
-                              validationFunc: (val) => maxLenghtValidation(
-                                  registrationController
-                                      .jobTitleTxtController.text,
-                                  100),
-                              inputData: TextInputType.text,
-                              autovalidateMode:
-                                  AutovalidateMode.onUserInteraction,
-                            ),
-                            SizedBox(
-                              height: 16.h,
-                            ),
-                            TextFieldTitle(
-                              title: AppStrings.egPhoneNum.tr,
-                              hasSubTitle: false,
-                            ),
-                            CustomTextFormField(
-                              controller: registrationController
-                                  .egptionPhoneNumTxtController,
-                              validationFunc: (val) => validateEgyptionPhoneNum(
-                                  registrationController
-                                      .egptionPhoneNumTxtController.text),
-                              inputData: TextInputType.phone,
-                              autovalidateMode:
-                                  AutovalidateMode.onUserInteraction,
-                            ),
-                            SizedBox(
-                              height: 16.h,
-                            ),
-                            Row(
-                              children: [
-                                TextFieldTitle(
-                                    title: AppStrings.forignPhoneNum.tr,
-                                    hasSubTitle: false,
-                                    hasHorizontalMargin: false),
-                                TextFieldTitle(
-                                  title: AppStrings.forignPhoneNumHint.tr,
-                                  fontSize: 10,
-                                  hasSubTitle: false,
-                                  hasHorizontalMargin: false,
-                                ),
-                              ],
-                            ),
-                            CustomTextFormField(
-                              controller: registrationController
-                                  .forignPhoneNumTxtController,
-                              validationFunc: (val) => maxLenghtValidation(
-                                  registrationController
-                                      .forignPhoneNumTxtController.text,
-                                  15),
-                              inputData: TextInputType.phone,
-                              autovalidateMode:
-                                  AutovalidateMode.onUserInteraction,
-                            ),
-                            SizedBox(
-                              height: 16.h,
-                            ),
-                            TextFieldTitle(
-                                title: AppStrings.msgsAddress.tr,
-                                hasSubTitle: false),
-                            CustomTextFormField(
-                              controller: registrationController
-                                  .msgsAddressTxtController,
-                              validationFunc: (val) => maxLenghtValidation(
-                                  registrationController
-                                      .msgsAddressTxtController.text,
-                                  200),
-                              inputData: TextInputType.text,
-                              autovalidateMode:
-                                  AutovalidateMode.onUserInteraction,
-                            ),
-                            SizedBox(
-                              height: 20.h,
-                            ),
-                            SizedBox(height: 186.h),
+                            // todo: translate
+                            Text('بيانات المهنة',
+                                style: TextStyle(
+                                    fontFamily: 'baloo',
+                                    fontSize: fixDpiFont(17),
+                                    fontWeight: FontWeight.w700,
+                                    color: Color(0xff3F3D56)))
                           ],
                         ),
-                      ),
-                    ],
+                        SizedBox(
+                          height: 8.h,
+                        ),
+                        TextFieldTitle(
+                            title: AppStrings.jobCategory.tr,
+                            hasSubTitle: false),
+                        ValueListenableBuilder<int?>(
+                            valueListenable: registrationController.jobCategory,
+                            builder: (_, category, __) {
+                              return DropDownListSelector(
+                                dropDownList: (registrationController
+                                            .jobCategoryList.length ==
+                                        0)
+                                    ? <DropdownMenuItem>[]
+                                    : registrationController.jobCategoryList
+                                        .map((e) => DropdownMenuItem(
+                                              child: Text(e.name),
+                                              value: e.id,
+                                            ))
+                                        .toList(),
+                                value: category,
+                                hint: "",
+                                onChangeFunc: (val) {
+                                  registrationController.jobCategory.value =
+                                      val;
+                                },
+                              );
+                            }),
+                        SizedBox(
+                          height: 16.h,
+                        ),
+                        TextFieldTitle(
+                            title: AppStrings.jobTitle.tr, hasSubTitle: false),
+                        CustomTextFormField(
+                          controller:
+                              registrationController.jobTitleTxtController,
+                          validationFunc: (val) => maxLenghtValidation(
+                              registrationController.jobTitleTxtController.text,
+                              100),
+                          inputData: TextInputType.text,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                        ),
+                        SizedBox(
+                          height: 16.h,
+                        ),
+                        TextFieldTitle(
+                          title: AppStrings.egPhoneNum.tr,
+                          hasSubTitle: false,
+                        ),
+                        CustomTextFormField(
+                          controller: registrationController
+                              .egptionPhoneNumTxtController,
+                          validationFunc: (val) => validateEgyptionPhoneNum(
+                              registrationController
+                                  .egptionPhoneNumTxtController.text),
+                          inputData: TextInputType.phone,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                        ),
+                        SizedBox(
+                          height: 16.h,
+                        ),
+                        Row(
+                          children: [
+                            TextFieldTitle(
+                                title: AppStrings.forignPhoneNum.tr,
+                                hasSubTitle: false,
+                                hasHorizontalMargin: false),
+                            TextFieldTitle(
+                              title: AppStrings.forignPhoneNumHint.tr,
+                              fontSize: 10,
+                              hasSubTitle: false,
+                              hasHorizontalMargin: false,
+                            ),
+                          ],
+                        ),
+                        CustomTextFormField(
+                          controller: registrationController
+                              .forignPhoneNumTxtController,
+                          validationFunc: (val) => maxLenghtValidation(
+                              registrationController
+                                  .forignPhoneNumTxtController.text,
+                              15),
+                          inputData: TextInputType.phone,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                        ),
+                        SizedBox(
+                          height: 16.h,
+                        ),
+                        TextFieldTitle(
+                            title: AppStrings.msgsAddress.tr,
+                            hasSubTitle: false),
+                        CustomTextFormField(
+                          controller:
+                              registrationController.msgsAddressTxtController,
+                          validationFunc: (val) => maxLenghtValidation(
+                              registrationController
+                                  .msgsAddressTxtController.text,
+                              200),
+                          inputData: TextInputType.text,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                        ),
+                        SizedBox(
+                          height: 32.h,
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                Positioned(
-                  height: 186.h,
-                  bottom: 0.0,
-                  child: Container(
+                  Container(
                     height: 186.h,
                     width: fixDpiScreenWidth(),
                     padding: EdgeInsets.symmetric(vertical: 11.h),
@@ -259,9 +242,9 @@ class _CompleteAccountWorkViewState extends State<CompleteAccountWorkView>
                         ),
                       ],
                     ),
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ),
           ),
         ),

@@ -50,183 +50,171 @@ class _CompleteAccountViewState extends State<CompleteAccountView>
     return NetworkIndicator(
       child: SafeArea(
         child: Scaffold(
-          resizeToAvoidBottomInset: false,
+          resizeToAvoidBottomInset: true,
           appBar: widget.carRegister ? const CustomAppBar() : null,
           body: GetBuilder<RegistrationController>(
             builder: (registrationController) {
               registrationController.residenceLoading
                   ? context.loaderOverlay.show()
                   : context.loaderOverlay.hide();
-              return Stack(
-                children: [
-                  Container(
-                    padding:
-                        EdgeInsets.only(right: 16.w, left: 16.w, top: 18.h),
-                    child: ListView(
-                      children: [
-                        SizedBox(height: !widget.carRegister ? 40.h : 0.0),
-                        Form(
-                          key: _formKey,
-                          child: Column(
+              return Container(
+                padding: EdgeInsets.only(right: 16.w, left: 16.w, top: 18.h),
+                child: ListView(
+                  children: [
+                    SizedBox(height: !widget.carRegister ? 40.h : 0.0),
+                    Form(
+                      key: _formKey,
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 18.h,
+                          ),
+                          Image.asset(
+                            AppImages.user,
+                            width: 56.w,
+                            fit: BoxFit.fitWidth,
+                          ),
+                          SizedBox(
+                            height: 16.h,
+                          ),
+                          TitleText(title: AppStrings.completeAccountTitle.tr),
+                          SizedBox(
+                            height: 20.h,
+                          ),
+                          Row(
                             children: [
-                              SizedBox(
-                                height: 18.h,
-                              ),
-                              Image.asset(
-                                AppImages.user,
-                                width: 56.w,
-                                fit: BoxFit.fitWidth,
-                              ),
-                              SizedBox(
-                                height: 16.h,
-                              ),
-                              TitleText(
-                                  title: AppStrings.completeAccountTitle.tr),
-                              SizedBox(
-                                height: 20.h,
-                              ),
-                              Row(
-                                children: [
-                                  !widget.carRegister
-                                      ? const ProgressIndicatorWidget(step: '1')
-                                      : const ProgressIndicatorWidget(
-                                          step: '2',
-                                          total: '4',
-                                        ),
-                                  SizedBox(width: 8.w),
-                                  // todo: translate
-                                  Text('بيانات الإقامة',
-                                      style: TextStyle(
-                                          fontFamily: 'baloo',
-                                          fontSize: fixDpiFont(17),
-                                          fontWeight: FontWeight.w700,
-                                          color: const Color(0xff3F3D56)))
-                                ],
-                              ),
-                              SizedBox(
-                                height: 8.h,
-                              ),
-                              TextFieldTitle(
-                                  title: AppStrings.egPassportNum.tr,
-                                  hasSubTitle: false),
-                              CustomTextFormField(
-                                controller: registrationController
-                                    .egPassportNumTxtController,
-                                validationFunc: (val) =>
-                                    validateEgyptionPassport(
-                                        registrationController
-                                            .egPassportNumTxtController.text),
-                                inputData: TextInputType.text,
-                                autovalidateMode:
-                                    AutovalidateMode.onUserInteraction,
-                              ),
-                              SizedBox(
-                                height: 16.h,
-                              ),
-                              TextFieldTitle(
-                                  title: AppStrings.residenceType.tr,
-                                  hasSubTitle: false),
-                              ValueListenableBuilder<int?>(
-                                  valueListenable:
-                                      registrationController.residenceType,
-                                  builder: (_, residenceTP, __) {
-                                    return Column(
-                                      children: [
-                                        DropDownListSelector(
-                                          dropDownList: registrationController
-                                              .residenceTypeList
-                                              .map((e) => DropdownMenuItem(
-                                                    value: e.id,
-                                                    child: Text(e.name),
-                                                  ))
-                                              .toList(),
-                                          value: residenceTP,
-                                          hint: "",
-                                          onChangeFunc: (val) {
-                                            registrationController
-                                                .residenceType.value = val;
-                                          },
-                                        ),
-                                        SizedBox(
-                                          height: 16.h,
-                                        ),
-                                        if (residenceTP == 1)
-                                          TextFieldTitle(
-                                              title:
-                                                  AppStrings.residenceNumber.tr,
-                                              hasSubTitle: false),
-                                        if (residenceTP == 1)
-                                          CustomTextFormField(
-                                            controller: registrationController
-                                                .residenceNumTxtController,
-                                            inputData: TextInputType.text,
-                                            validationFunc: (val) =>
-                                                maxLenghtValidation(
-                                                    registrationController
-                                                        .residenceNumTxtController
-                                                        .text,
-                                                    20),
-                                            autovalidateMode: AutovalidateMode
-                                                .onUserInteraction,
-                                          ),
-                                        if (residenceTP == 1)
-                                          SizedBox(
-                                            height: 16.h,
-                                          ),
-                                        if (residenceTP == 2)
-                                          TextFieldTitle(
-                                              title: AppStrings
-                                                  .forignPassportNum.tr,
-                                              hasSubTitle: false),
-                                        if (residenceTP == 2)
-                                          CustomTextFormField(
-                                            controller: registrationController
-                                                .forignPassportNumTxtController,
-                                            inputData: TextInputType.text,
-                                            validationFunc: (val) =>
-                                                maxLenghtValidation(
-                                                    registrationController
-                                                        .residenceNumTxtController
-                                                        .text,
-                                                    20),
-                                            autovalidateMode: AutovalidateMode
-                                                .onUserInteraction,
-                                          ),
-                                        if (residenceTP == 2)
-                                          SizedBox(
-                                            height: 16.h,
-                                          ),
-                                      ],
-                                    );
-                                  }),
-                              TextFieldTitle(
-                                  title: AppStrings.residenceAddress.tr,
-                                  hasSubTitle: false),
-                              CustomTextFormField(
-                                controller: registrationController
-                                    .residenceAddressTxtController,
-                                inputData: TextInputType.text,
-                                validationFunc: (val) => maxLenghtValidation(
-                                    registrationController
-                                        .residenceNumTxtController.text,
-                                    200),
-                                autovalidateMode:
-                                    AutovalidateMode.onUserInteraction,
-                              ),
-                              SizedBox(
-                                height: 50.h,
-                              ),
-                              SizedBox(height: 186.h),
+                              !widget.carRegister
+                                  ? const ProgressIndicatorWidget(step: '1')
+                                  : const ProgressIndicatorWidget(
+                                      step: '2',
+                                      total: '4',
+                                    ),
+                              SizedBox(width: 8.w),
+                              // todo: translate
+                              Text('بيانات الإقامة',
+                                  style: TextStyle(
+                                      fontFamily: 'baloo',
+                                      fontSize: fixDpiFont(17),
+                                      fontWeight: FontWeight.w700,
+                                      color: const Color(0xff3F3D56)))
                             ],
                           ),
-                        ),
-                      ],
+                          SizedBox(
+                            height: 8.h,
+                          ),
+                          TextFieldTitle(
+                              title: AppStrings.egPassportNum.tr,
+                              hasSubTitle: false),
+                          CustomTextFormField(
+                            controller: registrationController
+                                .egPassportNumTxtController,
+                            validationFunc: (val) => validateEgyptionPassport(
+                                registrationController
+                                    .egPassportNumTxtController.text),
+                            inputData: TextInputType.text,
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                          ),
+                          SizedBox(
+                            height: 16.h,
+                          ),
+                          TextFieldTitle(
+                              title: AppStrings.residenceType.tr,
+                              hasSubTitle: false),
+                          ValueListenableBuilder<int?>(
+                              valueListenable:
+                                  registrationController.residenceType,
+                              builder: (_, residenceTP, __) {
+                                return Column(
+                                  children: [
+                                    DropDownListSelector(
+                                      dropDownList: registrationController
+                                          .residenceTypeList
+                                          .map((e) => DropdownMenuItem(
+                                                value: e.id,
+                                                child: Text(e.name),
+                                              ))
+                                          .toList(),
+                                      value: residenceTP,
+                                      hint: "",
+                                      onChangeFunc: (val) {
+                                        registrationController
+                                            .residenceType.value = val;
+                                      },
+                                    ),
+                                    SizedBox(
+                                      height: 16.h,
+                                    ),
+                                    if (residenceTP == 1)
+                                      TextFieldTitle(
+                                          title: AppStrings.residenceNumber.tr,
+                                          hasSubTitle: false),
+                                    if (residenceTP == 1)
+                                      CustomTextFormField(
+                                        controller: registrationController
+                                            .residenceNumTxtController,
+                                        inputData: TextInputType.text,
+                                        validationFunc: (val) =>
+                                            maxLenghtValidation(
+                                                registrationController
+                                                    .residenceNumTxtController
+                                                    .text,
+                                                20),
+                                        autovalidateMode:
+                                            AutovalidateMode.onUserInteraction,
+                                      ),
+                                    if (residenceTP == 1)
+                                      SizedBox(
+                                        height: 16.h,
+                                      ),
+                                    if (residenceTP == 2)
+                                      TextFieldTitle(
+                                          title:
+                                              AppStrings.forignPassportNum.tr,
+                                          hasSubTitle: false),
+                                    if (residenceTP == 2)
+                                      CustomTextFormField(
+                                        controller: registrationController
+                                            .forignPassportNumTxtController,
+                                        inputData: TextInputType.text,
+                                        validationFunc: (val) =>
+                                            maxLenghtValidation(
+                                                registrationController
+                                                    .residenceNumTxtController
+                                                    .text,
+                                                20),
+                                        autovalidateMode:
+                                            AutovalidateMode.onUserInteraction,
+                                      ),
+                                    if (residenceTP == 2)
+                                      SizedBox(
+                                        height: 16.h,
+                                      ),
+                                  ],
+                                );
+                              }),
+                          TextFieldTitle(
+                              title: AppStrings.residenceAddress.tr,
+                              hasSubTitle: false),
+                          CustomTextFormField(
+                            controller: registrationController
+                                .residenceAddressTxtController,
+                            inputData: TextInputType.text,
+                            validationFunc: (val) => maxLenghtValidation(
+                                registrationController
+                                    .residenceNumTxtController.text,
+                                200),
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                          ),
+                          SizedBox(
+                            height: 32.h,
+                          ),
+                          // SizedBox(height: 186.h),
+                        ],
+                      ),
                     ),
-                  ),
-                  Positioned(
-                    height: 186.h,
-                    bottom: 0.0,
-                    child: Container(
+                    Container(
                       height: 186.h,
                       width: fixDpiScreenWidth(),
                       // width: double.infinity,
@@ -287,9 +275,9 @@ class _CompleteAccountViewState extends State<CompleteAccountView>
                           ),
                         ],
                       ),
-                    ),
-                  )
-                ],
+                    )
+                  ],
+                ),
               );
             },
           ),

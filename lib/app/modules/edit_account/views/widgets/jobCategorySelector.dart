@@ -62,7 +62,9 @@ class JobCategorySelectorButton extends StatelessWidget {
                     width: 8,
                   ),
                   Text(
-                    jobCategories[selectedCat!].name,
+                    jobCategories
+                        .firstWhere((element) => element.id == selectedCat)
+                        .name,
                     style: Styles.getRegularStyle(color: Styles.black),
                   ),
                 ],

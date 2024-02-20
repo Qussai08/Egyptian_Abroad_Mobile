@@ -57,6 +57,8 @@ abstract class AppStrings {
 
   static const welcome = 'welcome';
   static const dataSavedSuccessfully = 'dataSavedSuccessfully';
+  static const dataEditedSuccessfully = 'dataEditedSuccessfully';
+
 
   // otp screen
   static const otpTitle = 'otpTitle';
