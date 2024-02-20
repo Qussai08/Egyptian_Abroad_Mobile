@@ -52,7 +52,10 @@ class DataSavedView extends GetView<DataSavedController> {
                     style: Styles.getSemiBoldStyle(
                         color: Styles.black, fontSize: fixDpiFont(28)))
                 : Container(),
-            Text(AppStrings.dataSavedSuccessfully.tr,
+            Text(
+                controller.data[1] == 0
+                    ? AppStrings.dataSavedSuccessfully.tr
+                    : AppStrings.dataEditedSuccessfully.tr,
                 style: Styles.getBoldStyle(
                     color: Styles.black, fontSize: fixDpiFont(18))),
           ],

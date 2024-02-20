@@ -124,6 +124,7 @@ Map<String, String> en = {
   AppStrings.favorites: 'Favorites',
   AppStrings.welcome: 'Welcome',
   AppStrings.dataSavedSuccessfully: 'Your data saved successfully',
+  AppStrings.dataEditedSuccessfully: 'Your Profile avatar has been updated',
   AppStrings.eventDetails: 'Event Details',
   AppStrings.from: 'From',
   AppStrings.to: 'To',

@@ -89,15 +89,17 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
         hasMore) {
       pageNo++;
       // print(pageNo);
-      filterEvents();
+      filterEvents(clearList: false);
     }
   }
 
   Future<void> loadEvents(
-      {Map<String, dynamic>? body, bool clearFilters = false}) async {
+      {Map<String, dynamic>? body,
+      bool clearFilters = false,
+      bool? clearList = true}) async {
     isLoading.value = true;
 
-    // eventsList.clear();
+    if (clearList!) eventsList.clear();
     change([], status: RxStatus.loading());
 
     await eventsProvider
@@ -188,18 +190,20 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
       TextEditingController();
 
   List<Country> countryIds = <Country>[];
+  List<Country> filteredCountryIds = <Country>[];
   List<JobCategory> jobCategoryIds = <JobCategory>[];
+  List<JobCategory> filteredJobCategoryIds = <JobCategory>[];
+
   String dateFrom = "";
   String dateTo = "";
 
   filterCountriesByName() {
     countryIds = [];
+
     if (countriesKeySearch.isEmpty) {
       countryIds = registrationController.countriesList;
     } else {
-      for (var i = 0;
-          i < registrationController.countriesList.length - 1;
-          i++) {
+      for (var i = 0; i < registrationController.countriesList.length; i++) {
         if (registrationController.countriesList[i].country
             .toLowerCase()
             .contains(countriesKeySearch.toLowerCase())) {
@@ -215,9 +219,7 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
     if (jobCategoryKeySearch.isEmpty) {
       jobCategoryIds = registrationController.jobCategoryList;
     } else {
-      for (var i = 0;
-          i < registrationController.jobCategoryList.length - 1;
-          i++) {
+      for (var i = 0; i < registrationController.jobCategoryList.length; i++) {
         if (registrationController.jobCategoryList[i].name
             .toLowerCase()
             .contains(jobCategoryKeySearch.toLowerCase())) {
@@ -239,7 +241,9 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
   }
 
   Future<void> filterEvents(
-      {bool closeBottomSheet = true, bool clearFilters = false}) async {
+      {bool closeBottomSheet = true,
+      bool clearFilters = false,
+      bool? clearList = true}) async {
     if (checkFilterDatesValidation()) {
       // clear();
       // change([], status: RxStatus.loading());
@@ -255,41 +259,34 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
         body['dateTo'] = dateTo;
       }
 
-      if (countryIds.isNotEmpty && !selectAllCountries) {
+      if (filteredCountryIds.isNotEmpty) {
         List<int> selectedIDs = [];
-        for (var element in countryIds) {
+        for (var element in filteredCountryIds) {
           if (element.isSelected) {
             selectedIDs.add(element.id);
           }
         }
-
-        body['countryIds'] =
-            selectedIDs.length == registrationController.countriesList.length
-                ? []
-                : selectedIDs;
+        body['countryIds'] = selectedIDs;
       } else {
         body['countryIds'] = [];
       }
-      if (jobCategoryIds.isNotEmpty && !selectAllJobCategory) {
+      if (filteredJobCategoryIds.isNotEmpty) {
         List<int> selectedIDs = [];
-        for (var element in jobCategoryIds) {
+        for (var element in filteredJobCategoryIds) {
           if (element.isSelected) {
             selectedIDs.add(element.id);
           }
         }
-
-        body['jobCategoryIds'] =
-            selectedIDs.length == registrationController.jobCategoryList.length
-                ? []
-                : selectedIDs;
+        body['jobCategoryIds'] = selectedIDs;
       } else {
         body['jobCategoryIds'] = [];
       }
-      // print("filterEvents $body");
+      print("filterEvents $body");
 
       // print("filterEvents $body");
 
-      await loadEvents(body: body, clearFilters: clearFilters);
+      await loadEvents(
+          body: body, clearFilters: clearFilters, clearList: clearList);
       if (closeBottomSheet) Get.back();
     }
   }
@@ -301,34 +298,55 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
 
     if (index != null) {
       countryIds[index].isSelected = !countryIds[index].isSelected;
-      selectAllCountries = false;
+      if (countryIds[index].isSelected) {
+        filteredCountryIds.add(countryIds[index]);
+      } else {
+        filteredCountryIds
+            .removeWhere((element) => element.id == countryIds[index].id);
+        selectAllCountries = false;
+      }
     }
-
-    // print("selectedcountries ${selectedcountries.length}");
+    if (selectAllCountries) {
+      countryDisplayString = "الكل";
+      countryIds.forEach((element) => element.isSelected = true);
+      filteredCountryIds = countryIds;
+    } else {
+      filteredCountryIds
+          .forEach((element) => selectedcountries.add(element.country));
+      countryDisplayString = selectedcountries.join(" - ");
+    }
 
     if (clearFilters) {
       setSelectAllCountries(true);
     }
 
-    if (selectAllCountries) {
-      for (var i = 0; i < countryIds.length - 1; i++) {
-        countryIds[i].isSelected = true;
-        selectedcountries.add(countryIds[i].country);
-      }
-    } else {
-      selectedcountries = [];
-      for (var element in countryIds) {
-        if (element.isSelected) {
-          selectedcountries.add(element.country);
-        }
-      }
-    }
+    // if (selectAllCountries) {
+    //   for (var i = 0; i < countryIds.length; i++) {
+    //     countryIds[i].isSelected = true;
+    //     filteredCountryIds.add(countryIds[i]);
+    //   }
+    //   countryDisplayString = "الكل";
+    // } else {
+    //   selectedcountries = [];
+    //   for (var i = 0; i < countryIds.length; i++) {
+    //     if (countryIds[i].isSelected) {
+    //       filteredCountryIds.add(countryIds[i]);
+    //     }
+    //   }
+    //   for (var i = 0; i < filteredCountryIds.length; i++) {
+    //     selectedcountries.add(filteredCountryIds[i].country);
+    //   }
+    //   print(selectedcountries.first);
+    //   print(selectedcountries.length);
+    //   countryDisplayString = '';
+    //   countryDisplayString = selectedcountries.join(" - ");
+    // }
 
-    if (selectAllCountries) {
-      countryDisplayString = "الكل";
-    } else {
-      countryDisplayString = selectedcountries.join(" - ");
-    }
+    // if (selectAllCountries) {
+    //   countryDisplayString = "الكل";
+    // } else {
+    //   countryDisplayString = selectedcountries.join(" - ");
+    // }
 
     print("countryDisplayString ${countryDisplayString}");
     update();
@@ -340,10 +358,13 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
     // selectAllJobCategory = val;
     // print("selectAllJobCategory 1 $selectAllJobCategory");
     // if (selectAllJobCategory == false) {
-    for (var i = 0; i < jobCategoryIds.length - 1; i++) {
+    for (var i = 0; i < jobCategoryIds.length; i++) {
       jobCategoryIds[i].isSelected = val;
     }
     selectAllJobCategory = val;
+    if (!selectAllJobCategory) {
+      filteredJobCategoryIds = [];
+    }
     // }
     update();
   }
@@ -354,10 +375,13 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
     // selectAllCountries = val;
     // print("selectAllCountries 1 $selectAllCountries");
     // if (selectAllCountries == false) {
-    for (var i = 0; i < countryIds.length - 1; i++) {
+    for (var i = 0; i < countryIds.length; i++) {
       countryIds[i].isSelected = val;
     }
     selectAllCountries = val;
+    if (!selectAllCountries) {
+      filteredCountryIds = [];
+    }
     // }
     update();
   }
@@ -369,34 +393,58 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
 
     if (index != null) {
       jobCategoryIds[index].isSelected = !jobCategoryIds[index].isSelected;
-      selectAllJobCategory = false;
-    }
-
-    // print("selectAllJobCategory 2 $selectAllJobCategory");
-
-    if (clearFilters) {
-      setSelectAllJobCategory(true);
-    }
-    if (selectAllJobCategory) {
-      // print("222222");
-      jobCategoryIds = registrationController.jobCategoryList;
-      for (var i = 0; i < jobCategoryIds.length - 1; i++) {
-        jobCategoryIds[i].isSelected = true;
-        selectedjobCategory.add(jobCategoryIds[i].name);
-      }
-    } else {
-      selectedjobCategory = [];
-      for (var element in jobCategoryIds) {
-        if (element.isSelected) {
-          selectedjobCategory.add(element.name);
-        }
+      if (jobCategoryIds[index].isSelected) {
+        filteredJobCategoryIds.add(jobCategoryIds[index]);
+      } else {
+        filteredJobCategoryIds
+            .removeWhere((element) => element.id == jobCategoryIds[index].id);
+        selectAllJobCategory = false;
       }
     }
     if (selectAllJobCategory) {
       jobCatDisplayString = "الكل";
+      jobCategoryIds.forEach((element) => element.isSelected = true);
+      filteredJobCategoryIds = jobCategoryIds;
     } else {
+      filteredJobCategoryIds
+          .forEach((element) => selectedjobCategory.add(element.name));
       jobCatDisplayString = selectedjobCategory.join(" - ");
     }
+
+    if (clearFilters) {
+      setSelectAllJobCategory(true);
+    }
+
+    // if (index != null) {
+    //   jobCategoryIds[index].isSelected = !jobCategoryIds[index].isSelected;
+    //   selectAllJobCategory = false;
+    // }
+
+    // // print("selectAllJobCategory 2 $selectAllJobCategory");
+
+    // if (clearFilters) {
+    //   setSelectAllJobCategory(true);
+    // }
+    // if (selectAllJobCategory) {
+    //   // print("222222");
+    //   jobCategoryIds = registrationController.jobCategoryList;
+    //   for (var i = 0; i < jobCategoryIds.length; i++) {
+    //     jobCategoryIds[i].isSelected = true;
+    //     selectedjobCategory.add(jobCategoryIds[i].name);
+    //   }
+    // } else {
+    //   selectedjobCategory = [];
+    //   for (var element in jobCategoryIds) {
+    //     if (element.isSelected) {
+    //       selectedjobCategory.add(element.name);
+    //     }
+    //   }
+    // }
+    // if (selectAllJobCategory) {
+    //   jobCatDisplayString = "الكل";
+    // } else {
+    //   jobCatDisplayString = selectedjobCategory.join(" - ");
+    // }
     print("jobCatDisplayString ${jobCatDisplayString}");
     update();
   }

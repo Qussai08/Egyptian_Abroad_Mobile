@@ -145,6 +145,7 @@ class FilterWidget extends GetView<EventsController> {
                       type: ButtonType.primary,
                       text: "إظهار النتائج",
                       onPressed: () async {
+                        controller.clear();
                         await controller.filterEvents();
                       },
                     )
