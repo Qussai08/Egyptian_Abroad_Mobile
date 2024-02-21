@@ -5,8 +5,10 @@
 library;
 
 import 'dart:async';
+import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:dio/io.dart';
 import 'package:egyptians_abroad/app/core/constants/globals.dart';
 import 'package:egyptians_abroad/app/core/services/app_response.dart';
 import 'package:get/get.dart' as getx;
@@ -30,6 +32,15 @@ class CarsBaseApi {
     _dio = Dio(BaseOptions(
         baseUrl: Constants.baseUrl,
         connectTimeout: const Duration(milliseconds: 50000)));
+
+    !Constants.isProduction
+        ? (_dio!.httpClientAdapter as DefaultHttpClientAdapter)
+            .onHttpClientCreate = (HttpClient client) {
+            client.badCertificateCallback =
+                (X509Certificate cert, String host, int port) => true;
+            return client;
+          }
+        : null;
   }
 
   // Perform GET request
