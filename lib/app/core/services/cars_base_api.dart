@@ -33,12 +33,14 @@ class CarsBaseApi {
         baseUrl: Constants.baseUrl,
         connectTimeout: const Duration(milliseconds: 50000)));
 
-    (_dio!.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
-        (HttpClient client) {
-      client.badCertificateCallback =
-          (X509Certificate cert, String host, int port) => true;
-      return client;
-    };
+    !Constants.isProduction
+        ? (_dio!.httpClientAdapter as DefaultHttpClientAdapter)
+            .onHttpClientCreate = (HttpClient client) {
+            client.badCertificateCallback =
+                (X509Certificate cert, String host, int port) => true;
+            return client;
+          }
+        : null;
   }
 
   // Perform GET request
