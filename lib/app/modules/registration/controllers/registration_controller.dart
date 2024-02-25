@@ -329,7 +329,7 @@ class RegistrationController extends GetxController {
 
   Future<void> pushAvatar({int? avatar, required int route}) async {
     Map<String, dynamic> reqBody = {
-      "avatarId": avatar ?? selectedAvatarIndex,
+      "avatarId": avatar != null ? avatar + 1 : selectedAvatarIndex + 1,
     };
 
     AppResponse response = await UserRepository()
