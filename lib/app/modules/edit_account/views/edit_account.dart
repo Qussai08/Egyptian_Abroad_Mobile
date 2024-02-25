@@ -467,7 +467,8 @@ class _EditAccountViewState extends State<EditAccountView>
                                               autoFocusSearchField: false,
                                               locale: null,
                                               onChanged: (val) {
-                                                _jobCategory.value = val;
+                                                _jobCategory.value = controller
+                                                    .jobCategoryList[val!].id;
                                               },
                                               isEnabled: widget.isEdit!,
                                               isScrollControlled: true),
