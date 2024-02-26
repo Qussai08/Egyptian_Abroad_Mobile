@@ -15,6 +15,7 @@ class DropDownListSelector extends StatefulWidget {
   final double hintFontSize;
   final FontWeight hintFontWeight;
   final Color? borderColor;
+  final bool showArrow;
 
   const DropDownListSelector(
       {super.key,
@@ -26,6 +27,7 @@ class DropDownListSelector extends StatefulWidget {
       this.elementHasDefaultMargin = true,
       this.blackHint = false,
       this.reverseArrowPosition = false,
+      this.showArrow = true,
       this.hintFontSize = 18,
       this.hintFontWeight = FontWeight.w700,
       this.borderColor = const Color.fromARGB(255, 237, 239, 240)});
@@ -71,11 +73,13 @@ class _DropDownListSelectorState extends State<DropDownListSelector> {
                     overflow: TextOverflow.ellipsis),
               ),
               focusColor: Styles.primaryColor,
-              icon: const Icon(
-                Icons.keyboard_arrow_down,
-                size: 20,
-                color: Styles.primaryColor,
-              ),
+              icon: widget.showArrow
+                  ? const Icon(
+                      Icons.keyboard_arrow_down,
+                      size: 20,
+                      color: Styles.primaryColor,
+                    )
+                  : Container(),
               style: Styles.getRegularStyle(color: Styles.black),
               items: widget.dropDownList,
               onChanged: widget.onChangeFunc,
