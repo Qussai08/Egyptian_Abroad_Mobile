@@ -123,13 +123,12 @@ class _EditAccountViewState extends State<EditAccountView>
                                 children: [
                                   AvatarWidget(
                                       radius: 36.w,
-                                      // imageScale: 2.0,
                                       backgroundColor: Styles.avatarsBackground[
-                                          controller.authService.getUserProfile!
+                                          controller.authService.getUserProfile
                                               .avatarId!],
                                       imageAsset: AppImages.avatars[controller
                                           .authService
-                                          .getUserProfile!
+                                          .getUserProfile
                                           .avatarId!],
                                       isSelected: true),
                                   widget.isEdit!
@@ -148,7 +147,7 @@ class _EditAccountViewState extends State<EditAccountView>
                                             ),
                                           ),
                                         )
-                                      : SizedBox(),
+                                      : const SizedBox(),
                                 ],
                               ),
                               SizedBox(
@@ -312,6 +311,7 @@ class _EditAccountViewState extends State<EditAccountView>
                                         DropDownListSelector(
                                           hintFontSize: 14,
                                           hintFontWeight: FontWeight.w400,
+                                          showArrow: widget.isEdit!,
                                           dropDownList: widget.isEdit!
                                               ? controller.residenceTypeList
                                                   .map((e) => DropdownMenuItem(
@@ -345,7 +345,7 @@ class _EditAccountViewState extends State<EditAccountView>
                                               _residenceAddressTxtController
                                                   .text = AuthService()
                                                       .getUserProfile
-                                                      ?.residencyNo ??
+                                                      .residencyNo ??
                                                   "";
                                               _formKey.currentState!.validate();
                                             } else if (residenceTP == 2) {
@@ -354,7 +354,7 @@ class _EditAccountViewState extends State<EditAccountView>
                                               _forignPassportNumTxtController
                                                   .text = AuthService()
                                                       .getUserProfile
-                                                      ?.foreignPassportNo ??
+                                                      .foreignPassportNo ??
                                                   "";
 
                                               _formKey.currentState!.validate();
@@ -436,12 +436,7 @@ class _EditAccountViewState extends State<EditAccountView>
                                   builder: (_, category, __) {
                                     return Stack(
                                       children: [
-                                        CustomTextFormField(
-                                          // controller:
-                                          //     controller.residenceTxtController,
-                                          // validationFunc: (val) =>
-                                          //     validateCountry(
-                                          //         residence.toString()),
+                                        const CustomTextFormField(
                                           enabled: false,
                                         ),
                                         widget.isEdit!
@@ -461,13 +456,13 @@ class _EditAccountViewState extends State<EditAccountView>
                                               jobCategories:
                                                   controller.jobCategoryList,
                                               selectedCat: category,
-                                              // country: controller.countriesList[0],
                                               selectorTextStyle: null,
                                               searchBoxDecoration: null,
                                               autoFocusSearchField: false,
                                               locale: null,
                                               onChanged: (val) {
-                                                _jobCategory.value = val;
+                                                _jobCategory.value = controller
+                                                    .jobCategoryList[val!].id;
                                               },
                                               isEnabled: widget.isEdit!,
                                               isScrollControlled: true),
@@ -476,40 +471,6 @@ class _EditAccountViewState extends State<EditAccountView>
                                     );
                                   }),
 
-                              // ValueListenableBuilder<int?>(
-                              //     valueListenable: _jobCategory,
-                              //     builder: (_, category, __) {
-                              //       return DropDownListSelector(
-                              //         dropDownList: widget.isEdit!
-                              //             ? controller.jobCategoryList
-                              //                 .map((e) => DropdownMenuItem(
-                              //                       value: e.id,
-                              //                       child: Text(e.name),
-                              //                     ))
-                              //                 .toList()
-                              //             : [],
-                              //         value: category,
-                              //         hint: !widget.isEdit!
-                              //             ? controller.jobCategoryList
-                              //                         .firstWhereOrNull(
-                              //                             (element) =>
-                              //                                 element.id ==
-                              //                                 category) !=
-                              //                     null
-                              //                 ? controller.jobCategoryList
-                              //                     .firstWhereOrNull((element) =>
-                              //                         element.id == category)!
-                              //                     .name
-                              //                 : ""
-                              //             : "",
-                              //         blackHint: true,
-                              //         hintFontSize: 14,
-                              //         hintFontWeight: FontWeight.w400,
-                              //         onChangeFunc: (val) {
-                              //           _jobCategory.value = val;
-                              //         },
-                              //       );
-                              //     }),
                               SizedBox(
                                 height: 16.h,
                               ),
