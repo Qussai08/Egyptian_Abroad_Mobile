@@ -63,7 +63,8 @@ class CustoumShowcase1Widget extends StatelessWidget {
                                 fontSize: fixDpiFont(15),
                               ),
                               maxLines: 2,
-                              textScaler: TextScaler.noScaling,
+                              textScaleFactor: 1.0, //To be removed.
+                              // textScaler: TextScaler.noScaling,
                               overflow: TextOverflow.visible),
                         ),
                       ],
@@ -196,7 +197,8 @@ class CustoumShowcase2Widget extends StatelessWidget {
                               fontSize: fixDpiFont(15),
                             ),
                             textAlign: TextAlign.justify,
-                            textScaler: TextScaler.noScaling,
+                            textScaleFactor: 1.0, //To be removed.
+                            // textScaler: TextScaler.noScaling,
                             maxLines: 5,
                             overflow: TextOverflow.visible,
                           ),
@@ -332,7 +334,9 @@ class CustoumShowcase3Widget extends StatelessWidget {
                               color: Styles.black,
                               fontSize: fixDpiFont(15),
                             ),
-                            textScaler: TextScaler.noScaling,
+                            textScaleFactor: 1.0, //To be removed.
+
+                            // textScaler: TextScaler.noScaling,
                             maxLines: 3,
                             overflow: TextOverflow.ellipsis,
                           ),

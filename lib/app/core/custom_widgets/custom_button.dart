@@ -151,7 +151,8 @@ class CustomButton extends StatelessWidget {
                         type == ButtonType.disabled
                             ? disabledText ?? text!
                             : text!,
-                        textScaler: TextScaler.noScaling,
+                        textScaleFactor: 1.0, // To be removed
+                        // textScaler: TextScaler.noScaling,
                         overflow: TextOverflow.visible,
                         maxLines: 1,
                         style: Styles.getSemiBoldStyle(
