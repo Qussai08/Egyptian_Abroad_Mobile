@@ -1,6 +1,7 @@
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 enum ButtonType {
   primary,
@@ -130,8 +131,8 @@ class CustomButton extends StatelessWidget {
           onLongPress: onLongPressed,
           child: isLoading
               ? SizedBox(
-                  height: height - 10,
-                  width: height - 10,
+                  height: height - 10.h,
+                  width: height - 10.w,
                   child: const CircularProgressIndicator(
                     backgroundColor: Styles.primaryColor,
                   ),
@@ -150,13 +151,16 @@ class CustomButton extends StatelessWidget {
                         type == ButtonType.disabled
                             ? disabledText ?? text!
                             : text!,
+                        textScaler: TextScaler.noScaling,
+                        overflow: TextOverflow.visible,
+                        maxLines: 1,
                         style: Styles.getSemiBoldStyle(
                             color: textColor ?? type.textColor,
                             fontSize: fixDpiFont(16)),
                       ),
                       if (icon != null || iconIsAsset)
-                        const SizedBox(
-                          width: 5,
+                        SizedBox(
+                          width: 5.w,
                         ),
                       if (icon != null || iconIsAsset)
                         !iconIsAsset
