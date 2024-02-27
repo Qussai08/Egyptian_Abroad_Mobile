@@ -47,7 +47,10 @@ class _CategoryViewState extends State<CategoryView> {
                 decoration: BoxDecoration(
                     gradient: LinearGradient(
                   begin: Alignment.topCenter,
-                  end: Alignment.center,
+                  end: const Alignment(
+                    0.0,
+                    -0.4,
+                  ),
                   colors: [
                     widget.category!.categoryColor!.toColor(),
                     Colors.white
