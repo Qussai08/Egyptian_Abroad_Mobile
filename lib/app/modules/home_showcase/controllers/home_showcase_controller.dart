@@ -38,6 +38,7 @@ class HomeShowcaseController extends GetxController {
     await getUserProfile();
     await getCategoriesList();
     await updateFavoritesList(userId: authService.userID!);
+
     isLoading = false;
     // TODO: for testing only to be removed
     // authService.showcaseViewed = true;
@@ -328,27 +329,20 @@ class HomeShowcaseController extends GetxController {
     await favoritesListProvider.getFavoritesList(userId).then(
       (value) async {
         if (value.isSuccess) {
-          print('Favorites successfully updated');
           Iterable list = value.body;
           favoritesList = list.map((e) => ServiceItem.fromJson(e)).toList();
+          favoritesList.sort((fav1, fav2) {
+            return !fav1.isFixedFavorite ? 1 : -1;
+          });
           await loadFavoritesCategories();
         }
       },
       onError: (error) {
         print('FavoritesList Error: $error');
-        favoritesIsLoading = false;
         update();
       },
     );
-    List<Category> favoriteCategories = [];
-    AppResponse response = await CategoriesRepository()
-        .getCategories({"categoryName": "", "pageNo": 1, "pageSize": 5000});
-    if (response.status) {
-      CategoriesData categoriesData = CategoriesData.fromJson(response.data);
-      allCategoriesFavUse = categoriesData.categories;
-    }
     favoritesIsLoading = false;
-    print("favoritesIsLoading: $favoritesIsLoading");
     update();
   }
 
@@ -356,15 +350,21 @@ class HomeShowcaseController extends GetxController {
     favoriteCategories = [];
     print(favoritesList.length);
 
-    print(allCategoriesFavUse.length);
+    AppResponse response = await CategoriesRepository()
+        .getCategories({"categoryName": "", "pageNo": 1, "pageSize": 5000});
+    if (response.status) {
+      CategoriesData categoriesData = CategoriesData.fromJson(response.data);
+      allCategoriesFavUse = categoriesData.categories;
+    }
 
-    if (favoritesList.isNotEmpty && allCategoriesFavUse.isNotEmpty) {
+    
+    print("allCategoriesFavUse.length ${allCategoriesFavUse.length}");
+
+    if (favoritesList.isNotEmpty) {
       await Future.forEach<ServiceItem>(favoritesList, (item) {
-        Category? favCat = allCategoriesFavUse
-            .firstWhereOrNull((element) => element.id == item.categoryId);
-        if (favCat != null) {
-          favoriteCategories.add(favCat);
-        }
+        Category favCat = allCategoriesFavUse
+            .firstWhere((element) => element.id == item.categoryId);
+        favoriteCategories.add(favCat);
       });
     }
   }

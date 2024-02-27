@@ -226,8 +226,12 @@ class _CarsFirstStepViewState extends State<CarsFirstStepView>
                                                     locale: null,
                                                     onChanged: (val) {
                                                       controller
-                                                          .residenceCountry
-                                                          .value = val;
+                                                              .residenceCountry
+                                                              .value =
+                                                          controller
+                                                              .countriesList[
+                                                                  val!]
+                                                              .id;
                                                       if (residence != null) {
                                                         _formKey.currentState!
                                                             .validate();

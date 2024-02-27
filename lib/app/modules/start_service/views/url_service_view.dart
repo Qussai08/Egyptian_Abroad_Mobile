@@ -17,6 +17,7 @@ class _URLServiceViewState extends State<URLServiceView> {
 
   @override
   Widget build(BuildContext context) {
+    print('widget.url ${widget.url}');
     return NetworkIndicator(
       child: SafeArea(
         child: Scaffold(
@@ -27,7 +28,7 @@ class _URLServiceViewState extends State<URLServiceView> {
               width: fixDpiScreenWidth(),
               child: InAppWebView(
                 initialUrlRequest: URLRequest(
-                    url: Uri.parse(widget.url ?? "https://flutter.dev/")),
+                    url: Uri.parse(widget.url ?? "https://google.com/")),
                 initialOptions: InAppWebViewGroupOptions(
                     crossPlatform: InAppWebViewOptions(
                   javaScriptEnabled: true,

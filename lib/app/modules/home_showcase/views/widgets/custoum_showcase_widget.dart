@@ -58,8 +58,6 @@ class CustoumShowcase1Widget extends StatelessWidget {
                         Expanded(
                           child: Text(
                               ' لتعديل بيانات حسابك و الاطلاع على ملفك الشخصى المتابعة من هنا',
-                              // textAlign: TextAlign.justify,
-
                               style: Styles.getMediumStyle(
                                 color: Styles.black,
                                 fontSize: fixDpiFont(15),
