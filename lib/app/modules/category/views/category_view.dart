@@ -103,7 +103,7 @@ class _CategoryViewState extends State<CategoryView> {
                           height: 45.h,
                         ),
                         SizedBox(
-                          height: fixDpiScreenHeight() * 0.7,
+                          height: (fixDpiScreenHeight() * 0.7).h,
                           child: ListView(
                             shrinkWrap: true,
                             children: [
