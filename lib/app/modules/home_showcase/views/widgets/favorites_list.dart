@@ -33,14 +33,14 @@ class FavoritesList extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 5, right: 5, left: 5),
+            padding: const EdgeInsets.only(top: 5, right: 0, left: 5),
             child: Text(
               AppStrings.favorites.tr,
               style: Styles.getBoldStyle(
                   color: Styles.black, fontSize: fixDpiFont(18)),
             ),
           ),
-          SizedBox(height: 8.h),
+          SizedBox(height: 16.h),
           SizedBox(
             height: 130.h,
             width: double.infinity,

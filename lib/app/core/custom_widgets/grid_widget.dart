@@ -46,19 +46,27 @@ class GridWidget extends GetView<StartServiceController> {
     }
     return GestureDetector(
       onTap: () async {
+        print("widgetTag $widgetTag");
+        print("category $category");
+        print("serviceItem $serviceItem");
+        print("inFavList $inFavList");
+
         if (isService) {
           var serviceContent =
               await controller.getServicesContent(serviceItem!.serviceId);
 
-          Get.to(() => serviceContent!.servicesType! == ServiceType.content
-              ? ServiceContentView(
-                  serviceContent: serviceContent,
-                  category: category,
-                )
-              : StartServiceRedir(
-                  serviceContent: serviceContent,
-                  category: category,
-                ));
+          Get.to(() {
+            // print("serviceContent!.servicesType ${serviceContent!.servicesType}");
+            return serviceContent!.servicesType! == ServiceType.content
+                ? ServiceContentView(
+                    serviceContent: serviceContent,
+                    category: category,
+                  )
+                : StartServiceRedir(
+                    serviceContent: serviceContent,
+                    category: category,
+                  );
+          });
           //     : ServiceContentView(
           //         category: widget.category,
           //         serviceContent: serviceContent,
@@ -142,6 +150,8 @@ class GridWidget extends GetView<StartServiceController> {
                                             isFavorite:
                                                 serviceItem!.isMyFavorite(),
                                             onTap: () async {
+                                              print(
+                                                  "serviceItem!.categoryId ${serviceItem!.categoryId}");
                                               await controller
                                                   .handleFavorite(serviceItem!);
                                             },
@@ -152,8 +162,8 @@ class GridWidget extends GetView<StartServiceController> {
                     ],
                   )),
                 ),
-                const SizedBox(
-                  height: 5,
+                SizedBox(
+                  height: 6.h,
                 ),
                 Expanded(
                   // fix overflow on english text

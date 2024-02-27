@@ -46,10 +46,7 @@ class AvatarAndNameWidget extends StatelessWidget {
                 onBarrierClick: () {
                   log('onBarrierClick');
                 },
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ProfileIconWidget(),
-                ),
+                child: ProfileIconWidget(),
               ),
 
               SizedBox(width: 10.w),

@@ -50,6 +50,7 @@ class CategoriesListWidget extends StatelessWidget {
             title: AppStrings.exploreServices.tr,
             fontSize: fixDpiFont(18),
           ),
+          SizedBox(height: 7.h),
           TitleText(
             title: AppStrings.allServices.tr,
             fontSize: fixDpiFont(14),
@@ -83,7 +84,7 @@ class CategoriesListWidget extends StatelessWidget {
                   child: GridView.builder(
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    padding: EdgeInsets.only(top: 15.h),
+                    padding: EdgeInsets.only(top: 23.h),
                     gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                       maxCrossAxisExtent: 125.w,
                       childAspectRatio: 0.96,

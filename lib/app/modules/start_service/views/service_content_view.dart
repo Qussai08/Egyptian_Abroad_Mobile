@@ -37,7 +37,10 @@ class _ServiceContentViewState extends State<ServiceContentView> {
           decoration: BoxDecoration(
               gradient: LinearGradient(
             begin: Alignment.topCenter,
-            end: Alignment.center,
+            end: const Alignment(
+              0.0,
+              -0.4,
+            ),
             colors: [widget.category!.categoryColor!.toColor(), Colors.white],
           )),
           child: Scaffold(
@@ -134,10 +137,14 @@ class _ServiceContentViewState extends State<ServiceContentView> {
                             width: 300.w,
                             height: 50,
                             onPressed: () async {
-                              Get.to(() => URLServiceView(
-                                    url: widget
-                                        .serviceContent!.serviceContentLink,
-                                  ));
+                              Get.to(() {
+                                print(
+                                    "Link: ${widget.serviceContent!.serviceContentLink}");
+                                return URLServiceView(
+                                  url:
+                                      widget.serviceContent!.serviceContentLink,
+                                );
+                              });
                             },
                           ),
                           SizedBox(

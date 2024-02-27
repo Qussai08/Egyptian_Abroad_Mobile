@@ -109,7 +109,7 @@ class _CategoryViewState extends State<CategoryView> {
                             children: [
                               Container(
                                 margin: EdgeInsets.only(top: 18.h),
-                                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                                padding: EdgeInsets.symmetric(horizontal: 0.w),
                                 width: double.infinity,
                                 child: Column(
                                   children: [
@@ -133,11 +133,12 @@ class _CategoryViewState extends State<CategoryView> {
                                           )
                                         : GridView.builder(
                                             shrinkWrap: true,
-                                            padding: EdgeInsets.only(top: 15.h),
+                                            padding: EdgeInsets.only(top: 0.h),
                                             gridDelegate:
                                                 SliverGridDelegateWithMaxCrossAxisExtent(
-                                              maxCrossAxisExtent: 125.w,
-                                              mainAxisSpacing: 20.h,
+                                              maxCrossAxisExtent: 100.w,
+                                              mainAxisSpacing: 50.h,
+                                              crossAxisSpacing: 47.w,
                                               childAspectRatio: 0.96,
                                             ),
                                             itemCount: categoryController

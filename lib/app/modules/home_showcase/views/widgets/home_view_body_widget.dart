@@ -70,7 +70,7 @@ class HomeBodyWidget extends StatelessWidget {
       children: [
         // Avatar and Name
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: fixDpiWidth(16)),
+          padding: EdgeInsets.symmetric(horizontal: 16.w),
           child: Column(
             // mainAxisSize: MainAxisSize.max,
             children: [
@@ -79,7 +79,7 @@ class HomeBodyWidget extends StatelessWidget {
               HomeSearchWidget(),
 
               // Favorites
-              SizedBox(height: 8.h),
+              SizedBox(height: 12.h),
               FavoritesList(),
             ],
           ),

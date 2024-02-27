@@ -23,7 +23,6 @@ class AppImages {
   static const fingerPrint = 'assets/images/Fingerprint2.png';
 
   static const splash = 'assets/images/Splash.png';
-  static const svgSplash = 'assets/images/Splash.svg';
 
   static const logo = 'assets/images/logo.png';
 
