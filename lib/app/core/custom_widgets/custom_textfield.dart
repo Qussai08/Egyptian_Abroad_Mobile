@@ -1,5 +1,6 @@
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/helper/localization_helper.dart';
+import 'package:egyptians_abroad/app/core/theme/app_images.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -174,22 +175,17 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                           width: 30,
                           height: 30,
                           child: IconButton(
-                              splashColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onPressed: () {
-                                setState(() {
-                                  _obsecureText = !_obsecureText;
-                                });
-                              },
-                              icon: Icon(
-                                _obsecureText
-                                    ? Icons.remove_red_eye
-                                    : Icons.visibility_off,
-                                color: _focusNode.hasFocus
-                                    ? Styles.primaryColor
-                                    : Styles.grey_300,
-                                size: 20,
-                              )),
+                            splashColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onPressed: () {
+                              setState(() {
+                                _obsecureText = !_obsecureText;
+                              });
+                            },
+                            icon: _obsecureText
+                                ? Image.asset(AppImages.showPasswordIcon)
+                                : Image.asset(AppImages.hidePasswordIcon),
+                          ),
                         )
                       : widget.suffixIcon
                   : _focusNode.hasFocus

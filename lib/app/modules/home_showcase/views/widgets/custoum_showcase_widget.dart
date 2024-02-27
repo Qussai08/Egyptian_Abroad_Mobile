@@ -16,7 +16,7 @@ class CustoumShowcase1Widget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: 240.w,
-      height: 150.h,
+      height: 160.h,
       child: Stack(
         children: [
           Positioned(
@@ -24,7 +24,7 @@ class CustoumShowcase1Widget extends StatelessWidget {
             top: 13.h,
             child: Container(
               width: 240.w,
-              height: 140.h,
+              height: 130.h,
               decoration: ShapeDecoration(
                 color: const Color(0xFFFAFAFA),
                 shape: RoundedRectangleBorder(
@@ -57,15 +57,16 @@ class CustoumShowcase1Widget extends StatelessWidget {
 
                         Expanded(
                           child: Text(
-                            ' لتعديل بيانات حسابك و الاطلاع على ملفك الشخصى المتابعة من هنا',
-                            // textAlign: TextAlign.justify,
-                            style: Styles.getMediumStyle(
-                              color: Styles.black,
-                              fontSize: fixDpiFont(15),
-                            ),
-                            maxLines: 3,
-                            overflow: TextOverflow.ellipsis,
-                          ),
+                              ' لتعديل بيانات حسابك و الاطلاع على ملفك الشخصى المتابعة من هنا',
+                              // textAlign: TextAlign.justify,
+
+                              style: Styles.getMediumStyle(
+                                color: Styles.black,
+                                fontSize: fixDpiFont(15),
+                              ),
+                              maxLines: 2,
+                              textScaler: TextScaler.noScaling,
+                              overflow: TextOverflow.visible),
                         ),
                       ],
                     ),
@@ -197,8 +198,9 @@ class CustoumShowcase2Widget extends StatelessWidget {
                               fontSize: fixDpiFont(15),
                             ),
                             textAlign: TextAlign.justify,
+                            textScaler: TextScaler.noScaling,
                             maxLines: 5,
-                            overflow: TextOverflow.ellipsis,
+                            overflow: TextOverflow.visible,
                           ),
                         ),
                       ],
@@ -332,6 +334,7 @@ class CustoumShowcase3Widget extends StatelessWidget {
                               color: Styles.black,
                               fontSize: fixDpiFont(15),
                             ),
+                            textScaler: TextScaler.noScaling,
                             maxLines: 3,
                             overflow: TextOverflow.ellipsis,
                           ),

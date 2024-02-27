@@ -10,6 +10,9 @@ class AppImages {
   static const bookIcon = 'assets/icons/bookIcon.png';
   static const flagIcon = 'assets/icons/flagIcon.png';
 
+  static const showPasswordIcon = 'assets/icons/show_password.png';
+  static const hidePasswordIcon = 'assets/icons/hide_password.png';
+
   static const lock = 'assets/images/lock.png';
 
   static const checkIcon = 'assets/icons/icon-check.png';
@@ -20,6 +23,8 @@ class AppImages {
   static const fingerPrint = 'assets/images/Fingerprint2.png';
 
   static const splash = 'assets/images/Splash.png';
+  static const svgSplash = 'assets/images/Splash.svg';
+
   static const logo = 'assets/images/logo.png';
 
   static const profileIcon = 'assets/icons/profile_icon.png';

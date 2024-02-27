@@ -2,6 +2,7 @@ import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import '../../../core/helper/dpi_helper.dart';
@@ -16,7 +17,9 @@ class SplashView extends StatelessWidget {
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage(AppImages.splash),
+            image:
+                // SvgPicture(AppImages.svgSplash),
+                AssetImage(AppImages.splash),
             fit: BoxFit.cover,
           ),
         ),

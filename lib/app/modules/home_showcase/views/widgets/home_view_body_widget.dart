@@ -10,7 +10,6 @@ import '../../../home_showcase/views/widgets/favorites_list.dart';
 import '../../controllers/home_showcase_controller.dart';
 import 'avatar_and_name_widget.dart';
 import 'categories_list_widget.dart';
-import 'home_loading_widget.dart';
 import 'home_search_widget.dart';
 
 class HomeViewBodyWidget extends StatelessWidget {

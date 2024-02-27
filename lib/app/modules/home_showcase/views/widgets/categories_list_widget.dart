@@ -84,9 +84,8 @@ class CategoriesListWidget extends StatelessWidget {
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     padding: EdgeInsets.only(top: 15.h),
-                    gridDelegate:
-                        const SliverGridDelegateWithMaxCrossAxisExtent(
-                      maxCrossAxisExtent: 125,
+                    gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                      maxCrossAxisExtent: 125.w,
                       childAspectRatio: 0.96,
                     ),
                     scrollDirection: Axis.vertical,
