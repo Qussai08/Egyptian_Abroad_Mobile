@@ -47,7 +47,7 @@ class GridWidget extends GetView<StartServiceController> {
     return GestureDetector(
       onTap: () async {
         print("widgetTag $widgetTag");
-        print("category $category");
+        print("category id ${category!.id}");
         print("serviceItem $serviceItem");
         print("inFavList $inFavList");
 
@@ -56,7 +56,7 @@ class GridWidget extends GetView<StartServiceController> {
               await controller.getServicesContent(serviceItem!.serviceId);
 
           Get.to(() {
-            // print("serviceContent!.servicesType ${serviceContent!.servicesType}");
+            print("ImagePath ${category!.categoryIcon!}");
             return serviceContent!.servicesType! == ServiceType.content
                 ? ServiceContentView(
                     serviceContent: serviceContent,
