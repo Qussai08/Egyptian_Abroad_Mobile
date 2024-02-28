@@ -9,7 +9,6 @@ import 'package:egyptians_abroad/app/modules/home_showcase/views/widgets/custoum
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:loader_overlay/loader_overlay.dart';
 import 'package:showcaseview/showcaseview.dart';
 
 class FavoritesList extends StatelessWidget {
@@ -42,7 +41,7 @@ class FavoritesList extends StatelessWidget {
           ),
           SizedBox(height: 16.h),
           SizedBox(
-            height: 130.h,
+            height: 135.h,
             width: double.infinity,
             child: Row(
               children: [
@@ -62,13 +61,14 @@ class FavoritesList extends StatelessWidget {
                               itemCount: controller.favoritesList.length,
                               itemBuilder: (context, index) {
                                 return Padding(
-                                  padding: const EdgeInsets.only(left: 8.0),
+                                  padding: EdgeInsets.only(left: 8.w),
                                   child: GridWidget(
                                     index,
-                                    category: controller
-                                            .favoriteCategories.isNotEmpty
-                                        ? controller.favoriteCategories[index]
-                                        : null,
+                                    category: controller.favoriteCategories
+                                        .firstWhere((element) =>
+                                            element.id ==
+                                            controller.favoritesList[index]
+                                                .categoryId),
                                     serviceItem:
                                         controller.favoritesList[index],
                                     inFavList: true,

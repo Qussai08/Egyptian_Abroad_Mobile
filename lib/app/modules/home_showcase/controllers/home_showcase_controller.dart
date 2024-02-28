@@ -8,7 +8,6 @@ import 'package:showcaseview/showcaseview.dart';
 
 import '../../../core/helper/error_helper.dart';
 import '../../../core/helper/localization_helper.dart';
-import '../../../core/helper/secure_storage_helper.dart';
 import '../../../core/services/app_response.dart';
 import '../../../core/services/auth_service.dart';
 import '../../../core/services/models/category.dart';
@@ -37,6 +36,7 @@ class HomeShowcaseController extends GetxController {
     // isLoading = true;
     await getUserProfile();
     await getCategoriesList();
+    await fetchAllCategoriesFavUse();
     await updateFavoritesList(userId: authService.userID!);
 
     isLoading = false;
@@ -299,26 +299,29 @@ class HomeShowcaseController extends GetxController {
   Future<void> addToFavorites(
       {required String userId,
       required String serviceId,
-      required ServiceItem? service}) async {
-    favoritesListProvider
-        .addToFavorites(userId, serviceId)
-        .then((value) {}, onError: (error) {});
-    favoritesList.add(service!);
-    loadFavoritesCategories();
+      required ServiceItem service}) async {
+    await favoritesListProvider.addToFavorites(userId, serviceId).then((value) {
+      favoritesList.add(service);
+      loadFavoriteCategory(service);
+    }, onError: (error) {
+      print("Add to Favorites Error");
+    });
+
     update();
   }
 
   Future<void> removeFromFavorites(
       {required String userId,
       required String serviceId,
-      required ServiceItem? service}) async {
-    favoritesListProvider
-        .removeFromFavorites(userId, serviceId)
-        .then((value) {}, onError: (error) {});
-    favoritesList.removeWhere(
-      (element) => element.serviceId == int.parse(serviceId),
-    );
-    loadFavoritesCategories();
+      required ServiceItem service}) async {
+    await favoritesListProvider.removeFromFavorites(userId, serviceId).then(
+        (value) {
+      favoritesList.remove(service);
+      // favoritesList.removeWhere(
+      //   (element) => element.serviceId == int.parse(serviceId),
+      // );
+    }, onError: (error) {});
+
     update();
   }
 
@@ -326,15 +329,23 @@ class HomeShowcaseController extends GetxController {
   List<Category> allCategoriesFavUse = [];
   bool favoritesIsLoading = true;
   Future<void> updateFavoritesList({required String userId}) async {
+    List<ServiceItem> temp = [];
     await favoritesListProvider.getFavoritesList(userId).then(
       (value) async {
         if (value.isSuccess) {
           Iterable list = value.body;
-          favoritesList = list.map((e) => ServiceItem.fromJson(e)).toList();
-          favoritesList.sort((fav1, fav2) {
-            return !fav1.isFixedFavorite ? 1 : -1;
-          });
-          await loadFavoritesCategories();
+          temp = list.map((e) => ServiceItem.fromJson(e)).toList();
+
+          for (ServiceItem item in temp) {
+            if (item.isFixedFavorite) {
+              favoritesList.add(item);
+            }
+          }
+          temp.removeWhere((element) => element.isFixedFavorite);
+          favoritesList.addAll([...temp]);
+          for (ServiceItem item in favoritesList) {
+            loadFavoriteCategory(item);
+          }
         }
       },
       onError: (error) {
@@ -346,28 +357,40 @@ class HomeShowcaseController extends GetxController {
     update();
   }
 
-  loadFavoritesCategories() async {
-    favoriteCategories = [];
-    print(favoritesList.length);
-
+  fetchAllCategoriesFavUse() async {
     AppResponse response = await CategoriesRepository()
         .getCategories({"categoryName": "", "pageNo": 1, "pageSize": 5000});
     if (response.status) {
       CategoriesData categoriesData = CategoriesData.fromJson(response.data);
       allCategoriesFavUse = categoriesData.categories;
     }
+  }
 
-    
-    print("allCategoriesFavUse.length ${allCategoriesFavUse.length}");
-
-    if (favoritesList.isNotEmpty) {
-      await Future.forEach<ServiceItem>(favoritesList, (item) {
-        Category favCat = allCategoriesFavUse
-            .firstWhere((element) => element.id == item.categoryId);
-        favoriteCategories.add(favCat);
-      });
+  loadFavoriteCategory(ServiceItem item) {
+    for (Category cat in allCategoriesFavUse) {
+      if (cat.id == item.categoryId && !favoriteCategories.contains(cat)) {
+        favoriteCategories.add(cat);
+        print(
+            "cat.id ${cat.id} has been added to favoriteCategories list to use with service item ${item.serviceName}");
+        break;
+      }
     }
   }
+
+  // loadFavoritesCategories() async {
+  //   favoriteCategories = [];
+  //   print(favoritesList.length);
+
+  //   print("allCategoriesFavUse.length ${allCategoriesFavUse.length}");
+
+  //   if (favoritesList.isNotEmpty) {
+  //     await Future.forEach<ServiceItem>(favoritesList, (item) {
+  //       Category favCat = allCategoriesFavUse
+  //           .firstWhere((element) => element.id == item.categoryId);
+  //       favoriteCategories.add(favCat);
+  //     });
+  //   }
+  // }
 
   void handleError(String error) {
     Get.showSnackbar(
