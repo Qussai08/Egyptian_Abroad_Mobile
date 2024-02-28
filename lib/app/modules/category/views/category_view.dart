@@ -67,12 +67,12 @@ class _CategoryViewState extends State<CategoryView> {
                     ),
                   ),
                   body: Container(
-                    height: fixDpiScreenHeight(),
+                    height: fixDpiScreenHeight() - 56,
                     padding: EdgeInsets.symmetric(horizontal: 16.w),
                     child: ListView(
                       physics: const NeverScrollableScrollPhysics(),
                       children: [
-                        SizedBox(height: 40.h),
+                        SizedBox(height: 10.h),
                         CustomTextFormField(
                           controller: _searchController,
                           prefixIcon: const Icon(
@@ -100,10 +100,12 @@ class _CategoryViewState extends State<CategoryView> {
                           },
                         ),
                         SizedBox(
-                          height: 45.h,
+                          height: 20.h,
                         ),
-                        SizedBox(
-                          height: (fixDpiScreenHeight() * 0.7).h,
+                        Container(
+                          //color: Colors.red,
+                          padding: EdgeInsets.only(bottom: 20.h),
+                          height: fixDpiScreenHeight() * 0.72 + 40.h,
                           child: ListView(
                             shrinkWrap: true,
                             children: [
@@ -112,6 +114,7 @@ class _CategoryViewState extends State<CategoryView> {
                                 padding: EdgeInsets.symmetric(horizontal: 0.w),
                                 width: double.infinity,
                                 child: Column(
+                                  mainAxisSize: MainAxisSize.min,
                                   children: [
                                     // categoryController.servicesLoading
                                     //     ? Container(
@@ -137,7 +140,7 @@ class _CategoryViewState extends State<CategoryView> {
                                             gridDelegate:
                                                 SliverGridDelegateWithMaxCrossAxisExtent(
                                               maxCrossAxisExtent: 100.w,
-                                              mainAxisSpacing: 50.h,
+                                              mainAxisSpacing: 40.h,
                                               crossAxisSpacing: 47.w,
                                               childAspectRatio: 0.96,
                                             ),
@@ -155,7 +158,7 @@ class _CategoryViewState extends State<CategoryView> {
                                   ],
                                 ),
                               ),
-                              SizedBox(height: 50.h),
+                              SizedBox(height: 40.h),
                             ],
                           ),
                         ),
