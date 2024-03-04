@@ -183,8 +183,14 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                               });
                             },
                             icon: _obsecureText
-                                ? Image.asset(AppImages.showPasswordIcon)
-                                : Image.asset(AppImages.hidePasswordIcon),
+                                ? Image.asset(
+                                    AppImages.showPasswordIcon,
+                                    scale: 4,
+                                  )
+                                : Image.asset(
+                                    AppImages.hidePasswordIcon,
+                                    scale: 4,
+                                  ),
                           ),
                         )
                       : widget.suffixIcon

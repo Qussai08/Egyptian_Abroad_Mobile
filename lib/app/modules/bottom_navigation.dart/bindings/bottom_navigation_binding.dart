@@ -14,8 +14,8 @@ class BottomNavigationBinding extends Bindings {
   @override
   void dependencies() {
     // Favorites
-    Get.put<FavoritesListProvider>(FavoritesListProvider());
-    Get.put<StartServiceController>(StartServiceController());
+    Get.lazyPut<FavoritesListProvider>(() => FavoritesListProvider());
+    Get.lazyPut<StartServiceController>(() => StartServiceController());
 
     // Home
     Get.put<HomeShowcaseController>(HomeShowcaseController());
@@ -23,16 +23,18 @@ class BottomNavigationBinding extends Bindings {
     Get.put<HomeShowcaseController>(HomeShowcaseController());
 
     // Events
-    Get.put<EventsProvider>(EventsProvider());
-    Get.put<EventsController>(EventsController());
+    // Get.put<EventsProvider>(EventsProvider());
+    // Get.put<EventsController>(EventsController());
+    Get.lazyPut<EventsProvider>(() => EventsProvider());
+    Get.lazyPut<EventsController>(() => EventsController());
 
     // Notifications
-    Get.put<NotificationsProvider>(NotificationsProvider());
-    Get.put<NotificationsController>(NotificationsController());
+    Get.lazyPut<NotificationsProvider>(() => NotificationsProvider());
+    Get.lazyPut<NotificationsController>(() => NotificationsController());
 
     //More
     Get.lazyPut<MoreController>(() => MoreController());
     // BottomNavigation
-    Get.put<BottomNavigationController>(BottomNavigationController());
+    Get.lazyPut<BottomNavigationController>(() => BottomNavigationController());
   }
 }

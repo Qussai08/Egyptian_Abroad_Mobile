@@ -48,6 +48,7 @@ class MoreView extends GetView<MoreController> {
           ListTileWidget(
               text: AppStrings.profile.tr,
               imageAsset: AppImages.profileIcon,
+              imageScale: 4,
               onTap: () => controller.changeView(Routes.ViewACCOUNT)),
           const Divider(color: Styles.grey_200, height: 0),
           ListTileWidget(
@@ -74,6 +75,7 @@ class MoreView extends GetView<MoreController> {
           ListTileWidget(
             text: AppStrings.logOut.tr,
             imageAsset: AppImages.logoutIcon,
+            imageScale: 4,
             onTap: () async {
               await controller
                   .onLogout()
