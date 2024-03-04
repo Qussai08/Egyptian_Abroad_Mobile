@@ -1,7 +1,9 @@
+import 'package:egyptians_abroad/app/core/custom_widgets/image_placeholder.dart';
 import 'package:egyptians_abroad/app/core/helper/app_helper.dart';
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/services/models/category.dart';
 import 'package:egyptians_abroad/app/core/services/models/service.dart';
+import 'package:egyptians_abroad/app/core/theme/app_images.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:egyptians_abroad/app/modules/category/views/category_view.dart';
 import 'package:egyptians_abroad/app/modules/home_showcase/views/widgets/favorite_button.dart';
@@ -96,34 +98,28 @@ class GridWidget extends GetView<StartServiceController> {
                       // borderRadius: BorderRadius.circular(15.0),
                       child: Stack(
                     children: [
-                      // isNotPng
-                      //     ? SvgPicture.network(isService
-                      //         ? serviceItem!.servicesIcon!
-                      //         : category!.imagePath!)
-                      //     : Image.network(isService
-                      //         ? serviceItem!.servicesIcon ??
-                      //             "https://www.kuleuven.be/communicatie/congresbureau/fotos-en-afbeeldingen/no-image.png/image"
-                      //         : category!.imagePath ??
-                      //             "https://www.kuleuven.be/communicatie/congresbureau/fotos-en-afbeeldingen/no-image.png/image"),
-
                       isNotPng
                           ? SvgPicture.network(
-                              isService
-                                  ? serviceItem!.servicesIcon!
-                                  : category!.imagePath!,
-                              placeholderBuilder: (context) => Image.network(
-                                    "https://www.kuleuven.be/communicatie/congresbureau/fotos-en-afbeeldingen/no-image.png/image",
-                                  ))
+                              (isService
+                                      ? serviceItem!.servicesIcon
+                                      : category!.imagePath) ??
+                                  AppImages.imagePlaceHolder,
+                              placeholderBuilder: (context) =>
+                                  ImagePlaceholder(),
+                            )
                           : Image.network(
-                              isService
-                                  ? serviceItem!.servicesIcon ??
-                                      "https://www.kuleuven.be/communicatie/congresbureau/fotos-en-afbeeldingen/no-image.png/image"
-                                  : category!.imagePath ??
-                                      "https://www.kuleuven.be/communicatie/congresbureau/fotos-en-afbeeldingen/no-image.png/image",
+                              (isService
+                                      ? serviceItem!.servicesIcon
+                                      : category!.imagePath) ??
+                                  AppImages.imagePlaceHolder,
+                              loadingBuilder: (BuildContext context,
+                                  Widget child,
+                                  ImageChunkEvent? loadingProgress) {
+                                if (loadingProgress == null) return child;
+                                return ImagePlaceholder();
+                              },
                               errorBuilder: (context, error, stackTrace) =>
-                                  Image.network(
-                                "https://www.kuleuven.be/communicatie/congresbureau/fotos-en-afbeeldingen/no-image.png/image",
-                              ),
+                                  Image.asset(AppImages.imagePlaceHolder),
                             ),
                       isService
                           ? Positioned(

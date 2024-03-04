@@ -1,5 +1,7 @@
 import 'dart:developer';
 
+import 'package:egyptians_abroad/app/core/custom_widgets/image_placeholder.dart';
+import 'package:egyptians_abroad/app/modules/home_showcase/views/widgets/grid_placeholder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -72,33 +74,36 @@ class CategoriesListWidget extends StatelessWidget {
           //         ),
           //       )
           //     :
-          homeContoller.displayedCategoriesList.isEmpty
-              ? Container(
-                  height: 200,
-                  padding: EdgeInsets.only(top: 20),
-                  child: NoDataWidget(
-                    message: AppStrings.noServices.tr,
-                  ),
-                )
-              : Flexible(
-                  child: GridView.builder(
-                    physics: NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    padding: EdgeInsets.only(top: 23.h),
-                    gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                      maxCrossAxisExtent: 125.w,
-                      childAspectRatio: 0.96,
+
+          homeContoller.categoriesLoading
+              ? GridPlaceholder()
+              : homeContoller.displayedCategoriesList.isEmpty
+                  ? Container(
+                      height: 200,
+                      padding: EdgeInsets.only(top: 20),
+                      child: NoDataWidget(
+                        message: AppStrings.noServices.tr,
+                      ),
+                    )
+                  : Flexible(
+                      child: GridView.builder(
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        padding: EdgeInsets.only(top: 23.h),
+                        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                          maxCrossAxisExtent: 125.w,
+                          childAspectRatio: 0.96,
+                        ),
+                        scrollDirection: Axis.vertical,
+                        itemCount: homeContoller.displayedCategoriesList.length,
+                        itemBuilder: (ctx, i) {
+                          return GridWidget(
+                            i,
+                            category: homeContoller.displayedCategoriesList[i],
+                          );
+                        },
+                      ),
                     ),
-                    scrollDirection: Axis.vertical,
-                    itemCount: homeContoller.displayedCategoriesList.length,
-                    itemBuilder: (ctx, i) {
-                      return GridWidget(
-                        i,
-                        category: homeContoller.displayedCategoriesList[i],
-                      );
-                    },
-                  ),
-                ),
           !homeContoller.categoriesLoading &&
                   homeContoller.displayedCategoriesList.isNotEmpty &&
                   homeContoller.showMore
