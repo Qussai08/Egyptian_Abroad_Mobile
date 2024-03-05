@@ -1,11 +1,13 @@
 import 'dart:developer';
 
 import 'package:egyptians_abroad/app/core/custom_widgets/grid_widget.dart';
+import 'package:egyptians_abroad/app/core/custom_widgets/image_placeholder.dart';
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:egyptians_abroad/app/modules/home_showcase/controllers/home_showcase_controller.dart';
 import 'package:egyptians_abroad/app/modules/home_showcase/views/widgets/custoum_showcase_widget.dart';
+import 'package:egyptians_abroad/app/modules/start_service/controllers/start_service_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -53,29 +55,35 @@ class FavoritesList extends StatelessWidget {
                       // controller.favoritesIsLoading
                       //     ? context.loaderOverlay.show()
                       //     : context.loaderOverlay.hide();
-                      return controller.favoriteCategories.isEmpty &&
-                              controller.favoritesList.isEmpty
-                          ? Container()
-                          : ListView.builder(
+                      Get.find<StartServiceController>();
+                      return controller.favoritesIsLoading
+                          ? ListView(
                               scrollDirection: Axis.horizontal,
-                              itemCount: controller.favoritesList.length,
-                              itemBuilder: (context, index) {
-                                return Padding(
-                                  padding: EdgeInsets.only(left: 8.w),
-                                  child: GridWidget(
-                                    index,
-                                    category: controller.favoriteCategories
-                                        .firstWhere((element) =>
-                                            element.id ==
-                                            controller.favoritesList[index]
-                                                .categoryId),
-                                    serviceItem:
-                                        controller.favoritesList[index],
-                                    inFavList: true,
-                                  ),
+                              children: [ImagePlaceholder()],
+                            )
+                          : controller.favoriteCategories.isEmpty &&
+                                  controller.favoritesList.isEmpty
+                              ? Container()
+                              : ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: controller.favoritesList.length,
+                                  itemBuilder: (context, index) {
+                                    return Padding(
+                                      padding: EdgeInsets.only(left: 8.w),
+                                      child: GridWidget(
+                                        index,
+                                        category: controller.favoriteCategories
+                                            .firstWhere((element) =>
+                                                element.id ==
+                                                controller.favoritesList[index]
+                                                    .categoryId),
+                                        serviceItem:
+                                            controller.favoritesList[index],
+                                        inFavList: true,
+                                      ),
+                                    );
+                                  },
                                 );
-                              },
-                            );
                     }),
                   ),
                 ),

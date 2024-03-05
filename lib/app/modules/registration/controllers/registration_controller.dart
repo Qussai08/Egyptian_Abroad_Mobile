@@ -23,6 +23,7 @@ import '../views/complete_account_residence.dart';
 import '../views/select_avatar.dart';
 
 class RegistrationController extends GetxController {
+  double screenHeightPercentage = 0.94;
   // Auth service
   final AuthService authService = Get.find();
 
@@ -36,6 +37,11 @@ class RegistrationController extends GetxController {
   void onInit() {
     super.onInit();
     getCountriesList();
+  }
+
+  updateScreenHeight() {
+    screenHeightPercentage = 0.99;
+    update();
   }
 
   final TextEditingController nameTxtController = TextEditingController();
@@ -104,7 +110,7 @@ class RegistrationController extends GetxController {
       Get.showSnackbar(
         buildCustomToast(
           Get.context!,
-          toastMsg: "تم إنشاء الحساب بنجاح",
+          toastMsg: "تم إنشاء حساب جديد بنجاح",
           toastTitle: 'تاكيد',
           toastType: ToastType.success,
         ),

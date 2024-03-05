@@ -9,9 +9,6 @@ import '../../events/controllers/event_controller.dart';
 import '../../notifications/controllers/notifications_controller.dart';
 
 class BottomNavigationController extends GetxController {
-  final NotificationsController notificationsController =
-      Get.find<NotificationsController>();
-  final EventsController eventsController = Get.find<EventsController>();
   var tabIndex = 0;
 
   final List<Widget> _navigationScreens = [
@@ -22,18 +19,18 @@ class BottomNavigationController extends GetxController {
   ];
 
   void changeTabIndex(int index) {
-    tabIndex = index;
-    if (index == 1) {
-      getNotifications();
+    if (tabIndex != index) {
+      tabIndex = index;
+      if (index == 1) {
+        getNotifications();
+      }
+      if (index == 2) {
+        getEvents();
+      } else {
+        disposeEvents();
+      }
+      update();
     }
-    if (index == 2) {
-      getEvents();
-    } else {
-      eventsController.clear();
-      eventsController.clearFilters();
-
-    }
-    update();
   }
 
   Widget get selectedContent {
@@ -42,11 +39,22 @@ class BottomNavigationController extends GetxController {
 
   // call notification api
   getNotifications() {
+    final NotificationsController notificationsController =
+        Get.find<NotificationsController>();
     notificationsController.loadNotifications();
   }
 
 // TODO : load events
   getEvents() {
+    final EventsController eventsController = Get.find<EventsController>();
+
     eventsController.loadEvents();
+  }
+
+  disposeEvents() {
+    final EventsController eventsController = Get.find<EventsController>();
+    eventsController.clear();
+    eventsController.clearFilters();
+    // eventsController.dispose();
   }
 }

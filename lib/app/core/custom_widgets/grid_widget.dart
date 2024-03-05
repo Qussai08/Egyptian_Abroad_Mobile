@@ -58,11 +58,15 @@ class GridWidget extends GetView<StartServiceController> {
               await controller.getServicesContent(serviceItem!.serviceId);
 
           Get.to(() {
+            print("serviceItemIcon ${serviceItem!.servicesIcon}");
+
             print("ImagePath ${category!.categoryIcon!}");
             return serviceContent!.servicesType! == ServiceType.content
                 ? ServiceContentView(
+                    serviceItem: serviceItem,
                     serviceContent: serviceContent,
                     category: category,
+                    iconIsPNG: !isNotPng,
                   )
                 : StartServiceRedir(
                     serviceContent: serviceContent,

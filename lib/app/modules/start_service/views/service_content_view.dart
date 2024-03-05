@@ -6,7 +6,9 @@ import 'package:egyptians_abroad/app/core/helper/localization_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/core/services/auth_service.dart';
 import 'package:egyptians_abroad/app/core/services/models/category.dart';
+import 'package:egyptians_abroad/app/core/services/models/service.dart';
 import 'package:egyptians_abroad/app/core/services/models/service_content.dart';
+import 'package:egyptians_abroad/app/core/theme/app_images.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/custom_appbar.dart';
 import 'package:egyptians_abroad/app/modules/start_service/views/url_service_view.dart';
@@ -14,13 +16,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart' as html;
 // import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
 
 class ServiceContentView extends StatefulWidget {
   final Category? category;
+  final ServiceItem? serviceItem;
   final ServiceContent? serviceContent;
-  const ServiceContentView({super.key, this.category, this.serviceContent});
+  final bool iconIsPNG;
+  const ServiceContentView({
+    super.key,
+    this.category,
+    this.serviceContent,
+    this.serviceItem,
+    this.iconIsPNG = true,
+  });
 
   @override
   State<ServiceContentView> createState() => _ServiceContentViewState();
@@ -70,11 +81,19 @@ class _ServiceContentViewState extends State<ServiceContentView> {
                           SizedBox(
                             height: 20.h,
                           ),
-                          Image.network(
-                            widget.category!.categoryIcon!,
-                            width: 180.w,
-                            height: 180.w,
-                          ),
+                          widget.iconIsPNG
+                              ? Image.network(
+                                  widget.serviceItem!.servicesIcon ??
+                                      AppImages.imagePlaceHolder,
+                                  width: 80.w,
+                                  height: 80.w,
+                                )
+                              : SvgPicture.network(
+                                  widget.serviceItem!.servicesIcon ??
+                                      AppImages.imagePlaceHolder,
+                                  width: 80.w,
+                                  height: 80.w,
+                                ),
                           SizedBox(
                             height: 48.h,
                           ),

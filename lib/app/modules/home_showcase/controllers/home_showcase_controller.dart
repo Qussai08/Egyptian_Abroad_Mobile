@@ -22,7 +22,7 @@ class HomeShowcaseController extends GetxController {
   final TextEditingController searchController = TextEditingController();
   List<ServiceItem> favoritesList = [];
   // Auth service
-  final favoritesListProvider = Get.put(FavoritesListProvider());
+  final favoritesListProvider = Get.find<FavoritesListProvider>();
 
   // Auth service
   final authService = Get.find<AuthService>();
@@ -166,7 +166,11 @@ class HomeShowcaseController extends GetxController {
       );
     }
 
-    if (applyLoading) _updateCategoriesLoading(false);
+    if (applyLoading) {
+      Future.delayed(Duration(seconds: 2), () {
+        _updateCategoriesLoading(false);
+      });
+    }
     print("categoriesLoading: $categoriesLoading");
   }
 

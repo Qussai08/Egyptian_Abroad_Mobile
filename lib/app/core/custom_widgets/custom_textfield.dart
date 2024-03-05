@@ -4,6 +4,7 @@ import 'package:egyptians_abroad/app/core/theme/app_images.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomTextFormField extends StatefulWidget {
   final TextStyle? hintStyle;
@@ -208,8 +209,14 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                           width: 25,
                         ),
               prefix: widget.prefix,
+              prefixIconConstraints: BoxConstraints(
+                maxHeight: 16.h,
+                maxWidth: 41.w,
+              ),
               prefixIcon: !widget.prefixIconIsImage!
-                  ? widget.prefixIcon
+                  ? Padding(
+                      padding: EdgeInsets.only(right: 15.w, left: 10.w),
+                      child: widget.prefixIcon)
                   : _focusNode.hasFocus
                       ? Image.asset(
                           widget.prefixIconImagePath!,
@@ -223,6 +230,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                           height: 25,
                           width: 25,
                         ),
+
               hintText: widget.hintTxt,
               errorStyle: Styles.getRegularStyle(
                   color: Styles.red, fontSize: fixDpiFont(11)),

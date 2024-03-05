@@ -8,6 +8,7 @@ import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/core/services/auth_service.dart';
 import 'package:egyptians_abroad/app/core/services/models/category.dart';
+import 'package:egyptians_abroad/app/core/theme/app_images.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
@@ -46,7 +47,10 @@ class _CategoryViewState extends State<CategoryView> {
             body: Container(
                 decoration: BoxDecoration(
                     gradient: LinearGradient(
-                  begin: Alignment.topCenter,
+                  begin: const Alignment(
+                    0.0,
+                    -1.0,
+                  ),
                   end: const Alignment(
                     0.0,
                     -0.4,
@@ -63,7 +67,7 @@ class _CategoryViewState extends State<CategoryView> {
                       widget.category!.categoryName,
                       textAlign: TextAlign.center,
                       style: Styles.getBoldStyle(
-                          color: Styles.black, fontSize: fixDpiFont(26)),
+                          color: Styles.black, fontSize: fixDpiFont(27)),
                     ),
                   ),
                   body: Container(
@@ -72,12 +76,12 @@ class _CategoryViewState extends State<CategoryView> {
                     child: ListView(
                       physics: const NeverScrollableScrollPhysics(),
                       children: [
-                        SizedBox(height: 10.h),
+                        SizedBox(height: 48.h),
                         CustomTextFormField(
                           controller: _searchController,
-                          prefixIcon: const Icon(
-                            Icons.search,
-                            color: Styles.primaryColor,
+                          prefixIcon: Image.asset(
+                            AppImages.searchIcon,
+                            scale: 2.0,
                           ),
                           inputData: TextInputType.text,
                           textInputAction: TextInputAction.search,

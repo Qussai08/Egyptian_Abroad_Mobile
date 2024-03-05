@@ -52,6 +52,8 @@ class AppImages {
 
   static const imagePlaceHolder = 'assets/images/image_placeholder.png';
 
+  static const searchIcon = 'assets/icons/search_icon.png';
+
   static const List<String> avatars = [
     'assets/avatars/1.png',
     'assets/avatars/2.png',

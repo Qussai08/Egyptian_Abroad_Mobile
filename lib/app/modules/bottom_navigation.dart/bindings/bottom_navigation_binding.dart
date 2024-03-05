@@ -19,8 +19,6 @@ class BottomNavigationBinding extends Bindings {
 
     // Home
     Get.put<HomeShowcaseController>(HomeShowcaseController());
-    // Get.put<HomeController>(HomeController());
-    Get.put<HomeShowcaseController>(HomeShowcaseController());
 
     // Events
     // Get.put<EventsProvider>(EventsProvider());
