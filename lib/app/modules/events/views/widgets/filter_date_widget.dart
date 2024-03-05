@@ -21,6 +21,8 @@ class FilterWithDateWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String formattedDateFrom = '';
+    String formattedDateTo = '';
     return GetBuilder<EventsController>(
         builder: (eventsController) => Container(
               height: 50.h,
@@ -49,22 +51,64 @@ class FilterWithDateWidget extends StatelessWidget {
                               ),
                               height: size.height * 0.27,
                               width: fixDpiScreenWidth(),
-                              child: CupertinoDatePicker(
-                                
-                                mode: CupertinoDatePickerMode.date,
-                                onDateTimeChanged: (DateTime pickedDate) {
-                                  String formattedDate =
-                                      intl.DateFormat('yyyy-MM-dd HH:mm:ss')
-                                          .format(pickedDate);
+                              child: Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      TextButton(
+                                          onPressed: () {
+                                            if (formattedDateFrom.isEmpty) {
+                                              formattedDateFrom =
+                                                  intl.DateFormat(
+                                                          'yyyy-MM-dd HH:mm:ss')
+                                                      .format(
+                                                          con.dateTo.isNotEmpty
+                                                              ? DateTime.parse(
+                                                                  con.dateTo)
+                                                              : _dateTime);
+                                            }
+                                            con.setDateFrom(formattedDateFrom);
+                                            Get.back();
+                                            formattedDateFrom = '';
+                                          },
+                                          child: Text(
+                                            'تأكيد',
+                                            style: Styles.getMediumStyle(
+                                                color: Styles.primaryColor),
+                                          )),
+                                      TextButton(
+                                          onPressed: () {
+                                            Get.back();
+                                            formattedDateFrom = '';
+                                          },
+                                          child: Text(
+                                            'إلغاء',
+                                            style: Styles.getMediumStyle(
+                                                color: Styles.primaryColor),
+                                          )),
+                                    ],
+                                  ),
+                                  Expanded(
+                                    child: CupertinoDatePicker(
+                                      mode: CupertinoDatePickerMode.date,
+                                      onDateTimeChanged: (DateTime pickedDate) {
+                                        formattedDateFrom = intl.DateFormat(
+                                                'yyyy-MM-dd HH:mm:ss')
+                                            .format(pickedDate);
 
-                                  con.setDateFrom(formattedDate);
-                                },
-                                maximumDate: con.dateTo.isNotEmpty
-                                    ? DateTime.parse(con.dateTo)
-                                    : null,
-                                initialDateTime: con.dateTo.isNotEmpty
-                                    ? DateTime.parse(con.dateTo)
-                                    : _dateTime,
+                                        // con.setDateFrom(formattedDate);
+                                      },
+                                      maximumDate: con.dateTo.isNotEmpty
+                                          ? DateTime.parse(con.dateTo)
+                                          : null,
+                                      initialDateTime: con.dateTo.isNotEmpty
+                                          ? DateTime.parse(con.dateTo)
+                                          : _dateTime,
+                                    ),
+                                  ),
+                                ],
                               ),
                             );
                           });
@@ -117,19 +161,59 @@ class FilterWithDateWidget extends StatelessWidget {
                                 ),
                               ),
                               height: size.height * 0.27,
-                              child: CupertinoDatePicker(
-                                mode: CupertinoDatePickerMode.date,
-                                onDateTimeChanged: (DateTime pickedDate) {
-                                  String formattedDate =
-                                      intl.DateFormat('yyyy-MM-dd HH:mm:ss')
-                                          .format(pickedDate);
+                              child: Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      TextButton(
+                                          onPressed: () {
+                                            if (formattedDateTo.isEmpty) {
+                                              formattedDateTo = intl.DateFormat(
+                                                      'yyyy-MM-dd HH:mm:ss')
+                                                  .format(_dateTime);
+                                            }
+                                            con.setDateTo(formattedDateTo);
+                                            Get.back();
+                                            formattedDateTo = '';
+                                          },
+                                          child: Text(
+                                            'تأكيد',
+                                            style: Styles.getMediumStyle(
+                                                color: Styles.primaryColor),
+                                          )),
+                                      TextButton(
+                                          onPressed: () {
+                                            Get.back();
+                                            formattedDateTo = '';
+                                          },
+                                          child: Text(
+                                            'إلغاء',
+                                            style: Styles.getMediumStyle(
+                                                color: Styles.primaryColor),
+                                          )),
+                                    ],
+                                  ),
+                                  Expanded(
+                                    child: CupertinoDatePicker(
+                                      mode: CupertinoDatePickerMode.date,
+                                      onDateTimeChanged: (DateTime pickedDate) {
+                                        formattedDateTo = intl.DateFormat(
+                                                'yyyy-MM-dd HH:mm:ss')
+                                            .format(pickedDate);
 
-                                  con.setDateTo(formattedDate);
-                                },
-                                minimumDate: con.dateFrom.isNotEmpty
-                                    ? DateTime.parse(con.dateFrom)
-                                    : null,
-                                initialDateTime: _dateTime,
+                                        // con.setDateTo(formattedDate);
+                                      },
+                                      minimumDate: con.dateFrom.isNotEmpty
+                                          ? DateTime.parse(con.dateFrom)
+                                          : null,
+                                      initialDateTime: con.dateFrom.isNotEmpty
+                                          ? DateTime.parse(con.dateFrom)
+                                          : _dateTime,
+                                    ),
+                                  ),
+                                ],
                               ),
                             );
                           });

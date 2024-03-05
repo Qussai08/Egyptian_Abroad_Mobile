@@ -20,7 +20,7 @@ class SplashView extends StatelessWidget {
             image:
                 // SvgPicture(AppImages.svgSplash),
                 AssetImage(AppImages.splash),
-            fit: BoxFit.cover,
+            fit: BoxFit.fill,
           ),
         ),
         child: SafeArea(

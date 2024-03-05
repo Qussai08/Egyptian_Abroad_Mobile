@@ -1,3 +1,4 @@
+import 'package:egyptians_abroad/app/core/theme/app_images.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -20,10 +21,11 @@ class HomeSearchWidget extends StatelessWidget {
     FocusNode _focusNode = FocusNode();
     return CustomTextFormField(
       controller: homeContoller.searchController,
-      prefixIcon: const Icon(
-        Icons.search,
-        color: Styles.primaryColor,
+      prefixIcon: Image.asset(
+        AppImages.searchIcon,
+        scale: 2.0,
       ),
+
       inputData: TextInputType.text,
       textInputAction: TextInputAction.search,
       // autofocus: true,
