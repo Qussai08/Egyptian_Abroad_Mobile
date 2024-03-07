@@ -116,6 +116,8 @@ class GridWidget extends GetView<StartServiceController> {
                                       ? serviceItem!.servicesIcon
                                       : category!.imagePath) ??
                                   AppImages.imagePlaceHolder,
+                              cacheHeight: 279,
+                              cacheWidth: 279,
                               loadingBuilder: (BuildContext context,
                                   Widget child,
                                   ImageChunkEvent? loadingProgress) {

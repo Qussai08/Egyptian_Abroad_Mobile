@@ -4,6 +4,7 @@ import 'package:egyptians_abroad/app/core/theme/app_images.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -27,23 +28,33 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       title: Row(
         mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 5.0),
+            padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 8.w),
             child: Image.asset(
               AppImages.travel,
-              width: 40.w,
-              height: 40.h,
+              width: 30.w,
+              height: 30.h,
               fit: BoxFit.fitHeight,
             ),
           ),
-          Text(
-            " ${AppStrings.appName.tr}",
-            textAlign: TextAlign.center,
-            style: Styles.getBoldStyle(
-                color: Styles.black, fontSize: fixDpiFont(16)),
+
+          Padding(
+            padding: EdgeInsets.only(top: 8.h),
+            child: SvgPicture.asset(
+              AppImages.logoName,
+              width: 102.w,
+              alignment: Alignment.topCenter,
+            ),
           ),
+          // Text(
+          //   " ${AppStrings.appName.tr}",
+          //   textAlign: TextAlign.center,
+          //   style: Styles.getBoldStyle(
+          //       color: Styles.black, fontSize: fixDpiFont(16)),
+          // ),
         ],
       ),
       leading: Padding(

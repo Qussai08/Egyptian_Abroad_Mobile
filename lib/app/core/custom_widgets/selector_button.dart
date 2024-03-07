@@ -57,6 +57,8 @@ class SelectorButton extends StatelessWidget {
                     countries
                         .firstWhere((element) => element.id == selectedCountry)
                         .flag,
+                    cacheHeight: 52,
+                    cacheWidth: 73,
                     width: 21,
                     height: 15,
                     fit: BoxFit.cover,

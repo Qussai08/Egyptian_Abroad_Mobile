@@ -1,4 +1,3 @@
-import 'package:egyptians_abroad/app/core/custom_widgets/custom_button.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/custom_textfield.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/grid_widget.dart';
 import 'package:egyptians_abroad/app/core/custom_widgets/network_indecator.dart';
@@ -6,7 +5,6 @@ import 'package:egyptians_abroad/app/core/custom_widgets/no_data_widget.dart';
 import 'package:egyptians_abroad/app/core/helper/app_helper.dart';
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
-import 'package:egyptians_abroad/app/core/services/auth_service.dart';
 import 'package:egyptians_abroad/app/core/services/models/category.dart';
 import 'package:egyptians_abroad/app/core/theme/app_images.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
@@ -34,7 +32,7 @@ class _CategoryViewState extends State<CategoryView> {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(CategoryController(widget.category!.id));
-    AuthService authService = Get.find();
+    // AuthService authService = Get.find();
 
     return NetworkIndicator(
       child: GetBuilder<CategoryController>(
@@ -47,13 +45,13 @@ class _CategoryViewState extends State<CategoryView> {
             body: Container(
                 decoration: BoxDecoration(
                     gradient: LinearGradient(
-                  begin: const Alignment(
-                    0.0,
-                    -1.0,
+                  begin: Alignment(
+                    0.0.w,
+                    -1.0.w,
                   ),
-                  end: const Alignment(
-                    0.0,
-                    -0.4,
+                  end: Alignment(
+                    0.0.w,
+                    -0.4.w,
                   ),
                   colors: [
                     widget.category!.categoryColor!.toColor(),

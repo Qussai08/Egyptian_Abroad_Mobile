@@ -1,11 +1,8 @@
-import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
 
-import '../../../core/helper/dpi_helper.dart';
 import '../../../core/theme/app_images.dart';
 
 class SplashView extends StatelessWidget {
@@ -17,9 +14,7 @@ class SplashView extends StatelessWidget {
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image:
-                // SvgPicture(AppImages.svgSplash),
-                AssetImage(AppImages.splash),
+            image: AssetImage(AppImages.splash),
             fit: BoxFit.fill,
           ),
         ),
@@ -31,7 +26,7 @@ class SplashView extends StatelessWidget {
               children: [
                 Container(
                   alignment: Alignment.topLeft,
-                  margin: EdgeInsets.only(left: 25.w),
+                  margin: EdgeInsets.only(left: 25.w, top: 10.h),
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -40,23 +35,29 @@ class SplashView extends StatelessWidget {
                         width: 90.w,
                         fit: BoxFit.fitWidth,
                       ),
-                      Text(
-                        AppStrings.appName.tr,
-                        textAlign: TextAlign.center,
-                        style: Styles.getBoldStyle(
-                            color: Styles.black, fontSize: fixDpiFont(21)),
+                      SizedBox(height: 30.h),
+                      SvgPicture.asset(
+                        AppImages.logoName,
+                        width: 136.w,
                       ),
-                      Container(
-                        width: 150.w,
-                        padding: const EdgeInsets.symmetric(horizontal: 12),
-                        child: Text(
-                          AppStrings.splashDiscription.tr,
-                          textAlign: TextAlign.center,
-                          style: Styles.getRegularStyle(
-                              color: Styles.blueBlack,
-                              fontSize: fixDpiFont(11)),
-                        ),
-                      )
+                      // Text(
+                      //   AppStrings.appName.tr,
+                      //   textAlign: TextAlign.center,
+                      //   style: Styles.getBoldStyle(
+                      //           color: Styles.black, fontSize: fixDpiFont(21))
+                      //       .copyWith(fontFamily: 'Helvetica'),
+                      // ),
+                      // Container(
+                      //   width: 150.w,
+                      //   padding: const EdgeInsets.symmetric(horizontal: 12),
+                      //   child: Text(
+                      //     AppStrings.splashDiscription.tr,
+                      //     textAlign: TextAlign.center,
+                      //     style: Styles.getRegularStyle(
+                      //         color: Styles.blueBlack,
+                      //         fontSize: fixDpiFont(11)),
+                      //   ),
+                      // )
                     ],
                   ),
                 ),

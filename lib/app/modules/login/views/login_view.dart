@@ -35,7 +35,6 @@ class _LoginViewState extends State<LoginView> with ValidationMixin {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(LoginController());
-    final registrationController = Get.put(RegistrationController());
 
     return NetworkIndicator(
       child: SafeArea(
@@ -168,7 +167,9 @@ class _LoginViewState extends State<LoginView> with ValidationMixin {
                         text: AppStrings.registerWithCarsAccount.tr,
                         textColor: Styles.black3,
                         onPressed: () {
-                          registrationController.setRegisterWithCars(true);
+                          // final registrationController =
+                          //     Get.find<RegistrationController>();
+                          // registrationController.setRegisterWithCars(true);
                           Get.bottomSheet(RegisterWithCarsBottomSheet(),
                               isDismissible: false);
                         },
@@ -186,10 +187,7 @@ class _LoginViewState extends State<LoginView> with ValidationMixin {
                           ),
                           GestureDetector(
                             onTap: () {
-                              registrationController.setRegisterWithCars(false);
-                              Get.toNamed(
-                                Routes.REGISTRATION,
-                              );
+                              controller.onRegister();
                             },
                             child: Text(
                               AppStrings.registerNow.tr,

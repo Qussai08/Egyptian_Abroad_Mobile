@@ -15,7 +15,6 @@ import 'package:egyptians_abroad/app/modules/registration/views/cars_first_step.
 import 'package:egyptians_abroad/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:otp_text_field/otp_text_field.dart';
 
 import '../../otp/views/otp_view.dart';
@@ -36,7 +35,6 @@ class RegistrationController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    getCountriesList();
   }
 
   updateScreenHeight() {
@@ -88,6 +86,13 @@ class RegistrationController extends GetxController {
     AppHelper.name = nameTxtController.text;
 
     if (response.status) {
+      // authService.setUserProfile(UserProfileModel(
+      //     name: nameTxtController.text,
+      //     nationalId: nationalIDTxtController.text,
+      //     email: emailTxtController.text,
+      //     residencyCountryId: residenceCountry.value,
+      //     userId: registerWithCars ? carsUserId : "",
+      //     avatarId: 9));
       await loginController.login(
           email: emailTxtController.text,
           pass: passwordTxtController.text,
@@ -153,16 +158,18 @@ class RegistrationController extends GetxController {
   }
 
   Future<void> getCountriesList() async {
-    setCountriesLoading(true);
-    AppResponse response = await UserRepository().getCountriesReq();
-    if (response.status) {
-      Iterable iterable = response.data;
-      List<Country> countriesData =
-          iterable.map((e) => Country.fromJson(e)).toList();
-      setCountriesList(countriesData);
-    }
+    if (countriesList.isEmpty) {
+      setCountriesLoading(true);
+      AppResponse response = await UserRepository().getCountriesReq();
+      if (response.status) {
+        Iterable iterable = response.data;
+        List<Country> countriesData =
+            iterable.map((e) => Country.fromJson(e)).toList();
+        setCountriesList(countriesData);
+      }
 
-    setCountriesLoading(false);
+      setCountriesLoading(false);
+    }
   }
 
   Future<AppResponse> verifyMailAndNID() async {
@@ -218,9 +225,12 @@ class RegistrationController extends GetxController {
 
   Future<void> loadResidenceData() async {
     // setResidenceLoading(true);
-    await getResidenceTypeList();
-    await getGobCategoryList();
     await getCountriesList();
+    await getGobCategoryList();
+    await getResidenceTypeList();
+    print(
+        "loadResidenceData Registration controller getCountriesList has been called");
+
     setResidenceLoading(false);
   }
 
@@ -249,12 +259,14 @@ class RegistrationController extends GetxController {
   }
 
   Future<void> getGobCategoryList() async {
-    AppResponse response = await UserRepository().getJobCategoryListReq();
-    if (response.status) {
-      Iterable iterable = response.data;
-      List<JobCategory> joCatData =
-          iterable.map((e) => JobCategory.fromJson(e)).toList();
-      setJobCategoryList(joCatData);
+    if (jobCategoryList.isEmpty) {
+      AppResponse response = await UserRepository().getJobCategoryListReq();
+      if (response.status) {
+        Iterable iterable = response.data;
+        List<JobCategory> joCatData =
+            iterable.map((e) => JobCategory.fromJson(e)).toList();
+        setJobCategoryList(joCatData);
+      }
     }
   }
 
@@ -460,7 +472,10 @@ class RegistrationController extends GetxController {
       nationalIDCameFromCars =
           response.data['data']['nid'] != null ? true : false;
       carsUserId = response.data['data']['userId'];
+      // final registrationController = Get.find<RegistrationController>();
+      setRegisterWithCars(true);
       Get.back(closeOverlays: true);
+      getCountriesList();
       Get.to(() => CarsFirstStepView());
     } else {
       switch (response.statusCode) {
