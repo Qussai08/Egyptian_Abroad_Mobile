@@ -1,9 +1,13 @@
 // import 'dart:math';
+import 'package:egyptians_abroad/app/core/constants/storage_constants.dart';
+import 'package:egyptians_abroad/app/core/custom_widgets/custom_dialog.dart';
+import 'package:egyptians_abroad/app/core/services/storage_service.dart';
+import 'package:egyptians_abroad/app/modules/bottom_navigation.dart/controllers/bottom_navigation_controller.dart';
 import 'package:egyptians_abroad/app/routes/app_pages.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
-
+import 'dart:convert';
 import '../data/providers/auth_provider.dart';
 import '../services/auth_service.dart';
 
@@ -33,17 +37,28 @@ class NotificationHelper {
       iOS: initializationSettingsIOS,
     );
 
-    await flutterLocalNotificationsPlugin.initialize(initializationSettings,
-        onDidReceiveNotificationResponse: onDidReceiveNotificationResponse);
+    await flutterLocalNotificationsPlugin.initialize(
+      initializationSettings,
+      onDidReceiveNotificationResponse: onDidReceiveNotificationResponse,
+    );
 
     // Handle incoming messages
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      print('OnMessage');
       _handleMessage(message);
     });
 
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      print('OnMessageOpenedApp');
       // Open Notification Screen
-      Get.toNamed(Routes.NOTIFICATIONS);
+      if (message.data['NotificationId'] != null) {
+        final storageService = Get.find<StorageService>();
+        storageService.setData(
+            StorageConstants.kNotificationId, message.data['NotificationId']);
+      }
+
+      Get.offAllNamed(Routes.BOTTOMNAVIGATION,
+          arguments: [int.parse(message.data['NotificationId']), 1]);
     });
   }
 
@@ -54,7 +69,17 @@ class NotificationHelper {
   void onDidReceiveNotificationResponse(
       NotificationResponse notificationResponse) async {
     // Open Notification Screen
-    Get.toNamed(Routes.NOTIFICATIONS);
+    print('onDidReceiveNotificationResponse');
+
+    Get.offAllNamed(Routes.BOTTOMNAVIGATION,
+        arguments: [getNotificationId(notificationResponse), 1]);
+  }
+
+  int getNotificationId(NotificationResponse notificationResponse) {
+    print("notificationResponse.payload ${notificationResponse.payload}");
+    Map<String, dynamic> data = jsonDecode(notificationResponse.payload!);
+
+    return int.parse(data['NotificationId']);
   }
 
   Future<void> _showLocalNotification(RemoteMessage message) async {
@@ -72,11 +97,11 @@ class NotificationHelper {
     );
 
     await flutterLocalNotificationsPlugin.show(
-      0, // Notification ID
-      message.notification?.title, // Notification Title
-      message.notification?.body, // Notification Body
-      generalNotificationDetails,
-    );
+        0, // Notification ID
+        message.notification?.title, // Notification Title
+        message.notification?.body, // Notification Body
+        generalNotificationDetails,
+        payload: jsonEncode(message.data));
   }
 
   Future<void> setupInteractedMessage() async {

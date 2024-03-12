@@ -13,6 +13,7 @@ import 'package:egyptians_abroad/app/core/services/models/user_profile.dart';
 import 'package:egyptians_abroad/app/core/theme/app_images.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:egyptians_abroad/app/modules/registration/controllers/registration_controller.dart';
+import 'package:egyptians_abroad/app/modules/registration/data/models/country.dart';
 import 'package:egyptians_abroad/app/modules/registration/views/widgets/avatar_widget.dart';
 import 'package:egyptians_abroad/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,7 @@ import 'package:egyptians_abroad/app/core/helper/validators.dart';
 
 import 'package:get/get.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:shimmer/shimmer.dart';
 
 import 'widgets/jobCategorySelector.dart';
 
@@ -38,13 +40,13 @@ class _EditAccountViewState extends State<EditAccountView>
   bool intialRun = true;
 
   @override
-  void didChangeDependencies() {
+  void didChangeDependencies() async {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
     if (intialRun) {
       var controller = Get.find<RegistrationController>();
       controller.residenceDataLoading = true;
-      controller.loadResidenceData();
+      await controller.loadResidenceData();
       intialRun = false;
     }
   }
@@ -277,22 +279,38 @@ class _EditAccountViewState extends State<EditAccountView>
                                         Padding(
                                           padding: const EdgeInsets.symmetric(
                                               horizontal: 8.0),
-                                          child: SelectorButton(
-                                              countries:
-                                                  controller.countriesList,
-                                              selectedCountry: residence,
-                                              // country: controller.countriesList[0],
-                                              selectorTextStyle: null,
-                                              searchBoxDecoration: null,
-                                              autoFocusSearchField: false,
-                                              locale: null,
-                                              onChanged: (val) {
-                                                _residenceCountry.value =
-                                                    controller
-                                                        .countriesList[val!].id;
-                                              },
-                                              isEnabled: widget.isEdit!,
-                                              isScrollControlled: true),
+                                          child: controller
+                                                  .countriesList.isNotEmpty
+                                              ? SelectorButton(
+                                                  countries:
+                                                      controller.countriesList,
+                                                  selectedCountry: residence,
+                                                  // country: controller.countriesList[0],
+                                                  selectorTextStyle: null,
+                                                  searchBoxDecoration: null,
+                                                  autoFocusSearchField: false,
+                                                  locale: null,
+                                                  onChanged: (val) {
+                                                    _residenceCountry.value =
+                                                        controller
+                                                            .countriesList[val!]
+                                                            .id;
+                                                  },
+                                                  isEnabled: widget.isEdit!,
+                                                  isScrollControlled: true)
+                                              : Shimmer.fromColors(
+                                                  baseColor:
+                                                      Colors.grey.shade300,
+                                                  highlightColor:
+                                                      Colors.grey.shade100,
+                                                  child:
+                                                      const CustomTextFormField(),
+                                                  //  Container(
+                                                  //   color: Colors.white,
+                                                  //   height: 40,
+                                                  //   width: double.infinity,
+                                                  // ),
+                                                ),
                                         ),
                                       ],
                                     );

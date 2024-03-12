@@ -19,7 +19,7 @@ class NotificationEventCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("notification.notificationTypeId ${notification.notificationTypeId}");
+    // print("notification.notificationId ${notification.notificationId}");
     return GestureDetector(
       onTap: () {
         print("notification.eventId ${notification.eventID}");

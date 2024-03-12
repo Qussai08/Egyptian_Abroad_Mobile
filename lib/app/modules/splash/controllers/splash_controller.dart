@@ -22,7 +22,7 @@ class SplashController extends GetxController {
   }
 
   _startDelay() {
-    Future.delayed(const Duration(seconds: 3), _goNext);
+    Future.delayed(const Duration(seconds: 1), _goNext);
   }
 
   _goNext() async {
@@ -31,10 +31,10 @@ class SplashController extends GetxController {
     if (token?.isNotEmpty ?? false) {
       await notificationHelper.registerFCMToken();
       await notificationHelper.subscribeToTopic('broadcast');
-      await 2.delay();
+      await 1.delay();
       Get.offAllNamed(Routes.BOTTOMNAVIGATION);
     } else {
-      await 2.delay();
+      await 1.delay();
       Get.offAllNamed(Routes.LOGIN);
     }
   }

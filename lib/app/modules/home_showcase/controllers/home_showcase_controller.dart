@@ -59,6 +59,7 @@ class HomeShowcaseController extends GetxController {
       "languageId": LocalizationHelper.isArabic() ? 1 : 2
     }).then((value) {
       if (value.status) {
+        print("value.data['data'] ${value.data['data']}");
         UserProfileModel userProfile =
             UserProfileModel.fromJson(value.data['data']);
         // AppHelper.setUserProfile(userProfile);

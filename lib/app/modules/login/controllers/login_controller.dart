@@ -1,3 +1,4 @@
+import 'package:egyptians_abroad/app/modules/registration/controllers/registration_controller.dart';
 import 'package:get/get.dart';
 
 import '../../../core/custom_widgets/custom_taost.dart';
@@ -12,8 +13,21 @@ class LoginController extends GetxController {
   final AuthService authService = Get.find();
   var notificationHelper = NotificationHelper();
 
+  onInit() {
+    super.onInit();
+    Get.lazyPut(() => RegistrationController());
+  }
+
   RxBool loginIsDimmed = false.obs;
   RxBool isLoading = false.obs;
+
+  onRegister() {
+    final registrationController = Get.find<RegistrationController>();
+    registrationController.setRegisterWithCars(false);
+    registrationController.getCountriesList();
+    
+    Get.toNamed(Routes.REGISTRATION);
+  }
 
   Future<void> login(
       {required String email,

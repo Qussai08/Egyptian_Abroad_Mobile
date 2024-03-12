@@ -11,13 +11,15 @@ class NotificationCardWidget extends StatelessWidget {
   NotificationCardWidget({
     super.key,
     required this.notification,
+    required this.isExpanded,
   });
-
   final NotificationsModel notification;
-  final RxBool isExpanded = false.obs;
+  RxBool isExpanded = false.obs;
 
   @override
   Widget build(BuildContext context) {
+    // isExpanded =
+    //     notification.notificationId == expandedId ? true.obs : false.obs;
     return Obx(
       () => Container(
           margin: EdgeInsets.only(bottom: fixDpiHeight(12)),

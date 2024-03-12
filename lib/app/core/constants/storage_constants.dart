@@ -7,4 +7,5 @@ class StorageConstants {
   static const kFcmToken = 'fcm_token';
   static const kUserProfile = 'kUserProfile';
   static const kShowcaseViewed = 'kShowcaseViewed';
+  static const kNotificationId = 'kNotificationId';
 }
