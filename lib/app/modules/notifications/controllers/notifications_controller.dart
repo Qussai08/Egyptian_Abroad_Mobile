@@ -10,10 +10,13 @@ class NotificationsController extends GetxController
 
   RxList<NotificationsModel> notificationsList = <NotificationsModel>[].obs;
   RxBool isLoading = false.obs;
+
+  int openNotificationId = (Get.arguments != null) ? Get.arguments[0] : -1;
+
   @override
   void onInit() {
     super.onInit();
-    loadNotifications();
+    // loadNotifications();
     // Call the method to load notifications when the controller is initialized
   }
 
@@ -57,6 +60,8 @@ class NotificationsController extends GetxController
   Future<void> retry() async {
     // change([], status: RxStatus.loading());
     isLoading.value = true;
+    openNotificationId = (Get.arguments != null) ? Get.arguments[0] : -1;
+    print(openNotificationId);
     await loadNotifications();
     isLoading.value = false;
   }

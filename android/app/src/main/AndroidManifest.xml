@@ -3,6 +3,7 @@
     <application
         android:label="المصريون بالخارج"
         android:name="${applicationName}"
+        android:usesCleartextTraffic="true"
         android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
@@ -32,8 +33,12 @@
             android:value="2" />
 
             <!-- Notifications -->
-             <meta-data
-               android:name="com.google.firebase.messaging.default_notification_channel_id"
-               android:value="android_notification" />
+            <meta-data
+                android:name="com.google.firebase.messaging.default_notification_channel_id"
+                android:value="android_notification" />
+            <service
+                android:name="com.dexterous.flutterlocalnotifications.ForegroundService"
+                android:exported="false"
+                android:stopWithTask="false"/>
     </application>
 </manifest>

@@ -67,12 +67,18 @@ class NotificationsView extends GetView<NotificationsController> {
                         itemBuilder: (context, index) {
                           final notification =
                               controller.notificationsList[index];
+                          print(
+                              "${notification.title} ${notification.notificationId}");
 
                           return notification.notificationTypeId == null
                               ? Padding(
                                   padding: EdgeInsets.symmetric(
                                       horizontal: fixDpiWidth(16)),
                                   child: NotificationCardWidget(
+                                      isExpanded:
+                                          (controller.openNotificationId ==
+                                                  notification.notificationId)
+                                              .obs,
                                       notification: notification),
                                 )
                               : NotificationEventCardWidget(

@@ -26,7 +26,7 @@ Map<String, String> ar = {
   AppStrings.alreadyHaveAccount: ' هل لديك حساب بالفعل؟ ',
   AppStrings.otpTitle: 'تحقق من هويتك',
   AppStrings.otpDiscription:
-      'أدخل الرمز المكون من 4 أرقام المرسل على البريد الإلكتروني الخاص بك ',
+      'ادخل الرمز المكون من 4 ارقام المرسل اليك على البريد الإلكتروني',
   AppStrings.resendOtp: ' إعادة إرسال خلال ',
   AppStrings.resend: 'أرسل',
   AppStrings.home: 'الرئيسية',
@@ -123,7 +123,6 @@ Map<String, String> ar = {
   AppStrings.welcome: 'أهلًا بك',
   AppStrings.dataSavedSuccessfully: 'تم حفظ بياناتك بنجاح',
   AppStrings.dataEditedSuccessfully: 'تم تعديل الملف التعريفي بنجاح',
-
   AppStrings.eventDetails: 'تفاصيل الفعالية',
   AppStrings.from: 'من',
   AppStrings.to: 'إلى',
