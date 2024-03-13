@@ -4,7 +4,6 @@ import 'package:egyptians_abroad/app/core/helper/app_helper.dart';
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/helper/localization_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
-import 'package:egyptians_abroad/app/core/services/auth_service.dart';
 import 'package:egyptians_abroad/app/core/services/models/category.dart';
 import 'package:egyptians_abroad/app/core/services/models/service.dart';
 import 'package:egyptians_abroad/app/core/services/models/service_content.dart';
@@ -14,7 +13,6 @@ import 'package:egyptians_abroad/app/core/custom_widgets/custom_appbar.dart';
 import 'package:egyptians_abroad/app/modules/start_service/views/url_service_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart' as html;
-// import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -40,7 +38,7 @@ class ServiceContentView extends StatefulWidget {
 class _ServiceContentViewState extends State<ServiceContentView> {
   @override
   Widget build(BuildContext context) {
-    AuthService authService = Get.find();
+    // AuthService authService = Get.find();
     return NetworkIndicator(
         child: Scaffold(
       //   resizeToAvoidBottomInset: false,

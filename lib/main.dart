@@ -1,5 +1,5 @@
+import 'package:egyptians_abroad/app/core/constants/storage_constants.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
-import 'package:egyptians_abroad/app/modules/splash/controllers/splash_controller.dart';
 import 'package:egyptians_abroad/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -31,6 +31,18 @@ Future<void> main() async {
   );
   var notificationHelper = NotificationHelper();
   await notificationHelper.initialize();
+  await FirebaseMessaging.instance.getInitialMessage().then((value) {
+    if (value != null) {
+      final StorageService storageService;
+      if (Get.isRegistered<StorageService>()) {
+        storageService = Get.find<StorageService>();
+      } else {
+        storageService = Get.put(StorageService());
+      }
+      storageService.setData(
+          StorageConstants.kNotificationId, value.data['NotificationId']);
+    }
+  });
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   runApp(const MyApp());
 }

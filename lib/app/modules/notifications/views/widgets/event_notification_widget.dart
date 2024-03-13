@@ -1,10 +1,7 @@
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-
-import '../../../../core/theme/app_images.dart';
 import '../../../../core/theme/styles.dart';
 import '../../../../routes/app_pages.dart';
 import '../../data/models/notifications_model/notifications_model.dart';

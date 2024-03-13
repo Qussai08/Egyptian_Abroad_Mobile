@@ -6,8 +6,6 @@ import 'package:egyptians_abroad/app/modules/registration/data/models/country.da
 import 'package:egyptians_abroad/app/modules/registration/data/models/job_category.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../core/data/models/api_response.dart';
 import '../data/models/event_model.dart';
 import '../data/providers/events_provider.dart';
 

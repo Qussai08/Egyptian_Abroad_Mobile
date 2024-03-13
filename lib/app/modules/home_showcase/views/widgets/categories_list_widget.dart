@@ -1,19 +1,15 @@
 import 'dart:developer';
-
-import 'package:egyptians_abroad/app/core/custom_widgets/image_placeholder.dart';
 import 'package:egyptians_abroad/app/modules/home_showcase/views/widgets/grid_placeholder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:showcaseview/showcaseview.dart';
-
 import '../../../../core/custom_widgets/custom_button.dart';
 import '../../../../core/custom_widgets/grid_widget.dart';
 import '../../../../core/custom_widgets/no_data_widget.dart';
 import '../../../../core/custom_widgets/title_text.dart';
 import '../../../../core/helper/dpi_helper.dart';
 import '../../../../core/language/app_string.dart';
-import '../../../../core/theme/styles.dart';
 import '../../controllers/home_showcase_controller.dart';
 import 'custoum_showcase_widget.dart';
 

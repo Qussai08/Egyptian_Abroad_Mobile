@@ -1,4 +1,6 @@
+import 'package:egyptians_abroad/app/core/constants/storage_constants.dart';
 import 'package:egyptians_abroad/app/core/services/base_api.dart';
+import 'package:egyptians_abroad/app/core/services/storage_service.dart';
 import 'package:get/get.dart';
 
 import '../../../core/helper/localization_helper.dart';
@@ -32,7 +34,16 @@ class SplashController extends GetxController {
       await notificationHelper.registerFCMToken();
       await notificationHelper.subscribeToTopic('broadcast');
       await 1.delay();
-      Get.offAllNamed(Routes.BOTTOMNAVIGATION);
+
+      final storageService = Get.find<StorageService>();
+      var notificationId =
+          storageService.getData(StorageConstants.kNotificationId);
+      if (notificationId != null) {
+        Get.offAllNamed(Routes.BOTTOMNAVIGATION,
+            arguments: [int.parse(notificationId), 1]);
+      } else {
+        Get.offAllNamed(Routes.BOTTOMNAVIGATION);
+      }
     } else {
       await 1.delay();
       Get.offAllNamed(Routes.LOGIN);
