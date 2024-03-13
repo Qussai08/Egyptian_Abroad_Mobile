@@ -24,10 +24,15 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
   int pageSize = 10;
   bool hasMore = true;
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
     scrollController.addListener(scrollListener);
-    registrationController.getGobCategoryList();
+    // await registrationController.loadResidenceData();
+    print('On Init');
+    // await registrationController.getCountriesList();
+    // await registrationController.getGobCategoryList();
+    // clear();
+    // clearFilters();
     // loadEvents(body: {
     //   "search": "",
     //   "countryIds": [],

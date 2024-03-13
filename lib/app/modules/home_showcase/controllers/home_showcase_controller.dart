@@ -306,8 +306,12 @@ class HomeShowcaseController extends GetxController {
       required String serviceId,
       required ServiceItem service}) async {
     await favoritesListProvider.addToFavorites(userId, serviceId).then((value) {
-      favoritesList.add(service);
-      loadFavoriteCategory(service);
+      if (value.isSuccess) {
+        print("Favorite Value ${value.body}");
+
+        favoritesList.add(service);
+        loadFavoriteCategory(service);
+      }
     }, onError: (error) {
       print("Add to Favorites Error");
     });
