@@ -1,10 +1,7 @@
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-
-import '../../../../core/theme/app_images.dart';
 import '../../../../core/theme/styles.dart';
 import '../../../../routes/app_pages.dart';
 import '../../data/models/notifications_model/notifications_model.dart';
@@ -84,7 +81,7 @@ class NotificationEventCardWidget extends StatelessWidget {
               if (notification.notificationTypeId == 2)
                 SizedBox(height: fixDpiHeight(8)),
               Text(
-                "${notification.notificationTypeId == 1 ? 'تم اضافة فاعلية ' : ''}"
+                "${notification.notificationTypeId == 1 ? 'تم اضافة فعالية ' : ''}"
                 "${notification.notificationTypeId == 2 ? notification.message : notification.title} ",
                 maxLines: 2,
                 textAlign: TextAlign.start,

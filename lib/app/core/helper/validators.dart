@@ -1,10 +1,9 @@
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:validators/validators.dart';
 
 mixin ValidationMixin<T extends StatefulWidget> on State<T> {
-  String _password = '';
+  // String _password = '';
 
   String? validateName(String name, {int? maxlength = 100}) {
     if (name.trim().isEmpty) {
@@ -80,7 +79,7 @@ mixin ValidationMixin<T extends StatefulWidget> on State<T> {
   }
 
   String? validatePassword(String password) {
-    _password = password;
+    // _password = password;
     if (password.trim().isEmpty) {
       return AppStrings.emptyValidation.tr;
     } else if (password.length > 100) {

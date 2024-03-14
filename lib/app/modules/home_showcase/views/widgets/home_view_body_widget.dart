@@ -4,8 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:showcaseview/showcaseview.dart';
 import 'dart:developer';
-
-import '../../../../core/helper/dpi_helper.dart';
 import '../../../home_showcase/views/widgets/favorites_list.dart';
 import '../../controllers/home_showcase_controller.dart';
 import 'avatar_and_name_widget.dart';

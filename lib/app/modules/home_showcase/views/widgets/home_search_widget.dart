@@ -1,11 +1,8 @@
 import 'package:egyptians_abroad/app/core/theme/app_images.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../../core/custom_widgets/custom_textfield.dart';
-import '../../../../core/theme/styles.dart';
 import '../../controllers/home_showcase_controller.dart';
-
 import '../../../../core/helper/dpi_helper.dart';
 import '../../../../core/language/app_string.dart';
 

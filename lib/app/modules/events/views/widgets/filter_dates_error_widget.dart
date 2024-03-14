@@ -21,7 +21,7 @@ class FilterDatesErrorWidget extends StatelessWidget {
               child: Row(
                 children: [
                   Text(
-                    'يجب اختيار تاريخ بدء ونهاية الفاعلية',
+                    'يجب اختيار تاريخ بدء ونهاية الفعالية',
                     textAlign: LocalizationHelper.isArabic()
                         ? TextAlign.right
                         : TextAlign.left,

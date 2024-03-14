@@ -1,7 +1,4 @@
-import 'package:egyptians_abroad/app/core/services/app_response.dart';
-import 'package:egyptians_abroad/app/core/services/base_api.dart';
 import 'package:get/get.dart';
-
 import '../../../../core/constants/globals.dart';
 import '../../../../core/data/models/api_response.dart';
 import '../../../../core/helper/localization_helper.dart';

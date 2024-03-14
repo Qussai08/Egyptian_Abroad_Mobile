@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
-import '../../../../core/custom_widgets/app_error_widget.dart';
-import '../../../../core/custom_widgets/loading_dialog.dart';
 import '../../../../core/helper/dpi_helper.dart';
 import '../../../../core/language/app_string.dart';
 import '../../../../core/theme/styles.dart';

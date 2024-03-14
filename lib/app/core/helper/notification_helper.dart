@@ -1,8 +1,3 @@
-// import 'dart:math';
-import 'package:egyptians_abroad/app/core/constants/storage_constants.dart';
-import 'package:egyptians_abroad/app/core/custom_widgets/custom_dialog.dart';
-import 'package:egyptians_abroad/app/core/services/storage_service.dart';
-import 'package:egyptians_abroad/app/modules/bottom_navigation.dart/controllers/bottom_navigation_controller.dart';
 import 'package:egyptians_abroad/app/routes/app_pages.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -44,21 +39,13 @@ class NotificationHelper {
 
     // Handle incoming messages
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      print('OnMessage');
       _handleMessage(message);
     });
 
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      print('OnMessageOpenedApp');
-      // Open Notification Screen
-      if (message.data['NotificationId'] != null) {
-        final storageService = Get.find<StorageService>();
-        storageService.setData(
-            StorageConstants.kNotificationId, message.data['NotificationId']);
-      }
-
       Get.offAllNamed(Routes.BOTTOMNAVIGATION,
           arguments: [int.parse(message.data['NotificationId']), 1]);
+      // }
     });
   }
 

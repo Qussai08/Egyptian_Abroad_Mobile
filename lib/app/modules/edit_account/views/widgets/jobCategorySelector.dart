@@ -1,9 +1,6 @@
-import 'package:egyptians_abroad/app/core/custom_widgets/countries_search_list_widget.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
-import 'package:egyptians_abroad/app/modules/registration/data/models/country.dart';
 import 'package:egyptians_abroad/app/modules/registration/data/models/job_category.dart';
 import 'package:flutter/material.dart';
-
 import 'jobCategorySearchList.dart';
 
 /// [SelectorButton]

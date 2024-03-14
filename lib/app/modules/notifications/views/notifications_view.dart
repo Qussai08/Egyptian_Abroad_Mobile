@@ -1,16 +1,12 @@
 import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'package:get/get.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-
 import '../../../core/custom_widgets/app_error_widget.dart';
 import '../../../core/custom_widgets/loading_dialog.dart';
 import '../../../core/custom_widgets/title_text.dart';
 import '../../../core/theme/styles.dart';
-import '../../../routes/app_pages.dart';
 import '../controllers/notifications_controller.dart';
 import 'widgets/event_notification_widget.dart';
 import 'widgets/notification_card_widget.dart';

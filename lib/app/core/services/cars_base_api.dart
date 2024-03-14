@@ -34,7 +34,7 @@ class CarsBaseApi {
         connectTimeout: const Duration(milliseconds: 50000)));
 
     !Constants.isProduction
-        ? (_dio!.httpClientAdapter as DefaultHttpClientAdapter)
+        ? (_dio.httpClientAdapter as DefaultHttpClientAdapter)
             .onHttpClientCreate = (HttpClient client) {
             client.badCertificateCallback =
                 (X509Certificate cert, String host, int port) => true;

@@ -33,8 +33,10 @@ class RegistrationController extends GetxController {
   int selectedAvatarIndex = 9;
 
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
+    await getCountriesList();
+    await getGobCategoryList();
   }
 
   updateScreenHeight() {

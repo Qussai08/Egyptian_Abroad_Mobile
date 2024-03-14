@@ -4,7 +4,6 @@ import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:egyptians_abroad/app/modules/registration/data/models/country.dart';
 import 'package:egyptians_abroad/app/modules/registration/data/models/job_category.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 /// Creates a list of Countries with a search textfield.
 class CategoriesSearchListWidget extends StatefulWidget {

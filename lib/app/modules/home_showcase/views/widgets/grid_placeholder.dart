@@ -1,6 +1,3 @@
-import 'package:egyptians_abroad/app/core/custom_widgets/grid_widget.dart';
-import 'package:egyptians_abroad/app/core/helper/dpi_helper.dart';
-import 'package:egyptians_abroad/app/core/services/models/category.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';

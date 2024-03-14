@@ -3,11 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart' as intl;
-
 import '../../../../core/helper/dpi_helper.dart';
 import '../../../../core/language/app_string.dart';
 import '../../../../core/theme/styles.dart';
-import '../../../notifications/data/models/notifications_model/notifications_model.dart';
 import '../../controllers/event_controller.dart';
 import '../../data/models/event_model.dart';
 
