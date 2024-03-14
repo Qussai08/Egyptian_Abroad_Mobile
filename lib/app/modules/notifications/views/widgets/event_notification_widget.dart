@@ -81,7 +81,7 @@ class NotificationEventCardWidget extends StatelessWidget {
               if (notification.notificationTypeId == 2)
                 SizedBox(height: fixDpiHeight(8)),
               Text(
-                "${notification.notificationTypeId == 1 ? 'تم اضافة فاعلية ' : ''}"
+                "${notification.notificationTypeId == 1 ? 'تم اضافة فعالية ' : ''}"
                 "${notification.notificationTypeId == 2 ? notification.message : notification.title} ",
                 maxLines: 2,
                 textAlign: TextAlign.start,
