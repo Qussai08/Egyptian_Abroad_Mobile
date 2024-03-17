@@ -36,7 +36,7 @@ class RegistrationController extends GetxController {
   void onInit() async {
     super.onInit();
     await getCountriesList();
-    await getGobCategoryList();
+    // await getGobCategoryList();
   }
 
   updateScreenHeight() {

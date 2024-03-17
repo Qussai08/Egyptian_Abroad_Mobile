@@ -54,7 +54,7 @@ class StartServiceController extends GetxController {
           serviceId: item.serviceId.toString(),
           service: item);
     }
-    item.isMyFavorite.value = !item.isMyFavorite();
+    item.isMyFavorite.value = !item.isMyFavorite.value;
     update();
   }
 

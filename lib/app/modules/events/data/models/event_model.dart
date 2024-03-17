@@ -98,8 +98,8 @@ class Event {
       String formattedDate =
           DateFormat('dd MMMM yyyy', 'ar_EG').format(myDateTime);
 
-      String formatWithEngNums = "${myDateTime.day} $month ${myDateTime.year}";
-      return formatWithEngNums;
+      // String formatWithEngNums = "${myDateTime.day} $month ${myDateTime.year}";
+      return formattedDate;
     } else {
       String formattedDate =
           DateFormat('dd MMMM yyyy hh:mm a', 'ar_EG').format(myDateTime);
