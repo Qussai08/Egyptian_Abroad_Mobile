@@ -45,7 +45,7 @@ Map<String, String> ar = {
   AppStrings.onlyNumericValidation: 'ادخل ارقام انجليزية فقط',
   AppStrings.nationalIDShortValidation: 'يجب ادخال ١٤ رقم',
   AppStrings.otpEmptyValidation: 'من فضلك ادخل رمز التحقق',
-  AppStrings.otpShortValidation: 'رمز التحقق يجب ان يكون ٤ ارقام',
+  AppStrings.otpShortValidation: 'يجب إدخال ٤ أرقام',
   AppStrings.setPasswordTitle: 'تعيين كلمة مرور',
   AppStrings.confirmPassword: 'تأكيد كلمة المرور',
   AppStrings.passwordMinimum: 'الحد الأدنى 8 أحرف',

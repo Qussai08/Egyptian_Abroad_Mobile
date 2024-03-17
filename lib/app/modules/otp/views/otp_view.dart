@@ -181,14 +181,12 @@ class _OtpViewState extends State<OtpView> with ValidationMixin {
                                       ),
                                     if (hasError)
                                       Text(
-                                        validateOtpCode(controller.otp) ==
-                                                AppStrings.otpEmptyValidation.tr
-                                            ? ""
-                                            : "كود التحقق غير صحيح",
+                                        validateOtpCode(controller.otp) ??
+                                            'كود التحقق غير صحيح',
                                         textAlign: TextAlign.center,
                                         style: Styles.getRegularStyle(
                                             color: Styles.red),
-                                      ),
+                                      ).paddingOnly(top: 10.h),
                                   ],
                                 );
                               }),

@@ -79,7 +79,7 @@ class FavoritesList extends StatelessWidget {
                                                     .categoryId),
                                         serviceItem:
                                             controller.favoritesList[index],
-                                        inFavList: true,
+                                        // inFavList: true,
                                       ),
                                     );
                                   },

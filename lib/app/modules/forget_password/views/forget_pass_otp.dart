@@ -188,17 +188,15 @@ class _ForgetPassOtpViewState extends State<ForgetPassOtpView>
                                       ),
                                     if (hasError)
                                       Text(
-                                        validateOtpCode(controller.otp) ==
-                                                AppStrings.otpEmptyValidation.tr
-                                            ? ""
-                                            : "كود التحقق غير صحيح",
+                                        validateOtpCode(controller.otp) ??
+                                            'كود التحقق غير صحيح',
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                             color: Colors.red,
                                             fontSize: fixDpiFont(14),
                                             fontWeight: FontWeight.w400,
                                             fontFamily: "baloo"),
-                                      ),
+                                      ).paddingOnly(top: 10.h),
                                   ],
                                 );
                               }),

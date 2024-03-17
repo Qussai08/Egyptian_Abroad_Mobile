@@ -131,18 +131,19 @@ class GridWidget extends GetView<StartServiceController> {
                           ? Positioned(
                               bottom: 0.0,
                               left: 0.0,
-                              child: inFavList!
-                                  ? !serviceItem!.isFixedFavorite
-                                      ? FavoriteButton(
-                                          isFavorite: true,
-                                          onTap: () async {
-                                            await controller
-                                                .removeFromFavoriteInHome(
-                                                    serviceItem!);
-                                          },
-                                        )
-                                      : Container()
-                                  :
+                              child:
+                                  // inFavList!
+                                  //     ? !serviceItem!.isFixedFavorite
+                                  //         ? FavoriteButton(
+                                  //             isFavorite: true,
+                                  //             onTap: () async {
+                                  //               await controller
+                                  //                   .removeFromFavoriteInHome(
+                                  //                       serviceItem!);
+                                  //             },
+                                  //           )
+                                  //         : Container()
+                                  //     :
 
                                   /// for the services list
 

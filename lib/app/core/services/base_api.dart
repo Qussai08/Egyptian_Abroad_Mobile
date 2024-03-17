@@ -70,7 +70,7 @@ class BaseApi {
           status: jsonResponse! ? _response.data['isSuccess'] ?? true : true,
           data: _response.data);
     } on DioException catch (e) {
-      print("DioException -> ${endPoint} ${e.response}");
+      print("DioException -> ${endPoint} ${e.response} ${e.message}");
       if (e.response != null) {
         if (e.response!.statusCode != null) {
           if (e.response!.statusCode! == 401) {
@@ -124,7 +124,7 @@ class BaseApi {
           data: jsonResponse ? _response.data['data'] : {});
     } on DioException catch (e) {
       print("e.response!.statusCode! ${e.response!.statusCode!}");
-      print("DioException -> ${endPoint} ${e.response}");
+      print("DioException -> ${endPoint} ${e.response} ${e.message}");
       if (e.response != null) {
         if (e.response!.statusCode != null) {
           if (e.response!.statusCode! == 401) {

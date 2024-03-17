@@ -38,6 +38,7 @@ class HomeShowcaseController extends GetxController {
     await getCategoriesList();
     await fetchAllCategoriesFavUse();
     await updateFavoritesList(userId: authService.userID!);
+    registrationController.getGobCategoryList();
 
     isLoading = false;
     // TODO: for testing only to be removed
@@ -307,8 +308,6 @@ class HomeShowcaseController extends GetxController {
       required ServiceItem service}) async {
     await favoritesListProvider.addToFavorites(userId, serviceId).then((value) {
       if (value.isSuccess) {
-        print("Favorite Value ${value.body}");
-
         favoritesList.add(service);
         loadFavoriteCategory(service);
       }
@@ -325,10 +324,9 @@ class HomeShowcaseController extends GetxController {
       required ServiceItem service}) async {
     await favoritesListProvider.removeFromFavorites(userId, serviceId).then(
         (value) {
-      favoritesList.remove(service);
-      // favoritesList.removeWhere(
-      //   (element) => element.serviceId == int.parse(serviceId),
-      // );
+      favoritesList.removeWhere(
+        (element) => element.serviceId == int.parse(serviceId),
+      );
     }, onError: (error) {});
 
     update();
@@ -338,6 +336,7 @@ class HomeShowcaseController extends GetxController {
   List<Category> allCategoriesFavUse = [];
   bool favoritesIsLoading = true;
   Future<void> updateFavoritesList({required String userId}) async {
+    favoritesList.clear();
     List<ServiceItem> temp = [];
     await favoritesListProvider.getFavoritesList(userId).then(
       (value) async {
