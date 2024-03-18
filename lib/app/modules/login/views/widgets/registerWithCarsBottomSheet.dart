@@ -33,7 +33,12 @@ class _RegisterWithCarsBottomSheetState
 
   @override
   Widget build(BuildContext context) {
-    RegistrationController registrationController = Get.find();
+    RegistrationController registrationController;
+    if (Get.isRegistered<RegistrationController>()) {
+      registrationController = Get.find();
+    } else {
+      registrationController = Get.put(RegistrationController());
+    }
 
     return SingleChildScrollView(
       physics: NeverScrollableScrollPhysics(),

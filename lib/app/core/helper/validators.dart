@@ -17,12 +17,12 @@ mixin ValidationMixin<T extends StatefulWidget> on State<T> {
   String? validateNationalID(String nationalID, {bool carsRegister = false}) {
     if (nationalID.isEmpty) {
       return AppStrings.emptyValidation.tr;
-    } else if (int.tryParse(nationalID) == null) {
+    } else if (!nationalID.isNumericOnly) {
       return AppStrings.onlyNumericValidation.tr;
     } else if (nationalID.length != 14) {
       return AppStrings.nationalIDShortValidation.tr;
     } else if (!RegExp(
-            r'(2[0-9][0-9]|3([0][0-9]|[1][0-9]|2[0-3]))([0][1-9]|[1][0-2])(0[1-9]|[1-2]\d|30|31)[00-88]\d\d\d\d\d')
+            r"^([1-3]{1})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})[0-9]{3}([1-9]{1})[1-9]{1}$")
         .hasMatch(nationalID)) {
       if (carsRegister) {
         return "الرقم القومى المُسجل لدى تطبيق سيارات المصريين بالخارج غير صحيح";
@@ -61,7 +61,7 @@ mixin ValidationMixin<T extends StatefulWidget> on State<T> {
     print('Validation Started: ');
     if (otpCode.isEmpty) {
       return AppStrings.otpEmptyValidation.tr;
-    } else if (int.tryParse(otpCode) == null) {
+    } else if (!otpCode.isNumericOnly) {
       return AppStrings.onlyNumericValidation.tr;
     } else if (otpCode.length != 4) {
       return AppStrings.otpShortValidation.tr;

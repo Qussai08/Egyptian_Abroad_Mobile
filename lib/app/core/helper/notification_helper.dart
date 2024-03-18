@@ -8,6 +8,7 @@ import '../services/auth_service.dart';
 
 class NotificationHelper {
   final FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
+  late final NotificationDetails _notificationDetails;
 
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
@@ -19,6 +20,39 @@ class NotificationHelper {
     // print token
     String? fcmToken = await getFcmToken();
     print('FCMToken: $fcmToken');
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>()
+        ?.requestNotificationsPermission();
+
+    const AndroidNotificationChannel channel = AndroidNotificationChannel(
+        'android_notification', 'android_notification',
+        importance: Importance.max);
+
+    await flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>()
+        ?.createNotificationChannel(channel);
+
+    AndroidNotificationDetails androidNotificationDetails =
+        AndroidNotificationDetails(channel.id, channel.name,
+            importance: Importance.max,
+            priority: Priority.high,
+            icon: 'app_icon');
+
+    DarwinNotificationDetails darwinNotificationDetails =
+        const DarwinNotificationDetails(
+            presentAlert: true,
+            presentSound: true,
+            presentBadge: true,
+            interruptionLevel: InterruptionLevel.critical);
+
+    _notificationDetails = NotificationDetails(
+        android: androidNotificationDetails, iOS: darwinNotificationDetails);
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     const AndroidInitializationSettings initializationSettingsAndroid =
         AndroidInitializationSettings('@mipmap/launcher_icon');
@@ -87,7 +121,7 @@ class NotificationHelper {
         0, // Notification ID
         message.notification?.title, // Notification Title
         message.notification?.body, // Notification Body
-        generalNotificationDetails,
+        _notificationDetails,
         payload: jsonEncode(message.data));
   }
 
