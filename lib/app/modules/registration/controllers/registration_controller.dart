@@ -33,6 +33,8 @@ class RegistrationController extends GetxController {
   final avatarsProvider = Get.put<AvatarsProvider>(AvatarsProvider());
   int selectedAvatarIndex = 9;
 
+  RxBool showCountryError = false.obs;
+
   @override
   void onInit() async {
     super.onInit();
@@ -101,19 +103,17 @@ class RegistrationController extends GetxController {
           pass: passwordTxtController.text,
           navigateToHome: false);
 
-      Future.delayed(const Duration(seconds: 3), () async {
-        print('carsOtp $carsOtp');
-        if (carsOtp == null) {
-          print('Normal register');
-          Get.offAllNamed(Routes.COMPLETEACCOUNT);
-          passwordTxtController.clear();
-        } else {
-          print('Cars Register');
-          Get.offAll(() => const CompleteAccountView(
-                carRegister: true,
-              ));
-        }
-      });
+      print('carsOtp $carsOtp');
+      if (carsOtp == null) {
+        print('Normal register');
+        Get.offAllNamed(Routes.COMPLETEACCOUNT);
+        passwordTxtController.clear();
+      } else {
+        print('Cars Register');
+        Get.offAll(() => const CompleteAccountView(
+              carRegister: true,
+            ));
+      }
 
       Get.showSnackbar(
         buildCustomToast(

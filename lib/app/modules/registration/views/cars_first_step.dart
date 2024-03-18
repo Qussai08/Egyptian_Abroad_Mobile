@@ -28,7 +28,6 @@ class CarsFirstStepView extends StatefulWidget {
 class _CarsFirstStepViewState extends State<CarsFirstStepView>
     with ValidationMixin {
   final _formKey = GlobalKey<FormState>();
-  bool showCountryError = false;
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(RegistrationController());
@@ -180,7 +179,8 @@ class _CarsFirstStepViewState extends State<CarsFirstStepView>
                                                 CustomTextFormField(
                                                   // controller:
                                                   //     controller.residenceTxtController,
-                                                  enabledBorderColor: showCountryError ==
+                                                  enabledBorderColor: controller
+                                                                  .showCountryError() ==
                                                               false &&
                                                           (registrationController
                                                                       .residenceCountry
@@ -273,9 +273,10 @@ class _CarsFirstStepViewState extends State<CarsFirstStepView>
                               height: 50.h,
                               onPressed: () async {
                                 if (_formKey.currentState!.validate()) {
-                                  setState(() {
-                                    showCountryError = false;
-                                  });
+                                  // setState(() {
+                                  //   showCountryError = false;
+                                  // });
+                                  controller.showCountryError = true.obs;
 
                                   // check if National exist in cars
                                   await controller.checkNIDInCars();
@@ -284,13 +285,9 @@ class _CarsFirstStepViewState extends State<CarsFirstStepView>
                                           .residenceCountry.value
                                           .toString()) !=
                                       null) {
-                                    setState(() {
-                                      showCountryError = true;
-                                    });
+                                    controller.showCountryError = true.obs;
                                   } else {
-                                    setState(() {
-                                      showCountryError = false;
-                                    });
+                                    controller.showCountryError = false.obs;
                                   }
                                 }
                               },
