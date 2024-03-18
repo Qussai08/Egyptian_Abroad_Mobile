@@ -104,7 +104,10 @@ class EventDetailsView extends GetView<EventDetailsController> {
                     height: 50.h,
                     fontSize: fixDpiFont(16),
                     fontWeight: FontWeight.w600,
-                    onPressed: () => launchUrl(Uri.parse(event().link!)),
+                    onPressed: () {
+                      print(event().link!);
+                      return launchUrl(Uri.parse(event().link!));
+                    },
                   ),
                   SizedBox(height: 81.h),
                 ],

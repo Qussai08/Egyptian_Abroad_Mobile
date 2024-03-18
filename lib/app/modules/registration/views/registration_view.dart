@@ -297,9 +297,7 @@ class _RegistrationViewState extends State<RegistrationView>
                               width: 358.w,
                               height: 50.h,
                               onPressed: () async {
-                                if (_formKey.currentState!.validate() &&
-                                    registrationController
-                                        .agreeToShareWithCars.value) {
+                                if (_formKey.currentState!.validate()) {
                                   setState(() {
                                     showCountryError = false;
                                   });
@@ -320,13 +318,13 @@ class _RegistrationViewState extends State<RegistrationView>
                                     });
                                   }
 
-                                  if (!registrationController
-                                      .agreeToShareWithCars.value) {
-                                    registrationController
-                                        .setShowAgreeToShareWithCarsError(true);
-                                    print(
-                                        "registrationController.agreeToShareWithCars ${registrationController.agreeToShareWithCars}");
-                                  }
+                                  // if (!registrationController
+                                  //     .agreeToShareWithCars.value) {
+                                  //   registrationController
+                                  //       .setShowAgreeToShareWithCarsError(true);
+                                  //   print(
+                                  //       "registrationController.agreeToShareWithCars ${registrationController.agreeToShareWithCars}");
+                                  // }
                                 }
                               },
                             ),

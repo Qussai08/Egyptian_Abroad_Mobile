@@ -35,6 +35,7 @@ class _CarsFirstStepViewState extends State<CarsFirstStepView>
     return NetworkIndicator(
       child: SafeArea(
         child: Scaffold(
+          resizeToAvoidBottomInset: true,
           appBar: const CustomAppBar(),
           body: GetBuilder<RegistrationController>(
             builder: (registrationController) => registrationController
@@ -48,7 +49,7 @@ class _CarsFirstStepViewState extends State<CarsFirstStepView>
                       ),
                     ),
                   )
-                : Column(
+                : ListView(
                     children: [
                       Container(
                         padding: EdgeInsets.only(right: 16.w, left: 16.w),
@@ -275,6 +276,7 @@ class _CarsFirstStepViewState extends State<CarsFirstStepView>
                                   setState(() {
                                     showCountryError = false;
                                   });
+
                                   // check if National exist in cars
                                   await controller.checkNIDInCars();
                                 } else {

@@ -17,7 +17,7 @@ mixin ValidationMixin<T extends StatefulWidget> on State<T> {
   String? validateNationalID(String nationalID, {bool carsRegister = false}) {
     if (nationalID.isEmpty) {
       return AppStrings.emptyValidation.tr;
-    } else if (int.tryParse(nationalID) == null) {
+    } else if (!nationalID.isNumericOnly) {
       return AppStrings.onlyNumericValidation.tr;
     } else if (nationalID.length != 14) {
       return AppStrings.nationalIDShortValidation.tr;
@@ -61,7 +61,7 @@ mixin ValidationMixin<T extends StatefulWidget> on State<T> {
     print('Validation Started: ');
     if (otpCode.isEmpty) {
       return AppStrings.otpEmptyValidation.tr;
-    } else if (int.tryParse(otpCode) == null) {
+    } else if (!otpCode.isNumericOnly) {
       return AppStrings.onlyNumericValidation.tr;
     } else if (otpCode.length != 4) {
       return AppStrings.otpShortValidation.tr;

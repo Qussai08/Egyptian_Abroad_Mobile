@@ -1,5 +1,6 @@
 import 'package:egyptians_abroad/app/core/custom_widgets/custom_taost.dart';
 import 'package:egyptians_abroad/app/core/helper/app_helper.dart';
+import 'package:egyptians_abroad/app/core/helper/localization_helper.dart';
 import 'package:egyptians_abroad/app/core/language/app_string.dart';
 import 'package:egyptians_abroad/app/core/services/app_response.dart';
 import 'package:egyptians_abroad/app/core/services/auth_service.dart';
@@ -347,6 +348,26 @@ class RegistrationController extends GetxController {
     }
   }
 
+  Future<void> getUserProfile() async {
+    // AppResponse response =
+    await UserRepository().viewAccountReq(queryParameters: {
+      "Userid": authService.userID,
+      "languageId": LocalizationHelper.isArabic() ? 1 : 2
+    }).then((value) {
+      if (value.status) {
+        print("value.data['data'] ${value.data['data']}");
+        UserProfileModel userProfile =
+            UserProfileModel.fromJson(value.data['data']);
+        authService.setUserProfile(userProfile);
+      } else {
+        authService.setUserProfile(UserProfileModel.empty());
+        handleError(value.errorCode ?? '-1');
+      }
+    }, onError: (error) {
+      print('UserProfile Error: $error');
+    });
+  }
+
   Future<void> pushAvatar({int? avatar, required int route}) async {
     Map<String, dynamic> reqBody = {
       "avatarId": avatar != null ? avatar + 1 : selectedAvatarIndex + 1,
@@ -356,8 +377,12 @@ class RegistrationController extends GetxController {
         .editAccount(reqBody, queryParameters: {"guid": authService.userID});
 
     if (response.status) {
-      var controller = Get.put(HomeShowcaseController());
-      await controller.getUserProfile();
+      // var auth = Get.find<AuthService>();
+      // await auth.getUserProfile;
+      // var controller = Get.put(HomeShowcaseController());
+      // await controller.getUserProfile();
+
+      getUserProfile();
 
       Get.offNamed(Routes.DATASAVED,
           arguments: [avatar ?? selectedAvatarIndex, route]);
@@ -440,17 +465,17 @@ class RegistrationController extends GetxController {
     );
   }
 
-  final ValueNotifier<bool> agreeToShareWithCars = ValueNotifier(false);
-  setAgreeToShareWithCars(bool val) {
-    agreeToShareWithCars.value = val;
-  }
+  // final ValueNotifier<bool> agreeToShareWithCars = ValueNotifier(false);
+  // setAgreeToShareWithCars(bool val) {
+  //   agreeToShareWithCars.value = val;
+  // }
 
-  final ValueNotifier<bool> showAgreeToShareWithCarsError =
-      ValueNotifier(false);
+  // final ValueNotifier<bool> showAgreeToShareWithCarsError =
+  //     ValueNotifier(false);
 
-  setShowAgreeToShareWithCarsError(bool val) {
-    showAgreeToShareWithCarsError.value = val;
-  }
+  // setShowAgreeToShareWithCarsError(bool val) {
+  //   showAgreeToShareWithCarsError.value = val;
+  // }
 
   bool registerWithCars = false;
   setRegisterWithCars(bool val) {
