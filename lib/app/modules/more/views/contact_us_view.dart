@@ -39,10 +39,10 @@ class ContactUsView extends GetView<MoreController> {
                 SizedBox(height: 16.h),
                 ContactElementWidget(
                   onTap: () =>
-                      launchUrl(Uri(scheme: 'tel', path: '0225864252')),
+                      launchUrl(Uri(scheme: 'tel', path: '02220543415')),
                   imageAsset: AppImages.callIcon,
                   imageScale: 2,
-                  text: '0225864252',
+                  text: '02220543415',
                   fontSize: fixDpiFont(14),
                 ),
                 SizedBox(height: 24.h),
@@ -57,10 +57,11 @@ class ContactUsView extends GetView<MoreController> {
                     fontSize: fixDpiFont(14)),
                 SizedBox(height: 24.h),
                 ContactElementWidget(
-                    onTap: () => launchUrl(
-                        Uri(scheme: 'mailto', path: 'emigration@gov.eg')),
+                    onTap: () => launchUrl(Uri(
+                        scheme: 'mailto',
+                        path: 'egyptiansabroad@emigration.gov.eg')),
                     imageAsset: AppImages.gmailIcon,
-                    text: 'emigration@gov.eg',
+                    text: 'egyptiansabroad@emigration.gov.eg',
                     textUnderline: true,
                     fontSize: fixDpiFont(14)),
               ],

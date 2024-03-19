@@ -23,7 +23,12 @@ class LoginController extends GetxController {
   RxBool isLoading = false.obs;
 
   onRegister() {
-    final registrationController = Get.find<RegistrationController>();
+    RegistrationController registrationController;
+    if (Get.isRegistered<RegistrationController>()) {
+      registrationController = Get.find<RegistrationController>();
+    } else {
+      registrationController = Get.put(RegistrationController());
+    }
     registrationController.setRegisterWithCars(false);
     registrationController.getCountriesList();
 
