@@ -3,6 +3,7 @@ import 'package:egyptians_abroad/app/core/services/base_api.dart';
 import 'package:egyptians_abroad/app/core/services/storage_service.dart';
 import 'package:get/get.dart';
 
+import '../../../core/constants/globals.dart';
 import '../../../core/helper/localization_helper.dart';
 import '../../../core/helper/notification_helper.dart';
 import '../../../core/services/auth_service.dart';
@@ -32,7 +33,7 @@ class SplashController extends GetxController {
     print("registerFCMToken token ${token}");
     if (token?.isNotEmpty ?? false) {
       await notificationHelper.registerFCMToken();
-      await notificationHelper.subscribeToTopic('broadcast');
+      await notificationHelper.subscribeToTopic(Constants.fcmTopic);
       await 1.delay();
 
       final storageService = Get.find<StorageService>();

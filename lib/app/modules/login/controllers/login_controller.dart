@@ -1,6 +1,7 @@
 import 'package:egyptians_abroad/app/modules/registration/controllers/registration_controller.dart';
 import 'package:get/get.dart';
 
+import '../../../core/constants/globals.dart';
 import '../../../core/custom_widgets/custom_taost.dart';
 import '../../../core/helper/notification_helper.dart';
 import '../../../core/language/app_string.dart';
@@ -22,10 +23,15 @@ class LoginController extends GetxController {
   RxBool isLoading = false.obs;
 
   onRegister() {
-    final registrationController = Get.find<RegistrationController>();
+    RegistrationController registrationController;
+    if (Get.isRegistered<RegistrationController>()) {
+      registrationController = Get.find<RegistrationController>();
+    } else {
+      registrationController = Get.put(RegistrationController());
+    }
     registrationController.setRegisterWithCars(false);
     registrationController.getCountriesList();
-    
+
     Get.toNamed(Routes.REGISTRATION);
   }
 
@@ -46,7 +52,7 @@ class LoginController extends GetxController {
       authService.setRefreshToken(response.data['refreshToken'] ?? '');
 
       await notificationHelper.registerFCMToken();
-      await notificationHelper.subscribeToTopic('broadcast');
+      await notificationHelper.subscribeToTopic(Constants.fcmTopic);
       isLoading.value = false;
       if (navigateToHome) Get.offAllNamed(Routes.BOTTOMNAVIGATION);
     } else {

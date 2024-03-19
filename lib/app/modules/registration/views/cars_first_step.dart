@@ -50,7 +50,7 @@ class _CarsFirstStepViewState extends State<CarsFirstStepView>
                   )
                 : SingleChildScrollView(
                     child: Container(
-                      height: fixDpiScreenHeight() * 0.90,
+                      height: fixDpiScreenHeight() * 0.93,
                       child: Column(
                         children: [
                           Form(
@@ -254,10 +254,11 @@ class _CarsFirstStepViewState extends State<CarsFirstStepView>
                               ),
                             ),
                           ),
-                          Spacer(),
+                          SizedBox(height: 20.h),
+                          // Spacer(),
                           Container(
                             width: double.infinity,
-                            padding: EdgeInsets.symmetric(vertical: 11.h),
+                            padding: EdgeInsets.symmetric(vertical: 15.h),
                             alignment: Alignment.bottomCenter,
                             decoration: const BoxDecoration(
                               color: Colors.white,
