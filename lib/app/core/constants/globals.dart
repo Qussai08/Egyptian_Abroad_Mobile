@@ -9,4 +9,7 @@ class Constants {
   static const String registerFCMTokenPath = 'AssignFCMToken';
   static const String viewAccount = 'ViewAccount';
   static const String getEventsList = 'GetEvents';
+  static const String fcmTopic =
+      'broadcast-testing'; // broadcast fcm for testing "broadcast-testing" for uat "broadcast-uat"
+  static const String verstionNumber = 'v1.5.8';
 }

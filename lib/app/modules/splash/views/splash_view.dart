@@ -1,3 +1,4 @@
+import 'package:egyptians_abroad/app/core/constants/globals.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -80,7 +81,7 @@ class SplashView extends StatelessWidget {
                       ],
                     ),
                     child: Text(
-                      "v1.4.7",
+                      Constants.verstionNumber,
                       style: Styles.getMediumStyle(
                           color: Styles.black3.withOpacity(0.9), fontSize: 17),
                     ))
