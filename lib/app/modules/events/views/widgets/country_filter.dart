@@ -162,6 +162,7 @@ class FilterWithCountryWidget extends StatelessWidget {
                                   return ListTile(
                                     onTap: () {
                                       evController.onSelectcountry(index: i);
+                                      print(evController.countryIds.length);
                                     },
                                     contentPadding:
                                         EdgeInsets.symmetric(horizontal: 16.w),

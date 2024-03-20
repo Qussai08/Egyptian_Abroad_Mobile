@@ -298,7 +298,8 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
     if (selectAllCountries) {
       countryDisplayString = "الكل";
       countryIds.forEach((element) => element.isSelected = true);
-      filteredCountryIds = countryIds;
+      filteredCountryIds.clear();
+      filteredCountryIds = [...countryIds];
     } else {
       filteredCountryIds
           .forEach((element) => selectedcountries.add(element.country));
@@ -358,7 +359,8 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
     if (selectAllJobCategory) {
       jobCatDisplayString = "الكل";
       jobCategoryIds.forEach((element) => element.isSelected = true);
-      filteredJobCategoryIds = jobCategoryIds;
+      filteredJobCategoryIds.clear();
+      filteredJobCategoryIds = [...jobCategoryIds];
     } else {
       filteredJobCategoryIds
           .forEach((element) => selectedjobCategory.add(element.name));
