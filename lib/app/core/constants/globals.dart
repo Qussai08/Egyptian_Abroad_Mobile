@@ -6,12 +6,12 @@ class Constants {
   static const String uatUrl = "https://10.107.201.107/ebrdmgw/App/";
 
   static const String baseUrl =
-      testingUrl; // change this to devUrl, testingUrl, uatUrl
+      uatUrl; // change this to devUrl, testingUrl, uatUrl
   static const String getNotificationHistory = "GetNotificationHistory";
   static const String registerFCMTokenPath = 'AssignFCMToken';
   static const String viewAccount = 'ViewAccount';
   static const String getEventsList = 'GetEvents';
   static const String fcmTopic =
-      'broadcast-testing'; // broadcast fcm for testing "broadcast-testing" for uat "broadcast-uat"
+      'broadcast-uat'; // broadcast fcm for testing "broadcast-testing" for uat "broadcast-uat"
   static const String verstionNumber = 'v1.5.8';
 }

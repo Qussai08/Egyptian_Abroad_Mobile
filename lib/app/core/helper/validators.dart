@@ -22,7 +22,7 @@ mixin ValidationMixin<T extends StatefulWidget> on State<T> {
     } else if (nationalID.length != 14) {
       return AppStrings.nationalIDShortValidation.tr;
     } else if (!RegExp(
-            r"^([1-3]{1})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})[0-9]{3}([1-9]{1})[1-9]{1}$")
+            r'^(2[0-9][0-9]|3([0-9][0-9]))([0][1-9]|[1][0-2])(0[1-9]|[1-2]\d|30|31)(([0][1-4])|([1-2][1-9])|([3][1-5])|([8]{2}))\d\d\d([1-9]{2})$')
         .hasMatch(nationalID)) {
       if (carsRegister) {
         return "الرقم القومى المُسجل لدى تطبيق سيارات المصريين بالخارج غير صحيح";
