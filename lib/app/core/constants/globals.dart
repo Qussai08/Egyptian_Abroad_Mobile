@@ -6,7 +6,7 @@ class Constants {
   static const String uatUrl = "https://10.107.201.107/ebrdmgw/App/";
 
   static const String baseUrl =
-      testingUrl; // change this to devUrl, testingUrl, uatUrl
+      uatUrl; // change this to devUrl, testingUrl, uatUrl
   static const String getNotificationHistory = "GetNotificationHistory";
   static const String registerFCMTokenPath = 'AssignFCMToken';
   static const String viewAccount = 'ViewAccount';
