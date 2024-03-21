@@ -32,6 +32,10 @@ class AppImages {
   static const callIcon = 'assets/icons/call_icon.png';
   static const languageIcon = 'assets/icons/language_icon.png';
   static const facebookIcon = 'assets/icons/facebook_icon.png';
+  static const twitterIcon = 'assets/icons/twitter_icon.png';
+  static const youtubeIcon = 'assets/icons/youtube_icon.png';
+  static const instagramIcon = 'assets/icons/instagram_icon.png';
+
   static const gmailIcon = 'assets/icons/gmail_icon.png';
   static const icInfo = 'assets/icons/Icinfo.png';
 

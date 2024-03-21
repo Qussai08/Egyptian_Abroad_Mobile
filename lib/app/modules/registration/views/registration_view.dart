@@ -207,7 +207,6 @@ class _RegistrationViewState extends State<RegistrationView>
                             SizedBox(
                               height: 19.h,
                             ),
-
                             Text(
                               'بالمتابعة انت موافق على مشاركة بيانات الدخول مع سيارات المصرين بالخارج',
                               textDirection: LocalizationHelper.isArabic()
@@ -220,72 +219,6 @@ class _RegistrationViewState extends State<RegistrationView>
                                   color: Styles.lightBlack,
                                   fontSize: fixDpiFont(13)),
                             ),
-
-                            // GetBuilder<RegistrationController>(
-                            //   builder: (registrationController) =>
-                            //       ValueListenableBuilder<bool>(
-                            //     valueListenable:
-                            //         controller.showAgreeToShareWithCarsError,
-                            //     builder: (_, showError, __) => Container(
-                            //       // color: Colors.blueAccent,
-                            //       child: GestureDetector(
-                            //         onTap: () {
-                            //           registrationController
-                            //               .setAgreeToShareWithCars(
-                            //                   !registrationController
-                            //                       .agreeToShareWithCars.value);
-                            //           if (registrationController
-                            //               .agreeToShareWithCars.value) {
-                            //             registrationController
-                            //                 .setShowAgreeToShareWithCarsError(
-                            //                     false);
-                            //           }
-                            //           setState(() {});
-                            //           print(
-                            //               "agreeToShareWithCars ${registrationController.agreeToShareWithCars}");
-                            //         },
-                            //         child: Row(
-                            //           crossAxisAlignment:
-                            //               CrossAxisAlignment.start,
-                            //           mainAxisAlignment:
-                            //               MainAxisAlignment.start,
-                            //           children: [
-                            //             Icon(
-                            //               registrationController
-                            //                       .agreeToShareWithCars.value
-                            //                   ? Icons.check_box
-                            //                   : Icons.check_box_outline_blank,
-                            //               color: showError
-                            //                   ? Colors.red
-                            //                   : Styles.primaryColor,
-                            //               size: 20,
-                            //             ),
-                            //             const SizedBox(
-                            //               width: 5,
-                            //             ),
-                            //             Expanded(
-                            //               child: Text(
-                            //                 'سيتم مشاركة بيانات الدخول مع تطبيق سيارات المصريين بالخارج',
-                            //                 textDirection:
-                            //                     LocalizationHelper.isArabic()
-                            //                         ? TextDirection.rtl
-                            //                         : TextDirection.ltr,
-                            //                 textAlign: TextAlign.start,
-                            //                 maxLines: 2,
-                            //                 overflow: TextOverflow.ellipsis,
-                            //                 style: Styles.getRegularStyle(
-                            //                     color: showError
-                            //                         ? Colors.red
-                            //                         : Styles.lightBlack,
-                            //                     fontSize: fixDpiFont(13)),
-                            //               ),
-                            //             ),
-                            //           ],
-                            //         ),
-                            //       ),
-                            //     ),
-                            //   ),
-                            // ),
                             SizedBox(
                               height: 19.h,
                             ),
