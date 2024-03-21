@@ -11,6 +11,8 @@ class ContactElementWidget extends StatelessWidget {
     required this.fontSize,
     this.onTap,
     this.textUnderline = false,
+    this.isRichText = false,
+    this.richText,
   });
 
   final String imageAsset;
@@ -19,27 +21,39 @@ class ContactElementWidget extends StatelessWidget {
   final double? fontSize;
   final void Function()? onTap;
   final bool textUnderline;
+  final bool isRichText;
+  final Widget? richText;
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Row(
-        children: [
-          Image.asset(
-            imageAsset,
-            scale: imageScale,
-          ),
-          SizedBox(width: 12.w),
-          Text(
-            text,
-            style:
-                Styles.getRegularStyle(color: Styles.black, fontSize: fontSize!)
-                    .copyWith(
-                        decoration:
-                            textUnderline ? TextDecoration.underline : null),
+    return isRichText
+        ? Row(
+            children: [
+              Image.asset(
+                imageAsset,
+                scale: imageScale,
+              ),
+              Expanded(child: richText!),
+            ],
           )
-        ],
-      ),
-    );
+        : InkWell(
+            onTap: onTap,
+            child: Row(
+              children: [
+                Image.asset(
+                  imageAsset,
+                  scale: imageScale,
+                ),
+                SizedBox(width: 12.w),
+                Text(
+                  text,
+                  style: Styles.getRegularStyle(
+                          color: Styles.black, fontSize: fontSize!)
+                      .copyWith(
+                          decoration:
+                              textUnderline ? TextDecoration.underline : null),
+                )
+              ],
+            ),
+          );
   }
 }

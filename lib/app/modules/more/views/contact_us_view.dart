@@ -7,6 +7,7 @@ import 'package:egyptians_abroad/app/modules/more/controllers/more_controller.da
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_html/flutter_html.dart' as html;
 
 import 'widgets/column_element_widget.dart';
 import '../../../core/custom_widgets/custom_card_widget.dart';
@@ -38,8 +39,16 @@ class ContactUsView extends GetView<MoreController> {
                 ),
                 SizedBox(height: 16.h),
                 ContactElementWidget(
-                  onTap: () =>
-                      launchUrl(Uri(scheme: 'tel', path: '02220543415')),
+                  onTap: () => null,
+                  isRichText: true,
+                  richText: html.Html(
+                    data:
+                        '<a href="02220543415">02220543415</a> - <a href="02220543414">02220543414</a> - <a href="19787">19787</a>',
+                    onLinkTap: (url, attributes, element) {
+                      launchUrl(Uri(scheme: 'tel', path: url));
+                    },
+                  ),
+                  //launchUrl(Uri(scheme: 'tel', path: '02220543415')),
                   imageAsset: AppImages.callIcon,
                   imageScale: 2,
                   text: '02220543415',
@@ -48,20 +57,42 @@ class ContactUsView extends GetView<MoreController> {
                 SizedBox(height: 24.h),
                 ContactElementWidget(
                     onTap: () => launchUrl(Uri(
-                        scheme: 'https',
-                        host: 'www.facebook.com',
-                        path: 'eme/')),
-                    imageAsset: AppImages.facebookIcon,
-                    text: 'facebook/eme',
-                    textUnderline: true,
-                    fontSize: fixDpiFont(14)),
-                SizedBox(height: 24.h),
-                ContactElementWidget(
-                    onTap: () => launchUrl(Uri(
                         scheme: 'mailto',
                         path: 'egyptiansabroad@emigration.gov.eg')),
                     imageAsset: AppImages.gmailIcon,
                     text: 'egyptiansabroad@emigration.gov.eg',
+                    textUnderline: true,
+                    fontSize: fixDpiFont(14)),
+                SizedBox(height: 24.h),
+                ContactElementWidget(
+                    onTap: () => launchUrl(
+                        Uri.parse('https://www.facebook.com/Moemigegy/')),
+                    imageAsset: AppImages.facebookIcon,
+                    text: 'Moemigegy',
+                    textUnderline: true,
+                    fontSize: fixDpiFont(14)),
+                SizedBox(height: 24.h),
+                ContactElementWidget(
+                    onTap: () =>
+                        launchUrl(Uri.parse('https://twitter.com/Moemigegy/')),
+                    imageAsset: AppImages.twitterIcon,
+                    text: 'Moemigegy',
+                    textUnderline: true,
+                    fontSize: fixDpiFont(14)),
+                SizedBox(height: 24.h),
+                ContactElementWidget(
+                    onTap: () => launchUrl(Uri.parse(
+                        'https://www.youtube.com/channel/UCuJYKHp_-LEk4URcVuNHtbw')),
+                    imageAsset: AppImages.youtubeIcon,
+                    text: 'Moemigegy',
+                    textUnderline: true,
+                    fontSize: fixDpiFont(14)),
+                SizedBox(height: 24.h),
+                ContactElementWidget(
+                    onTap: () => launchUrl(
+                        Uri.parse('https://www.instagram.com/moemigegy/')),
+                    imageAsset: AppImages.instagramIcon,
+                    text: 'Moemigegy',
                     textUnderline: true,
                     fontSize: fixDpiFont(14)),
               ],
