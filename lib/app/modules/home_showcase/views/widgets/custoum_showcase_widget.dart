@@ -16,7 +16,7 @@ class CustoumShowcase1Widget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: 240.w,
-      height: 160.h,
+      height: 170.h,
       child: Stack(
         children: [
           Positioned(
@@ -41,7 +41,7 @@ class CustoumShowcase1Widget extends StatelessWidget {
               ),
               child: Padding(
                 padding: EdgeInsets.only(
-                    top: 16.h, right: 11.w, left: 11.w, bottom: 12.h),
+                    top: 14.h, right: 11.w, left: 11.w, bottom: 10.h),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -82,7 +82,7 @@ class CustoumShowcase1Widget extends StatelessWidget {
                       children: [
                         SizedBox(
                           width: 75.w,
-                          height: 32.h,
+                          height: 30.h,
                           child: MainButton(
                               enable: true,
                               text: Text(
@@ -100,7 +100,7 @@ class CustoumShowcase1Widget extends StatelessWidget {
 
                         SizedBox(
                           width: 75.w,
-                          height: 32.h,
+                          height: 30.h,
                           child: MainButton(
                               enable: true,
                               color: Styles.secondaryButtonColor,

@@ -94,31 +94,33 @@ class GridWidget extends GetView<StartServiceController> {
                       // borderRadius: BorderRadius.circular(15.0),
                       child: Stack(
                     children: [
-                      isNotPng
-                          ? SvgPicture.network(
-                              (isService
-                                      ? serviceItem!.servicesIcon
-                                      : category!.imagePath) ??
-                                  AppImages.imagePlaceHolder,
-                              placeholderBuilder: (context) =>
-                                  ImagePlaceholder(),
-                            )
-                          : Image.network(
-                              (isService
-                                      ? serviceItem!.servicesIcon
-                                      : category!.imagePath) ??
-                                  AppImages.imagePlaceHolder,
-                              cacheHeight: 279,
-                              cacheWidth: 279,
-                              loadingBuilder: (BuildContext context,
-                                  Widget child,
-                                  ImageChunkEvent? loadingProgress) {
-                                if (loadingProgress == null) return child;
-                                return ImagePlaceholder();
-                              },
-                              errorBuilder: (context, error, stackTrace) =>
-                                  Image.asset(AppImages.imagePlaceHolder),
-                            ),
+                      Center(
+                        child: isNotPng
+                            ? SvgPicture.network(
+                                (isService
+                                        ? serviceItem!.servicesIcon
+                                        : category!.imagePath) ??
+                                    AppImages.imagePlaceHolder,
+                                placeholderBuilder: (context) =>
+                                    ImagePlaceholder(),
+                              )
+                            : Image.network(
+                                (isService
+                                        ? serviceItem!.servicesIcon
+                                        : category!.imagePath) ??
+                                    AppImages.imagePlaceHolder,
+                                cacheHeight: 279,
+                                cacheWidth: 279,
+                                loadingBuilder: (BuildContext context,
+                                    Widget child,
+                                    ImageChunkEvent? loadingProgress) {
+                                  if (loadingProgress == null) return child;
+                                  return ImagePlaceholder();
+                                },
+                                errorBuilder: (context, error, stackTrace) =>
+                                    Image.asset(AppImages.imagePlaceHolder),
+                              ),
+                      ),
                       isService
                           ? Positioned(
                               bottom: 0.0,

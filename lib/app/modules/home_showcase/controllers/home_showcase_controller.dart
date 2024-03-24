@@ -42,7 +42,7 @@ class HomeShowcaseController extends GetxController {
 
     isLoading = false;
     // TODO: for testing only to be removed
-    // authService.showcaseViewed = true;
+    authService.showcaseViewed = true;
   }
 
   bool userProfileLoading = false;
