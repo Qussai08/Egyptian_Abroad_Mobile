@@ -147,7 +147,7 @@ class _CompleteAccountViewState extends State<CompleteAccountView>
                                           hint: "",
                                           onChangeFunc: (val) {
                                             registrationController
-                                                .updateScreenHeight();
+                                                .updateScreenHeight(null);
                                             registrationController
                                                 .residenceType.value = val;
                                           },

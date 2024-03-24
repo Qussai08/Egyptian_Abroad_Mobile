@@ -219,7 +219,8 @@ class _CarsFirstStepViewState extends State<CarsFirstStepView>
                                                               .text);
                                                       if (val != null) {
                                                         controller
-                                                            .updateScreenHeight();
+                                                            .updateScreenHeight(
+                                                                1.03);
                                                       }
                                                       return val;
                                                     },

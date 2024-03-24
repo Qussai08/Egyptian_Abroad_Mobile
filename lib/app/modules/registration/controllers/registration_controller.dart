@@ -42,8 +42,8 @@ class RegistrationController extends GetxController {
     // await getGobCategoryList();
   }
 
-  updateScreenHeight() {
-    screenHeightPercentage = 0.99;
+  updateScreenHeight(double? h) {
+    screenHeightPercentage = h ?? 0.99;
     update();
   }
 
