@@ -17,6 +17,7 @@ import 'package:get/get.dart';
 
 import '../../../core/custom_widgets/custom_appbar.dart';
 import '../../../core/custom_widgets/selector_button.dart';
+import '../../../routes/app_pages.dart';
 
 class CarsFirstStepView extends StatefulWidget {
   const CarsFirstStepView({super.key});
@@ -31,11 +32,14 @@ class _CarsFirstStepViewState extends State<CarsFirstStepView>
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(RegistrationController());
+
     return NetworkIndicator(
       child: SafeArea(
         child: Scaffold(
-          resizeToAvoidBottomInset: false,
-          appBar: const CustomAppBar(),
+          resizeToAvoidBottomInset: true,
+          appBar: CustomAppBar(onBack: () {
+            Get.offAllNamed(Routes.LOGIN);
+          }),
           body: GetBuilder<RegistrationController>(
             builder: (registrationController) => registrationController
                     .countriesLoading
@@ -48,277 +52,322 @@ class _CarsFirstStepViewState extends State<CarsFirstStepView>
                       ),
                     ),
                   )
-                : Stack(
-                    children: [
-                      Form(
-                        key: _formKey,
-                        child: Container(
-                          padding: EdgeInsets.only(right: 16.w, left: 16.w),
-                          height: fixDpiScreenHeight() * 0.7,
-                          child: ListView(
-                            children: [
-                              SizedBox(
-                                height: 18.h,
-                              ),
-                              Image.asset(
-                                AppImages.user,
-                                width: 56.w,
-                                height: 56.w,
-                                fit: BoxFit.fitHeight,
-                              ),
-                              SizedBox(
-                                height: 16.h,
-                              ),
-                              const TitleText(title: "إنشاء الملف التعريفي"),
-                              SizedBox(
-                                height: 20.h,
-                              ),
-                              Row(
+                : SingleChildScrollView(
+                    child: Container(
+                      height: fixDpiScreenHeight() *
+                          (controller.screenHeightPercentage - 0.03),
+                      child: Column(
+                        children: [
+                          Form(
+                            key: _formKey,
+                            child: Container(
+                              padding: EdgeInsets.only(right: 16.w, left: 16.w),
+                              height: fixDpiScreenHeight() *
+                                  (controller.screenHeightPercentage - 0.2),
+                              child: Column(
                                 children: [
-                                  const ProgressIndicatorWidget(
-                                    step: '1',
-                                    total: '4',
+                                  SizedBox(
+                                    height: 18.h,
                                   ),
-                                  SizedBox(width: 8.w),
-                                  // todo: translate
-                                  Text('البيانات الشخصية',
-                                      style: TextStyle(
-                                          fontFamily: 'baloo',
-                                          fontSize: fixDpiFont(17),
-                                          fontWeight: FontWeight.w700,
-                                          color: const Color(0xff3F3D56)))
-                                ],
-                              ),
-                              SizedBox(
-                                height: 12.h,
-                              ),
-                              TextFieldTitle(title: AppStrings.email.tr),
-                              CustomTextFormField(
-                                // TODO : check this senario
-                                enabled: false,
-                                controller: controller.emailTxtController,
-                                validationFunc: (val) => validateUserEmail(
-                                    controller.emailTxtController.text),
-                                inputData: TextInputType.emailAddress,
-                                fillColor: const Color(0xffF8F8F8),
-                              ),
-                              SizedBox(
-                                height: 16.h,
-                              ),
-                              TextFieldTitle(title: AppStrings.nationalID.tr),
-                              CustomTextFormField(
-                                controller: controller.nationalIDTxtController,
-                                validationFunc: (val) => validateNationalID(
-                                    controller.nationalIDTxtController.text,
-                                    carsRegister: true),
-                                inputData: TextInputType.number,
-                                fillColor: controller
-                                        .nationalIDTxtController.text.isNotEmpty
-                                    ? const Color(0xffF8F8F8)
-                                    : Colors.white,
+                                  Image.asset(
+                                    AppImages.user,
+                                    width: 56.w,
+                                    fit: BoxFit.fitWidth,
+                                  ),
+                                  SizedBox(
+                                    height: 16.h,
+                                  ),
+                                  const TitleText(
+                                      title: "إنشاء الملف التعريفي"),
+                                  SizedBox(
+                                    height: 20.h,
+                                  ),
+                                  Row(
+                                    children: [
+                                      const ProgressIndicatorWidget(
+                                        step: '1',
+                                        total: '4',
+                                      ),
+                                      SizedBox(width: 8.w),
+                                      // todo: translate
+                                      Text('البيانات الشخصية',
+                                          style: TextStyle(
+                                              fontFamily: 'baloo',
+                                              fontSize: fixDpiFont(17),
+                                              fontWeight: FontWeight.w700,
+                                              color: const Color(0xff3F3D56)))
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 12.h,
+                                  ),
+                                  TextFieldTitle(title: AppStrings.email.tr),
+                                  CustomTextFormField(
+                                    // TODO : check this senario
+                                    enabled: false,
+                                    controller: controller.emailTxtController,
+                                    validationFunc: (val) => validateUserEmail(
+                                        controller.emailTxtController.text),
+                                    inputData: TextInputType.emailAddress,
+                                    fillColor: const Color(0xffF8F8F8),
+                                  ),
+                                  SizedBox(
+                                    height: 16.h,
+                                  ),
+                                  TextFieldTitle(
+                                      title: AppStrings.nationalID.tr),
+                                  CustomTextFormField(
+                                    controller:
+                                        controller.nationalIDTxtController,
+                                    validationFunc: (val) => validateNationalID(
+                                        controller.nationalIDTxtController.text,
+                                        carsRegister: true),
+                                    inputData: TextInputType.number,
+                                    fillColor: controller
+                                            .nationalIDTxtController
+                                            .text
+                                            .isNotEmpty
+                                        ? const Color(0xffF8F8F8)
+                                        : Colors.white,
 
-                                // TODO : check this senario
-                                enabled: controller
-                                        .nationalIDTxtController.text.isEmpty
-                                    ? true
-                                    : false,
-                                maxLength: null,
-                                autovalidateMode:
-                                    AutovalidateMode.onUserInteraction,
-                              ),
-                              SizedBox(
-                                height: 16.h,
-                              ),
-                              TextFieldTitle(title: AppStrings.name.tr),
-                              CustomTextFormField(
-                                controller: controller.nameTxtController,
-                                validationFunc: (val) => validateName(
-                                    controller.nameTxtController.text,
-                                    maxlength: 50),
-                                inputData: TextInputType.text,
-                                autovalidateMode:
-                                    AutovalidateMode.onUserInteraction,
-                              ),
-                              SizedBox(
-                                height: 8.h,
-                              ),
-                              Row(
-                                children: [
-                                  Icon(
-                                    Icons.error_outline,
-                                    color: Styles.primaryColor,
-                                    size: fixDpiWidth(16),
+                                    // TODO : check this senario
+                                    enabled: controller.nationalIDTxtController
+                                            .text.isEmpty
+                                        ? true
+                                        : false,
+                                    maxLength: null,
+                                    autovalidateMode:
+                                        AutovalidateMode.onUserInteraction,
                                   ),
-                                  const SizedBox(
-                                    width: 3,
+                                  SizedBox(
+                                    height: 16.h,
                                   ),
-                                  Text(
-                                    AppStrings.nameDisclamer.tr,
-                                    // TODO : change it to custom
-                                    style: TextStyle(
-                                        fontFamily: 'baloo',
-                                        fontSize: fixDpiFont(10),
-                                        fontWeight: FontWeight.w400,
-                                        color: const Color(0xff698097)),
-                                  )
-                                ],
-                              ),
-                              SizedBox(
-                                height: 12.h,
-                              ),
-                              TextFieldTitle(title: AppStrings.residence.tr),
-                              GetBuilder<RegistrationController>(
-                                builder: (registrationController) =>
-                                    ValueListenableBuilder<int?>(
-                                        valueListenable:
-                                            controller.residenceCountry,
-                                        builder: (_, residence, __) {
-                                          return Stack(
-                                            children: [
-                                              CustomTextFormField(
-                                                // controller:
-                                                //     controller.residenceTxtController,
-                                                enabledBorderColor: controller
-                                                                .showCountryError() ==
-                                                            false &&
-                                                        (registrationController
-                                                                    .residenceCountry
-                                                                    .value ==
-                                                                null ||
-                                                            (registrationController
-                                                                        .residenceCountry
-                                                                        .value !=
-                                                                    null &&
-                                                                validateCountry(registrationController
-                                                                        .residenceCountry
-                                                                        .value
-                                                                        .toString()) ==
-                                                                    null))
-                                                    ? Styles.grey_200
-                                                    : Colors.red,
-                                                validationFunc: (val) =>
-                                                    validateCountry(
-                                                        residence.toString()),
-                                                // enabled: false,
-                                              ),
-                                              const Positioned(
-                                                  top: 14,
-                                                  left: 10,
-                                                  child: Icon(
-                                                    Icons.keyboard_arrow_down,
-                                                    color: Styles.primaryColor,
-                                                    size: 20,
-                                                  )),
-                                              SelectorButton(
-                                                  countries:
-                                                      controller.countriesList,
-                                                  selectedCountry: residence,
-                                                  // country: controller.countriesList[0],
-                                                  selectorTextStyle: null,
-                                                  searchBoxDecoration: null,
-                                                  autoFocusSearchField: false,
-                                                  locale: null,
-                                                  onChanged: (val) {
-                                                    controller.residenceCountry
-                                                            .value =
+                                  TextFieldTitle(title: AppStrings.name.tr),
+                                  CustomTextFormField(
+                                    controller: controller.nameTxtController,
+                                    validationFunc: (val) => validateName(
+                                        controller.nameTxtController.text,
+                                        maxlength: 50),
+                                    inputData: TextInputType.text,
+                                    autovalidateMode:
+                                        AutovalidateMode.onUserInteraction,
+                                  ),
+                                  SizedBox(
+                                    height: 8.h,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Icon(
+                                        Icons.error_outline,
+                                        color: Styles.primaryColor,
+                                        size: fixDpiWidth(16),
+                                      ),
+                                      const SizedBox(
+                                        width: 3,
+                                      ),
+                                      Text(
+                                        AppStrings.nameDisclamer.tr,
+                                        // TODO : change it to custom
+                                        style: TextStyle(
+                                            fontFamily: 'baloo',
+                                            fontSize: fixDpiFont(10),
+                                            fontWeight: FontWeight.w400,
+                                            color: const Color(0xff698097)),
+                                      )
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 12.h,
+                                  ),
+                                  TextFieldTitle(
+                                      title: AppStrings.residence.tr),
+                                  GetBuilder<RegistrationController>(
+                                    builder: (registrationController) =>
+                                        ValueListenableBuilder<int?>(
+                                            valueListenable:
+                                                controller.residenceCountry,
+                                            builder: (_, residence, __) {
+                                              return Stack(
+                                                children: [
+                                                  CustomTextFormField(
+                                                    controller:
+                                                        registrationController
+                                                            .residenceTxtController,
+                                                    // enabledBorderColor: showCountryError ==
+                                                    //             false &&
+                                                    //         (registrationController
+                                                    //                     .residenceCountry
+                                                    //                     .value ==
+                                                    //                 null ||
+                                                    //             (registrationController
+                                                    //                         .residenceCountry
+                                                    //                         .value !=
+                                                    //                     null &&
+                                                    //                 validateCountry(registrationController
+                                                    //                         .residenceCountry
+                                                    //                         .value
+                                                    //                         .toString()) ==
+                                                    //                     null))
+                                                    //     ? Styles.grey_200
+                                                    //     : Colors.red,
+                                                    textStyle: TextStyle(
+                                                        color: Colors.white),
+                                                    validationFunc: (val) {
+                                                      var val = validateCountry(
+                                                          registrationController
+                                                              .residenceTxtController
+                                                              .text);
+                                                      if (val != null) {
                                                         controller
-                                                            .countriesList[val!]
-                                                            .id;
-                                                    if (residence != null) {
-                                                      _formKey.currentState!
-                                                          .validate();
-                                                    }
-                                                  },
-                                                  isEnabled: true,
-                                                  isScrollControlled: true),
-                                            ],
-                                          );
-                                        }),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      // SizedBox(height: 20.h),
-                      // Spacer(),
-                      Align(
-                        alignment: FractionalOffset.bottomCenter,
-                        child: Container(
-                          width: double.infinity,
-                          height: 150.h,
-                          padding: EdgeInsets.symmetric(vertical: 15.h),
-                          alignment: Alignment.bottomCenter,
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(10),
-                                topLeft: Radius.circular(10)),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Color(0x3D6C63FF),
-                                blurRadius: 24,
-                                offset: Offset(0, -12), // Shadow position
-                              ),
-                            ],
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              CustomButton(
-                                text: AppStrings.next.tr,
-                                icon: Icons.arrow_forward,
-                                type: ButtonType.primary,
-                                width: 358.w,
-                                height: 50.h,
-                                onPressed: () async {
-                                  if (_formKey.currentState!.validate()) {
-                                    // setState(() {
-                                    //   showCountryError = false;
-                                    // });
-                                    controller.showCountryError = true.obs;
+                                                            .updateScreenHeight();
+                                                      }
+                                                      return val;
+                                                    },
+                                                    autovalidateMode:
+                                                        // showCountryError == false
+                                                        //     ? null
+                                                        //     :
+                                                        AutovalidateMode
+                                                            .onUserInteraction,
+                                                    // enabled: false,
+                                                  ),
+                                                  const Positioned(
+                                                      top: 14,
+                                                      left: 10,
+                                                      child: Icon(
+                                                        Icons
+                                                            .keyboard_arrow_down,
+                                                        color:
+                                                            Styles.primaryColor,
+                                                        size: 20,
+                                                      )),
+                                                  SelectorButton(
+                                                      countries: controller
+                                                          .countriesList,
+                                                      selectedCountry:
+                                                          residence,
+                                                      selectorTextStyle: null,
+                                                      searchBoxDecoration: null,
+                                                      autoFocusSearchField:
+                                                          false,
+                                                      locale: null,
+                                                      onChanged: (val) {
+                                                        controller
+                                                                .residenceCountry
+                                                                .value =
+                                                            controller
+                                                                .countriesList[
+                                                                    val!]
+                                                                .id;
 
-                                    // check if National exist in cars
-                                    await controller.checkNIDInCars();
-                                  } else {
-                                    if (validateCountry(registrationController
-                                            .residenceCountry.value
-                                            .toString()) !=
-                                        null) {
-                                      controller.showCountryError = true.obs;
-                                    } else {
-                                      controller.showCountryError = false.obs;
-                                    }
-                                  }
-                                },
+                                                        registrationController
+                                                                .residenceTxtController
+                                                                .text =
+                                                            controller
+                                                                .countriesList[
+                                                                    val!]
+                                                                .id
+                                                                .toString();
+
+                                                        if (residence != null) {
+                                                          _formKey.currentState!
+                                                              .validate();
+                                                        }
+                                                        // print(
+                                                        //     "showCountryError ${showCountryError}");
+                                                      },
+                                                      isEnabled: true,
+                                                      isScrollControlled: true),
+                                                ],
+                                              );
+                                            }),
+                                  ),
+                                ],
                               ),
-                              SizedBox(
-                                height: 8.h,
-                              ),
-                              CustomButton(
-                                text: AppStrings.cancel.tr,
-                                type: ButtonType.secondary,
-                                width: 358.w,
-                                height: 50.h,
-                                onPressed: () {
-                                  Get.back();
-                                  registrationController.passwordTxtController
-                                      .clear();
-                                  registrationController.emailTxtController
-                                      .clear();
-                                  registrationController.nationalIDTxtController
-                                      .clear();
-                                  registrationController.nameTxtController
-                                      .clear();
-                                  registrationController
-                                      .residenceCountry.value = null;
-                                },
-                              ),
-                            ],
+                            ),
                           ),
-                        ),
-                      )
-                    ],
+                          // SizedBox(height: 20.h),
+                          Spacer(),
+                          Container(
+                            width: double.infinity,
+                            padding: EdgeInsets.symmetric(vertical: 15.h),
+                            alignment: Alignment.bottomCenter,
+                            decoration: const BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(10),
+                                  topLeft: Radius.circular(10)),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Color(0x3D6C63FF),
+                                  blurRadius: 24,
+                                  offset: Offset(0, -12), // Shadow position
+                                ),
+                              ],
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                CustomButton(
+                                  text: AppStrings.next.tr,
+                                  icon: Icons.arrow_forward,
+                                  type: ButtonType.primary,
+                                  width: 358.w,
+                                  height: 50.h,
+                                  onPressed: () async {
+                                    if (_formKey.currentState!.validate()) {
+                                      // setState(() {
+                                      //   showCountryError = false;
+                                      // });
+                                      controller.showCountryError = true.obs;
+
+                                      // check if National exist in cars
+                                      await controller.checkNIDInCars();
+                                    } else {
+                                      if (validateCountry(registrationController
+                                              .residenceCountry.value
+                                              .toString()) !=
+                                          null) {
+                                        controller.showCountryError = true.obs;
+                                      } else {
+                                        controller.showCountryError = false.obs;
+                                      }
+                                    }
+                                  },
+                                ),
+                                SizedBox(
+                                  height: 8.h,
+                                ),
+                                CustomButton(
+                                  text: AppStrings.cancel.tr,
+                                  type: ButtonType.secondary,
+                                  width: 358.w,
+                                  height: 50.h,
+                                  onPressed: () {
+                                    controller.screenHeightPercentage = 0.94;
+                                    Get.offAllNamed(Routes.LOGIN);
+                                    // registrationController.passwordTxtController
+                                    //     .clear();
+                                    // // registrationController.emailTxtController
+                                    // //     .clear();
+                                    // registrationController
+                                    //     .nationalIDTxtController
+                                    //     .clear();
+                                    // registrationController.nameTxtController
+                                    //     .clear();
+                                    // registrationController
+                                    //     .completeResidenceTxtController
+                                    //     .clear();
+                                    // registrationController
+                                    //     .residenceCountry.value = null;
+                                  },
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
                   ),
           ),
         ),
