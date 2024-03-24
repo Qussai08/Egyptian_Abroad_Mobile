@@ -18,8 +18,9 @@ class NotificationHelper {
     await firebaseMessaging.requestPermission();
 
     // print token
-    String? fcmToken = await getFcmToken();
-    print('FCMToken: $fcmToken');
+    String? fcmToken = await firebaseMessaging.getToken();
+    // await getFcmToken();
+    print('getToken FCMToken: $fcmToken');
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     flutterLocalNotificationsPlugin
@@ -140,7 +141,7 @@ class NotificationHelper {
   Future<void> registerFCMToken() async {
     AuthService authService = Get.find();
     AuthProvider authProvider = Get.find();
-    final fcmToken = await getFcmToken() ?? '';
+    final fcmToken = await firebaseMessaging.getToken() ?? '';
     final userId = authService.userID ?? "";
 
     await authProvider.registerFCMToken(fcmToken, userId).then((value) {
@@ -163,14 +164,14 @@ class NotificationHelper {
   }
 
   // Get token form firebase for android and ios
-  Future<String?> getFcmToken() async {
-    if (GetPlatform.isAndroid) {
-      return await firebaseMessaging.getToken();
-    } else if (GetPlatform.isIOS) {
-      return await firebaseMessaging.getAPNSToken();
-    }
-    return null;
-  }
+  // Future<String?> getFcmToken() async {
+  //   if (GetPlatform.isAndroid) {
+  //     return await firebaseMessaging.getToken();
+  //   } else if (GetPlatform.isIOS) {
+  //     return await firebaseMessaging.getAPNSToken();
+  //   }
+  //   return null;
+  // }
 
 // Subscribe to topic
   Future<void> subscribeToTopic(String topic) async {

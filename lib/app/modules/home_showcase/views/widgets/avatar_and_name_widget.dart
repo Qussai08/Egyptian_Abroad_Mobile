@@ -32,7 +32,7 @@ class AvatarAndNameWidget extends StatelessWidget {
             children: [
               // Avatar Image
               Showcase.withWidget(
-                height: 144.h,
+                height: 146.h,
                 width: 240.w,
                 key: homeContoller.one,
                 onTargetClick: () => log('onTargetClick'),

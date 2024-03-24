@@ -226,7 +226,7 @@ class _RegistrationViewState extends State<RegistrationView>
                               textDirection: LocalizationHelper.isArabic()
                                   ? TextDirection.rtl
                                   : TextDirection.ltr,
-                              textAlign: TextAlign.start,
+                              textAlign: TextAlign.center,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                               style: Styles.getRegularStyle(

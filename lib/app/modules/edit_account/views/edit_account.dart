@@ -586,7 +586,7 @@ class _EditAccountViewState extends State<EditAccountView>
                       Container(
                         width: double.infinity,
                         padding: EdgeInsets.symmetric(vertical: 11.h),
-                        alignment: Alignment.bottomCenter,
+                        alignment: Alignment.center,
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.only(
