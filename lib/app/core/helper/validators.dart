@@ -49,12 +49,17 @@ mixin ValidationMixin<T extends StatefulWidget> on State<T> {
     return null;
   }
 
-  String? validateCountry(String? country) {
-    if (country == null || country == "null" || country.trim().isEmpty) {
+  String? validateCountry(String country) {
+    // if (country == null || country == "null" || country.trim().isEmpty) {
+    //   return AppStrings.emptyValidation.tr;
+    // } else {
+    //   return null;
+    // }
+
+    if (country.trim().isEmpty) {
       return AppStrings.emptyValidation.tr;
-    } else {
-      return null;
     }
+    return null;
   }
 
   String? validateOtpCode(String otpCode) {

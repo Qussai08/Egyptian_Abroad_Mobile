@@ -17,6 +17,7 @@ import 'package:get/get.dart';
 
 import '../../../core/custom_widgets/custom_appbar.dart';
 import '../../../core/custom_widgets/selector_button.dart';
+import '../../../routes/app_pages.dart';
 
 class CarsFirstStepView extends StatefulWidget {
   const CarsFirstStepView({super.key});
@@ -31,11 +32,14 @@ class _CarsFirstStepViewState extends State<CarsFirstStepView>
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(RegistrationController());
+
     return NetworkIndicator(
       child: SafeArea(
         child: Scaffold(
           resizeToAvoidBottomInset: true,
-          appBar: const CustomAppBar(),
+          appBar: CustomAppBar(onBack: () {
+            Get.offAllNamed(Routes.LOGIN);
+          }),
           body: GetBuilder<RegistrationController>(
             builder: (registrationController) => registrationController
                     .countriesLoading
@@ -50,14 +54,16 @@ class _CarsFirstStepViewState extends State<CarsFirstStepView>
                   )
                 : SingleChildScrollView(
                     child: Container(
-                      height: fixDpiScreenHeight() * 0.93,
+                      height: fixDpiScreenHeight() *
+                          (controller.screenHeightPercentage - 0.03),
                       child: Column(
                         children: [
                           Form(
                             key: _formKey,
                             child: Container(
                               padding: EdgeInsets.only(right: 16.w, left: 16.w),
-                              height: fixDpiScreenHeight() * 0.74,
+                              height: fixDpiScreenHeight() *
+                                  (controller.screenHeightPercentage - 0.2),
                               child: Column(
                                 children: [
                                   SizedBox(
@@ -184,30 +190,45 @@ class _CarsFirstStepViewState extends State<CarsFirstStepView>
                                               return Stack(
                                                 children: [
                                                   CustomTextFormField(
-                                                    // controller:
-                                                    //     controller.residenceTxtController,
-                                                    enabledBorderColor: controller
-                                                                    .showCountryError() ==
-                                                                false &&
-                                                            (registrationController
-                                                                        .residenceCountry
-                                                                        .value ==
-                                                                    null ||
-                                                                (registrationController
-                                                                            .residenceCountry
-                                                                            .value !=
-                                                                        null &&
-                                                                    validateCountry(registrationController
-                                                                            .residenceCountry
-                                                                            .value
-                                                                            .toString()) ==
-                                                                        null))
-                                                        ? Styles.grey_200
-                                                        : Colors.red,
-                                                    validationFunc: (val) =>
-                                                        validateCountry(
-                                                            residence
-                                                                .toString()),
+                                                    controller:
+                                                        registrationController
+                                                            .residenceTxtController,
+                                                    // enabledBorderColor: showCountryError ==
+                                                    //             false &&
+                                                    //         (registrationController
+                                                    //                     .residenceCountry
+                                                    //                     .value ==
+                                                    //                 null ||
+                                                    //             (registrationController
+                                                    //                         .residenceCountry
+                                                    //                         .value !=
+                                                    //                     null &&
+                                                    //                 validateCountry(registrationController
+                                                    //                         .residenceCountry
+                                                    //                         .value
+                                                    //                         .toString()) ==
+                                                    //                     null))
+                                                    //     ? Styles.grey_200
+                                                    //     : Colors.red,
+                                                    textStyle: TextStyle(
+                                                        color: Colors.white),
+                                                    validationFunc: (val) {
+                                                      var val = validateCountry(
+                                                          registrationController
+                                                              .residenceTxtController
+                                                              .text);
+                                                      if (val != null) {
+                                                        controller
+                                                            .updateScreenHeight();
+                                                      }
+                                                      return val;
+                                                    },
+                                                    autovalidateMode:
+                                                        // showCountryError == false
+                                                        //     ? null
+                                                        //     :
+                                                        AutovalidateMode
+                                                            .onUserInteraction,
                                                     // enabled: false,
                                                   ),
                                                   const Positioned(
@@ -225,7 +246,6 @@ class _CarsFirstStepViewState extends State<CarsFirstStepView>
                                                           .countriesList,
                                                       selectedCountry:
                                                           residence,
-                                                      // country: controller.countriesList[0],
                                                       selectorTextStyle: null,
                                                       searchBoxDecoration: null,
                                                       autoFocusSearchField:
@@ -239,10 +259,22 @@ class _CarsFirstStepViewState extends State<CarsFirstStepView>
                                                                 .countriesList[
                                                                     val!]
                                                                 .id;
+
+                                                        registrationController
+                                                                .residenceTxtController
+                                                                .text =
+                                                            controller
+                                                                .countriesList[
+                                                                    val!]
+                                                                .id
+                                                                .toString();
+
                                                         if (residence != null) {
                                                           _formKey.currentState!
                                                               .validate();
                                                         }
+                                                        // print(
+                                                        //     "showCountryError ${showCountryError}");
                                                       },
                                                       isEnabled: true,
                                                       isScrollControlled: true),
@@ -254,8 +286,8 @@ class _CarsFirstStepViewState extends State<CarsFirstStepView>
                               ),
                             ),
                           ),
-                          SizedBox(height: 20.h),
-                          // Spacer(),
+                          // SizedBox(height: 20.h),
+                          Spacer(),
                           Container(
                             width: double.infinity,
                             padding: EdgeInsets.symmetric(vertical: 15.h),
@@ -312,18 +344,22 @@ class _CarsFirstStepViewState extends State<CarsFirstStepView>
                                   width: 358.w,
                                   height: 50.h,
                                   onPressed: () {
-                                    Get.back();
-                                    registrationController.passwordTxtController
-                                        .clear();
-                                    registrationController.emailTxtController
-                                        .clear();
-                                    registrationController
-                                        .nationalIDTxtController
-                                        .clear();
-                                    registrationController.nameTxtController
-                                        .clear();
-                                    registrationController
-                                        .residenceCountry.value = null;
+                                    controller.screenHeightPercentage = 0.94;
+                                    Get.offAllNamed(Routes.LOGIN);
+                                    // registrationController.passwordTxtController
+                                    //     .clear();
+                                    // // registrationController.emailTxtController
+                                    // //     .clear();
+                                    // registrationController
+                                    //     .nationalIDTxtController
+                                    //     .clear();
+                                    // registrationController.nameTxtController
+                                    //     .clear();
+                                    // registrationController
+                                    //     .completeResidenceTxtController
+                                    //     .clear();
+                                    // registrationController
+                                    //     .residenceCountry.value = null;
                                   },
                                 ),
                               ],
