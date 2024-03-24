@@ -16,6 +16,7 @@ import 'package:egyptians_abroad/app/core/helper/validators.dart';
 import 'package:get/get.dart';
 
 import '../../../core/helper/localization_helper.dart';
+import '../../../routes/app_pages.dart';
 
 class RegistrationView extends StatefulWidget {
   const RegistrationView({super.key});
@@ -27,7 +28,7 @@ class RegistrationView extends StatefulWidget {
 class _RegistrationViewState extends State<RegistrationView>
     with ValidationMixin {
   final _formKey = GlobalKey<FormState>();
-  bool showCountryError = false;
+  // bool showCountryError = false;
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(RegistrationController());
@@ -139,33 +140,38 @@ class _RegistrationViewState extends State<RegistrationView>
                                         return Stack(
                                           children: [
                                             CustomTextFormField(
-                                              // controller:
-                                              //     controller.residenceTxtController,
-                                              enabledBorderColor: showCountryError ==
-                                                          false &&
-                                                      (registrationController
-                                                                  .residenceCountry
-                                                                  .value ==
-                                                              null ||
-                                                          (registrationController
-                                                                      .residenceCountry
-                                                                      .value !=
-                                                                  null &&
-                                                              validateCountry(registrationController
-                                                                      .residenceCountry
-                                                                      .value
-                                                                      .toString()) ==
-                                                                  null))
-                                                  ? Styles.grey_200
-                                                  : Colors.red,
+                                              controller: registrationController
+                                                  .residenceTxtController,
+                                              // enabledBorderColor: showCountryError ==
+                                              //             false &&
+                                              //         (registrationController
+                                              //                     .residenceCountry
+                                              //                     .value ==
+                                              //                 null ||
+                                              //             (registrationController
+                                              //                         .residenceCountry
+                                              //                         .value !=
+                                              //                     null &&
+                                              //                 validateCountry(registrationController
+                                              //                         .residenceCountry
+                                              //                         .value
+                                              //                         .toString()) ==
+                                              //                     null))
+                                              //     ? Styles.grey_200
+                                              //     : Colors.red,
+                                              textStyle: TextStyle(
+                                                  color: Colors.white),
                                               validationFunc: (val) =>
                                                   validateCountry(
-                                                      residence.toString()),
-                                              // autovalidateMode:
-                                              //     showCountryError == false
-                                              //         ? null
-                                              //         : AutovalidateMode
-                                              //             .onUserInteraction,
+                                                      registrationController
+                                                          .residenceTxtController
+                                                          .text),
+                                              autovalidateMode:
+                                                  // showCountryError == false
+                                                  //     ? null
+                                                  //     :
+                                                  AutovalidateMode
+                                                      .onUserInteraction,
                                               // enabled: false,
                                             ),
                                             const Positioned(
@@ -191,12 +197,20 @@ class _RegistrationViewState extends State<RegistrationView>
                                                           .countriesList[val!]
                                                           .id;
 
+                                                  registrationController
+                                                          .residenceTxtController
+                                                          .text =
+                                                      controller
+                                                          .countriesList[val!]
+                                                          .id
+                                                          .toString();
+
                                                   if (residence != null) {
                                                     _formKey.currentState!
                                                         .validate();
                                                   }
-                                                  print(
-                                                      "showCountryError ${showCountryError}");
+                                                  // print(
+                                                  //     "showCountryError ${showCountryError}");
                                                 },
                                                 isEnabled: true,
                                                 isScrollControlled: true),
@@ -231,9 +245,9 @@ class _RegistrationViewState extends State<RegistrationView>
                               height: 50.h,
                               onPressed: () async {
                                 if (_formKey.currentState!.validate()) {
-                                  setState(() {
-                                    showCountryError = false;
-                                  });
+                                  // setState(() {
+                                  //   showCountryError = false;
+                                  // });
 
                                   await controller.checkNIDAndEmailInCars();
                                   //  verfiy on cars first then on egy abroad
@@ -242,13 +256,13 @@ class _RegistrationViewState extends State<RegistrationView>
                                           .residenceCountry.value
                                           .toString()) !=
                                       null) {
-                                    setState(() {
-                                      showCountryError = true;
-                                    });
+                                    // setState(() {
+                                    //   showCountryError = true;
+                                    // });
                                   } else {
-                                    setState(() {
-                                      showCountryError = false;
-                                    });
+                                    // setState(() {
+                                    //   showCountryError = false;
+                                    // });
                                   }
 
                                   // if (!registrationController
@@ -275,7 +289,26 @@ class _RegistrationViewState extends State<RegistrationView>
                                 ),
                                 GestureDetector(
                                   onTap: () {
-                                    Get.back();
+                                    Get.offAllNamed(Routes.LOGIN);
+
+                                    // registrationController
+                                    //     .nationalIDTxtController
+                                    //     .clear();
+                                    // registrationController.nameTxtController
+                                    //     .clear();
+                                    // registrationController.emailTxtController
+                                    //     .clear();
+                                    // registrationController
+                                    //     .residenceCountry.value = null;
+                                    // registrationController
+                                    //     .completeResidenceTxtController
+                                    //     .clear();
+                                    // registrationController
+                                    //     .residenceTxtController
+                                    //     .clear();
+                                    // registrationController.dispose();
+
+                                    // Get.back();
                                   },
                                   child: Text(
                                     AppStrings.logIn.tr,
