@@ -70,7 +70,6 @@ class BaseApi {
           status: jsonResponse! ? _response.data['isSuccess'] ?? true : true,
           data: _response.data);
     } on DioException catch (e) {
-      print("DioException -> ${endPoint} ${e.response} ${e.message}");
       if (e.response != null) {
         if (e.response!.statusCode != null) {
           if (e.response!.statusCode! == 401) {
@@ -109,11 +108,9 @@ class BaseApi {
       if (options != null) {
         queryParms.addAll(options);
       }
-      print("_response body ${body}");
 
       _response = await _dio.post(Constants.baseUrl + endPoint,
           data: body, options: options0, queryParameters: queryParms);
-      print("_response postRequest _response ${_response}");
       return AppResponse(
           statusCode: _response.statusCode,
           status: jsonResponse!
@@ -123,8 +120,6 @@ class BaseApi {
                   : false,
           data: jsonResponse ? _response.data['data'] : {});
     } on DioException catch (e) {
-      print("e.response!.statusCode! ${e.response!.statusCode!}");
-      print("DioException -> ${endPoint} ${e.response} ${e.message}");
       if (e.response != null) {
         if (e.response!.statusCode != null) {
           if (e.response!.statusCode! == 401) {

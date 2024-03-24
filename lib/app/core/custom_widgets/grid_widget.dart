@@ -48,19 +48,11 @@ class GridWidget extends GetView<StartServiceController> {
     }
     return GestureDetector(
       onTap: () async {
-        print("widgetTag $widgetTag");
-        print("category id ${category!.id}");
-        print("serviceItem $serviceItem");
-        print("inFavList $inFavList");
-
         if (isService) {
           var serviceContent =
               await controller.getServicesContent(serviceItem!.serviceId);
 
           Get.to(() {
-            print("serviceItemIcon ${serviceItem!.servicesIcon}");
-
-            print("ImagePath ${category!.categoryIcon!}");
             return serviceContent!.servicesType! == ServiceType.content
                 ? ServiceContentView(
                     serviceItem: serviceItem,
@@ -131,19 +123,18 @@ class GridWidget extends GetView<StartServiceController> {
                           ? Positioned(
                               bottom: 0.0,
                               left: 0.0,
-                              child:
-                                  inFavList!
-                                      ? !serviceItem!.isFixedFavorite
-                                          ? FavoriteButton(
-                                              isFavorite: true,
-                                              onTap: () async {
-                                                await controller
-                                                    .removeFromFavoriteInHome(
-                                                        serviceItem!);
-                                              },
-                                            )
-                                          : Container()
-                                      :
+                              child: inFavList!
+                                  ? !serviceItem!.isFixedFavorite
+                                      ? FavoriteButton(
+                                          isFavorite: true,
+                                          onTap: () async {
+                                            await controller
+                                                .removeFromFavoriteInHome(
+                                                    serviceItem!);
+                                          },
+                                        )
+                                      : Container()
+                                  :
 
                                   /// for the services list
 
@@ -153,8 +144,6 @@ class GridWidget extends GetView<StartServiceController> {
                                             isFavorite:
                                                 serviceItem!.isMyFavorite(),
                                             onTap: () async {
-                                              print(
-                                                  "serviceItem!.categoryId ${serviceItem!.categoryId}");
                                               await controller
                                                   .handleFavorite(serviceItem!);
                                             },

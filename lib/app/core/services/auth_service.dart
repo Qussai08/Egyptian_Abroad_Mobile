@@ -96,12 +96,10 @@ class AuthService extends GetxService {
   }
 
   String? get userID {
-    print(accessToken);
     if (accessToken?.isNotEmpty ?? false) {
       // Decode
       Map<String, dynamic> payload = Jwt.parseJwt(accessToken!);
       String userId = payload['sub'];
-      print(userId);
       return userId;
     } else {
       return null;

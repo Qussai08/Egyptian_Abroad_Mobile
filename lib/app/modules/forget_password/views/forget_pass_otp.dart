@@ -272,7 +272,6 @@ class _ForgetPassOtpViewState extends State<ForgetPassOtpView>
                                       if (_otpHasError.value == false) {
                                         errormsg =
                                             validateOtpCode(controller.otp);
-                                        print("errormsg ${errormsg}");
                                         if (errormsg ==
                                             AppStrings.otpEmptyValidation.tr) {
                                           setState(() {});
@@ -308,9 +307,6 @@ class _ForgetPassOtpViewState extends State<ForgetPassOtpView>
                                         }
                                       }
                                     }
-
-                                    print(
-                                        "_otpHasError.value ${_otpHasError.value}");
                                   },
                                 ),
                                 SizedBox(

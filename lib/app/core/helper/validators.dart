@@ -63,7 +63,6 @@ mixin ValidationMixin<T extends StatefulWidget> on State<T> {
   }
 
   String? validateOtpCode(String otpCode) {
-    print('Validation Started: ');
     if (otpCode.isEmpty) {
       return AppStrings.otpEmptyValidation.tr;
     } else if (!otpCode.isNumericOnly) {
