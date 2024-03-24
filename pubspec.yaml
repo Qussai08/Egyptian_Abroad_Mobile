@@ -1,5 +1,5 @@
 name: egyptians_abroad
-version: 1.5.9+44
+version: 1.5.9+54
 publish_to: none
 description: A new Flutter project.
 environment:
@@ -26,7 +26,7 @@ dependencies:
   url_launcher: ^6.2.2
   flutter_html: ^3.0.0-alpha.1
   modal_bottom_sheet: ^2.1.2
-  firebase_messaging: ^14.7.20
+  firebase_messaging: ^14.7.9
   flutter_local_notifications: ^11.0.1
   firebase_core: ^2.24.2
   flutter_svg: ^2.0.9
