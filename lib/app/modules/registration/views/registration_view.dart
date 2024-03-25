@@ -142,37 +142,15 @@ class _RegistrationViewState extends State<RegistrationView>
                                             CustomTextFormField(
                                               controller: registrationController
                                                   .residenceTxtController,
-                                              // enabledBorderColor: showCountryError ==
-                                              //             false &&
-                                              //         (registrationController
-                                              //                     .residenceCountry
-                                              //                     .value ==
-                                              //                 null ||
-                                              //             (registrationController
-                                              //                         .residenceCountry
-                                              //                         .value !=
-                                              //                     null &&
-                                              //                 validateCountry(registrationController
-                                              //                         .residenceCountry
-                                              //                         .value
-                                              //                         .toString()) ==
-                                              //                     null))
-                                              //     ? Styles.grey_200
-                                              //     : Colors.red,
-                                              textStyle: TextStyle(
+                                              textStyle: const TextStyle(
                                                   color: Colors.white),
                                               validationFunc: (val) =>
                                                   validateCountry(
                                                       registrationController
                                                           .residenceTxtController
                                                           .text),
-                                              autovalidateMode:
-                                                  // showCountryError == false
-                                                  //     ? null
-                                                  //     :
-                                                  AutovalidateMode
-                                                      .onUserInteraction,
-                                              // enabled: false,
+                                              autovalidateMode: AutovalidateMode
+                                                  .onUserInteraction,
                                             ),
                                             const Positioned(
                                                 top: 14,
@@ -243,31 +221,8 @@ class _RegistrationViewState extends State<RegistrationView>
                               height: 50.h,
                               onPressed: () async {
                                 if (_formKey.currentState!.validate()) {
-                                  // setState(() {
-                                  //   showCountryError = false;
-                                  // });
-
                                   await controller.checkNIDAndEmailInCars();
                                   //  verfiy on cars first then on egy abroad
-                                } else {
-                                  if (validateCountry(registrationController
-                                          .residenceCountry.value
-                                          .toString()) !=
-                                      null) {
-                                    // setState(() {
-                                    //   showCountryError = true;
-                                    // });
-                                  } else {
-                                    // setState(() {
-                                    //   showCountryError = false;
-                                    // });
-                                  }
-
-                                  // if (!registrationController
-                                  //     .agreeToShareWithCars.value) {
-                                  //   registrationController
-                                  //       .setShowAgreeToShareWithCarsError(true);
-                                  // }
                                 }
                               },
                             ),
@@ -286,25 +241,6 @@ class _RegistrationViewState extends State<RegistrationView>
                                 GestureDetector(
                                   onTap: () {
                                     Get.offAllNamed(Routes.LOGIN);
-
-                                    // registrationController
-                                    //     .nationalIDTxtController
-                                    //     .clear();
-                                    // registrationController.nameTxtController
-                                    //     .clear();
-                                    // registrationController.emailTxtController
-                                    //     .clear();
-                                    // registrationController
-                                    //     .residenceCountry.value = null;
-                                    // registrationController
-                                    //     .completeResidenceTxtController
-                                    //     .clear();
-                                    // registrationController
-                                    //     .residenceTxtController
-                                    //     .clear();
-                                    // registrationController.dispose();
-
-                                    // Get.back();
                                   },
                                   child: Text(
                                     AppStrings.logIn.tr,

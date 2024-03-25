@@ -52,7 +52,7 @@ Future<void> main() async {
   StorageHelper();
   GetStorage().write(StorageHelper().encrypt(AppStrings.splashDiscription),
       StorageHelper().encrypt(AppStrings.splashDiscription));
-  SecurityHelper().securityInit();
+  // await SecurityHelper().securityInit();
 
   runApp(const MyApp());
 }

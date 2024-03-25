@@ -29,8 +29,7 @@ class SecurityHelper {
           packageName: 'com.getgroup.egyptians_abroad',
           // MCIT
           signingCertHashes: [base64Hash],
-          supportedStores: ['com.sec.android.app.samsungapps']
-          ),
+          supportedStores: ['com.sec.android.app.samsungapps']),
       // For iOS
       iosConfig: IOSConfig(
         // GET

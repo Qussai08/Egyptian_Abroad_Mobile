@@ -119,6 +119,7 @@ class _RegisterWithCarsBottomSheetState
                       controller: registrationController.emailTxtController,
                       validationFunc: (val) => validateUserEmail(
                           registrationController.emailTxtController.text),
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
                       inputData: TextInputType.emailAddress,
                     ),
                     SizedBox(
@@ -130,6 +131,7 @@ class _RegisterWithCarsBottomSheetState
                       controller: registrationController.passwordTxtController,
                       validationFunc: (val) => validatePassword(
                           registrationController.passwordTxtController.text),
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
                       inputData: TextInputType.text,
                       isPassword: true,
                     ),

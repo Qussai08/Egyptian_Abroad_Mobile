@@ -69,6 +69,6 @@ class AppImages {
     'assets/avatars/7.svg',
     'assets/avatars/8.svg',
     'assets/avatars/9.svg',
-    'assets/avatars/10.png',
+    'assets/avatars/10.svg',
   ];
 }
