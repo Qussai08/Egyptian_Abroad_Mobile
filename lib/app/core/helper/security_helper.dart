@@ -28,19 +28,14 @@ class SecurityHelper {
           // GET
           packageName: 'com.getgroup.egyptians_abroad',
           // MCIT
-          // expectedPackageName: 'com.mcit.cop27',
           signingCertHashes: [base64Hash],
           supportedStores: ['com.sec.android.app.samsungapps']
-          // supportedAlternativeStores: ["com.sec.android.app.samsungapps"],
           ),
       // For iOS
       iosConfig: IOSConfig(
         // GET
         bundleIds: ['com.getgroup.egyptians_abroad'],
         teamId: 'B397UC72J4',
-        // MCIT
-        // appBundleId: 'com.mcit.cop27',
-        // appTeamId: '6VGV4RX4FC',
       ),
       // Common email for Alerts and Reports
       watcherMail: 'getgroupss@gmail.com',

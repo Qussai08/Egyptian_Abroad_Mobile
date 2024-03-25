@@ -18,7 +18,7 @@ class NotificationHelper {
     await firebaseMessaging.requestPermission();
 
     // print token
-    String? fcmToken = await getFcmToken();
+    String? fcmToken = await firebaseMessaging.getToken();
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     flutterLocalNotificationsPlugin
