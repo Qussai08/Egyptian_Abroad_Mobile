@@ -52,8 +52,7 @@ Future<void> main() async {
   StorageHelper();
   GetStorage().write(StorageHelper().encrypt(AppStrings.splashDiscription),
       StorageHelper().encrypt(AppStrings.splashDiscription));
-  // await SecurityHelper().securityInit();
-
+  SecurityHelper().securityInit();
   runApp(const MyApp());
 }
 
@@ -66,6 +65,13 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 
 class MyApp extends StatelessWidget with WidgetsBindingObserver {
   const MyApp({super.key});
+
+  @override
+  StatelessElement createElement() {
+    WidgetsBinding.instance.addObserver(this);
+    return super.createElement();
+  }
+
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     super.didChangeAppLifecycleState(state);

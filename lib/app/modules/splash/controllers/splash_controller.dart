@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import '../../../core/constants/globals.dart';
 import '../../../core/helper/localization_helper.dart';
 import '../../../core/helper/notification_helper.dart';
+import '../../../core/helper/security_helper.dart';
 import '../../../core/services/auth_service.dart';
 import '../../../core/services/cars_base_api.dart';
 import '../../../routes/app_pages.dart';
@@ -44,9 +45,11 @@ class SplashController extends GetxController {
       } else {
         Get.offAllNamed(Routes.BOTTOMNAVIGATION);
       }
+      SecurityHelper.checkIsNotNormal();
     } else {
       await 1.delay();
       Get.offAllNamed(Routes.LOGIN);
+      SecurityHelper.checkIsNotNormal();
     }
   }
 }
