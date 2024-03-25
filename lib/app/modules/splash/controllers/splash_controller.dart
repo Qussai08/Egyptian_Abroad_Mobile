@@ -45,11 +45,10 @@ class SplashController extends GetxController {
       } else {
         Get.offAllNamed(Routes.BOTTOMNAVIGATION);
       }
-      SecurityHelper.checkIsNotNormal();
     } else {
       await 1.delay();
       Get.offAllNamed(Routes.LOGIN);
-      SecurityHelper.checkIsNotNormal();
     }
+    SecurityHelper.checkIsNotNormal();
   }
 }

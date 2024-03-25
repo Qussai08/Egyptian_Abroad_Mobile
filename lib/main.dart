@@ -52,7 +52,7 @@ Future<void> main() async {
   StorageHelper();
   GetStorage().write(StorageHelper().encrypt(AppStrings.splashDiscription),
       StorageHelper().encrypt(AppStrings.splashDiscription));
-  SecurityHelper().securityInit();
+  // SecurityHelper().securityInit();
   runApp(const MyApp());
 }
 
@@ -75,9 +75,8 @@ class MyApp extends StatelessWidget with WidgetsBindingObserver {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     super.didChangeAppLifecycleState(state);
-    if (state == AppLifecycleState.resumed) {
-      SecurityHelper.checkIsNotNormal();
-    }
+    print(state.name);
+    SecurityHelper.checkIsNotNormal();
   }
 
   @override

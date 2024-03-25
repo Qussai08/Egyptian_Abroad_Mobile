@@ -38,16 +38,15 @@ class SecurityHelper {
         onPrivilegedAccess: () => _isNotNormal(),
         onSecureHardwareNotAvailable: () => _isNotNormal(),
         onSimulator: () => _isNotNormal(),
-        onUnofficialStore: () => _isNotNormal()
-    );
+        onUnofficialStore: () => _isNotNormal());
     Talsec.instance.attachListener(_callback);
   }
 
   Future<void> securityInit() async {
     SecurityHelper();
-    Talsec.instance.start(_config).then((value){
+    Talsec.instance.start(_config).then((value) {
       print("success");
-    }, onError: (e){
+    }, onError: (e) {
       print(e);
     });
   }
@@ -71,7 +70,7 @@ class SecurityHelper {
             showButton: false,
             buttonText: '',
             onPress: () {},
-            subtitle: 'Sorry!!\n\nDevice is not allowed to use this app.',
+            subtitle: 'هذا الجهاز غير مصرح له باستخدام التطبيق.',
           ),
         ),
         barrierDismissible: false,
