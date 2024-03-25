@@ -11,6 +11,7 @@ import 'package:egyptians_abroad/app/modules/start_service/views/url_service_vie
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/language/app_string.dart';
 import '../controllers/start_service_controller.dart';
@@ -65,9 +66,10 @@ class StartServiceRedir extends GetView<StartServiceController> {
                     height: 50,
                     onPressed: () async {
                       serviceContent.servicesType == ServiceType.web
-                          ? Get.to(() => URLServiceView(
-                                url: serviceContent.servicesLink,
-                              ))
+                          ? launchUrl(Uri.parse(serviceContent.servicesLink!))
+                          // Get.to(() => URLServiceView(
+                          //       url: serviceContent.servicesLink,
+                          //     ))
                           : await controller.launchApp(
                               appLink: serviceContent.appLink ?? "",
                               androidID: serviceContent.androidLink ?? "",
