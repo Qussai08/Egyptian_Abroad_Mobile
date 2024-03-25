@@ -42,11 +42,9 @@ class LoginController extends GetxController {
     loginIsDimmed.value = true;
     isLoading.value = true;
 
-    print(loginIsDimmed);
 
     AppResponse response =
         await UserRepository().loginReq({"email": email, "password": pass});
-    print("login ${response.data}");
     if (response.status) {
       authService.setAccessToken(response.data['accessToken'] ?? '');
       authService.setRefreshToken(response.data['refreshToken'] ?? '');
@@ -56,7 +54,6 @@ class LoginController extends GetxController {
       isLoading.value = false;
       if (navigateToHome) Get.offAllNamed(Routes.BOTTOMNAVIGATION);
     } else {
-      print("resdd ${response.statusCode}");
 
       isLoading.value = false;
       loginIsDimmed.value = false;

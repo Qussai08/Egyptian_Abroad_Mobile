@@ -16,10 +16,8 @@ class NotificationEventCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // print("notification.notificationId ${notification.notificationId}");
     return GestureDetector(
       onTap: () {
-        print("notification.eventId ${notification.eventID}");
         Get.toNamed(Routes.EVENT_DETAILS,
             arguments: int.parse(notification.eventID ?? ""));
       },

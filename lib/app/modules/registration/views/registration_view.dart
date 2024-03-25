@@ -209,8 +209,6 @@ class _RegistrationViewState extends State<RegistrationView>
                                                     _formKey.currentState!
                                                         .validate();
                                                   }
-                                                  // print(
-                                                  //     "showCountryError ${showCountryError}");
                                                 },
                                                 isEnabled: true,
                                                 isScrollControlled: true),
@@ -222,7 +220,7 @@ class _RegistrationViewState extends State<RegistrationView>
                               height: 19.h,
                             ),
                             Text(
-                              'بالمتابعة انت موافق على مشاركة بيانات الدخول مع سيارات المصرين بالخارج',
+                              'بالمتابعة انت موافق على مشاركة بيانات الدخول مع تطبيق سيارات المصرين بالخارج',
                               textDirection: LocalizationHelper.isArabic()
                                   ? TextDirection.rtl
                                   : TextDirection.ltr,
@@ -269,8 +267,6 @@ class _RegistrationViewState extends State<RegistrationView>
                                   //     .agreeToShareWithCars.value) {
                                   //   registrationController
                                   //       .setShowAgreeToShareWithCarsError(true);
-                                  //   print(
-                                  //       "registrationController.agreeToShareWithCars ${registrationController.agreeToShareWithCars}");
                                   // }
                                 }
                               },

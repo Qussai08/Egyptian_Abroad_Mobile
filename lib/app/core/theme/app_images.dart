@@ -60,15 +60,15 @@ class AppImages {
   static const searchIcon = 'assets/icons/search_icon.png';
 
   static const List<String> avatars = [
-    'assets/avatars/1.png',
-    'assets/avatars/2.png',
-    'assets/avatars/3.png',
-    'assets/avatars/4.png',
-    'assets/avatars/5.png',
-    'assets/avatars/6.png',
-    'assets/avatars/7.png',
-    'assets/avatars/8.png',
-    'assets/avatars/9.png',
+    'assets/avatars/1.svg',
+    'assets/avatars/2.svg',
+    'assets/avatars/3.svg',
+    'assets/avatars/4.svg',
+    'assets/avatars/5.svg',
+    'assets/avatars/6.svg',
+    'assets/avatars/7.svg',
+    'assets/avatars/8.svg',
+    'assets/avatars/9.svg',
     'assets/avatars/10.png',
   ];
 }

@@ -27,7 +27,7 @@ class DataSavedView extends GetView<DataSavedController> {
                 AvatarWidget(
                   backgroundColor: Styles.avatarsBackground[controller.data[0]],
                   imageAsset: AppImages.avatars[controller.data[0]],
-                  imageScale: 0.5,
+                  width: 96.w,
                   isSelected: true,
                   radius: 76.w,
                 ),

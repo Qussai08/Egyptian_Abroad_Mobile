@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class AvatarWidget extends StatelessWidget {
   const AvatarWidget(
@@ -8,14 +9,14 @@ class AvatarWidget extends StatelessWidget {
       required this.imageAsset,
       required this.isSelected,
       this.radius,
-      this.imageScale,
+      this.width,
       this.onTap});
 
   final Color backgroundColor;
   final String imageAsset;
   final bool isSelected;
   final double? radius;
-  final double? imageScale;
+  final double? width;
   final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
@@ -32,9 +33,10 @@ class AvatarWidget extends StatelessWidget {
         child: CircleAvatar(
           backgroundColor: backgroundColor,
           radius: radius ?? 72.w,
-          child: Image.asset(
+          child: SvgPicture.asset(
             imageAsset,
-            scale: imageScale,
+            width: width,
+            // scale: imageScale,
           ),
         ),
       ),

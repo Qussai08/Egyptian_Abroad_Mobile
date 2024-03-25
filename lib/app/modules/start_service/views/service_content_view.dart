@@ -155,8 +155,6 @@ class _ServiceContentViewState extends State<ServiceContentView> {
                             height: 50,
                             onPressed: () async {
                               Get.to(() {
-                                print(
-                                    "Link: ${widget.serviceContent!.serviceContentLink}");
                                 return URLServiceView(
                                   url:
                                       widget.serviceContent!.serviceContentLink,

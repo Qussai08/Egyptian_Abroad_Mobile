@@ -63,8 +63,6 @@ class NotificationsView extends GetView<NotificationsController> {
                         itemBuilder: (context, index) {
                           final notification =
                               controller.notificationsList[index];
-                          print(
-                              "${notification.title} ${notification.notificationId}");
 
                           return notification.notificationTypeId == null
                               ? Padding(

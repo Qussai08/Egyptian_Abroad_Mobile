@@ -46,7 +46,6 @@ class _CompleteAccountViewState extends State<CompleteAccountView>
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    print('carRegister ${widget.carRegister}');
     return NetworkIndicator(
       child: SafeArea(
         child: Scaffold(

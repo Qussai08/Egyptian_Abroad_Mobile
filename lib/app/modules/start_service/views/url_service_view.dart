@@ -60,7 +60,6 @@ class _URLServiceViewState extends State<URLServiceView> {
 
   @override
   Widget build(BuildContext context) {
-    print('widget.url ${widget.url}');
     return NetworkIndicator(
       child: SafeArea(
           child: Scaffold(
@@ -82,10 +81,8 @@ class _URLServiceViewState extends State<URLServiceView> {
               //     webView = controller;
               //   },
               //   onLoadStart: (controller, url) {
-              //     print(url!.path);
               //   },
               //   onConsoleMessage: (controller, consoleMessage) {
-              //     print(consoleMessage);
               //   },
               // ),
               )),
