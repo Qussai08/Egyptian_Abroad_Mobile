@@ -31,7 +31,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
           Padding(
             padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 8.w),
             child: Image.asset(
-              AppImages.travel,
+              AppImages.logo,
               width: 30.w,
               height: 30.h,
               fit: BoxFit.fitHeight,

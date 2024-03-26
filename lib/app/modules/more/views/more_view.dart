@@ -53,8 +53,9 @@ class MoreView extends GetView<MoreController> {
           const Divider(color: Styles.grey_200, height: 0),
           ListTileWidget(
               text: AppStrings.aboutUs.tr,
+              // isSvg: true,
               imageAsset: AppImages.logo,
-              imageScale: 12,
+              imageScale: 20,
               onTap: () => controller.changeView(Routes.ABOUTUS)),
           const Divider(color: Styles.grey_200, height: 0),
           ListTileWidget(

@@ -26,7 +26,10 @@ class AboutUsView extends GetView<MoreController> {
         child: Column(
           children: [
             HeaderWidget(
-                imageAsset: AppImages.mediumLogo, text: AppStrings.aboutUs.tr),
+              imageAsset: AppImages.logo,
+              text: AppStrings.aboutUs.tr,
+              width: 56.w,
+            ),
             SizedBox(height: 64.h),
             CustomCardWidget(
               child: ListView(
@@ -45,21 +48,6 @@ class AboutUsView extends GetView<MoreController> {
                           '<p><a href="https://www.emigration.gov.eg/DefaultAr/Pages/structure.aspx">نشاطات الوزارة</a></p>'
                           '<p><a href="http://www.emigration.gov.eg/DefaultAr/DocumentsLibrary/Minister%20Bio%20_.pdf">عن الوزيرة</a></p>',
                       style: {
-                        // "*": html.Style(
-                        //     color: Styles.black,
-                        //     fontFamily: 'baloo',
-                        //     fontSize: html.FontSize.large,
-                        //     fontWeight: FontWeight.w400),
-                        // "div": html.Style(
-                        //     color: Styles.black,
-                        //     fontFamily: 'baloo',
-                        //     fontSize: html.FontSize.large,
-                        //     fontWeight: FontWeight.w400),
-                        // "span": html.Style(
-                        //     color: Styles.black,
-                        //     fontFamily: 'baloo',
-                        //     fontSize: html.FontSize.large,
-                        //     fontWeight: FontWeight.w400),
                         "h2": html.Style(
                           fontFamily: 'baloo',
                         ),
