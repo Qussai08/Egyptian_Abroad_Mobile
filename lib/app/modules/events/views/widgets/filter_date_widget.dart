@@ -59,18 +59,17 @@ class FilterWithDateWidget extends StatelessWidget {
                                       TextButton(
                                           onPressed: () {
                                             if (formattedDateFrom.isEmpty) {
-                                              formattedDateFrom =
-                                                  intl.DateFormat(
+                                              formattedDateFrom = formattedDateTo
+                                                      .isNotEmpty
+                                                  ? formattedDateTo
+                                                  : intl.DateFormat(
                                                           'yyyy-MM-dd HH:mm:ss')
-                                                      .format(
-                                                          con.dateTo.isNotEmpty
-                                                              ? DateTime.parse(
-                                                                  con.dateTo)
-                                                              : _dateTime);
+                                                      .format(_dateTime);
                                             }
                                             con.setDateFrom(formattedDateFrom);
                                             Get.back();
-                                            formattedDateFrom = '';
+                                            formattedDateTo = formattedDateFrom;
+                                            // formattedDateFrom = '';
                                           },
                                           child: Text(
                                             'تأكيد',
@@ -80,7 +79,7 @@ class FilterWithDateWidget extends StatelessWidget {
                                       TextButton(
                                           onPressed: () {
                                             Get.back();
-                                            formattedDateFrom = '';
+                                            // formattedDateFrom = '';
                                           },
                                           child: Text(
                                             'إلغاء',
@@ -102,9 +101,11 @@ class FilterWithDateWidget extends StatelessWidget {
                                       maximumDate: con.dateTo.isNotEmpty
                                           ? DateTime.parse(con.dateTo)
                                           : null,
-                                      initialDateTime: con.dateTo.isNotEmpty
-                                          ? DateTime.parse(con.dateTo)
-                                          : _dateTime,
+                                      initialDateTime: con.dateFrom.isNotEmpty
+                                          ? DateTime.parse(con.dateFrom)
+                                          : con.dateTo.isNotEmpty
+                                              ? DateTime.parse(con.dateTo)
+                                              : _dateTime,
                                     ),
                                   ),
                                 ],
@@ -169,13 +170,16 @@ class FilterWithDateWidget extends StatelessWidget {
                                       TextButton(
                                           onPressed: () {
                                             if (formattedDateTo.isEmpty) {
-                                              formattedDateTo = intl.DateFormat(
-                                                      'yyyy-MM-dd HH:mm:ss')
-                                                  .format(_dateTime);
+                                              formattedDateTo = formattedDateFrom
+                                                      .isNotEmpty
+                                                  ? formattedDateFrom
+                                                  : intl.DateFormat(
+                                                          'yyyy-MM-dd HH:mm:ss')
+                                                      .format(_dateTime);
                                             }
                                             con.setDateTo(formattedDateTo);
                                             Get.back();
-                                            formattedDateTo = '';
+                                            formattedDateFrom = formattedDateTo;
                                           },
                                           child: Text(
                                             'تأكيد',
@@ -185,7 +189,7 @@ class FilterWithDateWidget extends StatelessWidget {
                                       TextButton(
                                           onPressed: () {
                                             Get.back();
-                                            formattedDateTo = '';
+                                            // formattedDateTo = '';
                                           },
                                           child: Text(
                                             'إلغاء',
@@ -207,9 +211,11 @@ class FilterWithDateWidget extends StatelessWidget {
                                       minimumDate: con.dateFrom.isNotEmpty
                                           ? DateTime.parse(con.dateFrom)
                                           : null,
-                                      initialDateTime: con.dateFrom.isNotEmpty
-                                          ? DateTime.parse(con.dateFrom)
-                                          : _dateTime,
+                                      initialDateTime: con.dateTo.isNotEmpty
+                                          ? DateTime.parse(con.dateTo)
+                                          : con.dateFrom.isNotEmpty
+                                              ? DateTime.parse(con.dateFrom)
+                                              : _dateTime,
                                     ),
                                   ),
                                 ],
