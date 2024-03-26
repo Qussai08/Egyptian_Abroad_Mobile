@@ -49,6 +49,7 @@ class SplashController extends GetxController {
       await 1.delay();
       Get.offAllNamed(Routes.LOGIN);
     }
-    SecurityHelper.checkIsNotNormal();
+// Hashed Due to Testing purposes and should be enabled for Penetration Testing
+    // SecurityHelper.checkIsNotNormal();
   }
 }

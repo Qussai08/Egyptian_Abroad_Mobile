@@ -24,7 +24,7 @@ class NotificationHelper {
     flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin>()
-        ?.requestPermission();
+        ?.requestNotificationsPermission();
 
     const AndroidNotificationChannel channel = AndroidNotificationChannel(
         'android_notification', 'android_notification',
