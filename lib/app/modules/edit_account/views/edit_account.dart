@@ -13,7 +13,6 @@ import 'package:egyptians_abroad/app/core/services/models/user_profile.dart';
 import 'package:egyptians_abroad/app/core/theme/app_images.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:egyptians_abroad/app/modules/registration/controllers/registration_controller.dart';
-import 'package:egyptians_abroad/app/modules/registration/data/models/country.dart';
 import 'package:egyptians_abroad/app/modules/registration/views/widgets/avatar_widget.dart';
 import 'package:egyptians_abroad/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
@@ -363,7 +362,7 @@ class _EditAccountViewState extends State<EditAccountView>
                                               _residenceAddressTxtController
                                                   .text = AuthService()
                                                       .getUserProfile
-                                                      .residencyNo ??
+                                                      .residencyAddress ??
                                                   "";
                                               _formKey.currentState!.validate();
                                             } else if (residenceTP == 2) {
