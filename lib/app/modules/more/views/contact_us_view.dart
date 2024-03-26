@@ -35,7 +35,7 @@ class ContactUsView extends GetView<MoreController> {
                 Text(
                   AppStrings.callUsVia.tr,
                   style: Styles.getRegularStyle(
-                      color: Styles.lightBlack, fontSize: fixDpiFont(16)),
+                      color: Styles.black, fontSize: fixDpiFont(16)),
                 ),
                 SizedBox(height: 16.h),
                 ContactElementWidget(
@@ -61,39 +61,39 @@ class ContactUsView extends GetView<MoreController> {
                         path: 'egyptiansabroad@emigration.gov.eg')),
                     imageAsset: AppImages.gmailIcon,
                     text: 'egyptiansabroad@emigration.gov.eg',
-                    textUnderline: true,
+                    textUnderline: false,
                     fontSize: fixDpiFont(14)),
                 SizedBox(height: 24.h),
                 ContactElementWidget(
                     onTap: () => launchUrl(
                         Uri.parse('https://www.facebook.com/Moemigegy/')),
                     imageAsset: AppImages.facebookIcon,
-                    text: 'Moemigegy',
-                    textUnderline: true,
+                    text: 'تواصل معنا عبر فيسبوك',
+                    textUnderline: false,
                     fontSize: fixDpiFont(14)),
                 SizedBox(height: 24.h),
                 ContactElementWidget(
                     onTap: () =>
                         launchUrl(Uri.parse('https://twitter.com/Moemigegy/')),
                     imageAsset: AppImages.twitterIcon,
-                    text: 'Moemigegy',
-                    textUnderline: true,
+                    text: 'تواصل معنا عبر إكس',
+                    textUnderline: false,
                     fontSize: fixDpiFont(14)),
                 SizedBox(height: 24.h),
                 ContactElementWidget(
                     onTap: () => launchUrl(Uri.parse(
                         'https://www.youtube.com/channel/UCuJYKHp_-LEk4URcVuNHtbw')),
                     imageAsset: AppImages.youtubeIcon,
-                    text: 'Moemigegy',
-                    textUnderline: true,
+                    text: 'تابعنا على قناة اليوتيوب',
+                    textUnderline: false,
                     fontSize: fixDpiFont(14)),
                 SizedBox(height: 24.h),
                 ContactElementWidget(
                     onTap: () => launchUrl(
                         Uri.parse('https://www.instagram.com/moemigegy/')),
                     imageAsset: AppImages.instagramIcon,
-                    text: 'Moemigegy',
-                    textUnderline: true,
+                    text: 'تابعنا على انستجرام',
+                    textUnderline: false,
                     fontSize: fixDpiFont(14)),
               ],
             )),

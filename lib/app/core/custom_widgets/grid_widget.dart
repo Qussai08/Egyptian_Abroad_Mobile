@@ -173,8 +173,8 @@ class GridWidget extends GetView<StartServiceController> {
                         maxLines: 2,
                         overflow: TextOverflow.visible,
                         textAlign: TextAlign.center,
-                        style: Styles.getLightStyle(
-                            color: Colors.black, fontSize: 12),
+                        style: Styles.getBoldStyle(
+                            color: Styles.black, fontSize: 12),
                       ),
                     ),
                   ),
