@@ -71,7 +71,6 @@ class ForgetPasswordController extends GetxController {
       "verificationType": 2
     });
     if (response.status) {
-      print("createVerificationCode : ${response.status}");
     }
     return response;
   }

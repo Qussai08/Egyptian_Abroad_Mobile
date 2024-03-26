@@ -22,7 +22,6 @@ class StartServiceController extends GetxController {
         "languageId": LocalizationHelper.isArabic() ? 1 : 2
       });
       if (response.status) {
-        print("response.data['data'] ${response.data['data']}");
         ServiceContent serviceContent =
             ServiceContent.fromJson(response.data['data']);
 
@@ -71,7 +70,6 @@ class StartServiceController extends GetxController {
   }
 
   launchApp({String? appLink, String? androidID, String? iosID}) async {
-    print("appLink $appLink");
     if (appLink != null && appLink.isNotEmpty) {
       try {
         final isLaunch = await launchUrl(
@@ -100,7 +98,6 @@ class StartServiceController extends GetxController {
                   ? "market://details?id=$appId"
                   : "https://apps.apple.com/app/id$appId",
             );
-      print("url2 : $url2");
       await launchUrl(
         url2,
         mode: LaunchMode.externalApplication,

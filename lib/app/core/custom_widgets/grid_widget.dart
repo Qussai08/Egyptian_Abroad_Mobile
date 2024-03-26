@@ -48,19 +48,11 @@ class GridWidget extends GetView<StartServiceController> {
     }
     return GestureDetector(
       onTap: () async {
-        print("widgetTag $widgetTag");
-        print("category id ${category!.id}");
-        print("serviceItem $serviceItem");
-        print("inFavList $inFavList");
-
         if (isService) {
           var serviceContent =
               await controller.getServicesContent(serviceItem!.serviceId);
 
           Get.to(() {
-            print("serviceItemIcon ${serviceItem!.servicesIcon}");
-
-            print("ImagePath ${category!.categoryIcon!}");
             return serviceContent!.servicesType! == ServiceType.content
                 ? ServiceContentView(
                     serviceItem: serviceItem,
@@ -154,8 +146,6 @@ class GridWidget extends GetView<StartServiceController> {
                                             isFavorite:
                                                 serviceItem!.isMyFavorite(),
                                             onTap: () async {
-                                              print(
-                                                  "serviceItem!.categoryId ${serviceItem!.categoryId}");
                                               await controller
                                                   .handleFavorite(serviceItem!);
                                             },
@@ -183,8 +173,8 @@ class GridWidget extends GetView<StartServiceController> {
                         maxLines: 2,
                         overflow: TextOverflow.visible,
                         textAlign: TextAlign.center,
-                        style: Styles.getLightStyle(
-                            color: Colors.black, fontSize: 12),
+                        style: Styles.getBoldStyle(
+                            color: Styles.black, fontSize: 12),
                       ),
                     ),
                   ),

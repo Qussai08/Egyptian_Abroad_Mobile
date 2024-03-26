@@ -42,7 +42,7 @@ class HomeShowcaseController extends GetxController {
 
     isLoading = false;
     // TODO: for testing only to be removed
-    authService.showcaseViewed = true;
+    // authService.showcaseViewed = true;
   }
 
   bool userProfileLoading = false;
@@ -60,7 +60,6 @@ class HomeShowcaseController extends GetxController {
       "languageId": LocalizationHelper.isArabic() ? 1 : 2
     }).then((value) {
       if (value.status) {
-        print("value.data['data'] ${value.data['data']}");
         UserProfileModel userProfile =
             UserProfileModel.fromJson(value.data['data']);
         // AppHelper.setUserProfile(userProfile);
@@ -72,10 +71,8 @@ class HomeShowcaseController extends GetxController {
         setUserProfileLoading(false);
       }
     }, onError: (error) {
-      print('UserProfile Error: $error');
       setUserProfileLoading(false);
     });
-    print("userProfileLoading: $userProfileLoading");
     // if (response.status) {
     //   UserProfileModel userProfile =
     //       UserProfileModel.fromJson(response.data['data']);
@@ -173,7 +170,6 @@ class HomeShowcaseController extends GetxController {
         _updateCategoriesLoading(false);
       });
     }
-    print("categoriesLoading: $categoriesLoading");
   }
 
   void _updateCategoriesLoading(bool val) {
@@ -312,7 +308,6 @@ class HomeShowcaseController extends GetxController {
         loadFavoriteCategory(service);
       }
     }, onError: (error) {
-      print("Add to Favorites Error");
     });
 
     update();
@@ -357,7 +352,6 @@ class HomeShowcaseController extends GetxController {
         }
       },
       onError: (error) {
-        print('FavoritesList Error: $error');
         update();
       },
     );
@@ -378,8 +372,6 @@ class HomeShowcaseController extends GetxController {
     for (Category cat in allCategoriesFavUse) {
       if (cat.id == item.categoryId && !favoriteCategories.contains(cat)) {
         favoriteCategories.add(cat);
-        print(
-            "cat.id ${cat.id} has been added to favoriteCategories list to use with service item ${item.serviceName}");
         break;
       }
     }
@@ -387,10 +379,6 @@ class HomeShowcaseController extends GetxController {
 
   // loadFavoritesCategories() async {
   //   favoriteCategories = [];
-  //   print(favoritesList.length);
-
-  //   print("allCategoriesFavUse.length ${allCategoriesFavUse.length}");
-
   //   if (favoritesList.isNotEmpty) {
   //     await Future.forEach<ServiceItem>(favoritesList, (item) {
   //       Category favCat = allCategoriesFavUse

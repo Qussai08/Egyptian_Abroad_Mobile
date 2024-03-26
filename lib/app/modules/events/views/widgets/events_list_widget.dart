@@ -29,12 +29,8 @@ class EventsListWidget extends StatelessWidget {
                       itemCount: controller.eventsList.length,
                       itemBuilder: (context, index) {
                         final event = controller.eventsList[index];
-                        print(controller.eventsList.length);
-                        print(
-                            "Event $index loaded with eventId ${event.eventId}");
                         return GestureDetector(
                           onTap: () {
-                            print("event.eventId ${event.eventId}");
                             Get.toNamed(Routes.EVENT_DETAILS,
                                 arguments: event.eventId);
                           },

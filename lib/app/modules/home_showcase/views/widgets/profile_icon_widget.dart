@@ -23,7 +23,7 @@ class ProfileIconWidget extends StatelessWidget {
       },
       child: AvatarWidget(
           radius: 18.w,
-          imageScale: 2.0,
+          width: 25.w,
           backgroundColor: Styles.avatarsBackground[
               homeContoller.authService.getUserProfile.avatarId ?? 9],
           imageAsset: AppImages

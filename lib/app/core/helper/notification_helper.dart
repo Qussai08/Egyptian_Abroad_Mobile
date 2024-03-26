@@ -19,8 +19,6 @@ class NotificationHelper {
 
     // print token
     String? fcmToken = await firebaseMessaging.getToken();
-    // await getFcmToken();
-    print('getToken FCMToken: $fcmToken');
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     flutterLocalNotificationsPlugin
@@ -91,14 +89,12 @@ class NotificationHelper {
   void onDidReceiveNotificationResponse(
       NotificationResponse notificationResponse) async {
     // Open Notification Screen
-    print('onDidReceiveNotificationResponse');
 
     Get.offAllNamed(Routes.BOTTOMNAVIGATION,
         arguments: [getNotificationId(notificationResponse), 1]);
   }
 
   int getNotificationId(NotificationResponse notificationResponse) {
-    print("notificationResponse.payload ${notificationResponse.payload}");
     Map<String, dynamic> data = jsonDecode(notificationResponse.payload!);
 
     return int.parse(data['NotificationId']);
@@ -156,10 +152,7 @@ class NotificationHelper {
           authService.setFCMToken(fcmToken);
         }
       }, onError: (err) {});
-    }).onError((err) {
-      print(err);
-      print("onTokenRefresh -> registerFCMToken");
-    });
+    }).onError((err) {});
     //   }
   }
 

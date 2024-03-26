@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
@@ -14,6 +15,9 @@ import 'app/core/binding/initial_binding.dart';
 import 'app/core/helper/dpi_helper.dart';
 import 'app/core/helper/localization_helper.dart';
 import 'app/core/helper/notification_helper.dart';
+import 'app/core/helper/security_helper.dart';
+import 'app/core/helper/storage_helper.dart';
+import 'app/core/language/app_string.dart';
 import 'app/core/services/storage_service.dart';
 import 'app/routes/app_pages.dart';
 import 'package:flutter_localizations/flutter_localizations.dart'
@@ -44,6 +48,11 @@ Future<void> main() async {
     }
   });
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
+  StorageHelper();
+  GetStorage().write(StorageHelper().encrypt(AppStrings.splashDiscription),
+      StorageHelper().encrypt(AppStrings.splashDiscription));
+  // SecurityHelper().securityInit();
   runApp(const MyApp());
 }
 
@@ -54,8 +63,22 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatelessWidget with WidgetsBindingObserver {
   const MyApp({super.key});
+
+  @override
+  StatelessElement createElement() {
+    WidgetsBinding.instance.addObserver(this);
+    return super.createElement();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    print(state.name);
+    SecurityHelper.checkIsNotNormal();
+  }
+
   @override
   Widget build(BuildContext context) {
     // Device Orientation
@@ -78,6 +101,8 @@ class MyApp extends StatelessWidget {
         );
       },
       child: GetMaterialApp(
+        enableLog: false,
+        logWriterCallback: (text, {isError = false}) {},
         debugShowCheckedModeBanner: false,
         title: "Egyptians Abroad",
         supportedLocales: LocalizationHelper.locales,

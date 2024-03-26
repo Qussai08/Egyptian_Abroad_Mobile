@@ -57,7 +57,6 @@ class _ForgetPassSetPasswordViewState extends State<ForgetPassSetPasswordView>
 
           //  CustomAppBar(
           //   onBack: () {
-          //     print(" back");
           //     // Get.back();
           //     // Get.offAllNamed(Routes.LOGIN);
           //     Get.back();

@@ -64,9 +64,7 @@ class RegistrationController extends GetxController {
         "verificationType": 1
       },
     );
-    if (response.status) {
-      print("createVerificationCode : ${response.status}");
-    }
+    if (response.status) {}
     return response;
   }
 
@@ -86,7 +84,6 @@ class RegistrationController extends GetxController {
       "verificationCode": carsOtp ?? otp,
       "userId": registerWithCars ? carsUserId : ""
     });
-    print("register response ${response.statusCode} ");
 
     AppHelper.name = nameTxtController.text;
 
@@ -103,13 +100,10 @@ class RegistrationController extends GetxController {
           pass: passwordTxtController.text,
           navigateToHome: false);
 
-      print('carsOtp $carsOtp');
       if (carsOtp == null) {
-        print('Normal register');
         Get.offAllNamed(Routes.COMPLETEACCOUNT);
         passwordTxtController.clear();
       } else {
-        print('Cars Register');
         Get.offAll(() => const CompleteAccountView(
               carRegister: true,
             ));
@@ -231,8 +225,6 @@ class RegistrationController extends GetxController {
     await getCountriesList();
     await getGobCategoryList();
     await getResidenceTypeList();
-    print(
-        "loadResidenceData Registration controller getCountriesList has been called");
 
     setResidenceLoading(false);
   }
@@ -355,7 +347,6 @@ class RegistrationController extends GetxController {
       "languageId": LocalizationHelper.isArabic() ? 1 : 2
     }).then((value) {
       if (value.status) {
-        print("value.data['data'] ${value.data['data']}");
         UserProfileModel userProfile =
             UserProfileModel.fromJson(value.data['data']);
         authService.setUserProfile(userProfile);
@@ -363,9 +354,7 @@ class RegistrationController extends GetxController {
         authService.setUserProfile(UserProfileModel.empty());
         handleError(value.errorCode ?? '-1');
       }
-    }, onError: (error) {
-      print('UserProfile Error: $error');
-    });
+    }, onError: (error) {});
   }
 
   Future<void> pushAvatar({int? avatar, required int route}) async {
@@ -415,10 +404,6 @@ class RegistrationController extends GetxController {
       },
     );
     if (response.status) {
-      print("checkNIDAndEmailInCars - response.status ${response.status}");
-      print(
-          "checkNIDAndEmailInCars - response.statusCode ${response.statusCode}");
-
 // check if exist in egy abroad
       AppResponse res = await verifyMailAndNID();
 
@@ -492,7 +477,6 @@ class RegistrationController extends GetxController {
       "email": emailTxtController.text,
       "password": passwordTxtController.text
     });
-    print(response.toString());
 
     if (response.status) {
       nationalIDTxtController.text = response.data['data']['nid'] ?? "";
@@ -530,9 +514,6 @@ class RegistrationController extends GetxController {
       queryParameters: {"Email": "", "NID": nationalIDTxtController.text},
     );
     if (response.status) {
-      print("checkNIDAndEmailInCars - response.status ${response.status}");
-      print(
-          "checkNIDAndEmailInCars - response.statusCode ${response.statusCode}");
 // register the user with email from cars + nid ( from cars or app ) + name + residence
 
       await register(carsOtp: "", carsUserId: carsUserId);

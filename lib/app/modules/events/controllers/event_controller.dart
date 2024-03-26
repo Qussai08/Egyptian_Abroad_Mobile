@@ -81,7 +81,6 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
         !isLoading.value &&
         hasMore) {
       pageNo++;
-      // print(pageNo);
       filterEvents(clearList: false);
     }
   }
@@ -93,10 +92,7 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
     isLoading.value = true;
 
     countryIds = registrationController.countriesList;
-    // print("countryIds length ${countryIds.length}");
     onSelectcountry(clearFilters: clearFilters);
-    // print(
-    //     "registrationController.jobCategoryList ${registrationController.jobCategoryList}");
     jobCategoryIds = registrationController.jobCategoryList;
     onSelectjobCategory(clearFilters: clearFilters);
 
@@ -122,17 +118,13 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
             return;
           }
           if (value.body!.events.isEmpty) {
-            // print('Empty Events');
             isLoading.value = false;
             hasMore = false;
             return;
           }
-          // print("value.body!.events.length ${value.body!.events.length}");
           if (pageNo < value.body!.totalPages) {
-            // print('hasMore & pageNo $pageNo');
             hasMore = true;
           } else {
-            // print('No hasMore & pageNo $pageNo');
             hasMore = false;
           }
           pageNo == 1
@@ -152,7 +144,6 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
         isLoading.value = false;
       }
     }, onError: (error) {
-      // print("errorrrr $error");
       handleError(error.toString());
       // change(null, status: RxStatus.error('حدث خطأ ما'));
       // change(null, status: RxStatus.error('$error'));
@@ -270,9 +261,6 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
       } else {
         body['jobCategoryIds'] = [];
       }
-      print("filterEvents $body");
-
-      // print("filterEvents $body");
 
       await loadEvents(
           body: body, clearFilters: clearFilters, clearList: clearList);
@@ -310,7 +298,6 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
       setSelectAllCountries(true);
     }
 
-    print("countryDisplayString ${countryDisplayString}");
     update();
   }
 
@@ -371,7 +358,6 @@ class EventsController extends GetxController with StateMixin<List<Event>> {
       setSelectAllJobCategory(true);
     }
 
-    print("jobCatDisplayString ${jobCatDisplayString}");
     update();
   }
 

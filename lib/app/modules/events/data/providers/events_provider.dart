@@ -12,7 +12,6 @@ class EventsProvider extends ApiService {
     final Response response = await post(
         "${Constants.getEventsList}?LanguageId=${LocalizationHelper.isArabic() ? 1 : 2}",
         body);
-    print("getEventsListReq ${response.body}");
     return ApiResponse.fromResponse(
         response, (json) => EventData.fromJson(json));
   }

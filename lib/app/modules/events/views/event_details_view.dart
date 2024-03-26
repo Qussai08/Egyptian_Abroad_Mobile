@@ -105,7 +105,6 @@ class EventDetailsView extends GetView<EventDetailsController> {
                     fontSize: fixDpiFont(16),
                     fontWeight: FontWeight.w600,
                     onPressed: () {
-                      print(event().link!);
                       return launchUrl(Uri.parse(event().link!));
                     },
                   ),

@@ -57,7 +57,6 @@ extension ColorExtension on String {
 
 extension on String {
   toBool() {
-    print(this);
     return (toLowerCase() == "true") ? true : false;
   }
 

@@ -17,6 +17,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ServiceContentView extends StatefulWidget {
   final Category? category;
@@ -153,15 +154,15 @@ class _ServiceContentViewState extends State<ServiceContentView> {
                             type: ButtonType.primary,
                             width: 300.w,
                             height: 50,
-                            onPressed: () async {
-                              Get.to(() {
-                                print(
-                                    "Link: ${widget.serviceContent!.serviceContentLink}");
-                                return URLServiceView(
-                                  url:
-                                      widget.serviceContent!.serviceContentLink,
-                                );
-                              });
+                            onPressed: () {
+                              launchUrl(Uri.parse(
+                                  widget.serviceContent!.serviceContentLink!));
+                              // Get.to(() {
+                              //   return URLServiceView(
+                              //     url:
+                              //         widget.serviceContent!.serviceContentLink,
+                              //   );
+                              // });
                             },
                           ),
                           SizedBox(

@@ -122,7 +122,6 @@ class _OtpViewState extends State<OtpView> with ValidationMixin {
                                         contentPadding:
                                             const EdgeInsets.only(left: 5),
                                         onChanged: (pin) {
-                                          print("pin $pin");
                                           controller.otp = pin;
                                         },
                                         onCompleted: (pin) async {

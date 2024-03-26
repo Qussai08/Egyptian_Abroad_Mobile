@@ -61,7 +61,6 @@ class NotificationsController extends GetxController
     // change([], status: RxStatus.loading());
     isLoading.value = true;
     openNotificationId = (Get.arguments != null) ? Get.arguments[0] : -1;
-    print(openNotificationId);
     await loadNotifications();
     isLoading.value = false;
   }
