@@ -58,6 +58,7 @@ class _DropDownListSelectorState extends State<DropDownListSelector> {
               ),
           child: DropdownButtonHideUnderline(
             child: DropdownButton<dynamic>(
+              dropdownColor: Styles.white,
               borderRadius: BorderRadius.circular(10),
               isExpanded: widget.reverseArrowPosition ? false : true,
               hint: Text(

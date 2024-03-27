@@ -39,7 +39,7 @@ class NotificationHelper {
         AndroidNotificationDetails(channel.id, channel.name,
             importance: Importance.max,
             priority: Priority.high,
-            icon: ' @mipmap/launcher_icon');
+            icon: '@mipmap/launcher_icon');
 
     DarwinNotificationDetails darwinNotificationDetails =
         const DarwinNotificationDetails(
