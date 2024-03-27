@@ -19,7 +19,7 @@ class NotificationHelper {
 
     // print token
     String? fcmToken = await firebaseMessaging.getToken();
-
+    // final fcmToken = await getFcmToken() ?? '';
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
@@ -39,7 +39,7 @@ class NotificationHelper {
         AndroidNotificationDetails(channel.id, channel.name,
             importance: Importance.max,
             priority: Priority.high,
-            icon: 'app_icon');
+            icon: ' @mipmap/launcher_icon');
 
     DarwinNotificationDetails darwinNotificationDetails =
         const DarwinNotificationDetails(
@@ -138,6 +138,7 @@ class NotificationHelper {
     AuthService authService = Get.find();
     AuthProvider authProvider = Get.find();
     final fcmToken = await firebaseMessaging.getToken() ?? '';
+    // final fcmToken = await getFcmToken() ?? '';
     final userId = authService.userID ?? "";
 
     await authProvider.registerFCMToken(fcmToken, userId).then((value) {
