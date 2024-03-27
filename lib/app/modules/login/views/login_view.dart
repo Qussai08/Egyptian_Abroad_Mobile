@@ -64,7 +64,7 @@ class _LoginViewState extends State<LoginView> with ValidationMixin {
                       // End
 
                       Image.asset(
-                        AppImages.travel,
+                        AppImages.logo,
                         width: 56.w,
                         fit: BoxFit.fitWidth,
                       ),

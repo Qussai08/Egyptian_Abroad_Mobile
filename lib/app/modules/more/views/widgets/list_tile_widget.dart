@@ -12,6 +12,7 @@ class ListTileWidget extends StatelessWidget {
     this.horizontalPadding,
     this.height,
     this.onTap,
+    this.isSvg = false,
   });
 
   final String text;
@@ -20,6 +21,7 @@ class ListTileWidget extends StatelessWidget {
   final double? horizontalPadding;
   final double? height;
   final void Function()? onTap;
+  final bool isSvg;
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +33,7 @@ class ListTileWidget extends StatelessWidget {
           imageAsset: imageAsset,
           imageScale: imageScale ?? 1,
           text: text,
+          isSvg: isSvg,
           fontSize: fixDpiFont(16)),
     );
   }

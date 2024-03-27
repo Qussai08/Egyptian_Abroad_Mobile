@@ -18,13 +18,13 @@ class NotificationHelper {
     await firebaseMessaging.requestPermission();
 
     // print token
-    String? fcmToken = await firebaseMessaging.getToken();
-
+    // String? fcmToken = await firebaseMessaging.getToken();
+    final fcmToken = await getFcmToken() ?? '';
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin>()
-        ?.requestPermission();
+        ?.requestNotificationsPermission();
 
     const AndroidNotificationChannel channel = AndroidNotificationChannel(
         'android_notification', 'android_notification',
@@ -39,7 +39,7 @@ class NotificationHelper {
         AndroidNotificationDetails(channel.id, channel.name,
             importance: Importance.max,
             priority: Priority.high,
-            icon: 'app_icon');
+            icon: '@mipmap/launcher_icon');
 
     DarwinNotificationDetails darwinNotificationDetails =
         const DarwinNotificationDetails(
@@ -137,7 +137,8 @@ class NotificationHelper {
   Future<void> registerFCMToken() async {
     AuthService authService = Get.find();
     AuthProvider authProvider = Get.find();
-    final fcmToken = await firebaseMessaging.getToken() ?? '';
+    // final fcmToken = await firebaseMessaging.getToken() ?? '';
+    final fcmToken = await getFcmToken() ?? '';
     final userId = authService.userID ?? "";
 
     await authProvider.registerFCMToken(fcmToken, userId).then((value) {
@@ -157,14 +158,14 @@ class NotificationHelper {
   }
 
   // Get token form firebase for android and ios
-  // Future<String?> getFcmToken() async {
-  //   if (GetPlatform.isAndroid) {
-  //     return await firebaseMessaging.getToken();
-  //   } else if (GetPlatform.isIOS) {
-  //     return await firebaseMessaging.getAPNSToken();
-  //   }
-  //   return null;
-  // }
+  Future<String?> getFcmToken() async {
+    if (GetPlatform.isAndroid) {
+      return await firebaseMessaging.getToken();
+    } else if (GetPlatform.isIOS) {
+      return await firebaseMessaging.getAPNSToken();
+    }
+    return null;
+  }
 
 // Subscribe to topic
   Future<void> subscribeToTopic(String topic) async {

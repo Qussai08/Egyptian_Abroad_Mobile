@@ -13,7 +13,6 @@ import 'package:egyptians_abroad/app/core/services/models/user_profile.dart';
 import 'package:egyptians_abroad/app/core/theme/app_images.dart';
 import 'package:egyptians_abroad/app/core/theme/styles.dart';
 import 'package:egyptians_abroad/app/modules/registration/controllers/registration_controller.dart';
-import 'package:egyptians_abroad/app/modules/registration/data/models/country.dart';
 import 'package:egyptians_abroad/app/modules/registration/views/widgets/avatar_widget.dart';
 import 'package:egyptians_abroad/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
@@ -203,6 +202,34 @@ class _EditAccountViewState extends State<EditAccountView>
                                 autovalidateMode:
                                     AutovalidateMode.onUserInteraction,
                               ),
+                              widget.isEdit!
+                                  ? SizedBox(
+                                      height: 8.h,
+                                    )
+                                  : Container(),
+                              widget.isEdit!
+                                  ? Row(
+                                      children: [
+                                        Icon(
+                                          Icons.error_outline,
+                                          color: Styles.primaryColor,
+                                          size: fixDpiWidth(16),
+                                        ),
+                                        SizedBox(
+                                          width: 3,
+                                        ),
+                                        Text(
+                                          AppStrings.nameDisclamer.tr,
+                                          // TODO : change it to custom
+                                          style: TextStyle(
+                                              fontFamily: 'baloo',
+                                              fontSize: fixDpiFont(10),
+                                              fontWeight: FontWeight.w400,
+                                              color: Color(0xff698097)),
+                                        )
+                                      ],
+                                    )
+                                  : Container(),
                               SizedBox(
                                 height: 16.h,
                               ),
@@ -363,7 +390,7 @@ class _EditAccountViewState extends State<EditAccountView>
                                               _residenceAddressTxtController
                                                   .text = AuthService()
                                                       .getUserProfile
-                                                      .residencyNo ??
+                                                      .residencyAddress ??
                                                   "";
                                               _formKey.currentState!.validate();
                                             } else if (residenceTP == 2) {

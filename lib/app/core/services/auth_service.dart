@@ -79,6 +79,7 @@ class AuthService extends GetxService {
   }
 
   String? get accessToken {
+    // print(storageService.getData(StorageConstants.kToken));
     return storageService.getData(StorageConstants.kToken);
   }
 

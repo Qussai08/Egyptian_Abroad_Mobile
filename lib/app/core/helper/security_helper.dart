@@ -45,9 +45,7 @@ class SecurityHelper {
   Future<void> securityInit() async {
     SecurityHelper();
     Talsec.instance.start(_config).then((value) {
-      print("success");
     }, onError: (e) {
-      print(e);
     });
   }
 

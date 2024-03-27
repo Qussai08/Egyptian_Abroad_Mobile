@@ -33,8 +33,11 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
   var notificationHelper = NotificationHelper();
+
   await notificationHelper.initialize();
+
   await FirebaseMessaging.instance.getInitialMessage().then((value) {
     if (value != null) {
       final StorageService storageService;
@@ -47,11 +50,14 @@ Future<void> main() async {
           StorageConstants.kNotificationId, value.data['NotificationId']);
     }
   });
+
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
   StorageHelper();
+
   GetStorage().write(StorageHelper().encrypt(AppStrings.splashDiscription),
       StorageHelper().encrypt(AppStrings.splashDiscription));
+// Hashed Due to Testing purposes and should be enabled for Penetration Testing
   // SecurityHelper().securityInit();
   runApp(const MyApp());
 }
@@ -72,12 +78,12 @@ class MyApp extends StatelessWidget with WidgetsBindingObserver {
     return super.createElement();
   }
 
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    super.didChangeAppLifecycleState(state);
-    print(state.name);
-    SecurityHelper.checkIsNotNormal();
-  }
+// Hashed Due to Testing purposes and should be enabled for Penetration Testing
+  // @override
+  // void didChangeAppLifecycleState(AppLifecycleState state) {
+  //   super.didChangeAppLifecycleState(state);
+  //   SecurityHelper.checkIsNotNormal();
+  // }
 
   @override
   Widget build(BuildContext context) {
