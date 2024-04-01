@@ -108,13 +108,13 @@ class AuthService extends GetxService {
   }
 
   Future<void> logout() async {
+    storageService.removeAll();       
     await notificationHelper.unSubscribeFromTopic(Constants.fcmTopic);
     await notificationHelper.deleteFCMToken();
 
     // Remove user from secure storage
     // await SecureStorageHelper.localRemove('user');
 
-    storageService.removeAll();
     StorageService().setData("first_time", false);
     isAuthUser(false);
   }
