@@ -31,7 +31,13 @@ class BaseApi {
   static Future<void> initializeDio() async {
     _dio = Dio(BaseOptions(
         baseUrl: Constants.baseUrl,
-        connectTimeout: const Duration(milliseconds: 50000)));
+        connectTimeout: const Duration(milliseconds: 50000)))
+      ..interceptors.clear(keepImplyContentTypeInterceptor: false)
+      ..interceptors.add(LogInterceptor(
+          request: false, requestBody: false, requestHeader: false,
+          responseBody: false, responseHeader: false, error: false,
+          logPrint: (_){}
+      ));
 
     !Constants.isProduction
         ? (_dio.httpClientAdapter as DefaultHttpClientAdapter)
