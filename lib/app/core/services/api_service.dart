@@ -112,4 +112,27 @@ class ApiService extends GetConnect {
     var connectivityResult = await Connectivity().checkConnectivity();
     return connectivityResult != ConnectivityResult.none;
   }
+
+  // Future<bool> checkSSL() async {
+  //   try {
+  //     bool checked = false;
+  //     String _fingerprint = '8D 96 50 DE 15 9F 59 9D 26 B8 E3 18 C6 DD A6 EE C6 63 DE 1E 93 B0 64 C4 A2 14 9C E4 F4 A6 63 8A';
+  //     List<String> allowedShA1FingerprintList = [_fingerprint];
+  //     String _status = await SslPinningPlugin.check(
+  //       serverURL: 'https://mob1.abroad.cars.gov.eg',
+  //       headerHttp: Map(),
+  //       httpMethod: HttpMethod.Get,
+  //       sha: SHA.SHA256,
+  //       allowedSHAFingerprints: allowedShA1FingerprintList,
+  //       timeout: 100,
+  //     );
+  //     if (_status == "CONNECTION_SECURE") {
+  //       checked = true;
+  //     }
+  //     return checked;
+  //   } catch (error) {
+  //     print('SSL Pinning Error $error');
+  //     return false;
+  //   }
+  // }
 }

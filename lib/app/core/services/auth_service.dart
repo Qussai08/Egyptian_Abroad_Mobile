@@ -25,9 +25,6 @@ class AuthService extends GetxService {
   Future<bool> get isAuth async {
     String? accessToken = storageService.getData(StorageConstants.kToken);
     isAuthUser.value = accessToken?.isNotEmpty ?? false;
-    if (accessToken != null) {
-      setAccessToken(accessToken);
-    }
     return isAuthUser();
   }
 
@@ -108,7 +105,7 @@ class AuthService extends GetxService {
   }
 
   Future<void> logout() async {
-    storageService.removeAll();       
+    storageService.removeAll();
     await notificationHelper.unSubscribeFromTopic(Constants.fcmTopic);
     await notificationHelper.deleteFCMToken();
 

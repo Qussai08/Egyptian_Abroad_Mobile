@@ -4,7 +4,7 @@ import 'package:convert/convert.dart';
 class StorageHelper{
 
   late final Key _key;
-  final IV _iv = IV.fromLength(16);
+  final IV _iv = IV.fromUtf8("COP-g5008a4e4103");
   late final Encrypter _encrypter;
   static final StorageHelper _storageHelper = StorageHelper._internal();
 

@@ -28,6 +28,7 @@ import 'package:flutter_localizations/flutter_localizations.dart'
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  StorageHelper();
   // init storage service
   await Get.putAsync(() => StorageService().init());
   await Firebase.initializeApp(
@@ -52,8 +53,6 @@ Future<void> main() async {
   });
 
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-
-  StorageHelper();
 
   GetStorage().write(StorageHelper().encrypt(AppStrings.splashDiscription),
       StorageHelper().encrypt(AppStrings.splashDiscription));

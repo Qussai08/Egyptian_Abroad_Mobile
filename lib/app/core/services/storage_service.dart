@@ -1,3 +1,4 @@
+import 'package:egyptians_abroad/app/core/helper/storage_helper.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -9,11 +10,18 @@ class StorageService extends GetxService {
   }
 
   void setData<T>(String key, T value) {
-    GetStorage().write(key, value);
+    if(value is String){
+      GetStorage().write(key, StorageHelper().encrypt(value));
+    } else {
+      GetStorage().write(key, value);
+    }
   }
 
   T? getData<T>(String key) {
     T? value = GetStorage().read(key);
+    if(value!=null && (value is String) && value.isNotEmpty){
+      value = StorageHelper().decrypt(value) as T;
+    }
     return value;
   }
 
