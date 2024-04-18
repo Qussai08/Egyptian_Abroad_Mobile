@@ -135,9 +135,7 @@ class _ServiceContentViewState extends State<ServiceContentView> {
                                     fontWeight: FontWeight.w400),
                               },
                               onLinkTap: (url, attributes, element) {
-                                Get.to(() => URLServiceView(
-                                      url: url,
-                                    ));
+                                launchUrl(Uri.parse(url ?? ""));
                               },
                             ),
                           ),

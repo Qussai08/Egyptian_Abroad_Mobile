@@ -46,7 +46,7 @@ class ServiceContent {
     iosLink = json['iosLink'];
     servicesLink = json['servicesLink'];
     serviceContentId = json['serviceContentId'];
-    servicesType = AppHelper.getServiceType(json['servicesType']);
+    servicesType = AppHelper.getServiceType(json['servicesType'].toString());
     serviceName = json['serviceName'];
     serviceDescription = json['serviceDescription'];
     serviceContentLink = json['serviceContentLink'];
