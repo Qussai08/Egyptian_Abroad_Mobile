@@ -57,7 +57,7 @@ Future<void> main() async {
   GetStorage().write(StorageHelper().encrypt(AppStrings.splashDiscription),
       StorageHelper().encrypt(AppStrings.splashDiscription));
 // Hashed Due to Testing purposes and should be enabled for Penetration Testing
-  SecurityHelper().securityInit();
+  // SecurityHelper().securityInit();
   runApp(const MyApp());
 }
 
@@ -78,11 +78,11 @@ class MyApp extends StatelessWidget with WidgetsBindingObserver {
   }
 
 // Hashed Due to Testing purposes and should be enabled for Penetration Testing
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    super.didChangeAppLifecycleState(state);
-    SecurityHelper.checkIsNotNormal();
-  }
+  // @override
+  // void didChangeAppLifecycleState(AppLifecycleState state) {
+  //   super.didChangeAppLifecycleState(state);
+  //   SecurityHelper.checkIsNotNormal();
+  // }
 
   @override
   Widget build(BuildContext context) {

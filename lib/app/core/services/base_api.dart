@@ -11,6 +11,7 @@ import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'package:egyptians_abroad/app/core/constants/globals.dart';
 import 'package:egyptians_abroad/app/core/services/app_response.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart' as getx;
 import 'package:get/instance_manager.dart';
 
@@ -32,12 +33,15 @@ class BaseApi {
     _dio = Dio(BaseOptions(
         baseUrl: Constants.baseUrl,
         connectTimeout: const Duration(milliseconds: 50000)))
-      ..interceptors.clear(keepImplyContentTypeInterceptor: false)
+      ..interceptors.clear()
       ..interceptors.add(LogInterceptor(
-          request: false, requestBody: false, requestHeader: false,
-          responseBody: false, responseHeader: false, error: false,
-          logPrint: (_){}
-      ));
+          request: false,
+          requestBody: false,
+          requestHeader: false,
+          responseBody: false,
+          responseHeader: false,
+          error: false,
+          logPrint: (_) => {}));
 
     !Constants.isProduction
         ? (_dio.httpClientAdapter as DefaultHttpClientAdapter)
