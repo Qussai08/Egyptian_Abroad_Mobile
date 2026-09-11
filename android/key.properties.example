@@ -1,0 +1,6 @@
+# Copy this file to android/key.properties and fill the values from the team's
+# approved secret store. Do not commit android/key.properties.
+storePassword=
+keyPassword=
+storeFile=
+keyAlias=
